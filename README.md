@@ -65,6 +65,37 @@ Proyecto
   </tr>
 </table>
 
+<!--
+Ejemplo de cómo se vería la tabla complementada en las siguientes entregas (este curso solo maneja AV1, TB1, AV2, TB2 según el enunciado oficial). Reemplazar [Fecha], [Autor(es)] y [Avance] por los datos reales de cada entrega y descomentar cuando corresponda:
+
+<table>
+  <tr>
+    <th>Versión</th>
+    <th>Fecha</th>
+    <th>Autor</th>
+    <th>Descripción de modificación</th>
+  </tr>
+  <tr>
+    <td><b>Segunda Entrega (TB1)</b></td>
+    <td>[Fecha]</td>
+    <td>[Autor(es)]</td>
+    <td>[Avance]</td>
+  </tr>
+  <tr>
+    <td><b>Tercera Entrega (AV2)</b></td>
+    <td>[Fecha]</td>
+    <td>[Autor(es)]</td>
+    <td>[Avance]</td>
+  </tr>
+  <tr>
+    <td><b>Cuarta Entrega (TB2)</b></td>
+    <td>[Fecha]</td>
+    <td>[Autor(es)]</td>
+    <td>[Avance]</td>
+  </tr>
+</table>
+-->
+
 ---
 
 # Project Report Collaboration Insights
