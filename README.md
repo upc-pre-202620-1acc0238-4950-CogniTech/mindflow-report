@@ -460,6 +460,52 @@ _Pendiente_
 
 ### 2.5.1. EventStorming
 
+Partiendo del Big Picture explorado en la sección 2.3.5, el equipo realizó una segunda sesión de EventStorming, más enfocada (aproximadamente 2 horas, usando Miro), para alcanzar el nivel de detalle necesario y poder descomponer MindFlow en Bounded Contexts. A diferencia del Big Picture, esta sesión avanzó deliberadamente hacia un pensamiento más cercano al nivel de diseño, introduciendo Commands, Policies y Actors/Agents para cada evento.
+
+**Paso 1 — Events**
+
+El equipo retomó la lista de eventos del Big Picture y la amplió con eventos más granulares por cada área funcional, llegando a 25 eventos de dominio en total —expresados todavía en puro lenguaje de negocio, en tiempo pasado.
+
+<div align="center">
+
+![EventStorming - Paso 1: Events](assets/img/event_storming/EventStorming_Step1.png)
+*Figura: Domain Events ampliados con mayor nivel de detalle por área funcional.*
+
+</div>
+
+**Paso 2 — Commands & Policies**
+
+Para cada evento, el equipo identificó qué lo dispara. La mayoría de los eventos son resultado directo de un **Command** —una acción deliberada realizada por un actor (ej. *Write journal entry* → *Journal entry created*). Sin embargo, 7 de los 25 eventos son reacciones automáticas a un evento anterior, en vez de un comando deliberado, y se modelaron como **Policies** ("Cada vez que... entonces..."): *Insight generated*, *Reminder sent*, *Streak achieved*, *Wellness exercise suggested*, *Risk pattern detected*, *Wellness alert sent*, y *Subscription activated*. Tratar estos casos como policies en vez de inventar comandos artificiales mantiene el modelo fiel a cómo realmente se comporta la automatización de MindFlow.
+
+<div align="center">
+
+![EventStorming - Paso 2: Commands y Policies](assets/img/event_storming/EventStorming_Step2.png)
+*Figura: Commands y Policies identificados para cada Domain Event.*
+
+</div>
+
+**Paso 3 — Actors / Agents**
+
+El equipo identificó luego quién —o qué— emite cada comando o ejecuta cada policy: el **User** para la mayoría de las acciones directas, el **AI Engine** para la generación de insights, evaluación de riesgo y sugerencias de bienestar, el **System** para policies programadas o basadas en umbrales, el **Payment Gateway** para la confirmación de pagos, y un **Support Agent** para la resolución de tickets. Este paso comenzó a revelar costuras naturales en el dominio —grupos de eventos consistentemente impulsados por el mismo tipo de actor y que operan sobre los mismos datos subyacentes.
+
+<div align="center">
+
+![EventStorming - Paso 3: Actors y Agents](assets/img/event_storming/EventStorming_Step3.png)
+*Figura: Actors y Agents identificados para cada Command y Policy.*
+
+</div>
+
+**Paso 4 — Agrupación en Bounded Contexts**
+
+Finalmente, el equipo reagrupó físicamente las mismas notas —ya no siguiendo la línea de tiempo, sino agrupando eventos, commands, policies y actors que comparten fuerte cohesión y un lenguaje de negocio común. Esto produjo 8 clústeres candidatos: **IAM**, **Journal**, **AI Assistant**, **Habits & Wellness**, **Notifications**, **Analytics & Reporting**, **Subscriptions**, y **Support**. Varias policies cruzan visiblemente entre clústeres (por ejemplo, la policy detrás de *Insight generated* depende de un evento que vive dentro de *Journal*, pero la reacción en sí pertenece a *AI Assistant*) —una señal temprana de las relaciones entre contextos que se formalizarán después en la sección 2.5.2 Context Mapping.
+
+<div align="center">
+
+![EventStorming - Paso 4: Agrupación en Bounded Contexts](assets/img/event_storming/EventStorming_Step4.png)
+*Figura: Reagrupación final de eventos, commands, policies y actors en los 8 Bounded Contexts candidatos.*
+
+</div>
+
 #### 2.5.1.1. Candidate Context Discovery
 
 _Pendiente_
