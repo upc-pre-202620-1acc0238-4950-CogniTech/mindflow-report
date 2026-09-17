@@ -787,7 +787,32 @@ _Pendiente_
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
 
-_Pendiente_
+Se elaboró el Deployment Diagram siguiendo el C4 Model, con el objetivo de representar la distribución física de la solución MindFlow: los nodos de hardware e infraestructura sobre los que se despliega cada contenedor de software, así como las relaciones y dependencias entre ellos. 
+
+<div align="center">
+
+![MindFlow Deployment Diagram](assets/img/software_architecture/deployment_diagram.png)
+*Figura: Deployment Diagram (C4 Model) de la solución MindFlow en producción.*
+
+</div>
+
+**Explicación del diagrama**
+
+El sistema MindFlow está compuesto por cuatro contenedores (Landing Page, Mobile Application, Web Services API y Database) desplegados sobre nodos físicos y de infraestructura distintos:
+
+- **User's Mobile Device**: dispositivo físico (Android) sobre el que corre la Mobile Application. Se comunica con el backend mediante llamadas HTTPS/JSON autenticadas con JWT.
+
+- **GitHub Pages**: plataforma de hosting de sitios estáticos que aloja el Landing Page (HTML5, CSS3, JavaScript), distribuido a través de su CDN global bajo protocolo HTTPS.
+
+- **Microsoft Azure**: proveedor cloud que aloja toda la infraestructura del backend, compuesto por dos nodos:
+  - **Azure App Service**: plataforma PaaS que ejecuta el contenedor Docker de la **Web Services API** (ASP.NET Core / .NET 10), publicado automáticamente desde el repositorio de GitHub.
+  - **Azure Database for MySQL**: servicio de base de datos relacional administrado (Flexible Server) que aloja la **Database** (MySQL 8.0), donde se persisten usuarios, entradas de diario, hábitos, conversaciones de chat, suscripciones y tickets de soporte.
+
+- **Servicios externos de terceros** (agrupados como Third-Party Cloud Services), consumidos por la Web Services API mediante llamadas HTTPS/JSON (o SMTP en el caso del correo):
+  - **Google Cloud / Firebase**: aloja **Google Gemini API** (generación de insights de IA, respuestas del chat, análisis de sentimiento y sugerencias de hábitos), **Firebase Cloud Messaging** (notificaciones push) y **Google OAuth** (autenticación con Google Sign-In).
+  - **Stripe Cloud**: procesa los pagos de las suscripciones premium y envía webhooks de confirmación.
+  - **Cloudinary Cloud**: almacena y sirve los archivos multimedia adjuntos a las entradas del diario.
+  - **Email Provider**: servidor SMTP utilizado para el envío de correos transaccionales (recuperación de contraseña, confirmación de tickets de soporte).
 
 ## 2.6. Tactical-Level Domain-Driven Design
 
