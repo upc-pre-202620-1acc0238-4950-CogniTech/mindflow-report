@@ -387,7 +387,22 @@ Para fundamentar nuestra experimentación y mitigar riesgos en el desarrollo, he
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
-_Pendiente_
+Para validar nuestros supuestos, planteamos las siguientes hipótesis de diseño, formuladas con métricas de éxito cuantificables bajo la estructura estándar:
+
+* **Hipótesis 1 (Feedback IA y Retención):**
+  **Creemos que** implementar un motor de IA que genere respuestas empáticas inmediatas tras cada entrada del diario emocional aumentará significativamente el compromiso continuo del usuario.
+  **Sabremos que** tuvimos éxito
+  **Cuando veamos** que la tasa de retención semanal supera el 40% y el promedio de uso es mayor a 3 sesiones por semana durante el primer mes de lanzamiento.
+
+* **Hipótesis 2 (Recomendaciones Dinámicas y Estrés):**
+  **Creemos que** sugerir micro-ejercicios (como pausas activas o respiración guiada) basados en el análisis de sentimiento del usuario proporcionará herramientas efectivas de mitigación del estrés.
+  **Sabremos que** estamos en lo correcto
+  **Cuando veamos** que al menos el 50% de los usuarios que reciben una alerta de "alto estrés" hacen clic en la recomendación y la califican positivamente (4 o 5 estrellas de utilidad).
+
+* **Hipótesis 3 (Generación de Ingresos):**
+  **Creemos que** ofrecer la exportación de "Reportes de Tendencia Emocional" avanzados como una función de pago validará nuestro modelo de monetización Freemium.
+  **Sabremos que** nuestra estrategia de negocio funciona
+  **Cuando veamos** una tasa de conversión del 5% de usuarios gratuitos a usuarios *premium* dentro del primer trimestre de operación.
 
 #### 1.2.2.4. Lean UX Canvas
 
