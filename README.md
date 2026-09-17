@@ -406,7 +406,7 @@ Para validar nuestros supuestos, planteamos las siguientes hipótesis de diseño
 
 #### 1.2.2.4. Lean UX Canvas
 
-_Pendiente_
+<img src="assets/img/lean_ux/lean_ux_canvas.png" alt="lean_ux_canvas Picture" width="1890"/>
 
 ## 1.3. Segmentos objetivo
 
