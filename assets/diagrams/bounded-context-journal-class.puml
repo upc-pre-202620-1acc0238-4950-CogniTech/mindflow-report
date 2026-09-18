@@ -1,0 +1,74 @@
+@startuml Journal_DomainLayer_ClassDiagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface IAuditableEntity {
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class JournalEntry {
+  +Id : int
+  +UserId : int
+  +ClientId : string?
+  +Date : DateOnly
+  +Title : string
+  +Content : string
+  +Sentiment : string
+  +Category : string
+  +HasPreview : bool
+  +AiResponse : string?
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+  +DeletedAt : DateTimeOffset?
+}
+
+class Tag {
+  +Id : int
+  +UserId : int?
+  +Name : string
+}
+
+class EntryTag {
+  +Id : int
+  +EntryId : int
+  +TagId : int
+}
+
+class Media {
+  +Id : int
+  +EntryId : int
+  +Type : string
+  +Url : string
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class JournalSearchToken {
+  +Id : int
+  +EntryId : int
+  +UserId : int
+  +TokenHash : string
+}
+
+enum JournalError {
+  JournalEntryNotFound
+  EntryTagNotFound
+}
+
+class JournalSearchTokenizer <<Domain Service>> {
+  +{static} Tokenize(text: string?) : IReadOnlySet<string>
+}
+
+JournalEntry .up.|> IAuditableEntity
+Media .up.|> IAuditableEntity
+
+JournalEntry "1" --> "0..*" EntryTag : EntryTags
+Tag "1" --> "0..*" EntryTag : EntryTags
+EntryTag "0..*" --> "1" JournalEntry : Entry\n(FK enforced, cascade)
+EntryTag "0..*" --> "1" Tag : Tag\n(FK enforced, cascade)
+JournalEntry "1" --> "0..*" Media : Media
+Media "0..*" --> "1" JournalEntry : Entry\n(FK enforced, cascade)
+JournalSearchToken "0..*" --> "1" JournalEntry : Entry\n(FK enforced, cascade,\nno inverse collection)
+
+@enduml

@@ -909,6 +909,94 @@ El bounded context IAM persiste en dos tablas: `users` (con índices únicos sob
 
 ---
 
+### 2.6.2. Bounded Context: Journal
+
+El bounded context **Journal** es responsable del diario emocional: creación, edición, borrado (soft-delete), etiquetado, adjuntos multimedia y búsqueda de entradas. Ancla el evento pivote *Journal entry created* identificado en el EventStorming (sección 2.5.1.1), y es uno de los dos contexts core que entregan directamente la propuesta de valor de MindFlow (autoconciencia emocional), junto con Habits & Wellness.
+
+A diferencia de IAM, Journal **no define un repository interface propio**: los Command Handlers usan directamente `IBaseRepository<TEntity>` (abstracción genérica del Shared Kernel) para `JournalEntry`, `EntryTag` y `Media`, mientras que los Query Handlers acceden directamente a `AppDbContext` para construir lecturas optimizadas con `Include`/joins — un patrón CQRS explícito: comandos vía repository + Unit of Work, queries de solo lectura sin pasar por el repository. Tampoco existe una capa de Resources/Assemblers como en IAM: el `JournalController` consume los DTOs del Application Layer directamente como contrato de entrada/salida.
+
+#### 2.6.2.1. Domain Layer
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `JournalEntry` | Aggregate Root (implementa `IAuditableEntity`) | Representa una entrada del diario emocional del usuario, con soporte de sincronización offline-first y soft-delete. `Content` se persiste **cifrado en reposo** (AES, `EncryptedStringConverter`) y la entidad tiene un query filter global (`DeletedAt == null`). | `Id: int`, `UserId: int`, `ClientId: string?` (correlación offline-first), `Date: DateOnly`, `Title: string`, `Content: string`, `Sentiment: string`, `Category: string`, `HasPreview: bool`, `AiResponse: string?`, `CreatedAt/UpdatedAt/DeletedAt: DateTimeOffset?` | *(entidad anémica — el comportamiento vive en los Command Handlers)* | Raíz del agregado: `1` a `0..*` con `EntryTag` (colección `EntryTags`) y con `Media` (colección `Media`); referenciada por `JournalSearchToken` (FK enforced, sin navegación inversa) |
+| `Tag` | Entity | Representa una etiqueta que el usuario puede asociar a sus entradas. `UserId` nulo indica una etiqueta global/del sistema. | `Id: int`, `UserId: int?`, `Name: string` | *(anémica)* | `1` a `0..*` con `EntryTag` (colección `EntryTags`) |
+| `EntryTag` | Entity (tabla de asociación) | Representa la asociación many-to-many entre `JournalEntry` y `Tag`. | `Id: int`, `EntryId: int`, `TagId: int` | *(anémica)* | `0..*` a `1` con `JournalEntry` (navegación `Entry`, FK enforced, cascade) y con `Tag` (navegación `Tag`, FK enforced, cascade); único por `(EntryId, TagId)` |
+| `Media` | Entity (implementa `IAuditableEntity`) | Representa un archivo multimedia (imagen, audio, video, documento) adjunto a una entrada. | `Id: int`, `EntryId: int`, `Type: string`, `Url: string`, `CreatedAt/UpdatedAt: DateTimeOffset?` | *(anémica)* | `0..*` a `1` con `JournalEntry` (navegación `Entry`, FK enforced, cascade) |
+| `JournalSearchToken` | Entity | Representa el hash HMAC de una palabra normalizada extraída de una entrada, usado como índice de búsqueda ciego: el `WHERE` corre sobre el hash, así las entradas que no calzan nunca se desencriptan. | `Id: int`, `EntryId: int`, `UserId: int`, `TokenHash: string` | *(anémica)* | `0..*` a `1` con `JournalEntry` (navegación `Entry`, FK enforced, cascade — sin colección inversa en `JournalEntry`) |
+| `JournalError` | Domain Error Enum | Códigos de error de dominio para resultados fallidos. | — | `JournalEntryNotFound`, `EntryTagNotFound` | Usado por los Handlers al construir `Result.Failure(...)` |
+| `JournalSearchTokenizer` | Domain Service (estático) | Normaliza texto libre en un conjunto de palabras indexables: minúsculas, sin tildes, separadas por límites no alfanuméricos, deduplicadas. Se usa idénticamente al indexar una entrada y al parsear una query de búsqueda, para que ambos lados hasheen igual. | — | `{static} Tokenize(text: string?): IReadOnlySet<string>` | Consumida por `JournalSearchIndexer` (Infrastructure) y por `GetJournalEntriesHandler` (Application) |
+
+#### 2.6.2.2. Interface Layer
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `JournalController` | REST Controller (`/journal`) | Expone las 12 operaciones REST de Journal: entradas, tags, entry-tags y media (incluyendo upload de archivos). Resuelve el `user_id` del JWT y valida ownership antes de delegar en el Application Layer. | `GET/POST /entries`, `GET/PUT/DELETE /entries/{id}`, `POST /entries/sync`, `GET /tags`, `GET/POST /entry-tags`, `DELETE /entry-tags/{id}`, `GET/POST /media`, `POST /media/upload` | Depende de `IMediator` (Cortex.Mediator) para despachar Commands/Queries, de `IFileStorageService` para subir archivos, y de `AppDbContext` (acceso puntual en `DeleteEntryTag` para resolver el `EntryId` antes de validar ownership) |
+
+#### 2.6.2.3. Application Layer
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `CreateJournalEntryCommand`, `UpdateJournalEntryCommand`, `DeleteJournalEntryCommand`, `CreateEntryTagCommand`, `DeleteEntryTagCommand`, `CreateMediaCommand`, `SyncJournalEntriesCommand` | Commands | Encapsulan la intención de cada caso de uso de escritura de Journal. `SyncJournalEntriesCommand` agrupa una lista de `SyncJournalEntryItemRequest` para reconciliar ediciones offline. | P. ej. `CreateJournalEntryCommand{UserId, Date, Title, Content, Sentiment, Category}` | Despachadas por `JournalController` vía `IMediator.SendAsync` |
+| `GetJournalEntriesQuery`, `GetJournalEntryByIdQuery`, `GetTagsQuery`, `GetEntryTagsQuery`, `GetMediaQuery` | Queries | Encapsulan cada caso de uso de lectura, con soporte de filtros (`_sort`, `_order`, `_limit`, `q` para búsqueda en `GetJournalEntriesQuery`). | P. ej. `GetJournalEntriesQuery{UserId, Sort?, Order?, Limit?, Q?}` | Despachadas por `JournalController` vía `IMediator.QueryAsync` |
+| `CreateJournalEntryHandler`, `UpdateJournalEntryHandler`, `DeleteJournalEntryHandler`, `CreateEntryTagHandler`, `DeleteEntryTagHandler`, `CreateMediaHandler`, `SyncJournalEntriesHandler` | Command Handlers (`ICommandHandler<TCommand, Result<T>>`) | Implementan las reglas de negocio de escritura: detección automática de sentimiento (si no se especifica o es `"auto"`, analiza palabras clave positivas/negativas), soft-delete, y en `SyncJournalEntriesHandler`, reconciliación *last-write-wins* de un lote de ediciones offline contra el estado del servidor (ver `US54`). | Un método `Handle` por Command | Dependen de `IBaseRepository<TEntity>` + `IUnitOfWork` (persistencia), `IAnalyticsCacheInvalidator` (**dependencia cruzada hacia el bounded context Analytics & Reporting** — invalida la caché de analíticas del usuario tras cada cambio) y `IJournalSearchIndexer` (reindexado tras crear/actualizar) |
+| `GetJournalEntriesHandler`, `GetJournalEntryByIdHandler`, `GetTagsHandler`, `GetEntryTagsHandler`, `GetMediaHandler` | Query Handlers (`IQueryHandler<TQuery, Result<T>>`) | Implementan las lecturas optimizadas directamente sobre `AppDbContext` (con `AsNoTracking()`, `Include` para tags/media, filtros y orden). `GetJournalEntriesHandler` además resuelve la búsqueda por texto (`q`) tokenizando la query con `JournalSearchTokenizer` y comparando hashes vía `ISearchTokenHasher` contra `JournalSearchToken`, sin desencriptar entradas que no calzan. | Un método `Handle` por Query | Dependen de `AppDbContext` directamente (sin pasar por `IBaseRepository`) y, en el caso de `GetJournalEntriesHandler`, de `ISearchTokenHasher` |
+| `JournalEntryDto`, `TagDto`, `EntryTagDto`, `MediaDto` | Response DTOs | Representan la forma pública de cada entidad para las respuestas de la API. | P. ej. `JournalEntryDto{Id, UserId, Date, Title, Content, Sentiment, Category, HasPreview, AiResponse, Tags, Media, CreatedAt, UpdatedAt, DeletedAt}` | Construidos por los Handlers a partir de las entidades de dominio |
+| `CreateJournalEntryRequest`, `UpdateJournalEntryRequest` | Request DTOs | Representan el cuerpo de las peticiones HTTP de creación/actualización, consumidos directamente por `JournalController` (sin Assembler intermedio). | `CreateJournalEntryRequest{UserId, Date, Title, Content, Sentiment, Category}`, `UpdateJournalEntryRequest{Title, Content, Sentiment, Category}` | El Controller los transforma manualmente en el Command correspondiente |
+| `SyncJournalEntryItemRequest`, `SyncJournalEntryResultDto` | Sync DTOs | Representan, respectivamente, una entrada editada offline enviada en un lote de sincronización, y el resultado de reconciliarla (`created`/`updated`/`deleted`/`conflict_kept_server`). | `SyncJournalEntryItemRequest{ClientId, Date, Title, Content, Sentiment, Category, ClientUpdatedAt, Deleted}`, `SyncJournalEntryResultDto{ClientId, Action, Entry?}` | Usados por `SyncJournalEntriesCommand`/`SyncJournalEntriesHandler` |
+| `IFileStorageService` | Service Port | Abstrae el almacenamiento de archivos multimedia, desacoplando al Controller de la tecnología de almacenamiento concreta. | `SaveAsync(file: IFormFile, userId: int): Task<(string Url, string Type)>` | Implementada por `CloudinaryFileStorageService` y `LocalFileStorageService` (Infrastructure) |
+| `IJournalSearchIndexer` | Service Port | Abstrae la (re)indexación de una entrada en tokens de búsqueda. | `IndexAsync(entry: JournalEntry, ct): Task` | Implementada por `JournalSearchIndexer` (Infrastructure); invocada por los Command Handlers tras crear/actualizar |
+| `ISearchTokenHasher` | Service Port | Abstrae el hashing determinístico de un token de búsqueda. | `Hash(token: string): string` | Implementada por `SearchTokenHasher` (Infrastructure); consumida por `GetJournalEntriesHandler` y `JournalSearchIndexer` |
+
+#### 2.6.2.4. Infrastructure Layer
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `CloudinaryFileStorageService` | Infrastructure Service | Implementa `IFileStorageService` subiendo el archivo a Cloudinary (imagen/video/raw según extensión), validando extensiones permitidas (`.jpg`, `.png`, `.mp3`, `.mp4`, `.pdf`, etc.). | `SaveAsync(file, userId): Task<(Url, Type)>` | Implementa `IFileStorageService`; depende del servicio externo **Cloudinary** |
+| `LocalFileStorageService` | Infrastructure Service | Implementa `IFileStorageService` guardando el archivo en `wwwroot/uploads/{userId}/` del servidor y construyendo la URL pública a partir del request HTTP actual. Actúa como alternativa a Cloudinary (p. ej. entornos sin credenciales configuradas). | `SaveAsync(file, userId): Task<(Url, Type)>` | Implementa `IFileStorageService`; depende de `IWebHostEnvironment` e `IHttpContextAccessor` |
+| `SearchTokenHasher` | Infrastructure Service | Implementa `ISearchTokenHasher` con HMAC-SHA256 keyed hashing (clave de 256 bits en Base64), evitando que un atacante con acceso a la BD recupere palabras comunes vía diccionario precomputado. | `Hash(token): string`, `{static} GenerateKey(): string` | Implementa `ISearchTokenHasher` |
+| `JournalSearchIndexer` | Infrastructure Service | Implementa `IJournalSearchIndexer`: borra los tokens previos de la entrada, tokeniza título+contenido con `JournalSearchTokenizer` y guarda los nuevos `JournalSearchToken` vía `AppDbContext`. | `IndexAsync(entry, ct): Task` | Implementa `IJournalSearchIndexer`; depende de `AppDbContext` y `ISearchTokenHasher` |
+| `JournalSearchBackfillService` | Background Service (`BackgroundService`) | Job de arranque, idempotente y no bloqueante, que indexa retroactivamente las entradas creadas antes de que existiera la búsqueda (US53), sin demorar el health check de despliegue. | `ExecuteAsync(stoppingToken): Task` (override) | Depende de `AppDbContext` e `IJournalSearchIndexer`, resueltos vía `IServiceScopeFactory` |
+
+---
+
+#### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Journal Component Diagram](assets/img/software_architecture/journal_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Journal dentro del container Web Services API.*
+
+</div>
+
+El diagrama refleja la separación CQRS: `JournalController` despacha hacia dos grupos de componentes vía `IMediator` — los **Journal Command Handlers** (escritura, vía `IBaseRepository<T>` + Unit of Work) y los **Journal Query Handlers** (lectura, directo contra la base de datos con joins). Los Command Handlers disparan además el reindexado de búsqueda (`JournalSearchIndexer`) y la invalidación de caché de Analytics — esta última cruzando el límite del bounded context. La subida de archivos pasa por `FileStorageService`, que abstrae Cloudinary (producción) de un fallback local.
+
+#### 2.6.2.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Journal Domain Layer Class Diagram](assets/img/software_architecture/journal_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Journal.*
+
+</div>
+
+`JournalEntry` es el agregado raíz, con colecciones navegables hacia `EntryTag` y `Media` (ambas con Foreign Key enforced y `DeleteBehavior.Cascade`). `EntryTag` es la tabla de asociación many-to-many hacia `Tag`. `JournalSearchToken` referencia a `JournalEntry` con FK enforced pero **sin colección inversa navegable** desde el agregado (se consulta directamente vía `AppDbContext.Set<JournalSearchToken>()`). `JournalSearchTokenizer` es un Domain Service estático sin estado.
+
+##### 2.6.2.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Journal Database Diagram](assets/img/software_architecture/journal_database_diagram.png)
+*Figura: Database Diagram del bounded context Journal.*
+
+</div>
+
+Las tablas `entry_tags`, `media` y `journal_search_tokens` tienen **Foreign Key física enforced** hacia `journal_entries.id`, todas con `ON DELETE CASCADE`. `entry_tags` además tiene FK enforced hacia `tags.id` y un índice único compuesto `(entry_id, tag_id)` que impide duplicar la misma etiqueta en la misma entrada. La columna `tags.user_id` **no tiene Foreign Key declarada** hacia `users.id` (relación lógica, nullable — permite tags globales del sistema cuando es `NULL`). `journal_entries.content` se almacena cifrado en reposo (AES) a nivel de aplicación, transparente para el esquema de base de datos.
+
+---
+
 <!--
 # Capítulo III: Solution UI/UX Design
 

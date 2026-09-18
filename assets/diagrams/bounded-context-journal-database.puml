@@ -1,0 +1,66 @@
+@startuml Journal_DatabaseDiagram
+hide circle
+hide empty members
+skinparam linetype ortho
+
+entity "journal_entries" as journal_entries {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  client_id : varchar(64), nullable, unique with user_id
+  date : datetime(6)
+  title : longtext
+  content : longtext <<encrypted at rest (AES)>>
+  sentiment : longtext
+  category : longtext
+  has_preview : boolean
+  ai_response : text, nullable
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+  deleted_at : datetime, nullable
+}
+
+entity "tags" as tags {
+  *id : int <<PK>>
+  --
+  user_id : int, nullable <<no FK declared>>
+  name : longtext
+}
+
+entity "entry_tags" as entry_tags {
+  *id : int <<PK>>
+  --
+  entry_id : int <<FK, enforced, cascade>>
+  tag_id : int <<FK, enforced, cascade>>
+}
+
+entity "media" as media {
+  *id : int <<PK>>
+  --
+  entry_id : int <<FK, enforced, cascade>>
+  type : longtext
+  url : longtext
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+entity "journal_search_tokens" as journal_search_tokens {
+  *id : int <<PK>>
+  --
+  entry_id : int <<FK, enforced, cascade>>
+  user_id : int <<FK, logical only>>
+  token_hash : varchar(255)
+}
+
+journal_entries ||--o{ entry_tags : "entry_id\n(enforced, cascade)"
+tags ||--o{ entry_tags : "tag_id\n(enforced, cascade)"
+journal_entries ||--o{ media : "entry_id\n(enforced, cascade)"
+journal_entries ||--o{ journal_search_tokens : "entry_id\n(enforced, cascade)"
+
+note bottom of entry_tags
+  Unique index on (entry_id, tag_id):
+  a tag cannot be attached twice
+  to the same entry.
+end note
+
+@enduml
