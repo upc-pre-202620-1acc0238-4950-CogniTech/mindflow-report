@@ -1,0 +1,72 @@
+@startuml AnalyticsReporting_DatabaseDiagram
+hide circle
+hide empty members
+skinparam linetype ortho
+
+entity "analytics_caches" as analytics_caches {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  week_start : date
+  score : int = 0
+  trend_percentage : varchar(10) = "+0%"
+  start_date : date, nullable
+  end_date : date, nullable
+  ai_insight : text, nullable
+  ai_insight_localized : text, nullable
+  kpis : json, nullable
+  fluctuation_data : json, nullable
+  trend_data : json, nullable
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+entity "word_clouds" as word_clouds {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  words : json, nullable
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+entity "users" as users {
+  *id : int <<PK>>
+  --
+  ...
+}
+
+entity "journal_entries" as journal_entries {
+  *id : int <<PK>>
+  --
+  ...
+}
+
+entity "subscriptions" as subscriptions {
+  *id : int <<PK>>
+  --
+  ...
+}
+
+users ||..o{ analytics_caches : "user_id (referencia lógica al BC IAM)"
+users ||..o{ word_clouds : "user_id (referencia lógica al BC IAM)"
+analytics_caches ..> journal_entries : "se calcula a partir de\n(lectura directa, sin FK)"
+word_clouds ..> journal_entries : "se calcula a partir de\n(lectura directa, sin FK)"
+
+note right of analytics_caches
+  Único registro por (user_id, week_start):
+  se actualiza en lugar de duplicarse
+  cuando ya existe caché para esa semana.
+  Índice único recomendado sobre
+  (user_id, week_start).
+end note
+
+note bottom of subscriptions
+  Consultada por Reporting (fuera de
+  este agregado) únicamente para
+  verificar que el plan del usuario
+  sea "premium" y esté "active"
+  antes de permitir la exportación.
+end note
+
+@enduml
