@@ -1,0 +1,74 @@
+@startuml Subscriptions_DomainLayer_ClassDiagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface IAuditableEntity {
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class Subscription {
+  -Id : int
+  -UserId : int
+  -Plan : string = "free"
+  -Status : string = "active"
+  -StripeCustomerId : string?
+  -StripeSubscriptionId : string?
+  -ExpiresAt : DateTimeOffset?
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+  +IsPremium : bool <<computed>>
+  +Activate(stripeCustomerId: string, stripeSubscriptionId: string) : void
+  +Cancel() : void
+  +MarkPastDue() : void
+}
+
+interface ISubscriptionService {
+  +CreateCheckoutSessionAsync(userId: int, userEmail: string, ct: CancellationToken) : Task<CheckoutSessionDto>
+  +HandleWebhookAsync(payload: string, stripeSignature: string, ct: CancellationToken) : Task
+  +GetByUserIdAsync(userId: int, ct: CancellationToken) : Task<SubscriptionDto>
+  +VerifySessionAsync(userId: int, sessionId: string, ct: CancellationToken) : Task<SubscriptionDto>
+  +CancelAsync(userId: int, ct: CancellationToken) : Task
+}
+
+class SubscriptionDto {
+  +UserId : int
+  +Plan : string = "free"
+  +Status : string = "active"
+  +IsPremium : bool
+  +ExpiresAt : DateTimeOffset?
+}
+
+class CheckoutSessionDto {
+  +CheckoutUrl : string
+}
+
+Subscription .up.|> IAuditableEntity
+ISubscriptionService ..> Subscription : activa/cancela >
+ISubscriptionService ..> SubscriptionDto : produce >
+ISubscriptionService ..> CheckoutSessionDto : produce >
+
+note right of Subscription
+  UserId es una referencia lógica al
+  agregado User del bounded context IAM.
+  Se decidió modelar un único agregado
+  plano (sin una entidad separada de
+  "transacción de pago"): el estado de
+  facturación completo del usuario cabe
+  en Plan + Status + los identificadores
+  de Stripe, y el historial de pagos en
+  sí queda delegado por completo al
+  proveedor externo.
+end note
+
+note right of ISubscriptionService
+  Único puerto de dominio del bounded
+  context: aísla toda la lógica de
+  facturación (checkout, webhook,
+  cancelación) detrás de una interfaz
+  que no conoce Stripe explícitamente,
+  de modo que un cambio de proveedor de
+  pagos no afectaría al resto del sistema.
+end note
+
+@enduml
