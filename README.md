@@ -895,7 +895,80 @@ Complementando esto con un pase rápido de **start-with-value** se confirmó que
 
 #### 2.5.1.2. Domain Message Flows Modeling
 
-_Pendiente_
+El **Domain Message Flows Modeling** permite representar cómo circulan los mensajes de dominio entre los diferentes **Bounded Contexts** de MindFlow, considerando **Commands, Domain Events, Policies, Actors/Agents** y sistemas externos.
+
+A partir de los eventos y límites identificados previamente durante el **EventStorming** y el **Candidate Context Discovery**, se modelaron los principales escenarios de interacción del sistema. Estos flujos permiten visualizar qué actor inicia una acción, qué Bounded Context asume la responsabilidad, qué mensaje se genera y cómo dicho mensaje puede provocar nuevas acciones en otros contextos.
+
+Los escenarios considerados son:
+
+1. Registro y autenticación de usuario.
+2. Registro emocional y diario.
+3. Generación de Insight con IA.
+4. Gestión de hábitos y recordatorios.
+5. Detección de estrés y bienestar.
+6. Generación y exportación de reportes.
+7. Suscripción Premium.
+8. Gestión de soporte.
+
+Para la representación gráfica se empleó la siguiente convención:
+
+- **Azul:** Command.
+- **Amarillo:** Domain Event.
+- **Rosado:** Policy.
+- **Gris:** Actor, Agent, Bounded Context o External System.
+- **Flechas:** dirección en la que se produce el flujo de mensajes.
+
+<div align="center">
+
+![Domain Message Flows - Parte 1](assets/img/event_storming/Flow1.jpg)
+
+*Figura: Domain Message Flows Modeling de MindFlow - Parte 1.*
+
+</div>
+
+La primera parte representa los flujos relacionados con la identidad del usuario, el registro de estados emocionales y las operaciones principales del diario. El usuario interactúa mediante la **MindFlow Mobile Application**, que dirige las operaciones hacia los Bounded Contexts correspondientes.
+
+El contexto **IAM** administra los Commands `Register user`, `Update profile` y `Log in`, generando respectivamente los Domain Events `User registered`, `Profile updated` y `User authenticated`.
+
+Por su parte, **Journal** administra el registro emocional mediante `Log mood`, `Write journal entry` y `Tag journal entry`, generando los eventos `Mood logged`, `Journal entry created` y `Journal entry tagged`.
+
+<div align="center">
+
+![Domain Message Flows - Parte 2](assets/img/event_storming/Flow2.jpg)
+
+*Figura: Domain Message Flows Modeling de MindFlow - Parte 2.*
+
+</div>
+
+La segunda parte representa los escenarios donde se producen interacciones entre distintos Bounded Contexts.
+
+Cuando una entrada de diario es creada, el Domain Event `Journal entry created` activa la Policy `after Journal entry created`, permitiendo que **AI Assistant** procese la información con apoyo de **Google Gemini API** y genere el evento `Insight generated`. El usuario también puede valorar la respuesta generada, produciendo `Assistant response rated`.
+
+En **Habits & Wellness**, los Commands `Create habit` y `Complete habit` permiten registrar y actualizar los hábitos del usuario. Cuando se alcanza el umbral correspondiente se activa la Policy `streak threshold met`, produciendo `Streak achieved`.
+
+De manera independiente, el **System** puede activar la Policy `check-in time reached`, que invoca al Bounded Context **Notifications** para producir el evento `Reminder sent`.
+
+El flujo de bienestar comienza con `Run stress check`, generando `Stress check completed`. Ante un nivel elevado de estrés se activa la Policy `after high-stress check`, produciendo `Wellness exercise suggested`.
+
+Asimismo, los registros emocionales recurrentes pueden activar `after recurring low mood`. **AI Assistant** identifica entonces el evento `Risk pattern detected`, el cual activa `after risk detected` y permite que **Notifications** produzca `Wellness alert sent`.
+
+<div align="center">
+
+![Domain Message Flows - Parte 3](assets/img/event_storming/Flow3.jpg)
+
+*Figura: Domain Message Flows Modeling de MindFlow - Parte 3.*
+
+</div>
+
+La tercera parte representa los flujos relacionados con analítica, monetización y soporte.
+
+El Bounded Context **Analytics & Reporting** permite generar un reporte mediante `Generate progress report`, produciendo `Progress report generated`. Posteriormente, el usuario puede ejecutar `Export report`, generando el evento `Report exported`.
+
+En **Subscriptions**, el usuario selecciona un plan mediante `Select premium plan`, produciendo `Premium plan selected`. El pago es procesado mediante un **Payment Gateway / Stripe**, generando `Payment processed`. Este evento activa la Policy `after payment processed`, dando como resultado `Subscription activated`. El usuario también puede ejecutar `Cancel subscription`, produciendo `Subscription canceled`.
+
+Finalmente, el Bounded Context **Support** administra las solicitudes de asistencia. El usuario ejecuta `Create support ticket`, produciendo `Support ticket created`, mientras que el **Support Agent** puede ejecutar `Resolve support ticket`, generando `Support ticket resolved`.
+
+En conjunto, estos flujos evidencian cómo los diferentes Bounded Contexts colaboran sin perder sus responsabilidades individuales, utilizando mensajes de dominio para coordinar las capacidades principales de MindFlow.
 
 #### 2.5.1.3. Bounded Context Canvases
 
