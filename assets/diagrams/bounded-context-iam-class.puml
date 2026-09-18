@@ -1,0 +1,63 @@
+@startuml IAM_DomainLayer_ClassDiagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface IAuditableEntity {
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+interface "IBaseRepository<TEntity>" as IBaseRepository {
+  +AddAsync(entity: TEntity, cancellationToken: CancellationToken) : Task
+  +FindByIdAsync(id: int, cancellationToken: CancellationToken) : Task<TEntity?>
+  +Update(entity: TEntity) : void
+  +Remove(entity: TEntity) : void
+  +ListAsync(cancellationToken: CancellationToken) : Task<IEnumerable<TEntity>>
+}
+
+class User {
+  -Id : int
+  -Email : string
+  -Name : string?
+  -Occupation : string?
+  -GoogleId : string?
+  -PasswordHash : string
+  -PinHash : string?
+  -Role : string
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+  +{static} AdminRole : string
+  +{static} DefaultRole : string
+  +IsAdmin : bool
+  +HasPin : bool
+  +User(email: string, password: string)
+  +User(email: string, googleId: string, name: string?)
+  +PromoteToAdmin() : User
+  +LinkGoogle(googleId: string) : void
+  +UpdatePasswordHash(password: string) : User
+  +UpdateProfile(name: string?, occupation: string?) : User
+  +SetPin(pin: string) : User
+  +VerifyPin(pin: string) : bool
+  +RemovePin() : User
+}
+
+class PasswordResetToken {
+  +Id : int
+  +UserId : int
+  +Token : string
+  +ExpiresAt : DateTime
+  +Used : bool
+}
+
+interface IUserRepository {
+  +FindByEmailAsync(email: string) : Task<User?>
+  +FindByGoogleIdAsync(googleId: string) : Task<User?>
+  +ExistsByEmailAsync(email: string) : Task<bool>
+}
+
+User .up.|> IAuditableEntity
+IUserRepository -up-|> IBaseRepository
+IUserRepository ..> User : manages >
+PasswordResetToken "0..*" --> "1" User : references\n(logical FK, no DB constraint) >
+
+@enduml

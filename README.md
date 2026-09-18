@@ -818,7 +818,94 @@ El sistema MindFlow está compuesto por cuatro contenedores (Landing Page, Mobil
 
 <!-- Se agrega una sub-sección "2.6.x. Bounded Context: <Nombre>" por cada bounded context identificado en 2.5, una vez completado el Strategic-Level DDD. -->
 
-_Pendiente_
+### 2.6.1. Bounded Context: IAM
+
+El bounded context **IAM (Identity & Access Management)** es responsable de la identidad, autenticación y perfil de los usuarios de MindFlow. Ancla el evento *User registered / User authenticated*, y es consumido por el resto de bounded contexts, ya que toda operación sobre Journal, Habits & Wellness, AI Assistant, Analytics, Subscriptions, Notifications y Support requiere un usuario autenticado.
+
+#### 2.6.1.1. Domain Layer
+
+El Domain Layer concentra el agregado raíz `User`, la entidad `PasswordResetToken` y la abstracción `IUserRepository`, que encapsulan las reglas de negocio de identidad (hashing de contraseña y PIN, promoción a administrador, vínculo con Google) independientemente de cómo se exponen o se persisten.
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `User` | Aggregate Root (implementa `IAuditableEntity`) | Representa la identidad de un usuario de MindFlow y encapsula las reglas de negocio sobre su contraseña, PIN de seguridad y rol. | `Id: int`, `Email: string`, `Name: string?`, `Occupation: string?`, `GoogleId: string?`, `PasswordHash: string` (privado), `PinHash: string?` (privado), `Role: string`, `CreatedAt: DateTimeOffset?`, `UpdatedAt: DateTimeOffset?`, `AdminRole`/`DefaultRole: const string` | `User(email, password)`, `User(email, googleId, name)`, `PromoteToAdmin()`, `LinkGoogle(googleId)`, `UpdatePasswordHash(password)`, `UpdateProfile(name, occupation)`, `SetPin(pin)`, `VerifyPin(pin): bool`, `RemovePin()`, propiedades calculadas `IsAdmin`, `HasPin` | Es el agregado que `IUserRepository` persiste; `PasswordResetToken` referencia su `Id` (relación lógica, sin FK físico) |
+| `PasswordResetToken` | Entity | Representa un token de un solo uso, con expiración, para el flujo de recuperación de contraseña. Solo se persiste el hash del token; el valor crudo viaja únicamente en el correo enviado al usuario. | `Id: int`, `UserId: int`, `Token: string` (hash SHA-256), `ExpiresAt: DateTime`, `Used: bool` | *(entidad anémica, sin comportamiento propio — el ciclo de vida lo gestiona `UserCommandService`)* | Referencia lógica a `User` por `UserId` (0..* a 1, sin constraint físico en BD) |
+| `IUserRepository` | Repository Interface (extiende `IBaseRepository<User>`) | Abstrae el acceso a datos de `User` para que el Domain/Application Layer no dependa de la tecnología de persistencia. | — | `FindByEmailAsync(email): Task<User?>`, `FindByGoogleIdAsync(googleId): Task<User?>`, `ExistsByEmailAsync(email): Task<bool>` + heredados de `IBaseRepository<User>` (`AddAsync`, `FindByIdAsync`, `Update`, `Remove`, `ListAsync`) | Implementada por `UserRepository` (Infrastructure Layer); consumida por `UserCommandService` (Application Layer) |
+
+#### 2.6.1.2. Interface Layer
+
+El Interface Layer expone las capacidades de IAM como una API REST, y traduce entre el contrato HTTP (Resources) y los Commands del Application Layer.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `UsersController` | REST Controller (`api/v1/users`) | Expone los endpoints de registro, autenticación (email/password y Google), recuperación de contraseña, perfil y gestión de PIN. | Endpoints: `POST /sign-up`, `POST /sign-in`, `POST /google-auth`, `POST /forgot-password`, `POST /reset-password`, `GET /profile`, `PUT /profile`, `DELETE /`, `POST /pin`, `POST /pin/verify`, `DELETE /pin`, `GET /pin/status` | Depende de `IUserCommandService`; usa los *Assemblers* para transformar Resources ↔ Commands/Entities |
+| `SignUpResource`, `SignInResource`, `GoogleAuthResource`, `ForgotPasswordResource`, `ResetPasswordResource`, `UpdateProfileResource`, `SetPinResource`, `VerifyPinResource` | Request DTOs (records) | Representan el cuerpo (`body`) de cada petición HTTP entrante, desacoplado de los Commands del dominio. | Atributos según el endpoint (p. ej. `SignUpResource(Email, Password, Name?)`) | Transformados a Commands por los Assemblers o instanciados directamente en el Controller |
+| `UserResource`, `AuthenticatedUserResource` | Response DTOs (records) | Representan la forma pública de un `User` en las respuestas HTTP; `AuthenticatedUserResource` añade el JWT emitido. | `UserResource(Id, Email, Name?, Occupation?)`, `AuthenticatedUserResource(Id, Email, Token)` | Construidos a partir de `User` mediante `UserResourceFromEntityAssembler` |
+| `SignUpCommandFromResourceAssembler` | Assembler (static) | Convierte un `SignUpResource` en un `SignUpCommand`. | `ToCommandFromResource(resource): SignUpCommand` | Traduce Interface Layer → Application Layer |
+| `UserResourceFromEntityAssembler` | Assembler (static) | Convierte un `User` (Domain) en un `UserResource` (Interface). | `ToResourceFromEntity(entity): UserResource` | Traduce Domain Layer → Interface Layer |
+
+#### 2.6.1.3. Application Layer
+
+El Application Layer orquesta los flujos de negocio de IAM a través de Commands y del servicio `UserCommandService`, que actúa como Command Handler unificado para todos los casos de uso de identidad.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SignUpCommand`, `SignInCommand`, `UpdateProfileCommand`, `DeleteAccountCommand`, `GoogleAuthCommand`, `ForgotPasswordCommand`, `ResetPasswordCommand`, `SetPinCommand`, `VerifyPinCommand`, `RemovePinCommand` | Commands (records) | Encapsulan la intención y los datos necesarios para cada caso de uso de IAM (registro, login, actualización de perfil, eliminación de cuenta, login con Google, recuperación/reset de contraseña, gestión de PIN). | P. ej. `SignUpCommand(Email, Password, Name?)`, `SignInCommand(Email, Password)`, `SetPinCommand(UserId, Pin)` | Producidos por el Interface Layer (directamente o vía Assembler); consumidos por `IUserCommandService` |
+| `IUserCommandService` | Application Service Interface | Define el contrato de todos los casos de uso de IAM como métodos `Handle(...)` sobrecargados por tipo de Command. | Un `Handle(TCommand)` por cada Command, más `HasPinAsync(userId)` y `GetProfileAsync(userId)` | Implementada por `UserCommandService`; consumida por `UsersController` |
+| `UserCommandService` | Application Service (Command Handler) | Implementa `IUserCommandService`: valida entradas (formato de email, longitud de contraseña/PIN), aplica reglas de negocio sobre `User`, coordina `IUserRepository`, `ITokenService`, `IEmailService`, `IGoogleAuthService` y el `IUnitOfWork`. En `DeleteAccountCommand` además orquesta el borrado en cascada de datos del usuario en los demás bounded contexts (Journal, Habits, Analytics, Chat, Support, Subscriptions, Notifications, AiFeedback) dentro de una transacción. | Un método `Handle` por cada Command (ver tabla de Commands) | Depende de `IUserRepository`, `IUnitOfWork`, `ITokenService`, `IEmailService`, `IGoogleAuthService`, `AppDbContext` (acceso directo para el borrado en cascada multi-contexto) |
+| `ITokenService` | Service Port | Abstrae la generación de tokens de acceso. | `GenerateToken(user: User): string` | Implementada por `TokenService` (Infrastructure) |
+| `IEmailService` | Service Port | Abstrae el envío de correos transaccionales. | `SendPasswordResetAsync(toEmail, resetToken): Task` | Implementada por `EmailService` (Infrastructure) |
+| `IGoogleAuthService` | Service Port | Abstrae la validación de credenciales de Google Sign-In. | `ValidateAsync(credential): Task<GoogleUserInfo?>` | Implementada por `GoogleAuthService` (Infrastructure); retorna el record `GoogleUserInfo(GoogleId, Email, Name?)` |
+| `SignUpError`, `SignInError` | Error Enums | Códigos de error tipados para las respuestas `Result<T>.Failure(...)` de sign-up y sign-in/reset. | `SignUpError`: `EmailAlreadyInUse`, `InvalidEmailFormat`, `UnexpectedError`. `SignInError`: `InvalidCredentials`, `UnexpectedError` | Usados por `UserCommandService` al construir resultados fallidos |
+
+#### 2.6.1.4. Infrastructure Layer
+
+El Infrastructure Layer contiene las implementaciones concretas de los puertos definidos en Domain/Application Layer: persistencia con EF Core, emisión de JWT, envío de correo por SMTP, y validación de credenciales de Google.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `UserRepository` | Repository (EF Core) | Implementa `IUserRepository` sobre `AppDbContext`, extendiendo `BaseRepository<User>` para el CRUD genérico. | `FindByEmailAsync(email)`, `FindByGoogleIdAsync(googleId)`, `ExistsByEmailAsync(email)` | Implementa `IUserRepository`; hereda de `BaseRepository<User>`; opera sobre la tabla `users` vía `AppDbContext` |
+| `TokenService` | Infrastructure Service | Implementa `ITokenService` generando un JWT firmado con HMAC-SHA256, con claims `user_id`, `email` y `role`, expiración de 7 días. | `GenerateToken(user): string` | Implementa `ITokenService`; lee `TokenSettings:Secret`, `Jwt:Issuer`, `Jwt:Audience` de configuración |
+| `EmailService` | Infrastructure Service | Implementa `IEmailService` enviando el correo de recuperación de contraseña vía SMTP (`System.Net.Mail`), con el enlace hacia `FrontendUrl` configurado. | `SendPasswordResetAsync(toEmail, resetToken): Task` | Implementa `IEmailService`; depende del servicio externo **SMTP Email Service** |
+| `GoogleAuthService` | Infrastructure Service | Implementa `IGoogleAuthService` validando el `credential` (ID token) recibido contra la librería oficial `Google.Apis.Auth`, verificando el `Audience` contra `Google:ClientId`. | `ValidateAsync(credential): Task<GoogleUserInfo?>` | Implementa `IGoogleAuthService`; depende del servicio externo **Google OAuth** |
+
+---
+
+#### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![IAM Component Diagram](assets/img/software_architecture/iam_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context IAM dentro del container Web Services API.*
+
+</div>
+
+El diagrama descompone el container **Web Services API** en los componentes que implementan IAM: `UsersController` recibe las peticiones HTTP y delega en `UserCommandService`, que a su vez coordina `UserRepository` (persistencia), `TokenService` (emisión de JWT), `EmailService` (correo de recuperación vía SMTP) y `GoogleAuthService` (validación de credenciales contra Google OAuth). Cada componente de infraestructura encapsula la comunicación con su dependencia externa correspondiente, de modo que `UserCommandService` permanece desacoplado de los detalles técnicos (hashing JWT, protocolo SMTP, SDK de Google).
+
+#### 2.6.1.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![IAM Domain Layer Class Diagram](assets/img/software_architecture/iam_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context IAM.*
+
+</div>
+
+El diagrama muestra el agregado `User` (que implementa `IAuditableEntity`), la entidad `PasswordResetToken` y la interfaz `IUserRepository` (que extiende `IBaseRepository`).
+
+##### 2.6.1.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![IAM Database Diagram](assets/img/software_architecture/iam_database_diagram.png)
+
+*Figura: Database Diagram del bounded context IAM.*
+
+</div>
+
+El bounded context IAM persiste en dos tablas: `users` (con índices únicos sobre `email` y `google_id`) y `password_reset_tokens` (con índice único sobre `token` y un índice simple sobre `user_id`).
 
 ---
 
