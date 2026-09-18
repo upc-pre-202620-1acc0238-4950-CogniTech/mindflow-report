@@ -612,7 +612,25 @@ _Pendiente_
 
 ### 2.3.4. Empathy Mapping
 
-_Pendiente_
+#### Segmento Estudiantes Universitarios
+
+<div align="center">
+
+![Empathy Mapping - Estudiantes Universitarios](assets/img/lean_ux/Empathy%20map1.png)
+
+*Figura: Empathy Mapping del segmento de estudiantes universitarios.*
+
+</div>
+
+#### Segmento Profesionales Jóvenes
+
+<div align="center">
+
+![Empathy Mapping - Profesionales Jóvenes](assets/img/lean_ux/Empathy%20map2.png)
+
+*Figura: Empathy Mapping del segmento de profesionales jóvenes.*
+
+</div>
 
 ### 2.3.5. Big Picture EventStorming
 
