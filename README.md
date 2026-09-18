@@ -1172,7 +1172,32 @@ En conjunto, el Context Mapping permite visualizar las dependencias entre los Bo
 
 #### 2.5.3.1. Software Architecture Context Level Diagrams
 
-_Pendiente_
+El **Software Architecture Context Level Diagram** representa a MindFlow como un único sistema y muestra su interacción con los usuarios y los servicios externos necesarios para su funcionamiento.
+
+En este nivel del modelo C4 no se detallan los componentes internos de MindFlow, sino únicamente los actores y sistemas externos con los que se relaciona.
+
+<div align="center">
+
+![Diagrama de Contexto MindFlow](assets/img/software_architecture/Diagrama%20de%20Contexto%20Mindflow.png)
+
+*Figura: Software Architecture Context Level Diagram de MindFlow.*
+
+</div>
+
+**Explicación del diagrama**
+
+El usuario interactúa con **MindFlow** para registrar información emocional, gestionar hábitos, consultar insights generados mediante Inteligencia Artificial, revisar reportes de progreso, gestionar su cuenta y acceder a funcionalidades Premium.
+
+MindFlow se integra con diversos servicios externos:
+
+- **Google Gemini API**: utilizado para generar respuestas, insights emocionales y sugerencias basadas en Inteligencia Artificial.
+- **Firebase Cloud Messaging**: utilizado para el envío de notificaciones push y alertas de bienestar.
+- **Google OAuth**: permite la autenticación de usuarios mediante Google Sign-In.
+- **Stripe**: procesa los pagos relacionados con las suscripciones Premium.
+- **Cloudinary**: almacena y sirve archivos multimedia asociados a las entradas del diario.
+- **Email Provider**: permite el envío de correos transaccionales, como recuperación de contraseña y notificaciones relacionadas con soporte.
+
+Este diagrama permite visualizar el límite del sistema MindFlow y las principales dependencias externas que colaboran con la solución.
 
 #### 2.5.3.2. Software Architecture Container Level Diagrams
 
