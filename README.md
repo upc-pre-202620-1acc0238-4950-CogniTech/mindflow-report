@@ -1178,7 +1178,7 @@ En este nivel del modelo C4 no se detallan los componentes internos de MindFlow,
 
 <div align="center">
 
-![Diagrama de Contexto MindFlow](assets/diagrams/software_architecture/Diagrama%20de%20Contexto%20Mindflow.png)
+![Diagrama de Contexto MindFlow](assets/diagrams/Diagrama%20de%20Contexto%20Mindflow.png)
 
 *Figura: Software Architecture Context Level Diagram de MindFlow.*
 
