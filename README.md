@@ -739,7 +739,67 @@ _Pendiente_
 
 ### 2.4.3. Product Backlog
 
-_Pendiente_
+El **Product Backlog** de MindFlow organiza las User Stories según el valor que aportan al usuario, las dependencias funcionales y técnicas, y la necesidad de validar progresivamente la propuesta de valor del producto.
+
+A diferencia de una organización basada únicamente en el identificador de cada User Story, el presente backlog prioriza primero las funcionalidades que permiten comunicar y validar el producto, seguidas por las capacidades centrales de diario emocional, Inteligencia Artificial, gestión de hábitos y analítica.
+
+Las User Stories correspondientes a la **Landing Page** se ubican en las primeras posiciones debido a que forman parte del alcance inicial del producto y permiten comunicar la propuesta de valor de MindFlow desde el primer Sprint.
+
+La columna **Priority** representa la importancia relativa de cada elemento dentro del producto, mientras que los **Story Points** representan una estimación relativa del esfuerzo necesario para su implementación.
+
+| # Orden | User Story ID | Título | Descripción | Priority | Story Points |
+|---|---|---|---|---|---|
+| 1 | US41 | Navegación principal de la Landing Page | Como visitante, quiero contar con un menú de navegación claro, para acceder rápidamente a las secciones más importantes de la Landing Page. | High | 2 |
+| 2 | US42 | CTA principal | Como visitante, quiero visualizar un CTA principal claramente identificable, para comenzar rápidamente a utilizar MindFlow. | High | 2 |
+| 3 | US43 | Grid de funcionalidades | Como visitante, quiero visualizar las principales funcionalidades de MindFlow, para comprender rápidamente las capacidades que ofrece el producto. | High | 3 |
+| 4 | US50 | Vista previa de Insight de IA | Como visitante, quiero visualizar un ejemplo de una entrada de diario y su Insight generado por IA, para comprender cómo funciona la retroalimentación emocional de MindFlow. | High | 3 |
+| 5 | US44 | Vista previa de la interfaz | Como visitante, quiero visualizar ejemplos de la aplicación, para comprender cómo funciona MindFlow antes de registrarme. | Medium | 3 |
+| 6 | US48 | Vista previa de tendencias emocionales | Como visitante, quiero visualizar un ejemplo de las tendencias emocionales, para comprender el tipo de análisis que MindFlow puede proporcionar. | Medium | 3 |
+| 7 | US49 | Detalle de beneficios de funcionalidades | Como visitante, quiero conocer el beneficio asociado a cada funcionalidad principal de MindFlow, para identificar cómo el producto puede contribuir a mi bienestar. | Medium | 3 |
+| 8 | US45 | CTA de conversión | Como visitante, quiero visualizar un CTA adicional al final de la Landing Page, para comenzar a utilizar MindFlow después de conocer sus beneficios. | High | 2 |
+| 9 | US46 | Navegación del footer | Como visitante, quiero acceder a enlaces legales e informativos desde el footer, para consultar información relevante sobre MindFlow. | Medium | 1 |
+| 10 | US47 | Enlaces a redes sociales | Como visitante, quiero acceder a los perfiles oficiales de MindFlow en redes sociales, para visitar sus canales externos de comunicación. | Low | 1 |
+| 11 | SP01 | Investigación de viabilidad de integración de IA | Como equipo de desarrollo, queremos investigar y validar alternativas para integrar análisis de sentimientos y retroalimentación empática mediante IA, para seleccionar una solución adecuada antes de completar la implementación. | High | 5 |
+| 12 | US11 | Entrada de diario | Como usuario, quiero escribir entradas en mi diario, para registrar mis pensamientos, sentimientos y experiencias emocionales. | High | 3 |
+| 13 | US12 | Análisis de sentimientos | Como usuario, quiero que MindFlow analice el tono emocional de mi entrada de diario, para comprender mejor mi estado emocional actual. | High | 5 |
+| 14 | US13 | Retroalimentación empática mediante IA | Como usuario, quiero recibir retroalimentación empática después de registrar mis emociones, para obtener orientación y acompañamiento inmediato. | High | 5 |
+| 15 | US19 (T) | Integración con API de LLM | Como desarrollador, quiero integrar un servicio basado en LLM, para que MindFlow pueda generar respuestas contextuales y empáticas. | High | 8 |
+| 16 | US21 | Creación de hábitos | Como usuario, quiero crear hábitos personalizados de bienestar, para construir una rutina constante de autocuidado. | High | 3 |
+| 17 | US22 | Registro de cumplimiento de hábitos | Como usuario, quiero marcar mis hábitos como completados, para monitorear mi progreso diario. | High | 2 |
+| 18 | US23 | Ajuste basado en nivel de estrés | Como usuario que experimenta un nivel elevado de estrés, quiero que MindFlow adapte sus recomendaciones de bienestar según mi estado emocional, para evitar sentirme sobrecargado. | High | 8 |
+| 19 | US31 | Dashboard de analítica | Como usuario, quiero visualizar analíticas de mi actividad emocional, para comprender cómo evoluciona mi bienestar a lo largo del tiempo. | High | 5 |
+| 20 | US01 | Registro con OAuth (Google) | Como nuevo usuario, quiero registrarme utilizando mi cuenta de Google, para acceder rápidamente a la plataforma. | High | 3 |
+| 21 | US02 | Inicio de sesión tradicional | Como usuario, quiero iniciar sesión con correo electrónico y contraseña, para disponer de una alternativa de acceso manual. | High | 3 |
+| 22 | US10 (T) | Seguridad de API mediante JWT | Como desarrollador, quiero autenticar las solicitudes protegidas mediante JWT, para evitar accesos no autorizados a los servicios del backend. | High | 3 |
+| 23 | US08 (T) | Encriptación AES-256 | Como arquitecto, quiero que la información sensible del diario se almacene cifrada, para proteger la confidencialidad de los datos del usuario. | High | 8 |
+| 24 | US07 | Eliminación de cuenta | Como usuario, quiero eliminar mi cuenta y mis registros personales, para mantener control sobre mi información. | High | 3 |
+| 25 | US30 (T) | Sincronización de datos offline | Como usuario de la aplicación móvil, quiero registrar información del diario sin conexión y sincronizarla posteriormente, para que una conexión intermitente a Internet no me impida registrar mis pensamientos. | High | 8 |
+| 26 | US38 (T) | Pruebas automatizadas | Como desarrollador, quiero disponer de pruebas automatizadas para los flujos críticos, para detectar regresiones antes de liberar cambios. | High | 5 |
+| 27 | US03 | Recuperación de cuenta | Como usuario, quiero restablecer mi contraseña mediante un enlace enviado por correo electrónico, para recuperar el acceso a mi cuenta si la olvido. | Medium | 3 |
+| 28 | US04 | Bloqueo mediante PIN | Como usuario, quiero configurar un PIN de seguridad, para proteger mi información privada frente a accesos físicos no autorizados. | Medium | 2 |
+| 29 | US05 | Perfil de usuario | Como usuario, quiero editar mis datos personales, para que MindFlow pueda personalizar mi experiencia. | Medium | 2 |
+| 30 | US14 | Etiquetas contextuales | Como usuario, quiero categorizar mis entradas mediante etiquetas, para identificar situaciones o áreas relacionadas con mi estado emocional. | Medium | 2 |
+| 31 | US15 | Adjuntos multimedia | Como usuario, quiero adjuntar contenido multimedia a mis entradas de diario, para enriquecer mis registros emocionales. | Medium | 5 |
+| 32 | US16 | Búsqueda por palabras clave | Como usuario, quiero buscar entradas anteriores mediante palabras clave, para localizar rápidamente experiencias específicas. | Medium | 3 |
+| 33 | US17 | Calendario de estado de ánimo | Como usuario, quiero visualizar mis registros emocionales a lo largo del tiempo, para identificar patrones en mi estado de ánimo. | Medium | 5 |
+| 34 | US18 | Resumen semanal mediante IA | Como usuario, quiero recibir un resumen semanal de mi actividad emocional, para reflexionar sobre los cambios en mi bienestar. | Medium | 5 |
+| 35 | US20 (T) | Registro de interacciones de IA | Como desarrollador, quiero registrar métricas relevantes de las interacciones con IA, para monitorear el funcionamiento y comportamiento de esta funcionalidad. | Medium | 2 |
+| 36 | US24 | Guía de respiración 4-7-8 | Como usuario, quiero acceder a un ejercicio guiado de respiración, para utilizar una técnica rápida de relajación durante momentos de estrés. | Medium | 5 |
+| 37 | US25 | Micro-meditaciones | Como usuario, quiero acceder a ejercicios cortos de meditación, para incorporar actividades breves de bienestar dentro de mi rutina. | Medium | 3 |
+| 38 | US26 | Feedback sobre recomendaciones | Como usuario, quiero calificar las recomendaciones de la IA, para que MindFlow registre cuáles me resultan útiles. | Medium | 2 |
+| 39 | US28 | Racha de hábitos | Como usuario, quiero visualizar mis rachas de hábitos, para mantenerme motivado mediante el seguimiento de mi constancia. | Medium | 3 |
+| 40 | US32 | Nube de palabras | Como usuario, quiero visualizar términos recurrentes de mi actividad en el diario, para identificar temas frecuentes o posibles detonantes de estrés. | Medium | 5 |
+| 41 | US33 | Planes Premium | Como usuario, quiero comparar los planes disponibles, para determinar si las funcionalidades Premium me resultan útiles. | Medium | 2 |
+| 42 | US34 | Pago seguro | Como usuario, quiero realizar el pago de mi suscripción mediante un proveedor seguro, para activar las funcionalidades Premium de manera confiable. | Medium | 8 |
+| 43 | US35 | Exportación en PDF | Como usuario Premium, quiero exportar un reporte estructurado en PDF, para guardar o compartir un resumen legible de mi información emocional. | Medium | 5 |
+| 44 | US37 | Soporte técnico | Como usuario, quiero crear una solicitud de soporte, para reportar problemas técnicos o solicitar asistencia. | Medium | 3 |
+| 45 | US39 (T) | Diseño responsive | Como desarrollador, quiero que la Landing Page y las interfaces compatibles se adapten a diferentes tamaños de pantalla, para que puedan utilizarse correctamente desde distintos dispositivos. | Medium | 5 |
+| 46 | US40 (T) | Rate Limiting | Como administrador, quiero aplicar límites a las solicitudes realizadas a la API, para proteger el backend frente a un uso excesivo o abusivo. | Medium | 3 |
+| 47 | US29 (T) | Indexación de base de datos | Como desarrollador, quiero indexar adecuadamente la información consultada con frecuencia, para mantener tiempos de respuesta eficientes. | Medium | 3 |
+| 48 | US09 (T) | Pipeline CI/CD | Como desarrollador, quiero contar con un flujo automatizado de integración y despliegue, para realizar entregas de manera consistente y eficiente. | Medium | 5 |
+| 49 | US06 | Modo oscuro | Como usuario, quiero activar el modo oscuro, para reducir la fatiga visual durante el uso nocturno. | Low | 2 |
+| 50 | US27 | Alerta de hidratación | Como usuario, quiero recibir recordatorios para beber agua, para mantener hábitos saludables durante mi rutina diaria. | Low | 2 |
+| 51 | US36 | Exportación en CSV | Como usuario Premium, quiero exportar mi información en formato CSV, para analizar los datos mediante herramientas externas. | Low | 3 |
 
 ## 2.5. Strategic-Level Domain-Driven Design
 
