@@ -972,11 +972,201 @@ En conjunto, estos flujos evidencian cómo los diferentes Bounded Contexts colab
 
 #### 2.5.1.3. Bounded Context Canvases
 
-_Pendiente_
+Los **Bounded Context Canvases** permiten documentar de manera estructurada las responsabilidades, lenguaje, reglas de negocio y formas de comunicación de cada uno de los Bounded Contexts identificados durante el proceso de Strategic-Level Domain-Driven Design.
+
+Para MindFlow se definieron ocho Bounded Contexts: **IAM**, **Journal**, **AI Assistant**, **Habits & Wellness**, **Analytics & Reporting**, **Notifications**, **Subscriptions** y **Support**. Cada canvas describe su propósito, clasificación estratégica, lenguaje ubicuo, decisiones de negocio y mecanismos de comunicación de entrada y salida.
+
+### IAM
+
+El bounded context **IAM (Identity and Access Management)** concentra las responsabilidades relacionadas con la identidad de los usuarios, autenticación, perfiles y mecanismos de acceso a MindFlow. Funciona como un contexto de soporte para el resto de las capacidades del sistema.
+
+<div align="center">
+
+![Bounded Context Canvas - IAM](assets/img/event_storming/iam.png)
+
+*Figura: Bounded Context Canvas correspondiente a IAM.*
+
+</div>
+
+### Journal
+
+El bounded context **Journal** administra el diario emocional del usuario, incluyendo el registro de estados de ánimo, creación de entradas y organización de información mediante etiquetas. Se considera uno de los contextos centrales de MindFlow debido a su relación directa con la autoconciencia emocional.
+
+<div align="center">
+
+![Bounded Context Canvas - Journal](assets/img/event_storming/journal.png)
+
+*Figura: Bounded Context Canvas correspondiente a Journal.*
+
+</div>
+
+### AI Assistant
+
+El bounded context **AI Assistant** concentra las capacidades relacionadas con la interacción conversacional basada en Inteligencia Artificial, la generación de insights, el análisis del contexto emocional y la detección de patrones relevantes a partir de la información del usuario.
+
+<div align="center">
+
+![Bounded Context Canvas - AI Assistant](assets/img/event_storming/AIAssistant.png)
+
+*Figura: Bounded Context Canvas correspondiente a AI Assistant.*
+
+</div>
+
+### Habits & Wellness
+
+El bounded context **Habits & Wellness** administra la creación y seguimiento de hábitos, el cumplimiento de actividades, las rachas de progreso, los chequeos de estrés y las sugerencias orientadas al bienestar del usuario.
+
+<div align="center">
+
+![Bounded Context Canvas - Habits and Wellness](assets/img/event_storming/Habits.png)
+
+*Figura: Bounded Context Canvas correspondiente a Habits & Wellness.*
+
+</div>
+
+### Analytics & Reporting
+
+El bounded context **Analytics & Reporting** transforma la información generada en otros contextos en métricas, tendencias y reportes que permiten al usuario visualizar y comprender su evolución emocional y el progreso de sus hábitos.
+
+<div align="center">
+
+![Bounded Context Canvas - Analytics and Reporting](assets/img/event_storming/Analytics.png)
+
+*Figura: Bounded Context Canvas correspondiente a Analytics & Reporting.*
+
+</div>
+
+### Notifications
+
+El bounded context **Notifications** se encarga de gestionar recordatorios, alertas de bienestar y notificaciones dirigidas al usuario. Funciona como un contexto transversal que recibe información originada en otros Bounded Contexts y la comunica mediante los canales disponibles.
+
+<div align="center">
+
+![Bounded Context Canvas - Notifications](assets/img/event_storming/notifications.png)
+
+*Figura: Bounded Context Canvas correspondiente a Notifications.*
+
+</div>
+
+### Subscriptions
+
+El bounded context **Subscriptions** administra las capacidades comerciales de MindFlow relacionadas con los planes Premium, procesamiento de pagos, activación de suscripciones y cancelaciones, manteniendo estas responsabilidades separadas de las funcionalidades centrales de bienestar.
+
+<div align="center">
+
+![Bounded Context Canvas - Subscriptions](assets/img/event_storming/Subs.png)
+
+*Figura: Bounded Context Canvas correspondiente a Subscriptions.*
+
+</div>
+
+### Support
+
+El bounded context **Support** gestiona las solicitudes de asistencia de los usuarios mediante tickets de soporte, controlando su ciclo de vida desde la creación hasta su resolución por parte del equipo correspondiente.
+
+<div align="center">
+
+![Bounded Context Canvas - Support](assets/img/event_storming/Support.png)
+
+*Figura: Bounded Context Canvas correspondiente a Support.*
+
+</div>
+
+En conjunto, estos canvases permiten establecer límites claros entre las responsabilidades del dominio de MindFlow y documentar cómo cada Bounded Context mantiene su propio lenguaje y reglas de negocio, mientras colabora con otros contextos mediante mensajes y eventos de dominio.
 
 ### 2.5.2. Context Mapping
 
-_Pendiente_
+El **Context Mapping** permite representar las relaciones existentes entre los diferentes **Bounded Contexts** de MindFlow, identificando cuáles actúan como **Upstream (U)** y cuáles como **Downstream (D)**, así como el patrón de integración utilizado entre ellos.
+
+A partir de los Bounded Contexts identificados durante el EventStorming y el Candidate Context Discovery, se definieron relaciones de tipo **Conformist** y **Customer-Supplier**. Estas relaciones permiten mantener separados los modelos de dominio, al mismo tiempo que hacen explícitas las dependencias necesarias para el funcionamiento de la solución.
+
+<div align="center">
+
+![Context Mapping - MindFlow](assets/img/event_storming/ContextMapping.png)
+
+*Figura: Context Mapping de los Bounded Contexts de MindFlow.*
+
+</div>
+
+### Relaciones entre Bounded Contexts
+
+**IAM – Journal (Conformist)**
+
+En esta relación, **IAM** actúa como **Upstream**, ya que proporciona la identidad autenticada del usuario. **Journal** actúa como **Downstream**, utilizando dicha identidad para asociar las entradas del diario y los registros emocionales al usuario correspondiente.
+
+La relación se define como **Conformist**, debido a que Journal adopta la información de identidad proporcionada por IAM sin requerir un modelo de traducción adicional.
+
+**IAM – AI Assistant (Conformist)**
+
+**IAM** es el contexto **Upstream**, ya que proporciona la identidad del usuario autenticado. **AI Assistant** actúa como **Downstream**, utilizando esta información para asociar conversaciones, respuestas e insights con el usuario correspondiente.
+
+La relación se establece como **Conformist**, ya que AI Assistant utiliza directamente la identidad definida por IAM.
+
+**IAM – Habits & Wellness (Conformist)**
+
+**IAM** funciona como **Upstream**, mientras que **Habits & Wellness** funciona como **Downstream**. La identidad proporcionada por IAM permite asociar hábitos, chequeos de estrés y actividades de bienestar con un usuario específico.
+
+Habits & Wellness adopta el modelo de identidad de IAM, por lo que la relación se clasifica como **Conformist**.
+
+**IAM – Analytics & Reporting (Conformist)**
+
+En esta relación, **IAM** actúa como **Upstream** y **Analytics & Reporting** como **Downstream**. Los reportes, métricas y tendencias generados por MindFlow deben corresponder a un usuario previamente identificado.
+
+Analytics & Reporting utiliza la identidad proporcionada por IAM, estableciendo una relación de tipo **Conformist**.
+
+**IAM – Subscriptions (Conformist)**
+
+**IAM** es **Upstream**, proporcionando la identidad del usuario, mientras que **Subscriptions** es **Downstream**, ya que necesita asociar los planes Premium, pagos y estados de suscripción a un usuario determinado.
+
+Subscriptions adopta directamente la identificación del usuario gestionada por IAM, por lo que se utiliza el patrón **Conformist**.
+
+**IAM – Support (Conformist)**
+
+**IAM** funciona como **Upstream**, proporcionando la información de identidad necesaria para registrar solicitudes de soporte. **Support** actúa como **Downstream**, asociando cada ticket con el usuario que lo generó.
+
+La relación se define como **Conformist**, ya que Support utiliza directamente el modelo de identidad proporcionado por IAM.
+
+**Journal – AI Assistant (Customer-Supplier)**
+
+En esta relación, **Journal** actúa como **Upstream (Supplier)**, ya que produce información emocional como entradas de diario y estados de ánimo.
+
+**AI Assistant** funciona como **Downstream (Customer)**, consumiendo dicha información para generar insights, respuestas contextualizadas y detectar patrones emocionales.
+
+La relación se clasifica como **Customer-Supplier**, debido a que AI Assistant depende de información generada por Journal para ejecutar parte de sus capacidades.
+
+**Journal – Analytics & Reporting (Customer-Supplier)**
+
+**Journal** actúa como **Upstream (Supplier)** al proporcionar información relacionada con entradas emocionales y estados de ánimo.
+
+**Analytics & Reporting** funciona como **Downstream (Customer)**, utilizando estos datos para construir métricas, tendencias y reportes sobre la evolución emocional del usuario.
+
+Por ello, la relación se establece como **Customer-Supplier**.
+
+**Habits & Wellness – Analytics & Reporting (Customer-Supplier)**
+
+**Habits & Wellness** funciona como **Upstream (Supplier)**, ya que genera información relacionada con hábitos, cumplimiento, rachas y chequeos de estrés.
+
+**Analytics & Reporting** actúa como **Downstream (Customer)**, consumiendo estos datos para generar indicadores y reportes relacionados con el progreso del usuario.
+
+La relación se clasifica como **Customer-Supplier**.
+
+**AI Assistant – Notifications (Customer-Supplier)**
+
+**AI Assistant** actúa como **Upstream (Supplier)** al detectar patrones de riesgo y generar información que puede requerir una comunicación hacia el usuario.
+
+**Notifications** funciona como **Downstream (Customer)**, reaccionando ante estos eventos para generar y enviar alertas de bienestar.
+
+Esta relación se modela como **Customer-Supplier**.
+
+**Habits & Wellness – Notifications (Customer-Supplier)**
+
+**Habits & Wellness** actúa como **Upstream (Supplier)** al generar información relacionada con hábitos, chequeos y condiciones de bienestar.
+
+**Notifications** funciona como **Downstream (Customer)** al utilizar estas condiciones para generar recordatorios y comunicaciones dirigidas al usuario.
+
+Por ello, la relación se establece como **Customer-Supplier**.
+
+En conjunto, el Context Mapping permite visualizar las dependencias entre los Bounded Contexts de MindFlow y establecer de manera explícita la dirección de la comunicación entre ellos. IAM funciona como proveedor transversal de identidad, mientras que Journal, Habits & Wellness y AI Assistant generan información de dominio que posteriormente es utilizada por contextos como Analytics & Reporting y Notifications.
 
 ### 2.5.3. Software Architecture
 
