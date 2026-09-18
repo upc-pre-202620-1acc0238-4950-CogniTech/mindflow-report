@@ -1201,7 +1201,42 @@ Este diagrama permite visualizar el límite del sistema MindFlow y las principal
 
 #### 2.5.3.2. Software Architecture Container Level Diagrams
 
-_Pendiente_
+El **Software Architecture Container Level Diagram** representa la estructura interna de MindFlow a nivel de contenedores, mostrando las principales aplicaciones, servicios y mecanismos de persistencia que componen la solución.
+
+A diferencia del Context Level Diagram, en este nivel del modelo C4 se detalla cómo MindFlow se divide internamente y cómo sus contenedores se comunican entre sí y con los servicios externos.
+
+<div align="center">
+
+![Diagrama de Contenedores MindFlow](assets/diagrams/Diagrama%20de%20Contenedores%20Mindflow.png)
+
+*Figura: Software Architecture Container Level Diagram de MindFlow.*
+
+</div>
+
+**Explicación del diagrama**
+
+MindFlow está compuesto por cuatro contenedores principales:
+
+- **Mobile Application**: aplicación Android utilizada por los usuarios para acceder a las funcionalidades de MindFlow, incluyendo diario emocional, hábitos, asistente de IA, analíticas, suscripciones y soporte.
+
+- **Landing Page**: sitio web público desarrollado con HTML5, CSS3 y JavaScript, utilizado para presentar MindFlow y sus principales características.
+
+- **Web Services API**: backend desarrollado con ASP.NET Core / .NET 10. Centraliza la lógica de negocio, procesa las solicitudes provenientes de la aplicación móvil e integra los servicios externos utilizados por la plataforma.
+
+- **Database**: base de datos relacional MySQL 8.0 utilizada para persistir información de usuarios, entradas del diario, hábitos, información analítica, suscripciones y tickets de soporte.
+
+La **Mobile Application** se comunica con la **Web Services API** mediante HTTPS/JSON utilizando JWT para la autenticación de solicitudes. La API, a su vez, realiza operaciones de lectura y escritura sobre la base de datos MySQL.
+
+La Web Services API también mantiene integraciones con diferentes servicios externos:
+
+- **Google Gemini API**: generación de respuestas, insights emocionales y sugerencias mediante Inteligencia Artificial.
+- **Firebase Cloud Messaging**: envío de notificaciones push y alertas de bienestar.
+- **Google OAuth**: autenticación mediante Google Sign-In.
+- **Stripe**: procesamiento de pagos asociados a suscripciones Premium.
+- **Cloudinary**: almacenamiento y recuperación de archivos multimedia asociados a las entradas del diario.
+- **Email Provider**: envío de correos transaccionales mediante SMTP.
+
+Este nivel del modelo C4 permite comprender cómo se distribuyen las responsabilidades principales de la solución y cómo los contenedores internos de MindFlow colaboran para ofrecer las funcionalidades del sistema.
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
 
