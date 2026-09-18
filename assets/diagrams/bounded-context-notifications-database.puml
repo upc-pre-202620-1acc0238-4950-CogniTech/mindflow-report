@@ -1,0 +1,52 @@
+@startuml Notifications_DatabaseDiagram
+hide circle
+hide empty members
+skinparam linetype ortho
+
+entity "notifications" as notifications {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  title : varchar(200)
+  body : text
+  is_read : boolean = false
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+entity "device_tokens" as device_tokens {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  token : varchar(500)
+  platform : varchar(20) = "web"
+  created_at : datetime(6)
+}
+
+entity "users" as users {
+  *id : int <<PK>>
+  --
+  ...
+}
+
+users ||..o{ notifications : "user_id (referencia lógica al BC IAM)"
+users ||..o{ device_tokens : "user_id (referencia lógica al BC IAM)"
+
+note right of device_tokens
+  Índice único recomendado sobre token:
+  un mismo token de dispositivo push
+  pertenece a un único usuario, y se
+  reasigna en lugar de duplicarse si el
+  usuario vuelve a iniciar sesión en el
+  mismo dispositivo.
+end note
+
+note right of notifications
+  No tiene relación física con
+  device_tokens: se genera un registro
+  por usuario notificado en el momento
+  del envío, independientemente de
+  cuántos dispositivos tenga registrados.
+end note
+
+@enduml
