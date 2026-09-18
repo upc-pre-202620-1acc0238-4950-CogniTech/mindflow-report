@@ -1,0 +1,37 @@
+@startuml Support_DatabaseDiagram
+hide circle
+hide empty members
+skinparam linetype ortho
+
+entity "support_tickets" as support_tickets {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  user_email : varchar(255)
+  subject : varchar(255)
+  message : text
+  status : varchar(20) = "open"
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+entity "users" as users {
+  *id : int <<PK>>
+  --
+  ...
+}
+
+users ||..o{ support_tickets : "user_id (referencia lógica al BC IAM)"
+
+note right of support_tickets
+  user_email queda desnormalizado en la
+  propia tabla, para poder enviar la
+  confirmación por correo sin depender
+  de una consulta al bounded context IAM.
+  Índice recomendado sobre (user_id,
+  subject, created_at) para la
+  verificación de tickets duplicados
+  recientes.
+end note
+
+@enduml
