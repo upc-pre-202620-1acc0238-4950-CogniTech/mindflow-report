@@ -360,7 +360,7 @@ Participó en la actualización y aplicación de conocimientos relacionados con 
 Investigó y aplicó por primera vez las técnicas de Big Picture EventStorming y EventStorming estratégico para modelar el dominio de negocio de MindFlow, adquiriendo conocimientos nuevos de Domain-Driven Design y aplicándolos en la identificación de los Bounded Contexts candidatos del proyecto.<br><br>
 <b>Jáuregui Cerna, Jean Franco</b><br>
 <u>AV1</u><br>
-_Pendiente_<br><br>
+Investigó y aplicó nuevos enfoques de arquitectura de software al trasladar los hallazgos metodológicos del EventStorming hacia diagramas arquitectónicos y modelos de base de datos. Esta actualización de conocimientos técnicos le permitió estructurar el modelado del dominio de MindFlow, estableciendo una base sólida para su futura implementación como solución web escalable.<br><br>
 <b>Limache Coronel, Imanol Fabrizio</b><br>
 <u>AV1</u><br>
 _Pendiente_
@@ -384,7 +384,7 @@ Reconoció la importancia del aprendizaje continuo al investigar y aplicar de ma
 Reconoció la necesidad de seguir aprendiendo de forma autónoma al investigar por cuenta propia las técnicas start-with-value, start-with-simple y look-for-pivotal-events para Candidate Context Discovery, aplicándolas sin haber recibido instrucción previa detallada en clase, como parte de su compromiso con el aprendizaje continuo.<br><br>
 <b>Jáuregui Cerna, Jean Franco</b><br>
 <u>AV1</u><br>
-_Pendiente_<br><br>
+Reconoció la necesidad de expandir sus competencias en el diseño de software investigando de forma autónoma la construcción y aplicación del Lenguaje Ubicuo (Ubiquitous Language) dentro de Domain-Driven Design, aplicando este autoaprendizaje para asegurar que la arquitectura técnica y los esquemas de datos reflejen fielmente las reglas de negocio del proyecto MindFlow.<br><br>
 <b>Limache Coronel, Imanol Fabrizio</b><br>
 <u>AV1</u><br>
 _Pendiente_
@@ -422,8 +422,8 @@ Cada miembro del equipo formula un plan que incluye al menos dos objetivos SMART
 
 ### Jáuregui Cerna, Jean Franco
 
-1. A inicios de marzo de 2027, sacar mi certificación.
-2. _Pendiente_
+1. Completar, antes de finalizar el año 2027, la especialización en Desarrollo de Aplicaciones Empresariales con Java en Cibertec, cumpliendo con los entregables de cada módulo práctico, para ampliar el stack tecnológico y dominar la creación de sistemas backend corporativos robustos.
+2. Desarrollar y desplegar, antes de culminar el octavo ciclo universitario (2027), una aplicación web full-stack orientada a la gestión de servicios, utilizando Angular, Node.js y contenedores Docker, para afianzar mi experiencia práctica en la arquitectura y puesta en producción de soluciones tecnológicas escalables.
 
 ### Limache Coronel, Imanol Fabrizio
 
