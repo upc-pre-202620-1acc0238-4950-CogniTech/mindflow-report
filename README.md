@@ -330,70 +330,70 @@ El curso contribuye al cumplimiento del Student Outcome ABET:
 **Criterio:** *La capacidad de adquirir y aplicar nuevos conocimientos según sea necesario, utilizando estrategias de aprendizaje apropiadas.*
 
 En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 7.
+# Student Outcome
+
+El curso contribuye al cumplimiento del Student Outcome ABET:
+
+**ABET – EAC - Student Outcome 7**
+
+**Criterio:** *La capacidad de adquirir y aplicar nuevos conocimientos según sea necesario, utilizando estrategias de aprendizaje apropiadas.*
+
+En el siguiente cuadro se describen las acciones realizadas y los enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 7.
 
 <table>
-  <tr>
-    <th>Criterio específico</th>
-    <th>Acciones realizadas</th>
-    <th>Conclusiones</th>
-  </tr>
-  <tr>
-    <td><b>Actualiza conceptos y conocimientos necesarios para su desarrollo profesional y en especial para su proyecto en soluciones de software.</b></td>
-    <td>
-      <b>Cabrera Sotelo, Camila Celeste</b><br>
-      <u>AV1</u><br>
-      Investigó y aplicó técnicas de Strategic-Level Domain-Driven Design mediante la elaboración de Domain Message Flows, Bounded Context Canvases y Context Mapping para MindFlow. Además, participó en el análisis competitivo y en la documentación de entrevistas, fortaleciendo la relación entre las necesidades de los usuarios y las decisiones de diseño de la solución.
-      <br><br>
-      <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
-      <u>AV1</u><br>
-      _Pendiente_
-      <br><br>
-      <b>Güere Calero, Fernando Julio</b><br>
-      <u>AV1</u><br>
-      Investigó y aplicó por primera vez las técnicas de Big Picture EventStorming y EventStorming estratégico para modelar el dominio de negocio de MindFlow, adquiriendo conocimientos nuevos de Domain-Driven Design y aplicándolos en la identificación de los Bounded Contexts candidatos del proyecto.
-      <br><br>
-      <b>Jáuregui Cerna, Jean Franco</b><br>
-      <u>AV1</u><br>
-      _Pendiente_
-      <br><br>
-      <b>Limache Coronel, Imanol Fabrizio</b><br>
-      <u>AV1</u><br>
-      _Pendiente_
-    </td>
-    <td>
-      <u>AV1</u><br>
-      El equipo actualizó sus conocimientos en Domain-Driven Design mediante la aplicación práctica de EventStorming y Candidate Context Discovery, metodologías no abordadas previamente en el curso, fortaleciendo su capacidad de modelar dominios de negocio complejos y aplicando ese aprendizaje directamente en el diseño de la solución MindFlow.
-    </td>
-  </tr>
-
-  <tr>
-    <td><b>Reconoce la necesidad del aprendizaje permanente para el desempeño profesional y el desarrollo de proyectos en soluciones de software.</b></td>
-    <td>
-      <b>Cabrera Sotelo, Camila Celeste</b><br>
-      <u>AV1</u><br>
-      Reconoció la necesidad de continuar aprendiendo de forma autónoma al investigar nuevas técnicas de modelado de dominio, relaciones entre bounded contexts y análisis de usuarios, aplicando estos conocimientos directamente en la documentación y diseño de MindFlow.
-      <br><br>
-      <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
-      <u>AV1</u><br>
-      _Pendiente_
-      <br><br>
-      <b>Güere Calero, Fernando Julio</b><br>
-      <u>AV1</u><br>
-      Reconoció la necesidad de seguir aprendiendo de forma autónoma al investigar por cuenta propia las técnicas start-with-value, start-with-simple y look-for-pivotal-events para Candidate Context Discovery, aplicándolas sin haber recibido instrucción previa detallada en clase, como parte de su compromiso con el aprendizaje continuo.
-      <br><br>
-      <b>Jáuregui Cerna, Jean Franco</b><br>
-      <u>AV1</u><br>
-      _Pendiente_
-      <br><br>
-      <b>Limache Coronel, Imanol Fabrizio</b><br>
-      <u>AV1</u><br>
-      _Pendiente_
-    </td>
-    <td>
-      <u>AV1</u><br>
-      El equipo reconoció que el aprendizaje permanente es indispensable para adaptar metodologías de Domain-Driven Design a un proyecto real, investigando de forma autónoma técnicas de descubrimiento de bounded contexts y comprometiéndose a seguir profundizando en Context Mapping y Bounded Context Canvas en las siguientes entregas.
-    </td>
-  </tr>
+<tr>
+<th>Criterio específico</th>
+<th>Acciones realizadas</th>
+<th>Conclusiones</th>
+</tr>
+<tr>
+<td><b>Actualiza conceptos y conocimientos necesarios para su desarrollo profesional y en especial para su proyecto en soluciones de software.</b></td>
+<td>
+<b>Cabrera Sotelo, Camila Celeste</b><br>
+<u>AV1</u><br>
+Investigó y aplicó técnicas de Strategic-Level Domain-Driven Design mediante la elaboración de Domain Message Flows, Bounded Context Canvases y Context Mapping para MindFlow. Además, participó en el análisis competitivo y en la documentación de entrevistas, fortaleciendo la relación entre las necesidades de los usuarios y las decisiones de diseño de la solución.<br><br>
+<b>Sebastián Gabriel Díaz De la Cruz</b><br>
+<u>AV1</u><br>
+Participó en la actualización y aplicación de conocimientos relacionados con análisis de requerimientos y arquitectura de software mediante la elaboración y organización de User Stories, Product Backlog, Impact Mapping y diagramas C4 a nivel de Context y Container. Asimismo, trabajó con técnicas de Needfinding como Empathy Mapping y Ubiquitous Language, integrando estos conocimientos en la documentación y diseño de MindFlow.<br><br>
+<b>Güere Calero, Fernando Julio</b><br>
+<u>AV1</u><br>
+Investigó y aplicó por primera vez las técnicas de Big Picture EventStorming y EventStorming estratégico para modelar el dominio de negocio de MindFlow, adquiriendo conocimientos nuevos de Domain-Driven Design y aplicándolos en la identificación de los Bounded Contexts candidatos del proyecto.<br><br>
+<b>Jáuregui Cerna, Jean Franco</b><br>
+<u>AV1</u><br>
+_Pendiente_<br><br>
+<b>Limache Coronel, Imanol Fabrizio</b><br>
+<u>AV1</u><br>
+_Pendiente_
+</td>
+<td>
+<u>AV1</u><br>
+El equipo actualizó sus conocimientos en Domain-Driven Design, análisis de requerimientos y arquitectura de software mediante la aplicación práctica de EventStorming, Candidate Context Discovery, Context Mapping, modelado C4 y técnicas centradas en el usuario, fortaleciendo su capacidad de diseñar y documentar soluciones de software de forma estructurada.
+</td>
+</tr>
+<tr>
+<td><b>Reconoce la necesidad del aprendizaje permanente para el desempeño profesional y el desarrollo de proyectos en soluciones de software.</b></td>
+<td>
+<b>Cabrera Sotelo, Camila Celeste</b><br>
+<u>AV1</u><br>
+Reconoció la necesidad de continuar aprendiendo de forma autónoma al investigar nuevas técnicas de modelado de dominio, relaciones entre bounded contexts y análisis de usuarios, aplicando estos conocimientos directamente en la documentación y diseño de MindFlow.<br><br>
+<b>Sebastián Gabriel Díaz De la Cruz</b><br>
+<u>AV1</u><br>
+Reconoció la importancia del aprendizaje continuo al investigar y aplicar de manera autónoma técnicas de priorización de requerimientos, modelado C4 y análisis centrado en el usuario. Este proceso le permitió adaptar nuevos conocimientos a las necesidades del proyecto y fortalecer su comprensión sobre la relación entre requerimientos, experiencia de usuario y arquitectura de software.<br><br>
+<b>Güere Calero, Fernando Julio</b><br>
+<u>AV1</u><br>
+Reconoció la necesidad de seguir aprendiendo de forma autónoma al investigar por cuenta propia las técnicas start-with-value, start-with-simple y look-for-pivotal-events para Candidate Context Discovery, aplicándolas sin haber recibido instrucción previa detallada en clase, como parte de su compromiso con el aprendizaje continuo.<br><br>
+<b>Jáuregui Cerna, Jean Franco</b><br>
+<u>AV1</u><br>
+_Pendiente_<br><br>
+<b>Limache Coronel, Imanol Fabrizio</b><br>
+<u>AV1</u><br>
+_Pendiente_
+</td>
+<td>
+<u>AV1</u><br>
+El equipo reconoció que el aprendizaje permanente es indispensable para adaptar metodologías de Domain-Driven Design, análisis de requerimientos y arquitectura de software a un proyecto real, investigando de forma autónoma nuevas técnicas y aplicándolas directamente en la evolución de la solución MindFlow.
+</td>
+</tr>
 </table>
 
 ---
@@ -408,10 +408,11 @@ Cada miembro del equipo formula un plan que incluye al menos dos objetivos SMART
 
 2. Participar, durante los primeros dos años después de egresar, en al menos dos proyectos de software donde pueda aplicar desarrollo web, diseño de interfaces, análisis de requerimientos y trabajo colaborativo, fortaleciendo tanto mis habilidades técnicas como mis habilidades blandas.
 
-### Diaz de la Cruz, Sebastian Gabriel
+### Sebastián Gabriel Díaz De la Cruz
 
-1. _Pendiente_
-2. _Pendiente_
+1. Obtener, antes de diciembre de 2027, una certificación o curso especializado en desarrollo de aplicaciones, arquitectura de software o tecnologías web, dedicando al menos 4 horas semanales de estudio durante seis meses para fortalecer mis competencias técnicas en el desarrollo de soluciones de software.
+
+2. Participar, durante los primeros dos años después de egresar, en al menos dos proyectos reales de desarrollo de software orientados a empresas, aplicando tecnologías como C++, C#, JavaScript o Python en soluciones web, sistemas de gestión o herramientas para optimizar procesos empresariales.
 
 ### Güere Calero, Fernando Julio
 
@@ -447,76 +448,101 @@ CogniTech es una startup tecnológica emergente enfocada en la intersección ent
 ### 1.1.2. Perfiles de integrantes del equipo
 
 <table>
-  <tr>
-    <td rowspan="4" align="center">
-      <img src="assets/img/participants/Camila_Cabrera.jpeg" alt="Foto de Camila Cabrera" width="500"/>
-    </td>
-    <td><b>Nombre:</b> Camila Celeste Cabrera Sotelo</td>
-  </tr>
-  <tr>
-    <td><b>Código:</b> u202412462</td>
-  </tr>
-  <tr>
-    <td>
-      <div align="Justify">
-        <b>Descripción:</b><br/>
-        Soy <b>Camila Celeste Cabrera Sotelo</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC. Tengo interés en el desarrollo de páginas web, el diseño de interfaces y la creación de soluciones digitales orientadas a brindar una buena experiencia al usuario.
-        <br/><br/>
-        Dentro del equipo, participo activamente en el desarrollo y documentación de los proyectos, aportando ideas y colaborando en la organización de las actividades. Me caracterizo por trabajar de manera responsable y colaborativa, buscando fortalecer continuamente mis habilidades blandas, especialmente la comunicación, organización, adaptabilidad y trabajo en equipo.
-      </div>
-    </td>
-  </tr>
-  <tr>
-  </tr>
+<tr>
+<td rowspan="4" align="center">
+<img src="assets/img/participants/Camila_Cabrera.jpeg" alt="Foto de Camila Cabrera" width="500"/>
+</td>
+<td><b>Nombre:</b> Camila Celeste Cabrera Sotelo</td>
+</tr>
+<tr>
+<td><b>Código:</b> u202412462</td>
+</tr>
+<tr>
+<td>
+<div align="Justify">
+<b>Descripción:</b><br/>
+Soy <b>Camila Celeste Cabrera Sotelo</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC. Tengo interés en el desarrollo de páginas web, el diseño de interfaces y la creación de soluciones digitales orientadas a brindar una buena experiencia al usuario.
+<br/><br/>
+Dentro del equipo, participo activamente en el desarrollo y documentación de los proyectos, aportando ideas y colaborando en la organización de las actividades. Me caracterizo por trabajar de manera responsable y colaborativa, buscando fortalecer continuamente mis habilidades blandas, especialmente la comunicación, organización, adaptabilidad y trabajo en equipo.
+</div>
+</td>
+</tr>
+<tr>
+</tr>
 </table>
 
 <table>
-  <tr>
-    <td rowspan="4" align="center">
-      <img src="assets/img/participants/Fernando_Guere.jpeg" alt="Foto de Fernando Güere" width="500"/>
-    </td>
-    <td><b>Nombre:</b> Fernando Julio Güere Calero</td>
-  </tr>
-  <tr>
-    <td><b>Código:</b> u202413169</td>
-  </tr>
-  <tr>
-    <td>
-    <div align="Justify">
-      <b>Descripción:</b><br/>
-      Soy <b>Fernando Julio Güere Calero</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC, estoy cursando el 5to ciclo de la carrera. Cuento con los conocimientos para programar en C++, Python y gestión de base de datos SQL. Además, tengo conocimiento para el desarrollo de páginas web usando HTML, CSS y JavaScript. Siempre estoy interesado en expandir mis conocimientos con otros lenguajes de programación para fortalecer mis competencias técnicas y enfrentar retos en la industria.
-      <br/><br/>
-      Dentro del equipo, cumplo con las actividades de documentación y programación en un nivel intermedio. También quisiera destacar que soy responsable con las distintas tareas establecidas.
-      </div>
-    </td>
-  </tr>
-  <tr>
-  </tr>
+<tr>
+<td rowspan="4" align="center">
+<img src="assets/img/participants/Sebastian_Diaz.jpeg" alt="Foto de Sebastián Díaz" width="500"/>
+</td>
+<td><b>Nombre:</b> Sebastián Gabriel Díaz De la Cruz</td>
+</tr>
+<tr>
+<td><b>Código:</b> u202410421</td>
+</tr>
+<tr>
+<td>
+<div align="Justify">
+<b>Descripción:</b><br/>
+Soy <b>Sebastián Gabriel Díaz De la Cruz</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC. Cuento con conocimientos de programación en C++, C#, JavaScript y Python, y tengo especial interés en el desarrollo de soluciones tecnológicas, aplicaciones web y sistemas orientados a resolver necesidades reales de las empresas.
+<br/><br/>
+Me interesa especialmente desarrollar tecnología que permita optimizar procesos empresariales, incluyendo soluciones para la gestión de almacenes, control de operaciones y organización de información. Dentro del equipo, participo en actividades de análisis, desarrollo y documentación, aportando tanto en los aspectos técnicos como en la organización y planteamiento de soluciones para el proyecto.
+</div>
+</td>
+</tr>
+<tr>
+</tr>
 </table>
 
 <table>
-  <tr>
-    <td rowspan="4" align="center">
-      <img src="assets/img/participants/Jean_Franco_Jauregui.jpeg" alt="Foto de Jean Franco Jáuregui" width="500"/>
-    </td>
-    <td><b>Nombre:</b> Jean Franco Jáuregui Cerna</td>
-  </tr>
-  <tr>
-    <td><b>Código:</b> U202410024</td>
-  </tr>
-  <tr>
-    <td>
-    <div align="Justify">
-      <b>Descripción:</b><br/>
-      Soy <b>Jean Franco Jáuregui Cerna</b> y estudio la carrera de Ingeniería de Software en la UPC, donde me encuentro cursando el 5to ciclo. Cuento con sólidos conocimientos en el desarrollo de aplicaciones web utilizando Angular, Vue.js, Node.js y Python, así como en el modelado y gestión de bases de datos con MySQL y MongoDB. Además, tengo experiencia configurando despliegues y entornos de desarrollo utilizando Docker, Google Cloud Platform y Azure. Siempre busco aplicar buenas prácticas de arquitectura de software y expandir mis capacidades técnicas en proyectos de la industria.
-      <br/><br/>
-      Dentro del equipo, aporto directamente en el desarrollo full-stack, el diseño de la base de datos y la estructuración del proyecto. Destaco por ser una persona proactiva, enfocada en la resolución analítica de problemas y muy responsable con los plazos y objetivos establecidos.
-      </div>
-    </td>
-  </tr>
-  <tr>
-  </tr>
+<tr>
+<td rowspan="4" align="center">
+<img src="assets/img/participants/Fernando_Guere.jpeg" alt="Foto de Fernando Güere" width="500"/>
+</td>
+<td><b>Nombre:</b> Fernando Julio Güere Calero</td>
+</tr>
+<tr>
+<td><b>Código:</b> u202413169</td>
+</tr>
+<tr>
+<td>
+<div align="Justify">
+<b>Descripción:</b><br/>
+Soy <b>Fernando Julio Güere Calero</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC, estoy cursando el 5to ciclo de la carrera. Cuento con los conocimientos para programar en C++, Python y gestión de base de datos SQL. Además, tengo conocimiento para el desarrollo de páginas web usando HTML, CSS y JavaScript. Siempre estoy interesado en expandir mis conocimientos con otros lenguajes de programación para fortalecer mis competencias técnicas y enfrentar retos en la industria.
+<br/><br/>
+Dentro del equipo, cumplo con las actividades de documentación y programación en un nivel intermedio. También quisiera destacar que soy responsable con las distintas tareas establecidas.
+</div>
+</td>
+</tr>
+<tr>
+</tr>
 </table>
+
+<table>
+<tr>
+<td rowspan="4" align="center">
+<img src="assets/img/participants/Jean_Franco_Jauregui.jpeg" alt="Foto de Jean Franco Jáuregui" width="500"/>
+</td>
+<td><b>Nombre:</b> Jean Franco Jáuregui Cerna</td>
+</tr>
+<tr>
+<td><b>Código:</b> U202410024</td>
+</tr>
+<tr>
+<td>
+<div align="Justify">
+<b>Descripción:</b><br/>
+Soy <b>Jean Franco Jáuregui Cerna</b> y estudio la carrera de Ingeniería de Software en la UPC, donde me encuentro cursando el 5to ciclo. Cuento con sólidos conocimientos en el desarrollo de aplicaciones web utilizando Angular, Vue.js, Node.js y Python, así como en el modelado y gestión de bases de datos con MySQL y MongoDB. Además, tengo experiencia configurando despliegues y entornos de desarrollo utilizando Docker, Google Cloud Platform y Azure. Siempre busco aplicar buenas prácticas de arquitectura de software y expandir mis capacidades técnicas en proyectos de la industria.
+<br/><br/>
+Dentro del equipo, aporto directamente en el desarrollo full-stack, el diseño de la base de datos y la estructuración del proyecto. Destaco por ser una persona proactiva, enfocada en la resolución analítica de problemas y muy responsable con los plazos y objetivos establecidos.
+</div>
+</td>
+</tr>
+<tr>
+</tr>
+</table>
+
 _Pendiente: perfiles de los demás integrantes del equipo._
 
 ## 1.2. Solution Profile
