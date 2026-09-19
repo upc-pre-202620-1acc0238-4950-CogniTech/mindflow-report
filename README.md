@@ -321,6 +321,15 @@ El curso contribuye al cumplimiento del Student Outcome ABET:
 **Criterio:** *La capacidad de adquirir y aplicar nuevos conocimientos según sea necesario, utilizando estrategias de aprendizaje apropiadas.*
 
 En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 7.
+# Student Outcome
+
+El curso contribuye al cumplimiento del Student Outcome ABET:
+
+**ABET – EAC - Student Outcome 7**
+
+**Criterio:** *La capacidad de adquirir y aplicar nuevos conocimientos según sea necesario, utilizando estrategias de aprendizaje apropiadas.*
+
+En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 7.
 
 <table>
   <tr>
@@ -333,9 +342,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     <td>
       <b>Cabrera Sotelo, Camila Celeste</b><br>
       <u>AV1</u><br>
-      _Pendiente_
+      Investigó y aplicó técnicas de Strategic-Level Domain-Driven Design mediante la elaboración de Domain Message Flows, Bounded Context Canvases y Context Mapping para MindFlow. Además, participó en el análisis competitivo y en la documentación de entrevistas, fortaleciendo la relación entre las necesidades de los usuarios y las decisiones de diseño de la solución.
       <br><br>
-      <b>Dias de la Cruz, Sebastian Gabriel</b><br>
+      <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
       <u>AV1</u><br>
       _Pendiente_
       <br><br>
@@ -356,14 +365,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       El equipo actualizó sus conocimientos en Domain-Driven Design mediante la aplicación práctica de EventStorming y Candidate Context Discovery, metodologías no abordadas previamente en el curso, fortaleciendo su capacidad de modelar dominios de negocio complejos y aplicando ese aprendizaje directamente en el diseño de la solución MindFlow.
     </td>
   </tr>
+
   <tr>
     <td><b>Reconoce la necesidad del aprendizaje permanente para el desempeño profesional y el desarrollo de proyectos en soluciones de software.</b></td>
     <td>
       <b>Cabrera Sotelo, Camila Celeste</b><br>
       <u>AV1</u><br>
-      _Pendiente_
+      Reconoció la necesidad de continuar aprendiendo de forma autónoma al investigar nuevas técnicas de modelado de dominio, relaciones entre bounded contexts y análisis de usuarios, aplicando estos conocimientos directamente en la documentación y diseño de MindFlow.
       <br><br>
-      <b>Dias de la Cruz, Sebastian Gabriel</b><br>
+      <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
       <u>AV1</u><br>
       _Pendiente_
       <br><br>
@@ -394,10 +404,11 @@ Cada miembro del equipo formula un plan que incluye al menos dos objetivos SMART
 
 ### Cabrera Sotelo, Camila Celeste
 
-1. _Pendiente_
-2. _Pendiente_
+1. Obtener, antes de diciembre de 2027, una certificación o curso especializado en arquitectura de software, Domain-Driven Design o desarrollo web, dedicando al menos 4 horas semanales de estudio durante seis meses para fortalecer mis competencias técnicas.
 
-### Dias de la Cruz, Sebastian Gabriel
+2. Participar, durante los primeros dos años después de egresar, en al menos dos proyectos de software donde pueda aplicar desarrollo web, diseño de interfaces, análisis de requerimientos y trabajo colaborativo, fortaleciendo tanto mis habilidades técnicas como mis habilidades blandas.
+
+### Diaz de la Cruz, Sebastian Gabriel
 
 1. _Pendiente_
 2. _Pendiente_
@@ -405,11 +416,12 @@ Cada miembro del equipo formula un plan que incluye al menos dos objetivos SMART
 ### Güere Calero, Fernando Julio
 
 1. Obtener, antes de diciembre de 2027, una certificación en arquitectura de software y Domain-Driven Design, dedicando al menos 5 horas semanales de estudio autónomo durante el próximo año, para fortalecer las competencias técnicas aplicadas en este curso.
+
 2. Participar, durante el primer año tras egresar (2029), como desarrollador en al menos dos proyectos reales que apliquen microservicios o arquitecturas basadas en bounded contexts, consolidando mi especialización profesional en diseño de soluciones de software escalables.
 
 ### Jáuregui Cerna, Jean Franco
 
-1. A inicios de marzo de 2027, sacar mi certificación 
+1. A inicios de marzo de 2027, sacar mi certificación.
 2. _Pendiente_
 
 ### Limache Coronel, Imanol Fabrizio
@@ -437,6 +449,30 @@ CogniTech es una startup tecnológica emergente enfocada en la intersección ent
 <table>
   <tr>
     <td rowspan="4" align="center">
+      <img src="assets/img/participants/Camila_Cabrera.jpeg" alt="Foto de Camila Cabrera" width="500"/>
+    </td>
+    <td><b>Nombre:</b> Camila Celeste Cabrera Sotelo</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202412462</td>
+  </tr>
+  <tr>
+    <td>
+      <div align="Justify">
+        <b>Descripción:</b><br/>
+        Soy <b>Camila Celeste Cabrera Sotelo</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC. Tengo interés en el desarrollo de páginas web, el diseño de interfaces y la creación de soluciones digitales orientadas a brindar una buena experiencia al usuario.
+        <br/><br/>
+        Dentro del equipo, participo activamente en el desarrollo y documentación de los proyectos, aportando ideas y colaborando en la organización de las actividades. Me caracterizo por trabajar de manera responsable y colaborativa, buscando fortalecer continuamente mis habilidades blandas, especialmente la comunicación, organización, adaptabilidad y trabajo en equipo.
+      </div>
+    </td>
+  </tr>
+  <tr>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td rowspan="4" align="center">
       <img src="assets/img/participants/Fernando_Guere.jpeg" alt="Foto de Fernando Güere" width="500"/>
     </td>
     <td><b>Nombre:</b> Fernando Julio Güere Calero</td>
@@ -448,20 +484,19 @@ CogniTech es una startup tecnológica emergente enfocada en la intersección ent
     <td>
     <div align="Justify">
       <b>Descripción:</b><br/>
-      Soy <b>Fernando Julio Güere Calero</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC, estoy cursando el 5to ciclo de la carrera. Cuento con los conocimientos para programar en C++, Python y gestión de base de datos SQL. Además, tengo conocimiento para el desarrollo de páginas web usando HTML, CSS y JavaScript. Siempre estoy interesado en expandir mis conocimientos con otros lenguajes de programación para fortalecer mis competencias técnicas y enfrentar retos en la industria. 
+      Soy <b>Fernando Julio Güere Calero</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC, estoy cursando el 5to ciclo de la carrera. Cuento con los conocimientos para programar en C++, Python y gestión de base de datos SQL. Además, tengo conocimiento para el desarrollo de páginas web usando HTML, CSS y JavaScript. Siempre estoy interesado en expandir mis conocimientos con otros lenguajes de programación para fortalecer mis competencias técnicas y enfrentar retos en la industria.
       <br/><br/>
       Dentro del equipo, cumplo con las actividades de documentación y programación en un nivel intermedio. También quisiera destacar que soy responsable con las distintas tareas establecidas.
       </div>
     </td>
   </tr>
-
   <tr>
   </tr>
 </table>
+
 <table>
   <tr>
     <td rowspan="4" align="center">
-      <!-- Reemplaza el src con la ruta de tu foto -->
       <img src="assets/img/participants/Jean_Franco_Jauregui.jpeg" alt="Foto de Jean Franco Jáuregui" width="500"/>
     </td>
     <td><b>Nombre:</b> Jean Franco Jáuregui Cerna</td>
@@ -482,7 +517,6 @@ CogniTech es una startup tecnológica emergente enfocada en la intersección ent
   <tr>
   </tr>
 </table>
-
 _Pendiente: perfiles de los demás integrantes del equipo._
 
 ## 1.2. Solution Profile
