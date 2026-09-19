@@ -65,6 +65,30 @@ Proyecto
     <th>Autor</th>
     <th>Descripción de modificación</th>
   </tr>
+
+  <tr>
+    <td><b>Primera Entrega (AV1)</b></td>
+    <td>18/09/2026</td>
+    <td>
+      Cabrera Sotelo, Camila Celeste <br>
+      <br>
+      <p></p>
+      Dias de la Cruz, Sebastian Gabriel <br>
+      <br>
+      <p></p>
+      Güere Calero, Fernando Julio <br>
+      <br>
+      <p></p>
+      Jáuregui Cerna, Jean Franco <br>
+      <br>
+      <p></p>
+      Limache Coronel, Imanol Fabrizio <br>
+    </td>
+    <td>
+      Capítulo I: Presentación (Startup Profile, Lean UX Process) <br>
+      Capítulo II: Requirements Development and Software Solution Design (Needfinding - Big Picture EventStorming; Strategic-Level DDD - EventStorming, Candidate Context Discovery)
+    </td>
+  </tr>
   <!-- 
   <tr>
     <td><b>Primera Entrega (TB1)</b></td>
@@ -97,6 +121,30 @@ Proyecto
 ---
 
 # Project Report Collaboration Insights
+
+El informe del proyecto fue desarrollado de manera colaborativa por el equipo mediante el repositorio de GitHub creado para la gestión del Project Report de MindFlow. Este repositorio contiene los archivos del informe, los diagramas, las evidencias y el historial de versiones correspondiente a cada entrega.
+
+URL de la organización de GitHub: https://github.com/upc-pre-202620-1acc0238-4950-CogniTech
+
+**Primera Entrega (AV1)**
+
+Durante la primera entrega del proyecto MindFlow, el equipo trabajó de manera colaborativa en la elaboración del Project Report, organizando las actividades y responsabilidades de forma grupal para cubrir las diferentes secciones del informe correspondientes a esta etapa.
+
+El desarrollo del trabajo incluyó actividades de investigación y documentación del dominio del negocio: la descripción de la Startup y el desarrollo del Lean UX Process (Problem Statements y Assumptions) para el Capítulo I, así como el modelado del negocio mediante Big Picture EventStorming y el inicio del Strategic-Level Domain-Driven Design (sesión de EventStorming y Candidate Context Discovery) para el Capítulo II, permitiendo al equipo consolidar una primera visión compartida de los Bounded Contexts candidatos de la solución.
+
+Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como plataforma principal de colaboración y control de versiones, siguiendo el flujo de trabajo GitFlow (ramas `feature/*` sobre `develop`, integradas mediante Pull Requests). Mediante ramas de trabajo, commits y Pull Requests, fue posible registrar los avances realizados en el informe y mantener evidencia continua de la participación grupal durante esta primera entrega.
+
+<div align="center">
+
+<img src="assets/img/Insights/Organization_av1.png" width="500"/>
+
+*Figura: Creación y organización del repositorio del Project Report en GitHub.*
+
+<img src="assets/img/Insights/Ingishts_av1.png" width="500"/>
+
+*Figura: Historial de commits del equipo durante la primera entrega (AV1).*
+
+</div>
 
 ---
 
@@ -152,14 +200,78 @@ Proyecto
       - [2.5.3.2. Software Architecture Container Level Diagrams](#2532-software-architecture-container-level-diagrams)
       - [2.5.3.3. Software Architecture Deployment Diagrams](#2533-software-architecture-deployment-diagrams)
   - [2.6. Tactical-Level Domain-Driven Design](#26-tactical-level-domain-driven-design)
-      - [2.6.1.](#261-bounded-context-iam)
-      - [2.6.2.](#262-bounded-context-journal)
-      - [2.6.3.](#263-bounded-context-ai-assistant)
-      - [2.6.4.](#264-bounded-context-habits--wellness)
-      - [2.6.5.](#265-bounded-context-analytics--reporting)
-      - [2.6.6.](#266-bounded-context-notifications)
-      - [2.6.7.](#267-bounded-context-subscriptions)
-      - [2.6.8.](#268-bounded-context-support)
+    - [2.6.1. Bounded Context: IAM](#261-bounded-context-iam)
+      - [2.6.1.1. Domain Layer](#2611-domain-layer)
+      - [2.6.1.2. Interface Layer](#2612-interface-layer)
+      - [2.6.1.3. Application Layer](#2613-application-layer)
+      - [2.6.1.4. Infrastructure Layer](#2614-infrastructure-layer)
+      - [2.6.1.5. Bounded Context Software Architecture Component Level Diagrams](#2615-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.1.6. Bounded Context Software Architecture Code Level Diagrams](#2616-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.1.6.1. Bounded Context Domain Layer Class Diagrams](#26161-bounded-context-domain-layer-class-diagrams)
+        - [2.6.1.6.2. Bounded Context Database Design Diagram](#26162-bounded-context-database-design-diagram)
+    - [2.6.2. Bounded Context: Journal](#262-bounded-context-journal)
+      - [2.6.2.1. Domain Layer](#2621-domain-layer)
+      - [2.6.2.2. Interface Layer](#2622-interface-layer)
+      - [2.6.2.3. Application Layer](#2623-application-layer)
+      - [2.6.2.4. Infrastructure Layer](#2624-infrastructure-layer)
+      - [2.6.2.5. Bounded Context Software Architecture Component Level Diagrams](#2625-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.2.6. Bounded Context Software Architecture Code Level Diagrams](#2626-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.2.6.1. Bounded Context Domain Layer Class Diagrams](#26261-bounded-context-domain-layer-class-diagrams)
+        - [2.6.2.6.2. Bounded Context Database Design Diagram](#26262-bounded-context-database-design-diagram)
+    - [2.6.3. Bounded Context: AI Assistant](#263-bounded-context-ai-assistant)
+      - [2.6.3.1. Domain Layer](#2631-domain-layer)
+      - [2.6.3.2. Interface Layer](#2632-interface-layer)
+      - [2.6.3.3. Application Layer](#2633-application-layer)
+      - [2.6.3.4. Infrastructure Layer](#2634-infrastructure-layer)
+      - [2.6.3.5. Bounded Context Software Architecture Component Level Diagrams](#2635-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.3.6. Bounded Context Software Architecture Code Level Diagrams](#2636-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.3.6.1. Bounded Context Domain Layer Class Diagrams](#26361-bounded-context-domain-layer-class-diagrams)
+        - [2.6.3.6.2. Bounded Context Database Design Diagram](#26362-bounded-context-database-design-diagram)
+    - [2.6.4. Bounded Context: Habits & Wellness](#264-bounded-context-habits--wellness)
+      - [2.6.4.1. Domain Layer](#2641-domain-layer)
+      - [2.6.4.2. Interface Layer](#2642-interface-layer)
+      - [2.6.4.3. Application Layer](#2643-application-layer)
+      - [2.6.4.4. Infrastructure Layer](#2644-infrastructure-layer)
+      - [2.6.4.5. Bounded Context Software Architecture Component Level Diagrams](#2645-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.4.6. Bounded Context Software Architecture Code Level Diagrams](#2646-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.4.6.1. Bounded Context Domain Layer Class Diagrams](#26461-bounded-context-domain-layer-class-diagrams)
+        - [2.6.4.6.2. Bounded Context Database Design Diagram](#26462-bounded-context-database-design-diagram)
+    - [2.6.5. Bounded Context: Analytics & Reporting](#265-bounded-context-analytics--reporting)
+      - [2.6.5.1. Domain Layer](#2651-domain-layer)
+      - [2.6.5.2. Interface Layer](#2652-interface-layer)
+      - [2.6.5.3. Application Layer](#2653-application-layer)
+      - [2.6.5.4. Infrastructure Layer](#2654-infrastructure-layer)
+      - [2.6.5.5. Bounded Context Software Architecture Component Level Diagrams](#2655-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.5.6. Bounded Context Software Architecture Code Level Diagrams](#2656-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.5.6.1. Bounded Context Domain Layer Class Diagrams](#26561-bounded-context-domain-layer-class-diagrams)
+        - [2.6.5.6.2. Bounded Context Database Design Diagram](#26562-bounded-context-database-design-diagram)
+    - [2.6.6. Bounded Context: Notifications](#266-bounded-context-notifications)
+      - [2.6.6.1. Domain Layer](#2661-domain-layer)
+      - [2.6.6.2. Interface Layer](#2662-interface-layer)
+      - [2.6.6.3. Application Layer](#2663-application-layer)
+      - [2.6.6.4. Infrastructure Layer](#2664-infrastructure-layer)
+      - [2.6.6.5. Bounded Context Software Architecture Component Level Diagrams](#2665-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.6.6. Bounded Context Software Architecture Code Level Diagrams](#2666-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.6.6.1. Bounded Context Domain Layer Class Diagrams](#26661-bounded-context-domain-layer-class-diagrams)
+        - [2.6.6.6.2. Bounded Context Database Design Diagram](#26662-bounded-context-database-design-diagram)
+    - [2.6.7. Bounded Context: Subscriptions](#267-bounded-context-subscriptions)
+      - [2.6.7.1. Domain Layer](#2671-domain-layer)
+      - [2.6.7.2. Interface Layer](#2672-interface-layer)
+      - [2.6.7.3. Application Layer](#2673-application-layer)
+      - [2.6.7.4. Infrastructure Layer](#2674-infrastructure-layer)
+      - [2.6.7.5. Bounded Context Software Architecture Component Level Diagrams](#2675-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.7.6. Bounded Context Software Architecture Code Level Diagrams](#2676-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.7.6.1. Bounded Context Domain Layer Class Diagrams](#26761-bounded-context-domain-layer-class-diagrams)
+        - [2.6.7.6.2. Bounded Context Database Design Diagram](#26762-bounded-context-database-design-diagram)
+    - [2.6.8. Bounded Context: Support](#268-bounded-context-support)
+      - [2.6.8.1. Domain Layer](#2681-domain-layer)
+      - [2.6.8.2. Interface Layer](#2682-interface-layer)
+      - [2.6.8.3. Application Layer](#2683-application-layer)
+      - [2.6.8.4. Infrastructure Layer](#2684-infrastructure-layer)
+      - [2.6.8.5. Bounded Context Software Architecture Component Level Diagrams](#2685-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.8.6. Bounded Context Software Architecture Code Level Diagrams](#2686-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.8.6.1. Bounded Context Domain Layer Class Diagrams](#26861-bounded-context-domain-layer-class-diagrams)
+        - [2.6.8.6.2. Bounded Context Database Design Diagram](#26862-bounded-context-database-design-diagram)
 <!--
 - [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
   - [3.1. Product design](#31-product-design)
@@ -203,14 +315,16 @@ Proyecto
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 -->
 - [Conclusiones](#conclusiones)
-<!--
   - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
+<!--
   - [Video App Validation](#video-app-validation)
   - [Video About the product](#video-about-the-product)
   - [Video About the team](#video-about-the-team) 
 - [Glosario](#glosario)-->
 - [Bibliografía](#bibliografía)
+<!--
 - [Anexos](#anexos)
+-->
 
 ---
 
@@ -243,7 +357,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Güere Calero, Fernando Julio</b><br>
       <u>AV1</u><br>
-      _Pendiente_
+      Investigó y aplicó por primera vez las técnicas de Big Picture EventStorming y EventStorming estratégico para modelar el dominio de negocio de MindFlow, adquiriendo conocimientos nuevos de Domain-Driven Design y aplicándolos en la identificación de los Bounded Contexts candidatos del proyecto.
       <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
@@ -255,7 +369,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     </td>
     <td>
       <u>AV1</u><br>
-      _Pendiente_
+      El equipo actualizó sus conocimientos en Domain-Driven Design mediante la aplicación práctica de EventStorming y Candidate Context Discovery, metodologías no abordadas previamente en el curso, fortaleciendo su capacidad de modelar dominios de negocio complejos y aplicando ese aprendizaje directamente en el diseño de la solución MindFlow.
     </td>
   </tr>
   <tr>
@@ -271,7 +385,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Güere Calero, Fernando Julio</b><br>
       <u>AV1</u><br>
-      _Pendiente_
+      Reconoció la necesidad de seguir aprendiendo de forma autónoma al investigar por cuenta propia las técnicas start-with-value, start-with-simple y look-for-pivotal-events para Candidate Context Discovery, aplicándolas sin haber recibido instrucción previa detallada en clase, como parte de su compromiso con el aprendizaje continuo.
       <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
@@ -283,7 +397,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     </td>
     <td>
       <u>AV1</u><br>
-      _Pendiente_
+      El equipo reconoció que el aprendizaje permanente es indispensable para adaptar metodologías de Domain-Driven Design a un proyecto real, investigando de forma autónoma técnicas de descubrimiento de bounded contexts y comprometiéndose a seguir profundizando en Context Mapping y Bounded Context Canvas en las siguientes entregas.
     </td>
   </tr>
 </table>
@@ -306,8 +420,8 @@ Cada miembro del equipo formula un plan que incluye al menos dos objetivos SMART
 
 ### Güere Calero, Fernando Julio
 
-1. _Pendiente_
-2. _Pendiente_
+1. Obtener, antes de diciembre de 2027, una certificación en arquitectura de software y Domain-Driven Design, dedicando al menos 5 horas semanales de estudio autónomo durante el próximo año, para fortalecer las competencias técnicas aplicadas en este curso.
+2. Participar, durante el primer año tras egresar (2029), como desarrollador en al menos dos proyectos reales que apliquen microservicios o arquitecturas basadas en bounded contexts, consolidando mi especialización profesional en diseño de soluciones de software escalables.
 
 ### Jáuregui Cerna, Jean Franco
 
@@ -336,7 +450,53 @@ CogniTech es una startup tecnológica emergente enfocada en la intersección ent
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
-_Pendiente_
+<table>
+  <tr>
+    <td rowspan="4" align="center">
+      <img src="assets/img/participants/Fernando_Guere.jpeg" alt="Foto de Fernando Güere" width="500"/>
+    </td>
+    <td><b>Nombre:</b> Fernando Julio Güere Calero</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202413169</td>
+  </tr>
+  <tr>
+    <td>
+    <div align="Justify">
+      <b>Descripción:</b><br/>
+      Soy <b>Fernando Julio Güere Calero</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC, estoy cursando el 5to ciclo de la carrera. Cuento con los conocimientos para programar en C++, Python y gestión de base de datos SQL. Además, tengo conocimiento para el desarrollo de páginas web usando HTML, CSS y JavaScript. Siempre estoy interesado en expandir mis conocimientos con otros lenguajes de programación para fortalecer mis competencias técnicas y enfrentar retos en la industria. 
+      <br/><br/>
+      Dentro del equipo, cumplo con las actividades de documentación y programación en un nivel intermedio. También quisiera destacar que soy responsable con las distintas tareas establecidas.
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td rowspan="4" align="center">
+      <img src="assets/img/participants/Imanol_Limache.jpeg" alt="Foto de Imanol Limache" width="210"/>
+    </td>
+    <td><b>Nombre:</b> Imanol Fabrizio Limache Coronel</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202410382</td>
+  </tr>
+  <tr>
+    <td>
+    <div align="Justify">
+      <b>Descripción:</b><br/>
+      Soy Imanol Fabrizio Limache Coronel, tengo 19 años y me encuentro en el 6to ciclo de la carrera de Ingeniería de Software. Tengo conociemientos en c++ y desarrollo web. Siempre estoy dispuesto a aprender nuevas cosas.
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+  </tr>
+</table>
 
 ## 1.2. Solution Profile
 
@@ -588,21 +748,327 @@ Estas soluciones representan enfoques parciales del problema, lo que evidencia u
 
 ### 2.1.2. Estrategias y tácticas frente a competidores
 
-_Pendiente_
+A partir del análisis competitivo y del análisis SWOT realizado, se definen estrategias y tácticas preliminares que permitirán a MindFlow afrontar las fortalezas de sus competidores, aprovechar sus debilidades y capitalizar las oportunidades del entorno, mitigando a su vez las amenazas del mercado.
+
+#### Estrategias
+
+- **Estrategia de diferenciación frente a fortalezas de competidores:**  
+  Mientras aplicaciones como Daylio destacan por su simplicidad y Habitica por su gamificación, MindFlow propone una diferenciación basada en inteligencia artificial, integrando análisis emocional y personalización dinámica, lo cual permite ofrecer una experiencia más profunda y significativa.
+
+- **Estrategia de aprovechamiento de debilidades del mercado:**  
+  Se identificó que los competidores carecen de retroalimentación en tiempo real y adaptación al estado emocional. MindFlow capitaliza esta debilidad mediante un sistema que responde activamente al usuario, incrementando la retención.
+
+- **Estrategia de explotación de oportunidades:**  
+  El crecimiento del mercado de salud mental digital y la aceptación de soluciones basadas en IA representan una oportunidad clave. MindFlow se posiciona como una solución innovadora alineada con estas tendencias.
+
+- **Estrategia de mitigación de amenazas:**  
+  Frente a la presencia de competidores consolidados, se prioriza la innovación continua, la experiencia de usuario y la generación de confianza mediante políticas de privacidad y transparencia en el uso de datos.
+
+#### Tácticas
+
+- **Frente a fortalezas de competidores:**
+  - Diseñar una interfaz simple e intuitiva similar a Daylio, pero con mayor valor agregado.
+  - Incorporar elementos motivacionales (inspirados en gamificación) sin perder el enfoque emocional.
+
+- **Frente a debilidades de competidores:**
+  - Implementar retroalimentación empática en tiempo real mediante IA.
+  - Desarrollar un sistema de hábitos adaptativos basado en el estado emocional del usuario.
+
+- **Frente a oportunidades del entorno:**
+  - Crear contenido educativo sobre salud mental en redes sociales.
+  - Promover el uso de la app en comunidades universitarias y profesionales jóvenes.
+
+- **Frente a amenazas del mercado:**
+  - Garantizar la seguridad y privacidad de los datos mediante encriptación.
+  - Diferenciar la propuesta mediante innovación constante en funcionalidades.
+  - Generar confianza comunicando claramente que la app no reemplaza terapia profesional.
+
+#### Enfoque estratégico
+
+MindFlow adopta una estrategia de diferenciación centrada en la innovación tecnológica y la experiencia del usuario. A diferencia de los competidores que abordan el problema de manera fragmentada, la plataforma integra múltiples funcionalidades en un sistema adaptativo, lo que le permite posicionarse como una solución más completa, inteligente y alineada con las necesidades actuales del usuario.
 
 ## 2.2. Entrevistas
 
 ### 2.2.1. Diseño de entrevistas
 
-_Pendiente_
+Se han diseñado dos bloques de preguntas dirigidos a los principales segmentos objetivo: estudiantes universitarios y profesionales jóvenes. Las preguntas han sido estructuradas para recopilar información cualitativa relevante en torno a aspectos demográficos, hábitos digitales, gestión del estrés y percepción sobre el uso de herramientas tecnológicas para el bienestar emocional.
+
+Asimismo, se incluyen preguntas complementarias orientadas a la construcción de arquetipos de usuario (User Personas), considerando variables demográficas, psicográficas y de comportamiento digital.
+
+#### A. Entrevistas a Segmento 1: Estudiantes Universitarios (18–25 años)
+
+**Objetivo:** Comprender cómo los estudiantes gestionan su estrés académico, qué herramientas utilizan actualmente y cuáles son sus principales dificultades para mantener hábitos de bienestar.
+
+**Preguntas principales:**
+
+- ¿Podrías contarnos un poco sobre ti? (edad, carrera, ciclo, ciudad, etc.)
+- ¿Cómo describirías tu nivel de estrés durante el ciclo académico?
+- ¿En qué momentos sueles sentir más ansiedad o presión?
+- ¿Qué haces actualmente para manejar el estrés o la ansiedad?
+- ¿Has utilizado alguna aplicación para registrar tus emociones o hábitos?
+- ¿Qué dificultades tienes para mantener hábitos saludables?
+- ¿Qué tan cómodo(a) te sientes usando apps para tu bienestar?
+- ¿Con qué dispositivos accedes más a aplicaciones? (móvil, laptop, etc.)
+- ¿Qué aplicaciones usas con mayor frecuencia en tu día a día?
+- ¿Qué redes sociales utilizas más?
+- ¿Cuáles son tus principales objetivos personales o académicos?
+- ¿Qué situaciones te generan mayor frustración actualmente?
+- ¿Cómo describirías tu personalidad? (organizado, impulsivo, etc.)
+- ¿Sueles seguir recomendaciones de influencers o contenido sobre bienestar?
+
+#### B. Entrevistas a Segmento 2: Profesionales Jóvenes (26–35 años)
+
+**Objetivo:** Identificar los retos relacionados con el estrés laboral, la gestión del tiempo y la adopción de herramientas digitales para el bienestar personal.
+
+**Preguntas principales:**
+
+- ¿Podrías contarnos un poco sobre ti? (edad, profesión, tipo de trabajo, etc.)
+- ¿Cómo describirías tu nivel de estrés laboral?
+- ¿Qué situaciones te generan mayor agotamiento?
+- ¿Qué haces actualmente para reducir el estrés?
+- ¿Has utilizado apps de productividad o bienestar?
+- ¿Qué dificultades tienes para equilibrar trabajo y vida personal?
+- ¿Qué dispositivos utilizas con mayor frecuencia?
+- ¿Qué herramientas digitales usas para organizar tu día?
+- ¿Qué canales digitales utilizas con mayor frecuencia?
+- ¿Cuáles son tus principales objetivos profesionales y personales?
+- ¿Qué factores te generan mayor frustración en tu rutina?
+- ¿Qué valoras más en una aplicación digital?
+- ¿Qué te generaría confianza o desconfianza al usar una app de salud mental?
 
 ### 2.2.2. Registro de entrevistas
 
-_Pendiente_
+#### Segmento 1: Estudiantes Universitarios
+
+##### Entrevista 1
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Estudiantes universitarios (18–25 años) |
+| Fecha Entrevista | 18/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Jiss Zerpa |
+| Edad | 18 años |
+| Distrito | La Molina |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQC6LCtoZRnfR4iKU3dIHCeYATI4FuIHWP1zmVrAm3H4_R8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=jFGNLe) |
+| Minuto de Inicio | 0:00 |
+| Duración | 2:47 |
+| Resumen | Jiss, estudiante de Ingeniería Petroquímica, presenta un nivel de estrés de 7/10 con picos de 9 en exámenes. Su comportamiento refleja evitación del estrés mediante distracciones como TikTok y videojuegos. Reconoce que estas actividades le generan alivio momentáneo, pero posteriormente incrementan su ansiedad. Ha probado apps, pero las abandona rápidamente por requerir esfuerzo adicional. Insight principal: comportamiento de evitación frente al estrés. Hallazgos clave: alta procrastinación, baja tolerancia al esfuerzo y falta de estructura. Citas relevantes: “Me distraigo… pero después me estreso más.”, “No usaría una app si tengo que escribir mucho.” Conclusión: requiere soluciones simples, automáticas y de mínima interacción. |
+
+##### Entrevista 2
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Estudiantes universitarios (18–25 años) |
+| Fecha Entrevista | 19/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Lucero |
+| Edad | 19 años |
+| Distrito | La Molina |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAp-_6iUOSJS4FRQuTW-F-9AdcZK5XV42aVZmzgo0PuIAw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=HwtMjV) |
+| Minuto de Inicio | 0:00 |
+| Duración | 2:41 |
+| Resumen | Lucero, estudiante de Psicología, presenta un nivel de estrés de 6/10 con picos de 8. Tiene alta autoconciencia emocional y utiliza journaling, pero percibe que las herramientas actuales no generan cambios reales. Insight principal: perfil reflexivo con insatisfacción en el impacto de las soluciones actuales. Hallazgos clave: uso de journaling sin resultados, necesidad de análisis profundo y rechazo a la repetición. Citas relevantes: “Escribir me ayuda a entenderme, pero no cambia cómo me siento.”, “Las apps se vuelven repetitivas.” Conclusión: necesita soluciones que aporten análisis significativo y evolución emocional. |
+
+##### Entrevista 3
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Estudiantes universitarios (18–25 años) |
+| Fecha Entrevista | 20/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Jimena |
+| Edad | 19 años |
+| Distrito | San Isidro |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQDiIjKmBwlYSY162dNCHfq1AcmQjaPB0B48xM6UgMCISww?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ciHjIU) |
+| Minuto de Inicio | 0:00 |
+| Duración | 2:48 |
+| Resumen | Jimena, estudiante de Ingeniería de Software, presenta un nivel de estrés de 6/10 con picos de 8–9. Experimenta frustración en tareas académicas que deriva en bloqueo cognitivo y procrastinación. Ha utilizado múltiples apps, pero las abandona por falta de valor inmediato. Insight principal: patrón frustración → bloqueo → evasión. Hallazgos clave: bloqueo cognitivo, uso de distracción como escape y abandono rápido de apps. Citas relevantes: “Me bloqueo… y termino dejando todo.”, “Las apps solo te hacen escribir, pero no te ayudan.” Conclusión: requiere intervenciones en tiempo real que ayuden en momentos críticos. |
+
+#### Segmento 2: Profesionales Jóvenes
+
+##### Entrevista 4
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Profesionales jóvenes (26–35 años) |
+| Fecha Entrevista | 18/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Alexandra Montenegro |
+| Edad | 26 años |
+| Distrito | Barranco |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQBLlsZ3G-OZSLcOUS5eF6rQARMpWE6b_f3IIphyY7o3vlI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=p0isA8) |
+| Minuto de Inicio | 0:00 |
+| Duración | 3:15 |
+| Resumen | Alexandra, profesional en Recursos Humanos, presenta un nivel de estrés de 8/10 con picos de 9. Su principal limitación es la falta de energía tras la jornada laboral, lo que impide sostener hábitos. Insight principal: limitación de tiempo y energía. Hallazgos clave: dificultad para mantener rutinas, percepción de apps como costo de tiempo y preferencia por soluciones inmediatas. Citas relevantes: “Llego cansada del trabajo… no tengo energía para seguir una rutina.”, “Las apps me quitaban tiempo o no me daban algo útil en el momento.” Conclusión: requiere soluciones rápidas, de bajo esfuerzo y con valor inmediato. |
+
+##### Entrevista 5
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Profesionales jóvenes (26–35 años) |
+| Fecha Entrevista | 19/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Luciana Poma |
+| Edad | 27 años |
+| Distrito | Chorrillos |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAXQKz8cFuBRYmMRiluA61vAYFJfoUS8D6IibXF6VSNjnE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=qxkwbB) |
+| Minuto de Inicio | 0:00 |
+| Duración | 3:06 |
+| Resumen | Luciana, profesional de marketing digital, presenta un nivel de estrés de 8/10 con picos de 9. Usa apps frecuentemente, pero abandona aquellas que no se adaptan a su ritmo. Insight principal: necesidad de personalización dinámica. Hallazgos clave: frustración con apps rígidas, alta presión por resultados y relación entre bienestar y productividad. Citas relevantes: “Las apps no se adaptan a tu ritmo real.”, “Si no se adapta a mí, la dejo.” Conclusión: el producto debe ofrecer adaptación en tiempo real. |
+
+##### Entrevista 6
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Profesionales jóvenes (26–35 años) |
+| Fecha Entrevista | 21/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Nordie Sanabria |
+| Edad | 29 años |
+| Distrito | La Molina |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAu709K0qBWQZsvqeI53bCHAdB9HmsozDqHD-ua8jw6HjU?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=rM0yrn) |
+| Minuto de Inicio | 0:00 |
+| Duración | 2:52 |
+| Resumen | Nordie, coordinadora de marketing, presenta un nivel de estrés constante de 9/10, cercano al burnout. Ha probado múltiples apps sin éxito. Insight principal: rechazo a cualquier esfuerzo adicional. Hallazgos clave: estrés constante, rechazo a interacción compleja y necesidad de automatización total. Citas relevantes: “Siento que estoy siempre en alerta.”, “Cuando ya estás agotada, no quieres hacer más cosas.”, “Necesito algo que me dé soluciones sin tener que pensar mucho.” Conclusión: requiere una solución altamente automatizada, predictiva y sin fricción. |
 
 ### 2.2.3. Análisis de entrevistas
 
-_Pendiente_
+A partir de las entrevistas realizadas a los dos segmentos objetivo, se identificaron patrones de comportamiento, necesidades y frustraciones diferenciadas. Este análisis permite validar los supuestos planteados y orientar el diseño de la solución.
+
+### Segmento 1: Estudiantes Universitarios (18–25 años)
+
+**Entrevistados:** Jiss, Lucero, Jimena
+
+#### Nivel de estrés y comportamiento
+
+- Nivel promedio: 6–7/10
+- Picos en evaluaciones: 8–9/10
+
+El estrés en este segmento es situacional, asociado principalmente a exámenes, carga académica y dificultad en cursos.
+
+#### Patrones de comportamiento
+
+1. **Procrastinación como respuesta al estrés**
+   - Uso de redes sociales como mecanismo de escape
+   - Incremento del estrés posterior por acumulación de tareas
+
+   > “Me distraigo… pero después me estreso más.” (Jiss)  
+   > “Me bloqueo… y termino dejando todo.” (Jimena)
+
+2. **Baja adherencia a hábitos**
+   - Intentos de organización que no se sostienen en el tiempo
+   - Uso de apps limitado a corto plazo
+
+   > “He probado apps… pero las dejo rápido.” (Jimena)
+
+3. **Rechazo a esfuerzo adicional**
+   - Baja disposición a escribir o registrar emociones
+   - Percepción de apps como una tarea extra
+
+   > “No usaría una app si tengo que escribir mucho.” (Jiss)
+
+4. **Búsqueda de guía**
+   - Necesidad de orientación clara ante situaciones de estrés
+
+   > “Que me diga qué hacer en ese momento.” (Jiss)
+
+#### Frustraciones principales
+
+- Aplicaciones centradas solo en registro
+- Falta de retroalimentación útil
+- Experiencias repetitivas
+
+> “Era como hablar sola.” (Jimena)  
+> “Siempre era lo mismo.” (Lucero)
+
+#### Necesidades clave
+
+- Interacción simple y rápida
+- Bajo esfuerzo cognitivo
+- Recomendaciones claras
+- Apoyo en momentos críticos
+
+#### Insight del segmento
+
+Los estudiantes requieren una herramienta que intervenga en momentos de bloqueo emocional, ofreciendo guía inmediata sin aumentar la carga cognitiva.
+
+### Segmento 2: Profesionales Jóvenes (26–35 años)
+
+**Entrevistados:** Alexandra, Luciana, Nordie
+
+#### Nivel de estrés y comportamiento
+
+- Nivel promedio: 8/10
+- Picos: 9/10
+- Presencia de estrés constante en algunos casos
+
+El estrés es continuo y está vinculado a presión laboral, responsabilidad y cumplimiento de objetivos.
+
+#### Patrones de comportamiento
+
+1. **Fatiga mental**
+   - Reducción de energía al final del día
+   - Dificultad para sostener hábitos
+
+   > “No tengo energía para seguir una rutina.” (Alexandra)
+
+2. **Rechazo a pérdida de tiempo**
+   - Evaluación constante del valor de las aplicaciones
+   - Abandono rápido si no generan impacto
+
+   > “Las apps me quitaban tiempo.” (Alexandra)
+
+3. **Necesidad de personalización**
+   - Contextos variables que requieren adaptación
+
+   > “Si no se adapta a mí, la dejo.” (Luciana)
+
+4. **Orientación a resultados**
+   - Búsqueda de soluciones prácticas y eficientes
+
+   > “Necesito soluciones prácticas.” (Alexandra)
+
+5. **Burnout y automatización**
+   - Rechazo a cualquier esfuerzo adicional en estados de agotamiento
+
+   > “Cuando ya estás agotada, no quieres hacer más cosas.” (Nordie)  
+   > “Necesito algo que me dé soluciones sin tener que pensar mucho.” (Nordie)
+
+#### Frustraciones principales
+
+- Aplicaciones genéricas
+- Falta de personalización
+- Falta de resultados inmediatos
+
+> “Las apps no se adaptan a tu ritmo.” (Luciana)  
+> “Son muy genéricas.” (Nordie)
+
+#### Necesidades clave
+
+- Personalización en tiempo real
+- Interacción de bajo esfuerzo
+- Recomendaciones prácticas
+- Valor inmediato
+
+#### Insight del segmento
+
+Los profesionales requieren soluciones que optimicen su bienestar sin demandar tiempo ni esfuerzo adicional, integrándose de forma eficiente en su rutina.
+
+### Comparación entre segmentos
+
+| Factor | Estudiantes | Profesionales |
+|--------|------------|--------------|
+| Tipo de estrés | Situacional | Crónico |
+| Nivel promedio | 6–7 | 8–9 |
+| Problema principal | Procrastinación | Fatiga mental |
+| Barrera | Falta de disciplina | Falta de tiempo |
+| Rechazo | Esfuerzo cognitivo | Pérdida de tiempo |
+| Necesidad clave | Guía | Eficiencia |
+
+### Insight estratégico general
+
+Ambos segmentos coinciden en que las soluciones actuales fallan por ser pasivas, genéricas y demandar demasiado esfuerzo. Esto evidencia la oportunidad de desarrollar una plataforma que proporcione respuestas en tiempo real, minimice el esfuerzo del usuario y ofrezca recomendaciones personalizadas con impacto inmediato.
 
 ## 2.3. Needfinding
 
@@ -2228,8 +2694,17 @@ _Pendiente_
 
 ## Conclusiones y recomendaciones
 
-_Pendiente_
+**Conclusiones**
 
+1. El desarrollo del Big Picture EventStorming y de la sesión de EventStorming estratégico permitió al equipo construir un entendimiento compartido del dominio de negocio de MindFlow, sentando las bases para identificar los 8 Bounded Contexts candidatos (IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support) que guiarán el diseño de la solución en las siguientes entregas.
+2. La aplicación del Lean UX Process (Problem Statements y Assumptions) confirmó que la propuesta de valor de MindFlow —contención emocional inmediata mediante IA y seguimiento adaptativo de hábitos— responde a una necesidad real y validable en los segmentos de estudiantes universitarios y jóvenes profesionales identificados.
+
+**Recomendaciones**
+
+1. Se recomienda continuar con la elaboración de los Bounded Context Canvases y el Context Mapping antes de avanzar al diseño técnico detallado, con el fin de asegurar que las relaciones entre contextos (Anti-corruption Layer, Customer/Supplier, Shared Kernel, etc.) queden correctamente sustentadas.
+2. Se recomienda validar las Assumptions planteadas en el Lean UX Process —en especial las relacionadas con la disposición de pago y la confianza en el motor de IA— mediante entrevistas de validación con usuarios reales, antes de comprometer recursos de desarrollo en las funcionalidades Premium.
+
+<!--
 ## Video App Validation
 
 _Pendiente_
@@ -2241,6 +2716,7 @@ _Pendiente_
 ## Video About the team
 
 _Pendiente_
+-->
 
 ---
 
@@ -2252,10 +2728,14 @@ _Pendiente_ -->
 
 # Bibliografía
 
-_Pendiente_
+Organización Mundial de la Salud. (2021). *Global strategy on digital health 2020-2025*. https://www.who.int/publications/i/item/9789240020924
 
+Organización Mundial de la Salud. (2022). *World mental health report: Transforming mental health for all*. https://www.who.int/publications/i/item/9789240049338
+
+<!--
 ---
 
 # Anexos
 
 _Pendiente_
+-->
