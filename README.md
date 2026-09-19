@@ -1567,6 +1567,14 @@ Las tablas `entry_tags`, `media` y `journal_search_tokens` tienen **Foreign Key 
 
 ---
 
+### 2.6.3.
+
+---
+
+### 2.6.4.
+
+---
+
 ### 2.6.5. Bounded Context: Analytics & Reporting
 
 El bounded context **Analytics & Reporting** transforma el registro emocional del usuario en información accionable: un puntaje semanal de bienestar con su tendencia, un calendario de estados de ánimo, una nube de palabras frecuentes, y —para los usuarios con suscripción Premium— la exportación de un reporte personal en PDF o CSV. El equipo decidió agrupar ambas capacidades (analítica interna y exportación de reportes) en un mismo bounded context porque comparten la misma fuente de datos (las entradas del diario del usuario) y el mismo propósito de negocio: convertir datos crudos en una narrativa comprensible para el usuario.
@@ -1654,6 +1662,164 @@ El diagrama muestra los agregados `AnalyticsCache` y `WordCloud` (ambos implemen
 </div>
 
 El bounded context Analytics & Reporting persiste en dos tablas propias: `analytics_caches` (con un registro único por `(user_id, week_start)`) y `word_clouds` (un único registro por usuario). Ninguna de las dos tiene Foreign Key física hacia `users`, `journal_entries` ni `subscriptions`: `user_id` es siempre una referencia lógica al bounded context IAM, y tanto el cómputo de Analytics como la exportación de Reporting leen `journal_entries` (y, en el caso de Reporting, `subscriptions`) directamente, sin relación física declarada en el esquema.
+
+---
+
+### 2.6.6. Bounded Context: Notifications
+
+El bounded context **Notifications** es responsable de la bandeja de notificaciones del usuario y del envío de notificaciones push a sus dispositivos registrados. El equipo decidió mantenerlo deliberadamente simple: a diferencia de Journal o Analytics, la mayoría de sus operaciones (listar notificaciones, marcarlas como leídas, registrar o eliminar un dispositivo) son consultas y escrituras directas sin reglas de negocio adicionales, por lo que **no se introdujeron Commands, Queries ni un Application Service dedicado** para ellas: `NotificationsController` accede directamente a `AppDbContext` e `IUnitOfWork` para esos casos. La única regla de negocio real del bounded context —que toda notificación enviada quede primero registrada en la bandeja del usuario, y solo después se intente entregar como push— se aisló detrás de un único puerto de dominio, `INotificationService`.
+
+#### 2.6.6.1. Domain Layer
+
+El Domain Layer concentra las dos entidades del bounded context. Ninguna define un repository interface propio: al ser operaciones simples de consulta/escritura, el equipo decidió que tanto el Interface Layer como la implementación del puerto de notificación accedan directamente a `AppDbContext`, sin una capa de repositorio intermedia.
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `Notification` | Aggregate Root (implementa `IAuditableEntity`) | Representa una notificación en la bandeja de un usuario, con su estado de lectura. | `Id: int`, `UserId: int`, `Title: string`, `Body: string`, `IsRead: bool`, `CreatedAt/UpdatedAt: DateTimeOffset?` | *(entidad anémica — el ciclo de vida lo gestiona `NotificationsController` y `INotificationService`)* | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física); sin relación física con `DeviceToken` |
+| `DeviceToken` | Entity | Representa el token de un dispositivo (web, Android o iOS) habilitado para recibir notificaciones push. | `Id: int`, `UserId: int`, `Token: string`, `Platform: string`, `CreatedAt: DateTimeOffset` | *(anémica)* | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física); un mismo `Token` se reasigna de usuario en lugar de duplicarse |
+
+#### 2.6.6.2. Interface Layer
+
+El Interface Layer expone la bandeja de notificaciones y el registro de dispositivos como un único controlador REST, que para las operaciones de consulta/escritura simple actúa también como su propio orquestador (sin pasar por un Application Service intermedio).
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `NotificationsController` | REST Controller (`/notifications`) | Expone el listado de notificaciones del usuario (las 50 más recientes), marcarlas como leídas, y el registro/baja de un token de dispositivo. Resuelve el `user_id` del JWT y valida ownership antes de operar. | `GET /`, `PATCH /{id}/read`, `POST /register-device`, `DELETE /unregister-device` | Depende directamente de `AppDbContext` (lecturas) e `IUnitOfWork` (persistencia de cambios); no despacha Commands ni Queries |
+| `RegisterDeviceRequest`, `UnregisterDeviceRequest` | Request DTOs | Representan el cuerpo de las peticiones de registro y baja de un dispositivo. | `RegisterDeviceRequest{Token, Platform}`, `UnregisterDeviceRequest{Token}` | Consumidos directamente por `NotificationsController`, sin Assembler intermedio |
+
+#### 2.6.6.3. Application Layer
+
+El Application Layer de este bounded context se reduce, por diseño, a un único puerto: la lógica de negocio real de Notifications —el envío efectivo de una notificación, individual o masiva— vive detrás de `INotificationService`, mientras que las operaciones de simple consulta/escritura del inbox quedan resueltas en el Interface Layer, tal como se explica en la introducción de esta sección.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `INotificationService` | Service Port | Abstrae el envío de una notificación, garantizando que siempre quede primero registrada en la bandeja del destinatario antes de intentar entregarla como push. | `SendToAllAsync(title, body, ct): Task`, `SendToUserAsync(userId, title, body, ct): Task` | Implementada por `FcmNotificationService` (Infrastructure Layer); consumida por `HydrationReminderService` y por cualquier otro bounded context que necesite notificar a un usuario |
+
+#### 2.6.6.4. Infrastructure Layer
+
+El Infrastructure Layer implementa el puerto de notificación sobre el proveedor de push externo, y contiene el job en segundo plano que dispara el único recordatorio automático de MindFlow.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `FcmNotificationService` | Infrastructure Service | Implementa `INotificationService`: registra la `Notification` correspondiente, obtiene un token de acceso OAuth2 para el proveedor de push, y envía el payload a cada `DeviceToken` del destinatario. Los tokens que el proveedor reporta como inválidos se eliminan automáticamente de `device_tokens`. | `SendToAllAsync(title, body, ct): Task`, `SendToUserAsync(userId, title, body, ct): Task` | Implementa `INotificationService`; depende de `AppDbContext` y del servicio externo **Push Notification Service** (FCM) |
+| `HydrationReminderService` | Background Service (`BackgroundService`) | Job en segundo plano que, cada dos horas, envía a todos los usuarios registrados un recordatorio de bienestar (hidratación), como el único ejemplo de notificación proactiva y no solicitada por el usuario. | `ExecuteAsync(stoppingToken): Task` (override) | Depende de `INotificationService`, resuelto vía `IServiceScopeFactory` |
+
+---
+
+#### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Notifications Component Diagram](assets/img/software_architecture/notifications_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Notifications dentro del container Web Services API.*
+
+</div>
+
+El diagrama refleja la asimetría deliberada del bounded context: `NotificationsController` accede directamente a la base de datos para sus operaciones de bandeja y registro de dispositivos, mientras que `NotificationService` concentra la única lógica de negocio (registrar y enviar) y es el componente al que recurre el job `HydrationReminderService` para su recordatorio periódico, cruzando hacia el proveedor externo de push notifications.
+
+#### 2.6.6.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.6.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Notifications Domain Layer Class Diagram](assets/img/software_architecture/notifications_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Notifications.*
+
+</div>
+
+El diagrama muestra las dos entidades del bounded context, `Notification` (que implementa `IAuditableEntity`) y `DeviceToken`, junto con el puerto `INotificationService` que las relaciona: registra una `Notification` por cada envío y lee los `DeviceToken` del destinatario para la entrega push.
+
+##### 2.6.6.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Notifications Database Diagram](assets/img/software_architecture/notifications_database_diagram.png)
+*Figura: Database Diagram del bounded context Notifications.*
+
+</div>
+
+El bounded context Notifications persiste en dos tablas independientes entre sí: `notifications` y `device_tokens`. Ninguna tiene Foreign Key física hacia `users`: `user_id` es en ambos casos una referencia lógica al bounded context IAM. Se recomienda un índice único sobre `device_tokens.token`, dado que el mismo token de dispositivo se reasigna de usuario en lugar de duplicarse.
+
+---
+
+### 2.6.7. Bounded Context: Subscriptions
+
+El bounded context **Subscriptions** es responsable del plan de suscripción del usuario (gratuito o Premium) y de toda su facturación: iniciar el pago, verificar que se completó, sincronizar los cambios de estado que reporta el proveedor de pagos, y permitir la cancelación. El equipo decidió modelarlo con un único agregado plano y un único servicio de aplicación: a diferencia de Journal o Analytics, aquí no hay un catálogo de casos de uso lo bastante grande como para justificar Commands, Queries o manejadores separados — toda la lógica de facturación cabe naturalmente en una sola interfaz orientada a los verbos del ciclo de vida de una suscripción (iniciar checkout, verificar, cancelar, reconciliar webhook).
+
+#### 2.6.7.1. Domain Layer
+
+El Domain Layer se reduce a un único agregado, sin repository interface propio: al tener una única suscripción por usuario y operaciones acotadas, el equipo decidió que el servicio de aplicación acceda directamente a `AppDbContext`, sin una capa de repositorio intermedia.
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `Subscription` | Aggregate Root (implementa `IAuditableEntity`) | Representa el plan de facturación de un usuario. Se decidió modelar un único agregado plano —sin una entidad separada de "transacción de pago"— porque el estado completo de facturación que MindFlow necesita conocer (plan, estado, identificadores del proveedor de pagos) cabe en un solo registro; el historial detallado de cobros queda delegado por completo al proveedor externo. | `Id: int`, `UserId: int`, `Plan: string` ("free"/"premium"), `Status: string` ("active"/"past_due"/"canceled"), `StripeCustomerId: string?`, `StripeSubscriptionId: string?`, `ExpiresAt: DateTimeOffset?`, `CreatedAt/UpdatedAt: DateTimeOffset?` | `Activate(stripeCustomerId, stripeSubscriptionId)`, `Cancel()`, `MarkPastDue()`, propiedad calculada `IsPremium` | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física); único registro por usuario |
+
+#### 2.6.7.2. Interface Layer
+
+El Interface Layer expone la suscripción del usuario y el endpoint de webhook del proveedor de pagos como un único controlador REST.
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SubscriptionsController` | REST Controller (`api/v1/subscriptions`) | Expone el inicio de checkout, la consulta del plan actual, la verificación de una sesión completada, la cancelación, y recibe el webhook del proveedor de pagos (único endpoint anónimo del bounded context, protegido por verificación de firma en lugar de JWT). | `POST /checkout`, `GET /me`, `POST /verify-session`, `POST /cancel`, `POST /webhook` (`[AllowAnonymous]`) | Depende directamente de `ISubscriptionService` para los cinco casos de uso; no usa Resources ni Assemblers |
+
+#### 2.6.7.3. Application Layer
+
+El Application Layer se reduce, igual que en Notifications, a un único puerto de dominio: toda la lógica de facturación de MindFlow queda concentrada detrás de `ISubscriptionService`.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `ISubscriptionService` | Service Port | Abstrae toda la lógica de facturación —creación de la sesión de pago, verificación, reconciliación del webhook y cancelación— detrás de una interfaz que no expone detalles del proveedor de pagos concreto. | `CreateCheckoutSessionAsync(userId, userEmail, ct): Task<CheckoutSessionDto>`, `HandleWebhookAsync(payload, stripeSignature, ct): Task`, `GetByUserIdAsync(userId, ct): Task<SubscriptionDto>`, `VerifySessionAsync(userId, sessionId, ct): Task<SubscriptionDto>`, `CancelAsync(userId, ct): Task` | Implementada por `SubscriptionService` (Infrastructure Layer); consumida por `SubscriptionsController` |
+| `SubscriptionDto`, `CheckoutSessionDto` | Response DTOs | Representan, respectivamente, el estado público del plan del usuario, y la URL de la sesión de pago que el cliente debe abrir para completar el checkout. | `SubscriptionDto{UserId, Plan, Status, IsPremium, ExpiresAt}`, `CheckoutSessionDto{CheckoutUrl}` | Construidos por `ISubscriptionService` a partir de `Subscription` o de la respuesta del proveedor de pagos |
+
+#### 2.6.7.4. Infrastructure Layer
+
+El Infrastructure Layer implementa el puerto de facturación sobre el proveedor de pagos externo, siendo el punto de integración más denso del bounded context: reconcilia tanto las llamadas directas del usuario como los eventos asíncronos del webhook.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SubscriptionService` | Infrastructure Service | Implementa `ISubscriptionService`: crea la sesión de checkout, verifica una sesión completada, cancela la suscripción, y procesa los eventos entrantes del webhook (sesión completada, suscripción actualizada/eliminada, pago fallido/exitoso), manteniendo `Subscription` sincronizada con el estado real del proveedor de pagos. | `CreateCheckoutSessionAsync(...)`, `HandleWebhookAsync(...)`, `GetByUserIdAsync(...)`, `VerifySessionAsync(...)`, `CancelAsync(...)` | Implementa `ISubscriptionService`; depende de `AppDbContext` y del servicio externo **Payment Provider** (Stripe) |
+
+---
+
+#### 2.6.7.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Subscriptions Component Diagram](assets/img/software_architecture/subscriptions_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Subscriptions dentro del container Web Services API.*
+
+</div>
+
+El diagrama muestra el flujo bidireccional con el proveedor de pagos: `SubscriptionsController` recibe tanto las peticiones del usuario como el webhook entrante del proveedor, y delega ambos en `SubscriptionService`, el único componente de lógica de negocio, que mantiene `Subscription` sincronizada con el estado real de la facturación.
+
+#### 2.6.7.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.7.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Subscriptions Domain Layer Class Diagram](assets/img/software_architecture/subscriptions_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Subscriptions.*
+
+</div>
+
+El diagrama muestra el agregado `Subscription` (que implementa `IAuditableEntity`), con sus tres transiciones de estado (`Activate`, `Cancel`, `MarkPastDue`) y su propiedad calculada `IsPremium`, junto con el puerto `ISubscriptionService` y los DTOs que produce.
+
+##### 2.6.7.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Subscriptions Database Diagram](assets/img/software_architecture/subscriptions_database_diagram.png)
+*Figura: Database Diagram del bounded context Subscriptions.*
+
+</div>
+
+El bounded context Subscriptions persiste en una única tabla, `subscriptions`, sin Foreign Key física hacia `users` (`user_id` es una referencia lógica al bounded context IAM). Se recomienda un índice único sobre `user_id` (una suscripción por usuario) y otro sobre `stripe_customer_id`, usado para resolver los eventos entrantes del webhook.
+
+---
+
+
 
 
 <!--
