@@ -1819,6 +1819,79 @@ El bounded context Subscriptions persiste en una única tabla, `subscriptions`, 
 
 ---
 
+### 2.6.8. Bounded Context: Support
+
+El bounded context **Support** es responsable de los tickets de soporte que un usuario levanta hacia el equipo de MindFlow: su creación, su confirmación por correo, y la consulta del historial propio del usuario. El equipo decidió modelarlo de la forma más simple posible: un único agregado y un único servicio de aplicación, sin Commands ni Queries, siguiendo el mismo criterio adoptado en Notifications y Subscriptions para bounded contexts cuyo catálogo de casos de uso es reducido y no justifica una capa CQRS explícita.
+
+#### 2.6.8.1. Domain Layer
+
+El Domain Layer se reduce a un único agregado, sin repository interface propio: al ser un catálogo acotado de operaciones, el equipo decidió que el servicio de aplicación acceda directamente a `AppDbContext`, sin una capa de repositorio intermedia.
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `SupportTicket` | Aggregate Root (implementa `IAuditableEntity`) | Representa un ticket de soporte levantado por un usuario. Se decidió desnormalizar el correo del usuario (`UserEmail`) directamente en el ticket, en lugar de resolverlo en tiempo de consulta contra IAM, para poder enviar la confirmación y cualquier respuesta futura sin una dependencia síncrona entre bounded contexts. | `Id: int`, `UserId: int`, `UserEmail: string`, `Subject: string`, `Message: string`, `Status: string` ("open"/"in_progress"/"closed"), `CreatedAt/UpdatedAt: DateTimeOffset?` | `MarkInProgress()`, `Close()` | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física) |
+
+#### 2.6.8.2. Interface Layer
+
+El Interface Layer expone la creación y consulta de tickets del usuario autenticado como un único controlador REST.
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SupportController` | REST Controller (`api/v1/support`) | Expone la creación de un ticket y el listado de los tickets propios del usuario autenticado, formateando el identificador visible del ticket (`#00001`). Valida longitud del asunto y traduce el rechazo por duplicado a un código `429`. | `POST /tickets`, `GET /tickets` | Depende directamente de `ISupportService`; no usa Resources ni Assemblers |
+| `CreateTicketRequest` | Request DTO (record) | Representa el cuerpo de la petición de creación de un ticket. | `CreateTicketRequest(Subject, Message)` | Consumido directamente por `SupportController` |
+
+#### 2.6.8.3. Application Layer
+
+El Application Layer se reduce, igual que en Notifications y Subscriptions, a un único puerto de dominio.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `ISupportService` | Service Port | Abstrae el ciclo de vida de un ticket visible para el usuario: crearlo y consultar los propios. La transición de estado por parte del equipo de soporte (`MarkInProgress`/`Close`) queda deliberadamente fuera del alcance de este puerto en la primera versión, reservada al acceso directo del equipo a la base de datos en lugar de un panel de administración dedicado. | `CreateTicketAsync(userId, userEmail, subject, message): Task<SupportTicket>`, `GetUserTicketsAsync(userId): Task<IEnumerable<SupportTicket>>` | Implementada por `SupportService` (Infrastructure Layer); consumida por `SupportController` |
+
+#### 2.6.8.4. Infrastructure Layer
+
+El Infrastructure Layer implementa el puerto de soporte, concentrando dos decisiones de diseño puntuales: la protección contra tickets duplicados y el envío no bloqueante de la confirmación.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SupportService` | Infrastructure Service | Implementa `ISupportService`: rechaza la creación de un ticket si el mismo usuario envió uno con el mismo asunto en el último minuto (protección simple contra doble envío accidental), persiste el ticket, y dispara el correo de confirmación de forma no bloqueante (*fire-and-forget*), de modo que una falla o demora del proveedor de correo nunca retrase la respuesta al usuario. | `CreateTicketAsync(userId, userEmail, subject, message): Task<SupportTicket>`, `GetUserTicketsAsync(userId): Task<IEnumerable<SupportTicket>>` | Implementa `ISupportService`; depende de `AppDbContext` y del servicio externo **SMTP Email Service** |
+
+---
+
+#### 2.6.8.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Support Component Diagram](assets/img/software_architecture/support_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Support dentro del container Web Services API.*
+
+</div>
+
+El diagrama muestra el flujo más simple de los seis bounded contexts restantes: `SupportController` delega ambos casos de uso en `SupportService`, que concentra tanto la persistencia del ticket como el envío no bloqueante de su confirmación por correo hacia el proveedor SMTP externo.
+
+#### 2.6.8.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.8.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Support Domain Layer Class Diagram](assets/img/software_architecture/support_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Support.*
+
+</div>
+
+El diagrama muestra el agregado `SupportTicket` (que implementa `IAuditableEntity`), con sus dos transiciones de estado (`MarkInProgress`, `Close`) y el puerto `ISupportService` que lo crea y consulta.
+
+##### 2.6.8.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Support Database Diagram](assets/img/software_architecture/support_database_diagram.png)
+*Figura: Database Diagram del bounded context Support.*
+
+</div>
+
+El bounded context Support persiste en una única tabla, `support_tickets`, sin Foreign Key física hacia `users` (`user_id` es una referencia lógica al bounded context IAM). Se recomienda un índice compuesto sobre `(user_id, subject, created_at)` para acelerar la verificación de tickets duplicados recientes en cada creación.
 
 
 
