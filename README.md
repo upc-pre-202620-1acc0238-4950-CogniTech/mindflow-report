@@ -409,7 +409,7 @@ Cada miembro del equipo formula un plan que incluye al menos dos objetivos SMART
 
 ### Jáuregui Cerna, Jean Franco
 
-1. _Pendiente_
+1. A inicios de marzo de 2027, sacar mi certificación 
 2. _Pendiente_
 
 ### Limache Coronel, Imanol Fabrizio
