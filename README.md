@@ -711,21 +711,327 @@ Estas soluciones representan enfoques parciales del problema, lo que evidencia u
 
 ### 2.1.2. Estrategias y tácticas frente a competidores
 
-_Pendiente_
+A partir del análisis competitivo y del análisis SWOT realizado, se definen estrategias y tácticas preliminares que permitirán a MindFlow afrontar las fortalezas de sus competidores, aprovechar sus debilidades y capitalizar las oportunidades del entorno, mitigando a su vez las amenazas del mercado.
+
+#### Estrategias
+
+- **Estrategia de diferenciación frente a fortalezas de competidores:**  
+  Mientras aplicaciones como Daylio destacan por su simplicidad y Habitica por su gamificación, MindFlow propone una diferenciación basada en inteligencia artificial, integrando análisis emocional y personalización dinámica, lo cual permite ofrecer una experiencia más profunda y significativa.
+
+- **Estrategia de aprovechamiento de debilidades del mercado:**  
+  Se identificó que los competidores carecen de retroalimentación en tiempo real y adaptación al estado emocional. MindFlow capitaliza esta debilidad mediante un sistema que responde activamente al usuario, incrementando la retención.
+
+- **Estrategia de explotación de oportunidades:**  
+  El crecimiento del mercado de salud mental digital y la aceptación de soluciones basadas en IA representan una oportunidad clave. MindFlow se posiciona como una solución innovadora alineada con estas tendencias.
+
+- **Estrategia de mitigación de amenazas:**  
+  Frente a la presencia de competidores consolidados, se prioriza la innovación continua, la experiencia de usuario y la generación de confianza mediante políticas de privacidad y transparencia en el uso de datos.
+
+#### Tácticas
+
+- **Frente a fortalezas de competidores:**
+  - Diseñar una interfaz simple e intuitiva similar a Daylio, pero con mayor valor agregado.
+  - Incorporar elementos motivacionales (inspirados en gamificación) sin perder el enfoque emocional.
+
+- **Frente a debilidades de competidores:**
+  - Implementar retroalimentación empática en tiempo real mediante IA.
+  - Desarrollar un sistema de hábitos adaptativos basado en el estado emocional del usuario.
+
+- **Frente a oportunidades del entorno:**
+  - Crear contenido educativo sobre salud mental en redes sociales.
+  - Promover el uso de la app en comunidades universitarias y profesionales jóvenes.
+
+- **Frente a amenazas del mercado:**
+  - Garantizar la seguridad y privacidad de los datos mediante encriptación.
+  - Diferenciar la propuesta mediante innovación constante en funcionalidades.
+  - Generar confianza comunicando claramente que la app no reemplaza terapia profesional.
+
+#### Enfoque estratégico
+
+MindFlow adopta una estrategia de diferenciación centrada en la innovación tecnológica y la experiencia del usuario. A diferencia de los competidores que abordan el problema de manera fragmentada, la plataforma integra múltiples funcionalidades en un sistema adaptativo, lo que le permite posicionarse como una solución más completa, inteligente y alineada con las necesidades actuales del usuario.
 
 ## 2.2. Entrevistas
 
 ### 2.2.1. Diseño de entrevistas
 
-_Pendiente_
+Se han diseñado dos bloques de preguntas dirigidos a los principales segmentos objetivo: estudiantes universitarios y profesionales jóvenes. Las preguntas han sido estructuradas para recopilar información cualitativa relevante en torno a aspectos demográficos, hábitos digitales, gestión del estrés y percepción sobre el uso de herramientas tecnológicas para el bienestar emocional.
+
+Asimismo, se incluyen preguntas complementarias orientadas a la construcción de arquetipos de usuario (User Personas), considerando variables demográficas, psicográficas y de comportamiento digital.
+
+#### A. Entrevistas a Segmento 1: Estudiantes Universitarios (18–25 años)
+
+**Objetivo:** Comprender cómo los estudiantes gestionan su estrés académico, qué herramientas utilizan actualmente y cuáles son sus principales dificultades para mantener hábitos de bienestar.
+
+**Preguntas principales:**
+
+- ¿Podrías contarnos un poco sobre ti? (edad, carrera, ciclo, ciudad, etc.)
+- ¿Cómo describirías tu nivel de estrés durante el ciclo académico?
+- ¿En qué momentos sueles sentir más ansiedad o presión?
+- ¿Qué haces actualmente para manejar el estrés o la ansiedad?
+- ¿Has utilizado alguna aplicación para registrar tus emociones o hábitos?
+- ¿Qué dificultades tienes para mantener hábitos saludables?
+- ¿Qué tan cómodo(a) te sientes usando apps para tu bienestar?
+- ¿Con qué dispositivos accedes más a aplicaciones? (móvil, laptop, etc.)
+- ¿Qué aplicaciones usas con mayor frecuencia en tu día a día?
+- ¿Qué redes sociales utilizas más?
+- ¿Cuáles son tus principales objetivos personales o académicos?
+- ¿Qué situaciones te generan mayor frustración actualmente?
+- ¿Cómo describirías tu personalidad? (organizado, impulsivo, etc.)
+- ¿Sueles seguir recomendaciones de influencers o contenido sobre bienestar?
+
+#### B. Entrevistas a Segmento 2: Profesionales Jóvenes (26–35 años)
+
+**Objetivo:** Identificar los retos relacionados con el estrés laboral, la gestión del tiempo y la adopción de herramientas digitales para el bienestar personal.
+
+**Preguntas principales:**
+
+- ¿Podrías contarnos un poco sobre ti? (edad, profesión, tipo de trabajo, etc.)
+- ¿Cómo describirías tu nivel de estrés laboral?
+- ¿Qué situaciones te generan mayor agotamiento?
+- ¿Qué haces actualmente para reducir el estrés?
+- ¿Has utilizado apps de productividad o bienestar?
+- ¿Qué dificultades tienes para equilibrar trabajo y vida personal?
+- ¿Qué dispositivos utilizas con mayor frecuencia?
+- ¿Qué herramientas digitales usas para organizar tu día?
+- ¿Qué canales digitales utilizas con mayor frecuencia?
+- ¿Cuáles son tus principales objetivos profesionales y personales?
+- ¿Qué factores te generan mayor frustración en tu rutina?
+- ¿Qué valoras más en una aplicación digital?
+- ¿Qué te generaría confianza o desconfianza al usar una app de salud mental?
 
 ### 2.2.2. Registro de entrevistas
 
-_Pendiente_
+#### Segmento 1: Estudiantes Universitarios
+
+##### Entrevista 1
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Estudiantes universitarios (18–25 años) |
+| Fecha Entrevista | 18/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Jiss Zerpa |
+| Edad | 18 años |
+| Distrito | La Molina |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQC6LCtoZRnfR4iKU3dIHCeYATI4FuIHWP1zmVrAm3H4_R8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=jFGNLe) |
+| Minuto de Inicio | 0:00 |
+| Duración | 2:47 |
+| Resumen | Jiss, estudiante de Ingeniería Petroquímica, presenta un nivel de estrés de 7/10 con picos de 9 en exámenes. Su comportamiento refleja evitación del estrés mediante distracciones como TikTok y videojuegos. Reconoce que estas actividades le generan alivio momentáneo, pero posteriormente incrementan su ansiedad. Ha probado apps, pero las abandona rápidamente por requerir esfuerzo adicional. Insight principal: comportamiento de evitación frente al estrés. Hallazgos clave: alta procrastinación, baja tolerancia al esfuerzo y falta de estructura. Citas relevantes: “Me distraigo… pero después me estreso más.”, “No usaría una app si tengo que escribir mucho.” Conclusión: requiere soluciones simples, automáticas y de mínima interacción. |
+
+##### Entrevista 2
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Estudiantes universitarios (18–25 años) |
+| Fecha Entrevista | 19/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Lucero |
+| Edad | 19 años |
+| Distrito | La Molina |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAp-_6iUOSJS4FRQuTW-F-9AdcZK5XV42aVZmzgo0PuIAw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=HwtMjV) |
+| Minuto de Inicio | 0:00 |
+| Duración | 2:41 |
+| Resumen | Lucero, estudiante de Psicología, presenta un nivel de estrés de 6/10 con picos de 8. Tiene alta autoconciencia emocional y utiliza journaling, pero percibe que las herramientas actuales no generan cambios reales. Insight principal: perfil reflexivo con insatisfacción en el impacto de las soluciones actuales. Hallazgos clave: uso de journaling sin resultados, necesidad de análisis profundo y rechazo a la repetición. Citas relevantes: “Escribir me ayuda a entenderme, pero no cambia cómo me siento.”, “Las apps se vuelven repetitivas.” Conclusión: necesita soluciones que aporten análisis significativo y evolución emocional. |
+
+##### Entrevista 3
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Estudiantes universitarios (18–25 años) |
+| Fecha Entrevista | 20/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Jimena |
+| Edad | 19 años |
+| Distrito | San Isidro |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQDiIjKmBwlYSY162dNCHfq1AcmQjaPB0B48xM6UgMCISww?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ciHjIU) |
+| Minuto de Inicio | 0:00 |
+| Duración | 2:48 |
+| Resumen | Jimena, estudiante de Ingeniería de Software, presenta un nivel de estrés de 6/10 con picos de 8–9. Experimenta frustración en tareas académicas que deriva en bloqueo cognitivo y procrastinación. Ha utilizado múltiples apps, pero las abandona por falta de valor inmediato. Insight principal: patrón frustración → bloqueo → evasión. Hallazgos clave: bloqueo cognitivo, uso de distracción como escape y abandono rápido de apps. Citas relevantes: “Me bloqueo… y termino dejando todo.”, “Las apps solo te hacen escribir, pero no te ayudan.” Conclusión: requiere intervenciones en tiempo real que ayuden en momentos críticos. |
+
+#### Segmento 2: Profesionales Jóvenes
+
+##### Entrevista 4
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Profesionales jóvenes (26–35 años) |
+| Fecha Entrevista | 18/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Alexandra Montenegro |
+| Edad | 26 años |
+| Distrito | Barranco |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQBLlsZ3G-OZSLcOUS5eF6rQARMpWE6b_f3IIphyY7o3vlI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=p0isA8) |
+| Minuto de Inicio | 0:00 |
+| Duración | 3:15 |
+| Resumen | Alexandra, profesional en Recursos Humanos, presenta un nivel de estrés de 8/10 con picos de 9. Su principal limitación es la falta de energía tras la jornada laboral, lo que impide sostener hábitos. Insight principal: limitación de tiempo y energía. Hallazgos clave: dificultad para mantener rutinas, percepción de apps como costo de tiempo y preferencia por soluciones inmediatas. Citas relevantes: “Llego cansada del trabajo… no tengo energía para seguir una rutina.”, “Las apps me quitaban tiempo o no me daban algo útil en el momento.” Conclusión: requiere soluciones rápidas, de bajo esfuerzo y con valor inmediato. |
+
+##### Entrevista 5
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Profesionales jóvenes (26–35 años) |
+| Fecha Entrevista | 19/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Luciana Poma |
+| Edad | 27 años |
+| Distrito | Chorrillos |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAXQKz8cFuBRYmMRiluA61vAYFJfoUS8D6IibXF6VSNjnE?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=qxkwbB) |
+| Minuto de Inicio | 0:00 |
+| Duración | 3:06 |
+| Resumen | Luciana, profesional de marketing digital, presenta un nivel de estrés de 8/10 con picos de 9. Usa apps frecuentemente, pero abandona aquellas que no se adaptan a su ritmo. Insight principal: necesidad de personalización dinámica. Hallazgos clave: frustración con apps rígidas, alta presión por resultados y relación entre bienestar y productividad. Citas relevantes: “Las apps no se adaptan a tu ritmo real.”, “Si no se adapta a mí, la dejo.” Conclusión: el producto debe ofrecer adaptación en tiempo real. |
+
+##### Entrevista 6
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Profesionales jóvenes (26–35 años) |
+| Fecha Entrevista | 21/04/2026 |
+| Entrevistador | Sebastián Díaz |
+| Entrevistado | Nordie Sanabria |
+| Edad | 29 años |
+| Distrito | La Molina |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAu709K0qBWQZsvqeI53bCHAdB9HmsozDqHD-ua8jw6HjU?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=rM0yrn) |
+| Minuto de Inicio | 0:00 |
+| Duración | 2:52 |
+| Resumen | Nordie, coordinadora de marketing, presenta un nivel de estrés constante de 9/10, cercano al burnout. Ha probado múltiples apps sin éxito. Insight principal: rechazo a cualquier esfuerzo adicional. Hallazgos clave: estrés constante, rechazo a interacción compleja y necesidad de automatización total. Citas relevantes: “Siento que estoy siempre en alerta.”, “Cuando ya estás agotada, no quieres hacer más cosas.”, “Necesito algo que me dé soluciones sin tener que pensar mucho.” Conclusión: requiere una solución altamente automatizada, predictiva y sin fricción. |
 
 ### 2.2.3. Análisis de entrevistas
 
-_Pendiente_
+A partir de las entrevistas realizadas a los dos segmentos objetivo, se identificaron patrones de comportamiento, necesidades y frustraciones diferenciadas. Este análisis permite validar los supuestos planteados y orientar el diseño de la solución.
+
+### Segmento 1: Estudiantes Universitarios (18–25 años)
+
+**Entrevistados:** Jiss, Lucero, Jimena
+
+#### Nivel de estrés y comportamiento
+
+- Nivel promedio: 6–7/10
+- Picos en evaluaciones: 8–9/10
+
+El estrés en este segmento es situacional, asociado principalmente a exámenes, carga académica y dificultad en cursos.
+
+#### Patrones de comportamiento
+
+1. **Procrastinación como respuesta al estrés**
+   - Uso de redes sociales como mecanismo de escape
+   - Incremento del estrés posterior por acumulación de tareas
+
+   > “Me distraigo… pero después me estreso más.” (Jiss)  
+   > “Me bloqueo… y termino dejando todo.” (Jimena)
+
+2. **Baja adherencia a hábitos**
+   - Intentos de organización que no se sostienen en el tiempo
+   - Uso de apps limitado a corto plazo
+
+   > “He probado apps… pero las dejo rápido.” (Jimena)
+
+3. **Rechazo a esfuerzo adicional**
+   - Baja disposición a escribir o registrar emociones
+   - Percepción de apps como una tarea extra
+
+   > “No usaría una app si tengo que escribir mucho.” (Jiss)
+
+4. **Búsqueda de guía**
+   - Necesidad de orientación clara ante situaciones de estrés
+
+   > “Que me diga qué hacer en ese momento.” (Jiss)
+
+#### Frustraciones principales
+
+- Aplicaciones centradas solo en registro
+- Falta de retroalimentación útil
+- Experiencias repetitivas
+
+> “Era como hablar sola.” (Jimena)  
+> “Siempre era lo mismo.” (Lucero)
+
+#### Necesidades clave
+
+- Interacción simple y rápida
+- Bajo esfuerzo cognitivo
+- Recomendaciones claras
+- Apoyo en momentos críticos
+
+#### Insight del segmento
+
+Los estudiantes requieren una herramienta que intervenga en momentos de bloqueo emocional, ofreciendo guía inmediata sin aumentar la carga cognitiva.
+
+### Segmento 2: Profesionales Jóvenes (26–35 años)
+
+**Entrevistados:** Alexandra, Luciana, Nordie
+
+#### Nivel de estrés y comportamiento
+
+- Nivel promedio: 8/10
+- Picos: 9/10
+- Presencia de estrés constante en algunos casos
+
+El estrés es continuo y está vinculado a presión laboral, responsabilidad y cumplimiento de objetivos.
+
+#### Patrones de comportamiento
+
+1. **Fatiga mental**
+   - Reducción de energía al final del día
+   - Dificultad para sostener hábitos
+
+   > “No tengo energía para seguir una rutina.” (Alexandra)
+
+2. **Rechazo a pérdida de tiempo**
+   - Evaluación constante del valor de las aplicaciones
+   - Abandono rápido si no generan impacto
+
+   > “Las apps me quitaban tiempo.” (Alexandra)
+
+3. **Necesidad de personalización**
+   - Contextos variables que requieren adaptación
+
+   > “Si no se adapta a mí, la dejo.” (Luciana)
+
+4. **Orientación a resultados**
+   - Búsqueda de soluciones prácticas y eficientes
+
+   > “Necesito soluciones prácticas.” (Alexandra)
+
+5. **Burnout y automatización**
+   - Rechazo a cualquier esfuerzo adicional en estados de agotamiento
+
+   > “Cuando ya estás agotada, no quieres hacer más cosas.” (Nordie)  
+   > “Necesito algo que me dé soluciones sin tener que pensar mucho.” (Nordie)
+
+#### Frustraciones principales
+
+- Aplicaciones genéricas
+- Falta de personalización
+- Falta de resultados inmediatos
+
+> “Las apps no se adaptan a tu ritmo.” (Luciana)  
+> “Son muy genéricas.” (Nordie)
+
+#### Necesidades clave
+
+- Personalización en tiempo real
+- Interacción de bajo esfuerzo
+- Recomendaciones prácticas
+- Valor inmediato
+
+#### Insight del segmento
+
+Los profesionales requieren soluciones que optimicen su bienestar sin demandar tiempo ni esfuerzo adicional, integrándose de forma eficiente en su rutina.
+
+### Comparación entre segmentos
+
+| Factor | Estudiantes | Profesionales |
+|--------|------------|--------------|
+| Tipo de estrés | Situacional | Crónico |
+| Nivel promedio | 6–7 | 8–9 |
+| Problema principal | Procrastinación | Fatiga mental |
+| Barrera | Falta de disciplina | Falta de tiempo |
+| Rechazo | Esfuerzo cognitivo | Pérdida de tiempo |
+| Necesidad clave | Guía | Eficiencia |
+
+### Insight estratégico general
+
+Ambos segmentos coinciden en que las soluciones actuales fallan por ser pasivas, genéricas y demandar demasiado esfuerzo. Esto evidencia la oportunidad de desarrollar una plataforma que proporcione respuestas en tiempo real, minimice el esfuerzo del usuario y ofrezca recomendaciones personalizadas con impacto inmediato.
 
 ## 2.3. Needfinding
 
