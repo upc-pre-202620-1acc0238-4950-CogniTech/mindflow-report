@@ -63,12 +63,12 @@ class JournalSearchTokenizer <<Domain Service>> {
 JournalEntry .up.|> IAuditableEntity
 Media .up.|> IAuditableEntity
 
-JournalEntry "1" --> "0..*" EntryTag : EntryTags
-Tag "1" --> "0..*" EntryTag : EntryTags
-EntryTag "0..*" --> "1" JournalEntry : Entry\n(FK enforced, cascade)
-EntryTag "0..*" --> "1" Tag : Tag\n(FK enforced, cascade)
-JournalEntry "1" --> "0..*" Media : Media
-Media "0..*" --> "1" JournalEntry : Entry\n(FK enforced, cascade)
-JournalSearchToken "0..*" --> "1" JournalEntry : Entry\n(FK enforced, cascade,\nno inverse collection)
+JournalEntry "1" --> "0..*" EntryTag
+Tag "1" --> "0..*" EntryTag
+EntryTag "0..*" --> "1" JournalEntry
+EntryTag "0..*" --> "1" Tag
+JournalEntry "1" --> "0..*" Media
+Media "0..*" --> "1" JournalEntry
+JournalSearchToken "0..*" --> "1" JournalEntry
 
 @enduml

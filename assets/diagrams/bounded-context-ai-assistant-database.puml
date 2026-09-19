@@ -1,0 +1,52 @@
+@startuml AiAssistant_DatabaseDiagram
+hide circle
+hide empty members
+skinparam linetype ortho
+
+entity "conversations" as conversations {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  title : varchar(255)
+  category : varchar(50)
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+entity "chat_messages" as chat_messages {
+  *id : int <<PK>>
+  --
+  conversation_id : int <<FK, enforced, cascade>>
+  role : varchar(20)
+  content : longtext
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+entity "ai_feedback_ratings" as ai_feedback_ratings {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  content_id : int <<logical reference to journal_entries or habits>>
+  content_type : varchar(20)
+  rating : int
+  comment : varchar(500), nullable
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+entity "ai_metric_logs" as ai_metric_logs {
+  *id : int <<PK>>
+  --
+  operation : varchar(50)
+  latency_ms : int
+  success : boolean
+  prompt_length : int
+  response_length : int
+  error_message : varchar(500), nullable
+  created_at : datetime
+}
+
+conversations ||--o{ chat_messages
+
+@enduml

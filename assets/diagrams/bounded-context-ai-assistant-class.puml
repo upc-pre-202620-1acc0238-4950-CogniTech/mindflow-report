@@ -1,0 +1,57 @@
+@startuml AiAssistant_DomainLayer_ClassDiagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface IAuditableEntity {
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class Conversation {
+  +Id : int
+  +UserId : int
+  +Title : string
+  +Category : string
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class ChatMessage {
+  +Id : int
+  +ConversationId : int
+  +Role : string
+  +Content : string
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class AiFeedbackRating {
+  +Id : int
+  +UserId : int
+  +ContentId : int
+  +ContentType : string
+  +Rating : int
+  +Comment : string?
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class AiMetricLog {
+  +Id : int
+  +Operation : string
+  +LatencyMs : int
+  +Success : bool
+  +PromptLength : int
+  +ResponseLength : int
+  +ErrorMessage : string?
+  +CreatedAt : DateTimeOffset
+}
+
+Conversation .up.|> IAuditableEntity
+ChatMessage .up.|> IAuditableEntity
+AiFeedbackRating .up.|> IAuditableEntity
+
+Conversation "1" --> "0..*" ChatMessage
+ChatMessage "0..*" --> "1" Conversation
+
+@enduml

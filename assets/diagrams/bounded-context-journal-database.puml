@@ -52,15 +52,9 @@ entity "journal_search_tokens" as journal_search_tokens {
   token_hash : varchar(255)
 }
 
-journal_entries ||--o{ entry_tags : "entry_id\n(enforced, cascade)"
-tags ||--o{ entry_tags : "tag_id\n(enforced, cascade)"
-journal_entries ||--o{ media : "entry_id\n(enforced, cascade)"
-journal_entries ||--o{ journal_search_tokens : "entry_id\n(enforced, cascade)"
-
-note bottom of entry_tags
-  Unique index on (entry_id, tag_id):
-  a tag cannot be attached twice
-  to the same entry.
-end note
+journal_entries ||--o{ entry_tags
+tags ||--o{ entry_tags
+journal_entries ||--o{ media
+journal_entries ||--o{ journal_search_tokens
 
 @enduml

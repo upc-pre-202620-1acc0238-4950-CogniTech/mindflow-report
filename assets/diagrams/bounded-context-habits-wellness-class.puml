@@ -1,0 +1,125 @@
+@startuml HabitsWellness_DomainLayer_ClassDiagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface IAuditableEntity {
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+interface "IBaseRepository<TEntity>" as IBaseRepository {
+  +AddAsync(entity: TEntity, cancellationToken: CancellationToken) : Task
+  +FindByIdAsync(id: int, cancellationToken: CancellationToken) : Task<TEntity?>
+  +Update(entity: TEntity) : void
+  +Remove(entity: TEntity) : void
+  +ListAsync(cancellationToken: CancellationToken) : Task<IEnumerable<TEntity>>
+}
+
+enum HabitFrequency {
+  Daily
+  Weekly
+  Monthly
+}
+
+enum HabitStatus {
+  Pending
+  Completed
+  PausedByAi
+}
+
+class Habit {
+  -Id : int
+  -UserId : int
+  -Name : string
+  -Category : string
+  -Frequency : HabitFrequency
+  -Streak : int
+  -Status : HabitStatus
+  -PausedByAi : bool
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+  -DeletedAt : DateTimeOffset?
+  +MarkCompleted() : void
+  +MarkPending() : void
+  +SetStreak(streak: int) : void
+  +PauseByAi() : void
+  +Resume() : void
+  +UpdateDetails(name: string, category: string, frequency: HabitFrequency) : void
+  +UpdateFull(name: string, category: string, frequency: HabitFrequency, streak: int, status: HabitStatus, pausedByAi: bool) : void
+  +SoftDelete() : void
+}
+
+class HabitCompletionLog {
+  -Id : int
+  -HabitId : int
+  -HabitName : string
+  -Category : string
+  -Date : DateTime
+  -Completed : bool
+  -CompletedAt : DateTime?
+  -CreatedAt : DateTimeOffset
+  +UpdateDetails(habitName: string, category: string, completed: bool, completedAt: DateTime?) : void
+}
+
+class CachedHabitSuggestion {
+  +Id : int
+  +UserId : int
+  +SuggestionsJson : string
+  +GeneratedAt : DateTimeOffset
+}
+
+class WellnessExercise {
+  +Id : int
+  +Type : string
+  +Name : string
+  +Description : string
+  +DurationSeconds : int
+  +InhaleSeconds : int?
+  +HoldSeconds : int?
+  +ExhaleSeconds : int?
+  +HoldAfterExhaleSeconds : int?
+  +Cycles : int?
+  +AudioUrl : string?
+  +IsActive : bool
+  +SortOrder : int
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+enum HabitsError {
+  HabitNotFound
+  HabitCreationFailed
+  HabitUpdateFailed
+  HabitDeletionFailed
+  HabitLogNotFound
+  HabitLogCreationFailed
+  HabitLogUpdateFailed
+  HabitLogDeletionFailed
+  InvalidHabitFrequency
+  InvalidHabitStatus
+  InvalidHabitCategory
+  UserIdMismatch
+}
+
+interface IHabitRepository {
+  +FindByUserIdAsync(userId: int) : Task<IEnumerable<Habit>>
+  +FindByIdAndUserIdAsync(id: int, userId: int) : Task<Habit?>
+}
+
+interface IHabitCompletionLogRepository {
+  +FindByHabitIdAsync(habitId: int) : Task<IEnumerable<HabitCompletionLog>>
+  +FindByUserIdAsync(userId: int) : Task<IEnumerable<HabitCompletionLog>>
+}
+
+Habit .up.|> IAuditableEntity
+WellnessExercise .up.|> IAuditableEntity
+IHabitRepository -up-|> IBaseRepository
+IHabitCompletionLogRepository -up-|> IBaseRepository
+
+Habit "1" --> "0..*" HabitCompletionLog
+Habit --> HabitFrequency
+Habit --> HabitStatus
+IHabitRepository ..> Habit
+IHabitCompletionLogRepository ..> HabitCompletionLog
+
+@enduml

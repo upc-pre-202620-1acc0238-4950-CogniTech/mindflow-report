@@ -997,6 +997,191 @@ Las tablas `entry_tags`, `media` y `journal_search_tokens` tienen **Foreign Key 
 
 ---
 
+### 2.6.3. Bounded Context: AI Assistant
+
+El bounded context **AI Assistant** agrupa las capacidades de inteligencia artificial de MindFlow: el chat conversacional (módulo `Chat`), la integración con el proveedor de IA (módulo `AiIntegration`) y la valoración de usuarios sobre contenido generado por IA (módulo `AiFeedback`). Ancla los eventos pivote *Assistant query submitted* e *Insight generated* identificados en el EventStorming (sección 2.5.1.1), y es uno de los contexts core que constituyen el diferenciador tecnológico de MindFlow frente a la competencia.
+
+A diferencia de IAM (Command Service unificado) y de Journal (CQRS con Cortex.Mediator), AI Assistant usa un **tercer patrón de Application Layer**: Application Services planos (`ChatService`, `AiFeedbackService`) inyectados directamente en el Controller, sin Commands, Queries ni Mediator — el método del servicio se invoca de forma síncrona y directa. Tampoco hay repository interfaces ni Domain Services propios: toda la persistencia se resuelve con `AppDbContext` inyectado directamente en los Application Services (que, en la práctica, funcionan como su propia capa de Infrastructure).
+
+Se identificaron además dos dependencias cruzadas reales hacia otros bounded contexts: `AiFeedbackService` consulta directamente `JournalEntries` y el agregado `Habit` (Journal y Habits & Wellness) para validar que el contenido calificado existe; y `IAiService`/`GeminiService` es consumido no solo por `ChatService`, sino también por Analytics & Reporting (resúmenes semanales) y Habits & Wellness (consejos de estrés, sugerencias de hábitos) — es, en la práctica, un servicio compartido transversal más que un componente exclusivo de este bounded context.
+
+#### 2.6.3.1. Domain Layer
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `Conversation` | Aggregate Root (implementa `IAuditableEntity`) | Representa una conversación de chat entre el usuario y el asistente de IA. | `Id: int`, `UserId: int`, `Title: string` (autogenerado de los primeros 50 caracteres del primer mensaje), `Category: string` (default `"Personal"`), `CreatedAt/UpdatedAt: DateTimeOffset?` | *(anémica)* | Raíz del agregado: `1` a `0..*` con `ChatMessage` (colección `Messages`) |
+| `ChatMessage` | Entity (implementa `IAuditableEntity`) | Representa un mensaje individual dentro de una conversación, sea del usuario o del asistente. | `Id: int`, `ConversationId: int`, `Role: string` (`"user"` / `"assistant"`), `Content: string`, `CreatedAt/UpdatedAt: DateTimeOffset?` | *(anémica)* | `0..*` a `1` con `Conversation` (navegación `Conversation`, FK enforced, cascade) |
+| `AiFeedbackRating` | Entity (implementa `IAuditableEntity`) | Representa la calificación (1-5) que un usuario da a una pieza de contenido generado por IA (insight de journal o sugerencia de hábito). | `Id: int`, `UserId: int`, `ContentId: int`, `ContentType: string` (`"journal"` / `"habit"`), `Rating: int`, `Comment: string?`, `CreatedAt/UpdatedAt: DateTimeOffset?` | *(anémica)* | Única por `(UserId, ContentId, ContentType)`; `ContentId` referencia lógicamente (sin FK) a `JournalEntry` o `Habit` según `ContentType` |
+| `AiMetricLog` | Entity | Registra telemetría operacional de cada llamada al proveedor de IA (latencia, éxito, longitudes de prompt/respuesta, error). **No está asociada a un usuario** — es un log de sistema, no de dominio de negocio. | `Id: int`, `Operation: string`, `LatencyMs: int`, `Success: bool`, `PromptLength: int`, `ResponseLength: int`, `ErrorMessage: string?`, `CreatedAt: DateTimeOffset` (default `UtcNow`, no nullable) | *(anémica)* | Escrita exclusivamente por `GeminiService` tras cada llamada a Gemini |
+
+#### 2.6.3.2. Interface Layer
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `ChatController` | REST Controller (`/chat`) | Expone la creación de conversaciones, envío de mensajes, listado y borrado. Valida longitud del contenido (máx. 5000 caracteres) antes de delegar. | `POST/GET /conversations`, `DELETE /conversations/{id}`, `POST /conversations/{id}/messages`, `GET /conversations/{id}/messages` | Depende de `IChatService` |
+| `AiFeedbackController` | REST Controller (`/api/v1/ai-feedback`) | Expone el registro de calificaciones sobre contenido de IA y su resumen agregado. | `POST /`, `GET /`, `GET /summary` | Depende de `IAiFeedbackService` |
+| `CreateConversationRequest`, `SendMessageRequest` | Request DTOs (records) | Cuerpo de las peticiones de creación de conversación y envío de mensaje. | `CreateConversationRequest(Content, Category?)`, `SendMessageRequest(Content)` | Consumidos directamente por `ChatController` |
+| `SubmitRatingRequest` | Request DTO (record) | Cuerpo de la petición para registrar una calificación. Definido directamente en el archivo del Controller. | `SubmitRatingRequest(ContentId, ContentType, Rating, Comment?)` | Consumido directamente por `AiFeedbackController` |
+
+#### 2.6.3.3. Application Layer
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `IChatService` | Application Service Interface | Contrato de los casos de uso de chat. | `CreateConversationAsync`, `GetUserConversationsAsync`, `DeleteConversationAsync`, `SendMessageAsync`, `GetConversationMessagesAsync` | Implementada por `ChatService` (Infrastructure); consumida por `ChatController` |
+| `IAiFeedbackService` | Application Service Interface | Contrato de los casos de uso de calificación de contenido de IA. | `SubmitRatingAsync(userId, contentId, contentType, rating, comment)`, `GetUserRatingsAsync(userId)`, `GetSummaryAsync(userId)` | Implementada por `AiFeedbackService` (Infrastructure); consumida por `AiFeedbackController` |
+| `IAiService` | Service Port | Abstrae el proveedor de IA generativa para los 5 casos de uso que lo consumen en todo el sistema. | `GenerateEmpathicResponseAsync`, `GenerateWeeklySummaryAsync`, `GenerateStressAdviceAsync`, `GenerateHabitSuggestionsAsync`, `GenerateChatResponseAsync` | Implementada por `GeminiService` (Infrastructure); consumida por `ChatService` (este BC) y por servicios de Analytics & Reporting y Habits & Wellness (otros BC) |
+| `ChatMessageDto`, `ConversationDto`, `ConversationDetailDto`, `SendMessageResponseDto` | Response DTOs | Representan la forma pública de mensajes y conversaciones en las respuestas de la API. | P. ej. `ConversationDetailDto{Id, Title, Category, CreatedAt, Messages}` | Construidos por `ChatService` a partir de las entidades de dominio |
+| `AiFeedbackSummaryDto` | Response DTO (record) | Representa el resumen agregado de calificaciones de un usuario. | `AiFeedbackSummaryDto(TotalRatings, AverageRating, Distribution)` | Construido por `AiFeedbackService` |
+
+#### 2.6.3.4. Infrastructure Layer
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `ChatService` | Application/Infrastructure Service | Implementa `IChatService`: crea la conversación y el primer mensaje, invoca `IAiService` para la respuesta del asistente (con fallback de texto fijo si falla), persiste todo vía `AppDbContext` + `IUnitOfWork`, y mantiene una ventana de las últimas 10 respuestas como historial de contexto para el modelo. | `CreateConversationAsync`, `GetUserConversationsAsync`, `DeleteConversationAsync`, `SendMessageAsync`, `GetConversationMessagesAsync` | Implementa `IChatService`; depende de `AppDbContext`, `IUnitOfWork`, `IAiService` |
+| `AiFeedbackService` | Application/Infrastructure Service | Implementa `IAiFeedbackService`: valida `ContentType` (`journal`/`habit`) y rango de `Rating` (1-5), verifica que el contenido referenciado exista consultando directamente `JournalEntries` o `Habit` **(dependencia cruzada hacia Journal y Habits & Wellness)**, y hace upsert de la calificación (única por usuario+contenido). | `SubmitRatingAsync`, `GetUserRatingsAsync`, `GetSummaryAsync` | Implementa `IAiFeedbackService`; depende de `AppDbContext`, `IUnitOfWork` |
+| `GeminiService` | Infrastructure Service | Implementa `IAiService` construyendo prompts específicos por caso de uso (respuesta empática, resumen semanal, consejo de estrés, sugerencias de hábitos, respuesta de chat) y llamando a la API REST de Google Gemini vía `IHttpClientFactory`. Registra un `AiMetricLog` por cada llamada (éxito/fallo, latencia, longitudes), incluso ante error o timeout. | `GenerateEmpathicResponseAsync`, `GenerateWeeklySummaryAsync`, `GenerateStressAdviceAsync`, `GenerateHabitSuggestionsAsync`, `GenerateChatResponseAsync` | Implementa `IAiService`; depende del servicio externo **Google Gemini API** y de `AppDbContext` (para `AiMetricLog`) |
+
+---
+
+#### 2.6.3.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![AI Assistant Component Diagram](assets/img/software_architecture/assistant_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context AI Assistant dentro del container Web Services API.*
+
+</div>
+
+El diagrama muestra `ChatController` y `AiFeedbackController` delegando directamente en sus respectivos Application Services (sin Mediator). `GeminiService` aparece como un componente central consumido no solo por `ChatService`, sino también desde Analytics & Reporting y Habits & Wellness, reflejando su rol de servicio transversal de IA. `AiFeedbackService` cruza el límite del bounded context para validar la existencia del contenido calificado en Journal y en Habits & Wellness.
+
+#### 2.6.3.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.3.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![AI Assistant Domain Layer Class Diagram](assets/img/software_architecture/assistant_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context AI Assistant.*
+
+</div>
+
+`Conversation` es el agregado raíz del módulo Chat, con una colección navegable de `ChatMessage` (FK enforced, cascade). `AiFeedbackRating` y `AiMetricLog` son entidades independientes, sin relaciones de asociación declaradas hacia el resto del modelo — sus referencias a contenido de otros bounded contexts (`ContentId`, y en `AiFeedbackRating` implícitamente `UserId`) son lógicas, no navegables.
+
+##### 2.6.3.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![AI Assistant Database Diagram](assets/img/software_architecture/assistant_database_diagram.png)
+*Figura: Database Diagram del bounded context AI Assistant.*
+
+</div>
+
+`chat_messages` tiene **Foreign Key física enforced** hacia `conversations.id` con `ON DELETE CASCADE`. `conversations`, `ai_feedback_ratings` y `ai_metric_logs` **no tienen ninguna Foreign Key declarada** hacia `users.id` (relación lógica vía columna `user_id`) — y `ai_metric_logs` ni siquiera tiene columna `user_id`, al ser un log de sistema. `ai_feedback_ratings` tiene un índice único compuesto `(user_id, content_id, content_type)` que garantiza una sola calificación por usuario y contenido.
+
+---
+
+### 2.6.4. Bounded Context: Habits & Wellness
+
+El bounded context **Habits & Wellness** agrupa el seguimiento de hábitos (módulo `habits`), la evaluación automática de estrés y ajuste de rutinas (módulo `WellnessEngine`) y el catálogo de contenido de bienestar — ejercicios de respiración y meditación (módulo `WellnessContent`). Ancla los eventos pivote *Habit created* y *Stress check completed* identificados en el EventStorming (sección 2.5.1.1), y es, junto con Journal, uno de los dos contexts core que entregan directamente la propuesta de valor de MindFlow.
+
+Es el bounded context más heterogéneo de los cuatro cubiertos en este informe: sus tres módulos usan **tres patrones de Application Layer distintos**, cada uno igual a uno ya visto en otro bounded context — `habits` usa Command/Query Services dedicados con repository interfaces propios (similar a IAM), `WellnessContent` usa Cortex.Mediator con Commands/Queries/Handlers (idéntico a Journal), y `WellnessEngine` no tiene modelo de dominio propio en absoluto: es un único Application Service (`WellnessService`) que orquesta el agregado `Habit` y lee `JournalEntry` (Journal) directamente. Se identificaron tres dependencias cruzadas reales: `HabitsController` e `IWellnessService` consumen `IAiService` (AI Assistant) para sugerencias de hábitos y consejos de estrés respectivamente, y ambos leen `JournalEntries` (Journal) directamente vía `AppDbContext` para estimar el nivel de estrés reciente del usuario.
+
+También destaca un patrón de **consistencia perezosa** (*lazy consistency*): `HabitQueryService` recalcula el streak y revierte el estado `Completed` a `Pending` si corresponde **en el momento de la consulta** (no mediante un job programado), comparando la fecha/semana/mes actual contra los `HabitCompletionLog` existentes.
+
+#### 2.6.4.1. Domain Layer
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `Habit` | Aggregate Root (implementa `IAuditableEntity`) | Representa un hábito que el usuario quiere construir, con su racha (streak), estado y si fue pausado automáticamente por IA. | `Id: int`, `UserId: int`, `Name: string`, `Category: string`, `Frequency: HabitFrequency`, `Streak: int`, `Status: HabitStatus`, `PausedByAi: bool`, `CreatedAt/UpdatedAt/DeletedAt` | `MarkCompleted()`, `MarkPending()`, `SetStreak(streak)`, `PauseByAi()`, `Resume()`, `UpdateDetails(...)`, `UpdateFull(...)`, `SoftDelete()` | Raíz del agregado: `1` a `0..*` con `HabitCompletionLog` (colección `CompletionLogs`, sin navegación inversa) |
+| `HabitCompletionLog` | Entity | Representa el registro de que un hábito fue completado en una fecha específica. Duplica `HabitName`/`Category` del hábito al momento del registro (denormalización histórica). | `Id: int`, `HabitId: int`, `HabitName: string`, `Category: string`, `Date: DateTime`, `Completed: bool`, `CompletedAt: DateTime?`, `CreatedAt: DateTimeOffset` | `UpdateDetails(habitName, category, completed, completedAt)` | `0..*` a `1` con `Habit` (FK enforced, cascade, **sin propiedad de navegación** — solo `HabitId`) |
+| `CachedHabitSuggestion` | Entity (anémica) | Cachea en base de datos (no en memoria) las últimas sugerencias de hábitos generadas por IA para un usuario, válidas por 24 horas. | `Id: int`, `UserId: int`, `SuggestionsJson: string`, `GeneratedAt: DateTimeOffset` | *(anémica)* | Única por `UserId` |
+| `HabitFrequency` | Value Object (enum) | Frecuencia esperada del hábito. | — | `Daily`, `Weekly`, `Monthly` | Usado por `Habit` y por el cálculo de streak |
+| `HabitStatus` | Value Object (enum) | Estado actual del hábito. | — | `Pending`, `Completed`, `PausedByAi` | Usado por `Habit` |
+| `HabitsError` | Domain Error Enum | Códigos de error de dominio para `habits` y `habit-logs`. | — | `HabitNotFound`, `HabitCreationFailed`, `HabitUpdateFailed`, `HabitDeletionFailed`, `HabitLogNotFound`, `HabitLogCreationFailed`, `HabitLogUpdateFailed`, `HabitLogDeletionFailed`, `InvalidHabitFrequency`, `InvalidHabitStatus`, `InvalidHabitCategory`, `UserIdMismatch` | Usado por los Command Services y mapeado a status HTTP por `HabitsActionResultAssembler` |
+| `IHabitRepository` | Repository Interface (extiende `IBaseRepository<Habit>`) | Abstrae el acceso a datos de `Habit`. | — | `FindByUserIdAsync(userId)`, `FindByIdAndUserIdAsync(id, userId)` + heredados | Implementada por `HabitRepository` (Infrastructure) |
+| `IHabitCompletionLogRepository` | Repository Interface (extiende `IBaseRepository<HabitCompletionLog>`) | Abstrae el acceso a datos de `HabitCompletionLog`. | — | `FindByHabitIdAsync(habitId)`, `FindByUserIdAsync(userId)` + heredados | Implementada por `HabitCompletionLogRepository` (Infrastructure) |
+| `WellnessExercise` | Entity (implementa `IAuditableEntity`) | Representa un ejercicio de bienestar (respiración o meditación) editable sin necesidad de release del cliente. Campos de respiración (`InhaleSeconds`, `HoldSeconds`, etc.) y de meditación (`AudioUrl`) son mutuamente excluyentes según `Type`. | `Id: int`, `Type: string` (`"breathing"`/`"meditation"`), `Name/Description: string`, `DurationSeconds: int`, `InhaleSeconds/HoldSeconds/ExhaleSeconds/HoldAfterExhaleSeconds/Cycles: int?`, `AudioUrl: string?`, `IsActive: bool`, `SortOrder: int`, `CreatedAt/UpdatedAt` | *(anémica)* | Sin relaciones hacia otras entidades |
+| `WellnessContentError` | Domain Error Enum | Códigos de error para el catálogo de ejercicios. | — | `ExerciseNotFound`, `InvalidType` | Usado por los Handlers de `WellnessContent` |
+
+**Nota:** `WellnessEngine` no define entidades ni Value Objects propios — opera exclusivamente sobre `Habit` (mismo bounded context) y `JournalEntry` (Journal, dependencia cruzada).
+
+#### 2.6.4.2. Interface Layer
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `HabitsController` | REST Controller (`/habits`) | CRUD de hábitos, resumen de rachas y sugerencias de IA (con caché en BD de 24h y fallback local si Gemini falla). | `GET/POST /`, `GET/PUT/DELETE /{id}`, `GET /streak-summary`, `POST /suggestions` | Depende de `IHabitCommandService`, `IHabitQueryService`, `IAiService` (AI Assistant), `AppDbContext`, `ICacheService` |
+| `HabitLogsController` | REST Controller (`/habit-logs`) | CRUD de registros de cumplimiento de hábitos, validando ownership del hábito padre en cada operación. | `GET/POST /`, `GET/PUT/DELETE /{id}` | Depende de `IHabitLogCommandService`, `IHabitLogQueryService`, `IHabitRepository`, `ICacheService` |
+| `WellnessController` | REST Controller (`/wellness`) | Expone el chequeo de estrés semanal. | `POST /stress-check` | Depende de `IWellnessService` |
+| `WellnessExercisesController` | REST Controller (`/wellness/exercises`) | Catálogo público de ejercicios activos, y CRUD restringido a administradores (`Authorize(Roles = User.AdminRole)`, **referencia cruzada a IAM**). | `GET /`, `GET /all` (admin), `GET/POST/PUT/DELETE /{id}` (admin) | Depende de `IMediator` |
+| `CreateHabitResource`, `UpdateHabitResource`, `HabitResource`, `CreateHabitLogResource`, `UpdateHabitLogResource`, `HabitLogResource` | Request/Response DTOs (records, JSON `snake_case`) | Contrato HTTP de hábitos y logs, desacoplado de los Commands. | P. ej. `HabitResource(Id, UserId, Name, Category, Frequency, Streak, Status, PausedByAi, ...)` | Transformados por los Assemblers |
+| `CreateHabitCommandFromResourceAssembler`, `UpdateHabitCommandFromResourceAssembler`, `HabitResourceFromEntityAssembler`, `CreateHabitLogCommandFromResourceAssembler`, `UpdateHabitLogCommandFromResourceAssembler`, `HabitLogResourceFromEntityAssembler` | Assemblers (static) | Traducen Resource ↔ Command ↔ Entity, incluyendo el parseo de `Frequency`/`Status` desde string. | `ToCommandFromResource(...)`, `ToResourceFromEntity(...)` | Traducen Interface Layer ↔ Application/Domain Layer |
+| `HabitsActionResultAssembler` | Assembler (static, genérico) | Traduce un `Result<T>`/`Result` en un `IActionResult`, mapeando el nombre del error de dominio a status HTTP (`"NotFound"` → 404, `"Mismatch"` → 403, resto → 400) vía `ProblemDetailsFactory`. | `ToActionResultFromCreateResult`, `ToActionResultFromDeleteResult`, `ToActionResultFromGetResult`, `ToActionResultFromGetAllResult` | Usado por `HabitsController` y `HabitLogsController` |
+
+#### 2.6.4.3. Application Layer
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `CreateHabitCommand`, `UpdateHabitCommand`, `DeleteHabitCommand`, `CreateHabitLogCommand`, `UpdateHabitLogCommand`, `DeleteHabitLogCommand` | Commands (records) | Encapsulan la intención de cada caso de uso de escritura. | P. ej. `CreateHabitCommand(UserId, Name, Category, Frequency)` | Producidos por los Assemblers; consumidos por los Command Services |
+| `GetHabitByIdQuery`, `GetAllHabitsByUserIdQuery`, `GetHabitLogByIdQuery`, `GetAllHabitLogsQuery` | Queries (records) | Encapsulan cada caso de uso de lectura. | P. ej. `GetAllHabitsByUserIdQuery(UserId)` | Consumidos por los Query Services |
+| `IHabitCommandService` / `HabitCommandService` | Application Service | Contrato e implementación de creación/actualización/borrado de hábitos, validando ownership (`UserIdMismatch`). | Un `Handle` por Command | Depende de `IHabitRepository`, `IUnitOfWork` |
+| `IHabitLogCommandService` / `HabitLogCommandService` | Application Service | Contrato e implementación de creación/actualización/borrado de logs. Tras cada cambio, **recalcula y persiste el streak** del hábito padre con un algoritmo específico por frecuencia (Daily/Weekly/Monthly, comparando contra "hoy" o "ayer"/semana o mes previos). | Un `Handle` por Command; `{static} ComputeStreak(dates, frequency)`, `ComputeDailyStreak`, `ComputeWeeklyStreak`, `ComputeMonthlyStreak` | Depende de `IHabitCompletionLogRepository`, `IHabitRepository`, `IUnitOfWork`; `ComputeStreak` es reutilizado por `HabitQueryService` |
+| `IHabitQueryService` / `HabitQueryService` | Application Service | Contrato e implementación de lectura de hábitos. Recalcula el streak y **revierte `Completed` a `Pending`** en el momento de la consulta si no hay un log para el período vigente (día/semana/mes actual) — consistencia perezosa, sin job programado. | `Handle(GetHabitByIdQuery)`, `Handle(GetAllHabitsByUserIdQuery)` | Depende de `IHabitRepository`, `IHabitCompletionLogRepository`; reutiliza `HabitLogCommandService.ComputeStreak` |
+| `IHabitLogQueryService` / `HabitLogQueryService` | Application Service | Contrato e implementación de lectura de logs, con filtro opcional por hábito o por usuario. | `Handle(GetHabitLogByIdQuery)`, `Handle(GetAllHabitLogsQuery)` | Depende de `IHabitCompletionLogRepository` |
+| `IWellnessService` / `WellnessService` | Application Service | Contrato e implementación del chequeo de estrés: lee las últimas 10 entradas de journal de los últimos 7 días, calcula un score 0-100 según sentimiento, pausa (`PauseByAi`) todos los hábitos si el estrés es alto o los reanuda (`Resume`) si es bajo, y pide un consejo empático a `IAiService`. | `RunStressCheckAsync(userId)` | Depende de `AppDbContext` **(lee `JournalEntries` — dependencia cruzada hacia Journal)**, `IHabitRepository`, `IUnitOfWork`, `IAiService` (AI Assistant) |
+| `StressCheckResultDto`, `HabitAdjustmentDto` | Response DTOs | Representan el resultado del chequeo de estrés y cada hábito pausado/reanudado. | `StressCheckResultDto{StressLevel, Score, AnalyzedEntries, PausedHabits, ResumedHabits, Advice}` | Construidos por `WellnessService` |
+| `CreateWellnessExerciseCommand`, `UpdateWellnessExerciseCommand`, `DeleteWellnessExerciseCommand` | Commands | Encapsulan la intención de cada caso de uso de escritura del catálogo de ejercicios (solo administradores). | P. ej. `CreateWellnessExerciseCommand{Type, Name, Description, DurationSeconds, ...}` | Despachadas por `WellnessExercisesController` vía `IMediator.SendAsync` |
+| `GetActiveWellnessExercisesQuery`, `GetAllWellnessExercisesQuery`, `GetWellnessExerciseByIdQuery` | Queries | Encapsulan cada caso de uso de lectura (catálogo público activo vs. catálogo completo para administración). | P. ej. `GetActiveWellnessExercisesQuery{Type?}` | Despachadas vía `IMediator.QueryAsync` |
+| `CreateWellnessExerciseHandler`, `UpdateWellnessExerciseHandler`, `DeleteWellnessExerciseHandler`, `GetActiveWellnessExercisesHandler`, `GetAllWellnessExercisesHandler`, `GetWellnessExerciseByIdHandler` | Command/Query Handlers (Cortex.Mediator) | Implementan las reglas de negocio del catálogo de ejercicios, incluyendo la validación de `Type` (`"breathing"`/`"meditation"`), directo sobre `AppDbContext` (mismo patrón que Journal). | Un método `Handle` por Command/Query | Dependen de `AppDbContext` directamente |
+| `WellnessExerciseDto` | Response DTO | Representa la forma pública de un `WellnessExercise`. | `WellnessExerciseDto{Id, Type, Name, Description, DurationSeconds, ...}` | Construido por los Handlers |
+
+#### 2.6.4.4. Infrastructure Layer
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `HabitRepository` | Repository (EF Core) | Implementa `IHabitRepository` sobre `AppDbContext`, extendiendo `BaseRepository<Habit>`. | `FindByUserIdAsync(userId)`, `FindByIdAndUserIdAsync(id, userId)` | Implementa `IHabitRepository`; hereda de `BaseRepository<Habit>` |
+| `HabitCompletionLogRepository` | Repository (EF Core) | Implementa `IHabitCompletionLogRepository` sobre `AppDbContext`, extendiendo `BaseRepository<HabitCompletionLog>`. `FindByUserIdAsync` resuelve primero los `HabitId` del usuario y luego filtra los logs por esos IDs (no hay FK directa `UserId` en la tabla de logs). | `FindByHabitIdAsync(habitId)`, `FindByUserIdAsync(userId)` | Implementa `IHabitCompletionLogRepository`; hereda de `BaseRepository<HabitCompletionLog>` |
+
+**Nota:** `WellnessEngine` y `WellnessContent` no tienen clases de Infrastructure propias — `WellnessService` y los Handlers de `WellnessContent` acceden a `AppDbContext` directamente desde el Application Layer, sin una capa de Repository intermedia.
+
+---
+
+#### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Habits & Wellness Component Diagram](assets/img/software_architecture/wellness_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Habits & Wellness dentro del container Web Services API.*
+
+</div>
+
+El diagrama muestra los tres módulos como grupos de componentes diferenciados: `HabitsController`/`HabitLogsController` delegando en sus Command/Query Services (con `IHabitRepository`/`IHabitCompletionLogRepository` de por medio), `WellnessController` delegando en `WellnessService` (que cruza hacia Journal y hacia `GeminiService`), y `WellnessExercisesController` delegando en sus Handlers vía Mediator. Se muestran explícitamente las tres dependencias cruzadas: hacia AI Assistant (sugerencias y consejos) y hacia Journal (lectura de entradas para estimar estrés).
+
+#### 2.6.4.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.4.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Habits & Wellness Domain Layer Class Diagram](assets/img/software_architecture/wellness_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Habits & Wellness.*
+
+</div>
+
+`Habit` es el agregado raíz con una colección de `HabitCompletionLog` sin navegación inversa (la FK existe en base de datos, pero el modelo de objetos solo navega en un sentido). `CachedHabitSuggestion` y `WellnessExercise` son entidades independientes sin relaciones declaradas. `IHabitRepository` e `IHabitCompletionLogRepository` extienden el repositorio genérico del Shared Kernel.
+
+##### 2.6.4.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Habits & Wellness Database Diagram](assets/img/software_architecture/wellness_database_diagram.png)
+*Figura: Database Diagram del bounded context Habits & Wellness.*
+
+</div>
+
+`habit_completion_logs` tiene **Foreign Key física enforced** hacia `habits.id` con `ON DELETE CASCADE`. `habits` y `cached_habit_suggestions` **no tienen Foreign Key declarada** hacia `users.id` (relación lógica). `cached_habit_suggestions` tiene índice único por `user_id` (una sola caché vigente por usuario). `wellness_exercises` no tiene relación con ninguna otra tabla de este bounded context — es un catálogo independiente.
+
+---
+
 <!--
 # Capítulo III: Solution UI/UX Design
 

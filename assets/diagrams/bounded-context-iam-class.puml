@@ -57,7 +57,7 @@ interface IUserRepository {
 
 User .up.|> IAuditableEntity
 IUserRepository -up-|> IBaseRepository
-IUserRepository ..> User : manages >
-PasswordResetToken "0..*" --> "1" User : references\n(logical FK, no DB constraint) >
+IUserRepository ..> User
+PasswordResetToken "0..*" --> "1" User
 
 @enduml

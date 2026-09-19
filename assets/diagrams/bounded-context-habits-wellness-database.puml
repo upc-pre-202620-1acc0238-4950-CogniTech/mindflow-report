@@ -1,0 +1,62 @@
+@startuml HabitsWellness_DatabaseDiagram
+hide circle
+hide empty members
+skinparam linetype ortho
+
+entity "habits" as habits {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only>>
+  name : varchar(200)
+  category : varchar(100)
+  frequency : varchar(20)
+  streak : int = 0
+  status : varchar(20)
+  paused_by_ai : boolean = false
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+  deleted_at : datetime, nullable
+}
+
+entity "habit_completion_logs" as habit_completion_logs {
+  *id : int <<PK>>
+  --
+  habit_id : int <<FK, enforced, cascade>>
+  habit_name : varchar(200)
+  category : varchar(100)
+  date : datetime(6)
+  completed : boolean = true
+  completed_at : datetime(6), nullable
+  created_at : datetime
+}
+
+entity "cached_habit_suggestions" as cached_habit_suggestions {
+  *id : int <<PK>>
+  --
+  user_id : int <<FK, logical only, unique>>
+  suggestions_json : text
+  generated_at : datetime
+}
+
+entity "wellness_exercises" as wellness_exercises {
+  *id : int <<PK>>
+  --
+  type : varchar(20)
+  name : varchar(200)
+  description : varchar(1000)
+  duration_seconds : int
+  inhale_seconds : int, nullable
+  hold_seconds : int, nullable
+  exhale_seconds : int, nullable
+  hold_after_exhale_seconds : int, nullable
+  cycles : int, nullable
+  audio_url : varchar(500), nullable
+  is_active : boolean
+  sort_order : int
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+}
+
+habits ||--o{ habit_completion_logs
+
+@enduml

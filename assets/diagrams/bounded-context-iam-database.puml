@@ -26,6 +26,6 @@ entity "password_reset_tokens" as password_reset_tokens {
   used : boolean
 }
 
-users ||..o{ password_reset_tokens : "user_id\n(no DB constraint declared)"
+users ||..o{ password_reset_tokens
 
 @enduml
