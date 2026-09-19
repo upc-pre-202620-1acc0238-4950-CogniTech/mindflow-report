@@ -1567,6 +1567,95 @@ Las tablas `entry_tags`, `media` y `journal_search_tokens` tienen **Foreign Key 
 
 ---
 
+### 2.6.5. Bounded Context: Analytics & Reporting
+
+El bounded context **Analytics & Reporting** transforma el registro emocional del usuario en información accionable: un puntaje semanal de bienestar con su tendencia, un calendario de estados de ánimo, una nube de palabras frecuentes, y —para los usuarios con suscripción Premium— la exportación de un reporte personal en PDF o CSV. El equipo decidió agrupar ambas capacidades (analítica interna y exportación de reportes) en un mismo bounded context porque comparten la misma fuente de datos (las entradas del diario del usuario) y el mismo propósito de negocio: convertir datos crudos en una narrativa comprensible para el usuario.
+
+A diferencia de IAM, Analytics **no define un repository interface propio**: tanto los Command/Query Handlers de `AnalyticsCache` y `WordCloud` como el servicio de cómputo pesado acceden directamente a `AppDbContext`, siguiendo el mismo patrón CQRS explícito adoptado en Journal (sin una capa de repositorios intermedia). El único puerto de dominio propio del sub-modelo Analytics es `IAnalyticsCacheInvalidator`, pensado exclusivamente para ser invocado **desde otro bounded context** (Journal) cuando el diario de un usuario cambia; el sub-modelo Reporting, por su parte, no persiste ningún agregado propio —un reporte es un documento generado al vuelo a partir de las entradas del diario, no un dato nuevo que el sistema deba retener— y expone su propio puerto, `IReportingService`.
+
+#### 2.6.5.1. Domain Layer
+
+El Domain Layer concentra los agregados `AnalyticsCache` y `WordCloud`, la enumeración `AnalyticsError`, y los dos puertos de dominio del bounded context: `IAnalyticsCacheInvalidator` (consumido por Journal) e `IReportingService` (consumido por el propio Interface Layer de Reporting).
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `AnalyticsCache` | Aggregate Root (implementa `IAuditableEntity`) | Representa el resultado precomputado del análisis semanal de bienestar de un usuario. Se decidió modelarlo como un caché reemplazable en lugar de un historial inmutable: si el usuario agrega una entrada de diario a mitad de semana, el registro se recalcula por completo en vez de ajustarse incrementalmente. | `Id: int`, `UserId: int`, `WeekStart: DateOnly`, `Score: int`, `TrendPercentage: string`, `StartDate: DateOnly?`, `EndDate: DateOnly?`, `AiInsight: string?`, `AiInsightLocalized: string?`, `Kpis: string?` (JSON), `FluctuationData: string?` (JSON), `TrendData: string?` (JSON), `CreatedAt/UpdatedAt: DateTimeOffset?` | *(entidad anémica — el cómputo vive en `AnalyticsComputationService`)* | Único por `(UserId, WeekStart)`; `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física) |
+| `WordCloud` | Aggregate Root (implementa `IAuditableEntity`) | Representa la nube de palabras más frecuentes extraídas de las entradas de diario recientes de un usuario, con un único registro por usuario. | `Id: int`, `UserId: int`, `Words: string?` (JSON), `CreatedAt/UpdatedAt: DateTimeOffset?` | *(anémica)* | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física) |
+| `AnalyticsError` | Domain Error Enum | Códigos de error de dominio para resultados fallidos del sub-modelo Analytics. | — | `AnalyticsCacheNotFound`, `AnalyticsCacheCreationFailed`, `AnalyticsCacheUpdateFailed`, `WordCloudNotFound`, `WordCloudCreationFailed` | Usado por los Handlers al construir `Result.Failure(...)` |
+| `IAnalyticsCacheInvalidator` | Service Port | Único puerto de dominio expuesto hacia otros bounded contexts: permite que Journal notifique que el análisis de un usuario quedó desactualizado, sin conocer cómo Analytics calcula ni almacena sus datos internamente. | — | `InvalidateAsync(userId: int, entryDate: DateOnly, ct: CancellationToken): Task` | Implementada por `AnalyticsCacheInvalidator` (Infrastructure Layer); consumida por los Command Handlers de Journal |
+| `IReportingService` | Service Port | Abstrae la generación del reporte personal del usuario, dejando oculta la biblioteca de generación de documentos detrás de la interfaz. | — | `GeneratePdfAsync(userId: int): Task<byte[]>`, `GenerateCsvAsync(userId: int): Task<byte[]>` | Implementada por `ReportingService` (Infrastructure Layer); consumida por `ReportingController` |
+
+#### 2.6.5.2. Interface Layer
+
+El Interface Layer expone Analytics y Reporting como dos controladores REST independientes; ninguno de los dos usa una capa de Resources/Assemblers, siguiendo el mismo criterio adoptado en Journal: los DTOs del Application Layer se consumen directamente como contrato de entrada/salida.
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `AnalyticsController` | REST Controller (`""`, rutas de nivel raíz) | Expone las operaciones de consulta y cómputo del caché analítico semanal, la nube de palabras y el calendario de estados de ánimo. Resuelve el `user_id` del JWT y, si no existe caché para la semana solicitada, dispara su cómputo bajo demanda. | `GET/POST/PUT /analyticsCache`, `POST /analyticsCache/compute`, `GET/POST /wordCloud`, `POST /wordCloud/compute`, `GET /moodCalendar` | Depende de `IMediator` (Cortex.Mediator) para las operaciones simples, de `AnalyticsComputationService` para el cómputo pesado bajo demanda, y de `ICacheService` (Redis) para el calendario de estados de ánimo |
+| `ReportingController` | REST Controller (`api/v1/reporting`) | Expone la exportación del reporte personal del usuario, restringida a suscriptores Premium. | `GET /export/pdf`, `GET /export/csv` | Depende de `IReportingService` para generar el documento y de `AppDbContext` (acceso puntual) para verificar la suscripción activa del usuario |
+
+#### 2.6.5.3. Application Layer
+
+El Application Layer combina dos estilos: manejadores CQRS livianos (vía Cortex.Mediator) para las operaciones simples de lectura/escritura sobre `AnalyticsCache` y `WordCloud`, y un servicio de aplicación dedicado (`AnalyticsComputationService`) para el cómputo pesado, deliberadamente separado de los Handlers para no mezclar una operación costosa con el flujo estándar de consulta.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `CreateAnalyticsCacheCommand`, `UpdateAnalyticsCacheCommand`, `CreateWordCloudCommand` | Commands | Encapsulan la intención de cada caso de uso de escritura simple sobre `AnalyticsCache`/`WordCloud`. | P. ej. `CreateAnalyticsCacheCommand{UserId, WeekStart, Score, ...}` | Despachadas por `AnalyticsController` vía `IMediator.SendAsync` |
+| `GetAnalyticsCacheQuery`, `GetWordCloudQuery` | Queries | Encapsulan cada caso de uso de lectura sobre `AnalyticsCache`/`WordCloud`. | `GetAnalyticsCacheQuery{UserId, WeekStart?}`, `GetWordCloudQuery{UserId}` | Despachadas por `AnalyticsController` vía `IMediator.QueryAsync` |
+| `CreateAnalyticsCacheCommandHandler`, `UpdateAnalyticsCacheCommandHandler`, `CreateWordCloudCommandHandler` | Command Handlers (`ICommandHandler<TCommand, Result<T>>`) | Implementan la creación/actualización directa de `AnalyticsCache`/`WordCloud` contra `AppDbContext`. | Un método `Handle` por Command | Dependen de `AppDbContext` directamente (sin `IBaseRepository`) |
+| `GetAnalyticsCacheQueryHandler`, `GetWordCloudQueryHandler` | Query Handlers (`IQueryHandler<TQuery, Result<T>>`) | Implementan la lectura de `AnalyticsCache`/`WordCloud`, mapeando la entidad a su DTO correspondiente. | Un método `Handle` por Query | Dependen de `AppDbContext` directamente |
+| `AnalyticsComputationService` | Application Service | Orquesta el cómputo pesado: puntaje semanal y tendencia respecto a la semana anterior, calendario de estados de ánimo, extracción de nube de palabras, y el insight narrativo (con reserva local en español si el proveedor de IA no responde). | `ComputeAndSaveWeeklyAsync(userId, weekStart): Task<AnalyticsCache>`, `ComputeMoodCalendarAsync(userId, year, month): Task<List<object>>`, `ComputeAndSaveWordCloudAsync(userId): Task<WordCloud>` | Depende de `AppDbContext` (lee `JournalEntries`, escribe `AnalyticsCache`/`WordCloud`) y de `IAiService` (bounded context AI Assistant) para el insight narrativo |
+| `AnalyticsCacheDto`, `KpiItemDto`, `ChartDataDto`, `WordCloudDto` | Response DTOs | Representan la forma pública de cada agregado, ya lista para que el cliente renderice sus gráficos sin transformar el JSON almacenado. | P. ej. `AnalyticsCacheDto{Id, UserId, WeekStart, Score, TrendPercentage, AiInsightLocalized, Kpis, FluctuationData, TrendData}` | Construidos por los Query Handlers y por `AnalyticsController` a partir de las entidades de dominio |
+
+#### 2.6.5.4. Infrastructure Layer
+
+El Infrastructure Layer contiene las implementaciones concretas de los dos puertos definidos en el Domain Layer, además de la tarea programada que mantiene el análisis de todos los usuarios actualizado sin que tengan que esperar el cómputo bajo demanda.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `AnalyticsCacheInvalidator` | Infrastructure Service | Implementa `IAnalyticsCacheInvalidator`: elimina el caché semanal y la nube de palabras vigentes de un usuario, y limpia también su entrada de caché de corta duración del calendario de estados de ánimo. | `InvalidateAsync(userId, entryDate, ct): Task` | Implementa `IAnalyticsCacheInvalidator`; depende de `AppDbContext` y de `ICacheService` (Redis) |
+| `ReportingService` | Infrastructure Service | Implementa `IReportingService`: construye el documento PDF con la identidad visual de MindFlow (biblioteca de maquetado de documentos) y el archivo CSV tabular (biblioteca de escritura tabular estándar), ambos a partir de las entradas de diario del usuario. | `GeneratePdfAsync(userId): Task<byte[]>`, `GenerateCsvAsync(userId): Task<byte[]>` | Implementa `IReportingService`; depende de `AppDbContext` |
+| `WeeklySummaryScheduler` | Background Service (`BackgroundService`) | Job en segundo plano que, una vez por semana, recalcula automáticamente el caché analítico y la nube de palabras de todos los usuarios registrados, para que la información esté lista antes de que el usuario la consulte. | `ExecuteAsync(stoppingToken): Task` (override) | Depende de `AnalyticsComputationService` y `AppDbContext`, resueltos vía `IServiceScopeFactory` |
+| Caché de corta duración (Redis) | Infrastructure Concern | Se decidió cachear el resultado del calendario de estados de ánimo por un tiempo de vida corto (15 minutos), al ser una vista que se recalcula sobre un rango de fechas y no necesita reflejar cambios al instante. | `ICacheService.GetAsync<T>(key)`, `SetAsync<T>(key, value, ttl)` | Consumida por `AnalyticsController`; invalidada puntualmente por `AnalyticsCacheInvalidator` |
+
+---
+
+#### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Analytics & Reporting Component Diagram](assets/img/software_architecture/analytics_reporting_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Analytics & Reporting dentro del container Web Services API.*
+
+</div>
+
+El diagrama muestra los dos sub-modelos del bounded context: `AnalyticsController` despacha las operaciones simples hacia los **Analytics/WordCloud Command & Query Handlers** (vía mediador) y delega el cómputo pesado en `AnalyticsComputationService`, que a su vez solicita el insight narrativo al **AI Advisory Service** externo. `AnalyticsCacheInvalidator` aparece como el único componente invocado desde fuera del bounded context (por Journal), cruzando el límite entre contexts a través de un puerto explícito. `ReportingController` delega en `ReportingService`, que lee directamente las entradas de diario para construir el PDF o el CSV, tras validar la suscripción Premium del usuario.
+
+#### 2.6.5.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Analytics & Reporting Domain Layer Class Diagram](assets/img/software_architecture/analytics_reporting_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Analytics & Reporting.*
+
+</div>
+
+El diagrama muestra los agregados `AnalyticsCache` y `WordCloud` (ambos implementan `IAuditableEntity`), la enumeración `AnalyticsError`, el puerto `IAnalyticsCacheInvalidator` y el puerto `IReportingService`, junto con los Command/Query Handlers de Analytics y el servicio `AnalyticsComputationService` que los complementa.
+
+##### 2.6.5.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Analytics & Reporting Database Diagram](assets/img/software_architecture/analytics_reporting_database_diagram.png)
+*Figura: Database Diagram del bounded context Analytics & Reporting.*
+
+</div>
+
+El bounded context Analytics & Reporting persiste en dos tablas propias: `analytics_caches` (con un registro único por `(user_id, week_start)`) y `word_clouds` (un único registro por usuario). Ninguna de las dos tiene Foreign Key física hacia `users`, `journal_entries` ni `subscriptions`: `user_id` es siempre una referencia lógica al bounded context IAM, y tanto el cómputo de Analytics como la exportación de Reporting leen `journal_entries` (y, en el caso de Reporting, `subscriptions`) directamente, sin relación física declarada en el esquema.
+
+
 <!--
 # Capítulo III: Solution UI/UX Design
 
