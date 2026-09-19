@@ -65,6 +65,30 @@ Proyecto
     <th>Autor</th>
     <th>Descripción de modificación</th>
   </tr>
+
+  <tr>
+    <td><b>Primera Entrega (AV1)</b></td>
+    <td>18/09/2026</td>
+    <td>
+      Cabrera Sotelo, Camila Celeste <br>
+      <br>
+      <p></p>
+      Dias de la Cruz, Sebastian Gabriel <br>
+      <br>
+      <p></p>
+      Güere Calero, Fernando Julio <br>
+      <br>
+      <p></p>
+      Jáuregui Cerna, Jean Franco <br>
+      <br>
+      <p></p>
+      Limache Coronel, Imanol Fabrizio <br>
+    </td>
+    <td>
+      Capítulo I: Presentación (Startup Profile, Lean UX Process) <br>
+      Capítulo II: Requirements Development and Software Solution Design (Needfinding - Big Picture EventStorming; Strategic-Level DDD - EventStorming, Candidate Context Discovery)
+    </td>
+  </tr>
   <!-- 
   <tr>
     <td><b>Primera Entrega (TB1)</b></td>
@@ -97,6 +121,30 @@ Proyecto
 ---
 
 # Project Report Collaboration Insights
+
+El informe del proyecto fue desarrollado de manera colaborativa por el equipo mediante el repositorio de GitHub creado para la gestión del Project Report de MindFlow. Este repositorio contiene los archivos del informe, los diagramas, las evidencias y el historial de versiones correspondiente a cada entrega.
+
+URL de la organización de GitHub: https://github.com/upc-pre-202620-1acc0238-4950-CogniTech
+
+**Primera Entrega (AV1)**
+
+Durante la primera entrega del proyecto MindFlow, el equipo trabajó de manera colaborativa en la elaboración del Project Report, organizando las actividades y responsabilidades de forma grupal para cubrir las diferentes secciones del informe correspondientes a esta etapa.
+
+El desarrollo del trabajo incluyó actividades de investigación y documentación del dominio del negocio: la descripción de la Startup y el desarrollo del Lean UX Process (Problem Statements y Assumptions) para el Capítulo I, así como el modelado del negocio mediante Big Picture EventStorming y el inicio del Strategic-Level Domain-Driven Design (sesión de EventStorming y Candidate Context Discovery) para el Capítulo II, permitiendo al equipo consolidar una primera visión compartida de los Bounded Contexts candidatos de la solución.
+
+Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como plataforma principal de colaboración y control de versiones, siguiendo el flujo de trabajo GitFlow (ramas `feature/*` sobre `develop`, integradas mediante Pull Requests). Mediante ramas de trabajo, commits y Pull Requests, fue posible registrar los avances realizados en el informe y mantener evidencia continua de la participación grupal durante esta primera entrega.
+
+<div align="center">
+
+<img src="assets/img/Insights/Organization_av1.png" width="500"/>
+
+*Figura: Creación y organización del repositorio del Project Report en GitHub.*
+
+<img src="assets/img/Insights/Ingishts_av1.png" width="500"/>
+
+*Figura: Historial de commits del equipo durante la primera entrega (AV1).*
+
+</div>
 
 ---
 
@@ -152,14 +200,62 @@ Proyecto
       - [2.5.3.2. Software Architecture Container Level Diagrams](#2532-software-architecture-container-level-diagrams)
       - [2.5.3.3. Software Architecture Deployment Diagrams](#2533-software-architecture-deployment-diagrams)
   - [2.6. Tactical-Level Domain-Driven Design](#26-tactical-level-domain-driven-design)
-      - [2.6.1.](#261-bounded-context-iam)
-      - [2.6.2.](#262-bounded-context-journal)
-      - [2.6.3.](#263)
-      - [2.6.4.](#264)
-      - [2.6.5.](#265-bounded-context-analytics--reporting)
-      - [2.6.6.](#266-bounded-context-notifications)
-      - [2.6.7.](#267-bounded-context-subscriptions)
-      - [2.6.8.](#268-bounded-context-support)
+    - [2.6.1. Bounded Context: IAM](#261-bounded-context-iam)
+      - [2.6.1.1. Domain Layer](#2611-domain-layer)
+      - [2.6.1.2. Interface Layer](#2612-interface-layer)
+      - [2.6.1.3. Application Layer](#2613-application-layer)
+      - [2.6.1.4. Infrastructure Layer](#2614-infrastructure-layer)
+      - [2.6.1.5. Bounded Context Software Architecture Component Level Diagrams](#2615-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.1.6. Bounded Context Software Architecture Code Level Diagrams](#2616-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.1.6.1. Bounded Context Domain Layer Class Diagrams](#26161-bounded-context-domain-layer-class-diagrams)
+        - [2.6.1.6.2. Bounded Context Database Design Diagram](#26162-bounded-context-database-design-diagram)
+    - [2.6.2. Bounded Context: Journal](#262-bounded-context-journal)
+      - [2.6.2.1. Domain Layer](#2621-domain-layer)
+      - [2.6.2.2. Interface Layer](#2622-interface-layer)
+      - [2.6.2.3. Application Layer](#2623-application-layer)
+      - [2.6.2.4. Infrastructure Layer](#2624-infrastructure-layer)
+      - [2.6.2.5. Bounded Context Software Architecture Component Level Diagrams](#2625-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.2.6. Bounded Context Software Architecture Code Level Diagrams](#2626-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.2.6.1. Bounded Context Domain Layer Class Diagrams](#26261-bounded-context-domain-layer-class-diagrams)
+        - [2.6.2.6.2. Bounded Context Database Design Diagram](#26262-bounded-context-database-design-diagram)
+    - [2.6.3.](#263)
+    - [2.6.4.](#264)
+    - [2.6.5. Bounded Context: Analytics & Reporting](#265-bounded-context-analytics--reporting)
+      - [2.6.5.1. Domain Layer](#2651-domain-layer)
+      - [2.6.5.2. Interface Layer](#2652-interface-layer)
+      - [2.6.5.3. Application Layer](#2653-application-layer)
+      - [2.6.5.4. Infrastructure Layer](#2654-infrastructure-layer)
+      - [2.6.5.5. Bounded Context Software Architecture Component Level Diagrams](#2655-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.5.6. Bounded Context Software Architecture Code Level Diagrams](#2656-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.5.6.1. Bounded Context Domain Layer Class Diagrams](#26561-bounded-context-domain-layer-class-diagrams)
+        - [2.6.5.6.2. Bounded Context Database Design Diagram](#26562-bounded-context-database-design-diagram)
+    - [2.6.6. Bounded Context: Notifications](#266-bounded-context-notifications)
+      - [2.6.6.1. Domain Layer](#2661-domain-layer)
+      - [2.6.6.2. Interface Layer](#2662-interface-layer)
+      - [2.6.6.3. Application Layer](#2663-application-layer)
+      - [2.6.6.4. Infrastructure Layer](#2664-infrastructure-layer)
+      - [2.6.6.5. Bounded Context Software Architecture Component Level Diagrams](#2665-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.6.6. Bounded Context Software Architecture Code Level Diagrams](#2666-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.6.6.1. Bounded Context Domain Layer Class Diagrams](#26661-bounded-context-domain-layer-class-diagrams)
+        - [2.6.6.6.2. Bounded Context Database Design Diagram](#26662-bounded-context-database-design-diagram)
+    - [2.6.7. Bounded Context: Subscriptions](#267-bounded-context-subscriptions)
+      - [2.6.7.1. Domain Layer](#2671-domain-layer)
+      - [2.6.7.2. Interface Layer](#2672-interface-layer)
+      - [2.6.7.3. Application Layer](#2673-application-layer)
+      - [2.6.7.4. Infrastructure Layer](#2674-infrastructure-layer)
+      - [2.6.7.5. Bounded Context Software Architecture Component Level Diagrams](#2675-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.7.6. Bounded Context Software Architecture Code Level Diagrams](#2676-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.7.6.1. Bounded Context Domain Layer Class Diagrams](#26761-bounded-context-domain-layer-class-diagrams)
+        - [2.6.7.6.2. Bounded Context Database Design Diagram](#26762-bounded-context-database-design-diagram)
+    - [2.6.8. Bounded Context: Support](#268-bounded-context-support)
+      - [2.6.8.1. Domain Layer](#2681-domain-layer)
+      - [2.6.8.2. Interface Layer](#2682-interface-layer)
+      - [2.6.8.3. Application Layer](#2683-application-layer)
+      - [2.6.8.4. Infrastructure Layer](#2684-infrastructure-layer)
+      - [2.6.8.5. Bounded Context Software Architecture Component Level Diagrams](#2685-bounded-context-software-architecture-component-level-diagrams)
+      - [2.6.8.6. Bounded Context Software Architecture Code Level Diagrams](#2686-bounded-context-software-architecture-code-level-diagrams)
+        - [2.6.8.6.1. Bounded Context Domain Layer Class Diagrams](#26861-bounded-context-domain-layer-class-diagrams)
+        - [2.6.8.6.2. Bounded Context Database Design Diagram](#26862-bounded-context-database-design-diagram)
 <!--
 - [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
   - [3.1. Product design](#31-product-design)
@@ -203,14 +299,16 @@ Proyecto
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 -->
 - [Conclusiones](#conclusiones)
-<!--
   - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
+<!--
   - [Video App Validation](#video-app-validation)
   - [Video About the product](#video-about-the-product)
   - [Video About the team](#video-about-the-team) 
 - [Glosario](#glosario)-->
 - [Bibliografía](#bibliografía)
+<!--
 - [Anexos](#anexos)
+-->
 
 ---
 
@@ -243,7 +341,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Güere Calero, Fernando Julio</b><br>
       <u>AV1</u><br>
-      _Pendiente_
+      Investigó y aplicó por primera vez las técnicas de Big Picture EventStorming y EventStorming estratégico para modelar el dominio de negocio de MindFlow, adquiriendo conocimientos nuevos de Domain-Driven Design y aplicándolos en la identificación de los Bounded Contexts candidatos del proyecto.
       <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
@@ -255,7 +353,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     </td>
     <td>
       <u>AV1</u><br>
-      _Pendiente_
+      El equipo actualizó sus conocimientos en Domain-Driven Design mediante la aplicación práctica de EventStorming y Candidate Context Discovery, metodologías no abordadas previamente en el curso, fortaleciendo su capacidad de modelar dominios de negocio complejos y aplicando ese aprendizaje directamente en el diseño de la solución MindFlow.
     </td>
   </tr>
   <tr>
@@ -271,7 +369,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Güere Calero, Fernando Julio</b><br>
       <u>AV1</u><br>
-      _Pendiente_
+      Reconoció la necesidad de seguir aprendiendo de forma autónoma al investigar por cuenta propia las técnicas start-with-value, start-with-simple y look-for-pivotal-events para Candidate Context Discovery, aplicándolas sin haber recibido instrucción previa detallada en clase, como parte de su compromiso con el aprendizaje continuo.
       <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
@@ -283,7 +381,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     </td>
     <td>
       <u>AV1</u><br>
-      _Pendiente_
+      El equipo reconoció que el aprendizaje permanente es indispensable para adaptar metodologías de Domain-Driven Design a un proyecto real, investigando de forma autónoma técnicas de descubrimiento de bounded contexts y comprometiéndose a seguir profundizando en Context Mapping y Bounded Context Canvas en las siguientes entregas.
     </td>
   </tr>
 </table>
@@ -306,8 +404,8 @@ Cada miembro del equipo formula un plan que incluye al menos dos objetivos SMART
 
 ### Güere Calero, Fernando Julio
 
-1. _Pendiente_
-2. _Pendiente_
+1. Obtener, antes de diciembre de 2027, una certificación en arquitectura de software y Domain-Driven Design, dedicando al menos 5 horas semanales de estudio autónomo durante el próximo año, para fortalecer las competencias técnicas aplicadas en este curso.
+2. Participar, durante el primer año tras egresar (2029), como desarrollador en al menos dos proyectos reales que apliquen microservicios o arquitecturas basadas en bounded contexts, consolidando mi especialización profesional en diseño de soluciones de software escalables.
 
 ### Jáuregui Cerna, Jean Franco
 
@@ -336,7 +434,32 @@ CogniTech es una startup tecnológica emergente enfocada en la intersección ent
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
-_Pendiente_
+<table>
+  <tr>
+    <td rowspan="4" align="center">
+      <img src="assets/img/participants/Fernando_Guere.jpeg" alt="Foto de Fernando Güere" width="500"/>
+    </td>
+    <td><b>Nombre:</b> Fernando Julio Güere Calero</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202413169</td>
+  </tr>
+  <tr>
+    <td>
+    <div align="Justify">
+      <b>Descripción:</b><br/>
+      Soy <b>Fernando Julio Güere Calero</b>, tengo 19 años y estudio la carrera de Ingeniería de Software en la UPC, estoy cursando el 5to ciclo de la carrera. Cuento con los conocimientos para programar en C++, Python y gestión de base de datos SQL. Además, tengo conocimiento para el desarrollo de páginas web usando HTML, CSS y JavaScript. Siempre estoy interesado en expandir mis conocimientos con otros lenguajes de programación para fortalecer mis competencias técnicas y enfrentar retos en la industria. 
+      <br/><br/>
+      Dentro del equipo, cumplo con las actividades de documentación y programación en un nivel intermedio. También quisiera destacar que soy responsable con las distintas tareas establecidas.
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+  </tr>
+</table>
+
+_Pendiente: perfiles de los demás integrantes del equipo._
 
 ## 1.2. Solution Profile
 
@@ -2051,8 +2174,17 @@ _Pendiente_
 
 ## Conclusiones y recomendaciones
 
-_Pendiente_
+**Conclusiones**
 
+1. El desarrollo del Big Picture EventStorming y de la sesión de EventStorming estratégico permitió al equipo construir un entendimiento compartido del dominio de negocio de MindFlow, sentando las bases para identificar los 8 Bounded Contexts candidatos (IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support) que guiarán el diseño de la solución en las siguientes entregas.
+2. La aplicación del Lean UX Process (Problem Statements y Assumptions) confirmó que la propuesta de valor de MindFlow —contención emocional inmediata mediante IA y seguimiento adaptativo de hábitos— responde a una necesidad real y validable en los segmentos de estudiantes universitarios y jóvenes profesionales identificados.
+
+**Recomendaciones**
+
+1. Se recomienda continuar con la elaboración de los Bounded Context Canvases y el Context Mapping antes de avanzar al diseño técnico detallado, con el fin de asegurar que las relaciones entre contextos (Anti-corruption Layer, Customer/Supplier, Shared Kernel, etc.) queden correctamente sustentadas.
+2. Se recomienda validar las Assumptions planteadas en el Lean UX Process —en especial las relacionadas con la disposición de pago y la confianza en el motor de IA— mediante entrevistas de validación con usuarios reales, antes de comprometer recursos de desarrollo en las funcionalidades Premium.
+
+<!--
 ## Video App Validation
 
 _Pendiente_
@@ -2064,6 +2196,7 @@ _Pendiente_
 ## Video About the team
 
 _Pendiente_
+-->
 
 ---
 
@@ -2075,10 +2208,14 @@ _Pendiente_ -->
 
 # Bibliografía
 
-_Pendiente_
+Organización Mundial de la Salud. (2021). *Global strategy on digital health 2020-2025*. https://www.who.int/publications/i/item/9789240020924
 
+Organización Mundial de la Salud. (2022). *World mental health report: Transforming mental health for all*. https://www.who.int/publications/i/item/9789240049338
+
+<!--
 ---
 
 # Anexos
 
 _Pendiente_
+-->
