@@ -615,10 +615,10 @@ El proceso de needfinding evidencia que los usuarios no solo buscan registrar su
 
 ### 2.3.1. User Personas
 #### Segmento Estudiantes Universitarios:
-  <img src="../assets/img/lean_ux/User Persona1.png" alt="MindFlow" height="auto">
+  <img src="assets/img/lean_ux/User Persona1.png" alt="MindFlow" height="auto">
   
 #### Segmento Profesionales jóvenes:
-  <img src="../assets/img/lean_ux/User Persona2.png" alt="MindFlow" height="auto">
+  <img src="assets/img/lean_ux/User Persona2.png" alt="MindFlow" height="auto">
 
 ### 2.3.2. User Task Matrix
 
@@ -689,10 +689,10 @@ Los datos evidencian que el problema ocurre varias veces al día, lo que requier
 ### 2.3.3. User Journey Mapping
 
 #### Segmento Estudiantes Universitarios:
-  <img src="../assets/img/lean_ux/User Journey Mapping1.png" alt="MindFlow" height="auto">
+  <img src="assets/img/lean_ux/User Journey Mapping1.png" alt="MindFlow" height="auto">
   
 #### Segmento Profesionales jóvenes:
-  <img src="../assets/img/lean_ux/User Journey Mapping2.png" alt="MindFlow" height="auto">
+  <img src="assets/img/lean_ux/User Journey Mapping2.png" alt="MindFlow" height="auto">
 
 ### 2.3.4. Empathy Mapping
 
