@@ -156,7 +156,7 @@ Proyecto
       - [2.6.2.](#262-bounded-context-journal)
       - [2.6.3.](#263)
       - [2.6.4.](#264)
-      - [2.6.5.](#265-bounded-context-analytics)
+      - [2.6.5.](#265-bounded-context-analytics--reporting)
       - [2.6.6.](#266-bounded-context-notifications)
       - [2.6.7.](#267-bounded-context-subscriptions)
       - [2.6.8.](#268-bounded-context-support)
