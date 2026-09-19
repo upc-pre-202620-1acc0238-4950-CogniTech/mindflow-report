@@ -1,0 +1,136 @@
+@startuml AnalyticsReporting_DomainLayer_ClassDiagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface IAuditableEntity {
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class AnalyticsCache {
+  -Id : int
+  -UserId : int
+  -WeekStart : DateOnly
+  -Score : int
+  -TrendPercentage : string = "+0%"
+  -StartDate : DateOnly?
+  -EndDate : DateOnly?
+  -AiInsight : string?
+  -AiInsightLocalized : string?
+  -Kpis : string?
+  -FluctuationData : string?
+  -TrendData : string?
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class WordCloud {
+  -Id : int
+  -UserId : int
+  -Words : string?
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+enum AnalyticsError {
+  AnalyticsCacheNotFound
+  AnalyticsCacheCreationFailed
+  AnalyticsCacheUpdateFailed
+  WordCloudNotFound
+  WordCloudCreationFailed
+}
+
+interface IAnalyticsCacheInvalidator {
+  +InvalidateAsync(userId: int, entryDate: DateOnly, ct: CancellationToken) : Task
+}
+
+interface "ICommandHandler<TCommand, TResult>" as ICommandHandler
+interface "IQueryHandler<TQuery, TResult>" as IQueryHandler
+
+class GetAnalyticsCacheQueryHandler {
+  +Handle(request: GetAnalyticsCacheQuery, ct: CancellationToken) : Task<Result<List<AnalyticsCacheDto>>>
+}
+
+class CreateAnalyticsCacheCommandHandler {
+  +Handle(request: CreateAnalyticsCacheCommand, ct: CancellationToken) : Task<Result<AnalyticsCacheDto>>
+}
+
+class UpdateAnalyticsCacheCommandHandler {
+  +Handle(request: UpdateAnalyticsCacheCommand, ct: CancellationToken) : Task<Result<AnalyticsCacheDto>>
+}
+
+class GetWordCloudQueryHandler {
+  +Handle(request: GetWordCloudQuery, ct: CancellationToken) : Task<Result<WordCloudDto>>
+}
+
+class CreateWordCloudCommandHandler {
+  +Handle(request: CreateWordCloudCommand, ct: CancellationToken) : Task<Result<WordCloudDto>>
+}
+
+class AnalyticsComputationService {
+  +ComputeAndSaveWeeklyAsync(userId: int, weekStart: DateOnly) : Task<AnalyticsCache>
+  +ComputeMoodCalendarAsync(userId: int, year: int, month: int) : Task<List<object>>
+  +ComputeAndSaveWordCloudAsync(userId: int) : Task<WordCloud>
+}
+
+interface IReportingService {
+  +GeneratePdfAsync(userId: int) : Task<byte[]>
+  +GenerateCsvAsync(userId: int) : Task<byte[]>
+}
+
+AnalyticsCache .up.|> IAuditableEntity
+WordCloud .up.|> IAuditableEntity
+GetAnalyticsCacheQueryHandler ..|> IQueryHandler
+CreateAnalyticsCacheCommandHandler ..|> ICommandHandler
+UpdateAnalyticsCacheCommandHandler ..|> ICommandHandler
+GetWordCloudQueryHandler ..|> IQueryHandler
+CreateWordCloudCommandHandler ..|> ICommandHandler
+
+GetAnalyticsCacheQueryHandler ..> AnalyticsCache : lee >
+CreateAnalyticsCacheCommandHandler ..> AnalyticsCache : crea >
+UpdateAnalyticsCacheCommandHandler ..> AnalyticsCache : actualiza >
+GetWordCloudQueryHandler ..> WordCloud : lee >
+CreateWordCloudCommandHandler ..> WordCloud : crea >
+AnalyticsComputationService ..> AnalyticsCache : calcula y persiste >
+AnalyticsComputationService ..> WordCloud : calcula y persiste >
+IReportingService ..> AnalyticsError : (n/a, exporta directo de Journal)
+
+note right of AnalyticsCache
+  UserId es una referencia lógica al
+  agregado User del bounded context IAM.
+  Los campos Kpis/FluctuationData/TrendData
+  se almacenan como JSON serializado,
+  listos para ser consumidos por los
+  gráficos del cliente sin transformación
+  adicional.
+end note
+
+note right of IAnalyticsCacheInvalidator
+  Único puerto de dominio expuesto hacia
+  fuera de este bounded context: permite
+  que otro bounded context (Journal)
+  invalide el caché semanal y la nube de
+  palabras de un usuario cuando registra
+  una nueva entrada, sin conocer los
+  detalles internos de Analytics.
+end note
+
+note right of AnalyticsComputationService
+  Orquesta el cálculo pesado: puntaje
+  semanal, tendencia respecto a la
+  semana anterior, calendario de estados
+  de ánimo, nube de palabras y el insight
+  narrativo generado por IA, con una
+  respuesta de reserva en español si el
+  proveedor de IA no responde.
+end note
+
+note right of IReportingService
+  Puerto de exportación: genera un PDF
+  con diseño de marca (QuestPDF) o un
+  CSV tabular a partir de las entradas
+  del diario del usuario, reservado a
+  usuarios con suscripción Premium activa.
+end note
+
+@enduml

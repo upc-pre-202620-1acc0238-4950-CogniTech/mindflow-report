@@ -1,0 +1,61 @@
+@startuml Support_DomainLayer_ClassDiagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface IAuditableEntity {
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class SupportTicket {
+  -Id : int
+  -UserId : int
+  -UserEmail : string
+  -Subject : string
+  -Message : string
+  -Status : string = "open"
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+  +MarkInProgress() : void
+  +Close() : void
+}
+
+interface ISupportService {
+  +CreateTicketAsync(userId: int, userEmail: string, subject: string, message: string) : Task<SupportTicket>
+  +GetUserTicketsAsync(userId: int) : Task<IEnumerable<SupportTicket>>
+}
+
+class CreateTicketRequest {
+  +Subject : string
+  +Message : string
+}
+
+SupportTicket .up.|> IAuditableEntity
+ISupportService ..> SupportTicket : crea y consulta >
+
+note right of SupportTicket
+  UserId es una referencia lógica al
+  agregado User del bounded context IAM.
+  UserEmail se guarda de forma
+  desnormalizada al momento de crear el
+  ticket, para poder enviar la
+  confirmación por correo sin depender
+  de una consulta al bounded context IAM.
+  Status transiciona de forma lineal:
+  "open" → "in_progress" → "closed".
+end note
+
+note right of ISupportService
+  Único puerto de dominio del bounded
+  context: dos operaciones que cubren
+  todo el ciclo de vida visible para el
+  usuario (crear un ticket, consultar
+  los propios). La gestión interna del
+  ticket por el equipo de soporte
+  (cambiar su estado) queda fuera del
+  alcance de este puerto en la primera
+  versión, reservada al acceso directo
+  del equipo a la base de datos.
+end note
+
+@enduml

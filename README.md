@@ -152,6 +152,14 @@ Proyecto
       - [2.5.3.2. Software Architecture Container Level Diagrams](#2532-software-architecture-container-level-diagrams)
       - [2.5.3.3. Software Architecture Deployment Diagrams](#2533-software-architecture-deployment-diagrams)
   - [2.6. Tactical-Level Domain-Driven Design](#26-tactical-level-domain-driven-design)
+      - [2.6.1.](#261-bounded-context-iam)
+      - [2.6.2.](#262-bounded-context-journal)
+      - [2.6.3.](#263-bounded-context-ai-assistant)
+      - [2.6.4.](#264-bounded-context-habits--wellness)
+      - [2.6.5.](#265-bounded-context-analytics--reporting)
+      - [2.6.6.](#266-bounded-context-notifications)
+      - [2.6.7.](#267-bounded-context-subscriptions)
+      - [2.6.8.](#268-bounded-context-support)
 <!--
 - [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
   - [3.1. Product design](#31-product-design)
@@ -598,21 +606,123 @@ _Pendiente_
 
 ## 2.3. Needfinding
 
-### 2.3.1. User Personas
+En esta sección se presentan los artefactos resultantes del proceso de análisis de la información recolectada a través de entrevistas. El objetivo del needfinding es transformar los hallazgos cualitativos en representaciones estructuradas que permitan comprender profundamente a los usuarios, sus necesidades, comportamientos y puntos de dolor.
 
-_Pendiente_
+A partir de los insights obtenidos, se desarrollan los siguientes artefactos:
+
+- User Personas  
+- User Task Matrix  
+- User Journey Mapping  
+- Empathy Mapping  
+- Big Picture EventStorming  
+- Ubiquitous Language  
+
+Estos elementos permiten al equipo alinear la comprensión del problema, identificar oportunidades de diseño y establecer una base sólida para la definición de requerimientos del sistema.
+
+El proceso de needfinding evidencia que los usuarios no solo buscan registrar su estado emocional, sino recibir apoyo activo, personalizado y en tiempo real, lo cual guía directamente la propuesta de valor de la solución MindFlow.
+
+### 2.3.1. User Personas
+#### Segmento Estudiantes Universitarios:
+  <img src="assets/img/lean_ux/User Persona1.png" alt="MindFlow" height="auto">
+  
+#### Segmento Profesionales jóvenes:
+  <img src="assets/img/lean_ux/User Persona2.png" alt="MindFlow" height="auto">
 
 ### 2.3.2. User Task Matrix
 
-_Pendiente_
+En esta sección se presenta la matriz de tareas de usuario (User Task Matrix), construida a partir de los User Personas definidos: **Jimena** (estudiante universitaria) y **Nordie** (profesional joven).  
+
+La matriz identifica las tareas que ambos segmentos realizan para gestionar su bienestar emocional y productividad en su día a día, independientemente de la existencia de una solución tecnológica.  
+
+Cada tarea se evalúa en función de:  
+- **Frecuencia:** Número aproximado de veces que realiza la tarea (diaria/semanal)  
+- **Importancia:** Nivel de relevancia para el usuario (Alta, Media, Baja)  
+
+---
+
+#### User Task Matrix
+
+| Tareas del Usuario | Jimena (Frecuencia) | Jimena (Importancia) | Nordie (Frecuencia) | Nordie (Importancia) |
+|------------------|---------------------|----------------------|---------------------|----------------------|
+| Identificar que está estresado o abrumado | 2–3 veces al día | Alta | 3–5 veces al día | Alta |
+| Intentar continuar con sus responsabilidades a pesar del estrés | Diario | Alta | Diario | Alta |
+| Buscar distracciones (redes sociales, entretenimiento) | 2–4 veces al día | Media | 1–2 veces al día | Baja |
+| Tomar pausas para despejarse | 1–2 veces al día | Alta | 1–2 veces al día | Alta |
+| Intentar organizar tareas o responsabilidades | 3–4 veces por semana | Alta | Diario | Alta |
+| Reflexionar sobre cómo se siente | 1–2 veces por semana | Media | 1 vez por semana | Media |
+| Buscar soluciones rápidas para reducir el estrés | 1–2 veces al día | Alta | 2–3 veces al día | Alta |
+| Intentar mantener hábitos de bienestar (ejercicio, descanso) | 2–3 veces por semana | Alta | 1–2 veces por semana | Alta |
+| Usar herramientas digitales para organizarse o mejorar su bienestar | 3–4 veces por semana | Media | 2–3 veces por semana | Alta |
+| Abandonar herramientas o rutinas por falta de resultados | 1 vez por semana | Alta | 1 vez por semana | Alta |
+
+---
+
+### Análisis de la matriz
+
+Se observa que las tareas con mayor frecuencia e importancia en ambos segmentos están relacionadas con la **gestión inmediata del estrés**, especialmente:
+
+- Identificación del estrés varias veces al día  
+- Continuación de responsabilidades bajo presión  
+- Búsqueda de soluciones rápidas para aliviar el malestar  
+
+Esto confirma que el problema ocurre en **micro-momentos diarios**, no como eventos aislados.
+
+---
+
+### Coincidencias entre segmentos
+
+- Ambos identifican el estrés múltiples veces al día  
+- Buscan soluciones rápidas de forma recurrente  
+- Presentan abandono semanal de herramientas que no aportan valor  
+- Mantienen baja frecuencia en hábitos de bienestar  
+
+---
+
+### Diferencias clave
+
+- **Jimena (Estudiante):**
+  - Mayor frecuencia en distracciones (hasta 4 veces al día)  
+  - Menor consistencia en organización (no diaria)  
+
+- **Nordie (Profesional):**
+  - Mayor constancia en organización (diaria)  
+  - Menor uso de distracciones, pero mayor carga mental constante  
+
+---
+
+### Conclusión
+
+Los datos evidencian que el problema ocurre varias veces al día, lo que requiere una solución capaz de responder en tiempo real. Además, la alta tasa de abandono semanal confirma que los usuarios priorizan herramientas que generen valor inmediato, sin requerir esfuerzo adicional.
 
 ### 2.3.3. User Journey Mapping
 
-_Pendiente_
+#### Segmento Estudiantes Universitarios:
+  <img src="assets/img/lean_ux/User Journey Mapping1.png" alt="MindFlow" height="auto">
+  
+#### Segmento Profesionales jóvenes:
+  <img src="assets/img/lean_ux/User Journey Mapping2.png" alt="MindFlow" height="auto">
 
 ### 2.3.4. Empathy Mapping
 
-_Pendiente_
+#### Segmento Estudiantes Universitarios
+
+<div align="center">
+
+![Empathy Mapping - Estudiantes Universitarios](assets/img/lean_ux/Empathy%20map1.png)
+
+*Figura: Empathy Mapping del segmento de estudiantes universitarios.*
+
+</div>
+
+#### Segmento Profesionales Jóvenes
+
+<div align="center">
+
+![Empathy Mapping - Profesionales Jóvenes](assets/img/lean_ux/Empathy%20map2.png)
+
+*Figura: Empathy Mapping del segmento de profesionales jóvenes.*
+
+</div>
 
 ### 2.3.5. Big Picture EventStorming
 
@@ -655,21 +765,166 @@ Este ejercicio confirmó que el negocio de MindFlow abarca áreas de responsabil
 
 ### 2.3.6. Ubiquitous Language
 
-_Pendiente_
+El Lenguaje Ubicuo de MindFlow constituye el idioma común utilizado por los integrantes del equipo para eliminar la ambigüedad entre los requerimientos de salud mental y la implementación técnica. Estos términos han sido extraídos directamente del Event Storming, asegurando que cada concepto del negocio tenga una representación única y coherente en el código fuente y la base de datos.
+
+| Término | Definición de Dominio | Relación Técnica |
+|:-------:|:---------------------:|:----------------:|
+| Journal Entry | Registro de texto libre donde el usuario expresa sus pensamientos y sentimientos. | Objeto persistente en DB (Colección). |
+| NLP Engine | Servicio encargado de procesar el lenguaje natural para extraer emociones. | Sistema Externo (API). |
+| Sentiment Label | Etiqueta (Positivo/Negativo) asignada a una entrada tras el análisis. | Atributo de la clase JournalEntry. |
+| Habit Tracker | Módulo para la gestión y seguimiento de objetivos de autocuidado. | Agregado que gestiona la disciplina. |
+| Workload Adjustment | Modificación automática de la carga de tareas basada en el estado de estrés detectado. | Política de negocio (Business Rule). |
+| Burnout Level | Indicador de agotamiento detectado por la persistencia de ánimos negativos. | Variable de análisis para intervenciones. |
 
 ## 2.4. Requirements Specification
 
 ### 2.4.1. User Stories
 
-_Pendiente_
+Las siguientes **User Stories** definen los requerimientos funcionales y técnicos de MindFlow. Se encuentran agrupadas en cinco **Epics**, de acuerdo con las principales capacidades del producto.
+
+Para mejorar la gestión del **Product Backlog**, cada User Story incluye un atributo de **Priority**:
+
+- **High:** funcionalidad esencial para el MVP, el valor principal del negocio, la seguridad o la operación crítica del sistema.
+- **Medium:** funcionalidad importante que mejora la experiencia del usuario, pero no es indispensable para la primera versión utilizable.
+- **Low:** funcionalidad complementaria que puede implementarse después de las capacidades principales.
+
+Adicionalmente, se incluye una **Spike Story (SP01)** para reducir la incertidumbre técnica relacionada con la integración de servicios de Inteligencia Artificial para el análisis emocional.
+
+| Epic ID | Epic Name | Descripción |
+|---|---|---|
+| E1 | Identidad, Privacidad y Plataforma Principal | Gestión de seguridad, autenticación de usuarios, privacidad y configuración fundamental de la plataforma. |
+| E2 | Inteligencia Emocional Impulsada por IA | Implementación de capacidades de IA para análisis de sentimientos, procesamiento del diario emocional y retroalimentación empática. |
+| E3 | Bienestar Inteligente e Ingeniería de Hábitos | Gestión de hábitos, rutinas de bienestar, intervenciones frente al estrés y recomendaciones adaptativas. |
+| E4 | Analítica, Monetización y Escalabilidad | Visualización de datos, reportes, monetización, soporte y capacidades técnicas orientadas a la escalabilidad. |
+| E5 | Landing Page y Adquisición de Usuarios | Sitio informativo orientado a comunicar la propuesta de valor de MindFlow y atraer potenciales usuarios. |
+
+| Epic / Story ID | Título | Descripción | Acceptance Criteria | Priority | Epic relacionado |
+|---|---|---|---|---|---|
+| US01 | Registro con OAuth (Google) | Como nuevo usuario, quiero registrarme utilizando mi cuenta de Google, para acceder rápidamente a la plataforma. | Dado que el usuario se encuentra en la pantalla de registro, cuando selecciona "Continuar con Google", entonces el sistema crea correctamente la cuenta vinculada. | High | E1 |
+| US02 | Inicio de sesión tradicional | Como usuario, quiero iniciar sesión con correo electrónico y contraseña, para disponer de una alternativa de acceso manual. | Dado que el usuario tiene una cuenta activa, cuando ingresa credenciales válidas, entonces obtiene acceso a la aplicación. | High | E1 |
+| US03 | Recuperación de cuenta | Como usuario, quiero restablecer mi contraseña mediante un enlace enviado por correo electrónico, para recuperar el acceso a mi cuenta si la olvido. | Dado que el usuario solicita el restablecimiento de contraseña, cuando recibe el correo y actualiza su contraseña, entonces puede iniciar sesión nuevamente. | Medium | E1 |
+| US04 | Bloqueo mediante PIN | Como usuario, quiero configurar un PIN de seguridad, para proteger mi información privada frente a accesos físicos no autorizados. | Dado que la aplicación se encuentra abierta, cuando el bloqueo mediante PIN está activo, entonces el sistema solicita el código antes de mostrar contenido protegido. | Medium | E1 |
+| US05 | Perfil de usuario | Como usuario, quiero editar mis datos personales, para que MindFlow pueda personalizar mi experiencia. | Dado que el usuario se encuentra en la configuración de su perfil, cuando actualiza sus datos, entonces los cambios quedan almacenados y se reflejan en la aplicación. | Medium | E1 |
+| US06 | Modo oscuro | Como usuario, quiero activar el modo oscuro, para reducir la fatiga visual durante el uso nocturno. | Dado que el usuario modifica la configuración del tema, cuando activa el modo oscuro, entonces la interfaz adopta dicho tema. | Low | E1 |
+| US07 | Eliminación de cuenta | Como usuario, quiero eliminar mi cuenta y mis registros personales, para mantener control sobre mi información. | Dado que el usuario solicita eliminar su cuenta, cuando confirma la operación, entonces el sistema elimina o anonimiza permanentemente la información asociada de acuerdo con la política de privacidad definida. | High | E1 |
+| US08 (T) | Encriptación AES-256 | Como arquitecto, quiero que la información sensible del diario se almacene cifrada, para proteger la confidencialidad de los datos del usuario. | Dado que se almacena contenido sensible del diario, cuando este es persistido en la base de datos, entonces debe encontrarse cifrado. | High | E1 |
+| US09 (T) | Pipeline CI/CD | Como desarrollador, quiero contar con un flujo automatizado de integración y despliegue, para realizar entregas de manera consistente y eficiente. | Dado que se integran cambios de código en la rama configurada, cuando las validaciones automatizadas finalizan correctamente, entonces puede ejecutarse el proceso de despliegue. | Medium | E1 |
+| US10 (T) | Seguridad de API mediante JWT | Como desarrollador, quiero autenticar las solicitudes protegidas mediante JWT, para evitar accesos no autorizados a los servicios del backend. | Dado que un usuario autenticado solicita un recurso protegido, cuando la solicitud contiene un token válido, entonces la API procesa la petición. | High | E1 |
+| US11 | Entrada de diario | Como usuario, quiero escribir entradas en mi diario, para registrar mis pensamientos, sentimientos y experiencias emocionales. | Dado que el usuario abre el editor del diario, cuando escribe y guarda una entrada, entonces el sistema la almacena asociada al usuario y a la fecha correspondiente. | High | E2 |
+| US12 | Análisis de sentimientos | Como usuario, quiero que MindFlow analice el tono emocional de mi entrada de diario, para comprender mejor mi estado emocional actual. | Dado que el usuario guarda una entrada de diario, cuando se ejecuta el análisis de sentimientos, entonces el sistema proporciona una clasificación emocional asociada a la entrada. | High | E2 |
+| US13 | Retroalimentación empática mediante IA | Como usuario, quiero recibir retroalimentación empática después de registrar mis emociones, para obtener orientación y acompañamiento inmediato. | Dado que se ha identificado un estado emocional, cuando la IA procesa la entrada del diario, entonces MindFlow muestra una respuesta empática apropiada. | High | E2 |
+| US14 | Etiquetas contextuales | Como usuario, quiero categorizar mis entradas mediante etiquetas, para identificar situaciones o áreas relacionadas con mi estado emocional. | Dado que el usuario está editando o visualizando una entrada, cuando asigna una etiqueta, entonces la asociación queda almacenada y puede utilizarse para filtrado o análisis. | Medium | E2 |
+| US15 | Adjuntos multimedia | Como usuario, quiero adjuntar contenido multimedia a mis entradas de diario, para enriquecer mis registros emocionales. | Dado que el usuario está gestionando una entrada, cuando carga un archivo multimedia soportado, entonces el archivo queda asociado a la entrada correspondiente. | Medium | E2 |
+| US16 | Búsqueda por palabras clave | Como usuario, quiero buscar entradas anteriores mediante palabras clave, para localizar rápidamente experiencias específicas. | Dado que el usuario ingresa un término de búsqueda, cuando ejecuta la búsqueda, entonces el sistema devuelve las entradas relacionadas con el contenido coincidente. | Medium | E2 |
+| US17 | Calendario de estado de ánimo | Como usuario, quiero visualizar mis registros emocionales a lo largo del tiempo, para identificar patrones en mi estado de ánimo. | Dado que el usuario abre el calendario emocional, cuando existe información para una fecha determinada, entonces se representa el estado emocional correspondiente. | Medium | E2 |
+| US18 | Resumen semanal mediante IA | Como usuario, quiero recibir un resumen semanal de mi actividad emocional, para reflexionar sobre los cambios en mi bienestar. | Dado que existe suficiente información emocional registrada, cuando se genera el resumen semanal, entonces MindFlow presenta un resumen de los principales patrones identificados. | Medium | E2 |
+| US19 (T) | Integración con API de LLM | Como desarrollador, quiero integrar un servicio basado en LLM, para que MindFlow pueda generar respuestas contextuales y empáticas. | Dado que el backend solicita una respuesta generada mediante IA, cuando el servicio externo responde correctamente, entonces el sistema procesa y devuelve el resultado estructurado. | High | E2 |
+| US20 (T) | Registro de interacciones de IA | Como desarrollador, quiero registrar métricas relevantes de las interacciones con IA, para monitorear el funcionamiento y comportamiento de esta funcionalidad. | Dado que una solicitud de IA es procesada, cuando la operación finaliza, entonces se registran las métricas técnicas relevantes sin exponer contenido sensible del diario. | Medium | E2 |
+| SP01 | Investigación de viabilidad de integración de IA | Como equipo de desarrollo, queremos investigar y validar alternativas para integrar análisis de sentimientos y retroalimentación empática mediante IA, para seleccionar una solución adecuada antes de completar la implementación. | Dado que MindFlow requiere análisis emocional asistido por IA, cuando finalice la Spike, entonces el equipo deberá documentar las alternativas evaluadas, restricciones técnicas, consideraciones de privacidad, costos estimados y una prueba de concepto de la alternativa seleccionada. | High | E2 |
+| US21 | Creación de hábitos | Como usuario, quiero crear hábitos personalizados de bienestar, para construir una rutina constante de autocuidado. | Dado que el usuario se encuentra en la sección de hábitos, cuando completa la información requerida y guarda el hábito, entonces este es agregado a su lista de hábitos activos. | High | E3 |
+| US22 | Registro de cumplimiento de hábitos | Como usuario, quiero marcar mis hábitos como completados, para monitorear mi progreso diario. | Dado que existe un hábito activo, cuando el usuario lo marca como completado, entonces su estado y progreso quedan actualizados. | High | E3 |
+| US23 | Ajuste basado en nivel de estrés | Como usuario que experimenta un nivel elevado de estrés, quiero que MindFlow adapte sus recomendaciones de bienestar según mi estado emocional, para evitar sentirme sobrecargado. | Dado que el sistema identifica un nivel elevado de estrés, cuando genera recomendaciones de bienestar, entonces MindFlow sugiere actividades apropiadas para la condición actual del usuario. | High | E3 |
+| US24 | Guía de respiración 4-7-8 | Como usuario, quiero acceder a un ejercicio guiado de respiración, para utilizar una técnica rápida de relajación durante momentos de estrés. | Dado que el usuario selecciona el ejercicio de respiración, cuando inicia la actividad, entonces la aplicación lo guía durante la secuencia correspondiente. | Medium | E3 |
+| US25 | Micro-meditaciones | Como usuario, quiero acceder a ejercicios cortos de meditación, para incorporar actividades breves de bienestar dentro de mi rutina. | Dado que existen ejercicios disponibles, cuando el usuario selecciona uno, entonces la aplicación proporciona la actividad guiada correspondiente. | Medium | E3 |
+| US26 | Feedback sobre recomendaciones | Como usuario, quiero calificar las recomendaciones de la IA, para que MindFlow registre cuáles me resultan útiles. | Dado que el usuario recibe una recomendación, cuando envía su valoración, entonces el sistema registra el feedback asociado a dicha recomendación. | Medium | E3 |
+| US27 | Alerta de hidratación | Como usuario, quiero recibir recordatorios para beber agua, para mantener hábitos saludables durante mi rutina diaria. | Dado que los recordatorios de hidratación están habilitados, cuando se cumple la condición configurada, entonces el usuario recibe una notificación. | Low | E3 |
+| US28 | Racha de hábitos | Como usuario, quiero visualizar mis rachas de hábitos, para mantenerme motivado mediante el seguimiento de mi constancia. | Dado que el usuario ha completado hábitos durante varios días, cuando consulta su progreso, entonces la aplicación muestra la racha correspondiente. | Medium | E3 |
+| US29 (T) | Indexación de base de datos | Como desarrollador, quiero indexar adecuadamente la información consultada con frecuencia, para mantener tiempos de respuesta eficientes. | Dado que se ejecuta una consulta sobre información indexada, cuando la base de datos procesa la solicitud, entonces el rendimiento se mantiene dentro de los requerimientos no funcionales definidos. | Medium | E3 |
+| US30 (T) | Sincronización de datos offline | Como usuario de la aplicación móvil, quiero registrar información del diario sin conexión y sincronizarla posteriormente, para que una conexión intermitente a Internet no me impida registrar mis pensamientos. | Dado que el dispositivo no tiene conexión a Internet, cuando el usuario crea o actualiza información soportada del diario, entonces la aplicación almacena los cambios localmente y los sincroniza cuando se restablece la conectividad. | High | E3 |
+| US31 | Dashboard de analítica | Como usuario, quiero visualizar analíticas de mi actividad emocional, para comprender cómo evoluciona mi bienestar a lo largo del tiempo. | Dado que existe suficiente información emocional, cuando el usuario abre la sección de analítica, entonces la aplicación muestra las métricas y visualizaciones disponibles. | High | E4 |
+| US32 | Nube de palabras | Como usuario, quiero visualizar términos recurrentes de mi actividad en el diario, para identificar temas frecuentes o posibles detonantes de estrés. | Dado que existe suficiente información en el diario, cuando se genera el análisis correspondiente, entonces el sistema muestra los términos recurrentes según su frecuencia. | Medium | E4 |
+| US33 | Planes Premium | Como usuario, quiero comparar los planes disponibles, para determinar si las funcionalidades Premium me resultan útiles. | Dado que el usuario accede a la sección de suscripciones, cuando se cargan los planes, entonces el sistema muestra sus principales características y diferencias. | Medium | E4 |
+| US34 | Pago seguro | Como usuario, quiero realizar el pago de mi suscripción mediante un proveedor seguro, para activar las funcionalidades Premium de manera confiable. | Dado que el usuario selecciona un plan de pago, cuando el proceso externo de pago se confirma correctamente, entonces la suscripción correspondiente queda activada. | Medium | E4 |
+| US35 | Exportación en PDF | Como usuario Premium, quiero exportar un reporte estructurado en PDF, para guardar o compartir un resumen legible de mi información emocional. | Dado que el usuario tiene acceso a la funcionalidad de exportación, cuando solicita el formato PDF, entonces el sistema genera el reporte descargable correspondiente. | Medium | E4 |
+| US36 | Exportación en CSV | Como usuario Premium, quiero exportar mi información en formato CSV, para analizar los datos mediante herramientas externas. | Dado que el usuario tiene acceso a la exportación de datos, cuando selecciona CSV, entonces el sistema genera un archivo descargable con la información disponible para exportación. | Low | E4 |
+| US37 | Soporte técnico | Como usuario, quiero crear una solicitud de soporte, para reportar problemas técnicos o solicitar asistencia. | Dado que el usuario envía una solicitud válida, cuando esta es registrada, entonces el sistema crea el ticket de soporte correspondiente. | Medium | E4 |
+| US38 (T) | Pruebas automatizadas | Como desarrollador, quiero disponer de pruebas automatizadas para los flujos críticos, para detectar regresiones antes de liberar cambios. | Dado que un flujo crítico cuenta con pruebas automatizadas, cuando se ejecuta la suite de pruebas, entonces los errores son reportados antes de liberar el cambio afectado. | High | E4 |
+| US39 (T) | Diseño responsive | Como desarrollador, quiero que la Landing Page y las interfaces compatibles se adapten a diferentes tamaños de pantalla, para que puedan utilizarse correctamente desde distintos dispositivos. | Dado que cambia el tamaño de pantalla soportado, cuando se renderiza la interfaz, entonces el contenido permanece utilizable y visualmente consistente. | Medium | E4 |
+| US40 (T) | Rate Limiting | Como administrador, quiero aplicar límites a las solicitudes realizadas a la API, para proteger el backend frente a un uso excesivo o abusivo. | Dado que un cliente supera el límite configurado de solicitudes, cuando realiza nuevas peticiones durante el periodo restringido, entonces la API las rechaza o limita temporalmente según la política establecida. | Medium | E4 |
+| US41 | Navegación principal de la Landing Page | Como visitante, quiero contar con un menú de navegación claro, para acceder rápidamente a las secciones más importantes de la Landing Page. | Dado que el visitante se encuentra en la Landing Page, cuando selecciona una opción del menú, entonces la interfaz lo dirige hacia la sección correspondiente. | High | E5 |
+| US42 | CTA principal | Como visitante, quiero visualizar un CTA principal claramente identificable, para comenzar rápidamente a utilizar MindFlow. | Dado que el visitante visualiza la sección Hero, cuando selecciona el CTA principal, entonces es dirigido al flujo correspondiente de registro o acceso a la aplicación. | High | E5 |
+| US43 | Grid de funcionalidades | Como visitante, quiero visualizar las principales funcionalidades de MindFlow, para comprender rápidamente las capacidades que ofrece el producto. | Dado que el visitante llega a la sección de funcionalidades, cuando esta se muestra, entonces las principales capacidades se presentan mediante tarjetas y descripciones claramente identificables. | High | E5 |
+| US44 | Vista previa de la interfaz | Como visitante, quiero visualizar ejemplos de la aplicación, para comprender cómo funciona MindFlow antes de registrarme. | Dado que el visitante llega a la sección de vista previa del producto, cuando esta se muestra, entonces se presentan interfaces representativas de MindFlow. | Medium | E5 |
+| US45 | CTA de conversión | Como visitante, quiero visualizar un CTA adicional al final de la Landing Page, para comenzar a utilizar MindFlow después de conocer sus beneficios. | Dado que el visitante llega a la sección final de conversión, cuando selecciona el CTA, entonces es dirigido al flujo correspondiente de registro o acceso a la aplicación. | High | E5 |
+| US46 | Navegación del footer | Como visitante, quiero acceder a enlaces legales e informativos desde el footer, para consultar información relevante sobre MindFlow. | Dado que el visitante llega al footer, cuando selecciona uno de los enlaces disponibles, entonces se muestra la información correspondiente. | Medium | E5 |
+| US47 | Enlaces a redes sociales | Como visitante, quiero acceder a los perfiles oficiales de MindFlow en redes sociales, para visitar sus canales externos de comunicación. | Dado que se muestran los enlaces a redes sociales, cuando el visitante selecciona uno, entonces se abre el perfil externo correspondiente. | Low | E5 |
+| US48 | Vista previa de tendencias emocionales | Como visitante, quiero visualizar un ejemplo de las tendencias emocionales, para comprender el tipo de análisis que MindFlow puede proporcionar. | Dado que el visitante llega a la sección de vista previa de analítica, cuando esta se muestra, entonces se presenta una visualización representativa de tendencias emocionales. | Medium | E5 |
+| US49 | Detalle de beneficios de funcionalidades | Como visitante, quiero conocer el beneficio asociado a cada funcionalidad principal de MindFlow, para identificar cómo el producto puede contribuir a mi bienestar. | Dado que el visitante explora la sección de funcionalidades, cuando revisa una funcionalidad, entonces la interfaz presenta una explicación breve del beneficio que proporciona. | Medium | E5 |
+| US50 | Vista previa de Insight de IA | Como visitante, quiero visualizar un ejemplo de una entrada de diario y su Insight generado por IA, para comprender cómo funciona la retroalimentación emocional de MindFlow. | Dado que el visitante visualiza la demostración del producto, cuando se presenta el ejemplo de Insight, entonces la interfaz muestra una entrada representativa y su correspondiente respuesta generada mediante IA. | High | E5 |
 
 ### 2.4.2. Impact Mapping
 
-_Pendiente_
+<div align="center">
+
+![Impact Mapping - MindFlow](assets/img/lean_ux/Impact_mapping.png)
+
+*Figura: Impact Mapping de MindFlow.*
+
+</div>
 
 ### 2.4.3. Product Backlog
 
-_Pendiente_
+El **Product Backlog** de MindFlow organiza las User Stories según el valor que aportan al usuario, las dependencias funcionales y técnicas, y la necesidad de validar progresivamente la propuesta de valor del producto.
+
+A diferencia de una organización basada únicamente en el identificador de cada User Story, el presente backlog prioriza primero las funcionalidades que permiten comunicar y validar el producto, seguidas por las capacidades centrales de diario emocional, Inteligencia Artificial, gestión de hábitos y analítica.
+
+Las User Stories correspondientes a la **Landing Page** se ubican en las primeras posiciones debido a que forman parte del alcance inicial del producto y permiten comunicar la propuesta de valor de MindFlow desde el primer Sprint.
+
+La columna **Priority** representa la importancia relativa de cada elemento dentro del producto, mientras que los **Story Points** representan una estimación relativa del esfuerzo necesario para su implementación.
+
+| # Orden | User Story ID | Título | Descripción | Priority | Story Points |
+|---|---|---|---|---|---|
+| 1 | US41 | Navegación principal de la Landing Page | Como visitante, quiero contar con un menú de navegación claro, para acceder rápidamente a las secciones más importantes de la Landing Page. | High | 2 |
+| 2 | US42 | CTA principal | Como visitante, quiero visualizar un CTA principal claramente identificable, para comenzar rápidamente a utilizar MindFlow. | High | 2 |
+| 3 | US43 | Grid de funcionalidades | Como visitante, quiero visualizar las principales funcionalidades de MindFlow, para comprender rápidamente las capacidades que ofrece el producto. | High | 3 |
+| 4 | US50 | Vista previa de Insight de IA | Como visitante, quiero visualizar un ejemplo de una entrada de diario y su Insight generado por IA, para comprender cómo funciona la retroalimentación emocional de MindFlow. | High | 3 |
+| 5 | US44 | Vista previa de la interfaz | Como visitante, quiero visualizar ejemplos de la aplicación, para comprender cómo funciona MindFlow antes de registrarme. | Medium | 3 |
+| 6 | US48 | Vista previa de tendencias emocionales | Como visitante, quiero visualizar un ejemplo de las tendencias emocionales, para comprender el tipo de análisis que MindFlow puede proporcionar. | Medium | 3 |
+| 7 | US49 | Detalle de beneficios de funcionalidades | Como visitante, quiero conocer el beneficio asociado a cada funcionalidad principal de MindFlow, para identificar cómo el producto puede contribuir a mi bienestar. | Medium | 3 |
+| 8 | US45 | CTA de conversión | Como visitante, quiero visualizar un CTA adicional al final de la Landing Page, para comenzar a utilizar MindFlow después de conocer sus beneficios. | High | 2 |
+| 9 | US46 | Navegación del footer | Como visitante, quiero acceder a enlaces legales e informativos desde el footer, para consultar información relevante sobre MindFlow. | Medium | 1 |
+| 10 | US47 | Enlaces a redes sociales | Como visitante, quiero acceder a los perfiles oficiales de MindFlow en redes sociales, para visitar sus canales externos de comunicación. | Low | 1 |
+| 11 | SP01 | Investigación de viabilidad de integración de IA | Como equipo de desarrollo, queremos investigar y validar alternativas para integrar análisis de sentimientos y retroalimentación empática mediante IA, para seleccionar una solución adecuada antes de completar la implementación. | High | 5 |
+| 12 | US11 | Entrada de diario | Como usuario, quiero escribir entradas en mi diario, para registrar mis pensamientos, sentimientos y experiencias emocionales. | High | 3 |
+| 13 | US12 | Análisis de sentimientos | Como usuario, quiero que MindFlow analice el tono emocional de mi entrada de diario, para comprender mejor mi estado emocional actual. | High | 5 |
+| 14 | US13 | Retroalimentación empática mediante IA | Como usuario, quiero recibir retroalimentación empática después de registrar mis emociones, para obtener orientación y acompañamiento inmediato. | High | 5 |
+| 15 | US19 (T) | Integración con API de LLM | Como desarrollador, quiero integrar un servicio basado en LLM, para que MindFlow pueda generar respuestas contextuales y empáticas. | High | 8 |
+| 16 | US21 | Creación de hábitos | Como usuario, quiero crear hábitos personalizados de bienestar, para construir una rutina constante de autocuidado. | High | 3 |
+| 17 | US22 | Registro de cumplimiento de hábitos | Como usuario, quiero marcar mis hábitos como completados, para monitorear mi progreso diario. | High | 2 |
+| 18 | US23 | Ajuste basado en nivel de estrés | Como usuario que experimenta un nivel elevado de estrés, quiero que MindFlow adapte sus recomendaciones de bienestar según mi estado emocional, para evitar sentirme sobrecargado. | High | 8 |
+| 19 | US31 | Dashboard de analítica | Como usuario, quiero visualizar analíticas de mi actividad emocional, para comprender cómo evoluciona mi bienestar a lo largo del tiempo. | High | 5 |
+| 20 | US01 | Registro con OAuth (Google) | Como nuevo usuario, quiero registrarme utilizando mi cuenta de Google, para acceder rápidamente a la plataforma. | High | 3 |
+| 21 | US02 | Inicio de sesión tradicional | Como usuario, quiero iniciar sesión con correo electrónico y contraseña, para disponer de una alternativa de acceso manual. | High | 3 |
+| 22 | US10 (T) | Seguridad de API mediante JWT | Como desarrollador, quiero autenticar las solicitudes protegidas mediante JWT, para evitar accesos no autorizados a los servicios del backend. | High | 3 |
+| 23 | US08 (T) | Encriptación AES-256 | Como arquitecto, quiero que la información sensible del diario se almacene cifrada, para proteger la confidencialidad de los datos del usuario. | High | 8 |
+| 24 | US07 | Eliminación de cuenta | Como usuario, quiero eliminar mi cuenta y mis registros personales, para mantener control sobre mi información. | High | 3 |
+| 25 | US30 (T) | Sincronización de datos offline | Como usuario de la aplicación móvil, quiero registrar información del diario sin conexión y sincronizarla posteriormente, para que una conexión intermitente a Internet no me impida registrar mis pensamientos. | High | 8 |
+| 26 | US38 (T) | Pruebas automatizadas | Como desarrollador, quiero disponer de pruebas automatizadas para los flujos críticos, para detectar regresiones antes de liberar cambios. | High | 5 |
+| 27 | US03 | Recuperación de cuenta | Como usuario, quiero restablecer mi contraseña mediante un enlace enviado por correo electrónico, para recuperar el acceso a mi cuenta si la olvido. | Medium | 3 |
+| 28 | US04 | Bloqueo mediante PIN | Como usuario, quiero configurar un PIN de seguridad, para proteger mi información privada frente a accesos físicos no autorizados. | Medium | 2 |
+| 29 | US05 | Perfil de usuario | Como usuario, quiero editar mis datos personales, para que MindFlow pueda personalizar mi experiencia. | Medium | 2 |
+| 30 | US14 | Etiquetas contextuales | Como usuario, quiero categorizar mis entradas mediante etiquetas, para identificar situaciones o áreas relacionadas con mi estado emocional. | Medium | 2 |
+| 31 | US15 | Adjuntos multimedia | Como usuario, quiero adjuntar contenido multimedia a mis entradas de diario, para enriquecer mis registros emocionales. | Medium | 5 |
+| 32 | US16 | Búsqueda por palabras clave | Como usuario, quiero buscar entradas anteriores mediante palabras clave, para localizar rápidamente experiencias específicas. | Medium | 3 |
+| 33 | US17 | Calendario de estado de ánimo | Como usuario, quiero visualizar mis registros emocionales a lo largo del tiempo, para identificar patrones en mi estado de ánimo. | Medium | 5 |
+| 34 | US18 | Resumen semanal mediante IA | Como usuario, quiero recibir un resumen semanal de mi actividad emocional, para reflexionar sobre los cambios en mi bienestar. | Medium | 5 |
+| 35 | US20 (T) | Registro de interacciones de IA | Como desarrollador, quiero registrar métricas relevantes de las interacciones con IA, para monitorear el funcionamiento y comportamiento de esta funcionalidad. | Medium | 2 |
+| 36 | US24 | Guía de respiración 4-7-8 | Como usuario, quiero acceder a un ejercicio guiado de respiración, para utilizar una técnica rápida de relajación durante momentos de estrés. | Medium | 5 |
+| 37 | US25 | Micro-meditaciones | Como usuario, quiero acceder a ejercicios cortos de meditación, para incorporar actividades breves de bienestar dentro de mi rutina. | Medium | 3 |
+| 38 | US26 | Feedback sobre recomendaciones | Como usuario, quiero calificar las recomendaciones de la IA, para que MindFlow registre cuáles me resultan útiles. | Medium | 2 |
+| 39 | US28 | Racha de hábitos | Como usuario, quiero visualizar mis rachas de hábitos, para mantenerme motivado mediante el seguimiento de mi constancia. | Medium | 3 |
+| 40 | US32 | Nube de palabras | Como usuario, quiero visualizar términos recurrentes de mi actividad en el diario, para identificar temas frecuentes o posibles detonantes de estrés. | Medium | 5 |
+| 41 | US33 | Planes Premium | Como usuario, quiero comparar los planes disponibles, para determinar si las funcionalidades Premium me resultan útiles. | Medium | 2 |
+| 42 | US34 | Pago seguro | Como usuario, quiero realizar el pago de mi suscripción mediante un proveedor seguro, para activar las funcionalidades Premium de manera confiable. | Medium | 8 |
+| 43 | US35 | Exportación en PDF | Como usuario Premium, quiero exportar un reporte estructurado en PDF, para guardar o compartir un resumen legible de mi información emocional. | Medium | 5 |
+| 44 | US37 | Soporte técnico | Como usuario, quiero crear una solicitud de soporte, para reportar problemas técnicos o solicitar asistencia. | Medium | 3 |
+| 45 | US39 (T) | Diseño responsive | Como desarrollador, quiero que la Landing Page y las interfaces compatibles se adapten a diferentes tamaños de pantalla, para que puedan utilizarse correctamente desde distintos dispositivos. | Medium | 5 |
+| 46 | US40 (T) | Rate Limiting | Como administrador, quiero aplicar límites a las solicitudes realizadas a la API, para proteger el backend frente a un uso excesivo o abusivo. | Medium | 3 |
+| 47 | US29 (T) | Indexación de base de datos | Como desarrollador, quiero indexar adecuadamente la información consultada con frecuencia, para mantener tiempos de respuesta eficientes. | Medium | 3 |
+| 48 | US09 (T) | Pipeline CI/CD | Como desarrollador, quiero contar con un flujo automatizado de integración y despliegue, para realizar entregas de manera consistente y eficiente. | Medium | 5 |
+| 49 | US06 | Modo oscuro | Como usuario, quiero activar el modo oscuro, para reducir la fatiga visual durante el uso nocturno. | Low | 2 |
+| 50 | US27 | Alerta de hidratación | Como usuario, quiero recibir recordatorios para beber agua, para mantener hábitos saludables durante mi rutina diaria. | Low | 2 |
+| 51 | US36 | Exportación en CSV | Como usuario Premium, quiero exportar mi información en formato CSV, para analizar los datos mediante herramientas externas. | Low | 3 |
 
 ## 2.5. Strategic-Level Domain-Driven Design
 
@@ -765,25 +1020,348 @@ Complementando esto con un pase rápido de **start-with-value** se confirmó que
 
 #### 2.5.1.2. Domain Message Flows Modeling
 
-_Pendiente_
+El **Domain Message Flows Modeling** permite representar cómo circulan los mensajes de dominio entre los diferentes **Bounded Contexts** de MindFlow, considerando **Commands, Domain Events, Policies, Actors/Agents** y sistemas externos.
+
+A partir de los eventos y límites identificados previamente durante el **EventStorming** y el **Candidate Context Discovery**, se modelaron los principales escenarios de interacción del sistema. Estos flujos permiten visualizar qué actor inicia una acción, qué Bounded Context asume la responsabilidad, qué mensaje se genera y cómo dicho mensaje puede provocar nuevas acciones en otros contextos.
+
+Los escenarios considerados son:
+
+1. Registro y autenticación de usuario.
+2. Registro emocional y diario.
+3. Generación de Insight con IA.
+4. Gestión de hábitos y recordatorios.
+5. Detección de estrés y bienestar.
+6. Generación y exportación de reportes.
+7. Suscripción Premium.
+8. Gestión de soporte.
+
+Para la representación gráfica se empleó la siguiente convención:
+
+- **Azul:** Command.
+- **Amarillo:** Domain Event.
+- **Rosado:** Policy.
+- **Gris:** Actor, Agent, Bounded Context o External System.
+- **Flechas:** dirección en la que se produce el flujo de mensajes.
+
+<div align="center">
+
+![Domain Message Flows - Parte 1](assets/img/event_storming/Flow1.jpg)
+
+*Figura: Domain Message Flows Modeling de MindFlow - Parte 1.*
+
+</div>
+
+La primera parte representa los flujos relacionados con la identidad del usuario, el registro de estados emocionales y las operaciones principales del diario. El usuario interactúa mediante la **MindFlow Mobile Application**, que dirige las operaciones hacia los Bounded Contexts correspondientes.
+
+El contexto **IAM** administra los Commands `Register user`, `Update profile` y `Log in`, generando respectivamente los Domain Events `User registered`, `Profile updated` y `User authenticated`.
+
+Por su parte, **Journal** administra el registro emocional mediante `Log mood`, `Write journal entry` y `Tag journal entry`, generando los eventos `Mood logged`, `Journal entry created` y `Journal entry tagged`.
+
+<div align="center">
+
+![Domain Message Flows - Parte 2](assets/img/event_storming/Flow2.jpg)
+
+*Figura: Domain Message Flows Modeling de MindFlow - Parte 2.*
+
+</div>
+
+La segunda parte representa los escenarios donde se producen interacciones entre distintos Bounded Contexts.
+
+Cuando una entrada de diario es creada, el Domain Event `Journal entry created` activa la Policy `after Journal entry created`, permitiendo que **AI Assistant** procese la información con apoyo de **Google Gemini API** y genere el evento `Insight generated`. El usuario también puede valorar la respuesta generada, produciendo `Assistant response rated`.
+
+En **Habits & Wellness**, los Commands `Create habit` y `Complete habit` permiten registrar y actualizar los hábitos del usuario. Cuando se alcanza el umbral correspondiente se activa la Policy `streak threshold met`, produciendo `Streak achieved`.
+
+De manera independiente, el **System** puede activar la Policy `check-in time reached`, que invoca al Bounded Context **Notifications** para producir el evento `Reminder sent`.
+
+El flujo de bienestar comienza con `Run stress check`, generando `Stress check completed`. Ante un nivel elevado de estrés se activa la Policy `after high-stress check`, produciendo `Wellness exercise suggested`.
+
+Asimismo, los registros emocionales recurrentes pueden activar `after recurring low mood`. **AI Assistant** identifica entonces el evento `Risk pattern detected`, el cual activa `after risk detected` y permite que **Notifications** produzca `Wellness alert sent`.
+
+<div align="center">
+
+![Domain Message Flows - Parte 3](assets/img/event_storming/Flow3.jpg)
+
+*Figura: Domain Message Flows Modeling de MindFlow - Parte 3.*
+
+</div>
+
+La tercera parte representa los flujos relacionados con analítica, monetización y soporte.
+
+El Bounded Context **Analytics & Reporting** permite generar un reporte mediante `Generate progress report`, produciendo `Progress report generated`. Posteriormente, el usuario puede ejecutar `Export report`, generando el evento `Report exported`.
+
+En **Subscriptions**, el usuario selecciona un plan mediante `Select premium plan`, produciendo `Premium plan selected`. El pago es procesado mediante un **Payment Gateway / Stripe**, generando `Payment processed`. Este evento activa la Policy `after payment processed`, dando como resultado `Subscription activated`. El usuario también puede ejecutar `Cancel subscription`, produciendo `Subscription canceled`.
+
+Finalmente, el Bounded Context **Support** administra las solicitudes de asistencia. El usuario ejecuta `Create support ticket`, produciendo `Support ticket created`, mientras que el **Support Agent** puede ejecutar `Resolve support ticket`, generando `Support ticket resolved`.
+
+En conjunto, estos flujos evidencian cómo los diferentes Bounded Contexts colaboran sin perder sus responsabilidades individuales, utilizando mensajes de dominio para coordinar las capacidades principales de MindFlow.
 
 #### 2.5.1.3. Bounded Context Canvases
 
-_Pendiente_
+Los **Bounded Context Canvases** permiten documentar de manera estructurada las responsabilidades, lenguaje, reglas de negocio y formas de comunicación de cada uno de los Bounded Contexts identificados durante el proceso de Strategic-Level Domain-Driven Design.
+
+Para MindFlow se definieron ocho Bounded Contexts: **IAM**, **Journal**, **AI Assistant**, **Habits & Wellness**, **Analytics & Reporting**, **Notifications**, **Subscriptions** y **Support**. Cada canvas describe su propósito, clasificación estratégica, lenguaje ubicuo, decisiones de negocio y mecanismos de comunicación de entrada y salida.
+
+### IAM
+
+El bounded context **IAM (Identity and Access Management)** concentra las responsabilidades relacionadas con la identidad de los usuarios, autenticación, perfiles y mecanismos de acceso a MindFlow. Funciona como un contexto de soporte para el resto de las capacidades del sistema.
+
+<div align="center">
+
+![Bounded Context Canvas - IAM](assets/img/event_storming/iam.png)
+
+*Figura: Bounded Context Canvas correspondiente a IAM.*
+
+</div>
+
+### Journal
+
+El bounded context **Journal** administra el diario emocional del usuario, incluyendo el registro de estados de ánimo, creación de entradas y organización de información mediante etiquetas. Se considera uno de los contextos centrales de MindFlow debido a su relación directa con la autoconciencia emocional.
+
+<div align="center">
+
+![Bounded Context Canvas - Journal](assets/img/event_storming/journal.png)
+
+*Figura: Bounded Context Canvas correspondiente a Journal.*
+
+</div>
+
+### AI Assistant
+
+El bounded context **AI Assistant** concentra las capacidades relacionadas con la interacción conversacional basada en Inteligencia Artificial, la generación de insights, el análisis del contexto emocional y la detección de patrones relevantes a partir de la información del usuario.
+
+<div align="center">
+
+![Bounded Context Canvas - AI Assistant](assets/img/event_storming/AIAssistant.png)
+
+*Figura: Bounded Context Canvas correspondiente a AI Assistant.*
+
+</div>
+
+### Habits & Wellness
+
+El bounded context **Habits & Wellness** administra la creación y seguimiento de hábitos, el cumplimiento de actividades, las rachas de progreso, los chequeos de estrés y las sugerencias orientadas al bienestar del usuario.
+
+<div align="center">
+
+![Bounded Context Canvas - Habits and Wellness](assets/img/event_storming/Habits.png)
+
+*Figura: Bounded Context Canvas correspondiente a Habits & Wellness.*
+
+</div>
+
+### Analytics & Reporting
+
+El bounded context **Analytics & Reporting** transforma la información generada en otros contextos en métricas, tendencias y reportes que permiten al usuario visualizar y comprender su evolución emocional y el progreso de sus hábitos.
+
+<div align="center">
+
+![Bounded Context Canvas - Analytics and Reporting](assets/img/event_storming/Analytics.png)
+
+*Figura: Bounded Context Canvas correspondiente a Analytics & Reporting.*
+
+</div>
+
+### Notifications
+
+El bounded context **Notifications** se encarga de gestionar recordatorios, alertas de bienestar y notificaciones dirigidas al usuario. Funciona como un contexto transversal que recibe información originada en otros Bounded Contexts y la comunica mediante los canales disponibles.
+
+<div align="center">
+
+![Bounded Context Canvas - Notifications](assets/img/event_storming/notifications.png)
+
+*Figura: Bounded Context Canvas correspondiente a Notifications.*
+
+</div>
+
+### Subscriptions
+
+El bounded context **Subscriptions** administra las capacidades comerciales de MindFlow relacionadas con los planes Premium, procesamiento de pagos, activación de suscripciones y cancelaciones, manteniendo estas responsabilidades separadas de las funcionalidades centrales de bienestar.
+
+<div align="center">
+
+![Bounded Context Canvas - Subscriptions](assets/img/event_storming/Subs.png)
+
+*Figura: Bounded Context Canvas correspondiente a Subscriptions.*
+
+</div>
+
+### Support
+
+El bounded context **Support** gestiona las solicitudes de asistencia de los usuarios mediante tickets de soporte, controlando su ciclo de vida desde la creación hasta su resolución por parte del equipo correspondiente.
+
+<div align="center">
+
+![Bounded Context Canvas - Support](assets/img/event_storming/Support.png)
+
+*Figura: Bounded Context Canvas correspondiente a Support.*
+
+</div>
+
+En conjunto, estos canvases permiten establecer límites claros entre las responsabilidades del dominio de MindFlow y documentar cómo cada Bounded Context mantiene su propio lenguaje y reglas de negocio, mientras colabora con otros contextos mediante mensajes y eventos de dominio.
 
 ### 2.5.2. Context Mapping
 
-_Pendiente_
+El **Context Mapping** permite representar las relaciones existentes entre los diferentes **Bounded Contexts** de MindFlow, identificando cuáles actúan como **Upstream (U)** y cuáles como **Downstream (D)**, así como el patrón de integración utilizado entre ellos.
+
+A partir de los Bounded Contexts identificados durante el EventStorming y el Candidate Context Discovery, se definieron relaciones de tipo **Conformist** y **Customer-Supplier**. Estas relaciones permiten mantener separados los modelos de dominio, al mismo tiempo que hacen explícitas las dependencias necesarias para el funcionamiento de la solución.
+
+<div align="center">
+
+![Context Mapping - MindFlow](assets/img/event_storming/ContextMapping.png)
+
+*Figura: Context Mapping de los Bounded Contexts de MindFlow.*
+
+</div>
+
+### Relaciones entre Bounded Contexts
+
+**IAM – Journal (Conformist)**
+
+En esta relación, **IAM** actúa como **Upstream**, ya que proporciona la identidad autenticada del usuario. **Journal** actúa como **Downstream**, utilizando dicha identidad para asociar las entradas del diario y los registros emocionales al usuario correspondiente.
+
+La relación se define como **Conformist**, debido a que Journal adopta la información de identidad proporcionada por IAM sin requerir un modelo de traducción adicional.
+
+**IAM – AI Assistant (Conformist)**
+
+**IAM** es el contexto **Upstream**, ya que proporciona la identidad del usuario autenticado. **AI Assistant** actúa como **Downstream**, utilizando esta información para asociar conversaciones, respuestas e insights con el usuario correspondiente.
+
+La relación se establece como **Conformist**, ya que AI Assistant utiliza directamente la identidad definida por IAM.
+
+**IAM – Habits & Wellness (Conformist)**
+
+**IAM** funciona como **Upstream**, mientras que **Habits & Wellness** funciona como **Downstream**. La identidad proporcionada por IAM permite asociar hábitos, chequeos de estrés y actividades de bienestar con un usuario específico.
+
+Habits & Wellness adopta el modelo de identidad de IAM, por lo que la relación se clasifica como **Conformist**.
+
+**IAM – Analytics & Reporting (Conformist)**
+
+En esta relación, **IAM** actúa como **Upstream** y **Analytics & Reporting** como **Downstream**. Los reportes, métricas y tendencias generados por MindFlow deben corresponder a un usuario previamente identificado.
+
+Analytics & Reporting utiliza la identidad proporcionada por IAM, estableciendo una relación de tipo **Conformist**.
+
+**IAM – Subscriptions (Conformist)**
+
+**IAM** es **Upstream**, proporcionando la identidad del usuario, mientras que **Subscriptions** es **Downstream**, ya que necesita asociar los planes Premium, pagos y estados de suscripción a un usuario determinado.
+
+Subscriptions adopta directamente la identificación del usuario gestionada por IAM, por lo que se utiliza el patrón **Conformist**.
+
+**IAM – Support (Conformist)**
+
+**IAM** funciona como **Upstream**, proporcionando la información de identidad necesaria para registrar solicitudes de soporte. **Support** actúa como **Downstream**, asociando cada ticket con el usuario que lo generó.
+
+La relación se define como **Conformist**, ya que Support utiliza directamente el modelo de identidad proporcionado por IAM.
+
+**Journal – AI Assistant (Customer-Supplier)**
+
+En esta relación, **Journal** actúa como **Upstream (Supplier)**, ya que produce información emocional como entradas de diario y estados de ánimo.
+
+**AI Assistant** funciona como **Downstream (Customer)**, consumiendo dicha información para generar insights, respuestas contextualizadas y detectar patrones emocionales.
+
+La relación se clasifica como **Customer-Supplier**, debido a que AI Assistant depende de información generada por Journal para ejecutar parte de sus capacidades.
+
+**Journal – Analytics & Reporting (Customer-Supplier)**
+
+**Journal** actúa como **Upstream (Supplier)** al proporcionar información relacionada con entradas emocionales y estados de ánimo.
+
+**Analytics & Reporting** funciona como **Downstream (Customer)**, utilizando estos datos para construir métricas, tendencias y reportes sobre la evolución emocional del usuario.
+
+Por ello, la relación se establece como **Customer-Supplier**.
+
+**Habits & Wellness – Analytics & Reporting (Customer-Supplier)**
+
+**Habits & Wellness** funciona como **Upstream (Supplier)**, ya que genera información relacionada con hábitos, cumplimiento, rachas y chequeos de estrés.
+
+**Analytics & Reporting** actúa como **Downstream (Customer)**, consumiendo estos datos para generar indicadores y reportes relacionados con el progreso del usuario.
+
+La relación se clasifica como **Customer-Supplier**.
+
+**AI Assistant – Notifications (Customer-Supplier)**
+
+**AI Assistant** actúa como **Upstream (Supplier)** al detectar patrones de riesgo y generar información que puede requerir una comunicación hacia el usuario.
+
+**Notifications** funciona como **Downstream (Customer)**, reaccionando ante estos eventos para generar y enviar alertas de bienestar.
+
+Esta relación se modela como **Customer-Supplier**.
+
+**Habits & Wellness – Notifications (Customer-Supplier)**
+
+**Habits & Wellness** actúa como **Upstream (Supplier)** al generar información relacionada con hábitos, chequeos y condiciones de bienestar.
+
+**Notifications** funciona como **Downstream (Customer)** al utilizar estas condiciones para generar recordatorios y comunicaciones dirigidas al usuario.
+
+Por ello, la relación se establece como **Customer-Supplier**.
+
+En conjunto, el Context Mapping permite visualizar las dependencias entre los Bounded Contexts de MindFlow y establecer de manera explícita la dirección de la comunicación entre ellos. IAM funciona como proveedor transversal de identidad, mientras que Journal, Habits & Wellness y AI Assistant generan información de dominio que posteriormente es utilizada por contextos como Analytics & Reporting y Notifications.
 
 ### 2.5.3. Software Architecture
 
 #### 2.5.3.1. Software Architecture Context Level Diagrams
 
-_Pendiente_
+El **Software Architecture Context Level Diagram** representa a MindFlow como un único sistema y muestra su interacción con los usuarios y los servicios externos necesarios para su funcionamiento.
+
+En este nivel del modelo C4 no se detallan los componentes internos de MindFlow, sino únicamente los actores y sistemas externos con los que se relaciona.
+
+<div align="center">
+
+![Diagrama de Contexto MindFlow](assets/diagrams/Diagrama%20de%20Contexto%20Mindflow.png)
+
+*Figura: Software Architecture Context Level Diagram de MindFlow.*
+
+</div>
+
+**Explicación del diagrama**
+
+El usuario interactúa con **MindFlow** para registrar información emocional, gestionar hábitos, consultar insights generados mediante Inteligencia Artificial, revisar reportes de progreso, gestionar su cuenta y acceder a funcionalidades Premium.
+
+MindFlow se integra con diversos servicios externos:
+
+- **Google Gemini API**: utilizado para generar respuestas, insights emocionales y sugerencias basadas en Inteligencia Artificial.
+- **Firebase Cloud Messaging**: utilizado para el envío de notificaciones push y alertas de bienestar.
+- **Google OAuth**: permite la autenticación de usuarios mediante Google Sign-In.
+- **Stripe**: procesa los pagos relacionados con las suscripciones Premium.
+- **Cloudinary**: almacena y sirve archivos multimedia asociados a las entradas del diario.
+- **Email Provider**: permite el envío de correos transaccionales, como recuperación de contraseña y notificaciones relacionadas con soporte.
+
+Este diagrama permite visualizar el límite del sistema MindFlow y las principales dependencias externas que colaboran con la solución.
 
 #### 2.5.3.2. Software Architecture Container Level Diagrams
 
-_Pendiente_
+El **Software Architecture Container Level Diagram** representa la estructura interna de MindFlow a nivel de contenedores, mostrando las principales aplicaciones, servicios y mecanismos de persistencia que componen la solución.
+
+A diferencia del Context Level Diagram, en este nivel del modelo C4 se detalla cómo MindFlow se divide internamente y cómo sus contenedores se comunican entre sí y con los servicios externos.
+
+<div align="center">
+
+![Diagrama de Contenedores MindFlow](assets/diagrams/Diagrama%20de%20Contenedores%20Mindflow.png)
+
+*Figura: Software Architecture Container Level Diagram de MindFlow.*
+
+</div>
+
+**Explicación del diagrama**
+
+MindFlow está compuesto por cuatro contenedores principales:
+
+- **Mobile Application**: aplicación Android utilizada por los usuarios para acceder a las funcionalidades de MindFlow, incluyendo diario emocional, hábitos, asistente de IA, analíticas, suscripciones y soporte.
+
+- **Landing Page**: sitio web público desarrollado con HTML5, CSS3 y JavaScript, utilizado para presentar MindFlow y sus principales características.
+
+- **Web Services API**: backend desarrollado con ASP.NET Core / .NET 10. Centraliza la lógica de negocio, procesa las solicitudes provenientes de la aplicación móvil e integra los servicios externos utilizados por la plataforma.
+
+- **Database**: base de datos relacional MySQL 8.0 utilizada para persistir información de usuarios, entradas del diario, hábitos, información analítica, suscripciones y tickets de soporte.
+
+La **Mobile Application** se comunica con la **Web Services API** mediante HTTPS/JSON utilizando JWT para la autenticación de solicitudes. La API, a su vez, realiza operaciones de lectura y escritura sobre la base de datos MySQL.
+
+La Web Services API también mantiene integraciones con diferentes servicios externos:
+
+- **Google Gemini API**: generación de respuestas, insights emocionales y sugerencias mediante Inteligencia Artificial.
+- **Firebase Cloud Messaging**: envío de notificaciones push y alertas de bienestar.
+- **Google OAuth**: autenticación mediante Google Sign-In.
+- **Stripe**: procesamiento de pagos asociados a suscripciones Premium.
+- **Cloudinary**: almacenamiento y recuperación de archivos multimedia asociados a las entradas del diario.
+- **Email Provider**: envío de correos transaccionales mediante SMTP.
+
+Este nivel del modelo C4 permite comprender cómo se distribuyen las responsabilidades principales de la solución y cómo los contenedores internos de MindFlow colaboran para ofrecer las funcionalidades del sistema.
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
 
@@ -1179,6 +1757,326 @@ El diagrama muestra los tres módulos como grupos de componentes diferenciados: 
 </div>
 
 `habit_completion_logs` tiene **Foreign Key física enforced** hacia `habits.id` con `ON DELETE CASCADE`. `habits` y `cached_habit_suggestions` **no tienen Foreign Key declarada** hacia `users.id` (relación lógica). `cached_habit_suggestions` tiene índice único por `user_id` (una sola caché vigente por usuario). `wellness_exercises` no tiene relación con ninguna otra tabla de este bounded context — es un catálogo independiente.
+
+---
+
+### 2.6.5. Bounded Context: Analytics & Reporting
+
+El bounded context **Analytics & Reporting** transforma el registro emocional del usuario en información accionable: un puntaje semanal de bienestar con su tendencia, un calendario de estados de ánimo, una nube de palabras frecuentes, y —para los usuarios con suscripción Premium— la exportación de un reporte personal en PDF o CSV. El equipo decidió agrupar ambas capacidades (analítica interna y exportación de reportes) en un mismo bounded context porque comparten la misma fuente de datos (las entradas del diario del usuario) y el mismo propósito de negocio: convertir datos crudos en una narrativa comprensible para el usuario.
+
+A diferencia de IAM, Analytics **no define un repository interface propio**: tanto los Command/Query Handlers de `AnalyticsCache` y `WordCloud` como el servicio de cómputo pesado acceden directamente a `AppDbContext`, siguiendo el mismo patrón CQRS explícito adoptado en Journal (sin una capa de repositorios intermedia). El único puerto de dominio propio del sub-modelo Analytics es `IAnalyticsCacheInvalidator`, pensado exclusivamente para ser invocado **desde otro bounded context** (Journal) cuando el diario de un usuario cambia; el sub-modelo Reporting, por su parte, no persiste ningún agregado propio —un reporte es un documento generado al vuelo a partir de las entradas del diario, no un dato nuevo que el sistema deba retener— y expone su propio puerto, `IReportingService`.
+
+#### 2.6.5.1. Domain Layer
+
+El Domain Layer concentra los agregados `AnalyticsCache` y `WordCloud`, la enumeración `AnalyticsError`, y los dos puertos de dominio del bounded context: `IAnalyticsCacheInvalidator` (consumido por Journal) e `IReportingService` (consumido por el propio Interface Layer de Reporting).
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `AnalyticsCache` | Aggregate Root (implementa `IAuditableEntity`) | Representa el resultado precomputado del análisis semanal de bienestar de un usuario. Se decidió modelarlo como un caché reemplazable en lugar de un historial inmutable: si el usuario agrega una entrada de diario a mitad de semana, el registro se recalcula por completo en vez de ajustarse incrementalmente. | `Id: int`, `UserId: int`, `WeekStart: DateOnly`, `Score: int`, `TrendPercentage: string`, `StartDate: DateOnly?`, `EndDate: DateOnly?`, `AiInsight: string?`, `AiInsightLocalized: string?`, `Kpis: string?` (JSON), `FluctuationData: string?` (JSON), `TrendData: string?` (JSON), `CreatedAt/UpdatedAt: DateTimeOffset?` | *(entidad anémica — el cómputo vive en `AnalyticsComputationService`)* | Único por `(UserId, WeekStart)`; `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física) |
+| `WordCloud` | Aggregate Root (implementa `IAuditableEntity`) | Representa la nube de palabras más frecuentes extraídas de las entradas de diario recientes de un usuario, con un único registro por usuario. | `Id: int`, `UserId: int`, `Words: string?` (JSON), `CreatedAt/UpdatedAt: DateTimeOffset?` | *(anémica)* | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física) |
+| `AnalyticsError` | Domain Error Enum | Códigos de error de dominio para resultados fallidos del sub-modelo Analytics. | — | `AnalyticsCacheNotFound`, `AnalyticsCacheCreationFailed`, `AnalyticsCacheUpdateFailed`, `WordCloudNotFound`, `WordCloudCreationFailed` | Usado por los Handlers al construir `Result.Failure(...)` |
+| `IAnalyticsCacheInvalidator` | Service Port | Único puerto de dominio expuesto hacia otros bounded contexts: permite que Journal notifique que el análisis de un usuario quedó desactualizado, sin conocer cómo Analytics calcula ni almacena sus datos internamente. | — | `InvalidateAsync(userId: int, entryDate: DateOnly, ct: CancellationToken): Task` | Implementada por `AnalyticsCacheInvalidator` (Infrastructure Layer); consumida por los Command Handlers de Journal |
+| `IReportingService` | Service Port | Abstrae la generación del reporte personal del usuario, dejando oculta la biblioteca de generación de documentos detrás de la interfaz. | — | `GeneratePdfAsync(userId: int): Task<byte[]>`, `GenerateCsvAsync(userId: int): Task<byte[]>` | Implementada por `ReportingService` (Infrastructure Layer); consumida por `ReportingController` |
+
+#### 2.6.5.2. Interface Layer
+
+El Interface Layer expone Analytics y Reporting como dos controladores REST independientes; ninguno de los dos usa una capa de Resources/Assemblers, siguiendo el mismo criterio adoptado en Journal: los DTOs del Application Layer se consumen directamente como contrato de entrada/salida.
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `AnalyticsController` | REST Controller (`""`, rutas de nivel raíz) | Expone las operaciones de consulta y cómputo del caché analítico semanal, la nube de palabras y el calendario de estados de ánimo. Resuelve el `user_id` del JWT y, si no existe caché para la semana solicitada, dispara su cómputo bajo demanda. | `GET/POST/PUT /analyticsCache`, `POST /analyticsCache/compute`, `GET/POST /wordCloud`, `POST /wordCloud/compute`, `GET /moodCalendar` | Depende de `IMediator` (Cortex.Mediator) para las operaciones simples, de `AnalyticsComputationService` para el cómputo pesado bajo demanda, y de `ICacheService` (Redis) para el calendario de estados de ánimo |
+| `ReportingController` | REST Controller (`api/v1/reporting`) | Expone la exportación del reporte personal del usuario, restringida a suscriptores Premium. | `GET /export/pdf`, `GET /export/csv` | Depende de `IReportingService` para generar el documento y de `AppDbContext` (acceso puntual) para verificar la suscripción activa del usuario |
+
+#### 2.6.5.3. Application Layer
+
+El Application Layer combina dos estilos: manejadores CQRS livianos (vía Cortex.Mediator) para las operaciones simples de lectura/escritura sobre `AnalyticsCache` y `WordCloud`, y un servicio de aplicación dedicado (`AnalyticsComputationService`) para el cómputo pesado, deliberadamente separado de los Handlers para no mezclar una operación costosa con el flujo estándar de consulta.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `CreateAnalyticsCacheCommand`, `UpdateAnalyticsCacheCommand`, `CreateWordCloudCommand` | Commands | Encapsulan la intención de cada caso de uso de escritura simple sobre `AnalyticsCache`/`WordCloud`. | P. ej. `CreateAnalyticsCacheCommand{UserId, WeekStart, Score, ...}` | Despachadas por `AnalyticsController` vía `IMediator.SendAsync` |
+| `GetAnalyticsCacheQuery`, `GetWordCloudQuery` | Queries | Encapsulan cada caso de uso de lectura sobre `AnalyticsCache`/`WordCloud`. | `GetAnalyticsCacheQuery{UserId, WeekStart?}`, `GetWordCloudQuery{UserId}` | Despachadas por `AnalyticsController` vía `IMediator.QueryAsync` |
+| `CreateAnalyticsCacheCommandHandler`, `UpdateAnalyticsCacheCommandHandler`, `CreateWordCloudCommandHandler` | Command Handlers (`ICommandHandler<TCommand, Result<T>>`) | Implementan la creación/actualización directa de `AnalyticsCache`/`WordCloud` contra `AppDbContext`. | Un método `Handle` por Command | Dependen de `AppDbContext` directamente (sin `IBaseRepository`) |
+| `GetAnalyticsCacheQueryHandler`, `GetWordCloudQueryHandler` | Query Handlers (`IQueryHandler<TQuery, Result<T>>`) | Implementan la lectura de `AnalyticsCache`/`WordCloud`, mapeando la entidad a su DTO correspondiente. | Un método `Handle` por Query | Dependen de `AppDbContext` directamente |
+| `AnalyticsComputationService` | Application Service | Orquesta el cómputo pesado: puntaje semanal y tendencia respecto a la semana anterior, calendario de estados de ánimo, extracción de nube de palabras, y el insight narrativo (con reserva local en español si el proveedor de IA no responde). | `ComputeAndSaveWeeklyAsync(userId, weekStart): Task<AnalyticsCache>`, `ComputeMoodCalendarAsync(userId, year, month): Task<List<object>>`, `ComputeAndSaveWordCloudAsync(userId): Task<WordCloud>` | Depende de `AppDbContext` (lee `JournalEntries`, escribe `AnalyticsCache`/`WordCloud`) y de `IAiService` (bounded context AI Assistant) para el insight narrativo |
+| `AnalyticsCacheDto`, `KpiItemDto`, `ChartDataDto`, `WordCloudDto` | Response DTOs | Representan la forma pública de cada agregado, ya lista para que el cliente renderice sus gráficos sin transformar el JSON almacenado. | P. ej. `AnalyticsCacheDto{Id, UserId, WeekStart, Score, TrendPercentage, AiInsightLocalized, Kpis, FluctuationData, TrendData}` | Construidos por los Query Handlers y por `AnalyticsController` a partir de las entidades de dominio |
+
+#### 2.6.5.4. Infrastructure Layer
+
+El Infrastructure Layer contiene las implementaciones concretas de los dos puertos definidos en el Domain Layer, además de la tarea programada que mantiene el análisis de todos los usuarios actualizado sin que tengan que esperar el cómputo bajo demanda.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `AnalyticsCacheInvalidator` | Infrastructure Service | Implementa `IAnalyticsCacheInvalidator`: elimina el caché semanal y la nube de palabras vigentes de un usuario, y limpia también su entrada de caché de corta duración del calendario de estados de ánimo. | `InvalidateAsync(userId, entryDate, ct): Task` | Implementa `IAnalyticsCacheInvalidator`; depende de `AppDbContext` y de `ICacheService` (Redis) |
+| `ReportingService` | Infrastructure Service | Implementa `IReportingService`: construye el documento PDF con la identidad visual de MindFlow (biblioteca de maquetado de documentos) y el archivo CSV tabular (biblioteca de escritura tabular estándar), ambos a partir de las entradas de diario del usuario. | `GeneratePdfAsync(userId): Task<byte[]>`, `GenerateCsvAsync(userId): Task<byte[]>` | Implementa `IReportingService`; depende de `AppDbContext` |
+| `WeeklySummaryScheduler` | Background Service (`BackgroundService`) | Job en segundo plano que, una vez por semana, recalcula automáticamente el caché analítico y la nube de palabras de todos los usuarios registrados, para que la información esté lista antes de que el usuario la consulte. | `ExecuteAsync(stoppingToken): Task` (override) | Depende de `AnalyticsComputationService` y `AppDbContext`, resueltos vía `IServiceScopeFactory` |
+| Caché de corta duración (Redis) | Infrastructure Concern | Se decidió cachear el resultado del calendario de estados de ánimo por un tiempo de vida corto (15 minutos), al ser una vista que se recalcula sobre un rango de fechas y no necesita reflejar cambios al instante. | `ICacheService.GetAsync<T>(key)`, `SetAsync<T>(key, value, ttl)` | Consumida por `AnalyticsController`; invalidada puntualmente por `AnalyticsCacheInvalidator` |
+
+---
+
+#### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Analytics & Reporting Component Diagram](assets/img/software_architecture/analytics_reporting_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Analytics & Reporting dentro del container Web Services API.*
+
+</div>
+
+El diagrama muestra los dos sub-modelos del bounded context: `AnalyticsController` despacha las operaciones simples hacia los **Analytics/WordCloud Command & Query Handlers** (vía mediador) y delega el cómputo pesado en `AnalyticsComputationService`, que a su vez solicita el insight narrativo al **AI Advisory Service** externo. `AnalyticsCacheInvalidator` aparece como el único componente invocado desde fuera del bounded context (por Journal), cruzando el límite entre contexts a través de un puerto explícito. `ReportingController` delega en `ReportingService`, que lee directamente las entradas de diario para construir el PDF o el CSV, tras validar la suscripción Premium del usuario.
+
+#### 2.6.5.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Analytics & Reporting Domain Layer Class Diagram](assets/img/software_architecture/analytics_reporting_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Analytics & Reporting.*
+
+</div>
+
+El diagrama muestra los agregados `AnalyticsCache` y `WordCloud` (ambos implementan `IAuditableEntity`), la enumeración `AnalyticsError`, el puerto `IAnalyticsCacheInvalidator` y el puerto `IReportingService`, junto con los Command/Query Handlers de Analytics y el servicio `AnalyticsComputationService` que los complementa.
+
+##### 2.6.5.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Analytics & Reporting Database Diagram](assets/img/software_architecture/analytics_reporting_database_diagram.png)
+*Figura: Database Diagram del bounded context Analytics & Reporting.*
+
+</div>
+
+El bounded context Analytics & Reporting persiste en dos tablas propias: `analytics_caches` (con un registro único por `(user_id, week_start)`) y `word_clouds` (un único registro por usuario). Ninguna de las dos tiene Foreign Key física hacia `users`, `journal_entries` ni `subscriptions`: `user_id` es siempre una referencia lógica al bounded context IAM, y tanto el cómputo de Analytics como la exportación de Reporting leen `journal_entries` (y, en el caso de Reporting, `subscriptions`) directamente, sin relación física declarada en el esquema.
+
+---
+
+### 2.6.6. Bounded Context: Notifications
+
+El bounded context **Notifications** es responsable de la bandeja de notificaciones del usuario y del envío de notificaciones push a sus dispositivos registrados. El equipo decidió mantenerlo deliberadamente simple: a diferencia de Journal o Analytics, la mayoría de sus operaciones (listar notificaciones, marcarlas como leídas, registrar o eliminar un dispositivo) son consultas y escrituras directas sin reglas de negocio adicionales, por lo que **no se introdujeron Commands, Queries ni un Application Service dedicado** para ellas: `NotificationsController` accede directamente a `AppDbContext` e `IUnitOfWork` para esos casos. La única regla de negocio real del bounded context —que toda notificación enviada quede primero registrada en la bandeja del usuario, y solo después se intente entregar como push— se aisló detrás de un único puerto de dominio, `INotificationService`.
+
+#### 2.6.6.1. Domain Layer
+
+El Domain Layer concentra las dos entidades del bounded context. Ninguna define un repository interface propio: al ser operaciones simples de consulta/escritura, el equipo decidió que tanto el Interface Layer como la implementación del puerto de notificación accedan directamente a `AppDbContext`, sin una capa de repositorio intermedia.
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `Notification` | Aggregate Root (implementa `IAuditableEntity`) | Representa una notificación en la bandeja de un usuario, con su estado de lectura. | `Id: int`, `UserId: int`, `Title: string`, `Body: string`, `IsRead: bool`, `CreatedAt/UpdatedAt: DateTimeOffset?` | *(entidad anémica — el ciclo de vida lo gestiona `NotificationsController` y `INotificationService`)* | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física); sin relación física con `DeviceToken` |
+| `DeviceToken` | Entity | Representa el token de un dispositivo (web, Android o iOS) habilitado para recibir notificaciones push. | `Id: int`, `UserId: int`, `Token: string`, `Platform: string`, `CreatedAt: DateTimeOffset` | *(anémica)* | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física); un mismo `Token` se reasigna de usuario en lugar de duplicarse |
+
+#### 2.6.6.2. Interface Layer
+
+El Interface Layer expone la bandeja de notificaciones y el registro de dispositivos como un único controlador REST, que para las operaciones de consulta/escritura simple actúa también como su propio orquestador (sin pasar por un Application Service intermedio).
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `NotificationsController` | REST Controller (`/notifications`) | Expone el listado de notificaciones del usuario (las 50 más recientes), marcarlas como leídas, y el registro/baja de un token de dispositivo. Resuelve el `user_id` del JWT y valida ownership antes de operar. | `GET /`, `PATCH /{id}/read`, `POST /register-device`, `DELETE /unregister-device` | Depende directamente de `AppDbContext` (lecturas) e `IUnitOfWork` (persistencia de cambios); no despacha Commands ni Queries |
+| `RegisterDeviceRequest`, `UnregisterDeviceRequest` | Request DTOs | Representan el cuerpo de las peticiones de registro y baja de un dispositivo. | `RegisterDeviceRequest{Token, Platform}`, `UnregisterDeviceRequest{Token}` | Consumidos directamente por `NotificationsController`, sin Assembler intermedio |
+
+#### 2.6.6.3. Application Layer
+
+El Application Layer de este bounded context se reduce, por diseño, a un único puerto: la lógica de negocio real de Notifications —el envío efectivo de una notificación, individual o masiva— vive detrás de `INotificationService`, mientras que las operaciones de simple consulta/escritura del inbox quedan resueltas en el Interface Layer, tal como se explica en la introducción de esta sección.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `INotificationService` | Service Port | Abstrae el envío de una notificación, garantizando que siempre quede primero registrada en la bandeja del destinatario antes de intentar entregarla como push. | `SendToAllAsync(title, body, ct): Task`, `SendToUserAsync(userId, title, body, ct): Task` | Implementada por `FcmNotificationService` (Infrastructure Layer); consumida por `HydrationReminderService` y por cualquier otro bounded context que necesite notificar a un usuario |
+
+#### 2.6.6.4. Infrastructure Layer
+
+El Infrastructure Layer implementa el puerto de notificación sobre el proveedor de push externo, y contiene el job en segundo plano que dispara el único recordatorio automático de MindFlow.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `FcmNotificationService` | Infrastructure Service | Implementa `INotificationService`: registra la `Notification` correspondiente, obtiene un token de acceso OAuth2 para el proveedor de push, y envía el payload a cada `DeviceToken` del destinatario. Los tokens que el proveedor reporta como inválidos se eliminan automáticamente de `device_tokens`. | `SendToAllAsync(title, body, ct): Task`, `SendToUserAsync(userId, title, body, ct): Task` | Implementa `INotificationService`; depende de `AppDbContext` y del servicio externo **Push Notification Service** (FCM) |
+| `HydrationReminderService` | Background Service (`BackgroundService`) | Job en segundo plano que, cada dos horas, envía a todos los usuarios registrados un recordatorio de bienestar (hidratación), como el único ejemplo de notificación proactiva y no solicitada por el usuario. | `ExecuteAsync(stoppingToken): Task` (override) | Depende de `INotificationService`, resuelto vía `IServiceScopeFactory` |
+
+---
+
+#### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Notifications Component Diagram](assets/img/software_architecture/notifications_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Notifications dentro del container Web Services API.*
+
+</div>
+
+El diagrama refleja la asimetría deliberada del bounded context: `NotificationsController` accede directamente a la base de datos para sus operaciones de bandeja y registro de dispositivos, mientras que `NotificationService` concentra la única lógica de negocio (registrar y enviar) y es el componente al que recurre el job `HydrationReminderService` para su recordatorio periódico, cruzando hacia el proveedor externo de push notifications.
+
+#### 2.6.6.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.6.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Notifications Domain Layer Class Diagram](assets/img/software_architecture/notifications_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Notifications.*
+
+</div>
+
+El diagrama muestra las dos entidades del bounded context, `Notification` (que implementa `IAuditableEntity`) y `DeviceToken`, junto con el puerto `INotificationService` que las relaciona: registra una `Notification` por cada envío y lee los `DeviceToken` del destinatario para la entrega push.
+
+##### 2.6.6.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Notifications Database Diagram](assets/img/software_architecture/notifications_database_diagram.png)
+*Figura: Database Diagram del bounded context Notifications.*
+
+</div>
+
+El bounded context Notifications persiste en dos tablas independientes entre sí: `notifications` y `device_tokens`. Ninguna tiene Foreign Key física hacia `users`: `user_id` es en ambos casos una referencia lógica al bounded context IAM. Se recomienda un índice único sobre `device_tokens.token`, dado que el mismo token de dispositivo se reasigna de usuario en lugar de duplicarse.
+
+---
+
+### 2.6.7. Bounded Context: Subscriptions
+
+El bounded context **Subscriptions** es responsable del plan de suscripción del usuario (gratuito o Premium) y de toda su facturación: iniciar el pago, verificar que se completó, sincronizar los cambios de estado que reporta el proveedor de pagos, y permitir la cancelación. El equipo decidió modelarlo con un único agregado plano y un único servicio de aplicación: a diferencia de Journal o Analytics, aquí no hay un catálogo de casos de uso lo bastante grande como para justificar Commands, Queries o manejadores separados — toda la lógica de facturación cabe naturalmente en una sola interfaz orientada a los verbos del ciclo de vida de una suscripción (iniciar checkout, verificar, cancelar, reconciliar webhook).
+
+#### 2.6.7.1. Domain Layer
+
+El Domain Layer se reduce a un único agregado, sin repository interface propio: al tener una única suscripción por usuario y operaciones acotadas, el equipo decidió que el servicio de aplicación acceda directamente a `AppDbContext`, sin una capa de repositorio intermedia.
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `Subscription` | Aggregate Root (implementa `IAuditableEntity`) | Representa el plan de facturación de un usuario. Se decidió modelar un único agregado plano —sin una entidad separada de "transacción de pago"— porque el estado completo de facturación que MindFlow necesita conocer (plan, estado, identificadores del proveedor de pagos) cabe en un solo registro; el historial detallado de cobros queda delegado por completo al proveedor externo. | `Id: int`, `UserId: int`, `Plan: string` ("free"/"premium"), `Status: string` ("active"/"past_due"/"canceled"), `StripeCustomerId: string?`, `StripeSubscriptionId: string?`, `ExpiresAt: DateTimeOffset?`, `CreatedAt/UpdatedAt: DateTimeOffset?` | `Activate(stripeCustomerId, stripeSubscriptionId)`, `Cancel()`, `MarkPastDue()`, propiedad calculada `IsPremium` | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física); único registro por usuario |
+
+#### 2.6.7.2. Interface Layer
+
+El Interface Layer expone la suscripción del usuario y el endpoint de webhook del proveedor de pagos como un único controlador REST.
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SubscriptionsController` | REST Controller (`api/v1/subscriptions`) | Expone el inicio de checkout, la consulta del plan actual, la verificación de una sesión completada, la cancelación, y recibe el webhook del proveedor de pagos (único endpoint anónimo del bounded context, protegido por verificación de firma en lugar de JWT). | `POST /checkout`, `GET /me`, `POST /verify-session`, `POST /cancel`, `POST /webhook` (`[AllowAnonymous]`) | Depende directamente de `ISubscriptionService` para los cinco casos de uso; no usa Resources ni Assemblers |
+
+#### 2.6.7.3. Application Layer
+
+El Application Layer se reduce, igual que en Notifications, a un único puerto de dominio: toda la lógica de facturación de MindFlow queda concentrada detrás de `ISubscriptionService`.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `ISubscriptionService` | Service Port | Abstrae toda la lógica de facturación —creación de la sesión de pago, verificación, reconciliación del webhook y cancelación— detrás de una interfaz que no expone detalles del proveedor de pagos concreto. | `CreateCheckoutSessionAsync(userId, userEmail, ct): Task<CheckoutSessionDto>`, `HandleWebhookAsync(payload, stripeSignature, ct): Task`, `GetByUserIdAsync(userId, ct): Task<SubscriptionDto>`, `VerifySessionAsync(userId, sessionId, ct): Task<SubscriptionDto>`, `CancelAsync(userId, ct): Task` | Implementada por `SubscriptionService` (Infrastructure Layer); consumida por `SubscriptionsController` |
+| `SubscriptionDto`, `CheckoutSessionDto` | Response DTOs | Representan, respectivamente, el estado público del plan del usuario, y la URL de la sesión de pago que el cliente debe abrir para completar el checkout. | `SubscriptionDto{UserId, Plan, Status, IsPremium, ExpiresAt}`, `CheckoutSessionDto{CheckoutUrl}` | Construidos por `ISubscriptionService` a partir de `Subscription` o de la respuesta del proveedor de pagos |
+
+#### 2.6.7.4. Infrastructure Layer
+
+El Infrastructure Layer implementa el puerto de facturación sobre el proveedor de pagos externo, siendo el punto de integración más denso del bounded context: reconcilia tanto las llamadas directas del usuario como los eventos asíncronos del webhook.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SubscriptionService` | Infrastructure Service | Implementa `ISubscriptionService`: crea la sesión de checkout, verifica una sesión completada, cancela la suscripción, y procesa los eventos entrantes del webhook (sesión completada, suscripción actualizada/eliminada, pago fallido/exitoso), manteniendo `Subscription` sincronizada con el estado real del proveedor de pagos. | `CreateCheckoutSessionAsync(...)`, `HandleWebhookAsync(...)`, `GetByUserIdAsync(...)`, `VerifySessionAsync(...)`, `CancelAsync(...)` | Implementa `ISubscriptionService`; depende de `AppDbContext` y del servicio externo **Payment Provider** (Stripe) |
+
+---
+
+#### 2.6.7.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Subscriptions Component Diagram](assets/img/software_architecture/subscriptions_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Subscriptions dentro del container Web Services API.*
+
+</div>
+
+El diagrama muestra el flujo bidireccional con el proveedor de pagos: `SubscriptionsController` recibe tanto las peticiones del usuario como el webhook entrante del proveedor, y delega ambos en `SubscriptionService`, el único componente de lógica de negocio, que mantiene `Subscription` sincronizada con el estado real de la facturación.
+
+#### 2.6.7.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.7.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Subscriptions Domain Layer Class Diagram](assets/img/software_architecture/subscriptions_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Subscriptions.*
+
+</div>
+
+El diagrama muestra el agregado `Subscription` (que implementa `IAuditableEntity`), con sus tres transiciones de estado (`Activate`, `Cancel`, `MarkPastDue`) y su propiedad calculada `IsPremium`, junto con el puerto `ISubscriptionService` y los DTOs que produce.
+
+##### 2.6.7.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Subscriptions Database Diagram](assets/img/software_architecture/subscriptions_database_diagram.png)
+*Figura: Database Diagram del bounded context Subscriptions.*
+
+</div>
+
+El bounded context Subscriptions persiste en una única tabla, `subscriptions`, sin Foreign Key física hacia `users` (`user_id` es una referencia lógica al bounded context IAM). Se recomienda un índice único sobre `user_id` (una suscripción por usuario) y otro sobre `stripe_customer_id`, usado para resolver los eventos entrantes del webhook.
+
+---
+
+### 2.6.8. Bounded Context: Support
+
+El bounded context **Support** es responsable de los tickets de soporte que un usuario levanta hacia el equipo de MindFlow: su creación, su confirmación por correo, y la consulta del historial propio del usuario. El equipo decidió modelarlo de la forma más simple posible: un único agregado y un único servicio de aplicación, sin Commands ni Queries, siguiendo el mismo criterio adoptado en Notifications y Subscriptions para bounded contexts cuyo catálogo de casos de uso es reducido y no justifica una capa CQRS explícita.
+
+#### 2.6.8.1. Domain Layer
+
+El Domain Layer se reduce a un único agregado, sin repository interface propio: al ser un catálogo acotado de operaciones, el equipo decidió que el servicio de aplicación acceda directamente a `AppDbContext`, sin una capa de repositorio intermedia.
+
+| Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
+|---|---|---|---|---|---|
+| `SupportTicket` | Aggregate Root (implementa `IAuditableEntity`) | Representa un ticket de soporte levantado por un usuario. Se decidió desnormalizar el correo del usuario (`UserEmail`) directamente en el ticket, en lugar de resolverlo en tiempo de consulta contra IAM, para poder enviar la confirmación y cualquier respuesta futura sin una dependencia síncrona entre bounded contexts. | `Id: int`, `UserId: int`, `UserEmail: string`, `Subject: string`, `Message: string`, `Status: string` ("open"/"in_progress"/"closed"), `CreatedAt/UpdatedAt: DateTimeOffset?` | `MarkInProgress()`, `Close()` | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física) |
+
+#### 2.6.8.2. Interface Layer
+
+El Interface Layer expone la creación y consulta de tickets del usuario autenticado como un único controlador REST.
+
+| Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SupportController` | REST Controller (`api/v1/support`) | Expone la creación de un ticket y el listado de los tickets propios del usuario autenticado, formateando el identificador visible del ticket (`#00001`). Valida longitud del asunto y traduce el rechazo por duplicado a un código `429`. | `POST /tickets`, `GET /tickets` | Depende directamente de `ISupportService`; no usa Resources ni Assemblers |
+| `CreateTicketRequest` | Request DTO (record) | Representa el cuerpo de la petición de creación de un ticket. | `CreateTicketRequest(Subject, Message)` | Consumido directamente por `SupportController` |
+
+#### 2.6.8.3. Application Layer
+
+El Application Layer se reduce, igual que en Notifications y Subscriptions, a un único puerto de dominio.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `ISupportService` | Service Port | Abstrae el ciclo de vida de un ticket visible para el usuario: crearlo y consultar los propios. La transición de estado por parte del equipo de soporte (`MarkInProgress`/`Close`) queda deliberadamente fuera del alcance de este puerto en la primera versión, reservada al acceso directo del equipo a la base de datos en lugar de un panel de administración dedicado. | `CreateTicketAsync(userId, userEmail, subject, message): Task<SupportTicket>`, `GetUserTicketsAsync(userId): Task<IEnumerable<SupportTicket>>` | Implementada por `SupportService` (Infrastructure Layer); consumida por `SupportController` |
+
+#### 2.6.8.4. Infrastructure Layer
+
+El Infrastructure Layer implementa el puerto de soporte, concentrando dos decisiones de diseño puntuales: la protección contra tickets duplicados y el envío no bloqueante de la confirmación.
+
+| Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
+|---|---|---|---|---|
+| `SupportService` | Infrastructure Service | Implementa `ISupportService`: rechaza la creación de un ticket si el mismo usuario envió uno con el mismo asunto en el último minuto (protección simple contra doble envío accidental), persiste el ticket, y dispara el correo de confirmación de forma no bloqueante (*fire-and-forget*), de modo que una falla o demora del proveedor de correo nunca retrase la respuesta al usuario. | `CreateTicketAsync(userId, userEmail, subject, message): Task<SupportTicket>`, `GetUserTicketsAsync(userId): Task<IEnumerable<SupportTicket>>` | Implementa `ISupportService`; depende de `AppDbContext` y del servicio externo **SMTP Email Service** |
+
+---
+
+#### 2.6.8.5. Bounded Context Software Architecture Component Level Diagrams
+
+<div align="center">
+
+![Support Component Diagram](assets/img/software_architecture/support_component_diagram.png)
+*Figura: Component Diagram (C4 Model) del bounded context Support dentro del container Web Services API.*
+
+</div>
+
+El diagrama muestra el flujo más simple de los seis bounded contexts restantes: `SupportController` delega ambos casos de uso en `SupportService`, que concentra tanto la persistencia del ticket como el envío no bloqueante de su confirmación por correo hacia el proveedor SMTP externo.
+
+#### 2.6.8.6. Bounded Context Software Architecture Code Level Diagrams
+
+##### 2.6.8.6.1. Bounded Context Domain Layer Class Diagrams
+
+<div align="center">
+
+![Support Domain Layer Class Diagram](assets/img/software_architecture/support_class_diagram.png)
+*Figura: Class Diagram (UML) del Domain Layer del bounded context Support.*
+
+</div>
+
+El diagrama muestra el agregado `SupportTicket` (que implementa `IAuditableEntity`), con sus dos transiciones de estado (`MarkInProgress`, `Close`) y el puerto `ISupportService` que lo crea y consulta.
+
+##### 2.6.8.6.2. Bounded Context Database Design Diagram
+
+<div align="center">
+
+![Support Database Diagram](assets/img/software_architecture/support_database_diagram.png)
+*Figura: Database Diagram del bounded context Support.*
+
+</div>
+
+El bounded context Support persiste en una única tabla, `support_tickets`, sin Foreign Key física hacia `users` (`user_id` es una referencia lógica al bounded context IAM). Se recomienda un índice compuesto sobre `(user_id, subject, created_at)` para acelerar la verificación de tickets duplicados recientes en cada creación.
 
 ---
 

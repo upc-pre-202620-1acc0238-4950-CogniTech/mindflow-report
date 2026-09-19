@@ -1,0 +1,76 @@
+@startuml Notifications_DomainLayer_ClassDiagram
+skinparam classAttributeIconSize 0
+hide circle
+
+interface IAuditableEntity {
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class Notification {
+  -Id : int
+  -UserId : int
+  -Title : string
+  -Body : string
+  -IsRead : bool
+  +CreatedAt : DateTimeOffset?
+  +UpdatedAt : DateTimeOffset?
+}
+
+class DeviceToken {
+  -Id : int
+  -UserId : int
+  -Token : string
+  -Platform : string = "web"
+  +CreatedAt : DateTimeOffset
+}
+
+interface INotificationService {
+  +SendToAllAsync(title: string, body: string, ct: CancellationToken) : Task
+  +SendToUserAsync(userId: int, title: string, body: string, ct: CancellationToken) : Task
+}
+
+class RegisterDeviceRequest {
+  +Token : string
+  +Platform : string = "web"
+}
+
+class UnregisterDeviceRequest {
+  +Token : string
+}
+
+Notification .up.|> IAuditableEntity
+INotificationService ..> Notification : registra un\nregistro por envío >
+INotificationService ..> DeviceToken : lee los tokens\nde destino >
+
+note right of Notification
+  UserId es una referencia lógica al
+  agregado User del bounded context IAM.
+  No existe repositorio dedicado: el
+  controlador y el servicio de envío
+  acceden a Notification y DeviceToken
+  directamente vía AppDbContext, dado
+  que sus operaciones son consultas y
+  escrituras simples sin reglas de
+  negocio adicionales.
+end note
+
+note right of INotificationService
+  Único puerto de dominio del bounded
+  context. Concentra la única regla de
+  negocio real: toda notificación enviada
+  (individual o masiva) queda además
+  registrada como Notification antes de
+  intentar el envío push, para que el
+  usuario la vea en su bandeja aunque el
+  push falle o su dispositivo esté offline.
+end note
+
+note right of DeviceToken
+  Un token de dispositivo pertenece a un
+  único usuario a la vez: al registrar un
+  token ya existente, se reasigna su
+  UserId en lugar de duplicarlo.
+end note
+
+@enduml
