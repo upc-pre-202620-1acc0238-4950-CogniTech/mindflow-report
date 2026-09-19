@@ -365,7 +365,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
-      _Pendiente_
+      Ya contaba con base previa en Domain-Driven Design y en el C4 Model, pero en este proyecto actualizó ese conocimiento al aplicarlo a un caso real con varios bounded contexts interdependientes (IAM, Journal, AI Assistant y Habits & Wellness) y al elaborar por primera vez un Deployment Diagram sobre infraestructura cloud concreta (Azure App Service, Azure Database for MySQL), integrando patrones de Application Layer distintos entre sí (Command Service unificado, CQRS, servicios planos) según las necesidades específicas de cada contexto.
     </td>
     <td>
       <u>AV1</u><br>
@@ -393,7 +393,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
-      _Pendiente_
+      Tuvo que investigar por cuenta propia detalles no cubiertos antes, como el despliegue de un backend .NET sobre Azure App Service y Azure Database for MySQL, y las particularidades de integrar un proveedor de IA generativa (Gemini) como dependencia transversal entre varios bounded contexts, reconociendo que ese conocimiento previo necesita actualizarse constantemente frente a cada proyecto y stack tecnológico concreto.
     </td>
     <td>
       <u>AV1</u><br>
@@ -430,8 +430,8 @@ Cada miembro del equipo formula un plan que incluye al menos dos objetivos SMART
 
 ### Limache Coronel, Imanol Fabrizio
 
-1. _Pendiente_
-2. _Pendiente_
+1. Dominar la optimización de rendimiento y desarrollo de bajo nivel en C++ mediante el estudio de arquitectura de computadores e implementación de estructuras de datos avanzadas.
+2. Asegurar un rol profesional como Ingeniero de Software enfocado en desarrollo backend
 
 ---
 
