@@ -458,6 +458,30 @@ CogniTech es una startup tecnológica emergente enfocada en la intersección ent
   <tr>
   </tr>
 </table>
+<table>
+  <tr>
+    <td rowspan="4" align="center">
+      <!-- Reemplaza el src con la ruta de tu foto -->
+      <img src="assets/img/participants/Jean_Franco_Jauregui.jpeg" alt="Foto de Jean Franco Jáuregui" width="500"/>
+    </td>
+    <td><b>Nombre:</b> Jean Franco Jáuregui Cerna</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> U202410024</td>
+  </tr>
+  <tr>
+    <td>
+    <div align="Justify">
+      <b>Descripción:</b><br/>
+      Soy <b>Jean Franco Jáuregui Cerna</b> y estudio la carrera de Ingeniería de Software en la UPC, donde me encuentro cursando el 5to ciclo. Cuento con sólidos conocimientos en el desarrollo de aplicaciones web utilizando Angular, Vue.js, Node.js y Python, así como en el modelado y gestión de bases de datos con MySQL y MongoDB. Además, tengo experiencia configurando despliegues y entornos de desarrollo utilizando Docker, Google Cloud Platform y Azure. Siempre busco aplicar buenas prácticas de arquitectura de software y expandir mis capacidades técnicas en proyectos de la industria.
+      <br/><br/>
+      Dentro del equipo, aporto directamente en el desarrollo full-stack, el diseño de la base de datos y la estructuración del proyecto. Destaco por ser una persona proactiva, enfocada en la resolución analítica de problemas y muy responsable con los plazos y objetivos establecidos.
+      </div>
+    </td>
+  </tr>
+  <tr>
+  </tr>
+</table>
 
 _Pendiente: perfiles de los demás integrantes del equipo._
 
