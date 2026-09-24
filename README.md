@@ -292,16 +292,20 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
       - [3.1.4.3. Mobile Applications Mock-ups](#3143-mobile-applications-mock-ups)
       - [3.1.4.4. Mobile Applications User Flow Diagrams](#3144-mobile-applications-user-flow-diagrams)
       - [3.1.4.5. Mobile Applications Prototyping](#3145-mobile-applications-prototyping)
+-->
 - [Capítulo IV: Product Implementation & Validation](#capítulo-iv-product-implementation--validation)
+<!--
   - [4.1. Software Configuration Management](#41-software-configuration-management)
     - [4.1.1. Software Development Environment Configuration](#411-software-development-environment-configuration)
     - [4.1.2. Source Code Management](#412-source-code-management)
     - [4.1.3. Source Code Style Guide & Conventions](#413-source-code-style-guide--conventions)
     - [4.1.4. Software Deployment Configuration](#414-software-deployment-configuration)
+-->
   - [4.2. Landing Page & Mobile Application Implementation](#42-landing-page--mobile-application-implementation)
     - [4.2.1. Sprint 1](#421-sprint-1)
       - [4.2.1.1. Sprint Planning 1](#4211-sprint-planning-1)
       - [4.2.1.2. Aspect Leaders and Collaborators](#4212-aspect-leaders-and-collaborators)
+<!--
       - [4.2.1.3. Sprint Backlog 1](#4213-sprint-backlog-1)
       - [4.2.1.4. Development Evidence for Sprint Review](#4214-development-evidence-for-sprint-review)
       - [4.2.1.5. Testing Suite Evidence for Sprint Review](#4215-testing-suite-evidence-for-sprint-review)
@@ -2829,9 +2833,13 @@ _Pendiente_
 
 _Pendiente_
 
+-->
+
 ---
 
 # Capítulo IV: Product Implementation & Validation
+
+<!--
 
 ## 4.1. Software Configuration Management
 
@@ -2851,18 +2859,54 @@ _Pendiente_
 
 _Pendiente_
 
+-->
+
 ## 4.2. Landing Page & Mobile Application Implementation
 
 ### 4.2.1. Sprint 1
 
+En este primer Sprint el equipo trabajó en paralelo el backend de los 8 bounded contexts y la Mobile Application para Android que se construye sobre esos mismos endpoints, además del sistema de diseño, el Landing Page y la configuración base del proyecto. Esto incluye:
+
+- Backend funcional de IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support, incluyendo la integración inicial con proveedores externos (Google Gemini para AI Assistant, Stripe en modo sandbox para Subscriptions).
+- Mobile Application para Android construida sobre los endpoints reales de los 8 bounded contexts.
+- Sistema de diseño (Style Guidelines) llevado a componentes reutilizables en Figma, sobre el cual se construyen los wireframes, wireflows, mock-ups y el prototipo final de la Mobile Application.
+- Landing Page en wireframe y mock-up, lista para su implementación y despliegue.
+- Configuración del entorno de desarrollo y del despliegue del proyecto.
+
 #### 4.2.1.1. Sprint Planning 1
 
-_Pendiente_
+A continuación se presenta el resumen del Sprint Planning Meeting realizado para el Sprint 1.
+
+| Sprint # | Sprint 1 |
+|---|---|
+| **Sprint Planning Background** | |
+| Date | 2026-09-22 |
+| Time | 07:00 PM |
+| Location | Reunión virtual vía Google Meet |
+| Prepared By | Güere Calero, Fernando Julio |
+| Attendees | Cabrera Sotelo, Camila Celeste / Díaz De la Cruz, Sebastián Gabriel / Güere Calero, Fernando Julio / Jáuregui Cerna, Jean Franco / Limache Coronel, Imanol Fabrizio |
+| Sprint 0 Review Summary | No aplica — es el primer Sprint de ejecución del proyecto; el trabajo previo (AV1) correspondió íntegramente a documentación de diseño (Strategic y Tactical-Level DDD), sin artefactos de código. |
+| Sprint 0 Retrospective Summary | No aplica, por el mismo motivo anterior. |
+| **Sprint Goal & User Stories** | |
+| Sprint 1 Goal | Nuestro enfoque está en construir la Mobile Application completa para Android sobre el backend real de los 8 bounded contexts, además de publicar el Landing Page. Esto se validará una vez la app pueda recorrerse de punta a punta sobre datos reales — registro e inicio de sesión, entradas del Diario, seguimiento de Hábitos, feedback del Asistente IA, Analíticas, Notificaciones, gestión de Suscripción y creación de tickets de Soporte — y el Landing Page esté accesible públicamente. |
+| Sprint 1 Velocity | 25 |
+| Sum of Story Points | 20 |
 
 #### 4.2.1.2. Aspect Leaders and Collaborators
 
-_Pendiente_
+En esta sección se detalla la matriz de liderazgo y colaboración (LACX) para el Sprint 1. Cada aspecto representa una fase crítica de la entrega, donde se designa un líder (**L**) responsable de la dirección del entregable y colaboradores (**C**) que apoyaron en su ejecución.
 
+| Team Member (Last Name, First Name) | GitHub Username | Style Guidelines & Information Architecture | Backend — 8 Bounded Contexts | Landing Page (Wireframe y Mock-up) | Mobile Application (Android) — 8 Bounded Contexts | Configuración del Proyecto y Despliegue | Prototyping & Testing/Sprint Review Evidence |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Güere Calero, Fernando Julio | FerG17 | **L** | **L** | C | C | C | C |
+| Díaz De la Cruz, Sebastián Gabriel | tipaso07 | C | **L** | **L** | C | C | C |
+| Jáuregui Cerna, Jean Franco | JFranco556 | C | C | C | **L** | **L** | C |
+| Cabrera Sotelo, Camila Celeste | whcamm | C | C | C | **L** | **L** | C |
+| Limache Coronel, Imanol Fabrizio | ImaLi06 | C | C | C | C | C | **L** |
+
+El aspecto de Backend queda co-liderado por Güere Calero y Díaz De la Cruz, ya que ambos se repartieron los 8 bounded contexts entre sí (4 cada uno), trabajando como una sola unidad de entrega en lugar de dos backends independientes. De la misma forma, Mobile Application (Android) queda co-liderada por Jáuregui Cerna y Cabrera Sotelo, quienes se repartieron los 8 bounded contexts entre sí para construir la app como una sola entrega. Jáuregui Cerna y Cabrera Sotelo también co-lideran la Configuración del Proyecto y Despliegue, cada uno desde su parte (entorno de desarrollo y despliegue, respectivamente). Díaz De la Cruz lidera además el Landing Page, al ser quien elabora su Wireframe (3.1.3.1) y da inicio a esa pieza del entregable.
+
+<!--
 #### 4.2.1.3. Sprint Backlog 1
 
 _Pendiente_
