@@ -89,6 +89,30 @@ Proyecto
       Capítulo II: Requirements Development and Software Solution Design (Needfinding - Big Picture EventStorming; Strategic-Level DDD - EventStorming, Candidate Context Discovery)
     </td>
   </tr>
+
+  <tr>
+    <td><b>Segunda Entrega (TB1)</b></td>
+    <td>05/10/2026</td>
+    <td>
+      Cabrera Sotelo, Camila Celeste <br>
+      <br>
+      <p></p>
+      Dias de la Cruz, Sebastian Gabriel <br>
+      <br>
+      <p></p>
+      Güere Calero, Fernando Julio <br>
+      <br>
+      <p></p>
+      Jáuregui Cerna, Jean Franco <br>
+      <br>
+      <p></p>
+      Limache Coronel, Imanol Fabrizio <br>
+    </td>
+    <td>
+      Capítulo III: Solution UI/UX Design (diseño de producto: guías de estilo, arquitectura de información y diseño UX/UI del Landing Page y las Mobile Applications) <br>
+      Capítulo IV: Product Implementation & Validation (configuración del proyecto, implementación del Sprint 1 del Landing Page y las Mobile Applications, y entrevistas de validación)
+    </td>
+  </tr>
   <!-- 
   <tr>
     <td><b>Primera Entrega (TB1)</b></td>
