@@ -89,6 +89,30 @@ Proyecto
       Capítulo II: Requirements Development and Software Solution Design (Needfinding - Big Picture EventStorming; Strategic-Level DDD - EventStorming, Candidate Context Discovery)
     </td>
   </tr>
+
+  <tr>
+    <td><b>Segunda Entrega (TB1)</b></td>
+    <td>05/10/2026</td>
+    <td>
+      Cabrera Sotelo, Camila Celeste <br>
+      <br>
+      <p></p>
+      Dias de la Cruz, Sebastian Gabriel <br>
+      <br>
+      <p></p>
+      Güere Calero, Fernando Julio <br>
+      <br>
+      <p></p>
+      Jáuregui Cerna, Jean Franco <br>
+      <br>
+      <p></p>
+      Limache Coronel, Imanol Fabrizio <br>
+    </td>
+    <td>
+      Capítulo III: Solution UI/UX Design (diseño de producto: guías de estilo, arquitectura de información y diseño UX/UI del Landing Page y las Mobile Applications) <br>
+      Capítulo IV: Product Implementation & Validation (configuración del proyecto, implementación del Sprint 1 del Landing Page y las Mobile Applications, y entrevistas de validación)
+    </td>
+  </tr>
   <!-- 
   <tr>
     <td><b>Primera Entrega (TB1)</b></td>
@@ -272,7 +296,6 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
       - [2.6.8.6. Bounded Context Software Architecture Code Level Diagrams](#2686-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.8.6.1. Bounded Context Domain Layer Class Diagrams](#26861-bounded-context-domain-layer-class-diagrams)
         - [2.6.8.6.2. Bounded Context Database Design Diagram](#26862-bounded-context-database-design-diagram)
-<!--
 - [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
   - [3.1. Product design](#31-product-design)
     - [3.1.1. Style Guidelines](#311-style-guidelines)
@@ -313,7 +336,6 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
--->
 - [Conclusiones](#conclusiones)
   - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
 <!--
@@ -360,6 +382,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV1</u><br>
       Investigó y aplicó por primera vez las técnicas de Big Picture EventStorming y EventStorming estratégico para modelar el dominio de negocio de MindFlow, adquiriendo conocimientos nuevos de Domain-Driven Design y aplicándolos en la identificación de los Bounded Contexts candidatos del proyecto.
       <br><br>
+      <u>TB1</u><br>
+      Investigó y aplicó por primera vez principios de diseño de sistemas (Design Systems) y arquitectura de información para dispositivos móviles, definiendo la tipografía, paleta de colores y guías dimensionales de MindFlow, además de estructurar los esquemas de organización, etiquetado y navegación de la Mobile Application y el Landing Page.
+      <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
       Investigó y aplicó nuevos enfoques de arquitectura de software al trasladar los hallazgos metodológicos del EventStorming hacia diagramas arquitectónicos y modelos de base de datos. Esta actualización de conocimientos técnicos le permitió estructurar el modelado del dominio de MindFlow, estableciendo una base sólida para su futura implementación como solución web escalable.
@@ -371,6 +396,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     <td>
       <u>AV1</u><br>
       El equipo actualizó sus conocimientos en Domain-Driven Design, análisis de requerimientos y arquitectura de software mediante la aplicación práctica de EventStorming, Candidate Context Discovery, Context Mapping, modelado C4 y técnicas centradas en el usuario, fortaleciendo su capacidad de diseñar y documentar soluciones de software de forma estructurada.
+      <br><br>
+      <u>TB1</u><br>
+      El equipo actualizó sus conocimientos en diseño de producto y planificación ágil, aplicando Style Guidelines, Information Architecture y Sprint Planning para estructurar la construcción del Landing Page y las Mobile Applications sobre los 8 bounded contexts definidos en el Capítulo II.
     </td>
   </tr>
   <tr>
@@ -388,6 +416,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV1</u><br>
       Reconoció la necesidad de seguir aprendiendo de forma autónoma al investigar por cuenta propia las técnicas start-with-value, start-with-simple y look-for-pivotal-events para Candidate Context Discovery, aplicándolas sin haber recibido instrucción previa detallada en clase, como parte de su compromiso con el aprendizaje continuo.
       <br><br>
+      <u>TB1</u><br>
+      Reconoció la necesidad de aprender de forma autónoma criterios de accesibilidad táctil y guías de estilo específicas para aplicaciones móviles (Android e iOS), un ámbito no cubierto en clase, aplicándolos directamente en la planificación del Sprint 1 y en la definición de la matriz de liderazgo del equipo.
+      <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
       Reconoció la necesidad de expandir sus competencias en el diseño de software investigando de forma autónoma la construcción y aplicación del Lenguaje Ubicuo (Ubiquitous Language) dentro de Domain-Driven Design, aplicando este autoaprendizaje para asegurar que la arquitectura técnica y los esquemas de datos reflejen fielmente las reglas de negocio del proyecto MindFlow.
@@ -399,6 +430,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     <td>
       <u>AV1</u><br>
       El equipo reconoció que el aprendizaje permanente es indispensable para adaptar metodologías de Domain-Driven Design, análisis de requerimientos y arquitectura de software a un proyecto real, investigando de forma autónoma nuevas técnicas y aplicándolas directamente en la evolución de la solución MindFlow.
+      <br><br>
+      <u>TB1</u><br>
+      El equipo reconoció la necesidad de aprendizaje continuo al enfrentar por primera vez decisiones de diseño de producto y coordinación de un Sprint real, investigando de forma autónoma buenas prácticas de UX/UI y gestión ágil para aplicarlas en la construcción de MindFlow.
     </td>
   </tr>
 </table>
@@ -2621,38 +2655,180 @@ El bounded context Support persiste en una única tabla, `support_tickets`, sin 
 
 ---
 
-<!--
 # Capítulo III: Solution UI/UX Design
 
 ## 3.1. Product design
 
 ### 3.1.1. Style Guidelines
 
+Link de Figma para la Mobile Application: [https://www.figma.com/design/YvuKDbvstLy6Cm8cKsGqsk/MindFlow-Mobile-Application?node-id=2005-10](https://www.figma.com/design/YvuKDbvstLy6Cm8cKsGqsk/Web-Application--copia-?node-id=2005-10&t=Jq7rNlnniC0U3rtl-1)
+
 #### 3.1.1.1. General Style Guidelines
 
-_Pendiente_
+En esta sección se definen las pautas de estilo generales que rigen la identidad visual de MindFlow, sobre las cuales se construyen tanto el Landing Page como las Mobile Applications. El objetivo es garantizar una experiencia visual coherente, calmada y confiable, alineada con el propósito de la plataforma: acompañar el bienestar emocional del usuario sin generar ruido visual ni sobrecarga cognitiva.
+
+**Branding**
+
+La identidad visual de MindFlow busca transmitir calma emocional, confianza tecnológica y cercanía humana. Se evita cualquier elemento que remita a urgencia, alarma o exceso de estímulo visual, priorizando en cambio formas suaves, espacios en blanco generosos y una paleta de colores fríos.
+
+**Typography**
+
+- **Primary Font:** Plus Jakarta Sans
+- **Tipo:** Sans-serif humanista
+- **Uso:** Títulos, subtítulos, botones e interfaz general
+
+Se seleccionó por su alta legibilidad en pantallas pequeñas (crítico para el contexto móvil del proyecto), su trazo redondeado que transmite cercanía sin perder seriedad, y su amplia disponibilidad de pesos (Regular, Medium, SemiBold, Bold) que permite construir jerarquía tipográfica sin depender de una segunda familia tipográfica.
+
+| Estilo | Peso | Uso |
+|---|---|---|
+| Heading 1 | Bold | Títulos de pantalla (p. ej. "Tu Diario") |
+| Heading 2 | SemiBold | Encabezados de sección |
+| Body | Regular | Texto de lectura general |
+| Label | Medium | Etiquetas de formularios y botones |
+| Caption | Regular | Metadatos (fecha, hora, estado) |
+
+**Colors**
+
+*Colores primarios* — representan calma emocional y confianza; se usan en botones principales, elementos interactivos y estados positivos.
+
+| Nombre | Hex | Uso |
+|---|---|---|
+| Calm Indigo | `#4C5FD5` | Acción principal, elementos activos, branding |
+| Serene Teal | `#45C7A3` | Estados positivos, progreso, hábitos completados |
+
+*Colores secundarios* — dan soporte y jerarquía visual sin competir con los primarios.
+
+| Nombre | Hex | Uso |
+|---|---|---|
+| Warm Lavender | `#9B8CF2` | Elementos del módulo AI Assistant / Chat |
+| Neutral Fog | `#F4F6FA` | Fondos de sección, tarjetas |
+| Ink Gray | `#2B2D33` | Texto principal |
+
+*Colores de estado* — reservados exclusivamente para retroalimentación funcional, no decorativa.
+
+| Nombre | Hex | Uso |
+|---|---|---|
+| Success Green | `#2FB380` | Confirmaciones, hábito registrado con éxito |
+| Alert Amber | `#E0A73B` | Advertencias no críticas (p. ej. suscripción por vencer) |
+| Error Red | `#E5484D` | Errores de validación, fallos de red |
+
+*Colores de wireframe* — usados exclusivamente durante la etapa de baja fidelidad, para mantener el foco en estructura y no en estética final.
+
+| Nombre | Hex |
+|---|---|
+| Light Gray | `#E5E5E5` |
+| Medium Gray | `#BDBDBD` |
+| Dark Gray | `#828282` |
+| White | `#FFFFFF` |
+
+**Spacing**
+
+Sistema de espaciado basado en múltiplos de 8px, consistente entre Landing Page y Mobile Applications:
+
+- Unidad base: `8px`
+- Padding interno de tarjetas: `16px`–`24px`
+- Separación entre elementos de una lista: `12px`
+- Márgenes laterales de pantalla: `16px`
+- Separación entre secciones: `32px`
+
+**Communication Tone**
+
+| Dimensión | Posición de MindFlow |
+|---|---|
+| Divertido ↔ Serio | Cercano a *Serio*, sin ser frío: el tono reconoce la sensibilidad del contenido emocional que maneja el usuario |
+| Formal ↔ Casual | Cercano a *Casual*: lenguaje cercano, en segunda persona, sin tecnicismos |
+| Respetuoso ↔ Irreverente | Siempre *Respetuoso*: ningún mensaje del sistema minimiza o juzga el estado emocional del usuario |
+| Entusiasta ↔ Sereno | Cercano a *Sereno*: se evita el uso de exclamaciones excesivas o lenguaje que presione al usuario a "sentirse mejor rápido" |
+
+**Dimension Guidelines**
+
+Al tratarse de un proyecto orientado a Mobile Applications, las dimensiones se definen priorizando accesibilidad táctil:
+
+- Botones principales: altura `48px`–`56px` (óptimo para interacción táctil)
+- Íconos: `24px`–`32px`
+- Inputs de texto: altura `48px`–`56px`
+- Bottom Navigation Bar: altura `56px`–`64px`
+- Tarjetas de información: ancho completo con padding lateral de `16px`
+- Área táctil mínima para cualquier elemento interactivo: `44px x 44px`, siguiendo las guías de accesibilidad táctil de Android e iOS
 
 ### 3.1.2. Information Architecture
 
+En esta sección el equipo plantea las decisiones y el sustento que dirigen la manera en que se organiza el contenido en las experiencias del Landing Page y de las Mobile Applications de MindFlow, buscando que visitantes y usuarios se adapten con facilidad a la funcionalidad de cada producto y encuentren lo que necesitan sin esfuerzo.
+
 #### 3.1.2.1. Organization Systems
 
-_Pendiente_
+MindFlow combina tres tipos de organización visual, aplicados según el contexto de cada pantalla:
+
+- **Organización jerárquica:** utilizada en el Dashboard principal y en el Landing Page, donde se prioriza visualmente la información más relevante para el usuario (estado emocional del día, hábitos pendientes) mediante tamaño, contraste y posición.
+- **Organización secuencial:** aplicada en flujos donde el usuario debe completar una serie de pasos, como el registro (Onboarding → Registro → Configuración de perfil) o la creación de una nueva entrada de diario (Selección de estado de ánimo → Redacción → Confirmación).
+- **Organización matricial:** utilizada en la sección de Analíticas, donde se cruzan distintas variables (estado de ánimo, fecha, hábitos completados) dentro de una misma vista para facilitar la comparación y el análisis de patrones.
+
+A nivel de categorización de contenido, se aplican los siguientes esquemas:
+
+| Esquema | Dónde se aplica |
+|---|---|
+| Cronológico | Historial de entradas del Diario, registro de notificaciones |
+| Por tópicos | Separación de módulos: Diario, Hábitos, Analíticas, Asistente IA, Soporte |
+| Según audiencia | Distinción entre funcionalidades del plan gratuito y del plan Premium (Subscriptions) |
+| Alfabético | Listados extensos, como el historial de tickets de soporte |
 
 #### 3.1.2.2. Labelling Systems
 
-_Pendiente_
+Las etiquetas de MindFlow se definieron priorizando claridad y el menor número de palabras posible, manteniendo consistencia entre el Landing Page, la Mobile Application y el propio lenguaje ubicuo definido en el Capítulo II.
+
+| Etiqueta | Módulo asociado |
+|---|---|
+| Inicio | Dashboard |
+| Diario | Journal |
+| Hábitos | Habits & Wellness |
+| Analíticas | Analytics & Reporting |
+| Asistente | AI Assistant (Chat) |
+| Notificaciones | Notifications |
+| Premium | Subscriptions |
+| Soporte | Support |
+| Perfil | IAM |
+
+Estas etiquetas se mantienen idénticas en todos los puntos de contacto (menú de navegación, notificaciones push, correos transaccionales), evitando sinónimos que puedan confundir al usuario respecto a qué sección del producto se le está mencionando.
 
 #### 3.1.2.3. SEO Tags and Meta Tags
 
-_Pendiente_
+Para el **Landing Page**, se definen las siguientes meta tags principales:
+
+| Tag | Valor |
+|---|---|
+| Title | MindFlow — Bienestar emocional con inteligencia artificial |
+| Description | Registra tu estado de ánimo, construye hábitos saludables y recibe acompañamiento con IA. Descarga MindFlow. |
+| Keywords | bienestar emocional, diario emocional, hábitos saludables, salud mental, IA |
+| Author | CogniTech |
+| Charset | UTF-8 |
+
+Para las **Mobile Applications**, al distribuirse a través de una app store, se definen adicionalmente los elementos de ASO (App Store Optimization):
+
+| Elemento ASO | Valor |
+|---|---|
+| App Title | MindFlow: Diario y Bienestar |
+| App Subtitle | Hábitos y bienestar emocional con IA |
+| App Keywords | diario, ánimo, hábitos, bienestar, salud mental, IA |
+| App Description | MindFlow te acompaña a registrar tu estado emocional, construir hábitos saludables y recibir feedback empático generado por IA, todo en un solo lugar. |
 
 #### 3.1.2.4. Searching Systems
 
-_Pendiente_
+MindFlow incorpora mecanismos de búsqueda diferenciados por módulo, siempre acompañados de filtros que evitan que el usuario se sienta perdido entre el volumen de información generado por el uso continuo de la aplicación:
+
+- **Diario:** búsqueda por palabra clave dentro del contenido de las entradas, con filtros por rango de fecha y por etiqueta emocional asociada.
+- **Hábitos:** filtros por estado (activo, completado, pausado) y por frecuencia (diario, semanal).
+- **Notificaciones:** filtros por tipo (recordatorio, confirmación, alerta de suscripción) y por estado de lectura.
+- **Soporte:** búsqueda de tickets propios por asunto y filtro por estado (abierto, en progreso, cerrado).
+
+Los resultados se presentan siempre en listas estructuradas que muestran los atributos más relevantes de cada registro, sin requerir que el usuario abra cada elemento para identificar si es el que busca.
 
 #### 3.1.2.5. Navigation Systems
 
-_Pendiente_
+La navegación de MindFlow se apoya en un patrón nativo de **Bottom Navigation Bar**, consistente en todas las pantallas principales de la Mobile Application, que agrupa los módulos de mayor uso: Inicio, Diario, Hábitos, Analíticas y Asistente. El resto de módulos (Notificaciones, Premium, Soporte, Perfil) se accede mediante navegación contextual desde el ícono de perfil, evitando saturar la barra principal.
+
+Dentro de cada módulo se incorporan elementos de navegación contextual (botones de retorno, accesos directos entre pantallas relacionadas, p. ej. de una entrada del Diario hacia el hábito que la originó) que permiten desplazarse sin perder el contexto de la tarea que el usuario está realizando.
+
+En el **Landing Page**, la navegación se organiza mediante un menú superior fijo que dirige a los visitantes hacia las secciones principales del sitio (Producto, Beneficios, Planes, Footer con enlaces de contacto), permitiendo un recorrido lineal y ordenado de la propuesta de valor antes de la llamada a la acción final (descarga de la app).
 
 ### 3.1.3. Landing Page UI Design
 
@@ -2712,13 +2888,46 @@ _Pendiente_
 
 ### 4.2.1. Sprint 1
 
+En este primer Sprint el equipo trabajó en paralelo el backend de los 8 bounded contexts y la Mobile Application para Android que se construye sobre esos mismos endpoints, además del sistema de diseño, el Landing Page y la configuración base del proyecto. Esto incluye:
+
+- Backend funcional de IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support, incluyendo la integración inicial con proveedores externos (Google Gemini para AI Assistant, Stripe en modo sandbox para Subscriptions).
+- Mobile Application para Android construida sobre los endpoints reales de los 8 bounded contexts.
+- Sistema de diseño (Style Guidelines) llevado a componentes reutilizables en Figma, sobre el cual se construyen los wireframes, wireflows, mock-ups y el prototipo final de la Mobile Application.
+- Landing Page en wireframe y mock-up, lista para su implementación y despliegue.
+- Configuración del entorno de desarrollo y del despliegue del proyecto.
+
 #### 4.2.1.1. Sprint Planning 1
 
-_Pendiente_
+A continuación se presenta el resumen del Sprint Planning Meeting realizado para el Sprint 1.
+
+| Sprint # | Sprint 1 |
+|---|---|
+| **Sprint Planning Background** | |
+| Date | 2026-09-22 |
+| Time | 07:00 PM |
+| Location | Reunión virtual vía Google Meet |
+| Prepared By | Güere Calero, Fernando Julio |
+| Attendees | Cabrera Sotelo, Camila Celeste / Díaz De la Cruz, Sebastián Gabriel / Güere Calero, Fernando Julio / Jáuregui Cerna, Jean Franco / Limache Coronel, Imanol Fabrizio |
+| Sprint 0 Review Summary | No aplica — es el primer Sprint de ejecución del proyecto; el trabajo previo (AV1) correspondió íntegramente a documentación de diseño (Strategic y Tactical-Level DDD), sin artefactos de código. |
+| Sprint 0 Retrospective Summary | No aplica, por el mismo motivo anterior. |
+| **Sprint Goal & User Stories** | |
+| Sprint 1 Goal | Nuestro enfoque está en construir la Mobile Application completa para Android sobre el backend real de los 8 bounded contexts, además de publicar el Landing Page. Esto se validará una vez la app pueda recorrerse de punta a punta sobre datos reales — registro e inicio de sesión, entradas del Diario, seguimiento de Hábitos, feedback del Asistente IA, Analíticas, Notificaciones, gestión de Suscripción y creación de tickets de Soporte — y el Landing Page esté accesible públicamente. |
+| Sprint 1 Velocity | 25 |
+| Sum of Story Points | 20 |
 
 #### 4.2.1.2. Aspect Leaders and Collaborators
 
-_Pendiente_
+En esta sección se detalla la matriz de liderazgo y colaboración (LACX) para el Sprint 1. Cada aspecto representa una fase crítica de la entrega, donde se designa un líder (**L**) responsable de la dirección del entregable y colaboradores (**C**) que apoyaron en su ejecución.
+
+| Team Member (Last Name, First Name) | GitHub Username | Style Guidelines & Information Architecture | Backend — 8 Bounded Contexts | Landing Page (Wireframe y Mock-up) | Mobile Application (Android) — 8 Bounded Contexts | Configuración del Proyecto y Despliegue | Prototyping & Testing/Sprint Review Evidence |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Güere Calero, Fernando Julio | FerG17 | **L** | **L** | C | C | C | C |
+| Díaz De la Cruz, Sebastián Gabriel | tipaso07 | C | **L** | **L** | C | C | C |
+| Jáuregui Cerna, Jean Franco | JFranco556 | C | C | C | **L** | **L** | C |
+| Cabrera Sotelo, Camila Celeste | whcamm | C | C | C | **L** | **L** | C |
+| Limache Coronel, Imanol Fabrizio | ImaLi06 | C | C | C | C | C | **L** |
+
+El aspecto de Backend queda co-liderado por Güere Calero y Díaz De la Cruz, ya que ambos se repartieron los 8 bounded contexts entre sí (4 cada uno), trabajando como una sola unidad de entrega en lugar de dos backends independientes. De la misma forma, Mobile Application (Android) queda co-liderada por Jáuregui Cerna y Cabrera Sotelo, quienes se repartieron los 8 bounded contexts entre sí para construir la app como una sola entrega. Jáuregui Cerna y Cabrera Sotelo también co-lideran la Configuración del Proyecto y Despliegue, cada uno desde su parte (entorno de desarrollo y despliegue, respectivamente). Díaz De la Cruz lidera además el Landing Page, al ser quien elabora su Wireframe (3.1.3.1) y da inicio a esa pieza del entregable.
 
 #### 4.2.1.3. Sprint Backlog 1
 
@@ -2763,7 +2972,6 @@ _Pendiente_
 _Pendiente_
 
 ---
--->
 
 # Conclusiones
 
