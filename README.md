@@ -272,11 +272,11 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
       - [2.6.8.6. Bounded Context Software Architecture Code Level Diagrams](#2686-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.8.6.1. Bounded Context Domain Layer Class Diagrams](#26861-bounded-context-domain-layer-class-diagrams)
         - [2.6.8.6.2. Bounded Context Database Design Diagram](#26862-bounded-context-database-design-diagram)
-<!--
 - [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
   - [3.1. Product design](#31-product-design)
     - [3.1.1. Style Guidelines](#311-style-guidelines)
       - [3.1.1.1. General Style Guidelines](#3111-general-style-guidelines)
+<!--
     - [3.1.2. Information Architecture](#312-information-architecture)
       - [3.1.2.1. Organization Systems](#3121-organization-systems)
       - [3.1.2.2. Labelling Systems](#3122-labelling-systems)
@@ -2621,17 +2621,103 @@ El bounded context Support persiste en una única tabla, `support_tickets`, sin 
 
 ---
 
-<!--
 # Capítulo III: Solution UI/UX Design
 
 ## 3.1. Product design
 
 ### 3.1.1. Style Guidelines
 
+Link de Figma para la Mobile Application: [https://www.figma.com/design/YvuKDbvstLy6Cm8cKsGqsk/MindFlow-Mobile-Application?node-id=2005-10](https://www.figma.com/design/YvuKDbvstLy6Cm8cKsGqsk/Web-Application--copia-?node-id=2005-10&t=Jq7rNlnniC0U3rtl-1)
+
 #### 3.1.1.1. General Style Guidelines
 
-_Pendiente_
+En esta sección se definen las pautas de estilo generales que rigen la identidad visual de MindFlow, sobre las cuales se construyen tanto el Landing Page como las Mobile Applications. El objetivo es garantizar una experiencia visual coherente, calmada y confiable, alineada con el propósito de la plataforma: acompañar el bienestar emocional del usuario sin generar ruido visual ni sobrecarga cognitiva.
 
+**Branding**
+
+La identidad visual de MindFlow busca transmitir calma emocional, confianza tecnológica y cercanía humana. Se evita cualquier elemento que remita a urgencia, alarma o exceso de estímulo visual, priorizando en cambio formas suaves, espacios en blanco generosos y una paleta de colores fríos.
+
+**Typography**
+
+- **Primary Font:** Plus Jakarta Sans
+- **Tipo:** Sans-serif humanista
+- **Uso:** Títulos, subtítulos, botones e interfaz general
+
+Se seleccionó por su alta legibilidad en pantallas pequeñas (crítico para el contexto móvil del proyecto), su trazo redondeado que transmite cercanía sin perder seriedad, y su amplia disponibilidad de pesos (Regular, Medium, SemiBold, Bold) que permite construir jerarquía tipográfica sin depender de una segunda familia tipográfica.
+
+| Estilo | Peso | Uso |
+|---|---|---|
+| Heading 1 | Bold | Títulos de pantalla (p. ej. "Tu Diario") |
+| Heading 2 | SemiBold | Encabezados de sección |
+| Body | Regular | Texto de lectura general |
+| Label | Medium | Etiquetas de formularios y botones |
+| Caption | Regular | Metadatos (fecha, hora, estado) |
+
+**Colors**
+
+*Colores primarios* — representan calma emocional y confianza; se usan en botones principales, elementos interactivos y estados positivos.
+
+| Nombre | Hex | Uso |
+|---|---|---|
+| Calm Indigo | `#4C5FD5` | Acción principal, elementos activos, branding |
+| Serene Teal | `#45C7A3` | Estados positivos, progreso, hábitos completados |
+
+*Colores secundarios* — dan soporte y jerarquía visual sin competir con los primarios.
+
+| Nombre | Hex | Uso |
+|---|---|---|
+| Warm Lavender | `#9B8CF2` | Elementos del módulo AI Assistant / Chat |
+| Neutral Fog | `#F4F6FA` | Fondos de sección, tarjetas |
+| Ink Gray | `#2B2D33` | Texto principal |
+
+*Colores de estado* — reservados exclusivamente para retroalimentación funcional, no decorativa.
+
+| Nombre | Hex | Uso |
+|---|---|---|
+| Success Green | `#2FB380` | Confirmaciones, hábito registrado con éxito |
+| Alert Amber | `#E0A73B` | Advertencias no críticas (p. ej. suscripción por vencer) |
+| Error Red | `#E5484D` | Errores de validación, fallos de red |
+
+*Colores de wireframe* — usados exclusivamente durante la etapa de baja fidelidad, para mantener el foco en estructura y no en estética final.
+
+| Nombre | Hex |
+|---|---|
+| Light Gray | `#E5E5E5` |
+| Medium Gray | `#BDBDBD` |
+| Dark Gray | `#828282` |
+| White | `#FFFFFF` |
+
+**Spacing**
+
+Sistema de espaciado basado en múltiplos de 8px, consistente entre Landing Page y Mobile Applications:
+
+- Unidad base: `8px`
+- Padding interno de tarjetas: `16px`–`24px`
+- Separación entre elementos de una lista: `12px`
+- Márgenes laterales de pantalla: `16px`
+- Separación entre secciones: `32px`
+
+**Communication Tone**
+
+| Dimensión | Posición de MindFlow |
+|---|---|
+| Divertido ↔ Serio | Cercano a *Serio*, sin ser frío: el tono reconoce la sensibilidad del contenido emocional que maneja el usuario |
+| Formal ↔ Casual | Cercano a *Casual*: lenguaje cercano, en segunda persona, sin tecnicismos |
+| Respetuoso ↔ Irreverente | Siempre *Respetuoso*: ningún mensaje del sistema minimiza o juzga el estado emocional del usuario |
+| Entusiasta ↔ Sereno | Cercano a *Sereno*: se evita el uso de exclamaciones excesivas o lenguaje que presione al usuario a "sentirse mejor rápido" |
+
+**Dimension Guidelines**
+
+Al tratarse de un proyecto orientado a Mobile Applications, las dimensiones se definen priorizando accesibilidad táctil:
+
+- Botones principales: altura `48px`–`56px` (óptimo para interacción táctil)
+- Íconos: `24px`–`32px`
+- Inputs de texto: altura `48px`–`56px`
+- Bottom Navigation Bar: altura `56px`–`64px`
+- Tarjetas de información: ancho completo con padding lateral de `16px`
+- Área táctil mínima para cualquier elemento interactivo: `44px x 44px`, siguiendo las guías de accesibilidad táctil de Android e iOS
+
+<!--
 ### 3.1.2. Information Architecture
 
 #### 3.1.2.1. Organization Systems
