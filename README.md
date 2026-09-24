@@ -276,13 +276,13 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
   - [3.1. Product design](#31-product-design)
     - [3.1.1. Style Guidelines](#311-style-guidelines)
       - [3.1.1.1. General Style Guidelines](#3111-general-style-guidelines)
-<!--
     - [3.1.2. Information Architecture](#312-information-architecture)
       - [3.1.2.1. Organization Systems](#3121-organization-systems)
       - [3.1.2.2. Labelling Systems](#3122-labelling-systems)
       - [3.1.2.3. SEO Tags and Meta Tags](#3123-seo-tags-and-meta-tags)
       - [3.1.2.4. Searching Systems](#3124-searching-systems)
       - [3.1.2.5. Navigation Systems](#3125-navigation-systems)
+<!--
     - [3.1.3. Landing Page UI Design](#313-landing-page-ui-design)
       - [3.1.3.1. Landing Page Wireframe](#3131-landing-page-wireframe)
       - [3.1.3.2. Landing Page Mock-up](#3132-landing-page-mock-up)
@@ -2717,29 +2717,86 @@ Al tratarse de un proyecto orientado a Mobile Applications, las dimensiones se d
 - Tarjetas de información: ancho completo con padding lateral de `16px`
 - Área táctil mínima para cualquier elemento interactivo: `44px x 44px`, siguiendo las guías de accesibilidad táctil de Android e iOS
 
-<!--
 ### 3.1.2. Information Architecture
+
+En esta sección el equipo plantea las decisiones y el sustento que dirigen la manera en que se organiza el contenido en las experiencias del Landing Page y de las Mobile Applications de MindFlow, buscando que visitantes y usuarios se adapten con facilidad a la funcionalidad de cada producto y encuentren lo que necesitan sin esfuerzo.
 
 #### 3.1.2.1. Organization Systems
 
-_Pendiente_
+MindFlow combina tres tipos de organización visual, aplicados según el contexto de cada pantalla:
+
+- **Organización jerárquica:** utilizada en el Dashboard principal y en el Landing Page, donde se prioriza visualmente la información más relevante para el usuario (estado emocional del día, hábitos pendientes) mediante tamaño, contraste y posición.
+- **Organización secuencial:** aplicada en flujos donde el usuario debe completar una serie de pasos, como el registro (Onboarding → Registro → Configuración de perfil) o la creación de una nueva entrada de diario (Selección de estado de ánimo → Redacción → Confirmación).
+- **Organización matricial:** utilizada en la sección de Analíticas, donde se cruzan distintas variables (estado de ánimo, fecha, hábitos completados) dentro de una misma vista para facilitar la comparación y el análisis de patrones.
+
+A nivel de categorización de contenido, se aplican los siguientes esquemas:
+
+| Esquema | Dónde se aplica |
+|---|---|
+| Cronológico | Historial de entradas del Diario, registro de notificaciones |
+| Por tópicos | Separación de módulos: Diario, Hábitos, Analíticas, Asistente IA, Soporte |
+| Según audiencia | Distinción entre funcionalidades del plan gratuito y del plan Premium (Subscriptions) |
+| Alfabético | Listados extensos, como el historial de tickets de soporte |
 
 #### 3.1.2.2. Labelling Systems
 
-_Pendiente_
+Las etiquetas de MindFlow se definieron priorizando claridad y el menor número de palabras posible, manteniendo consistencia entre el Landing Page, la Mobile Application y el propio lenguaje ubicuo definido en el Capítulo II.
+
+| Etiqueta | Módulo asociado |
+|---|---|
+| Inicio | Dashboard |
+| Diario | Journal |
+| Hábitos | Habits & Wellness |
+| Analíticas | Analytics & Reporting |
+| Asistente | AI Assistant (Chat) |
+| Notificaciones | Notifications |
+| Premium | Subscriptions |
+| Soporte | Support |
+| Perfil | IAM |
+
+Estas etiquetas se mantienen idénticas en todos los puntos de contacto (menú de navegación, notificaciones push, correos transaccionales), evitando sinónimos que puedan confundir al usuario respecto a qué sección del producto se le está mencionando.
 
 #### 3.1.2.3. SEO Tags and Meta Tags
 
-_Pendiente_
+Para el **Landing Page**, se definen las siguientes meta tags principales:
+
+| Tag | Valor |
+|---|---|
+| Title | MindFlow — Bienestar emocional con inteligencia artificial |
+| Description | Registra tu estado de ánimo, construye hábitos saludables y recibe acompañamiento con IA. Descarga MindFlow. |
+| Keywords | bienestar emocional, diario emocional, hábitos saludables, salud mental, IA |
+| Author | CogniTech |
+| Charset | UTF-8 |
+
+Para las **Mobile Applications**, al distribuirse a través de una app store, se definen adicionalmente los elementos de ASO (App Store Optimization):
+
+| Elemento ASO | Valor |
+|---|---|
+| App Title | MindFlow: Diario y Bienestar |
+| App Subtitle | Hábitos y bienestar emocional con IA |
+| App Keywords | diario, ánimo, hábitos, bienestar, salud mental, IA |
+| App Description | MindFlow te acompaña a registrar tu estado emocional, construir hábitos saludables y recibir feedback empático generado por IA, todo en un solo lugar. |
 
 #### 3.1.2.4. Searching Systems
 
-_Pendiente_
+MindFlow incorpora mecanismos de búsqueda diferenciados por módulo, siempre acompañados de filtros que evitan que el usuario se sienta perdido entre el volumen de información generado por el uso continuo de la aplicación:
+
+- **Diario:** búsqueda por palabra clave dentro del contenido de las entradas, con filtros por rango de fecha y por etiqueta emocional asociada.
+- **Hábitos:** filtros por estado (activo, completado, pausado) y por frecuencia (diario, semanal).
+- **Notificaciones:** filtros por tipo (recordatorio, confirmación, alerta de suscripción) y por estado de lectura.
+- **Soporte:** búsqueda de tickets propios por asunto y filtro por estado (abierto, en progreso, cerrado).
+
+Los resultados se presentan siempre en listas estructuradas que muestran los atributos más relevantes de cada registro, sin requerir que el usuario abra cada elemento para identificar si es el que busca.
 
 #### 3.1.2.5. Navigation Systems
 
-_Pendiente_
+La navegación de MindFlow se apoya en un patrón nativo de **Bottom Navigation Bar**, consistente en todas las pantallas principales de la Mobile Application, que agrupa los módulos de mayor uso: Inicio, Diario, Hábitos, Analíticas y Asistente. El resto de módulos (Notificaciones, Premium, Soporte, Perfil) se accede mediante navegación contextual desde el ícono de perfil, evitando saturar la barra principal.
 
+Dentro de cada módulo se incorporan elementos de navegación contextual (botones de retorno, accesos directos entre pantallas relacionadas, p. ej. de una entrada del Diario hacia el hábito que la originó) que permiten desplazarse sin perder el contexto de la tarea que el usuario está realizando.
+
+En el **Landing Page**, la navegación se organiza mediante un menú superior fijo que dirige a los visitantes hacia las secciones principales del sitio (Producto, Beneficios, Planes, Footer con enlaces de contacto), permitiendo un recorrido lineal y ordenado de la propuesta de valor antes de la llamada a la acción final (descarga de la app).
+
+<!--
 ### 3.1.3. Landing Page UI Design
 
 #### 3.1.3.1. Landing Page Wireframe
