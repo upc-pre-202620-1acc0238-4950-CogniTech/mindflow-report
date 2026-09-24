@@ -306,7 +306,6 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
       - [3.1.2.3. SEO Tags and Meta Tags](#3123-seo-tags-and-meta-tags)
       - [3.1.2.4. Searching Systems](#3124-searching-systems)
       - [3.1.2.5. Navigation Systems](#3125-navigation-systems)
-<!--
     - [3.1.3. Landing Page UI Design](#313-landing-page-ui-design)
       - [3.1.3.1. Landing Page Wireframe](#3131-landing-page-wireframe)
       - [3.1.3.2. Landing Page Mock-up](#3132-landing-page-mock-up)
@@ -316,20 +315,16 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
       - [3.1.4.3. Mobile Applications Mock-ups](#3143-mobile-applications-mock-ups)
       - [3.1.4.4. Mobile Applications User Flow Diagrams](#3144-mobile-applications-user-flow-diagrams)
       - [3.1.4.5. Mobile Applications Prototyping](#3145-mobile-applications-prototyping)
--->
 - [Capítulo IV: Product Implementation & Validation](#capítulo-iv-product-implementation--validation)
-<!--
   - [4.1. Software Configuration Management](#41-software-configuration-management)
     - [4.1.1. Software Development Environment Configuration](#411-software-development-environment-configuration)
     - [4.1.2. Source Code Management](#412-source-code-management)
     - [4.1.3. Source Code Style Guide & Conventions](#413-source-code-style-guide--conventions)
     - [4.1.4. Software Deployment Configuration](#414-software-deployment-configuration)
--->
   - [4.2. Landing Page & Mobile Application Implementation](#42-landing-page--mobile-application-implementation)
     - [4.2.1. Sprint 1](#421-sprint-1)
       - [4.2.1.1. Sprint Planning 1](#4211-sprint-planning-1)
       - [4.2.1.2. Aspect Leaders and Collaborators](#4212-aspect-leaders-and-collaborators)
-<!--
       - [4.2.1.3. Sprint Backlog 1](#4213-sprint-backlog-1)
       - [4.2.1.4. Development Evidence for Sprint Review](#4214-development-evidence-for-sprint-review)
       - [4.2.1.5. Testing Suite Evidence for Sprint Review](#4215-testing-suite-evidence-for-sprint-review)
@@ -341,7 +336,6 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
--->
 - [Conclusiones](#conclusiones)
   - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
 <!--
@@ -388,6 +382,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV1</u><br>
       Investigó y aplicó por primera vez las técnicas de Big Picture EventStorming y EventStorming estratégico para modelar el dominio de negocio de MindFlow, adquiriendo conocimientos nuevos de Domain-Driven Design y aplicándolos en la identificación de los Bounded Contexts candidatos del proyecto.
       <br><br>
+      <u>TB1</u><br>
+      Investigó y aplicó por primera vez principios de diseño de sistemas (Design Systems) y arquitectura de información para dispositivos móviles, definiendo la tipografía, paleta de colores y guías dimensionales de MindFlow, además de estructurar los esquemas de organización, etiquetado y navegación de la Mobile Application y el Landing Page.
+      <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
       Investigó y aplicó nuevos enfoques de arquitectura de software al trasladar los hallazgos metodológicos del EventStorming hacia diagramas arquitectónicos y modelos de base de datos. Esta actualización de conocimientos técnicos le permitió estructurar el modelado del dominio de MindFlow, estableciendo una base sólida para su futura implementación como solución web escalable.
@@ -399,6 +396,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     <td>
       <u>AV1</u><br>
       El equipo actualizó sus conocimientos en Domain-Driven Design, análisis de requerimientos y arquitectura de software mediante la aplicación práctica de EventStorming, Candidate Context Discovery, Context Mapping, modelado C4 y técnicas centradas en el usuario, fortaleciendo su capacidad de diseñar y documentar soluciones de software de forma estructurada.
+      <br><br>
+      <u>TB1</u><br>
+      El equipo actualizó sus conocimientos en diseño de producto y planificación ágil, aplicando Style Guidelines, Information Architecture y Sprint Planning para estructurar la construcción del Landing Page y las Mobile Applications sobre los 8 bounded contexts definidos en el Capítulo II.
     </td>
   </tr>
   <tr>
@@ -416,6 +416,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV1</u><br>
       Reconoció la necesidad de seguir aprendiendo de forma autónoma al investigar por cuenta propia las técnicas start-with-value, start-with-simple y look-for-pivotal-events para Candidate Context Discovery, aplicándolas sin haber recibido instrucción previa detallada en clase, como parte de su compromiso con el aprendizaje continuo.
       <br><br>
+      <u>TB1</u><br>
+      Reconoció la necesidad de aprender de forma autónoma criterios de accesibilidad táctil y guías de estilo específicas para aplicaciones móviles (Android e iOS), un ámbito no cubierto en clase, aplicándolos directamente en la planificación del Sprint 1 y en la definición de la matriz de liderazgo del equipo.
+      <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
       Reconoció la necesidad de expandir sus competencias en el diseño de software investigando de forma autónoma la construcción y aplicación del Lenguaje Ubicuo (Ubiquitous Language) dentro de Domain-Driven Design, aplicando este autoaprendizaje para asegurar que la arquitectura técnica y los esquemas de datos reflejen fielmente las reglas de negocio del proyecto MindFlow.
@@ -427,6 +430,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     <td>
       <u>AV1</u><br>
       El equipo reconoció que el aprendizaje permanente es indispensable para adaptar metodologías de Domain-Driven Design, análisis de requerimientos y arquitectura de software a un proyecto real, investigando de forma autónoma nuevas técnicas y aplicándolas directamente en la evolución de la solución MindFlow.
+      <br><br>
+      <u>TB1</u><br>
+      El equipo reconoció la necesidad de aprendizaje continuo al enfrentar por primera vez decisiones de diseño de producto y coordinación de un Sprint real, investigando de forma autónoma buenas prácticas de UX/UI y gestión ágil para aplicarlas en la construcción de MindFlow.
     </td>
   </tr>
 </table>
@@ -2824,7 +2830,6 @@ Dentro de cada módulo se incorporan elementos de navegación contextual (botone
 
 En el **Landing Page**, la navegación se organiza mediante un menú superior fijo que dirige a los visitantes hacia las secciones principales del sitio (Producto, Beneficios, Planes, Footer con enlaces de contacto), permitiendo un recorrido lineal y ordenado de la propuesta de valor antes de la llamada a la acción final (descarga de la app).
 
-<!--
 ### 3.1.3. Landing Page UI Design
 
 #### 3.1.3.1. Landing Page Wireframe
@@ -2857,13 +2862,9 @@ _Pendiente_
 
 _Pendiente_
 
--->
-
 ---
 
 # Capítulo IV: Product Implementation & Validation
-
-<!--
 
 ## 4.1. Software Configuration Management
 
@@ -2882,8 +2883,6 @@ _Pendiente_
 ### 4.1.4. Software Deployment Configuration
 
 _Pendiente_
-
--->
 
 ## 4.2. Landing Page & Mobile Application Implementation
 
@@ -2930,7 +2929,6 @@ En esta sección se detalla la matriz de liderazgo y colaboración (LACX) para e
 
 El aspecto de Backend queda co-liderado por Güere Calero y Díaz De la Cruz, ya que ambos se repartieron los 8 bounded contexts entre sí (4 cada uno), trabajando como una sola unidad de entrega en lugar de dos backends independientes. De la misma forma, Mobile Application (Android) queda co-liderada por Jáuregui Cerna y Cabrera Sotelo, quienes se repartieron los 8 bounded contexts entre sí para construir la app como una sola entrega. Jáuregui Cerna y Cabrera Sotelo también co-lideran la Configuración del Proyecto y Despliegue, cada uno desde su parte (entorno de desarrollo y despliegue, respectivamente). Díaz De la Cruz lidera además el Landing Page, al ser quien elabora su Wireframe (3.1.3.1) y da inicio a esa pieza del entregable.
 
-<!--
 #### 4.2.1.3. Sprint Backlog 1
 
 _Pendiente_
@@ -2974,7 +2972,6 @@ _Pendiente_
 _Pendiente_
 
 ---
--->
 
 # Conclusiones
 
