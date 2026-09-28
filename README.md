@@ -2878,7 +2878,24 @@ _Pendiente_
 
 ### 4.1.3. Source Code Style Guide & Conventions
 
-_Pendiente_
+El equipo adopta guías de estilo oficiales y ampliamente utilizadas en la industria para cada lenguaje empleado en la solución, garantizando consistencia en todo el código fuente. En todos los casos, la nomenclatura de clases, métodos, variables, archivos y comentarios de código se redacta en inglés.
+
+| Lenguaje / Artefacto | Uso en el proyecto | Guía de estilo adoptada | Convenciones clave |
+|---|---|---|---|
+| **C# (.NET 10)** | Backend — Web Services API (ASP.NET Core) | [Microsoft C# Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions) | `PascalCase` para clases, records, métodos y propiedades (`JournalEntry`, `UserCommandService`); `camelCase` para parámetros y variables locales; interfaces prefijadas con `I` (`IUserRepository`, `IAiService`); métodos asíncronos sufijados con `Async` (`FindByEmailAsync`); un tipo público por archivo; `namespace` a nivel de archivo (*file-scoped*) |
+| **Kotlin** | Mobile Application (Android nativo) | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) + [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | `PascalCase` para clases e interfaces; `camelCase` para funciones y propiedades; `UPPER_SNAKE_CASE` para constantes (`companion object`); indentación de 4 espacios; uso explícito de modificadores de visibilidad; *trailing comma* en declaraciones multilínea |
+| **HTML5** | Landing Page | [HTML Style Guide and Coding Conventions](https://www.w3schools.com/html/html5_syntax.asp) + [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) | Etiquetas y atributos en minúscula, comillas dobles, etiquetas semánticas (`<header>`, `<section>`, `<footer>`), indentación de 2 espacios |
+| **CSS3** | Landing Page | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) | Clases e IDs en `kebab-case` (`.hero-section`, `#cta-button`), metodología BEM para componentes reutilizables, *mobile-first* en media queries |
+| **JavaScript** | Landing Page (interactividad) | [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | `camelCase` para variables y funciones, `PascalCase` para clases, `const`/`let` (nunca `var`), funciones puras cuando sea posible |
+| **Gherkin (.feature)** | Especificaciones BDD para Acceptance Tests del backend | [Gherkin Conventions for Readable Specifications](https://specflow.org/gherkin/gherkin-conventions-for-readable-specifications/) | Un escenario = un comportamiento; redacción declarativa (qué, no cómo); estructura estricta `Given-When-Then`; nombres de archivo en `kebab-case` (`create-journal-entry.feature`) |
+
+**Convenciones adicionales de contrato e infraestructura:**
+
+- **Contratos JSON de la API** (requests/responses): `snake_case` (p. ej. `user_id`, `paused_by_ai`), consistente con lo ya definido en los Resources de Habits & Wellness (Capítulo 2.6.4).
+- **Base de datos (MySQL)**: nombres de tablas y columnas en `snake_case` (`journal_entries`, `password_reset_tokens`, `entry_tags`), tal como se evidencia en los Database Diagrams de cada bounded context (Capítulo 2.6).
+- **Ramas y commits**: siguiendo GitFlow y Conventional Commits (ver 4.1.2), los mensajes de commit se redactan en inglés y en tiempo presente (`feat: add journal entry encryption`).
+
+Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, asegurando que el modelo de dominio, la API y la base de datos compartan un mismo lenguaje técnico coherente con el Ubiquitous Language definido.
 
 ### 4.1.4. Software Deployment Configuration
 
