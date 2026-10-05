@@ -2884,11 +2884,23 @@ Los mock-ups representan la versión de alta fidelidad de las pantallas de la Mo
 
 <img src="assets/img/mobile_mockups/habits-mockup.png" alt="Mockup - Hábitos" width="300"/>
 
+**Analíticas**
+
+**El usuario revisa su resumen semanal generado por IA, sus indicadores del mes, la fluctuación emocional de la última semana, la nube de palabras frecuentes y la tendencia de ánimo; al final puede exportar sus reportes en PDF o CSV (US18, US28, US31, US32, US35, US36)**
+
+<img src="assets/img/mobile_mockups/analytics-mockup.png" alt="Mockup - Analíticas" width="300"/>
+
 **Perfil y privacidad**
 
 **El usuario edita sus datos personales, activa el bloqueo por PIN y cambia al modo oscuro desde Ajustes y Privacidad (US04, US05, US06)**
 
 <img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="300"/>
+
+**Planes y suscripción**
+
+**El usuario compara el plan Freemium con MindFlow Premium, revisa qué funcionalidades incluye cada uno y puede actualizar a Premium con pago seguro (US33, US34)**
+
+<img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="600"/>
 
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
 
