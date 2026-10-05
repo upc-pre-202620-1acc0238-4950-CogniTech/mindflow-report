@@ -2852,7 +2852,43 @@ _Pendiente_
 
 #### 3.1.4.3. Mobile Applications Mock-ups
 
-_Pendiente_
+Los mock-ups representan la versión de alta fidelidad de las pantallas de la Mobile Application de MindFlow. Fueron elaborados en Figma sobre un frame de 402 × 874 px y aplican la paleta, la tipografía y los componentes del archivo de diseño enlazado en la sección 3.1.1. Cada pantalla se presenta en el orden en que el usuario la recorre y se relaciona con las User Stories que cubre.
+
+**Acceso a la aplicación**
+
+**El usuario inicia sesión con su cuenta de Google o con su correo electrónico y contraseña; desde esta pantalla también puede recuperar su contraseña o ir al registro (US01, US02, US03)**
+
+<img src="assets/img/mobile_mockups/login-mockup.png" alt="Mockup - Login" width="300"/>
+
+**El usuario nuevo crea su cuenta con Google o completando su nombre, correo electrónico y contraseña, y acepta los Términos de Servicio y la Política de Privacidad (US01)**
+
+<img src="assets/img/mobile_mockups/register-mockup.png" alt="Mockup - Registro" width="300"/>
+
+**Registro emocional y navegación**
+
+**El usuario entra al Dashboard, escribe cómo se siente, elige una etiqueta de contexto y guarda el registro; MindFlow AI le responde con retroalimentación empática y debajo aparecen sus conversaciones recientes (US11, US12, US13, US14)**
+
+<img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Home" width="300"/>
+
+**El usuario abre el menú lateral desde el ícono superior izquierdo para moverse entre Dashboard, Diario, Hábitos, Analíticas, Configuración y Planes**
+
+<img src="assets/img/mobile_mockups/menu-mockup.png" alt="Mockup - Menú móvil" width="300"/>
+
+**Diario y hábitos**
+
+**El usuario revisa su historial emocional: busca entradas por palabra clave, filtra por etiqueta, estado y fecha, y ve en el calendario el estado de ánimo de cada día según su color (US14, US16, US17)**
+
+<img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="300"/>
+
+**El usuario consulta sus rutinas, ve el progreso del día y añade un nuevo hábito con su frecuencia; cuando MindFlow AI detecta un nivel alto de estrés, muestra un aviso y ajusta las tareas (US21, US22, US23)**
+
+<img src="assets/img/mobile_mockups/habits-mockup.png" alt="Mockup - Hábitos" width="300"/>
+
+**Perfil y privacidad**
+
+**El usuario edita sus datos personales, activa el bloqueo por PIN y cambia al modo oscuro desde Ajustes y Privacidad (US04, US05, US06)**
+
+<img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="300"/>
 
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
 
