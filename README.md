@@ -2978,7 +2978,51 @@ _Pendiente_
 
 ### 4.3.1. Diseño de Entrevistas
 
-_Pendiente_
+Las entrevistas de validación buscan conocer cómo usuarios reales de cada segmento objetivo perciben y entienden la **Landing Page** y la **aplicación móvil Android** de MindFlow, e identificar problemas de usabilidad, arquitectura de información y diseño inclusivo. Se realizarán **3 entrevistas por segmento (6 en total)**, con una duración de entre 3 y 5 minutos cada una.
+ 
+#### Segmentos a validar
+ 
+| Segmento | Perfil | Nº de entrevistas |
+|---|---|---|
+| Segmento A: Estudiantes Universitarios (*Tech-Native Scholars*) | Jóvenes de 18 a 25 años que cursan pregrado en entornos de alta exigencia académica | 3 |
+| Segmento B: Profesionales Jóvenes (*High-Performance Achievers*) | Adultos de 26 a 35 años en consolidación de carrera o mando medio | 3 |
+ 
+Se invitará a personas que no hayan participado en las entrevistas de descubrimiento de la sección 2.2.
+ 
+#### Elementos de la sesión
+ 
+1. **Landing Page** (versión desplegada).
+2. **Aplicación móvil Android** (pantallas del Sprint 1).
+#### Flujos de la aplicación validados
+ 
+| Flujo | User Stories |
+|---|---|
+| Registro o inicio de sesión | US01, US02 |
+| Entrada de diario y retroalimentación empática de la IA | US11, US13 |
+| Creación y cumplimiento de hábitos | US21, US22 |
+ 
+Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprint 1.
+ 
+#### Estructura de la sesión
+ 
+| Etapa | Duración aprox. | Descripción |
+|---|---|---|
+| Presentación | 30 s | Se explica el propósito de la sesión y se solicita autorización para grabar |
+| Landing Page | 1 a 1,5 min | Se muestra la página completa sin dar contexto previo; luego se consulta qué entendió y qué ofrece MindFlow |
+| Aplicación móvil | 1,5 a 2 min | Se muestra el funcionamiento general de la app a través de los flujos indicados; cuando es posible, el entrevistado realiza una acción simple por sí mismo |
+| Preguntas de validación | 1 min | Preguntas de cierre y por segmento |
+ 
+#### Preguntas de validación (ambos segmentos)
+ 
+- ¿Con tus propias palabras, qué es MindFlow y para qué sirve?
+- ¿Qué fue lo que más te llamó la atención y qué fue lo que menos entendiste?
+- ¿Hubo algo que esperabas encontrar y no viste?
+- ¿Qué te generaría confianza o desconfianza al registrar tus emociones en esta app?
+- ¿Qué cambiarías o agregarías?
+
+**Segmento A:** ¿Usarías MindFlow en una semana de exámenes? ¿Qué tan importante es para ti que sea gratuita o de bajo costo?
+ 
+**Segmento B:** ¿Encajaría MindFlow en tu rutina laboral? ¿Qué valor tendría para ti ver reportes de tu estado emocional?
 
 ### 4.3.2. Registro de Entrevistas
 
