@@ -2996,7 +2996,7 @@ En esta sección se detalla la matriz de liderazgo y colaboración (LACX) para e
 El aspecto de Backend queda co-liderado por Güere Calero y Díaz De la Cruz, ya que ambos se repartieron los 8 bounded contexts entre sí (4 cada uno), trabajando como una sola unidad de entrega en lugar de dos backends independientes. De la misma forma, Mobile Application (Android) queda co-liderada por Jáuregui Cerna y Cabrera Sotelo, quienes se repartieron los 8 bounded contexts entre sí para construir la app como una sola entrega. Jáuregui Cerna y Cabrera Sotelo también co-lideran la Configuración del Proyecto y Despliegue, cada uno desde su parte (entorno de desarrollo y despliegue, respectivamente). Díaz De la Cruz lidera además el Landing Page, al ser quien elabora su Wireframe (3.1.3.1) y da inicio a esa pieza del entregable.
 
 #### 4.2.1.3 Sprint Backlog 1
-![SprintBacklog](../assets/SprintBacklog.png)
+![SprintBacklog](assets/img/participants/SprintBacklog.png)
 
 Enlace de Trello: [https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1](https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1)
 
