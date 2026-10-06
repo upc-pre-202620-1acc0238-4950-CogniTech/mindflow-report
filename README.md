@@ -2834,7 +2834,24 @@ En el **Landing Page**, la navegación se organiza mediante un menú superior fi
 
 #### 3.1.3.1. Landing Page Wireframe
 
-_Pendiente_
+<img src="assets/img/wireframe web/Analíticas Wireframe.png" alt="Wireframe - Analíticas" width="300"/>
+
+<img src="assets/img/wireframe web/Configuraciones Wireframe.png" alt="Wireframe - Configuraciones" width="300"/>
+
+<img src="assets/img/wireframe web/Habitos Wireframe.png" alt="Wireframe - Hábitos" width="300"/>
+
+<img src="assets/img/wireframe web/Home Wireframe.png" alt="Wireframe - Home" width="300"/>
+
+<img src="assets/img/wireframe web/Journal Wireframe.png" alt="Wireframe - Journal" width="300"/>
+
+<img src="assets/img/wireframe web/Login Wireframe.png" alt="Wireframe - Login" width="300"/>
+
+<img src="assets/img/wireframe web/Planes Wireframe.png" alt="Wireframe - Planes" width="300"/>
+
+<img src="assets/img/wireframe web/Register Wireframe.png" alt="Wireframe - Register" width="300"/>
+
+<img src="assets/img/wireframe web/SprintBacklog.png" alt="Sprint Backlog" width="300"/>
+
 
 #### 3.1.3.2. Landing Page Mock-up
 
