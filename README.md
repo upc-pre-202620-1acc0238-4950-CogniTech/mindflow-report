@@ -3395,7 +3395,41 @@ _Pendiente_
 
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
 
-_Pendiente_
+En este Sprint, la suite de pruebas automatizadas se concentró en la Mobile Application. Se escribieron **unit tests** con **JUnit 4** para las reglas de negocio de la capa de dominio y para los casos de uso de la capa de aplicación. Estas pruebas validan la lógica que define el comportamiento de MindFlow frente al estrés del usuario y la conversación con MindFlow AI, sin depender de la interfaz ni de servicios externos.
+
+**Repositorio:** [https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted) (rama `develop`)
+
+**Ruta de las pruebas:** `app/src/test/java/com/cognitech/mindflow/`
+
+**Ejecución:** `./gradlew testDebugUnitTest`
+
+##### Relación de Unit Tests
+
+| Archivo de prueba | Clase probada | Test | Comportamiento validado | User Story |
+|---|---|---|---|---|
+| `domain/service/HabitPolicyTest.kt` | `HabitPolicy` (domain service) | `classifies habit from its name` | Un hábito se clasifica automáticamente en su categoría a partir del nombre. Por ejemplo, "Estudiar estadística" pertenece a la categoría Estudios. | US21 |
+| `domain/service/HabitPolicyTest.kt` | `HabitPolicy` (domain service) | `counts consecutive days ending yesterday when today is pending` | La racha cuenta los días consecutivos cumplidos. Si el hábito de hoy aún está pendiente, la racha se calcula hasta ayer y no se reinicia. | US28 |
+| `domain/service/HabitPolicyTest.kt` | `HabitPolicy` (domain service) | `detects stress after two negative recent entries` | Se detecta estrés alto cuando al menos dos de los tres registros más recientes del diario tienen sentimiento negativo. Esta condición activa la pausa de hábitos exigentes. | US23 |
+| `application/ChatUseCasesTest.kt` | `ChatUseCases` (application service) | `replies as the assistant` | La respuesta al mensaje del usuario la entrega MindFlow AI y se identifica como mensaje del asistente, no del usuario. | US13 |
+| `application/ChatUseCasesTest.kt` | `ChatUseCases` (application service) | `welcome message comes from the assistant` | El mensaje de bienvenida del chat se muestra como mensaje del asistente. | US13 |
+
+En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementación de prueba. Así se valida el caso de uso de forma aislada, sin llamar al servicio de IA del backend.
+
+##### Resultado de la ejecución
+
+| Clase de prueba | Tests | Exitosos | Fallidos |
+|---|---|---|---|
+| `HabitPolicyTest` | 3 | 3 | 0 |
+| `ChatUseCasesTest` | 2 | 2 | 0 |
+| **Total** | **5** | **5** | **0** |
+
+##### Commits relacionados con Testing
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+|---|---|---|---|---|---|
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 05d549d | refactor: add DDD foundation for frontend | Adds domain, application, infrastructure and shared layers. Introduces local persistence adapters, dependency composition, initial domain policies and fixes the Plans header. Incluye `HabitPolicyTest`. | 28/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 7bbe3ca | refactor(chat): route AI chat through application and domain layers | — (agrega `ChatUseCasesTest`) | 02/10/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | a83a7e5 | feat(chat): wire the floating chat widget to backend Gemini, not LocalAiResponder | Replaces the sync-only AiResponder port with a suspend ChatResponder port and adds RemoteChatAdapter. Actualiza `ChatUseCasesTest` al nuevo puerto. | 06/10/2026 |
 
 #### 4.2.1.6. Execution Evidence for Sprint Review
 
