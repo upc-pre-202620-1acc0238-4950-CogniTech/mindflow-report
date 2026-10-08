@@ -2922,7 +2922,379 @@ Los mock-ups representan la versión de alta fidelidad de las pantallas de la Mo
 
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
 
-_Pendiente_
+Los User Flows describen el recorrido que sigue cada User Persona dentro de la Mobile Application de MindFlow para cumplir un objetivo concreto. Se elaboró un User Flow por cada User goal, tomando como referencia a los dos User Personas definidos en la sección 2.3.1: **Jimena Luna** (estudiante universitaria, 19 años) y **Nordie Sanabria** (profesional de marketing, 29 años). Cada flujo se apoya en los mock-ups de la sección 3.1.4.3 y en las User Stories de la sección 2.4.1.
+
+En cada diagrama se distinguen dos tipos de recorrido:
+
+- **Happy path** (verde): la ruta esperada, en la que el usuario cumple su objetivo sin inconvenientes.
+- **Unhappy paths** (rojo): rutas alternativas que aparecen cuando una validación falla, el servicio no responde o el usuario no cumple una condición previa (por ejemplo, no tener el plan Premium).
+
+Las pantallas aparecen como rectángulos, las decisiones del sistema o del usuario como rombos y los mensajes que muestra la aplicación como nodos redondeados.
+
+---
+
+##### User Flow 1: Acceder a MindFlow
+
+**User goal:** Como Jimena, quiero crear mi cuenta o iniciar sesión de forma rápida para empezar a registrar cómo me siento sin pasos innecesarios.
+
+**User Persona:** Jimena Luna, aunque el flujo es el mismo para Nordie Sanabria. **User Stories:** US01, US02, US03.
+
+<p>
+<img src="assets/img/mobile_mockups/login-mockup.png" alt="Mockup - Login" width="200"/>
+<img src="assets/img/mobile_mockups/register-mockup.png" alt="Mockup - Registro" width="200"/>
+<img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Dashboard" width="200"/>
+</p>
+
+```mermaid
+flowchart TD
+    A["Pantalla Login"] --> B{"¿Tiene cuenta?"}
+    B -->|"No"| C["Pantalla Registro"]
+    C --> D{"¿Método de registro?"}
+    D -->|"Google"| E["Selector de cuenta Google"]
+    D -->|"Correo"| F["Completa nombre, correo y contraseña<br/>y acepta Términos y Privacidad"]
+    F --> G{"¿Datos válidos?"}
+    G -->|"No"| G1(["Mensaje: Correo electrónico no válido /<br/>Mínimo 8 caracteres"])
+    G1 --> F
+    G -->|"Sí"| H{"¿Cuenta creada en el servidor?"}
+    H -->|"No"| H1(["Mensaje: No se pudo crear la cuenta"])
+    H1 --> F
+    E --> K
+    H -->|"Sí"| K["Dashboard"]
+    B -->|"Sí"| I{"¿Método de acceso?"}
+    I -->|"Google"| E
+    I -->|"Correo"| J["Ingresa correo y contraseña"]
+    J --> L{"¿Credenciales correctas?"}
+    L -->|"Sí"| K
+    L -->|"No"| L1(["Mensaje: Correo o contraseña incorrectos"])
+    L1 --> M{"¿Olvidó su contraseña?"}
+    M -->|"No"| J
+    M -->|"Sí"| N["Solicita enlace de recuperación"]
+    N --> N1(["Recibe correo para restablecer contraseña"])
+    N1 --> J
+    J -.->|"Sin conexión"| X(["Mensaje: No se pudo conectar con el servidor.<br/>Verifica tu conexión."])
+    X -.-> J
+
+    classDef happy fill:#d9f2e6,stroke:#2e8b57,color:#1b4332
+    classDef unhappy fill:#fde2e1,stroke:#c0392b,color:#7b241c
+    class A,B,C,D,E,F,G,H,I,J,K,L happy
+    class G1,H1,L1,M,N,N1,X unhappy
+```
+
+**Explicación del flujo:**
+
+- **Happy path:** Jimena abre la aplicación y llega a la pantalla de Login. Si ya tiene cuenta, ingresa su correo y contraseña (o usa Google) y entra directamente al Dashboard. Si es nueva, pasa a Registro, completa sus datos, acepta los Términos de Servicio y la Política de Privacidad, y entra al Dashboard con la sesión ya iniciada.
+- **Unhappy paths:**
+  - Si el correo no tiene un formato válido o la contraseña tiene menos de 8 caracteres, el formulario muestra el error junto al campo y no se envía.
+  - Si el servidor no puede crear la cuenta (por ejemplo, porque el correo ya está registrado), se muestra "No se pudo crear la cuenta" y el usuario vuelve al formulario.
+  - Si las credenciales son incorrectas, se muestra "Correo o contraseña incorrectos". Desde ahí el usuario puede volver a intentarlo o pedir el enlace de recuperación de contraseña (US03).
+  - Si no hay conexión, la aplicación lo indica y el usuario puede reintentar.
+
+---
+
+##### User Flow 2: Registrar cómo me siento y recibir apoyo de la IA
+
+**User goal:** Como Jimena, quiero escribir cómo me siento en un momento de estrés académico y recibir una respuesta empática inmediata para sentirme acompañada y entender mejor mi estado.
+
+**User Persona:** Jimena Luna. **User Stories:** US11, US12, US13, US14.
+
+<p>
+<img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Dashboard" width="200"/>
+<img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="200"/>
+</p>
+
+```mermaid
+flowchart TD
+    A["Dashboard"] --> B["Escribe cómo se siente"]
+    B --> C["Elige etiqueta de contexto<br/>Estudios, Trabajo, Personal..."]
+    C --> D{"¿El texto está vacío?"}
+    D -->|"Sí"| D1(["Botón Guardar deshabilitado"])
+    D1 --> B
+    D -->|"No"| E["Guarda el registro"]
+    E --> F["MindFlow AI analiza el sentimiento"]
+    F --> G{"¿Servicio de IA disponible?"}
+    G -->|"Sí"| H["Muestra retroalimentación empática"]
+    G -->|"No"| G1(["Se guarda el registro y se muestra<br/>una respuesta de apoyo de respaldo"])
+    G1 --> I
+    H --> I["El registro aparece en Conversaciones recientes"]
+    I --> J{"¿Quiere ver todo su historial?"}
+    J -->|"Sí"| K["Diario"]
+    J -->|"No"| L(["Fin: registro guardado"])
+
+    classDef happy fill:#d9f2e6,stroke:#2e8b57,color:#1b4332
+    classDef unhappy fill:#fde2e1,stroke:#c0392b,color:#7b241c
+    class A,B,C,D,E,F,G,H,I,J,K,L happy
+    class D1,G1 unhappy
+```
+
+**Explicación del flujo:**
+
+- **Happy path:** Desde el Dashboard, Jimena escribe lo que siente, elige una etiqueta de contexto y guarda. MindFlow AI analiza el tono del texto (US12), responde con un mensaje empático (US13) y el registro aparece en la lista de conversaciones recientes. Desde ahí puede ir al Diario para ver su historial completo.
+- **Unhappy paths:**
+  - Mientras el campo de texto está vacío, el botón de guardar permanece deshabilitado, así que no se pueden crear registros en blanco.
+  - Si el servicio de IA no responde, el registro igual se guarda y la aplicación muestra un mensaje de apoyo de respaldo. Así Jimena no pierde lo que escribió.
+- **Condición:** el análisis de sentimiento de cada registro alimenta los User Flows 4 y 5 (ajuste de hábitos por estrés y analíticas).
+
+---
+
+##### User Flow 3: Revisar mi historial emocional
+
+**User goal:** Como Nordie, quiero encontrar rápidamente registros anteriores y ver en un calendario cómo ha variado mi ánimo para identificar qué situaciones del trabajo me afectan más.
+
+**User Persona:** Nordie Sanabria. **User Stories:** US14, US16, US17.
+
+<p>
+<img src="assets/img/mobile_mockups/menu-mockup.png" alt="Mockup - Menú" width="200"/>
+<img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="200"/>
+</p>
+
+```mermaid
+flowchart TD
+    A["Dashboard"] --> B["Navega a la sección Diario"]
+    B --> C["Diario"]
+    C --> D{"¿Tiene registros?"}
+    D -->|"No"| D1(["Mensaje: Aún no tienes registros.<br/>Escribe tu primer pensamiento desde el Dashboard."])
+    D1 --> A
+    D -->|"Sí"| E{"¿Cómo busca?"}
+    E -->|"Palabra clave"| F["Escribe en el buscador"]
+    E -->|"Filtros"| G["Filtra por etiqueta, estado o fecha"]
+    E -->|"Calendario"| H["Selecciona un día en el calendario"]
+    F --> I{"¿Hay coincidencias?"}
+    G --> I
+    H --> I
+    I -->|"Sí"| J["Ve los registros y su estado de ánimo por color"]
+    I -->|"No"| I1(["Mensaje: No hay registros que<br/>coincidan con los filtros"])
+    I1 --> E
+    H -.->|"Día futuro"| H1(["El día no es seleccionable"])
+    H1 -.-> H
+
+    classDef happy fill:#d9f2e6,stroke:#2e8b57,color:#1b4332
+    classDef unhappy fill:#fde2e1,stroke:#c0392b,color:#7b241c
+    class A,B,C,D,E,F,G,H,I,J happy
+    class D1,I1,H1 unhappy
+```
+
+**Explicación del flujo:**
+
+- **Happy path:** Nordie entra al Diario desde la navegación principal. Para encontrar lo que busca puede escribir una palabra clave (US16), filtrar por etiqueta, estado o fecha (US14), o tocar un día del calendario, cuyo color indica el estado de ánimo de ese día (US17). La lista muestra los registros que coinciden.
+- **Unhappy paths:**
+  - Si todavía no tiene registros, la pantalla le indica que escriba el primero desde el Dashboard.
+  - Si la búsqueda o los filtros no devuelven resultados, se muestra un mensaje y puede ajustar los criterios.
+  - Los días futuros del calendario no se pueden seleccionar.
+
+---
+
+##### User Flow 4: Gestionar mis hábitos según mi nivel de estrés
+
+**User goal:** Como Jimena, quiero crear y cumplir hábitos de bienestar que se adapten a mi nivel de estrés para no sentir que la aplicación es una tarea más en semana de exámenes.
+
+**User Persona:** Jimena Luna. **User Stories:** US21, US22, US23, US28.
+
+<p>
+<img src="assets/img/mobile_mockups/habits-mockup.png" alt="Mockup - Hábitos" width="200"/>
+</p>
+
+```mermaid
+flowchart TD
+    A["Hábitos"] --> B{"¿MindFlow AI detecta estrés alto<br/>en los registros recientes?"}
+    B -->|"Sí"| B1(["Aviso: Hemos pausado tus tareas de<br/>alta exigencia cognitiva"])
+    B1 --> B2["Hábitos de Estudios marcados como Pausado por IA<br/>y sugerencias para reducir el estrés"]
+    B2 --> C
+    B -->|"No"| C["Ve sus rutinas y el progreso del día"]
+    C --> D{"¿Qué quiere hacer?"}
+    D -->|"Marcar hábito"| E["Marca un hábito como completado"]
+    E --> F["Se actualiza el progreso y la racha"]
+    D -->|"Crear hábito"| G["Escribe nombre, categoría y frecuencia"]
+    G --> H{"¿Nombre vacío?"}
+    H -->|"Sí"| H1(["Botón Crear deshabilitado"])
+    H1 --> G
+    H -->|"No"| I["El hábito aparece en la lista"]
+    D -->|"Usar sugerencia"| J["Agrega un hábito sugerido"]
+    J --> I
+    E -.->|"Hábito pausado"| E1(["No se puede marcar mientras esté pausado"])
+
+    classDef happy fill:#d9f2e6,stroke:#2e8b57,color:#1b4332
+    classDef unhappy fill:#fde2e1,stroke:#c0392b,color:#7b241c
+    class A,B,C,D,E,F,G,H,I,J happy
+    class B1,B2,H1,E1 unhappy
+```
+
+**Explicación del flujo:**
+
+- **Happy path:** Jimena entra a Hábitos y ve sus rutinas con el progreso del día. Puede marcar un hábito como completado, lo que actualiza su progreso y su racha (US22, US28). También puede crear un hábito nuevo con nombre, categoría y frecuencia, o agregar uno de los sugeridos (US21).
+- **Ruta alternativa por estrés (US23):** si sus registros recientes tienen un tono negativo, MindFlow AI muestra un aviso, pausa los hábitos de alta exigencia cognitiva (categoría Estudios) y cambia las sugerencias por rutinas que reducen el estrés, como la respiración 4-7-8. No es un error: es la adaptación que necesita la persona para no sentirse sobrecargada.
+- **Unhappy paths:** no se puede crear un hábito sin nombre, y los hábitos pausados por la IA no se pueden marcar como completados mientras dure la pausa.
+
+---
+
+##### User Flow 5: Revisar mis analíticas y exportar un reporte
+
+**User goal:** Como Nordie, quiero ver cómo ha evolucionado mi bienestar y descargar un reporte para compartirlo con mi psicólogo, sin dedicarle tiempo extra.
+
+**User Persona:** Nordie Sanabria. **User Stories:** US18, US31, US32, US35, US36.
+
+<p>
+<img src="assets/img/mobile_mockups/analytics-mockup.png" alt="Mockup - Analíticas" width="200"/>
+<img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="300"/>
+</p>
+
+```mermaid
+flowchart TD
+    A["Analíticas y Tendencias"] --> B["Ve resumen semanal de IA, indicadores del mes,<br/>fluctuación emocional, nube de palabras y tendencia"]
+    B --> C["Pulsa Exportar PDF o Exportar CSV"]
+    C --> D{"¿Tiene plan Premium?"}
+    D -->|"Sí"| E{"¿Formato?"}
+    E -->|"PDF"| F["Genera el reporte clínico en PDF"]
+    E -->|"CSV"| G["Genera el archivo CSV"]
+    F --> H["Hoja para compartir de Android"]
+    G --> H
+    H --> I(["Envía el reporte a su psicólogo o lo guarda"])
+    D -->|"No"| D1(["Diálogo: Función Premium.<br/>La exportación requiere MindFlow Premium"])
+    D1 --> J{"¿Ver planes?"}
+    J -->|"Sí"| K["Planes, ver User Flow 6"]
+    J -->|"No"| B
+
+    classDef happy fill:#d9f2e6,stroke:#2e8b57,color:#1b4332
+    classDef unhappy fill:#fde2e1,stroke:#c0392b,color:#7b241c
+    class A,B,C,D,E,F,G,H,I happy
+    class D1,J,K unhappy
+```
+
+**Explicación del flujo:**
+
+- **Happy path:** Nordie abre Analíticas y en una sola pantalla ve el resumen semanal generado por IA (US18), sus indicadores del mes, la fluctuación emocional, la nube de palabras (US32) y la tendencia de ánimo (US31). Al final pulsa Exportar PDF (US35) o Exportar CSV (US36), y la aplicación genera el archivo y abre la hoja para compartir de Android, desde donde puede enviarlo a su psicólogo.
+- **Unhappy path:** si Nordie tiene el plan Freemium, al pulsar exportar aparece el diálogo "Función Premium". Desde ahí puede ir a Planes (User Flow 6) o cerrar el diálogo y seguir viendo sus analíticas.
+
+---
+
+##### User Flow 6: Mejorar a MindFlow Premium
+
+**User goal:** Como Nordie, quiero comparar los planes y pagar Premium de forma segura para desbloquear la exportación de reportes y las analíticas avanzadas.
+
+**User Persona:** Nordie Sanabria. **User Stories:** US33, US34.
+
+<p>
+<img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="400"/>
+</p>
+
+```mermaid
+flowchart TD
+    A["Planes"] --> B["Compara Freemium y MindFlow Premium"]
+    B --> C{"¿Ya es Premium?"}
+    C -->|"Sí"| C1(["Botón muestra Tu Plan Actual"])
+    C -->|"No"| D["Pulsa Actualizar a Premium"]
+    D --> E{"¿Confirma en el diálogo?"}
+    E -->|"No"| B
+    E -->|"Sí"| F{"¿Se creó la sesión de pago?"}
+    F -->|"No"| F1(["Mensaje: No se pudo iniciar el pago"])
+    F1 --> B
+    F -->|"Sí"| G["Stripe Checkout en el navegador"]
+    G --> H{"¿Pago completado?"}
+    H -->|"No / cancela"| H1(["Vuelve a Planes sin cambios"])
+    H1 --> B
+    H -->|"Sí"| I["Vuelve a la app"]
+    I --> J["La app consulta la suscripción confirmada"]
+    J --> K(["Plan actual: Premium.<br/>Exportación habilitada"])
+
+    classDef happy fill:#d9f2e6,stroke:#2e8b57,color:#1b4332
+    classDef unhappy fill:#fde2e1,stroke:#c0392b,color:#7b241c
+    class A,B,C,D,E,F,G,H,I,J,K happy
+    class C1,F1,H1 unhappy
+```
+
+**Explicación del flujo:**
+
+- **Happy path:** Nordie entra a Planes desde Configuración o desde el diálogo del User Flow 5. Compara lo que incluye cada plan (US33), pulsa "Actualizar a Premium" y confirma. La aplicación abre Stripe Checkout (US34), donde completa el pago. Al regresar, la aplicación consulta al servidor la suscripción confirmada y muestra Premium como plan actual, con la exportación ya habilitada.
+- **Unhappy paths:**
+  - Si cancela el diálogo de confirmación o abandona el pago en Stripe, vuelve a Planes sin cambios en su plan.
+  - Si no se puede crear la sesión de pago (por ejemplo, por falta de conexión), se muestra un mensaje de error y puede reintentar.
+  - Si ya es Premium, el botón muestra "Tu Plan Actual" y no se puede pulsar.
+- **Condición:** el plan solo cambia cuando el servidor confirma el pago. La aplicación nunca activa Premium por su cuenta.
+
+---
+
+##### User Flow 7: Proteger mi privacidad y personalizar la aplicación
+
+**User goal:** Como Jimena, quiero proteger mis registros con un PIN y ajustar la aplicación a mi gusto para sentirme segura al escribir sobre temas personales.
+
+**User Persona:** Jimena Luna. **User Stories:** US04, US05, US06, US07.
+
+<p>
+<img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="200"/>
+</p>
+
+```mermaid
+flowchart TD
+    A["Configuración"] --> B{"¿Qué quiere ajustar?"}
+    B -->|"Perfil"| C["Edita nombre, ocupación y zona horaria"]
+    C --> D["Guardar Cambios"]
+    D --> E(["Datos actualizados"])
+    B -->|"PIN"| F["Activa Bloqueo por PIN"]
+    F --> G["Al volver a abrir la app se pide el PIN"]
+    G --> H{"¿PIN correcto?"}
+    H -->|"Sí"| I["Accede a su información"]
+    H -->|"No"| H1(["PIN incorrecto, vuelve a intentarlo"])
+    H1 --> G
+    B -->|"Tema"| J["Activa Modo oscuro"]
+    J --> K(["La interfaz cambia de tema"])
+    B -->|"Eliminar cuenta"| L{"¿Confirma la eliminación?"}
+    L -->|"No"| A
+    L -->|"Sí"| M(["Cuenta eliminada y vuelve al Login"])
+
+    classDef happy fill:#d9f2e6,stroke:#2e8b57,color:#1b4332
+    classDef unhappy fill:#fde2e1,stroke:#c0392b,color:#7b241c
+    class A,B,C,D,E,F,G,H,I,J,K happy
+    class H1,L,M unhappy
+```
+
+**Explicación del flujo:**
+
+- **Happy path:** desde Configuración, Jimena edita sus datos personales (US05), activa el bloqueo por PIN (US04) y el modo oscuro (US06). Con el PIN activo, cada vez que vuelve a abrir la aplicación se le pide el PIN antes de mostrar su información.
+- **Unhappy paths:**
+  - Si ingresa un PIN incorrecto, no accede y puede volver a intentarlo.
+  - Eliminar la cuenta (US07) es una acción irreversible, por eso requiere confirmación. Si cancela, vuelve a Configuración sin cambios.
+
+---
+
+##### User Flow 8: Pedir ayuda al soporte técnico
+
+**User goal:** Como Nordie, quiero resolver una duda o reportar un problema sin salir de la aplicación para no perder tiempo buscando cómo contactar al equipo.
+
+**User Persona:** Nordie Sanabria. **User Stories:** US37.
+
+<p>
+<img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="200"/>
+</p>
+
+```mermaid
+flowchart TD
+    A["Configuración"] --> B["Sección Soporte Técnico"]
+    B --> C{"¿Qué necesita?"}
+    C -->|"Duda frecuente"| D["Centro de Preguntas FAQ"]
+    D --> E{"¿Resolvió su duda?"}
+    E -->|"Sí"| F(["Fin"])
+    E -->|"No"| G
+    C -->|"Reportar problema"| G["Generar Ticket de Ayuda"]
+    G --> H["Describe el problema"]
+    H --> I{"¿Descripción vacía?"}
+    I -->|"Sí"| I1(["Botón Enviar deshabilitado"])
+    I1 --> H
+    I -->|"No"| J{"¿Ticket registrado?"}
+    J -->|"Sí"| K(["Mensaje: Ticket generado.<br/>Te contactaremos por correo."])
+    J -->|"No"| J1(["Mensaje de error, puede reintentar"])
+    J1 --> H
+
+    classDef happy fill:#d9f2e6,stroke:#2e8b57,color:#1b4332
+    classDef unhappy fill:#fde2e1,stroke:#c0392b,color:#7b241c
+    class A,B,C,D,E,F,G,H,I,J,K happy
+    class I1,J1 unhappy
+```
+
+**Explicación del flujo:**
+
+- **Happy path:** Nordie entra a Configuración y, en la sección Soporte Técnico, primero revisa el Centro de Preguntas (FAQ). Si su duda no está ahí, genera un ticket de ayuda, describe el problema y lo envía. La aplicación le confirma que el ticket fue generado y que recibirá la respuesta por correo; además, el ticket queda registrado en su bandeja de notificaciones (US37).
+- **Unhappy paths:**
+  - No se puede enviar un ticket sin descripción.
+  - Si el ticket no se registra (por ejemplo, por falta de conexión), se muestra un mensaje de error y puede reintentar.
 
 #### 3.1.4.5. Mobile Applications Prototyping
 
