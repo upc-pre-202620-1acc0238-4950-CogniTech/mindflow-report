@@ -683,7 +683,9 @@ Para validar nuestros supuestos, planteamos las siguientes hipótesis de diseño
 
 #### 1.2.2.4. Lean UX Canvas
 
-<img src="assets/img/lean_ux/lean_ux_canvas.png" alt="lean_ux_canvas Picture" width="1890"/>
+El Lean UX Canvas resume en una sola vista el proceso Lean UX de MindFlow. Integra el problema de negocio y los problem statements (1.2.2.1), los resultados de negocio y de usuario del Assumptions Worksheet (1.2.2.2), los segmentos objetivo (1.3) y las hipótesis planteadas (1.2.2.3). Las ocho cajas siguen el orden propuesto por Jeff Gothelf: primero se define el problema, los resultados esperados y los usuarios, luego las soluciones y las hipótesis que las conectan, y finalmente lo más importante que el equipo necesita aprender y el experimento mínimo para lograrlo.
+
+<img src="assets/img/lean_ux/lean_ux_canvas.png" alt="Lean UX Canvas de MindFlow" width="900"/>
 
 ## 1.3. Segmentos objetivo
 
@@ -3713,7 +3715,17 @@ _Pendiente: agregar capturas de Swagger UI con datos de muestra:_
 
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
 
-_Pendiente_
+En el Sprint 1 el equipo preparó la infraestructura de despliegue de los tres productos de la solución. La Landing Page se publicó en GitHub Pages. Los Web Services se desplegaron en **MonsterASP.NET**, un hosting especializado en aplicaciones ASP.NET, junto con su base de datos MySQL, y la caché Redis se configuró en **Upstash**. La Mobile Application se ejecutó en dispositivos Android físicos conectados al backend durante las pruebas del Sprint.
+
+##### Landing Page: GitHub Pages
+
+La Landing Page es un sitio estático (HTML, CSS y JavaScript, sin paso de compilación), por lo que se publicó directamente con **GitHub Pages** desde el repositorio [mindflow-landingPage](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage). Cada cambio que se integra en la rama publicada se refleja automáticamente en el sitio.
+
+**URL de la Landing Page:** [https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/](https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/)
+
+##### Mobile Application
+
+Durante el Sprint, la aplicación se compiló desde Android Studio y se instaló en dispositivos Android físicos para las pruebas de integración. La dirección del backend se define en la propiedad `API_BASE_URL` de la configuración de compilación (`app/build.gradle.kts`), por lo que cambiar el entorno al que apunta la aplicación (local o nube) solo requiere actualizar ese valor y volver a compilar.
 
 #### 4.2.1.9. Team Collaboration Insights during Sprint
 
