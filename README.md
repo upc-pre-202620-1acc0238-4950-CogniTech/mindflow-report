@@ -4021,7 +4021,41 @@ Durante el Sprint, la aplicación se compiló desde Android Studio y se instaló
 
 #### 4.2.1.9. Team Collaboration Insights during Sprint
 
-_Pendiente_
+Durante el Sprint 1 el equipo trabajó con el flujo GitFlow en los tres repositorios de los productos: cada integrante desarrolló sus cambios en ramas `feature/*` creadas a partir de `develop` y los integró mediante Pull Requests, con mensajes de commit bajo la convención Conventional Commits. A continuación se presentan los analíticos de colaboración de GitHub (*Insights → Contributors*) de cada producto, que muestran los commits de cada integrante en la rama `develop`, sin contar los commits de merge.
+
+**Tabla 76. Team Collaboration Insights — Commits por integrante en el Sprint 1.**
+
+| Team Member | GitHub Username | Landing Page | Web Services | Mobile Application |
+|:---|:---|:---:|:---:|:---:|
+| Güere Calero, Fernando Julio | FerG17 | 3 | 18 | 24 |
+| Díaz De la Cruz, Sebastián Gabriel | tipaso07 | 1 | 4 | 2 |
+| Cabrera Sotelo, Camila Celeste | whcamm | 1 | — | 17 |
+| Limache Coronel, Imanol Fabrizio | ImaLi06 | 1 | — | 2 |
+| Jáuregui Cerna, Jean Franco | JFranco556 | — | — | — |
+
+##### Landing Page
+
+En el repositorio [mindflow-landingPage](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage) participaron cuatro integrantes. Güere Calero construyó el sitio (página principal, página Nosotros e internacionalización), mientras que Díaz De la Cruz, Cabrera Sotelo y Limache Coronel documentaron el repositorio: el enlace del sitio desplegado, su formato y la descripción de las secciones de la página (Figura 90).
+
+<img src="assets/img/Insights/Insights_TB1_Landing.png" alt="Insights del repositorio mindflow-landingPage" width="800"/>
+
+*Figura 90. Team Collaboration Insights del repositorio `mindflow-landingPage` durante el Sprint 1.*
+
+##### Web Services
+
+En el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), Güere Calero y Díaz De la Cruz co-lideraron la implementación de los 8 bounded contexts. Güere Calero concentró la mayor cantidad de commits, y Díaz De la Cruz implementó los bounded contexts de Notifications, Support, Subscriptions y Analytics, junto con el checkout de Stripe, los reportes en PDF y las notificaciones por correo (Figura 91).
+
+<img src="assets/img/Insights/Insights_TB1_Backends.png" alt="Insights del repositorio mindflow-backend" width="800"/>
+
+*Figura 91. Team Collaboration Insights del repositorio `mindflow-backend` durante el Sprint 1.*
+
+##### Mobile Application
+
+En el repositorio [mindflow-frontend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend) participaron cuatro integrantes. Güere Calero y Cabrera Sotelo desarrollaron la mayor parte de las pantallas y su conexión con el backend, mientras que Díaz De la Cruz implementó la base de capas DDD de la app y el checkout de prueba de Stripe, y Limache Coronel agregó el botón flotante del chat de IA y reorganizó el chat en las capas de aplicación y dominio (Figura 92).
+
+<img src="assets/img/Insights/Insights_TB1_Frontend.png" alt="Insights del repositorio mindflow-frontend" width="800"/>
+
+*Figura 92. Team Collaboration Insights del repositorio `mindflow-frontend` durante el Sprint 1.*
 
 ## 4.3. Validation Interviews
 
@@ -4031,14 +4065,14 @@ Las entrevistas de validación buscan conocer cómo usuarios reales de cada segm
  
 #### Segmentos a validar
  
-**Tabla 76. Diseño de Entrevistas — Segmentos a validar.**
+**Tabla 77. Diseño de Entrevistas — Segmentos a validar.**
 
 | Segmento | Perfil | Nº de entrevistas |
 |---|---|---|
 | Segmento A: Estudiantes Universitarios (*Tech-Native Scholars*) | Jóvenes de 18 a 25 años que cursan pregrado en entornos de alta exigencia académica | 3 |
 | Segmento B: Profesionales Jóvenes (*High-Performance Achievers*) | Adultos de 26 a 35 años en consolidación de carrera o mando medio | 3 |
  
-Se invitará a personas que no hayan participado en las entrevistas de descubrimiento de la sección 2.2 (Tabla 76).
+Se invitará a personas que no hayan participado en las entrevistas de descubrimiento de la sección 2.2 (Tabla 77).
  
 #### Elementos de la sesión
  
@@ -4046,7 +4080,7 @@ Se invitará a personas que no hayan participado en las entrevistas de descubrim
 2. **Aplicación móvil Android** (pantallas del Sprint 1).
 #### Flujos de la aplicación validados
  
-**Tabla 77. Diseño de Entrevistas — Flujos de la aplicación validados.**
+**Tabla 78. Diseño de Entrevistas — Flujos de la aplicación validados.**
 
 | Flujo | User Stories |
 |---|---|
@@ -4054,11 +4088,11 @@ Se invitará a personas que no hayan participado en las entrevistas de descubrim
 | Entrada de diario y retroalimentación empática de la IA | US11, US13 |
 | Creación y cumplimiento de hábitos | US21, US22 |
  
-Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprint 1 (Tabla 77).
+Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprint 1 (Tabla 78).
  
 #### Estructura de la sesión
  
-**Tabla 78. Diseño de Entrevistas — Estructura de la sesión.**
+**Tabla 79. Diseño de Entrevistas — Estructura de la sesión.**
 
 | Etapa | Duración aprox. | Descripción |
 |---|---|---|
@@ -4085,7 +4119,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 1
 
-**Tabla 79. Segmento 1: Estudiantes Universitarios — Entrevista 1.**
+**Tabla 80. Segmento 1: Estudiantes Universitarios — Entrevista 1.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4104,7 +4138,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 1
 
-**Tabla 80. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
+**Tabla 81. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4121,13 +4155,13 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ### 4.3.3. Evaluaciones según heurísticas
 
-Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 81).
+Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 82).
 
 #### UX Heuristics & Principles Evaluation
 
 **Usability - Inclusive Design - Information Architecture**
 
-**Tabla 81. Evaluación según Heurísticas — Datos generales de la evaluación.**
+**Tabla 82. Evaluación según Heurísticas — Datos generales de la evaluación.**
 
 | Campo | Detalle |
 |---|---|
@@ -4163,9 +4197,9 @@ No están incluidas en esta versión de la evaluación las siguientes tareas:
 
 #### Escala de severidad
 
-Los problemas se puntúan con la siguiente escala (Tabla 82).
+Los problemas se puntúan con la siguiente escala (Tabla 83).
 
-**Tabla 82. Evaluación según Heurísticas — Escala de severidad.**
+**Tabla 83. Evaluación según Heurísticas — Escala de severidad.**
 
 | Nivel | Descripción |
 |---|---|
@@ -4176,9 +4210,9 @@ Los problemas se puntúan con la siguiente escala (Tabla 82).
 
 #### Tabla resumen
 
-La Tabla 83 resume los 16 problemas identificados, ordenados según su numeración y severidad.
+La Tabla 84 resume los 16 problemas identificados, ordenados según su numeración y severidad.
 
-**Tabla 83. Evaluación según Heurísticas — Resumen de problemas identificados.**
+**Tabla 84. Evaluación según Heurísticas — Resumen de problemas identificados.**
 
 | # | Problema | Severidad | Heurística/Principio violada(o) |
 |---|---|---|---|
@@ -4208,11 +4242,11 @@ La Tabla 83 resume los 16 problemas identificados, ordenados según su numeraci�
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-Ambos entrevistados dudaron sobre el alcance real de la IA. El entrevistado del Segmento 1 no tuvo claro si funciona como un terapeuta formal o solo como un asistente de reflexión, y el entrevistado del Segmento 2 se preguntó si el chat es una bitácora interactiva o una sesión de coaching continuo. La pantalla de Inicio presenta a "MindFlow AI" con un saludo cercano ("estoy aquí para escucharte"). La aclaración de que MindFlow no reemplaza la atención profesional ni constituye un diagnóstico clínico existe únicamente dentro de los Términos y Condiciones, pero no aparece en el flujo de uso de la aplicación (Inicio ni chat), por lo que el usuario no la ve (Figura 90).
+Ambos entrevistados dudaron sobre el alcance real de la IA. El entrevistado del Segmento 1 no tuvo claro si funciona como un terapeuta formal o solo como un asistente de reflexión, y el entrevistado del Segmento 2 se preguntó si el chat es una bitácora interactiva o una sesión de coaching continuo. La pantalla de Inicio presenta a "MindFlow AI" con un saludo cercano ("estoy aquí para escucharte"). La aclaración de que MindFlow no reemplaza la atención profesional ni constituye un diagnóstico clínico existe únicamente dentro de los Términos y Condiciones, pero no aparece en el flujo de uso de la aplicación (Inicio ni chat), por lo que el usuario no la ve (Figura 93).
 
 ![Problema 1: pantalla de Inicio con el chat de IA](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 90. Pantalla de Inicio: la IA se presenta sin indicar su alcance.*
+*Figura 93. Pantalla de Inicio: la IA se presenta sin indicar su alcance.*
 
 **Recomendación:**
 Llevar la aclaración de los Términos y Condiciones a un aviso breve en el onboarding y en el primer uso del chat, que indique que MindFlow es una herramienta de autocuidado y reflexión que no reemplaza la atención psicológica, junto con una etiqueta fija bajo el nombre de la IA ("Asistente de reflexión") y un acceso a recursos de ayuda profesional.
@@ -4224,15 +4258,15 @@ Llevar la aclaración de los Términos y Condiciones a un aviso breve en el onbo
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-Los dos entrevistados señalaron que su desconfianza vendría de no saber si sus reflexiones se usan para entrenar modelos de terceros o quedan expuestas. En la pantalla de registro solo se indica "Datos encriptados con AES-256" junto con los enlaces a Términos de Servicio y Política de Privacidad. La Política de Privacidad indica que los datos se usan para generar observaciones con IA y que el contenido del diario no se vende a terceros, pero ni ella, ni el mensaje del registro, ni la sección de Privacidad de Ajustes mencionan que el texto se envía a un proveedor externo de IA ni si se utiliza para entrenar modelos. El entrevistado del Segmento 2 señaló además que una política ambigua sobre APIs externas le restaría confianza (Figuras 91 y 92).
+Los dos entrevistados señalaron que su desconfianza vendría de no saber si sus reflexiones se usan para entrenar modelos de terceros o quedan expuestas. En la pantalla de registro solo se indica "Datos encriptados con AES-256" junto con los enlaces a Términos de Servicio y Política de Privacidad. La Política de Privacidad indica que los datos se usan para generar observaciones con IA y que el contenido del diario no se vende a terceros, pero ni ella, ni el mensaje del registro, ni la sección de Privacidad de Ajustes mencionan que el texto se envía a un proveedor externo de IA ni si se utiliza para entrenar modelos. El entrevistado del Segmento 2 señaló además que una política ambigua sobre APIs externas le restaría confianza (Figuras 94 y 95).
 
 ![Problema 2: pantalla de registro](assets/img/heuristics/app-03-registro.jpeg)
 
-*Figura 91. Registro: el mensaje de privacidad solo menciona el cifrado.*
+*Figura 94. Registro: el mensaje de privacidad solo menciona el cifrado.*
 
 ![Problema 2: ajustes de privacidad](assets/img/heuristics/app-06-ajustes-privacidad.jpeg)
 
-*Figura 92. Ajustes de privacidad: sin información sobre el procesamiento por terceros.*
+*Figura 95. Ajustes de privacidad: sin información sobre el procesamiento por terceros.*
 
 **Recomendación:**
 Agregar en el registro y en Ajustes de Privacidad un texto claro, con enlace a la política, que explique qué datos se envían al servicio de IA, si se usan o no para entrenar modelos y cómo se eliminan. Completar la Política de Privacidad de la Landing Page con la misma información.
@@ -4244,15 +4278,15 @@ Agregar en el registro y en Ajustes de Privacidad un texto claro, con enlace a l
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-Los botones principales ("Ingresar a MindFlow", "Crear mi cuenta", "Guardar Registro") usan texto blanco sobre un degradado de #4F8DF5 a #6ED3A3. La relación de contraste del blanco es de 3.25:1 en el extremo azul y de 1.82:1 en el extremo verde. Los botones "+ Añadir" y "+ Crear" de Hábitos usan texto blanco sobre #6ED3A3 (1.82:1). WCAG 2.1 exige como mínimo 4.5:1 para texto normal y 3:1 para texto grande, por lo que las personas con baja visión o que usan la aplicación bajo luz intensa pueden no leer las acciones principales (Figuras 93 y 94).
+Los botones principales ("Ingresar a MindFlow", "Crear mi cuenta", "Guardar Registro") usan texto blanco sobre un degradado de #4F8DF5 a #6ED3A3. La relación de contraste del blanco es de 3.25:1 en el extremo azul y de 1.82:1 en el extremo verde. Los botones "+ Añadir" y "+ Crear" de Hábitos usan texto blanco sobre #6ED3A3 (1.82:1). WCAG 2.1 exige como mínimo 4.5:1 para texto normal y 3:1 para texto grande, por lo que las personas con baja visión o que usan la aplicación bajo luz intensa pueden no leer las acciones principales (Figuras 96 y 97).
 
 ![Problema 3: botón de inicio de sesión](assets/img/heuristics/app-01-login.jpeg)
 
-*Figura 93. Inicio de sesión: botón principal con texto blanco sobre degradado.*
+*Figura 96. Inicio de sesión: botón principal con texto blanco sobre degradado.*
 
 ![Problema 3: sugerencias de IA con botones Añadir](assets/img/heuristics/app-17-habitos-sugerencias-ia.jpeg)
 
-*Figura 94. Sugerencias de IA: botones "Añadir" con texto blanco sobre verde claro.*
+*Figura 97. Sugerencias de IA: botones "Añadir" con texto blanco sobre verde claro.*
 
 **Recomendación:**
 Usar texto oscuro (#1F2937) sobre los fondos verdes claros o un tono más oscuro del degradado, de modo que todas las combinaciones superen 4.5:1, y verificar el resultado con una herramienta de contraste.
@@ -4264,15 +4298,15 @@ Usar texto oscuro (#1F2937) sobre los fondos verdes claros o un tono más oscuro
 **Origen:** Revisión del equipo auditor sobre el código de la Landing Page.
 
 **Problema:**
-Las 13 imágenes de la Landing Page tienen el atributo `alt` vacío (`alt=""`), incluidas las capturas de la aplicación en la sección "Así se ve MindFlow en tu teléfono" y las fotos del equipo en la página "Nosotros". Un lector de pantalla las omite, por lo que una persona con discapacidad visual no recibe la información de las capturas ni de los integrantes. Una captura sí tiene un nombre visible debajo, pero no describe su contenido (Figuras 95 y 96).
+Las 13 imágenes de la Landing Page tienen el atributo `alt` vacío (`alt=""`), incluidas las capturas de la aplicación en la sección "Así se ve MindFlow en tu teléfono" y las fotos del equipo en la página "Nosotros". Un lector de pantalla las omite, por lo que una persona con discapacidad visual no recibe la información de las capturas ni de los integrantes. Una captura sí tiene un nombre visible debajo, pero no describe su contenido (Figuras 98 y 99).
 
 ![Problema 4: sección de capturas de la Landing Page](assets/img/heuristics/landing-01-capturas.png)
 
-*Figura 95. Landing Page: capturas de la aplicación sin texto alternativo.*
+*Figura 98. Landing Page: capturas de la aplicación sin texto alternativo.*
 
 ![Problema 4: página Nosotros](assets/img/heuristics/landing-02-equipo.png)
 
-*Figura 96. Página Nosotros: fotos del equipo sin texto alternativo.*
+*Figura 99. Página Nosotros: fotos del equipo sin texto alternativo.*
 
 **Recomendación:**
 Describir cada imagen informativa en su atributo `alt` (por ejemplo, "Pantalla de Inicio de MindFlow con el campo para escribir cómo te sientes") y mantener `alt=""` solo en las imágenes decorativas, como el logotipo repetido.
@@ -4284,11 +4318,11 @@ Describir cada imagen informativa en su atributo `alt` (por ejemplo, "Pantalla d
 **Origen:** Entrevista al Segmento 1.
 
 **Problema:**
-El entrevistado del Segmento 1 indicó que no le quedó claro qué funcionalidades son exclusivas de Premium frente a Freemium hasta llegar a la pantalla de Planes. En el resto de la aplicación la distinción aparece solo de forma puntual: la tarjeta de exportación menciona "(Requiere Premium)" al final de una frase y Ajustes muestra únicamente la lista del plan actual (Figura 97).
+El entrevistado del Segmento 1 indicó que no le quedó claro qué funcionalidades son exclusivas de Premium frente a Freemium hasta llegar a la pantalla de Planes. En el resto de la aplicación la distinción aparece solo de forma puntual: la tarjeta de exportación menciona "(Requiere Premium)" al final de una frase y Ajustes muestra únicamente la lista del plan actual (Figura 100).
 
 ![Problema 5: tarjeta de suscripción en Ajustes](assets/img/heuristics/app-07-ajustes-suscripcion.jpeg)
 
-*Figura 97. Ajustes: la tarjeta de suscripción lista los beneficios sin compararlos con el plan gratuito.*
+*Figura 100. Ajustes: la tarjeta de suscripción lista los beneficios sin compararlos con el plan gratuito.*
 
 **Recomendación:**
 Identificar las funciones Premium con una etiqueta visible (por ejemplo, una insignia "Premium") en el lugar donde aparecen y agregar en Ajustes un enlace "Comparar planes" que lleve a la pantalla de Planes.
@@ -4300,11 +4334,11 @@ Identificar las funciones Premium con una etiqueta visible (por ejemplo, una ins
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-Con la cuenta evaluada, Ajustes muestra "Plan Actual: Premium", pero la tarjeta "Exportar Reportes Clínicos" de Analíticas mantiene el texto "(Requiere Premium)". El mensaje es contradictorio: el usuario puede dudar de si su suscripción está activa o de si podrá usar la función (Figura 98).
+Con la cuenta evaluada, Ajustes muestra "Plan Actual: Premium", pero la tarjeta "Exportar Reportes Clínicos" de Analíticas mantiene el texto "(Requiere Premium)". El mensaje es contradictorio: el usuario puede dudar de si su suscripción está activa o de si podrá usar la función (Figura 101).
 
 ![Problema 6: tarjeta de exportación en Analíticas](assets/img/heuristics/app-13-analiticas-exportar.jpeg)
 
-*Figura 98. Analíticas: la tarjeta de exportación indica "Requiere Premium" aunque el plan actual es Premium.*
+*Figura 101. Analíticas: la tarjeta de exportación indica "Requiere Premium" aunque el plan actual es Premium.*
 
 **Recomendación:**
 Mostrar el texto "(Requiere Premium)" únicamente a los usuarios del plan gratuito; para usuarios Premium, ocultarlo o reemplazarlo por un mensaje como "Incluido en tu plan".
@@ -4316,15 +4350,15 @@ Mostrar el texto "(Requiere Premium)" únicamente a los usuarios del plan gratui
 **Origen:** Entrevista al Segmento 2.
 
 **Problema:**
-El entrevistado del Segmento 2 no tuvo claro si el cálculo de las analíticas se procesa localmente en su teléfono o se sincroniza en la nube. Las pantallas de Analíticas y Tendencias muestran resúmenes y gráficas, pero no informan el estado de la sincronización ni el origen de los datos (Figuras 99 y 100).
+El entrevistado del Segmento 2 no tuvo claro si el cálculo de las analíticas se procesa localmente en su teléfono o se sincroniza en la nube. Las pantallas de Analíticas y Tendencias muestran resúmenes y gráficas, pero no informan el estado de la sincronización ni el origen de los datos (Figuras 102 y 103).
 
 ![Problema 7: resumen semanal de Analíticas](assets/img/heuristics/app-10-analiticas-resumen.jpeg)
 
-*Figura 99. Analíticas: el resumen no indica el origen ni el estado de sincronización de los datos.*
+*Figura 102. Analíticas: el resumen no indica el origen ni el estado de sincronización de los datos.*
 
 ![Problema 7: nube de palabras y tendencias](assets/img/heuristics/app-12-analiticas-nube-tendencias.jpeg)
 
-*Figura 100. Analíticas: nube de palabras y tendencias sin indicador de sincronización.*
+*Figura 103. Analíticas: nube de palabras y tendencias sin indicador de sincronización.*
 
 **Recomendación:**
 Agregar un indicador discreto de estado (por ejemplo, "Sincronizado hace 2 min" o "Solo en este dispositivo") en la cabecera de Analíticas, con una explicación breve al tocarlo.
@@ -4336,11 +4370,11 @@ Agregar un indicador discreto de estado (por ejemplo, "Sincronizado hace 2 min" 
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-El entrevistado del Segmento 1 pidió recordatorios más personalizables y el entrevistado del Segmento 2 esperaba una notificación configurable según su jornada laboral para registrar su ánimo al terminar la tarde. En Ajustes, "Recordatorios de Hábitos" es un único interruptor orientado a "hidratación y pausas", sin elegir horario, días ni tipo de recordatorio, y no existe un recordatorio para registrar el estado de ánimo (Figura 101).
+El entrevistado del Segmento 1 pidió recordatorios más personalizables y el entrevistado del Segmento 2 esperaba una notificación configurable según su jornada laboral para registrar su ánimo al terminar la tarde. En Ajustes, "Recordatorios de Hábitos" es un único interruptor orientado a "hidratación y pausas", sin elegir horario, días ni tipo de recordatorio, y no existe un recordatorio para registrar el estado de ánimo (Figura 104).
 
 ![Problema 8: ajustes de privacidad y experiencia](assets/img/heuristics/app-06-ajustes-privacidad.jpeg)
 
-*Figura 101. Ajustes: el recordatorio es un único interruptor sin opciones de horario.*
+*Figura 104. Ajustes: el recordatorio es un único interruptor sin opciones de horario.*
 
 **Recomendación:**
 Permitir elegir la hora y los días de los recordatorios, y agregar un recordatorio opcional para registrar el estado de ánimo al cierre de la jornada.
@@ -4352,11 +4386,11 @@ Permitir elegir la hora y los días de los recordatorios, y agregar un recordato
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-El campo de fecha del historial emocional muestra el texto "mm/dd/yyyy" y el código aplica el patrón `MM/dd/yyyy`, propio de Estados Unidos, aunque la aplicación está en español latinoamericano. Un usuario peruano puede interpretar mal el valor (por ejemplo, 07/10 como 10 de julio) y filtrar por una fecha equivocada (Figura 102).
+El campo de fecha del historial emocional muestra el texto "mm/dd/yyyy" y el código aplica el patrón `MM/dd/yyyy`, propio de Estados Unidos, aunque la aplicación está en español latinoamericano. Un usuario peruano puede interpretar mal el valor (por ejemplo, 07/10 como 10 de julio) y filtrar por una fecha equivocada (Figura 105).
 
 ![Problema 9: filtro de fecha del historial](assets/img/heuristics/app-20-diario-calendario.jpeg)
 
-*Figura 102. Historial emocional: el filtro de fecha usa el formato mm/dd/yyyy.*
+*Figura 105. Historial emocional: el filtro de fecha usa el formato mm/dd/yyyy.*
 
 **Recomendación:**
 Dar formato a la fecha según el idioma y la región del dispositivo (dd/MM/yyyy para es_419) y mostrar el nombre del mes en el selector.
@@ -4368,15 +4402,15 @@ Dar formato a la fecha según el idioma y la región del dispositivo (dd/MM/yyyy
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-El botón flotante del chat con la IA se mantiene fijo en la esquina inferior derecha y cubre parte del contenido en varias pantallas: oculta el botón "Exportar CSV" en Analíticas, el borde del botón "Micro-meditación (3 min)" en Inicio y la leyenda "Negativo" del calendario. Para usar esas acciones el usuario debe desplazar la pantalla hasta una posición donde el botón no las cubra (Figuras 103 y 104).
+El botón flotante del chat con la IA se mantiene fijo en la esquina inferior derecha y cubre parte del contenido en varias pantallas: oculta el botón "Exportar CSV" en Analíticas, el borde del botón "Micro-meditación (3 min)" en Inicio y la leyenda "Negativo" del calendario. Para usar esas acciones el usuario debe desplazar la pantalla hasta una posición donde el botón no las cubra (Figuras 106 y 107).
 
 ![Problema 10: botón flotante sobre Exportar CSV](assets/img/heuristics/app-13-analiticas-exportar.jpeg)
 
-*Figura 103. Analíticas: el botón flotante cubre el botón "Exportar CSV".*
+*Figura 106. Analíticas: el botón flotante cubre el botón "Exportar CSV".*
 
 ![Problema 10: botón flotante sobre Intervenciones Rápidas](assets/img/heuristics/app-23-inicio-intervenciones.jpeg)
 
-*Figura 104. Inicio: el botón flotante cubre la acción "Micro-meditación (3 min)".*
+*Figura 107. Inicio: el botón flotante cubre la acción "Micro-meditación (3 min)".*
 
 **Recomendación:**
 Agregar un espacio inferior al final de las listas para que el contenido nunca quede debajo del botón, o reducir el botón y moverlo a la barra superior.
@@ -4388,15 +4422,15 @@ Agregar un espacio inferior al final de las listas para que el contenido nunca q
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-En Hábitos, las pestañas "Mis Rutinas", "Sugerencias de IA" e "Historial" no caben en el ancho de la pantalla. Al abrir la pantalla solo se ve una parte de la tercera pestaña (un trazo), y al seleccionar "Historial" la primera queda cortada ("nas"). Sin un indicador de desplazamiento, un usuario puede no descubrir que existe el historial de hábitos (Figuras 105 y 106).
+En Hábitos, las pestañas "Mis Rutinas", "Sugerencias de IA" e "Historial" no caben en el ancho de la pantalla. Al abrir la pantalla solo se ve una parte de la tercera pestaña (un trazo), y al seleccionar "Historial" la primera queda cortada ("nas"). Sin un indicador de desplazamiento, un usuario puede no descubrir que existe el historial de hábitos (Figuras 108 y 109).
 
 ![Problema 11: pestañas de Hábitos](assets/img/heuristics/app-15-habitos-rutinas.jpeg)
 
-*Figura 105. Hábitos: la tercera pestaña no es visible al abrir la pantalla.*
+*Figura 108. Hábitos: la tercera pestaña no es visible al abrir la pantalla.*
 
 ![Problema 11: pestaña Historial](assets/img/heuristics/app-19-habitos-historial.jpeg)
 
-*Figura 106. Hábitos: al seleccionar "Historial" la primera pestaña queda cortada.*
+*Figura 109. Hábitos: al seleccionar "Historial" la primera pestaña queda cortada.*
 
 **Recomendación:**
 Ajustar los textos y el espaciado para que las tres pestañas se vean completas, o usar etiquetas más cortas ("Rutinas", "Sugerencias", "Historial").
@@ -4408,15 +4442,15 @@ Ajustar los textos y el espaciado para que las tres pestañas se vean completas,
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-La casilla de la lista "Hábitos Diarios" mide 20 dp y el ícono para mostrar u ocultar la contraseña mide 24 dp, por debajo de los 48 dp recomendados por Material Design y WCAG para áreas táctiles. Usar la aplicación con una sola mano, en movimiento o con dificultades motoras aumenta la probabilidad de tocar mal (Figuras 107 y 108).
+La casilla de la lista "Hábitos Diarios" mide 20 dp y el ícono para mostrar u ocultar la contraseña mide 24 dp, por debajo de los 48 dp recomendados por Material Design y WCAG para áreas táctiles. Usar la aplicación con una sola mano, en movimiento o con dificultades motoras aumenta la probabilidad de tocar mal (Figuras 110 y 111).
 
 ![Problema 12: casilla de hábito diario](assets/img/heuristics/app-24-inicio-habitos.jpeg)
 
-*Figura 107. Inicio: la casilla del hábito diario tiene un área táctil de 20 dp.*
+*Figura 110. Inicio: la casilla del hábito diario tiene un área táctil de 20 dp.*
 
 ![Problema 12: ícono de contraseña](assets/img/heuristics/app-01-login.jpeg)
 
-*Figura 108. Inicio de sesión: el ícono de mostrar contraseña tiene 24 dp.*
+*Figura 111. Inicio de sesión: el ícono de mostrar contraseña tiene 24 dp.*
 
 **Recomendación:**
 Mantener el tamaño visual de los controles, pero ampliar su área táctil a 48 x 48 dp.
@@ -4428,15 +4462,15 @@ Mantener el tamaño visual de los controles, pero ampliar su área táctil a 48 
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-La sección "Así se ve MindFlow en tu teléfono" se presenta como "Capturas reales de la app Android", pero las imágenes muestran una versión anterior: un menú lateral (Dashboard, Diario, Hábitos, Analíticas, Configuración) y datos de abril de 2026, mientras que la aplicación actual usa barra de navegación inferior. El visitante que descarga la aplicación encuentra una interfaz distinta de la que vio (Figuras 109 y 110).
+La sección "Así se ve MindFlow en tu teléfono" se presenta como "Capturas reales de la app Android", pero las imágenes muestran una versión anterior: un menú lateral (Dashboard, Diario, Hábitos, Analíticas, Configuración) y datos de abril de 2026, mientras que la aplicación actual usa barra de navegación inferior. El visitante que descarga la aplicación encuentra una interfaz distinta de la que vio (Figuras 112 y 113).
 
 ![Problema 13: capturas de la Landing Page](assets/img/heuristics/landing-01-capturas.png)
 
-*Figura 109. Landing Page: capturas con menú lateral.*
+*Figura 112. Landing Page: capturas con menú lateral.*
 
 ![Problema 13: Inicio de la aplicación actual](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 110. Aplicación actual: Inicio con barra de navegación inferior.*
+*Figura 113. Aplicación actual: Inicio con barra de navegación inferior.*
 
 **Recomendación:**
 Reemplazar las capturas de la Landing Page por las de la versión vigente de la aplicación y revisarlas en cada release.
@@ -4448,11 +4482,11 @@ Reemplazar las capturas de la Landing Page por las de la versión vigente de la 
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-El calendario del Diario comunica el estado de ánimo de cada día solo con color (positivo, neutral y negativo), y la leyenda usa un texto de 12 sp. El color de "Neutral" (#FFD166) tiene una relación de contraste de 1.44:1 sobre fondo blanco y el verde de "Positivo" (#6ED3A3) de 1.82:1, por lo que las personas con baja visión o daltonismo pueden no distinguir los estados (Figura 111).
+El calendario del Diario comunica el estado de ánimo de cada día solo con color (positivo, neutral y negativo), y la leyenda usa un texto de 12 sp. El color de "Neutral" (#FFD166) tiene una relación de contraste de 1.44:1 sobre fondo blanco y el verde de "Positivo" (#6ED3A3) de 1.82:1, por lo que las personas con baja visión o daltonismo pueden no distinguir los estados (Figura 114).
 
 ![Problema 14: leyenda del calendario](assets/img/heuristics/app-20-diario-calendario.jpeg)
 
-*Figura 111. Historial emocional: la leyenda del calendario se apoya solo en el color.*
+*Figura 114. Historial emocional: la leyenda del calendario se apoya solo en el color.*
 
 **Recomendación:**
 Complementar el color con un ícono o una forma distinta por estado (por ejemplo, ▲ positivo, ● neutral, ▼ negativo) y oscurecer los colores del texto de la leyenda hasta superar 4.5:1.
@@ -4464,11 +4498,11 @@ Complementar el color con un ícono o una forma distinta por estado (por ejemplo
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-En el idioma español, algunos títulos permanecen en inglés: "AI Mood Journal", "Dynamic Habit Tracker" y "Smart Interventions" en la pantalla de registro y en la tarjeta de suscripción, mientras que el resto de la interfaz está en español. Es una inconsistencia menor que no impide completar las tareas (Figura 112).
+En el idioma español, algunos títulos permanecen en inglés: "AI Mood Journal", "Dynamic Habit Tracker" y "Smart Interventions" en la pantalla de registro y en la tarjeta de suscripción, mientras que el resto de la interfaz está en español. Es una inconsistencia menor que no impide completar las tareas (Figura 115).
 
 ![Problema 15: beneficios en la pantalla de registro](assets/img/heuristics/app-04-registro-beneficios.jpeg)
 
-*Figura 112. Registro: títulos de beneficios en inglés dentro de una interfaz en español.*
+*Figura 115. Registro: títulos de beneficios en inglés dentro de una interfaz en español.*
 
 **Recomendación:**
 Traducir los títulos al español (por ejemplo, "Diario emocional con IA", "Seguimiento dinámico de hábitos" e "Intervenciones inteligentes") y gestionarlos mediante los archivos de idioma de la aplicación.
@@ -4480,20 +4514,20 @@ Traducir los títulos al español (por ejemplo, "Diario emocional con IA", "Segu
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-El entrevistado del Segmento 1 esperaba poder registrar entradas mediante notas de voz y programar hábitos con integración a Google Calendar. El entrevistado del Segmento 2 propuso etiquetar las entradas por proyecto o cliente. La pantalla de Inicio solo permite escribir texto y elegir una de las categorías predefinidas (Estudios, Trabajo, Familia, Reflexión Personal, Salud) (Figura 113).
+El entrevistado del Segmento 1 esperaba poder registrar entradas mediante notas de voz y programar hábitos con integración a Google Calendar. El entrevistado del Segmento 2 propuso etiquetar las entradas por proyecto o cliente. La pantalla de Inicio solo permite escribir texto y elegir una de las categorías predefinidas (Estudios, Trabajo, Familia, Reflexión Personal, Salud) (Figura 116).
 
 ![Problema 16: registro de entrada en el diario](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 113. Inicio: el registro admite solo texto y categorías predefinidas.*
+*Figura 116. Inicio: el registro admite solo texto y categorías predefinidas.*
 
 **Recomendación:**
 Incorporar en el roadmap el registro por dictado de voz, la sincronización de hábitos con el calendario del dispositivo y las etiquetas personalizadas por entrada.
 
 #### Resumen de hallazgos
 
-La distribución de los problemas según su severidad (Tabla 84) y según el eje evaluado (Tabla 85) se muestra a continuación.
+La distribución de los problemas según su severidad (Tabla 85) y según el eje evaluado (Tabla 86) se muestra a continuación.
 
-**Tabla 84. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
+**Tabla 85. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
 
 | Severidad | Cantidad | Problemas |
 |---|---|---|
@@ -4502,7 +4536,7 @@ La distribución de los problemas según su severidad (Tabla 84) y según el eje
 | Severidad 3 | 4 | #1, #2, #3, #4 |
 | Severidad 4 | 0 | — |
 
-**Tabla 85. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
+**Tabla 86. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
 
 | Eje evaluado | Problemas |
 |---|---|
