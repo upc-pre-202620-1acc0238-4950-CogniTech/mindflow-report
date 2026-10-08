@@ -3031,7 +3031,247 @@ _Pendiente_
 
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 
-_Pendiente_
+Durante el Sprint 1 se documentaron con **OpenAPI (Swagger)** los Web Services de los 8 bounded contexts de MindFlow. La documentación se genera automáticamente desde los controladores del backend (ASP.NET Core con Swashbuckle) e incluye el esquema de seguridad **Bearer (JWT)**. Así, desde la misma interfaz de Swagger UI se puede iniciar sesión, pegar el token y probar los endpoints protegidos.
+
+Logros del Sprint en documentación de Web Services:
+
+- Todas las rutas quedaron unificadas bajo el prefijo `api/v1`. Las únicas excepciones son el endpoint de salud `/health` y la propia documentación.
+- Se documentaron **69 endpoints** agrupados en 12 controladores (IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support), además del endpoint `/health`.
+- Los cuerpos de request y response usan nombres en `snake_case` (por ejemplo `user_id` o `ai_response`), la misma convención que consume la Mobile Application.
+- Se configuró la autenticación Bearer en Swagger para poder probar los endpoints que requieren sesión iniciada.
+
+**Repositorio de Web Services:** [https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) (rama `develop`)
+
+**Documentación (entorno local, previo al despliegue):** `http://localhost:5166/swagger/index.html`. Swagger UI se habilita cuando el backend se ejecuta en el entorno `Development`.
+
+**Convenciones de la tabla:**
+
+- 🔒 indica que el endpoint requiere el header `Authorization: Bearer <token>`.
+- 👤 indica que el endpoint requiere además el rol `Admin` o `Support`.
+- Las respuestas de error siguen el formato `{ "error": "mensaje" }` o `{ "message": "mensaje" }` según el controlador.
+
+##### IAM: usuarios y autenticación
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| POST | `/api/v1/users/sign-up` | Body: `email`, `password`, `name` (opcional) | `201` con el usuario creado (`id`, `email`, `name`, `occupation`). `400` si el correo ya existe o los datos no son válidos. |
+| POST | `/api/v1/users/sign-in` | Body: `email`, `password` | `200` con `id`, `email` y `token` (JWT). `401` si las credenciales son incorrectas. |
+| POST | `/api/v1/users/google-auth` | Body: `credential` (token de Google) | `200` con `id`, `email` y `token`. `401` si el token de Google no es válido. |
+| POST | `/api/v1/users/forgot-password` | Body: `email` | `200` con un mensaje genérico. No revela si el correo existe. |
+| POST | `/api/v1/users/reset-password` | Body: `token`, `new_password` | `200` "Contraseña actualizada correctamente.". `400` si el token es inválido o expiró. |
+| GET 🔒 | `/api/v1/users/profile` | — | `200` con el perfil del usuario autenticado. |
+| PUT 🔒 | `/api/v1/users/profile` | Body: `name`, `occupation` (ambos opcionales) | `200` con el perfil actualizado. |
+| DELETE 🔒 | `/api/v1/users` | — | `204` al eliminar la cuenta del usuario autenticado. |
+| POST 🔒 | `/api/v1/users/pin` | Body: `pin` | `200` "PIN configurado correctamente.". |
+| POST 🔒 | `/api/v1/users/pin/verify` | Body: `pin` | `200` con `{ "valid": true }` o `{ "valid": false }`. |
+| DELETE 🔒 | `/api/v1/users/pin` | — | `200` "PIN eliminado correctamente.". |
+| GET 🔒 | `/api/v1/users/pin/status` | — | `200` con `{ "has_pin": true }` o `{ "has_pin": false }`. |
+
+Ejemplo de inicio de sesión. El `token` devuelto es el que se usa en el botón **Authorize** de Swagger:
+
+```http
+POST /api/v1/users/sign-in
+Content-Type: application/json
+
+{ "email": "jimena@mindflow.pe", "password": "MindFlow2026" }
+```
+
+```json
+{ "id": 12, "email": "jimena@mindflow.pe", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
+```
+
+##### Journal: diario emocional
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET 🔒 | `/api/v1/journal/entries` | Query: `_sort`, `_order` (`asc`/`desc`), `_limit`, `q` (búsqueda por palabra clave) | `200` con la lista de entradas del usuario. |
+| GET 🔒 | `/api/v1/journal/entries/{id}` | Path: `id` | `200` con la entrada. `404` si no existe o pertenece a otro usuario. |
+| POST 🔒 | `/api/v1/journal/entries` | Body: `date`, `title`, `content`, `sentiment`, `category` | `200` con la entrada creada, incluida la respuesta empática generada por IA (`ai_response`). |
+| PUT 🔒 | `/api/v1/journal/entries/{id}` | Path: `id`. Body: `title`, `content`, `sentiment`, `category` | `200` con la entrada actualizada. `404` si no existe. |
+| DELETE 🔒 | `/api/v1/journal/entries/{id}` | Path: `id` | `200` al eliminarla. `404` si no existe. |
+| POST 🔒 | `/api/v1/journal/entries/sync` | Body: lista de entradas creadas sin conexión (`client_id`, `date`, `title`, `content`, `sentiment`, `category`, `client_updated_at`) | `200` con el resultado de la sincronización (US30). |
+| GET 🔒 | `/api/v1/journal/tags` | — | `200` con las etiquetas disponibles. |
+| GET 🔒 | `/api/v1/journal/entry-tags` | Query: `entryId` (opcional) | `200` con las etiquetas asignadas a las entradas. |
+| POST 🔒 | `/api/v1/journal/entry-tags` | Body: `entry_id`, `tag_id` | `200` con la asignación creada. `404` si la entrada no existe. |
+| DELETE 🔒 | `/api/v1/journal/entry-tags/{id}` | Path: `id` | `200` al quitar la etiqueta. |
+| GET 🔒 | `/api/v1/journal/media` | Query: `entryId` (opcional) | `200` con los adjuntos multimedia. |
+| POST 🔒 | `/api/v1/journal/media` | Body: datos del adjunto asociado a una entrada | `200` con el adjunto registrado. |
+| POST 🔒 | `/api/v1/journal/media/upload` | `multipart/form-data`: `entryId`, `file` | `200` con el adjunto subido. `400` si no se envía archivo. |
+
+Ejemplo de creación de una entrada. El backend analiza el texto y devuelve la respuesta empática de MindFlow AI (US11, US12, US13):
+
+```http
+POST /api/v1/journal/entries
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "date": "2026-10-05",
+  "title": "Semana de parciales",
+  "content": "Me siento agotada, tengo tres exámenes esta semana y no avanzo.",
+  "sentiment": "negative",
+  "category": "Estudios"
+}
+```
+
+```json
+{
+  "id": 48,
+  "user_id": 12,
+  "date": "2026-10-05",
+  "title": "Semana de parciales",
+  "content": "Me siento agotada, tengo tres exámenes esta semana y no avanzo.",
+  "sentiment": "negative",
+  "category": "Estudios",
+  "has_preview": false,
+  "ai_response": "Es normal sentirse así con tanta carga. Prueba dividir el estudio en bloques cortos y date pausas para respirar.",
+  "tags": [],
+  "media": [],
+  "created_at": "2026-10-05T22:14:03+00:00",
+  "updated_at": "2026-10-05T22:14:03+00:00"
+}
+```
+
+##### AI Assistant: chat y valoración de respuestas
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| POST 🔒 | `/api/v1/chat/conversations` | Body: `content`, `category` (opcional) | `201` con la conversación creada y sus mensajes (el del usuario y la respuesta de la IA). `400` si el mensaje está vacío o supera el máximo de caracteres. |
+| GET 🔒 | `/api/v1/chat/conversations` | — | `200` con las conversaciones del usuario (`id`, `title`, `category`, `message_count`, `last_message`). |
+| GET 🔒 | `/api/v1/chat/conversations/{id}/messages` | Path: `id` | `200` con la conversación y su historial de mensajes. `404` si no existe. |
+| POST 🔒 | `/api/v1/chat/conversations/{id}/messages` | Path: `id`. Body: `content` | `201` con `user_message` y `ai_message`. `404` si la conversación no existe. |
+| DELETE 🔒 | `/api/v1/chat/conversations/{id}` | Path: `id` | `200` "Conversación eliminada exitosamente.". `404` si no existe. |
+| POST 🔒 | `/api/v1/ai-feedback` | Body: `content_id`, `content_type`, `rating`, `comment` (opcional) | `200` con la valoración registrada (US26). |
+| GET 🔒 | `/api/v1/ai-feedback` | — | `200` con las valoraciones del usuario. |
+| GET 🔒 | `/api/v1/ai-feedback/summary` | — | `200` con `total_ratings`, `average_rating` y `distribution`. |
+
+Ejemplo de mensaje en una conversación existente:
+
+```json
+{
+  "user_message": { "id": 101, "role": "user", "content": "¿Qué hago si no puedo dormir antes de un examen?", "created_at": "2026-10-06T01:02:11+00:00" },
+  "ai_message": { "id": 102, "role": "assistant", "content": "Intenta la respiración 4-7-8: inhala 4 segundos, sostén 7 y exhala 8...", "created_at": "2026-10-06T01:02:14+00:00" }
+}
+```
+
+##### Habits & Wellness: hábitos, registros y bienestar
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET 🔒 | `/api/v1/habits` | Query: `user_id` (opcional) | `200` con los hábitos (`id`, `name`, `category`, `frequency`, `streak`, `status`, `paused_by_ai`). |
+| GET 🔒 | `/api/v1/habits/{id}` | Path: `id` | `200` con el hábito. `404` si no existe. |
+| POST 🔒 | `/api/v1/habits` | Body: `name`, `category`, `frequency`, `user_id` | Hábito creado (US21). |
+| PUT 🔒 | `/api/v1/habits/{id}` | Path: `id`. Body: `name`, `category`, `frequency` | Hábito actualizado. |
+| DELETE 🔒 | `/api/v1/habits/{id}` | Path: `id` | Elimina el hábito. |
+| GET 🔒 | `/api/v1/habits/streak-summary` | — | `200` con la racha de cada hábito, ordenada de mayor a menor (`habit_id`, `name`, `streak`, `status`) (US28). |
+| POST 🔒 | `/api/v1/habits/suggestions` | — | `200` con `{ "suggestions": [...] }`: hasta 3 hábitos sugeridos por IA según el nivel de estrés. Si la IA no responde, devuelve sugerencias predefinidas. |
+| GET 🔒 | `/api/v1/habit-logs` | Query: `user_id`, `habit_id` (opcionales) | `200` con los registros de cumplimiento. |
+| GET 🔒 | `/api/v1/habit-logs/{id}` | Path: `id` | `200` con el registro. |
+| POST 🔒 | `/api/v1/habit-logs` | Body: `habit_id`, `habit_name`, `category`, `date`, `completed`, `completed_at` | Registro de cumplimiento creado (US22). |
+| PUT 🔒 | `/api/v1/habit-logs/{id}` | Path: `id`. Body: `habit_name`, `category`, `completed`, `completed_at` | Registro actualizado. |
+| DELETE 🔒 | `/api/v1/habit-logs/{id}` | Path: `id` | Elimina el registro. |
+| POST 🔒 | `/api/v1/wellness/stress-check` | — | `200` con `stress_level`, `score`, `analyzed_entries`, `paused_habits`, `resumed_habits` y `advice`. Pausa o reactiva hábitos según el estrés detectado (US23). |
+| GET 🔒 | `/api/v1/wellness/exercises` | Query: `type` (opcional, por ejemplo `breathing`) | `200` con los ejercicios activos: respiración 4-7-8 y micro-meditaciones (US24, US25). |
+| GET 🔒👤 | `/api/v1/wellness/exercises/all` | Query: `type` (opcional) | `200` con todos los ejercicios, incluidos los inactivos. |
+| GET 🔒👤 | `/api/v1/wellness/exercises/{id}` | Path: `id` | `200` con el ejercicio. |
+| POST 🔒👤 | `/api/v1/wellness/exercises` | Body: `type`, `name`, `description`, `duration_seconds`, `inhale_seconds`, `hold_seconds`, `exhale_seconds`, `hold_after_exhale_seconds`, `cycles`, `audio_url`, `is_active`, `sort_order` | Ejercicio creado. |
+| PUT 🔒👤 | `/api/v1/wellness/exercises/{id}` | Path: `id`. Body: mismos campos que POST | Ejercicio actualizado. |
+| DELETE 🔒👤 | `/api/v1/wellness/exercises/{id}` | Path: `id` | Elimina el ejercicio. |
+
+##### Analytics & Reporting
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET 🔒 | `/api/v1/analytics/dashboard` | Query: `from`, `to` (fechas `YYYY-MM-DD`, opcionales; por defecto los últimos 30 días) | `200` con las métricas del periodo (US31). `400` si `from` es posterior a `to`. |
+| GET 🔒 | `/api/v1/analytics/report.csv` | — | Archivo `mindflow-report.csv` con fecha, categoría, sentimiento y título de cada entrada (US36). |
+| GET 🔒 | `/api/v1/analytics/report.pdf` | — | Archivo `mindflow-report.pdf` con el resumen emocional y el listado de entradas (US35). |
+
+Ejemplo de respuesta del dashboard:
+
+```json
+{
+  "from": "2026-09-05",
+  "to": "2026-10-05",
+  "journal_entries": 18,
+  "sentiments": { "positive": 7, "neutral": 6, "negative": 5 },
+  "top_categories": [
+    { "category": "Estudios", "count": 8 },
+    { "category": "Personal", "count": 6 }
+  ],
+  "habit_completions": 24,
+  "active_habits": 4
+}
+```
+
+##### Notifications
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET 🔒 | `/api/v1/notifications` | — | `200` con las notificaciones del usuario, de la más reciente a la más antigua. |
+| GET 🔒 | `/api/v1/notifications/unread-count` | — | `200` con `{ "count": 3 }`. |
+| POST 🔒 | `/api/v1/notifications/{id}/read` | Path: `id` | `204` al marcarla como leída. `404` si no existe. |
+| POST 🔒 | `/api/v1/notifications/read-all` | — | `204` al marcar todas como leídas. |
+
+##### Subscriptions
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET | `/api/v1/subscriptions/plans` | — (público) | `200` con el catálogo de planes: `freemium` (0 USD) y `premium` (4.99 USD/mes) (US33). |
+| GET 🔒 | `/api/v1/subscriptions/me` | — | `200` con la suscripción del usuario (`plan`, `status`, `current_period_end`). Si no tiene una, devuelve `freemium`. |
+| POST 🔒 | `/api/v1/subscriptions/checkout` | — | `200` con `checkout_url` y `session_id` de Stripe Checkout en modo prueba (US34). `503` si Stripe no está configurado, `502` si Stripe rechaza la solicitud. |
+| POST | `/api/v1/subscriptions/webhook` | Header `Stripe-Signature`. Body: evento de Stripe | `200` al procesar `checkout.session.completed` y activar el plan Premium. `401` si la firma no es válida. Lo invoca Stripe, no la aplicación. |
+| POST 🔒 | `/api/v1/subscriptions/demo/plan/{plan}` | Path: `plan` (`freemium` o `premium`) | `200` con la suscripción actualizada. Endpoint de demostración para cambiar de plan sin pasar por Stripe. |
+
+Ejemplo de respuesta de checkout:
+
+```json
+{
+  "checkout_url": "https://checkout.stripe.com/c/pay/cs_test_a1B2c3...",
+  "session_id": "cs_test_a1B2c3..."
+}
+```
+
+##### Support
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| POST 🔒 | `/api/v1/support/tickets` | Body: `subject`, `category`, `message` (opcional), `priority` (por defecto `normal`) | `201` con el ticket creado. Además genera una notificación "Ticket creado" (US37). `400` si falta `subject`. |
+| GET 🔒 | `/api/v1/support/tickets` | — | `200` con los tickets del usuario. El personal de soporte ve todos. |
+| GET 🔒 | `/api/v1/support/tickets/{id}` | Path: `id` | `200` con el ticket y su hilo de mensajes. `404` si no existe o no le pertenece. |
+| POST 🔒 | `/api/v1/support/tickets/{id}/messages` | Path: `id`. Body: `message` | `204` al agregar el mensaje. Si responde el personal de soporte, el usuario recibe una notificación. |
+| PATCH 🔒👤 | `/api/v1/support/tickets/{id}` | Path: `id`. Body: `assignee_id`, `status` | `204` al asignar el ticket o cambiar su estado. |
+
+##### Health check
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET | `/health` | — | `200` con `{ "status": "ok", "database": "connected" }`. `503` si la base de datos no responde. |
+
+##### Capturas de la interacción con la documentación
+
+_Pendiente: agregar capturas de Swagger UI con datos de muestra:_
+
+1. _Vista general de Swagger UI con los controladores agrupados._
+2. _Botón **Authorize** con el token Bearer obtenido en `sign-in`._
+3. _`POST /api/v1/journal/entries` ejecutado, mostrando el `ai_response` generado._
+4. _`GET /api/v1/analytics/dashboard` con la respuesta de métricas._
+5. _`POST /api/v1/subscriptions/checkout` devolviendo la URL de Stripe._
+6. _`POST /api/v1/support/tickets` devolviendo el ticket creado._
+
+##### Commits relacionados con los Web Services y su documentación
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+|---|---|---|---|---|---|
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/iam | 748340a | feat(iam): port IAM bounded context (auth, users, JWT) | — | 24/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/journal | 7e10b95 | feat(journal): port Journal bounded context | — | 24/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/ai-assistant | d8be277 | feat(ai-assistant): port AI Assistant bounded context (Chat + AiIntegration + AiFeedback) | — | 24/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/habits-wellness | d1ce85a | feat(habits-wellness): port Habits & Wellness bounded context (habits + WellnessEngine + WellnessContent) | — | 24/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/local-dev-setup | 4b17622 | feat: add health endpoint, initial EF migration, and local docker-compose setup | — | 24/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | develop | 35b637b | feat: add notifications, support, subscriptions and analytics contexts | Adds the initial implementation of the missing backend bounded contexts: notifications, support tickets, subscription catalog and analytics dashboard with CSV export. | 28/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | develop | cfd6ee0 | feat: add Stripe Checkout, PDF reports and email notifications | Adds Stripe Checkout in test mode, a signed Stripe webhook endpoint and QuestPDF report export. Configures Swagger Bearer authentication for protected endpoint testing. | 28/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/backend-hardening | 7b671a8 | feat(api): unify REST routes under api/v1 and add Stripe placeholders | — | 05/10/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/backend-hardening | 0295657 | feat(journal): auto-generate empathic AI response on entry creation | — | 05/10/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/backend-hardening | 5ad57c2 | chore: pin local dev port (5166) via launchSettings for frontend integration | — | 05/10/2026 |
 
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
 
