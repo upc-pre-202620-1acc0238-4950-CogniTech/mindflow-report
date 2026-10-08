@@ -3754,7 +3754,9 @@ Logros del Sprint en documentación de Web Services:
 
 **Repositorio de Web Services:** [https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) (rama `develop`)
 
-**Documentación (entorno local, previo al despliegue):** `http://localhost:5166/swagger/index.html`. Swagger UI se habilita cuando el backend se ejecuta en el entorno `Development`.
+**Documentación desplegada (Railway):** [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger)
+
+**Documentación en entorno local:** `http://localhost:5166/swagger/index.html`, disponible al ejecutar el backend en el entorno `Development`.
 
 **Convenciones de la tabla:**
 
@@ -4053,6 +4055,8 @@ El backend de MindFlow (ASP.NET Core) se desplegó en **Railway**. Los pasos rea
 <img src="assets/img/deployment/04-railway-variables.jpeg" alt="Variables de entorno del servicio en Railway" width="700"/>
 
 *Figura 93. Variables de entorno del servicio del backend en Railway.*
+
+**URL de los Web Services (documentación Swagger):** [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger)
 
 ##### Mobile Application
 
