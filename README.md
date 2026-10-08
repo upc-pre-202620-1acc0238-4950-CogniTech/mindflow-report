@@ -176,6 +176,41 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
 
 ---
 
+**Segunda Entrega (TB1)**
+
+Para la segunda entrega, el trabajo colaborativo del equipo se amplió del único repositorio del Project Report a los cuatro repositorios que conforman la solución completa de MindFlow:
+
+- Informe: [`mindflow-report`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-report)
+- Backend: [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend)
+- Mobile Application (Android nativo): [`mindflow-frontend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend)
+- Landing Page: [`mindflow-landingPage`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage), desplegado en [GitHub Pages](https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/)
+
+El desarrollo del trabajo incluyó la elaboración completa de los Capítulos I al IV del informe —Lean UX Process y segmentos objetivo, análisis competitivo y entrevistas de descubrimiento, Domain-Driven Design estratégico y táctico de los 8 Bounded Contexts, arquitectura de software en C4 Model, Style Guide e Information Architecture, wireframes y mock-ups del Landing Page y la Mobile Application, y la evidencia del Sprint 1 junto con las primeras entrevistas de validación—, en paralelo a la implementación del backend sobre esos mismos 8 Bounded Contexts, el desarrollo de la Mobile Application nativa en Android y la construcción y despliegue del Landing Page.
+
+En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado desde la primera entrega (ramas `feature/*` sobre `develop`, integradas mediante Pull Requests), lo que permitió registrar los avances realizados y mantener evidencia continua de la participación grupal en esta segunda entrega (Figuras 3 a 6).
+
+<div align="center">
+
+<img src="assets/img/Insights/Insights_TB1_Reporte.png" width="500"/>
+
+*Figura 3. Historial de colaboración del repositorio `mindflow-report` durante la segunda entrega (TB1).*
+
+<img src="assets/img/Insights/Insights_TB1_Backends.png" width="500"/>
+
+*Figura 4. Historial de colaboración del repositorio `mindflow-backend` durante la segunda entrega (TB1).*
+
+<img src="assets/img/Insights/Insights_TB1_Frontend.png" width="500"/>
+
+*Figura 5. Historial de colaboración del repositorio `mindflow-frontend` durante la segunda entrega (TB1).*
+
+<img src="assets/img/Insights/Insights_TB1_Landing.png" width="500"/>
+
+*Figura 6. Historial de colaboración del repositorio `mindflow-landingPage` durante la segunda entrega (TB1).*
+
+</div>
+
+---
+
 # Contenido
 
 ## Tabla de Contenidos
@@ -691,11 +726,11 @@ Para validar nuestros supuestos, planteamos las siguientes hipótesis de diseño
 
 #### 1.2.2.4. Lean UX Canvas
 
-*(Ver Figura 3.)*
+*(Ver Figura 7.)*
 
 <img src="assets/img/lean_ux/lean_ux_canvas.png" alt="lean_ux_canvas Picture" width="1890"/>
 
-*Figura 3. lean_ux_canvas Picture.*
+*Figura 7. lean_ux_canvas Picture.*
 
 ## 1.3. Segmentos objetivo
 
@@ -1228,18 +1263,18 @@ El proceso de needfinding evidencia que los usuarios no solo buscan registrar su
 
 ### 2.3.1. User Personas
 #### Segmento Estudiantes Universitarios:
-*(Ver Figura 4.)*
+*(Ver Figura 8.)*
 
   <img src="assets/img/lean_ux/User Persona1.png" alt="MindFlow" height="auto">
 
-*Figura 4. User Personas — Segmento Estudiantes Universitarios.*
+*Figura 8. User Personas — Segmento Estudiantes Universitarios.*
   
 #### Segmento Profesionales jóvenes:
-*(Ver Figura 5.)*
+*(Ver Figura 9.)*
 
   <img src="assets/img/lean_ux/User Persona2.png" alt="MindFlow" height="auto">
 
-*Figura 5. User Personas — Segmento Profesionales jóvenes.*
+*Figura 9. User Personas — Segmento Profesionales jóvenes.*
 
 ### 2.3.2. User Task Matrix
 
@@ -1312,18 +1347,18 @@ Los datos evidencian que el problema ocurre varias veces al día, lo que requier
 ### 2.3.3. User Journey Mapping
 
 #### Segmento Estudiantes Universitarios:
-*(Ver Figura 6.)*
+*(Ver Figura 10.)*
 
   <img src="assets/img/lean_ux/User Journey Mapping1.png" alt="MindFlow" height="auto">
 
-*Figura 6. User Journey Mapping — Segmento Estudiantes Universitarios.*
+*Figura 10. User Journey Mapping — Segmento Estudiantes Universitarios.*
   
 #### Segmento Profesionales jóvenes:
-*(Ver Figura 7.)*
+*(Ver Figura 11.)*
 
   <img src="assets/img/lean_ux/User Journey Mapping2.png" alt="MindFlow" height="auto">
 
-*Figura 7. User Journey Mapping — Segmento Profesionales jóvenes.*
+*Figura 11. User Journey Mapping — Segmento Profesionales jóvenes.*
 
 ### 2.3.4. Empathy Mapping
 
@@ -1331,11 +1366,11 @@ Los datos evidencian que el problema ocurre varias veces al día, lo que requier
 
 <div align="center">
 
-*(Ver Figura 8.)*
+*(Ver Figura 12.)*
 
 ![Empathy Mapping - Estudiantes Universitarios](assets/img/lean_ux/Empathy%20map1.png)
 
-*Figura 8. Empathy Mapping del segmento de estudiantes universitarios.*
+*Figura 12. Empathy Mapping del segmento de estudiantes universitarios.*
 
 </div>
 
@@ -1343,11 +1378,11 @@ Los datos evidencian que el problema ocurre varias veces al día, lo que requier
 
 <div align="center">
 
-*(Ver Figura 9.)*
+*(Ver Figura 13.)*
 
 ![Empathy Mapping - Profesionales Jóvenes](assets/img/lean_ux/Empathy%20map2.png)
 
-*Figura 9. Empathy Mapping del segmento de profesionales jóvenes.*
+*Figura 13. Empathy Mapping del segmento de profesionales jóvenes.*
 
 </div>
 
@@ -1357,34 +1392,34 @@ El equipo realizó una sesión colaborativa de Big Picture EventStorming (aproxi
 
 **Paso 1 — Generación de Domain Events**
 
-Cada integrante del equipo escribió de forma independiente los eventos de dominio que identificó en el negocio de MindFlow, en tiempo pasado, sin discutir todavía orden ni relaciones. Este brainstorming sin orden reveló 19 eventos que abarcan todo el producto, desde la creación de la cuenta hasta la cancelación de la suscripción (Figura 10).
+Cada integrante del equipo escribió de forma independiente los eventos de dominio que identificó en el negocio de MindFlow, en tiempo pasado, sin discutir todavía orden ni relaciones. Este brainstorming sin orden reveló 19 eventos que abarcan todo el producto, desde la creación de la cuenta hasta la cancelación de la suscripción (Figura 14).
 
 <div align="center">
 
 ![Big Picture EventStorming - Paso 1: Generación de Domain Events](assets/img/event_storming/BigPicture_Step1.png)
-*Figura 10. Domain Events generados de forma independiente por el equipo.*
+*Figura 14. Domain Events generados de forma independiente por el equipo.*
 
 </div>
 
 **Paso 2 — Ordenamiento cronológico de los Domain Events**
 
-Luego, el equipo organizó esos mismos eventos a lo largo de una sola línea de tiempo, desde el inicio de la relación del usuario con MindFlow (registro) pasando por el uso continuo (diario, hábitos, reportes) hasta eventos comerciales y de soporte (suscripción, tickets) (Figura 11).
+Luego, el equipo organizó esos mismos eventos a lo largo de una sola línea de tiempo, desde el inicio de la relación del usuario con MindFlow (registro) pasando por el uso continuo (diario, hábitos, reportes) hasta eventos comerciales y de soporte (suscripción, tickets) (Figura 15).
 
 <div align="center">
 
 ![Big Picture EventStorming - Paso 2: Ordenamiento cronológico](assets/img/event_storming/BigPicture_Step2.png)
-*Figura 11. Domain Events ordenados cronológicamente en el timeline de negocio.*
+*Figura 15. Domain Events ordenados cronológicamente en el timeline de negocio.*
 
 </div>
 
 **Paso 3 — Agregar Actors y External Systems**
 
-Finalmente, el equipo identificó quién dispara cada evento y qué sistemas externos reales están involucrados en el negocio: el **User** impulsa la mayoría de los eventos directamente, mientras que el **AI Engine**, el **Notification Service** y el **Payment Gateway** aparecen como los sistemas externos de los que ya depende el negocio de MindFlow (Figura 12).
+Finalmente, el equipo identificó quién dispara cada evento y qué sistemas externos reales están involucrados en el negocio: el **User** impulsa la mayoría de los eventos directamente, mientras que el **AI Engine**, el **Notification Service** y el **Payment Gateway** aparecen como los sistemas externos de los que ya depende el negocio de MindFlow (Figura 16).
 
 <div align="center">
 
 ![Big Picture EventStorming - Paso 3: Actors y External Systems](assets/img/event_storming/BigPicture_Step3.png)
-*Figura 12. Actors y External Systems agregados al timeline de eventos.*
+*Figura 16. Actors y External Systems agregados al timeline de eventos.*
 
 </div>
 
@@ -1489,11 +1524,11 @@ Adicionalmente, se incluye una **Spike Story (SP01)** para reducir la incertidum
 
 <div align="center">
 
-*(Ver Figura 13.)*
+*(Ver Figura 17.)*
 
 ![Impact Mapping - MindFlow](assets/img/lean_ux/Impact_mapping.png)
 
-*Figura 13. Impact Mapping de MindFlow.*
+*Figura 17. Impact Mapping de MindFlow.*
 
 </div>
 
@@ -1571,63 +1606,63 @@ Partiendo del Big Picture explorado en la sección 2.3.5, el equipo realizó una
 
 **Paso 1 — Events**
 
-El equipo retomó la lista de eventos del Big Picture y la amplió con eventos más granulares por cada área funcional, llegando a 25 eventos de dominio en total —expresados todavía en puro lenguaje de negocio, en tiempo pasado (Figura 14).
+El equipo retomó la lista de eventos del Big Picture y la amplió con eventos más granulares por cada área funcional, llegando a 25 eventos de dominio en total —expresados todavía en puro lenguaje de negocio, en tiempo pasado (Figura 18).
 
 <div align="center">
 
 ![EventStorming - Paso 1: Events](assets/img/event_storming/EventStorming_Step1.png)
-*Figura 14. Domain Events ampliados con mayor nivel de detalle por área funcional.*
+*Figura 18. Domain Events ampliados con mayor nivel de detalle por área funcional.*
 
 </div>
 
 **Paso 2 — Commands & Policies**
 
-Para cada evento, el equipo identificó qué lo dispara. La mayoría de los eventos son resultado directo de un **Command** —una acción deliberada realizada por un actor (ej. *Write journal entry* → *Journal entry created*). Sin embargo, 7 de los 25 eventos son reacciones automáticas a un evento anterior, en vez de un comando deliberado, y se modelaron como **Policies** ("Cada vez que... entonces..."): *Insight generated*, *Reminder sent*, *Streak achieved*, *Wellness exercise suggested*, *Risk pattern detected*, *Wellness alert sent*, y *Subscription activated*. Tratar estos casos como policies en vez de inventar comandos artificiales mantiene el modelo fiel a cómo realmente se comporta la automatización de MindFlow (Figura 15).
+Para cada evento, el equipo identificó qué lo dispara. La mayoría de los eventos son resultado directo de un **Command** —una acción deliberada realizada por un actor (ej. *Write journal entry* → *Journal entry created*). Sin embargo, 7 de los 25 eventos son reacciones automáticas a un evento anterior, en vez de un comando deliberado, y se modelaron como **Policies** ("Cada vez que... entonces..."): *Insight generated*, *Reminder sent*, *Streak achieved*, *Wellness exercise suggested*, *Risk pattern detected*, *Wellness alert sent*, y *Subscription activated*. Tratar estos casos como policies en vez de inventar comandos artificiales mantiene el modelo fiel a cómo realmente se comporta la automatización de MindFlow (Figura 19).
 
 <div align="center">
 
 ![EventStorming - Paso 2: Commands y Policies](assets/img/event_storming/EventStorming_Step2.png)
-*Figura 15. Commands y Policies identificados para cada Domain Event.*
+*Figura 19. Commands y Policies identificados para cada Domain Event.*
 
 </div>
 
 **Paso 3 — Actors / Agents**
 
-El equipo identificó luego quién —o qué— emite cada comando o ejecuta cada policy: el **User** para la mayoría de las acciones directas, el **AI Engine** para la generación de insights, evaluación de riesgo y sugerencias de bienestar, el **System** para policies programadas o basadas en umbrales, el **Payment Gateway** para la confirmación de pagos, y un **Support Agent** para la resolución de tickets. Este paso comenzó a revelar costuras naturales en el dominio —grupos de eventos consistentemente impulsados por el mismo tipo de actor y que operan sobre los mismos datos subyacentes (Figura 16).
+El equipo identificó luego quién —o qué— emite cada comando o ejecuta cada policy: el **User** para la mayoría de las acciones directas, el **AI Engine** para la generación de insights, evaluación de riesgo y sugerencias de bienestar, el **System** para policies programadas o basadas en umbrales, el **Payment Gateway** para la confirmación de pagos, y un **Support Agent** para la resolución de tickets. Este paso comenzó a revelar costuras naturales en el dominio —grupos de eventos consistentemente impulsados por el mismo tipo de actor y que operan sobre los mismos datos subyacentes (Figura 20).
 
 <div align="center">
 
 ![EventStorming - Paso 3: Actors y Agents](assets/img/event_storming/EventStorming_Step3.png)
-*Figura 16. Actors y Agents identificados para cada Command y Policy.*
+*Figura 20. Actors y Agents identificados para cada Command y Policy.*
 
 </div>
 
 **Paso 4 — Agrupación en Bounded Contexts**
 
-Finalmente, el equipo reagrupó físicamente las mismas notas —ya no siguiendo la línea de tiempo, sino agrupando eventos, commands, policies y actors que comparten fuerte cohesión y un lenguaje de negocio común. Esto produjo 8 clústeres candidatos: **IAM**, **Journal**, **AI Assistant**, **Habits & Wellness**, **Notifications**, **Analytics & Reporting**, **Subscriptions**, y **Support**. Varias policies cruzan visiblemente entre clústeres (por ejemplo, la policy detrás de *Insight generated* depende de un evento que vive dentro de *Journal*, pero la reacción en sí pertenece a *AI Assistant*) —una señal temprana de las relaciones entre contextos que se formalizarán después en la sección 2.5.2 Context Mapping (Figura 17).
+Finalmente, el equipo reagrupó físicamente las mismas notas —ya no siguiendo la línea de tiempo, sino agrupando eventos, commands, policies y actors que comparten fuerte cohesión y un lenguaje de negocio común. Esto produjo 8 clústeres candidatos: **IAM**, **Journal**, **AI Assistant**, **Habits & Wellness**, **Notifications**, **Analytics & Reporting**, **Subscriptions**, y **Support**. Varias policies cruzan visiblemente entre clústeres (por ejemplo, la policy detrás de *Insight generated* depende de un evento que vive dentro de *Journal*, pero la reacción en sí pertenece a *AI Assistant*) —una señal temprana de las relaciones entre contextos que se formalizarán después en la sección 2.5.2 Context Mapping (Figura 21).
 
 <div align="center">
 
 ![EventStorming - Paso 4: Agrupación en Bounded Contexts](assets/img/event_storming/EventStorming_Step4.png)
-*Figura 17. Reagrupación final de eventos, commands, policies y actors en los 8 Bounded Contexts candidatos.*
+*Figura 21. Reagrupación final de eventos, commands, policies y actors en los 8 Bounded Contexts candidatos.*
 
 </div>
 
 #### 2.5.1.1. Candidate Context Discovery
 
-Partiendo de la sesión de EventStorming documentada en 2.5.1, el equipo realizó una sesión dedicada de Candidate Context Discovery (aproximadamente 1.5 horas, usando Miro) para formalizar los límites naturales dentro del dominio de MindFlow, comparando el estado del tablero antes del reagrupamiento (Paso 3) contra el estado después del reagrupamiento (Paso 4) (Figura 18).
+Partiendo de la sesión de EventStorming documentada en 2.5.1, el equipo realizó una sesión dedicada de Candidate Context Discovery (aproximadamente 1.5 horas, usando Miro) para formalizar los límites naturales dentro del dominio de MindFlow, comparando el estado del tablero antes del reagrupamiento (Paso 3) contra el estado después del reagrupamiento (Paso 4) (Figura 22).
 
 <div align="center">
 
 ![Candidate Context Discovery - Tablero antes del reagrupamiento](assets/img/event_storming/EventStorming_Step3.png)
-*Figura 18. Estado del tablero antes del reagrupamiento (Actors/Agents identificados, aún sobre la línea de tiempo).*
+*Figura 22. Estado del tablero antes del reagrupamiento (Actors/Agents identificados, aún sobre la línea de tiempo).*
 
 ![Candidate Context Discovery - Tablero después del reagrupamiento](assets/img/event_storming/EventStorming_Step4.png)
-*Figura 19. Estado del tablero después del reagrupamiento en los 8 Bounded Contexts candidatos.*
+*Figura 23. Estado del tablero después del reagrupamiento en los 8 Bounded Contexts candidatos.*
 
 </div>
 
-La técnica principal aplicada fue **look-for-pivotal-events**: el equipo recorrió la línea de tiempo producida en el Paso 3 y marcó cada evento que representara un cambio significativo de responsabilidad o capacidad de negocio —un punto donde "empieza a pasar algo distinto." Estos eventos pivote se convirtieron en las costuras a lo largo de las cuales se reagrupó el tablero en el Paso 4 (Figura 19).
+La técnica principal aplicada fue **look-for-pivotal-events**: el equipo recorrió la línea de tiempo producida en el Paso 3 y marcó cada evento que representara un cambio significativo de responsabilidad o capacidad de negocio —un punto donde "empieza a pasar algo distinto." Estos eventos pivote se convirtieron en las costuras a lo largo de las cuales se reagrupó el tablero en el Paso 4 (Figura 23).
 
 Se identificaron los siguientes eventos pivote como marcadores de límite:
 
@@ -1678,13 +1713,13 @@ Para la representación gráfica se empleó la siguiente convención:
 - **Amarillo:** Domain Event.
 - **Rosado:** Policy.
 - **Gris:** Actor, Agent, Bounded Context o External System.
-- **Flechas:** dirección en la que se produce el flujo de mensajes (Figura 20).
+- **Flechas:** dirección en la que se produce el flujo de mensajes (Figura 24).
 
 <div align="center">
 
 ![Domain Message Flows - Parte 1](assets/img/event_storming/Flow1.jpg)
 
-*Figura 20. Domain Message Flows Modeling de MindFlow - Parte 1.*
+*Figura 24. Domain Message Flows Modeling de MindFlow - Parte 1.*
 
 </div>
 
@@ -1692,13 +1727,13 @@ La primera parte representa los flujos relacionados con la identidad del usuario
 
 El contexto **IAM** administra los Commands `Register user`, `Update profile` y `Log in`, generando respectivamente los Domain Events `User registered`, `Profile updated` y `User authenticated`.
 
-Por su parte, **Journal** administra el registro emocional mediante `Log mood`, `Write journal entry` y `Tag journal entry`, generando los eventos `Mood logged`, `Journal entry created` y `Journal entry tagged` (Figura 21).
+Por su parte, **Journal** administra el registro emocional mediante `Log mood`, `Write journal entry` y `Tag journal entry`, generando los eventos `Mood logged`, `Journal entry created` y `Journal entry tagged` (Figura 25).
 
 <div align="center">
 
 ![Domain Message Flows - Parte 2](assets/img/event_storming/Flow2.jpg)
 
-*Figura 21. Domain Message Flows Modeling de MindFlow - Parte 2.*
+*Figura 25. Domain Message Flows Modeling de MindFlow - Parte 2.*
 
 </div>
 
@@ -1712,13 +1747,13 @@ De manera independiente, el **System** puede activar la Policy `check-in time re
 
 El flujo de bienestar comienza con `Run stress check`, generando `Stress check completed`. Ante un nivel elevado de estrés se activa la Policy `after high-stress check`, produciendo `Wellness exercise suggested`.
 
-Asimismo, los registros emocionales recurrentes pueden activar `after recurring low mood`. **AI Assistant** identifica entonces el evento `Risk pattern detected`, el cual activa `after risk detected` y permite que **Notifications** produzca `Wellness alert sent` (Figura 22).
+Asimismo, los registros emocionales recurrentes pueden activar `after recurring low mood`. **AI Assistant** identifica entonces el evento `Risk pattern detected`, el cual activa `after risk detected` y permite que **Notifications** produzca `Wellness alert sent` (Figura 26).
 
 <div align="center">
 
 ![Domain Message Flows - Parte 3](assets/img/event_storming/Flow3.jpg)
 
-*Figura 22. Domain Message Flows Modeling de MindFlow - Parte 3.*
+*Figura 26. Domain Message Flows Modeling de MindFlow - Parte 3.*
 
 </div>
 
@@ -1740,97 +1775,97 @@ Para MindFlow se definieron ocho Bounded Contexts: **IAM**, **Journal**, **AI As
 
 ### IAM
 
-El bounded context **IAM (Identity and Access Management)** concentra las responsabilidades relacionadas con la identidad de los usuarios, autenticación, perfiles y mecanismos de acceso a MindFlow. Funciona como un contexto de soporte para el resto de las capacidades del sistema (Figura 23).
+El bounded context **IAM (Identity and Access Management)** concentra las responsabilidades relacionadas con la identidad de los usuarios, autenticación, perfiles y mecanismos de acceso a MindFlow. Funciona como un contexto de soporte para el resto de las capacidades del sistema (Figura 27).
 
 <div align="center">
 
 ![Bounded Context Canvas - IAM](assets/img/event_storming/iam.png)
 
-*Figura 23. Bounded Context Canvas correspondiente a IAM.*
+*Figura 27. Bounded Context Canvas correspondiente a IAM.*
 
 </div>
 
 ### Journal
 
-El bounded context **Journal** administra el diario emocional del usuario, incluyendo el registro de estados de ánimo, creación de entradas y organización de información mediante etiquetas. Se considera uno de los contextos centrales de MindFlow debido a su relación directa con la autoconciencia emocional (Figura 24).
+El bounded context **Journal** administra el diario emocional del usuario, incluyendo el registro de estados de ánimo, creación de entradas y organización de información mediante etiquetas. Se considera uno de los contextos centrales de MindFlow debido a su relación directa con la autoconciencia emocional (Figura 28).
 
 <div align="center">
 
 ![Bounded Context Canvas - Journal](assets/img/event_storming/journal.png)
 
-*Figura 24. Bounded Context Canvas correspondiente a Journal.*
+*Figura 28. Bounded Context Canvas correspondiente a Journal.*
 
 </div>
 
 ### AI Assistant
 
-El bounded context **AI Assistant** concentra las capacidades relacionadas con la interacción conversacional basada en Inteligencia Artificial, la generación de insights, el análisis del contexto emocional y la detección de patrones relevantes a partir de la información del usuario (Figura 25).
+El bounded context **AI Assistant** concentra las capacidades relacionadas con la interacción conversacional basada en Inteligencia Artificial, la generación de insights, el análisis del contexto emocional y la detección de patrones relevantes a partir de la información del usuario (Figura 29).
 
 <div align="center">
 
 ![Bounded Context Canvas - AI Assistant](assets/img/event_storming/AIAssistant.png)
 
-*Figura 25. Bounded Context Canvas correspondiente a AI Assistant.*
+*Figura 29. Bounded Context Canvas correspondiente a AI Assistant.*
 
 </div>
 
 ### Habits & Wellness
 
-El bounded context **Habits & Wellness** administra la creación y seguimiento de hábitos, el cumplimiento de actividades, las rachas de progreso, los chequeos de estrés y las sugerencias orientadas al bienestar del usuario (Figura 26).
+El bounded context **Habits & Wellness** administra la creación y seguimiento de hábitos, el cumplimiento de actividades, las rachas de progreso, los chequeos de estrés y las sugerencias orientadas al bienestar del usuario (Figura 30).
 
 <div align="center">
 
 ![Bounded Context Canvas - Habits and Wellness](assets/img/event_storming/Habits.png)
 
-*Figura 26. Bounded Context Canvas correspondiente a Habits & Wellness.*
+*Figura 30. Bounded Context Canvas correspondiente a Habits & Wellness.*
 
 </div>
 
 ### Analytics & Reporting
 
-El bounded context **Analytics & Reporting** transforma la información generada en otros contextos en métricas, tendencias y reportes que permiten al usuario visualizar y comprender su evolución emocional y el progreso de sus hábitos (Figura 27).
+El bounded context **Analytics & Reporting** transforma la información generada en otros contextos en métricas, tendencias y reportes que permiten al usuario visualizar y comprender su evolución emocional y el progreso de sus hábitos (Figura 31).
 
 <div align="center">
 
 ![Bounded Context Canvas - Analytics and Reporting](assets/img/event_storming/Analytics.png)
 
-*Figura 27. Bounded Context Canvas correspondiente a Analytics & Reporting.*
+*Figura 31. Bounded Context Canvas correspondiente a Analytics & Reporting.*
 
 </div>
 
 ### Notifications
 
-El bounded context **Notifications** se encarga de gestionar recordatorios, alertas de bienestar y notificaciones dirigidas al usuario. Funciona como un contexto transversal que recibe información originada en otros Bounded Contexts y la comunica mediante los canales disponibles (Figura 28).
+El bounded context **Notifications** se encarga de gestionar recordatorios, alertas de bienestar y notificaciones dirigidas al usuario. Funciona como un contexto transversal que recibe información originada en otros Bounded Contexts y la comunica mediante los canales disponibles (Figura 32).
 
 <div align="center">
 
 ![Bounded Context Canvas - Notifications](assets/img/event_storming/notifications.png)
 
-*Figura 28. Bounded Context Canvas correspondiente a Notifications.*
+*Figura 32. Bounded Context Canvas correspondiente a Notifications.*
 
 </div>
 
 ### Subscriptions
 
-El bounded context **Subscriptions** administra las capacidades comerciales de MindFlow relacionadas con los planes Premium, procesamiento de pagos, activación de suscripciones y cancelaciones, manteniendo estas responsabilidades separadas de las funcionalidades centrales de bienestar (Figura 29).
+El bounded context **Subscriptions** administra las capacidades comerciales de MindFlow relacionadas con los planes Premium, procesamiento de pagos, activación de suscripciones y cancelaciones, manteniendo estas responsabilidades separadas de las funcionalidades centrales de bienestar (Figura 33).
 
 <div align="center">
 
 ![Bounded Context Canvas - Subscriptions](assets/img/event_storming/Subs.png)
 
-*Figura 29. Bounded Context Canvas correspondiente a Subscriptions.*
+*Figura 33. Bounded Context Canvas correspondiente a Subscriptions.*
 
 </div>
 
 ### Support
 
-El bounded context **Support** gestiona las solicitudes de asistencia de los usuarios mediante tickets de soporte, controlando su ciclo de vida desde la creación hasta su resolución por parte del equipo correspondiente (Figura 30).
+El bounded context **Support** gestiona las solicitudes de asistencia de los usuarios mediante tickets de soporte, controlando su ciclo de vida desde la creación hasta su resolución por parte del equipo correspondiente (Figura 34).
 
 <div align="center">
 
 ![Bounded Context Canvas - Support](assets/img/event_storming/Support.png)
 
-*Figura 30. Bounded Context Canvas correspondiente a Support.*
+*Figura 34. Bounded Context Canvas correspondiente a Support.*
 
 </div>
 
@@ -1840,13 +1875,13 @@ En conjunto, estos canvases permiten establecer límites claros entre las respon
 
 El **Context Mapping** permite representar las relaciones existentes entre los diferentes **Bounded Contexts** de MindFlow, identificando cuáles actúan como **Upstream (U)** y cuáles como **Downstream (D)**, así como el patrón de integración utilizado entre ellos.
 
-A partir de los Bounded Contexts identificados durante el EventStorming y el Candidate Context Discovery, se definieron relaciones de tipo **Conformist** y **Customer-Supplier**. Estas relaciones permiten mantener separados los modelos de dominio, al mismo tiempo que hacen explícitas las dependencias necesarias para el funcionamiento de la solución (Figura 31).
+A partir de los Bounded Contexts identificados durante el EventStorming y el Candidate Context Discovery, se definieron relaciones de tipo **Conformist** y **Customer-Supplier**. Estas relaciones permiten mantener separados los modelos de dominio, al mismo tiempo que hacen explícitas las dependencias necesarias para el funcionamiento de la solución (Figura 35).
 
 <div align="center">
 
 ![Context Mapping - MindFlow](assets/img/event_storming/ContextMapping.png)
 
-*Figura 31. Context Mapping de los Bounded Contexts de MindFlow.*
+*Figura 35. Context Mapping de los Bounded Contexts de MindFlow.*
 
 </div>
 
@@ -1936,13 +1971,13 @@ En conjunto, el Context Mapping permite visualizar las dependencias entre los Bo
 
 El **Software Architecture Context Level Diagram** representa a MindFlow como un único sistema y muestra su interacción con los usuarios y los servicios externos necesarios para su funcionamiento.
 
-En este nivel del modelo C4 no se detallan los componentes internos de MindFlow, sino únicamente los actores y sistemas externos con los que se relaciona (Figura 32).
+En este nivel del modelo C4 no se detallan los componentes internos de MindFlow, sino únicamente los actores y sistemas externos con los que se relaciona (Figura 36).
 
 <div align="center">
 
 ![Diagrama de Contexto MindFlow](assets/diagrams/Diagrama%20de%20Contexto%20Mindflow.png)
 
-*Figura 32. Software Architecture Context Level Diagram de MindFlow.*
+*Figura 36. Software Architecture Context Level Diagram de MindFlow.*
 
 </div>
 
@@ -1965,13 +2000,13 @@ Este diagrama permite visualizar el límite del sistema MindFlow y las principal
 
 El **Software Architecture Container Level Diagram** representa la estructura interna de MindFlow a nivel de contenedores, mostrando las principales aplicaciones, servicios y mecanismos de persistencia que componen la solución.
 
-A diferencia del Context Level Diagram, en este nivel del modelo C4 se detalla cómo MindFlow se divide internamente y cómo sus contenedores se comunican entre sí y con los servicios externos (Figura 33).
+A diferencia del Context Level Diagram, en este nivel del modelo C4 se detalla cómo MindFlow se divide internamente y cómo sus contenedores se comunican entre sí y con los servicios externos (Figura 37).
 
 <div align="center">
 
 ![Diagrama de Contenedores MindFlow](assets/diagrams/Diagrama%20de%20Contenedores%20Mindflow.png)
 
-*Figura 33. Software Architecture Container Level Diagram de MindFlow.*
+*Figura 37. Software Architecture Container Level Diagram de MindFlow.*
 
 </div>
 
@@ -2002,12 +2037,12 @@ Este nivel del modelo C4 permite comprender cómo se distribuyen las responsabil
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
 
-Se elaboró el Deployment Diagram siguiendo el C4 Model, con el objetivo de representar la distribución física de la solución MindFlow: los nodos de hardware e infraestructura sobre los que se despliega cada contenedor de software, así como las relaciones y dependencias entre ellos (Figura 34).
+Se elaboró el Deployment Diagram siguiendo el C4 Model, con el objetivo de representar la distribución física de la solución MindFlow: los nodos de hardware e infraestructura sobre los que se despliega cada contenedor de software, así como las relaciones y dependencias entre ellos (Figura 38).
 
 <div align="center">
 
 ![MindFlow Deployment Diagram](assets/img/software_architecture/deployment_diagram.png)
-*Figura 34. Deployment Diagram (C4 Model) de la solución MindFlow en producción.*
+*Figura 38. Deployment Diagram (C4 Model) de la solución MindFlow en producción.*
 
 </div>
 
@@ -2099,11 +2134,11 @@ El Infrastructure Layer contiene las implementaciones concretas de los puertos d
 <div align="center">
 
 ![IAM Component Diagram](assets/img/software_architecture/iam_component_diagram.png)
-*Figura 35. Component Diagram (C4 Model) del bounded context IAM dentro del container Web Services API.*
+*Figura 39. Component Diagram (C4 Model) del bounded context IAM dentro del container Web Services API.*
 
 </div>
 
-El diagrama descompone el container **Web Services API** en los componentes que implementan IAM: `UsersController` recibe las peticiones HTTP y delega en `UserCommandService`, que a su vez coordina `UserRepository` (persistencia), `TokenService` (emisión de JWT), `EmailService` (correo de recuperación vía SMTP) y `GoogleAuthService` (validación de credenciales contra Google OAuth). Cada componente de infraestructura encapsula la comunicación con su dependencia externa correspondiente, de modo que `UserCommandService` permanece desacoplado de los detalles técnicos (hashing JWT, protocolo SMTP, SDK de Google) (Figura 35).
+El diagrama descompone el container **Web Services API** en los componentes que implementan IAM: `UsersController` recibe las peticiones HTTP y delega en `UserCommandService`, que a su vez coordina `UserRepository` (persistencia), `TokenService` (emisión de JWT), `EmailService` (correo de recuperación vía SMTP) y `GoogleAuthService` (validación de credenciales contra Google OAuth). Cada componente de infraestructura encapsula la comunicación con su dependencia externa correspondiente, de modo que `UserCommandService` permanece desacoplado de los detalles técnicos (hashing JWT, protocolo SMTP, SDK de Google) (Figura 39).
 
 #### 2.6.1.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -2112,11 +2147,11 @@ El diagrama descompone el container **Web Services API** en los componentes que 
 <div align="center">
 
 ![IAM Domain Layer Class Diagram](assets/img/software_architecture/iam_class_diagram.png)
-*Figura 36. Class Diagram (UML) del Domain Layer del bounded context IAM.*
+*Figura 40. Class Diagram (UML) del Domain Layer del bounded context IAM.*
 
 </div>
 
-El diagrama muestra el agregado `User` (que implementa `IAuditableEntity`), la entidad `PasswordResetToken` y la interfaz `IUserRepository` (que extiende `IBaseRepository`) (Figura 36).
+El diagrama muestra el agregado `User` (que implementa `IAuditableEntity`), la entidad `PasswordResetToken` y la interfaz `IUserRepository` (que extiende `IBaseRepository`) (Figura 40).
 
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
 
@@ -2124,11 +2159,11 @@ El diagrama muestra el agregado `User` (que implementa `IAuditableEntity`), la e
 
 ![IAM Database Diagram](assets/img/software_architecture/iam_database_diagram.png)
 
-*Figura 37. Database Diagram del bounded context IAM.*
+*Figura 41. Database Diagram del bounded context IAM.*
 
 </div>
 
-El bounded context IAM persiste en dos tablas: `users` (con índices únicos sobre `email` y `google_id`) y `password_reset_tokens` (con índice único sobre `token` y un índice simple sobre `user_id`) (Figura 37).
+El bounded context IAM persiste en dos tablas: `users` (con índices únicos sobre `email` y `google_id`) y `password_reset_tokens` (con índice único sobre `token` y un índice simple sobre `user_id`) (Figura 41).
 
 ---
 
@@ -2196,11 +2231,11 @@ A diferencia de IAM, Journal **no define un repository interface propio**: los C
 <div align="center">
 
 ![Journal Component Diagram](assets/img/software_architecture/journal_component_diagram.png)
-*Figura 38. Component Diagram (C4 Model) del bounded context Journal dentro del container Web Services API.*
+*Figura 42. Component Diagram (C4 Model) del bounded context Journal dentro del container Web Services API.*
 
 </div>
 
-El diagrama refleja la separación CQRS: `JournalController` despacha hacia dos grupos de componentes vía `IMediator` — los **Journal Command Handlers** (escritura, vía `IBaseRepository<T>` + Unit of Work) y los **Journal Query Handlers** (lectura, directo contra la base de datos con joins). Los Command Handlers disparan además el reindexado de búsqueda (`JournalSearchIndexer`) y la invalidación de caché de Analytics — esta última cruzando el límite del bounded context. La subida de archivos pasa por `FileStorageService`, que abstrae Cloudinary (producción) de un fallback local (Figura 38).
+El diagrama refleja la separación CQRS: `JournalController` despacha hacia dos grupos de componentes vía `IMediator` — los **Journal Command Handlers** (escritura, vía `IBaseRepository<T>` + Unit of Work) y los **Journal Query Handlers** (lectura, directo contra la base de datos con joins). Los Command Handlers disparan además el reindexado de búsqueda (`JournalSearchIndexer`) y la invalidación de caché de Analytics — esta última cruzando el límite del bounded context. La subida de archivos pasa por `FileStorageService`, que abstrae Cloudinary (producción) de un fallback local (Figura 42).
 
 #### 2.6.2.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -2209,22 +2244,22 @@ El diagrama refleja la separación CQRS: `JournalController` despacha hacia dos 
 <div align="center">
 
 ![Journal Domain Layer Class Diagram](assets/img/software_architecture/journal_class_diagram.png)
-*Figura 39. Class Diagram (UML) del Domain Layer del bounded context Journal.*
+*Figura 43. Class Diagram (UML) del Domain Layer del bounded context Journal.*
 
 </div>
 
-`JournalEntry` es el agregado raíz, con colecciones navegables hacia `EntryTag` y `Media` (ambas con Foreign Key enforced y `DeleteBehavior.Cascade`). `EntryTag` es la tabla de asociación many-to-many hacia `Tag`. `JournalSearchToken` referencia a `JournalEntry` con FK enforced pero **sin colección inversa navegable** desde el agregado (se consulta directamente vía `AppDbContext.Set<JournalSearchToken>()`). `JournalSearchTokenizer` es un Domain Service estático sin estado (Figura 39).
+`JournalEntry` es el agregado raíz, con colecciones navegables hacia `EntryTag` y `Media` (ambas con Foreign Key enforced y `DeleteBehavior.Cascade`). `EntryTag` es la tabla de asociación many-to-many hacia `Tag`. `JournalSearchToken` referencia a `JournalEntry` con FK enforced pero **sin colección inversa navegable** desde el agregado (se consulta directamente vía `AppDbContext.Set<JournalSearchToken>()`). `JournalSearchTokenizer` es un Domain Service estático sin estado (Figura 43).
 
 ##### 2.6.2.6.2. Bounded Context Database Design Diagram
 
 <div align="center">
 
 ![Journal Database Diagram](assets/img/software_architecture/journal_database_diagram.png)
-*Figura 40. Database Diagram del bounded context Journal.*
+*Figura 44. Database Diagram del bounded context Journal.*
 
 </div>
 
-Las tablas `entry_tags`, `media` y `journal_search_tokens` tienen **Foreign Key física enforced** hacia `journal_entries.id`, todas con `ON DELETE CASCADE`. `entry_tags` además tiene FK enforced hacia `tags.id` y un índice único compuesto `(entry_id, tag_id)` que impide duplicar la misma etiqueta en la misma entrada. La columna `tags.user_id` **no tiene Foreign Key declarada** hacia `users.id` (relación lógica, nullable — permite tags globales del sistema cuando es `NULL`). `journal_entries.content` se almacena cifrado en reposo (AES) a nivel de aplicación, transparente para el esquema de base de datos (Figura 40).
+Las tablas `entry_tags`, `media` y `journal_search_tokens` tienen **Foreign Key física enforced** hacia `journal_entries.id`, todas con `ON DELETE CASCADE`. `entry_tags` además tiene FK enforced hacia `tags.id` y un índice único compuesto `(entry_id, tag_id)` que impide duplicar la misma etiqueta en la misma entrada. La columna `tags.user_id` **no tiene Foreign Key declarada** hacia `users.id` (relación lógica, nullable — permite tags globales del sistema cuando es `NULL`). `journal_entries.content` se almacena cifrado en reposo (AES) a nivel de aplicación, transparente para el esquema de base de datos (Figura 44).
 
 ---
 
@@ -2287,11 +2322,11 @@ Se identificaron además dos dependencias cruzadas reales hacia otros bounded co
 <div align="center">
 
 ![AI Assistant Component Diagram](assets/img/software_architecture/assistant_component_diagram.png)
-*Figura 41. Component Diagram (C4 Model) del bounded context AI Assistant dentro del container Web Services API.*
+*Figura 45. Component Diagram (C4 Model) del bounded context AI Assistant dentro del container Web Services API.*
 
 </div>
 
-El diagrama muestra `ChatController` y `AiFeedbackController` delegando directamente en sus respectivos Application Services (sin Mediator). `GeminiService` aparece como un componente central consumido no solo por `ChatService`, sino también desde Analytics & Reporting y Habits & Wellness, reflejando su rol de servicio transversal de IA. `AiFeedbackService` cruza el límite del bounded context para validar la existencia del contenido calificado en Journal y en Habits & Wellness (Figura 41).
+El diagrama muestra `ChatController` y `AiFeedbackController` delegando directamente en sus respectivos Application Services (sin Mediator). `GeminiService` aparece como un componente central consumido no solo por `ChatService`, sino también desde Analytics & Reporting y Habits & Wellness, reflejando su rol de servicio transversal de IA. `AiFeedbackService` cruza el límite del bounded context para validar la existencia del contenido calificado en Journal y en Habits & Wellness (Figura 45).
 
 #### 2.6.3.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -2300,22 +2335,22 @@ El diagrama muestra `ChatController` y `AiFeedbackController` delegando directam
 <div align="center">
 
 ![AI Assistant Domain Layer Class Diagram](assets/img/software_architecture/assistant_class_diagram.png)
-*Figura 42. Class Diagram (UML) del Domain Layer del bounded context AI Assistant.*
+*Figura 46. Class Diagram (UML) del Domain Layer del bounded context AI Assistant.*
 
 </div>
 
-`Conversation` es el agregado raíz del módulo Chat, con una colección navegable de `ChatMessage` (FK enforced, cascade). `AiFeedbackRating` y `AiMetricLog` son entidades independientes, sin relaciones de asociación declaradas hacia el resto del modelo — sus referencias a contenido de otros bounded contexts (`ContentId`, y en `AiFeedbackRating` implícitamente `UserId`) son lógicas, no navegables (Figura 42).
+`Conversation` es el agregado raíz del módulo Chat, con una colección navegable de `ChatMessage` (FK enforced, cascade). `AiFeedbackRating` y `AiMetricLog` son entidades independientes, sin relaciones de asociación declaradas hacia el resto del modelo — sus referencias a contenido de otros bounded contexts (`ContentId`, y en `AiFeedbackRating` implícitamente `UserId`) son lógicas, no navegables (Figura 46).
 
 ##### 2.6.3.6.2. Bounded Context Database Design Diagram
 
 <div align="center">
 
 ![AI Assistant Database Diagram](assets/img/software_architecture/assistant_database_diagram.png)
-*Figura 43. Database Diagram del bounded context AI Assistant.*
+*Figura 47. Database Diagram del bounded context AI Assistant.*
 
 </div>
 
-`chat_messages` tiene **Foreign Key física enforced** hacia `conversations.id` con `ON DELETE CASCADE`. `conversations`, `ai_feedback_ratings` y `ai_metric_logs` **no tienen ninguna Foreign Key declarada** hacia `users.id` (relación lógica vía columna `user_id`) — y `ai_metric_logs` ni siquiera tiene columna `user_id`, al ser un log de sistema. `ai_feedback_ratings` tiene un índice único compuesto `(user_id, content_id, content_type)` que garantiza una sola calificación por usuario y contenido (Figura 43).
+`chat_messages` tiene **Foreign Key física enforced** hacia `conversations.id` con `ON DELETE CASCADE`. `conversations`, `ai_feedback_ratings` y `ai_metric_logs` **no tienen ninguna Foreign Key declarada** hacia `users.id` (relación lógica vía columna `user_id`) — y `ai_metric_logs` ni siquiera tiene columna `user_id`, al ser un log de sistema. `ai_feedback_ratings` tiene un índice único compuesto `(user_id, content_id, content_type)` que garantiza una sola calificación por usuario y contenido (Figura 47).
 
 ---
 
@@ -2397,11 +2432,11 @@ También destaca un patrón de **consistencia perezosa** (*lazy consistency*): `
 <div align="center">
 
 ![Habits & Wellness Component Diagram](assets/img/software_architecture/wellness_component_diagram.png)
-*Figura 44. Component Diagram (C4 Model) del bounded context Habits & Wellness dentro del container Web Services API.*
+*Figura 48. Component Diagram (C4 Model) del bounded context Habits & Wellness dentro del container Web Services API.*
 
 </div>
 
-El diagrama muestra los tres módulos como grupos de componentes diferenciados: `HabitsController`/`HabitLogsController` delegando en sus Command/Query Services (con `IHabitRepository`/`IHabitCompletionLogRepository` de por medio), `WellnessController` delegando en `WellnessService` (que cruza hacia Journal y hacia `GeminiService`), y `WellnessExercisesController` delegando en sus Handlers vía Mediator. Se muestran explícitamente las tres dependencias cruzadas: hacia AI Assistant (sugerencias y consejos) y hacia Journal (lectura de entradas para estimar estrés) (Figura 44).
+El diagrama muestra los tres módulos como grupos de componentes diferenciados: `HabitsController`/`HabitLogsController` delegando en sus Command/Query Services (con `IHabitRepository`/`IHabitCompletionLogRepository` de por medio), `WellnessController` delegando en `WellnessService` (que cruza hacia Journal y hacia `GeminiService`), y `WellnessExercisesController` delegando en sus Handlers vía Mediator. Se muestran explícitamente las tres dependencias cruzadas: hacia AI Assistant (sugerencias y consejos) y hacia Journal (lectura de entradas para estimar estrés) (Figura 48).
 
 #### 2.6.4.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -2410,22 +2445,22 @@ El diagrama muestra los tres módulos como grupos de componentes diferenciados: 
 <div align="center">
 
 ![Habits & Wellness Domain Layer Class Diagram](assets/img/software_architecture/wellness_class_diagram.png)
-*Figura 45. Class Diagram (UML) del Domain Layer del bounded context Habits & Wellness.*
+*Figura 49. Class Diagram (UML) del Domain Layer del bounded context Habits & Wellness.*
 
 </div>
 
-`Habit` es el agregado raíz con una colección de `HabitCompletionLog` sin navegación inversa (la FK existe en base de datos, pero el modelo de objetos solo navega en un sentido). `CachedHabitSuggestion` y `WellnessExercise` son entidades independientes sin relaciones declaradas. `IHabitRepository` e `IHabitCompletionLogRepository` extienden el repositorio genérico del Shared Kernel (Figura 45).
+`Habit` es el agregado raíz con una colección de `HabitCompletionLog` sin navegación inversa (la FK existe en base de datos, pero el modelo de objetos solo navega en un sentido). `CachedHabitSuggestion` y `WellnessExercise` son entidades independientes sin relaciones declaradas. `IHabitRepository` e `IHabitCompletionLogRepository` extienden el repositorio genérico del Shared Kernel (Figura 49).
 
 ##### 2.6.4.6.2. Bounded Context Database Design Diagram
 
 <div align="center">
 
 ![Habits & Wellness Database Diagram](assets/img/software_architecture/wellness_database_diagram.png)
-*Figura 46. Database Diagram del bounded context Habits & Wellness.*
+*Figura 50. Database Diagram del bounded context Habits & Wellness.*
 
 </div>
 
-`habit_completion_logs` tiene **Foreign Key física enforced** hacia `habits.id` con `ON DELETE CASCADE`. `habits` y `cached_habit_suggestions` **no tienen Foreign Key declarada** hacia `users.id` (relación lógica). `cached_habit_suggestions` tiene índice único por `user_id` (una sola caché vigente por usuario). `wellness_exercises` no tiene relación con ninguna otra tabla de este bounded context — es un catálogo independiente (Figura 46).
+`habit_completion_logs` tiene **Foreign Key física enforced** hacia `habits.id` con `ON DELETE CASCADE`. `habits` y `cached_habit_suggestions` **no tienen Foreign Key declarada** hacia `users.id` (relación lógica). `cached_habit_suggestions` tiene índice único por `user_id` (una sola caché vigente por usuario). `wellness_exercises` no tiene relación con ninguna otra tabla de este bounded context — es un catálogo independiente (Figura 50).
 
 ---
 
@@ -2495,11 +2530,11 @@ El Infrastructure Layer contiene las implementaciones concretas de los dos puert
 <div align="center">
 
 ![Analytics & Reporting Component Diagram](assets/img/software_architecture/analytics_reporting_component_diagram.png)
-*Figura 47. Component Diagram (C4 Model) del bounded context Analytics & Reporting dentro del container Web Services API.*
+*Figura 51. Component Diagram (C4 Model) del bounded context Analytics & Reporting dentro del container Web Services API.*
 
 </div>
 
-El diagrama muestra los dos sub-modelos del bounded context: `AnalyticsController` despacha las operaciones simples hacia los **Analytics/WordCloud Command & Query Handlers** (vía mediador) y delega el cómputo pesado en `AnalyticsComputationService`, que a su vez solicita el insight narrativo al **AI Advisory Service** externo. `AnalyticsCacheInvalidator` aparece como el único componente invocado desde fuera del bounded context (por Journal), cruzando el límite entre contexts a través de un puerto explícito. `ReportingController` delega en `ReportingService`, que lee directamente las entradas de diario para construir el PDF o el CSV, tras validar la suscripción Premium del usuario (Figura 47).
+El diagrama muestra los dos sub-modelos del bounded context: `AnalyticsController` despacha las operaciones simples hacia los **Analytics/WordCloud Command & Query Handlers** (vía mediador) y delega el cómputo pesado en `AnalyticsComputationService`, que a su vez solicita el insight narrativo al **AI Advisory Service** externo. `AnalyticsCacheInvalidator` aparece como el único componente invocado desde fuera del bounded context (por Journal), cruzando el límite entre contexts a través de un puerto explícito. `ReportingController` delega en `ReportingService`, que lee directamente las entradas de diario para construir el PDF o el CSV, tras validar la suscripción Premium del usuario (Figura 51).
 
 #### 2.6.5.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -2508,22 +2543,22 @@ El diagrama muestra los dos sub-modelos del bounded context: `AnalyticsControlle
 <div align="center">
 
 ![Analytics & Reporting Domain Layer Class Diagram](assets/img/software_architecture/analytics_reporting_class_diagram.png)
-*Figura 48. Class Diagram (UML) del Domain Layer del bounded context Analytics & Reporting.*
+*Figura 52. Class Diagram (UML) del Domain Layer del bounded context Analytics & Reporting.*
 
 </div>
 
-El diagrama muestra los agregados `AnalyticsCache` y `WordCloud` (ambos implementan `IAuditableEntity`), la enumeración `AnalyticsError`, el puerto `IAnalyticsCacheInvalidator` y el puerto `IReportingService`, junto con los Command/Query Handlers de Analytics y el servicio `AnalyticsComputationService` que los complementa (Figura 48).
+El diagrama muestra los agregados `AnalyticsCache` y `WordCloud` (ambos implementan `IAuditableEntity`), la enumeración `AnalyticsError`, el puerto `IAnalyticsCacheInvalidator` y el puerto `IReportingService`, junto con los Command/Query Handlers de Analytics y el servicio `AnalyticsComputationService` que los complementa (Figura 52).
 
 ##### 2.6.5.6.2. Bounded Context Database Design Diagram
 
 <div align="center">
 
 ![Analytics & Reporting Database Diagram](assets/img/software_architecture/analytics_reporting_database_diagram.png)
-*Figura 49. Database Diagram del bounded context Analytics & Reporting.*
+*Figura 53. Database Diagram del bounded context Analytics & Reporting.*
 
 </div>
 
-El bounded context Analytics & Reporting persiste en dos tablas propias: `analytics_caches` (con un registro único por `(user_id, week_start)`) y `word_clouds` (un único registro por usuario). Ninguna de las dos tiene Foreign Key física hacia `users`, `journal_entries` ni `subscriptions`: `user_id` es siempre una referencia lógica al bounded context IAM, y tanto el cómputo de Analytics como la exportación de Reporting leen `journal_entries` (y, en el caso de Reporting, `subscriptions`) directamente, sin relación física declarada en el esquema (Figura 49).
+El bounded context Analytics & Reporting persiste en dos tablas propias: `analytics_caches` (con un registro único por `(user_id, week_start)`) y `word_clouds` (un único registro por usuario). Ninguna de las dos tiene Foreign Key física hacia `users`, `journal_entries` ni `subscriptions`: `user_id` es siempre una referencia lógica al bounded context IAM, y tanto el cómputo de Analytics como la exportación de Reporting leen `journal_entries` (y, en el caso de Reporting, `subscriptions`) directamente, sin relación física declarada en el esquema (Figura 53).
 
 ---
 
@@ -2581,11 +2616,11 @@ El Infrastructure Layer implementa el puerto de notificación sobre el proveedor
 <div align="center">
 
 ![Notifications Component Diagram](assets/img/software_architecture/notifications_component_diagram.png)
-*Figura 50. Component Diagram (C4 Model) del bounded context Notifications dentro del container Web Services API.*
+*Figura 54. Component Diagram (C4 Model) del bounded context Notifications dentro del container Web Services API.*
 
 </div>
 
-El diagrama refleja la asimetría deliberada del bounded context: `NotificationsController` accede directamente a la base de datos para sus operaciones de bandeja y registro de dispositivos, mientras que `NotificationService` concentra la única lógica de negocio (registrar y enviar) y es el componente al que recurre el job `HydrationReminderService` para su recordatorio periódico, cruzando hacia el proveedor externo de push notifications (Figura 50).
+El diagrama refleja la asimetría deliberada del bounded context: `NotificationsController` accede directamente a la base de datos para sus operaciones de bandeja y registro de dispositivos, mientras que `NotificationService` concentra la única lógica de negocio (registrar y enviar) y es el componente al que recurre el job `HydrationReminderService` para su recordatorio periódico, cruzando hacia el proveedor externo de push notifications (Figura 54).
 
 #### 2.6.6.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -2594,22 +2629,22 @@ El diagrama refleja la asimetría deliberada del bounded context: `Notifications
 <div align="center">
 
 ![Notifications Domain Layer Class Diagram](assets/img/software_architecture/notifications_class_diagram.png)
-*Figura 51. Class Diagram (UML) del Domain Layer del bounded context Notifications.*
+*Figura 55. Class Diagram (UML) del Domain Layer del bounded context Notifications.*
 
 </div>
 
-El diagrama muestra las dos entidades del bounded context, `Notification` (que implementa `IAuditableEntity`) y `DeviceToken`, junto con el puerto `INotificationService` que las relaciona: registra una `Notification` por cada envío y lee los `DeviceToken` del destinatario para la entrega push (Figura 51).
+El diagrama muestra las dos entidades del bounded context, `Notification` (que implementa `IAuditableEntity`) y `DeviceToken`, junto con el puerto `INotificationService` que las relaciona: registra una `Notification` por cada envío y lee los `DeviceToken` del destinatario para la entrega push (Figura 55).
 
 ##### 2.6.6.6.2. Bounded Context Database Design Diagram
 
 <div align="center">
 
 ![Notifications Database Diagram](assets/img/software_architecture/notifications_database_diagram.png)
-*Figura 52. Database Diagram del bounded context Notifications.*
+*Figura 56. Database Diagram del bounded context Notifications.*
 
 </div>
 
-El bounded context Notifications persiste en dos tablas independientes entre sí: `notifications` y `device_tokens`. Ninguna tiene Foreign Key física hacia `users`: `user_id` es en ambos casos una referencia lógica al bounded context IAM. Se recomienda un índice único sobre `device_tokens.token`, dado que el mismo token de dispositivo se reasigna de usuario en lugar de duplicarse (Figura 52).
+El bounded context Notifications persiste en dos tablas independientes entre sí: `notifications` y `device_tokens`. Ninguna tiene Foreign Key física hacia `users`: `user_id` es en ambos casos una referencia lógica al bounded context IAM. Se recomienda un índice único sobre `device_tokens.token`, dado que el mismo token de dispositivo se reasigna de usuario en lugar de duplicarse (Figura 56).
 
 ---
 
@@ -2665,11 +2700,11 @@ El Infrastructure Layer implementa el puerto de facturación sobre el proveedor 
 <div align="center">
 
 ![Subscriptions Component Diagram](assets/img/software_architecture/subscriptions_component_diagram.png)
-*Figura 53. Component Diagram (C4 Model) del bounded context Subscriptions dentro del container Web Services API.*
+*Figura 57. Component Diagram (C4 Model) del bounded context Subscriptions dentro del container Web Services API.*
 
 </div>
 
-El diagrama muestra el flujo bidireccional con el proveedor de pagos: `SubscriptionsController` recibe tanto las peticiones del usuario como el webhook entrante del proveedor, y delega ambos en `SubscriptionService`, el único componente de lógica de negocio, que mantiene `Subscription` sincronizada con el estado real de la facturación (Figura 53).
+El diagrama muestra el flujo bidireccional con el proveedor de pagos: `SubscriptionsController` recibe tanto las peticiones del usuario como el webhook entrante del proveedor, y delega ambos en `SubscriptionService`, el único componente de lógica de negocio, que mantiene `Subscription` sincronizada con el estado real de la facturación (Figura 57).
 
 #### 2.6.7.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -2678,22 +2713,22 @@ El diagrama muestra el flujo bidireccional con el proveedor de pagos: `Subscript
 <div align="center">
 
 ![Subscriptions Domain Layer Class Diagram](assets/img/software_architecture/subscriptions_class_diagram.png)
-*Figura 54. Class Diagram (UML) del Domain Layer del bounded context Subscriptions.*
+*Figura 58. Class Diagram (UML) del Domain Layer del bounded context Subscriptions.*
 
 </div>
 
-El diagrama muestra el agregado `Subscription` (que implementa `IAuditableEntity`), con sus tres transiciones de estado (`Activate`, `Cancel`, `MarkPastDue`) y su propiedad calculada `IsPremium`, junto con el puerto `ISubscriptionService` y los DTOs que produce (Figura 54).
+El diagrama muestra el agregado `Subscription` (que implementa `IAuditableEntity`), con sus tres transiciones de estado (`Activate`, `Cancel`, `MarkPastDue`) y su propiedad calculada `IsPremium`, junto con el puerto `ISubscriptionService` y los DTOs que produce (Figura 58).
 
 ##### 2.6.7.6.2. Bounded Context Database Design Diagram
 
 <div align="center">
 
 ![Subscriptions Database Diagram](assets/img/software_architecture/subscriptions_database_diagram.png)
-*Figura 55. Database Diagram del bounded context Subscriptions.*
+*Figura 59. Database Diagram del bounded context Subscriptions.*
 
 </div>
 
-El bounded context Subscriptions persiste en una única tabla, `subscriptions`, sin Foreign Key física hacia `users` (`user_id` es una referencia lógica al bounded context IAM). Se recomienda un índice único sobre `user_id` (una suscripción por usuario) y otro sobre `stripe_customer_id`, usado para resolver los eventos entrantes del webhook (Figura 55).
+El bounded context Subscriptions persiste en una única tabla, `subscriptions`, sin Foreign Key física hacia `users` (`user_id` es una referencia lógica al bounded context IAM). Se recomienda un índice único sobre `user_id` (una suscripción por usuario) y otro sobre `stripe_customer_id`, usado para resolver los eventos entrantes del webhook (Figura 59).
 
 ---
 
@@ -2749,11 +2784,11 @@ El Infrastructure Layer implementa el puerto de soporte, concentrando dos decisi
 <div align="center">
 
 ![Support Component Diagram](assets/img/software_architecture/support_component_diagram.png)
-*Figura 56. Component Diagram (C4 Model) del bounded context Support dentro del container Web Services API.*
+*Figura 60. Component Diagram (C4 Model) del bounded context Support dentro del container Web Services API.*
 
 </div>
 
-El diagrama muestra el flujo más simple de los seis bounded contexts restantes: `SupportController` delega ambos casos de uso en `SupportService`, que concentra tanto la persistencia del ticket como el envío no bloqueante de su confirmación por correo hacia el proveedor SMTP externo (Figura 56).
+El diagrama muestra el flujo más simple de los seis bounded contexts restantes: `SupportController` delega ambos casos de uso en `SupportService`, que concentra tanto la persistencia del ticket como el envío no bloqueante de su confirmación por correo hacia el proveedor SMTP externo (Figura 60).
 
 #### 2.6.8.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -2762,22 +2797,22 @@ El diagrama muestra el flujo más simple de los seis bounded contexts restantes:
 <div align="center">
 
 ![Support Domain Layer Class Diagram](assets/img/software_architecture/support_class_diagram.png)
-*Figura 57. Class Diagram (UML) del Domain Layer del bounded context Support.*
+*Figura 61. Class Diagram (UML) del Domain Layer del bounded context Support.*
 
 </div>
 
-El diagrama muestra el agregado `SupportTicket` (que implementa `IAuditableEntity`), con sus dos transiciones de estado (`MarkInProgress`, `Close`) y el puerto `ISupportService` que lo crea y consulta (Figura 57).
+El diagrama muestra el agregado `SupportTicket` (que implementa `IAuditableEntity`), con sus dos transiciones de estado (`MarkInProgress`, `Close`) y el puerto `ISupportService` que lo crea y consulta (Figura 61).
 
 ##### 2.6.8.6.2. Bounded Context Database Design Diagram
 
 <div align="center">
 
 ![Support Database Diagram](assets/img/software_architecture/support_database_diagram.png)
-*Figura 58. Database Diagram del bounded context Support.*
+*Figura 62. Database Diagram del bounded context Support.*
 
 </div>
 
-El bounded context Support persiste en una única tabla, `support_tickets`, sin Foreign Key física hacia `users` (`user_id` es una referencia lógica al bounded context IAM). Se recomienda un índice compuesto sobre `(user_id, subject, created_at)` para acelerar la verificación de tickets duplicados recientes en cada creación (Figura 58).
+El bounded context Support persiste en una única tabla, `support_tickets`, sin Foreign Key física hacia `users` (`user_id` es una referencia lógica al bounded context IAM). Se recomienda un índice compuesto sobre `(user_id, subject, created_at)` para acelerar la verificación de tickets duplicados recientes en cada creación (Figura 62).
 
 ---
 
@@ -2982,7 +3017,7 @@ En el **Landing Page**, la navegación se organiza mediante un menú superior fi
 
 #### 3.1.3.1. Landing Page Wireframe
 
-*(Ver Figura 59.)*
+*(Ver Figura 63.)*
 
 <img src="assets/img/wireframe web/Analíticas Wireframe.png" alt="Wireframe - Analíticas" width="300"/>
 
@@ -3002,7 +3037,7 @@ En el **Landing Page**, la navegación se organiza mediante un menú superior fi
 
 <img src="assets/img/wireframe web/SprintBacklog.png" alt="Sprint Backlog" width="300"/>
 
-*Figura 59. Landing Page Wireframe (conjunto de 9 imágenes).*
+*Figura 63. Landing Page Wireframe (conjunto de 9 imágenes).*
 
 
 #### 3.1.3.2. Landing Page Mock-up
@@ -3025,70 +3060,70 @@ Los mock-ups representan la versión de alta fidelidad de las pantallas de la Mo
 
 **Acceso a la aplicación**
 
-**El usuario inicia sesión con su cuenta de Google o con su correo electrónico y contraseña; desde esta pantalla también puede recuperar su contraseña o ir al registro (US01, US02, US03) (Figura 60)**
+**El usuario inicia sesión con su cuenta de Google o con su correo electrónico y contraseña; desde esta pantalla también puede recuperar su contraseña o ir al registro (US01, US02, US03) (Figura 64)**
 
 <img src="assets/img/mobile_mockups/login-mockup.png" alt="Mockup - Login" width="300"/>
 
-*Figura 60. Mockup - Login.*
+*Figura 64. Mockup - Login.*
 
-**El usuario nuevo crea su cuenta con Google o completando su nombre, correo electrónico y contraseña, y acepta los Términos de Servicio y la Política de Privacidad (US01) (Figura 61)**
+**El usuario nuevo crea su cuenta con Google o completando su nombre, correo electrónico y contraseña, y acepta los Términos de Servicio y la Política de Privacidad (US01) (Figura 65)**
 
 <img src="assets/img/mobile_mockups/register-mockup.png" alt="Mockup - Registro" width="300"/>
 
-*Figura 61. Mockup - Registro.*
+*Figura 65. Mockup - Registro.*
 
 **Registro emocional y navegación**
 
-**El usuario entra al Dashboard, escribe cómo se siente, elige una etiqueta de contexto y guarda el registro; MindFlow AI le responde con retroalimentación empática y debajo aparecen sus conversaciones recientes (US11, US12, US13, US14) (Figura 62)**
+**El usuario entra al Dashboard, escribe cómo se siente, elige una etiqueta de contexto y guarda el registro; MindFlow AI le responde con retroalimentación empática y debajo aparecen sus conversaciones recientes (US11, US12, US13, US14) (Figura 66)**
 
 <img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Home" width="300"/>
 
-*Figura 62. Mockup - Home.*
+*Figura 66. Mockup - Home.*
 
-**El usuario abre el menú lateral desde el ícono superior izquierdo para moverse entre Dashboard, Diario, Hábitos, Analíticas, Configuración y Planes (Figura 63)**
+**El usuario abre el menú lateral desde el ícono superior izquierdo para moverse entre Dashboard, Diario, Hábitos, Analíticas, Configuración y Planes (Figura 67)**
 
 <img src="assets/img/mobile_mockups/menu-mockup.png" alt="Mockup - Menú móvil" width="300"/>
 
-*Figura 63. Mockup - Menú móvil.*
+*Figura 67. Mockup - Menú móvil.*
 
 **Diario y hábitos**
 
-**El usuario revisa su historial emocional: busca entradas por palabra clave, filtra por etiqueta, estado y fecha, y ve en el calendario el estado de ánimo de cada día según su color (US14, US16, US17) (Figura 64)**
+**El usuario revisa su historial emocional: busca entradas por palabra clave, filtra por etiqueta, estado y fecha, y ve en el calendario el estado de ánimo de cada día según su color (US14, US16, US17) (Figura 68)**
 
 <img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="300"/>
 
-*Figura 64. Mockup - Diario.*
+*Figura 68. Mockup - Diario.*
 
-**El usuario consulta sus rutinas, ve el progreso del día y añade un nuevo hábito con su frecuencia; cuando MindFlow AI detecta un nivel alto de estrés, muestra un aviso y ajusta las tareas (US21, US22, US23) (Figura 65)**
+**El usuario consulta sus rutinas, ve el progreso del día y añade un nuevo hábito con su frecuencia; cuando MindFlow AI detecta un nivel alto de estrés, muestra un aviso y ajusta las tareas (US21, US22, US23) (Figura 69)**
 
 <img src="assets/img/mobile_mockups/habits-mockup.png" alt="Mockup - Hábitos" width="300"/>
 
-*Figura 65. Mockup - Hábitos.*
+*Figura 69. Mockup - Hábitos.*
 
 **Analíticas**
 
-**El usuario revisa su resumen semanal generado por IA, sus indicadores del mes, la fluctuación emocional de la última semana, la nube de palabras frecuentes y la tendencia de ánimo; al final puede exportar sus reportes en PDF o CSV (US18, US28, US31, US32, US35, US36) (Figura 66)**
+**El usuario revisa su resumen semanal generado por IA, sus indicadores del mes, la fluctuación emocional de la última semana, la nube de palabras frecuentes y la tendencia de ánimo; al final puede exportar sus reportes en PDF o CSV (US18, US28, US31, US32, US35, US36) (Figura 70)**
 
 <img src="assets/img/mobile_mockups/analytics-mockup.png" alt="Mockup - Analíticas" width="300"/>
 
-*Figura 66. Mockup - Analíticas.*
+*Figura 70. Mockup - Analíticas.*
 
 **Perfil y privacidad**
 
-**El usuario edita sus datos personales, activa el bloqueo por PIN y cambia al modo oscuro desde Ajustes y Privacidad (US04, US05, US06) (Figura 67)**
+**El usuario edita sus datos personales, activa el bloqueo por PIN y cambia al modo oscuro desde Ajustes y Privacidad (US04, US05, US06) (Figura 71)**
 
 <img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="300"/>
 
-*Figura 67. Mockup - Configuración.*
+*Figura 71. Mockup - Configuración.*
 
 
 **Planes y suscripción**
 
-**El usuario compara el plan Freemium con MindFlow Premium, revisa qué funcionalidades incluye cada uno y puede actualizar a Premium con pago seguro (US33, US34) (Figura 68)**
+**El usuario compara el plan Freemium con MindFlow Premium, revisa qué funcionalidades incluye cada uno y puede actualizar a Premium con pago seguro (US33, US34) (Figura 72)**
 
 <img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="600"/>
 
-*Figura 68. Mockup - Planes.*
+*Figura 72. Mockup - Planes.*
 
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
 
@@ -3107,17 +3142,17 @@ Las pantallas aparecen como rectángulos, las decisiones del sistema o del usuar
 
 **User goal:** Como Jimena, quiero crear mi cuenta o iniciar sesión de forma rápida para empezar a registrar cómo me siento sin pasos innecesarios.
 
-**User Persona:** Jimena Luna, aunque el flujo es el mismo para Nordie Sanabria. **User Stories:** US01, US02, US03 (Figura 69).
+**User Persona:** Jimena Luna, aunque el flujo es el mismo para Nordie Sanabria. **User Stories:** US01, US02, US03 (Figura 73).
 
 <p>
 <img src="assets/img/mobile_mockups/login-mockup.png" alt="Mockup - Login" width="200"/>
 <img src="assets/img/mobile_mockups/register-mockup.png" alt="Mockup - Registro" width="200"/>
 <img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Dashboard" width="200"/>
 
-*Figura 69. User Flow 1: Acceder a MindFlow: Mockup - Login, Mockup - Registro, Mockup - Dashboard.*
+*Figura 73. User Flow 1: Acceder a MindFlow: Mockup - Login, Mockup - Registro, Mockup - Dashboard.*
 </p>
 
-*(Ver Figura 70.)*
+*(Ver Figura 74.)*
 
 ```mermaid
 flowchart TD
@@ -3154,7 +3189,7 @@ flowchart TD
     class G1,H1,L1,M,N,N1,X unhappy
 ```
 
-*Figura 70. Diagrama de flujo (flowchart) — User Flow 1: Acceder a MindFlow.*
+*Figura 74. Diagrama de flujo (flowchart) — User Flow 1: Acceder a MindFlow.*
 
 **Explicación del flujo:**
 
@@ -3171,16 +3206,16 @@ flowchart TD
 
 **User goal:** Como Jimena, quiero escribir cómo me siento en un momento de estrés académico y recibir una respuesta empática inmediata para sentirme acompañada y entender mejor mi estado.
 
-**User Persona:** Jimena Luna. **User Stories:** US11, US12, US13, US14 (Figura 71).
+**User Persona:** Jimena Luna. **User Stories:** US11, US12, US13, US14 (Figura 75).
 
 <p>
 <img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Dashboard" width="200"/>
 <img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="200"/>
 
-*Figura 71. User Flow 2: Registrar cómo me siento y recibir apoyo de la IA: Mockup - Dashboard, Mockup - Diario.*
+*Figura 75. User Flow 2: Registrar cómo me siento y recibir apoyo de la IA: Mockup - Dashboard, Mockup - Diario.*
 </p>
 
-*(Ver Figura 72.)*
+*(Ver Figura 76.)*
 
 ```mermaid
 flowchart TD
@@ -3206,7 +3241,7 @@ flowchart TD
     class D1,G1 unhappy
 ```
 
-*Figura 72. Diagrama de flujo (flowchart) — User Flow 2: Registrar cómo me siento y recibir apoyo de la IA.*
+*Figura 76. Diagrama de flujo (flowchart) — User Flow 2: Registrar cómo me siento y recibir apoyo de la IA.*
 
 **Explicación del flujo:**
 
@@ -3222,16 +3257,16 @@ flowchart TD
 
 **User goal:** Como Nordie, quiero encontrar rápidamente registros anteriores y ver en un calendario cómo ha variado mi ánimo para identificar qué situaciones del trabajo me afectan más.
 
-**User Persona:** Nordie Sanabria. **User Stories:** US14, US16, US17 (Figura 73).
+**User Persona:** Nordie Sanabria. **User Stories:** US14, US16, US17 (Figura 77).
 
 <p>
 <img src="assets/img/mobile_mockups/menu-mockup.png" alt="Mockup - Menú" width="200"/>
 <img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="200"/>
 
-*Figura 73. User Flow 3: Revisar mi historial emocional: Mockup - Menú, Mockup - Diario.*
+*Figura 77. User Flow 3: Revisar mi historial emocional: Mockup - Menú, Mockup - Diario.*
 </p>
 
-*(Ver Figura 74.)*
+*(Ver Figura 78.)*
 
 ```mermaid
 flowchart TD
@@ -3259,7 +3294,7 @@ flowchart TD
     class D1,I1,H1 unhappy
 ```
 
-*Figura 74. Diagrama de flujo (flowchart) — User Flow 3: Revisar mi historial emocional.*
+*Figura 78. Diagrama de flujo (flowchart) — User Flow 3: Revisar mi historial emocional.*
 
 **Explicación del flujo:**
 
@@ -3275,15 +3310,15 @@ flowchart TD
 
 **User goal:** Como Jimena, quiero crear y cumplir hábitos de bienestar que se adapten a mi nivel de estrés para no sentir que la aplicación es una tarea más en semana de exámenes.
 
-**User Persona:** Jimena Luna. **User Stories:** US21, US22, US23, US28 (Figura 75).
+**User Persona:** Jimena Luna. **User Stories:** US21, US22, US23, US28 (Figura 79).
 
 <p>
 <img src="assets/img/mobile_mockups/habits-mockup.png" alt="Mockup - Hábitos" width="200"/>
 
-*Figura 75. Mockup - Hábitos (2).*
+*Figura 79. Mockup - Hábitos (2).*
 </p>
 
-*(Ver Figura 76.)*
+*(Ver Figura 80.)*
 
 ```mermaid
 flowchart TD
@@ -3310,7 +3345,7 @@ flowchart TD
     class B1,B2,H1,E1 unhappy
 ```
 
-*Figura 76. Diagrama de flujo (flowchart) — User Flow 4: Gestionar mis hábitos según mi nivel de estrés.*
+*Figura 80. Diagrama de flujo (flowchart) — User Flow 4: Gestionar mis hábitos según mi nivel de estrés.*
 
 **Explicación del flujo:**
 
@@ -3324,16 +3359,16 @@ flowchart TD
 
 **User goal:** Como Nordie, quiero ver cómo ha evolucionado mi bienestar y descargar un reporte para compartirlo con mi psicólogo, sin dedicarle tiempo extra.
 
-**User Persona:** Nordie Sanabria. **User Stories:** US18, US31, US32, US35, US36 (Figura 77).
+**User Persona:** Nordie Sanabria. **User Stories:** US18, US31, US32, US35, US36 (Figura 81).
 
 <p>
 <img src="assets/img/mobile_mockups/analytics-mockup.png" alt="Mockup - Analíticas" width="200"/>
 <img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="300"/>
 
-*Figura 77. User Flow 5: Revisar mis analíticas y exportar un reporte: Mockup - Analíticas, Mockup - Planes.*
+*Figura 81. User Flow 5: Revisar mis analíticas y exportar un reporte: Mockup - Analíticas, Mockup - Planes.*
 </p>
 
-*(Ver Figura 78.)*
+*(Ver Figura 82.)*
 
 ```mermaid
 flowchart TD
@@ -3357,7 +3392,7 @@ flowchart TD
     class D1,J,K unhappy
 ```
 
-*Figura 78. Diagrama de flujo (flowchart) — User Flow 5: Revisar mis analíticas y exportar un reporte.*
+*Figura 82. Diagrama de flujo (flowchart) — User Flow 5: Revisar mis analíticas y exportar un reporte.*
 
 **Explicación del flujo:**
 
@@ -3370,15 +3405,15 @@ flowchart TD
 
 **User goal:** Como Nordie, quiero comparar los planes y pagar Premium de forma segura para desbloquear la exportación de reportes y las analíticas avanzadas.
 
-**User Persona:** Nordie Sanabria. **User Stories:** US33, US34 (Figura 79).
+**User Persona:** Nordie Sanabria. **User Stories:** US33, US34 (Figura 83).
 
 <p>
 <img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="400"/>
 
-*Figura 79. Mockup - Planes (2).*
+*Figura 83. Mockup - Planes (2).*
 </p>
 
-*(Ver Figura 80.)*
+*(Ver Figura 84.)*
 
 ```mermaid
 flowchart TD
@@ -3405,7 +3440,7 @@ flowchart TD
     class C1,F1,H1 unhappy
 ```
 
-*Figura 80. Diagrama de flujo (flowchart) — User Flow 6: Mejorar a MindFlow Premium.*
+*Figura 84. Diagrama de flujo (flowchart) — User Flow 6: Mejorar a MindFlow Premium.*
 
 **Explicación del flujo:**
 
@@ -3422,15 +3457,15 @@ flowchart TD
 
 **User goal:** Como Jimena, quiero proteger mis registros con un PIN y ajustar la aplicación a mi gusto para sentirme segura al escribir sobre temas personales.
 
-**User Persona:** Jimena Luna. **User Stories:** US04, US05, US06, US07 (Figura 81).
+**User Persona:** Jimena Luna. **User Stories:** US04, US05, US06, US07 (Figura 85).
 
 <p>
 <img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="200"/>
 
-*Figura 81. Mockup - Configuración (2).*
+*Figura 85. Mockup - Configuración (2).*
 </p>
 
-*(Ver Figura 82.)*
+*(Ver Figura 86.)*
 
 ```mermaid
 flowchart TD
@@ -3456,7 +3491,7 @@ flowchart TD
     class H1,L,M unhappy
 ```
 
-*Figura 82. Diagrama de flujo (flowchart) — User Flow 7: Proteger mi privacidad y personalizar la aplicación.*
+*Figura 86. Diagrama de flujo (flowchart) — User Flow 7: Proteger mi privacidad y personalizar la aplicación.*
 
 **Explicación del flujo:**
 
@@ -3471,15 +3506,15 @@ flowchart TD
 
 **User goal:** Como Nordie, quiero resolver una duda o reportar un problema sin salir de la aplicación para no perder tiempo buscando cómo contactar al equipo.
 
-**User Persona:** Nordie Sanabria. **User Stories:** US37 (Figura 83).
+**User Persona:** Nordie Sanabria. **User Stories:** US37 (Figura 87).
 
 <p>
 <img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="200"/>
 
-*Figura 83. Mockup - Configuración (3).*
+*Figura 87. Mockup - Configuración (3).*
 </p>
 
-*(Ver Figura 84.)*
+*(Ver Figura 88.)*
 
 ```mermaid
 flowchart TD
@@ -3505,7 +3540,7 @@ flowchart TD
     class I1,J1 unhappy
 ```
 
-*Figura 84. Diagrama de flujo (flowchart) — User Flow 8: Pedir ayuda al soporte técnico.*
+*Figura 88. Diagrama de flujo (flowchart) — User Flow 8: Pedir ayuda al soporte técnico.*
 
 **Explicación del flujo:**
 
@@ -3613,9 +3648,9 @@ El aspecto de Backend queda co-liderado por Güere Calero y Díaz De la Cruz, ya
 #### 4.2.1.3 Sprint Backlog 1
 ![SprintBacklog](assets/img/participants/SprintBacklog.png)
 
-*Figura 85. SprintBacklog.*
+*Figura 89. SprintBacklog.*
 
-Enlace de Trello: [https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1](https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1) (Figura 85)
+Enlace de Trello: [https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1](https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1) (Figura 89)
 
 #### 4.2.1.4. Development Evidence for Sprint Review
 
