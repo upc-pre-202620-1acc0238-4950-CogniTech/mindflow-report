@@ -3027,7 +3027,39 @@ _Pendiente_
 
 #### 4.2.1.6. Execution Evidence for Sprint Review
 
-_Pendiente_
+En el Sprint 1 el equipo construyó la Mobile Application de MindFlow para Android con **Kotlin y Jetpack Compose (Material 3)**, siguiendo los mock-ups de la sección 3.1.4.3 y el sistema de diseño definido en Figma (tipografía Inter, paleta de marca y componentes reutilizables). En paralelo se levantó el backend **MindFlow.Platform** (ASP.NET Core) con los 8 bounded contexts, documentado en la sección 4.2.1.7.
+
+Logros principales del Sprint:
+
+- **Ocho vistas implementadas** que cubren el recorrido completo del usuario: acceso, registro emocional, diario, hábitos, analíticas, configuración, planes y chat con la IA.
+- **Integración con el backend real** en los flujos principales:
+  - registro e inicio de sesión con JWT;
+  - creación de entradas del diario con la respuesta empática generada por Google Gemini;
+  - chat con MindFlow AI;
+  - pago de la suscripción Premium mediante Stripe Checkout en modo prueba.
+- **Persistencia local con SQLite**, que funciona como caché de los datos del usuario. Si la IA del backend no responde, la aplicación usa una respuesta local de respaldo para que el usuario no pierda su registro.
+- **Arquitectura por capas** (domain, application, infrastructure y ui) siguiendo los principios de DDD, con ViewModels por pantalla (MVVM).
+- **Mejoras de usabilidad** posteriores a los mock-ups:
+  - barra de navegación inferior de 5 íconos en lugar del menú lateral, para acceder con una mano a las secciones principales;
+  - cambio de idioma español/inglés desde la aplicación;
+  - modo oscuro inmediato;
+  - opción de mostrar u ocultar la contraseña.
+
+##### Vistas implementadas
+
+| Vista | Funcionalidad implementada | User Stories | Conexión con el backend |
+|---|---|---|---|
+| Login | Inicio de sesión con correo y contraseña, opción de mostrar la contraseña y acceso al registro. | US02 | `POST /api/v1/users/sign-in` |
+| Registro | Creación de cuenta con nombre, correo y contraseña de mínimo 8 caracteres. | US01 | `POST /api/v1/users/sign-up` |
+| Dashboard | Registro emocional con etiqueta de contexto, respuesta de MindFlow AI, conversaciones recientes, resumen semanal, intervenciones rápidas (respiración 4-7-8 y micro-meditación) y hábitos del día. | US11, US12, US13, US14, US24, US25 | `POST /api/v1/journal/entries` (respuesta generada con Gemini) |
+| Diario | Historial emocional con búsqueda por palabra clave, filtros por etiqueta, estado y fecha, y calendario coloreado según el estado de ánimo. | US14, US16, US17 | Persistencia local (SQLite) |
+| Hábitos | Rutinas con progreso diario, creación de hábitos, rachas, sugerencias de IA, historial y pausa automática de tareas exigentes cuando se detecta estrés alto. | US21, US22, US23, US28 | Persistencia local (SQLite) |
+| Analíticas | Resumen semanal, métricas del mes, fluctuación emocional, nube de palabras, tendencia de ánimo y exportación de reportes en PDF y CSV para usuarios Premium. | US18, US31, US32, US35, US36 | Cálculo y exportación en el dispositivo |
+| Configuración | Edición del perfil, modo oscuro, plan actual, Centro de Preguntas (FAQ), formulario de ticket de soporte y eliminación de cuenta. Incluye las opciones de bloqueo por PIN y recordatorios de hábitos, que por ahora guardan la preferencia del usuario. | US05, US06, US07 | Persistencia local (SQLite) |
+| Planes | Comparación de Freemium y Premium, y actualización a Premium con Stripe Checkout en modo prueba. El plan se vuelve a consultar al regresar a la aplicación. | US33, US34 | `POST /api/v1/subscriptions/checkout`, `GET /api/v1/subscriptions/me` |
+| Chat MindFlow AI | Botón flotante que abre una conversación con la IA desde cualquier pantalla. | US13 | `POST /api/v1/chat/conversations`, `POST /api/v1/chat/conversations/{id}/messages` |
+
+Las vistas que hoy trabajan con persistencia local (Diario, Hábitos, Analíticas y Configuración) se conectarán a sus endpoints del backend en el siguiente Sprint. Esos endpoints ya están implementados y documentados en la sección 4.2.1.7. En ese mismo Sprint se completarán la pantalla de bloqueo por PIN (US04), los recordatorios de hábitos y el envío de tickets de soporte al backend (US37).
 
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 
