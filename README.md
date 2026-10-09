@@ -431,7 +431,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
-      Ya contaba con base previa en Domain-Driven Design y en el C4 Model, pero en este proyecto actualizó ese conocimiento al aplicarlo a un caso real con varios bounded contexts interdependientes (IAM, Journal, AI Assistant y Habits & Wellness) y al elaborar por primera vez un Deployment Diagram sobre infraestructura cloud concreta (Azure App Service, Azure Database for MySQL), integrando patrones de Application Layer distintos entre sí (Command Service unificado, CQRS, servicios planos) según las necesidades específicas de cada contexto.
+      Ya contaba con base previa en Domain-Driven Design y en el C4 Model, pero en este proyecto actualizó ese conocimiento al aplicarlo a un caso real con varios bounded contexts interdependientes (IAM, Journal, AI Assistant y Habits & Wellness) y al elaborar por primera vez un Deployment Diagram sobre infraestructura cloud concreta (Railway, con servicios de API, MySQL y Redis), integrando patrones de Application Layer distintos entre sí (Command Service unificado, CQRS, servicios planos) según las necesidades específicas de cada contexto.
     </td>
     <td>
       <u>AV1</u><br>
@@ -465,7 +465,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
-      Tuvo que investigar por cuenta propia detalles no cubiertos antes, como el despliegue de un backend .NET sobre Azure App Service y Azure Database for MySQL, y las particularidades de integrar un proveedor de IA generativa (Gemini) como dependencia transversal entre varios bounded contexts, reconociendo que ese conocimiento previo necesita actualizarse constantemente frente a cada proyecto y stack tecnológico concreto.
+      Tuvo que investigar por cuenta propia detalles no cubiertos antes, como el despliegue de un backend .NET en contenedores Docker sobre Railway, junto con sus servicios de MySQL y Redis, y las particularidades de integrar un proveedor de IA generativa (Gemini) como dependencia transversal entre varios bounded contexts, reconociendo que ese conocimiento previo necesita actualizarse constantemente frente a cada proyecto y stack tecnológico concreto.
     </td>
     <td>
       <u>AV1</u><br>
@@ -2057,9 +2057,10 @@ El sistema MindFlow está compuesto por cuatro contenedores (Landing Page, Mobil
 
 - **GitHub Pages**: plataforma de hosting de sitios estáticos que aloja el Landing Page (HTML5, CSS3, JavaScript), distribuido a través de su CDN global bajo protocolo HTTPS.
 
-- **Microsoft Azure**: proveedor cloud que aloja toda la infraestructura del backend, compuesto por dos nodos:
-  - **Azure App Service**: plataforma PaaS que ejecuta el contenedor Docker de la **Web Services API** (ASP.NET Core / .NET 10), publicado automáticamente desde el repositorio de GitHub.
-  - **Azure Database for MySQL**: servicio de base de datos relacional administrado (Flexible Server) que aloja la **Database** (MySQL 8.0), donde se persisten usuarios, entradas de diario, hábitos, conversaciones de chat, suscripciones y tickets de soporte.
+- **Railway**: plataforma cloud que aloja toda la infraestructura del backend dentro de un mismo proyecto, compuesto por tres servicios:
+  - **Web Services API**: servicio que construye y ejecuta el contenedor Docker de la API (ASP.NET Core / .NET 10) a partir del `Dockerfile` del repositorio de GitHub.
+  - **MySQL**: servicio de base de datos relacional que aloja la **Database** (MySQL 8.0), donde se persisten usuarios, entradas de diario, hábitos, conversaciones de chat, suscripciones y tickets de soporte.
+  - **Redis**: servicio de caché en memoria que usa la Web Services API para reducir las consultas repetidas a la base de datos.
 
 - **Servicios externos de terceros** (agrupados como Third-Party Cloud Services), consumidos por la Web Services API mediante llamadas HTTPS/JSON (o SMTP en el caso del correo):
   - **Google Cloud / Firebase**: aloja **Google Gemini API** (generación de insights de IA, respuestas del chat, análisis de sentimiento y sugerencias de hábitos), **Firebase Cloud Messaging** (notificaciones push) y **Google OAuth** (autenticación con Google Sign-In).
@@ -3169,76 +3170,76 @@ Los wireframes representan la versión de baja fidelidad de las pantallas de la 
 
 Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navegación que sigue el usuario, mostrando en una sola fila las pantallas de baja fidelidad que recorre para cumplir un objetivo. A diferencia del diagrama de flujo abstracto de la sección 3.1.4.4 (que incluye decisiones del sistema y mensajes de error), el wireflow se queda solo en la secuencia de pantallas, en el mismo orden que cada User Flow.
 
-**User Flow 1: Acceder a MindFlow (Figura 146).**
+**User Flow 1: Acceder a MindFlow (Figura 87).**
 
 <p>
 <img src="assets/img/movil_wireframes/App — 01 Login.png" alt="Wireframe - Login" width="160"/>
 <img src="assets/img/movil_wireframes/App — 02 Registro.png" alt="Wireframe - Registro" width="160"/>
 <img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
 
-*Figura 146. Wireflow — User Flow 1: Acceder a MindFlow (Login → Registro → Inicio).*
+*Figura 87. Wireflow — User Flow 1: Acceder a MindFlow (Login → Registro → Inicio).*
 </p>
 
-**User Flow 2: Registrar cómo me siento y recibir apoyo de la IA (Figura 147).**
+**User Flow 2: Registrar cómo me siento y recibir apoyo de la IA (Figura 88).**
 
 <p>
 <img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
 <img src="assets/img/movil_wireframes/App — 12 Chat con MindFlow AI.png" alt="Wireframe - Chat con MindFlow AI" width="160"/>
 
-*Figura 147. Wireflow — User Flow 2: Registrar cómo me siento y recibir apoyo de la IA (Inicio → Chat con MindFlow AI).*
+*Figura 88. Wireflow — User Flow 2: Registrar cómo me siento y recibir apoyo de la IA (Inicio → Chat con MindFlow AI).*
 </p>
 
-**User Flow 3: Revisar mi historial emocional (Figura 148).**
+**User Flow 3: Revisar mi historial emocional (Figura 89).**
 
 <p>
 <img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
 <img src="assets/img/movil_wireframes/App — 04 Diario (Historial emocional).png" alt="Wireframe - Diario (Historial emocional)" width="160"/>
 
-*Figura 148. Wireflow — User Flow 3: Revisar mi historial emocional (Inicio → Diario).*
+*Figura 89. Wireflow — User Flow 3: Revisar mi historial emocional (Inicio → Diario).*
 </p>
 
-**User Flow 4: Gestionar mis hábitos según mi nivel de estrés (Figura 149).**
+**User Flow 4: Gestionar mis hábitos según mi nivel de estrés (Figura 90).**
 
 <p>
 <img src="assets/img/movil_wireframes/App — 05 Hábitos · Mis Rutinas.png" alt="Wireframe - Hábitos: Mis Rutinas" width="160"/>
 <img src="assets/img/movil_wireframes/App — 06 Hábitos · Sugerencias de IA.png" alt="Wireframe - Hábitos: Sugerencias de IA" width="160"/>
 
-*Figura 149. Wireflow — User Flow 4: Gestionar mis hábitos según mi nivel de estrés (Mis Rutinas → Sugerencias de IA).*
+*Figura 90. Wireflow — User Flow 4: Gestionar mis hábitos según mi nivel de estrés (Mis Rutinas → Sugerencias de IA).*
 </p>
 
-**User Flow 5: Revisar mis analíticas y exportar un reporte (Figura 150).**
+**User Flow 5: Revisar mis analíticas y exportar un reporte (Figura 91).**
 
 <p>
 <img src="assets/img/movil_wireframes/App — 07 Analíticas · Resumen.png" alt="Wireframe - Analíticas: Resumen" width="160"/>
 <img src="assets/img/movil_wireframes/App — 08 Analíticas · Nube, tendencias y exportación.png" alt="Wireframe - Analíticas: Nube, tendencias y exportación" width="160"/>
 <img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="160"/>
 
-*Figura 150. Wireflow — User Flow 5: Revisar mis analíticas y exportar un reporte (Analíticas: Resumen → Analíticas: Nube, tendencias y exportación → Suscripción, al requerir Premium).*
+*Figura 91. Wireflow — User Flow 5: Revisar mis analíticas y exportar un reporte (Analíticas: Resumen → Analíticas: Nube, tendencias y exportación → Suscripción, al requerir Premium).*
 </p>
 
-**User Flow 6: Mejorar a MindFlow Premium (Figura 151).**
+**User Flow 6: Mejorar a MindFlow Premium (Figura 92).**
 
 <p>
 <img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="180"/>
 
-*Figura 151. Wireflow — User Flow 6: Mejorar a MindFlow Premium (Suscripción, soporte y cuenta).*
+*Figura 92. Wireflow — User Flow 6: Mejorar a MindFlow Premium (Suscripción, soporte y cuenta).*
 </p>
 
-**User Flow 7: Proteger mi privacidad y personalizar la aplicación (Figura 152).**
+**User Flow 7: Proteger mi privacidad y personalizar la aplicación (Figura 93).**
 
 <p>
 <img src="assets/img/movil_wireframes/App — 09 Ajustes · Perfil.png" alt="Wireframe - Ajustes: Perfil" width="160"/>
 <img src="assets/img/movil_wireframes/App — 10 Ajustes · Privacidad y experiencia.png" alt="Wireframe - Ajustes: Privacidad y experiencia" width="160"/>
 
-*Figura 152. Wireflow — User Flow 7: Proteger mi privacidad y personalizar la aplicación (Perfil → Privacidad y experiencia).*
+*Figura 93. Wireflow — User Flow 7: Proteger mi privacidad y personalizar la aplicación (Perfil → Privacidad y experiencia).*
 </p>
 
-**User Flow 8: Pedir ayuda al soporte técnico (Figura 153).**
+**User Flow 8: Pedir ayuda al soporte técnico (Figura 94).**
 
 <p>
 <img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="180"/>
 
-*Figura 153. Wireflow — User Flow 8: Pedir ayuda al soporte técnico (Suscripción, soporte y cuenta).*
+*Figura 94. Wireflow — User Flow 8: Pedir ayuda al soporte técnico (Suscripción, soporte y cuenta).*
 </p>
 
 #### 3.1.4.3. Mobile Applications Mock-ups
@@ -3247,82 +3248,82 @@ Los mock-ups representan la versión de alta fidelidad de las pantallas de la Mo
 
 **Acceso a la aplicación**
 
-**El usuario inicia sesión con su cuenta de Google o con su correo electrónico y contraseña; desde esta pantalla también puede recuperar su contraseña o ir al registro (US01, US02, US03) (Figura 87)**
+**El usuario inicia sesión con su cuenta de Google o con su correo electrónico y contraseña; desde esta pantalla también puede recuperar su contraseña o ir al registro (US01, US02, US03) (Figura 95)**
 
 <img src="assets/img/mobile_mockups/login-mockup.png" alt="Mockup - Login" width="300"/>
 
-*Figura 87. Mockup - Login.*
+*Figura 95. Mockup - Login.*
 
-**El usuario nuevo crea su cuenta con Google o completando su nombre, correo electrónico y contraseña, y acepta los Términos de Servicio y la Política de Privacidad (US01) (Figura 88)**
+**El usuario nuevo crea su cuenta con Google o completando su nombre, correo electrónico y contraseña, y acepta los Términos de Servicio y la Política de Privacidad (US01) (Figura 96)**
 
 <img src="assets/img/mobile_mockups/register-mockup.png" alt="Mockup - Registro" width="300"/>
 
-*Figura 88. Mockup - Registro.*
+*Figura 96. Mockup - Registro.*
 
 **Registro emocional y navegación**
 
-**El usuario entra al Dashboard, escribe cómo se siente, elige una etiqueta de contexto y guarda el registro; MindFlow AI le responde con retroalimentación empática y debajo aparecen sus conversaciones recientes (US11, US12, US13, US14) (Figura 89)**
+**El usuario entra al Dashboard, escribe cómo se siente, elige una etiqueta de contexto y guarda el registro; MindFlow AI le responde con retroalimentación empática y debajo aparecen sus conversaciones recientes (US11, US12, US13, US14) (Figura 97)**
 
 <img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Home" width="300"/>
 
-*Figura 89. Mockup - Home.*
+*Figura 97. Mockup - Home.*
 
-**El usuario conversa con MindFlow AI desde la pantalla de Chat para profundizar en cómo se siente; la IA responde con preguntas de seguimiento y sugerencias de autocuidado dentro de un mismo hilo de conversación (US12, US13) (Figura 90)**
+**El usuario conversa con MindFlow AI desde la pantalla de Chat para profundizar en cómo se siente; la IA responde con preguntas de seguimiento y sugerencias de autocuidado dentro de un mismo hilo de conversación (US12, US13) (Figura 98)**
 
 <img src="assets/img/mobile_mockups/chat-mockup.png" alt="Mockup - Chat con MindFlow AI" width="300"/>
 
-*Figura 90. Mockup - Chat con MindFlow AI.*
+*Figura 98. Mockup - Chat con MindFlow AI.*
 
-**El usuario abre el menú lateral desde el ícono superior izquierdo para moverse entre Dashboard, Diario, Hábitos, Analíticas, Configuración y Planes (Figura 91)**
+**El usuario abre el menú lateral desde el ícono superior izquierdo para moverse entre Dashboard, Diario, Hábitos, Analíticas, Configuración y Planes (Figura 99)**
 
 <img src="assets/img/mobile_mockups/menu-mockup.png" alt="Mockup - Menú móvil" width="300"/>
 
-*Figura 91. Mockup - Menú móvil.*
+*Figura 99. Mockup - Menú móvil.*
 
 **Diario y hábitos**
 
-**El usuario revisa su historial emocional: busca entradas por palabra clave, filtra por etiqueta, estado y fecha, y ve en el calendario el estado de ánimo de cada día según su color (US14, US16, US17) (Figura 92)**
+**El usuario revisa su historial emocional: busca entradas por palabra clave, filtra por etiqueta, estado y fecha, y ve en el calendario el estado de ánimo de cada día según su color (US14, US16, US17) (Figura 100)**
 
 <img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="300"/>
 
-*Figura 92. Mockup - Diario.*
+*Figura 100. Mockup - Diario.*
 
-**El usuario consulta sus rutinas, ve el progreso del día y añade un nuevo hábito con su frecuencia; cuando MindFlow AI detecta un nivel alto de estrés, muestra un aviso y ajusta las tareas (US21, US22, US23) (Figura 93)**
+**El usuario consulta sus rutinas, ve el progreso del día y añade un nuevo hábito con su frecuencia; cuando MindFlow AI detecta un nivel alto de estrés, muestra un aviso y ajusta las tareas (US21, US22, US23) (Figura 101)**
 
 <img src="assets/img/mobile_mockups/habits-mockup.png" alt="Mockup - Hábitos" width="300"/>
 
-*Figura 93. Mockup - Hábitos.*
+*Figura 101. Mockup - Hábitos.*
 
-**Cuando MindFlow AI detecta un nivel de estrés elevado en los registros recientes, sugiere ajustes a la rutina de hábitos del usuario —pausar, reducir la frecuencia o reemplazar un hábito por uno más ligero— y el usuario decide si aplicarlos (US22, US23) (Figura 94)**
+**Cuando MindFlow AI detecta un nivel de estrés elevado en los registros recientes, sugiere ajustes a la rutina de hábitos del usuario —pausar, reducir la frecuencia o reemplazar un hábito por uno más ligero— y el usuario decide si aplicarlos (US22, US23) (Figura 102)**
 
 <img src="assets/img/mobile_mockups/habits-ai-mockup.png" alt="Mockup - Sugerencias de IA" width="300"/>
 
-*Figura 94. Mockup - Sugerencias de IA.*
+*Figura 102. Mockup - Sugerencias de IA.*
 
 **Analíticas**
 
-**El usuario revisa su resumen semanal generado por IA, sus indicadores del mes, la fluctuación emocional de la última semana, la nube de palabras frecuentes y la tendencia de ánimo; al final puede exportar sus reportes en PDF o CSV (US18, US28, US31, US32, US35, US36) (Figura 95)**
+**El usuario revisa su resumen semanal generado por IA, sus indicadores del mes, la fluctuación emocional de la última semana, la nube de palabras frecuentes y la tendencia de ánimo; al final puede exportar sus reportes en PDF o CSV (US18, US28, US31, US32, US35, US36) (Figura 103)**
 
 <img src="assets/img/mobile_mockups/analytics-mockup.png" alt="Mockup - Analíticas" width="300"/>
 
-*Figura 95. Mockup - Analíticas.*
+*Figura 103. Mockup - Analíticas.*
 
 **Perfil y privacidad**
 
-**El usuario edita sus datos personales, activa el bloqueo por PIN y cambia al modo oscuro desde Ajustes y Privacidad (US04, US05, US06) (Figura 96)**
+**El usuario edita sus datos personales, activa el bloqueo por PIN y cambia al modo oscuro desde Ajustes y Privacidad (US04, US05, US06) (Figura 104)**
 
 <img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="300"/>
 
-*Figura 96. Mockup - Configuración.*
+*Figura 104. Mockup - Configuración.*
 
 
 **Planes y suscripción**
 
-**El usuario compara el plan Freemium con MindFlow Premium, revisa qué funcionalidades incluye cada uno y puede actualizar a Premium con pago seguro (US33, US34) (Figura 97)**
+**El usuario compara el plan Freemium con MindFlow Premium, revisa qué funcionalidades incluye cada uno y puede actualizar a Premium con pago seguro (US33, US34) (Figura 105)**
 
 <img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="600"/>
 
-*Figura 97. Mockup - Planes.*
+*Figura 105. Mockup - Planes.*
 
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
 
@@ -3341,17 +3342,17 @@ Las pantallas aparecen como rectángulos, las decisiones del sistema o del usuar
 
 **User goal:** Como Jimena, quiero crear mi cuenta o iniciar sesión de forma rápida para empezar a registrar cómo me siento sin pasos innecesarios.
 
-**User Persona:** Jimena Luna, aunque el flujo es el mismo para Nordie Sanabria. **User Stories:** US01, US02, US03 (Figura 98).
+**User Persona:** Jimena Luna, aunque el flujo es el mismo para Nordie Sanabria. **User Stories:** US01, US02, US03 (Figura 106).
 
 <p>
 <img src="assets/img/mobile_mockups/login-mockup.png" alt="Mockup - Login" width="200"/>
 <img src="assets/img/mobile_mockups/register-mockup.png" alt="Mockup - Registro" width="200"/>
 <img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Dashboard" width="200"/>
 
-*Figura 98. User Flow 1: Acceder a MindFlow: Mockup - Login, Mockup - Registro, Mockup - Dashboard.*
+*Figura 106. User Flow 1: Acceder a MindFlow: Mockup - Login, Mockup - Registro, Mockup - Dashboard.*
 </p>
 
-*(Ver Figura 99.)*
+*(Ver Figura 107.)*
 
 ```mermaid
 flowchart TD
@@ -3388,7 +3389,7 @@ flowchart TD
     class G1,H1,L1,M,N,N1,X unhappy
 ```
 
-*Figura 99. Diagrama de flujo (flowchart) — User Flow 1: Acceder a MindFlow.*
+*Figura 107. Diagrama de flujo (flowchart) — User Flow 1: Acceder a MindFlow.*
 
 **Explicación del flujo:**
 
@@ -3405,16 +3406,16 @@ flowchart TD
 
 **User goal:** Como Jimena, quiero escribir cómo me siento en un momento de estrés académico y recibir una respuesta empática inmediata para sentirme acompañada y entender mejor mi estado.
 
-**User Persona:** Jimena Luna. **User Stories:** US11, US12, US13, US14 (Figura 100).
+**User Persona:** Jimena Luna. **User Stories:** US11, US12, US13, US14 (Figura 108).
 
 <p>
 <img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Dashboard" width="200"/>
 <img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="200"/>
 
-*Figura 100. User Flow 2: Registrar cómo me siento y recibir apoyo de la IA: Mockup - Dashboard, Mockup - Diario.*
+*Figura 108. User Flow 2: Registrar cómo me siento y recibir apoyo de la IA: Mockup - Dashboard, Mockup - Diario.*
 </p>
 
-*(Ver Figura 101.)*
+*(Ver Figura 109.)*
 
 ```mermaid
 flowchart TD
@@ -3440,7 +3441,7 @@ flowchart TD
     class D1,G1 unhappy
 ```
 
-*Figura 101. Diagrama de flujo (flowchart) — User Flow 2: Registrar cómo me siento y recibir apoyo de la IA.*
+*Figura 109. Diagrama de flujo (flowchart) — User Flow 2: Registrar cómo me siento y recibir apoyo de la IA.*
 
 **Explicación del flujo:**
 
@@ -3456,16 +3457,16 @@ flowchart TD
 
 **User goal:** Como Nordie, quiero encontrar rápidamente registros anteriores y ver en un calendario cómo ha variado mi ánimo para identificar qué situaciones del trabajo me afectan más.
 
-**User Persona:** Nordie Sanabria. **User Stories:** US14, US16, US17 (Figura 102).
+**User Persona:** Nordie Sanabria. **User Stories:** US14, US16, US17 (Figura 110).
 
 <p>
 <img src="assets/img/mobile_mockups/menu-mockup.png" alt="Mockup - Menú" width="200"/>
 <img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="200"/>
 
-*Figura 102. User Flow 3: Revisar mi historial emocional: Mockup - Menú, Mockup - Diario.*
+*Figura 110. User Flow 3: Revisar mi historial emocional: Mockup - Menú, Mockup - Diario.*
 </p>
 
-*(Ver Figura 103.)*
+*(Ver Figura 111.)*
 
 ```mermaid
 flowchart TD
@@ -3493,7 +3494,7 @@ flowchart TD
     class D1,I1,H1 unhappy
 ```
 
-*Figura 103. Diagrama de flujo (flowchart) — User Flow 3: Revisar mi historial emocional.*
+*Figura 111. Diagrama de flujo (flowchart) — User Flow 3: Revisar mi historial emocional.*
 
 **Explicación del flujo:**
 
@@ -3509,15 +3510,15 @@ flowchart TD
 
 **User goal:** Como Jimena, quiero crear y cumplir hábitos de bienestar que se adapten a mi nivel de estrés para no sentir que la aplicación es una tarea más en semana de exámenes.
 
-**User Persona:** Jimena Luna. **User Stories:** US21, US22, US23, US28 (Figura 104).
+**User Persona:** Jimena Luna. **User Stories:** US21, US22, US23, US28 (Figura 112).
 
 <p>
 <img src="assets/img/mobile_mockups/habits-mockup.png" alt="Mockup - Hábitos" width="200"/>
 
-*Figura 104. Mockup - Hábitos (2).*
+*Figura 112. Mockup - Hábitos (2).*
 </p>
 
-*(Ver Figura 105.)*
+*(Ver Figura 113.)*
 
 ```mermaid
 flowchart TD
@@ -3544,7 +3545,7 @@ flowchart TD
     class B1,B2,H1,E1 unhappy
 ```
 
-*Figura 105. Diagrama de flujo (flowchart) — User Flow 4: Gestionar mis hábitos según mi nivel de estrés.*
+*Figura 113. Diagrama de flujo (flowchart) — User Flow 4: Gestionar mis hábitos según mi nivel de estrés.*
 
 **Explicación del flujo:**
 
@@ -3558,16 +3559,16 @@ flowchart TD
 
 **User goal:** Como Nordie, quiero ver cómo ha evolucionado mi bienestar y descargar un reporte para compartirlo con mi psicólogo, sin dedicarle tiempo extra.
 
-**User Persona:** Nordie Sanabria. **User Stories:** US18, US31, US32, US35, US36 (Figura 106).
+**User Persona:** Nordie Sanabria. **User Stories:** US18, US31, US32, US35, US36 (Figura 114).
 
 <p>
 <img src="assets/img/mobile_mockups/analytics-mockup.png" alt="Mockup - Analíticas" width="200"/>
 <img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="300"/>
 
-*Figura 106. User Flow 5: Revisar mis analíticas y exportar un reporte: Mockup - Analíticas, Mockup - Planes.*
+*Figura 114. User Flow 5: Revisar mis analíticas y exportar un reporte: Mockup - Analíticas, Mockup - Planes.*
 </p>
 
-*(Ver Figura 107.)*
+*(Ver Figura 115.)*
 
 ```mermaid
 flowchart TD
@@ -3591,7 +3592,7 @@ flowchart TD
     class D1,J,K unhappy
 ```
 
-*Figura 107. Diagrama de flujo (flowchart) — User Flow 5: Revisar mis analíticas y exportar un reporte.*
+*Figura 115. Diagrama de flujo (flowchart) — User Flow 5: Revisar mis analíticas y exportar un reporte.*
 
 **Explicación del flujo:**
 
@@ -3604,15 +3605,15 @@ flowchart TD
 
 **User goal:** Como Nordie, quiero comparar los planes y pagar Premium de forma segura para desbloquear la exportación de reportes y las analíticas avanzadas.
 
-**User Persona:** Nordie Sanabria. **User Stories:** US33, US34 (Figura 108).
+**User Persona:** Nordie Sanabria. **User Stories:** US33, US34 (Figura 116).
 
 <p>
 <img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="400"/>
 
-*Figura 108. Mockup - Planes (2).*
+*Figura 116. Mockup - Planes (2).*
 </p>
 
-*(Ver Figura 109.)*
+*(Ver Figura 117.)*
 
 ```mermaid
 flowchart TD
@@ -3639,7 +3640,7 @@ flowchart TD
     class C1,F1,H1 unhappy
 ```
 
-*Figura 109. Diagrama de flujo (flowchart) — User Flow 6: Mejorar a MindFlow Premium.*
+*Figura 117. Diagrama de flujo (flowchart) — User Flow 6: Mejorar a MindFlow Premium.*
 
 **Explicación del flujo:**
 
@@ -3656,15 +3657,15 @@ flowchart TD
 
 **User goal:** Como Jimena, quiero proteger mis registros con un PIN y ajustar la aplicación a mi gusto para sentirme segura al escribir sobre temas personales.
 
-**User Persona:** Jimena Luna. **User Stories:** US04, US05, US06, US07 (Figura 110).
+**User Persona:** Jimena Luna. **User Stories:** US04, US05, US06, US07 (Figura 118).
 
 <p>
 <img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="200"/>
 
-*Figura 110. Mockup - Configuración (2).*
+*Figura 118. Mockup - Configuración (2).*
 </p>
 
-*(Ver Figura 111.)*
+*(Ver Figura 119.)*
 
 ```mermaid
 flowchart TD
@@ -3690,7 +3691,7 @@ flowchart TD
     class H1,L,M unhappy
 ```
 
-*Figura 111. Diagrama de flujo (flowchart) — User Flow 7: Proteger mi privacidad y personalizar la aplicación.*
+*Figura 119. Diagrama de flujo (flowchart) — User Flow 7: Proteger mi privacidad y personalizar la aplicación.*
 
 **Explicación del flujo:**
 
@@ -3705,15 +3706,15 @@ flowchart TD
 
 **User goal:** Como Nordie, quiero resolver una duda o reportar un problema sin salir de la aplicación para no perder tiempo buscando cómo contactar al equipo.
 
-**User Persona:** Nordie Sanabria. **User Stories:** US37 (Figura 112).
+**User Persona:** Nordie Sanabria. **User Stories:** US37 (Figura 120).
 
 <p>
 <img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="200"/>
 
-*Figura 112. Mockup - Configuración (3).*
+*Figura 120. Mockup - Configuración (3).*
 </p>
 
-*(Ver Figura 113.)*
+*(Ver Figura 121.)*
 
 ```mermaid
 flowchart TD
@@ -3739,7 +3740,7 @@ flowchart TD
     class I1,J1 unhappy
 ```
 
-*Figura 113. Diagrama de flujo (flowchart) — User Flow 8: Pedir ayuda al soporte técnico.*
+*Figura 121. Diagrama de flujo (flowchart) — User Flow 8: Pedir ayuda al soporte técnico.*
 
 **Explicación del flujo:**
 
@@ -3847,9 +3848,9 @@ El aspecto de Backend queda co-liderado por Güere Calero y Díaz De la Cruz, ya
 #### 4.2.1.3 Sprint Backlog 1
 ![SprintBacklog](assets/img/participants/SprintBacklog.png)
 
-*Figura 114. SprintBacklog.*
+*Figura 122. SprintBacklog.*
 
-Enlace de Trello: [https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1](https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1) (Figura 114)
+Enlace de Trello: [https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1](https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc57045762f9cffcb3ed31790eae864e799787B74/mindflow-sprint-backlog-1) (Figura 122)
 
 #### 4.2.1.4. Development Evidence for Sprint Review
 
@@ -4177,14 +4178,49 @@ Ejemplo de respuesta de checkout (Tabla 72):
 
 ##### Capturas de la interacción con la documentación
 
-_Pendiente: agregar capturas de Swagger UI con datos de muestra:_
+A continuación se muestra la interacción con la documentación desplegada en Railway, ejecutando con datos de muestra los endpoints principales del Sprint 1.
 
-1. _Vista general de Swagger UI con los controladores agrupados._
-2. _Botón **Authorize** con el token Bearer obtenido en `sign-in`._
-3. _`POST /api/v1/journal/entries` ejecutado, mostrando el `ai_response` generado._
-4. _`GET /api/v1/analytics/dashboard` con la respuesta de métricas._
-5. _`POST /api/v1/subscriptions/checkout` devolviendo la URL de Stripe._
-6. _`POST /api/v1/support/tickets` devolviendo el ticket creado._
+**1. Vista general.** Al ingresar a la documentación desplegada se muestran los endpoints agrupados por controlador, cada uno con su verbo HTTP, su ruta y un candado en los que requieren autenticación (Figura 123).
+
+<img src="assets/img/swagger/01-swagger-general.png" alt="Vista general de Swagger UI" width="800"/>
+
+*Figura 123. Vista general de la documentación en Swagger UI desplegada en Railway, con los endpoints agrupados por controlador.*
+
+**2. Registro de usuario.** Se registró un usuario de prueba con `POST /api/v1/users/sign-up`. El servicio respondió `201 Created` con el `id`, el `email` y el `name` del nuevo usuario (Figura 124).
+
+<img src="assets/img/swagger/02-sign-up.png" alt="Registro de usuario desde Swagger UI" width="800"/>
+
+*Figura 124. Registro de un usuario de prueba con `POST /api/v1/users/sign-up`.*
+
+**3. Autenticación.** Con `POST /api/v1/users/sign-in` se obtuvo el token JWT del usuario, que se ingresó en la opción **Authorize** para que Swagger UI lo envíe como encabezado `Authorization: Bearer` en los endpoints protegidos (Figura 125).
+
+<img src="assets/img/swagger/03-authorize.png" alt="Autorización con token Bearer" width="800"/>
+
+*Figura 125. Autorización en Swagger UI con el token JWT obtenido en `sign-in`.*
+
+**4. Entrada del diario emocional.** Con `POST /api/v1/journal/entries` se registró una entrada con su fecha, título, contenido, sentimiento y categoría. El servicio respondió `200 OK` con la entrada guardada y asociada al usuario autenticado (`user_id`) (Figura 126).
+
+<img src="assets/img/swagger/04-journal-entry.png" alt="Creación de una entrada del diario" width="800"/>
+
+*Figura 126. Creación de una entrada del diario emocional con `POST /api/v1/journal/entries`.*
+
+**5. Analíticas.** `GET /api/v1/analytics/dashboard`, sin parámetros, devolvió las métricas de los últimos 30 días: cantidad de entradas, distribución por sentimiento, categorías más frecuentes y hábitos completados. Los valores reflejan la entrada registrada en el paso anterior (Figura 127).
+
+<img src="assets/img/swagger/05-analytics-dashboard.png" alt="Dashboard de analíticas" width="800"/>
+
+*Figura 127. Métricas del usuario obtenidas con `GET /api/v1/analytics/dashboard`.*
+
+**6. Suscripción Premium.** `POST /api/v1/subscriptions/checkout` creó una sesión de **Stripe Checkout en modo prueba** y devolvió la `checkout_url` a la que la aplicación redirige al usuario para pagar, junto con el `session_id` de la sesión (Figura 128).
+
+<img src="assets/img/swagger/06-subscriptions-checkout.png" alt="Checkout de Stripe" width="800"/>
+
+*Figura 128. Creación de una sesión de Stripe Checkout en modo prueba con `POST /api/v1/subscriptions/checkout`.*
+
+**7. Ticket de soporte.** Con `POST /api/v1/support/tickets` se creó un ticket con su asunto, categoría, prioridad y mensaje. El servicio respondió `201 Created` con el ticket en estado `open` y el primer mensaje del hilo de conversación (Figura 129).
+
+<img src="assets/img/swagger/07-support-ticket.png" alt="Creación de un ticket de soporte" width="800"/>
+
+*Figura 129. Creación de un ticket de soporte con `POST /api/v1/support/tickets`.*
 
 ##### Commits relacionados con los Web Services y su documentación
 
@@ -4217,25 +4253,25 @@ La Landing Page es un sitio estático (HTML, CSS y JavaScript, sin paso de compi
 
 El backend de MindFlow (ASP.NET Core) se desplegó en **Railway**. Los pasos realizados fueron los siguientes.
 
-**1. Creación del servicio.** Desde el proyecto en Railway se creó un nuevo servicio con la opción *GitHub Repository*, que permite desplegar la aplicación directamente desde su código fuente (Figura 115).
+**1. Creación del servicio.** Desde el proyecto en Railway se creó un nuevo servicio con la opción *GitHub Repository*, que permite desplegar la aplicación directamente desde su código fuente (Figura 130).
 
 <img src="assets/img/deployment/01-railway-nuevo-servicio.jpeg" alt="Creación de un nuevo servicio en Railway" width="500"/>
 
-*Figura 115. Creación de un nuevo servicio en Railway a partir de un repositorio de GitHub.*
+*Figura 130. Creación de un nuevo servicio en Railway a partir de un repositorio de GitHub.*
 
-**2. Conexión del repositorio.** Se seleccionó el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) de la organización del equipo. A partir de ese momento, Railway compila y despliega el backend con cada cambio integrado en la rama configurada (Figura 116).
+**2. Conexión del repositorio.** Se seleccionó el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) de la organización del equipo. A partir de ese momento, Railway compila y despliega el backend con cada cambio integrado en la rama configurada (Figura 131).
 
 <img src="assets/img/deployment/02-railway-repositorio.jpeg" alt="Selección del repositorio mindflow-backend" width="500"/>
 
-*Figura 116. Selección del repositorio `mindflow-backend` en Railway.*
+*Figura 131. Selección del repositorio `mindflow-backend` en Railway.*
 
-**3. Bases de datos.** Desde la opción *Database* se agregaron al proyecto los servicios de datos que necesita el backend: **MySQL**, donde Entity Framework Core persiste la información de los 8 bounded contexts, y **Redis**, que el backend usa como caché (Figura 117).
+**3. Bases de datos.** Desde la opción *Database* se agregaron al proyecto los servicios de datos que necesita el backend: **MySQL**, donde Entity Framework Core persiste la información de los 8 bounded contexts, y **Redis**, que el backend usa como caché (Figura 132).
 
 <img src="assets/img/deployment/03-railway-base-de-datos.jpeg" alt="Bases de datos disponibles en Railway" width="500"/>
 
-*Figura 117. Selección de las bases de datos del backend en Railway.*
+*Figura 132. Selección de las bases de datos del backend en Railway.*
 
-**4. Variables de entorno.** La configuración sensible no se guarda en el repositorio: se registró como variables del servicio en Railway, que las muestra ocultas. Se usa el separador `__` para las claves anidadas de `appsettings.json` (por ejemplo, `ConnectionStrings__DefaultConnection` equivale a `ConnectionStrings:DefaultConnection`). Se registraron las siguientes variables (Tabla 76 y Figura 118):
+**4. Variables de entorno.** La configuración sensible no se guarda en el repositorio: se registró como variables del servicio en Railway, que las muestra ocultas. Se usa el separador `__` para las claves anidadas de `appsettings.json` (por ejemplo, `ConnectionStrings__DefaultConnection` equivale a `ConnectionStrings:DefaultConnection`). Se registraron las siguientes variables (Tabla 76 y Figura 133):
 
 **Tabla 76. Software Deployment Evidence — Variables de entorno de los Web Services.**
 
@@ -4250,7 +4286,7 @@ El backend de MindFlow (ASP.NET Core) se desplegó en **Railway**. Los pasos rea
 
 <img src="assets/img/deployment/04-railway-variables.jpeg" alt="Variables de entorno del servicio en Railway" width="700"/>
 
-*Figura 118. Variables de entorno del servicio del backend en Railway.*
+*Figura 133. Variables de entorno del servicio del backend en Railway.*
 
 **URL de los Web Services (documentación Swagger):** [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger)
 
@@ -4274,27 +4310,27 @@ Durante el Sprint 1 el equipo trabajó con el flujo GitFlow en los tres reposito
 
 ##### Landing Page
 
-En el repositorio [mindflow-landingPage](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage) participaron cuatro integrantes. Güere Calero construyó el sitio (página principal, página Nosotros e internacionalización), mientras que Díaz De la Cruz, Cabrera Sotelo y Limache Coronel documentaron el repositorio: el enlace del sitio desplegado, su formato y la descripción de las secciones de la página (Figura 119).
+En el repositorio [mindflow-landingPage](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage) participaron cuatro integrantes. Güere Calero construyó el sitio (página principal, página Nosotros e internacionalización), mientras que Díaz De la Cruz, Cabrera Sotelo y Limache Coronel documentaron el repositorio: el enlace del sitio desplegado, su formato y la descripción de las secciones de la página (Figura 134).
 
 <img src="assets/img/Insights/Insights_TB1_Landing.png" alt="Insights del repositorio mindflow-landingPage" width="800"/>
 
-*Figura 119. Team Collaboration Insights del repositorio `mindflow-landingPage` durante el Sprint 1.*
+*Figura 134. Team Collaboration Insights del repositorio `mindflow-landingPage` durante el Sprint 1.*
 
 ##### Web Services
 
-En el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), Güere Calero y Díaz De la Cruz co-lideraron la implementación de los 8 bounded contexts. Güere Calero concentró la mayor cantidad de commits, y Díaz De la Cruz implementó los bounded contexts de Notifications, Support, Subscriptions y Analytics, junto con el checkout de Stripe, los reportes en PDF y las notificaciones por correo (Figura 120).
+En el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), Güere Calero y Díaz De la Cruz co-lideraron la implementación de los 8 bounded contexts. Güere Calero concentró la mayor cantidad de commits, y Díaz De la Cruz implementó los bounded contexts de Notifications, Support, Subscriptions y Analytics, junto con el checkout de Stripe, los reportes en PDF y las notificaciones por correo (Figura 135).
 
 <img src="assets/img/Insights/Insights_TB1_Backends.png" alt="Insights del repositorio mindflow-backend" width="800"/>
 
-*Figura 120. Team Collaboration Insights del repositorio `mindflow-backend` durante el Sprint 1.*
+*Figura 135. Team Collaboration Insights del repositorio `mindflow-backend` durante el Sprint 1.*
 
 ##### Mobile Application
 
-En el repositorio [mindflow-frontend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend) participaron cuatro integrantes. Güere Calero y Cabrera Sotelo desarrollaron la mayor parte de las pantallas y su conexión con el backend, mientras que Díaz De la Cruz implementó la base de capas DDD de la app y el checkout de prueba de Stripe, y Limache Coronel agregó el botón flotante del chat de IA y reorganizó el chat en las capas de aplicación y dominio (Figura 121).
+En el repositorio [mindflow-frontend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend) participaron cuatro integrantes. Güere Calero y Cabrera Sotelo desarrollaron la mayor parte de las pantallas y su conexión con el backend, mientras que Díaz De la Cruz implementó la base de capas DDD de la app y el checkout de prueba de Stripe, y Limache Coronel agregó el botón flotante del chat de IA y reorganizó el chat en las capas de aplicación y dominio (Figura 136).
 
 <img src="assets/img/Insights/Insights_TB1_Frontend.png" alt="Insights del repositorio mindflow-frontend" width="800"/>
 
-*Figura 121. Team Collaboration Insights del repositorio `mindflow-frontend` durante el Sprint 1.*
+*Figura 136. Team Collaboration Insights del repositorio `mindflow-frontend` durante el Sprint 1.*
 
 ## 4.3. Validation Interviews
 
@@ -4394,7 +4430,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 2
 
-**Tabla 82. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
+**Tabla 83. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4411,13 +4447,13 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ### 4.3.3. Evaluaciones según heurísticas
 
-Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 83).
+Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 84).
 
 #### UX Heuristics & Principles Evaluation
 
 **Usability - Inclusive Design - Information Architecture**
 
-**Tabla 83. Evaluación según Heurísticas — Datos generales de la evaluación.**
+**Tabla 84. Evaluación según Heurísticas — Datos generales de la evaluación.**
 
 | Campo | Detalle |
 |---|---|
@@ -4453,9 +4489,9 @@ No están incluidas en esta versión de la evaluación las siguientes tareas:
 
 #### Escala de severidad
 
-Los problemas se puntúan con la siguiente escala (Tabla 84).
+Los problemas se puntúan con la siguiente escala (Tabla 85).
 
-**Tabla 84. Evaluación según Heurísticas — Escala de severidad.**
+**Tabla 85. Evaluación según Heurísticas — Escala de severidad.**
 
 | Nivel | Descripción |
 |---|---|
@@ -4466,9 +4502,9 @@ Los problemas se puntúan con la siguiente escala (Tabla 84).
 
 #### Tabla resumen
 
-La Tabla 85 resume los 16 problemas identificados, ordenados según su numeración y severidad.
+La Tabla 86 resume los 16 problemas identificados, ordenados según su numeración y severidad.
 
-**Tabla 85. Evaluación según Heurísticas — Resumen de problemas identificados.**
+**Tabla 86. Evaluación según Heurísticas — Resumen de problemas identificados.**
 
 | # | Problema | Severidad | Heurística/Principio violada(o) |
 |---|---|---|---|
@@ -4498,11 +4534,11 @@ La Tabla 85 resume los 16 problemas identificados, ordenados según su numeraci�
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-Ambos entrevistados dudaron sobre el alcance real de la IA. El entrevistado del Segmento 1 no tuvo claro si funciona como un terapeuta formal o solo como un asistente de reflexión, y el entrevistado del Segmento 2 se preguntó si el chat es una bitácora interactiva o una sesión de coaching continuo. La pantalla de Inicio presenta a "MindFlow AI" con un saludo cercano ("estoy aquí para escucharte"). La aclaración de que MindFlow no reemplaza la atención profesional ni constituye un diagnóstico clínico existe únicamente dentro de los Términos y Condiciones, pero no aparece en el flujo de uso de la aplicación (Inicio ni chat), por lo que el usuario no la ve (Figura 122).
+Ambos entrevistados dudaron sobre el alcance real de la IA. El entrevistado del Segmento 1 no tuvo claro si funciona como un terapeuta formal o solo como un asistente de reflexión, y el entrevistado del Segmento 2 se preguntó si el chat es una bitácora interactiva o una sesión de coaching continuo. La pantalla de Inicio presenta a "MindFlow AI" con un saludo cercano ("estoy aquí para escucharte"). La aclaración de que MindFlow no reemplaza la atención profesional ni constituye un diagnóstico clínico existe únicamente dentro de los Términos y Condiciones, pero no aparece en el flujo de uso de la aplicación (Inicio ni chat), por lo que el usuario no la ve (Figura 137).
 
 ![Problema 1: pantalla de Inicio con el chat de IA](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 122. Pantalla de Inicio: la IA se presenta sin indicar su alcance.*
+*Figura 137. Pantalla de Inicio: la IA se presenta sin indicar su alcance.*
 
 **Recomendación:**
 Llevar la aclaración de los Términos y Condiciones a un aviso breve en el onboarding y en el primer uso del chat, que indique que MindFlow es una herramienta de autocuidado y reflexión que no reemplaza la atención psicológica, junto con una etiqueta fija bajo el nombre de la IA ("Asistente de reflexión") y un acceso a recursos de ayuda profesional.
@@ -4514,15 +4550,15 @@ Llevar la aclaración de los Términos y Condiciones a un aviso breve en el onbo
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-Los dos entrevistados señalaron que su desconfianza vendría de no saber si sus reflexiones se usan para entrenar modelos de terceros o quedan expuestas. En la pantalla de registro solo se indica "Datos encriptados con AES-256" junto con los enlaces a Términos de Servicio y Política de Privacidad. La Política de Privacidad indica que los datos se usan para generar observaciones con IA y que el contenido del diario no se vende a terceros, pero ni ella, ni el mensaje del registro, ni la sección de Privacidad de Ajustes mencionan que el texto se envía a un proveedor externo de IA ni si se utiliza para entrenar modelos. El entrevistado del Segmento 2 señaló además que una política ambigua sobre APIs externas le restaría confianza (Figuras 123 y 124).
+Los dos entrevistados señalaron que su desconfianza vendría de no saber si sus reflexiones se usan para entrenar modelos de terceros o quedan expuestas. En la pantalla de registro solo se indica "Datos encriptados con AES-256" junto con los enlaces a Términos de Servicio y Política de Privacidad. La Política de Privacidad indica que los datos se usan para generar observaciones con IA y que el contenido del diario no se vende a terceros, pero ni ella, ni el mensaje del registro, ni la sección de Privacidad de Ajustes mencionan que el texto se envía a un proveedor externo de IA ni si se utiliza para entrenar modelos. El entrevistado del Segmento 2 señaló además que una política ambigua sobre APIs externas le restaría confianza (Figuras 138 y 139).
 
 ![Problema 2: pantalla de registro](assets/img/heuristics/app-03-registro.jpeg)
 
-*Figura 123. Registro: el mensaje de privacidad solo menciona el cifrado.*
+*Figura 138. Registro: el mensaje de privacidad solo menciona el cifrado.*
 
 ![Problema 2: ajustes de privacidad](assets/img/heuristics/app-06-ajustes-privacidad.jpeg)
 
-*Figura 124. Ajustes de privacidad: sin información sobre el procesamiento por terceros.*
+*Figura 139. Ajustes de privacidad: sin información sobre el procesamiento por terceros.*
 
 **Recomendación:**
 Agregar en el registro y en Ajustes de Privacidad un texto claro, con enlace a la política, que explique qué datos se envían al servicio de IA, si se usan o no para entrenar modelos y cómo se eliminan. Completar la Política de Privacidad de la Landing Page con la misma información.
@@ -4534,15 +4570,15 @@ Agregar en el registro y en Ajustes de Privacidad un texto claro, con enlace a l
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-Los botones principales ("Ingresar a MindFlow", "Crear mi cuenta", "Guardar Registro") usan texto blanco sobre un degradado de #4F8DF5 a #6ED3A3. La relación de contraste del blanco es de 3.25:1 en el extremo azul y de 1.82:1 en el extremo verde. Los botones "+ Añadir" y "+ Crear" de Hábitos usan texto blanco sobre #6ED3A3 (1.82:1). WCAG 2.1 exige como mínimo 4.5:1 para texto normal y 3:1 para texto grande, por lo que las personas con baja visión o que usan la aplicación bajo luz intensa pueden no leer las acciones principales (Figuras 125 y 126).
+Los botones principales ("Ingresar a MindFlow", "Crear mi cuenta", "Guardar Registro") usan texto blanco sobre un degradado de #4F8DF5 a #6ED3A3. La relación de contraste del blanco es de 3.25:1 en el extremo azul y de 1.82:1 en el extremo verde. Los botones "+ Añadir" y "+ Crear" de Hábitos usan texto blanco sobre #6ED3A3 (1.82:1). WCAG 2.1 exige como mínimo 4.5:1 para texto normal y 3:1 para texto grande, por lo que las personas con baja visión o que usan la aplicación bajo luz intensa pueden no leer las acciones principales (Figuras 140 y 141).
 
 ![Problema 3: botón de inicio de sesión](assets/img/heuristics/app-01-login.jpeg)
 
-*Figura 125. Inicio de sesión: botón principal con texto blanco sobre degradado.*
+*Figura 140. Inicio de sesión: botón principal con texto blanco sobre degradado.*
 
 ![Problema 3: sugerencias de IA con botones Añadir](assets/img/heuristics/app-17-habitos-sugerencias-ia.jpeg)
 
-*Figura 126. Sugerencias de IA: botones "Añadir" con texto blanco sobre verde claro.*
+*Figura 141. Sugerencias de IA: botones "Añadir" con texto blanco sobre verde claro.*
 
 **Recomendación:**
 Usar texto oscuro (#1F2937) sobre los fondos verdes claros o un tono más oscuro del degradado, de modo que todas las combinaciones superen 4.5:1, y verificar el resultado con una herramienta de contraste.
@@ -4554,15 +4590,15 @@ Usar texto oscuro (#1F2937) sobre los fondos verdes claros o un tono más oscuro
 **Origen:** Revisión del equipo auditor sobre el código de la Landing Page.
 
 **Problema:**
-Las 13 imágenes de la Landing Page tienen el atributo `alt` vacío (`alt=""`), incluidas las capturas de la aplicación en la sección "Así se ve MindFlow en tu teléfono" y las fotos del equipo en la página "Nosotros". Un lector de pantalla las omite, por lo que una persona con discapacidad visual no recibe la información de las capturas ni de los integrantes. Una captura sí tiene un nombre visible debajo, pero no describe su contenido (Figuras 127 y 128).
+Las 13 imágenes de la Landing Page tienen el atributo `alt` vacío (`alt=""`), incluidas las capturas de la aplicación en la sección "Así se ve MindFlow en tu teléfono" y las fotos del equipo en la página "Nosotros". Un lector de pantalla las omite, por lo que una persona con discapacidad visual no recibe la información de las capturas ni de los integrantes. Una captura sí tiene un nombre visible debajo, pero no describe su contenido (Figuras 142 y 143).
 
 ![Problema 4: sección de capturas de la Landing Page](assets/img/heuristics/landing-01-capturas.png)
 
-*Figura 127. Landing Page: capturas de la aplicación sin texto alternativo.*
+*Figura 142. Landing Page: capturas de la aplicación sin texto alternativo.*
 
 ![Problema 4: página Nosotros](assets/img/heuristics/landing-02-equipo.png)
 
-*Figura 128. Página Nosotros: fotos del equipo sin texto alternativo.*
+*Figura 143. Página Nosotros: fotos del equipo sin texto alternativo.*
 
 **Recomendación:**
 Describir cada imagen informativa en su atributo `alt` (por ejemplo, "Pantalla de Inicio de MindFlow con el campo para escribir cómo te sientes") y mantener `alt=""` solo en las imágenes decorativas, como el logotipo repetido.
@@ -4574,11 +4610,11 @@ Describir cada imagen informativa en su atributo `alt` (por ejemplo, "Pantalla d
 **Origen:** Entrevista al Segmento 1.
 
 **Problema:**
-El entrevistado del Segmento 1 indicó que no le quedó claro qué funcionalidades son exclusivas de Premium frente a Freemium hasta llegar a la pantalla de Planes. En el resto de la aplicación la distinción aparece solo de forma puntual: la tarjeta de exportación menciona "(Requiere Premium)" al final de una frase y Ajustes muestra únicamente la lista del plan actual (Figura 129).
+El entrevistado del Segmento 1 indicó que no le quedó claro qué funcionalidades son exclusivas de Premium frente a Freemium hasta llegar a la pantalla de Planes. En el resto de la aplicación la distinción aparece solo de forma puntual: la tarjeta de exportación menciona "(Requiere Premium)" al final de una frase y Ajustes muestra únicamente la lista del plan actual (Figura 144).
 
 ![Problema 5: tarjeta de suscripción en Ajustes](assets/img/heuristics/app-07-ajustes-suscripcion.jpeg)
 
-*Figura 129. Ajustes: la tarjeta de suscripción lista los beneficios sin compararlos con el plan gratuito.*
+*Figura 144. Ajustes: la tarjeta de suscripción lista los beneficios sin compararlos con el plan gratuito.*
 
 **Recomendación:**
 Identificar las funciones Premium con una etiqueta visible (por ejemplo, una insignia "Premium") en el lugar donde aparecen y agregar en Ajustes un enlace "Comparar planes" que lleve a la pantalla de Planes.
@@ -4590,11 +4626,11 @@ Identificar las funciones Premium con una etiqueta visible (por ejemplo, una ins
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-Con la cuenta evaluada, Ajustes muestra "Plan Actual: Premium", pero la tarjeta "Exportar Reportes Clínicos" de Analíticas mantiene el texto "(Requiere Premium)". El mensaje es contradictorio: el usuario puede dudar de si su suscripción está activa o de si podrá usar la función (Figura 130).
+Con la cuenta evaluada, Ajustes muestra "Plan Actual: Premium", pero la tarjeta "Exportar Reportes Clínicos" de Analíticas mantiene el texto "(Requiere Premium)". El mensaje es contradictorio: el usuario puede dudar de si su suscripción está activa o de si podrá usar la función (Figura 145).
 
 ![Problema 6: tarjeta de exportación en Analíticas](assets/img/heuristics/app-13-analiticas-exportar.jpeg)
 
-*Figura 130. Analíticas: la tarjeta de exportación indica "Requiere Premium" aunque el plan actual es Premium.*
+*Figura 145. Analíticas: la tarjeta de exportación indica "Requiere Premium" aunque el plan actual es Premium.*
 
 **Recomendación:**
 Mostrar el texto "(Requiere Premium)" únicamente a los usuarios del plan gratuito; para usuarios Premium, ocultarlo o reemplazarlo por un mensaje como "Incluido en tu plan".
@@ -4606,15 +4642,15 @@ Mostrar el texto "(Requiere Premium)" únicamente a los usuarios del plan gratui
 **Origen:** Entrevista al Segmento 2.
 
 **Problema:**
-El entrevistado del Segmento 2 no tuvo claro si el cálculo de las analíticas se procesa localmente en su teléfono o se sincroniza en la nube. Las pantallas de Analíticas y Tendencias muestran resúmenes y gráficas, pero no informan el estado de la sincronización ni el origen de los datos (Figuras 131 y 132).
+El entrevistado del Segmento 2 no tuvo claro si el cálculo de las analíticas se procesa localmente en su teléfono o se sincroniza en la nube. Las pantallas de Analíticas y Tendencias muestran resúmenes y gráficas, pero no informan el estado de la sincronización ni el origen de los datos (Figuras 146 y 147).
 
 ![Problema 7: resumen semanal de Analíticas](assets/img/heuristics/app-10-analiticas-resumen.jpeg)
 
-*Figura 131. Analíticas: el resumen no indica el origen ni el estado de sincronización de los datos.*
+*Figura 146. Analíticas: el resumen no indica el origen ni el estado de sincronización de los datos.*
 
 ![Problema 7: nube de palabras y tendencias](assets/img/heuristics/app-12-analiticas-nube-tendencias.jpeg)
 
-*Figura 132. Analíticas: nube de palabras y tendencias sin indicador de sincronización.*
+*Figura 147. Analíticas: nube de palabras y tendencias sin indicador de sincronización.*
 
 **Recomendación:**
 Agregar un indicador discreto de estado (por ejemplo, "Sincronizado hace 2 min" o "Solo en este dispositivo") en la cabecera de Analíticas, con una explicación breve al tocarlo.
@@ -4626,11 +4662,11 @@ Agregar un indicador discreto de estado (por ejemplo, "Sincronizado hace 2 min" 
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-El entrevistado del Segmento 1 pidió recordatorios más personalizables y el entrevistado del Segmento 2 esperaba una notificación configurable según su jornada laboral para registrar su ánimo al terminar la tarde. En Ajustes, "Recordatorios de Hábitos" es un único interruptor orientado a "hidratación y pausas", sin elegir horario, días ni tipo de recordatorio, y no existe un recordatorio para registrar el estado de ánimo (Figura 133).
+El entrevistado del Segmento 1 pidió recordatorios más personalizables y el entrevistado del Segmento 2 esperaba una notificación configurable según su jornada laboral para registrar su ánimo al terminar la tarde. En Ajustes, "Recordatorios de Hábitos" es un único interruptor orientado a "hidratación y pausas", sin elegir horario, días ni tipo de recordatorio, y no existe un recordatorio para registrar el estado de ánimo (Figura 148).
 
 ![Problema 8: ajustes de privacidad y experiencia](assets/img/heuristics/app-06-ajustes-privacidad.jpeg)
 
-*Figura 133. Ajustes: el recordatorio es un único interruptor sin opciones de horario.*
+*Figura 148. Ajustes: el recordatorio es un único interruptor sin opciones de horario.*
 
 **Recomendación:**
 Permitir elegir la hora y los días de los recordatorios, y agregar un recordatorio opcional para registrar el estado de ánimo al cierre de la jornada.
@@ -4642,11 +4678,11 @@ Permitir elegir la hora y los días de los recordatorios, y agregar un recordato
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-El campo de fecha del historial emocional muestra el texto "mm/dd/yyyy" y el código aplica el patrón `MM/dd/yyyy`, propio de Estados Unidos, aunque la aplicación está en español latinoamericano. Un usuario peruano puede interpretar mal el valor (por ejemplo, 07/10 como 10 de julio) y filtrar por una fecha equivocada (Figura 134).
+El campo de fecha del historial emocional muestra el texto "mm/dd/yyyy" y el código aplica el patrón `MM/dd/yyyy`, propio de Estados Unidos, aunque la aplicación está en español latinoamericano. Un usuario peruano puede interpretar mal el valor (por ejemplo, 07/10 como 10 de julio) y filtrar por una fecha equivocada (Figura 149).
 
 ![Problema 9: filtro de fecha del historial](assets/img/heuristics/app-20-diario-calendario.jpeg)
 
-*Figura 134. Historial emocional: el filtro de fecha usa el formato mm/dd/yyyy.*
+*Figura 149. Historial emocional: el filtro de fecha usa el formato mm/dd/yyyy.*
 
 **Recomendación:**
 Dar formato a la fecha según el idioma y la región del dispositivo (dd/MM/yyyy para es_419) y mostrar el nombre del mes en el selector.
@@ -4658,15 +4694,15 @@ Dar formato a la fecha según el idioma y la región del dispositivo (dd/MM/yyyy
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-El botón flotante del chat con la IA se mantiene fijo en la esquina inferior derecha y cubre parte del contenido en varias pantallas: oculta el botón "Exportar CSV" en Analíticas, el borde del botón "Micro-meditación (3 min)" en Inicio y la leyenda "Negativo" del calendario. Para usar esas acciones el usuario debe desplazar la pantalla hasta una posición donde el botón no las cubra (Figuras 135 y 136).
+El botón flotante del chat con la IA se mantiene fijo en la esquina inferior derecha y cubre parte del contenido en varias pantallas: oculta el botón "Exportar CSV" en Analíticas, el borde del botón "Micro-meditación (3 min)" en Inicio y la leyenda "Negativo" del calendario. Para usar esas acciones el usuario debe desplazar la pantalla hasta una posición donde el botón no las cubra (Figuras 150 y 151).
 
 ![Problema 10: botón flotante sobre Exportar CSV](assets/img/heuristics/app-13-analiticas-exportar.jpeg)
 
-*Figura 135. Analíticas: el botón flotante cubre el botón "Exportar CSV".*
+*Figura 150. Analíticas: el botón flotante cubre el botón "Exportar CSV".*
 
 ![Problema 10: botón flotante sobre Intervenciones Rápidas](assets/img/heuristics/app-23-inicio-intervenciones.jpeg)
 
-*Figura 136. Inicio: el botón flotante cubre la acción "Micro-meditación (3 min)".*
+*Figura 151. Inicio: el botón flotante cubre la acción "Micro-meditación (3 min)".*
 
 **Recomendación:**
 Agregar un espacio inferior al final de las listas para que el contenido nunca quede debajo del botón, o reducir el botón y moverlo a la barra superior.
@@ -4678,15 +4714,15 @@ Agregar un espacio inferior al final de las listas para que el contenido nunca q
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-En Hábitos, las pestañas "Mis Rutinas", "Sugerencias de IA" e "Historial" no caben en el ancho de la pantalla. Al abrir la pantalla solo se ve una parte de la tercera pestaña (un trazo), y al seleccionar "Historial" la primera queda cortada ("nas"). Sin un indicador de desplazamiento, un usuario puede no descubrir que existe el historial de hábitos (Figuras 137 y 138).
+En Hábitos, las pestañas "Mis Rutinas", "Sugerencias de IA" e "Historial" no caben en el ancho de la pantalla. Al abrir la pantalla solo se ve una parte de la tercera pestaña (un trazo), y al seleccionar "Historial" la primera queda cortada ("nas"). Sin un indicador de desplazamiento, un usuario puede no descubrir que existe el historial de hábitos (Figuras 152 y 153).
 
 ![Problema 11: pestañas de Hábitos](assets/img/heuristics/app-15-habitos-rutinas.jpeg)
 
-*Figura 137. Hábitos: la tercera pestaña no es visible al abrir la pantalla.*
+*Figura 152. Hábitos: la tercera pestaña no es visible al abrir la pantalla.*
 
 ![Problema 11: pestaña Historial](assets/img/heuristics/app-19-habitos-historial.jpeg)
 
-*Figura 138. Hábitos: al seleccionar "Historial" la primera pestaña queda cortada.*
+*Figura 153. Hábitos: al seleccionar "Historial" la primera pestaña queda cortada.*
 
 **Recomendación:**
 Ajustar los textos y el espaciado para que las tres pestañas se vean completas, o usar etiquetas más cortas ("Rutinas", "Sugerencias", "Historial").
@@ -4698,15 +4734,15 @@ Ajustar los textos y el espaciado para que las tres pestañas se vean completas,
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-La casilla de la lista "Hábitos Diarios" mide 20 dp y el ícono para mostrar u ocultar la contraseña mide 24 dp, por debajo de los 48 dp recomendados por Material Design y WCAG para áreas táctiles. Usar la aplicación con una sola mano, en movimiento o con dificultades motoras aumenta la probabilidad de tocar mal (Figuras 139 y 140).
+La casilla de la lista "Hábitos Diarios" mide 20 dp y el ícono para mostrar u ocultar la contraseña mide 24 dp, por debajo de los 48 dp recomendados por Material Design y WCAG para áreas táctiles. Usar la aplicación con una sola mano, en movimiento o con dificultades motoras aumenta la probabilidad de tocar mal (Figuras 154 y 155).
 
 ![Problema 12: casilla de hábito diario](assets/img/heuristics/app-24-inicio-habitos.jpeg)
 
-*Figura 139. Inicio: la casilla del hábito diario tiene un área táctil de 20 dp.*
+*Figura 154. Inicio: la casilla del hábito diario tiene un área táctil de 20 dp.*
 
 ![Problema 12: ícono de contraseña](assets/img/heuristics/app-01-login.jpeg)
 
-*Figura 140. Inicio de sesión: el ícono de mostrar contraseña tiene 24 dp.*
+*Figura 155. Inicio de sesión: el ícono de mostrar contraseña tiene 24 dp.*
 
 **Recomendación:**
 Mantener el tamaño visual de los controles, pero ampliar su área táctil a 48 x 48 dp.
@@ -4718,15 +4754,15 @@ Mantener el tamaño visual de los controles, pero ampliar su área táctil a 48 
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-La sección "Así se ve MindFlow en tu teléfono" se presenta como "Capturas reales de la app Android", pero las imágenes muestran una versión anterior: un menú lateral (Dashboard, Diario, Hábitos, Analíticas, Configuración) y datos de abril de 2026, mientras que la aplicación actual usa barra de navegación inferior. El visitante que descarga la aplicación encuentra una interfaz distinta de la que vio (Figuras 141 y 142).
+La sección "Así se ve MindFlow en tu teléfono" se presenta como "Capturas reales de la app Android", pero las imágenes muestran una versión anterior: un menú lateral (Dashboard, Diario, Hábitos, Analíticas, Configuración) y datos de abril de 2026, mientras que la aplicación actual usa barra de navegación inferior. El visitante que descarga la aplicación encuentra una interfaz distinta de la que vio (Figuras 156 y 157).
 
 ![Problema 13: capturas de la Landing Page](assets/img/heuristics/landing-01-capturas.png)
 
-*Figura 141. Landing Page: capturas con menú lateral.*
+*Figura 156. Landing Page: capturas con menú lateral.*
 
 ![Problema 13: Inicio de la aplicación actual](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 142. Aplicación actual: Inicio con barra de navegación inferior.*
+*Figura 157. Aplicación actual: Inicio con barra de navegación inferior.*
 
 **Recomendación:**
 Reemplazar las capturas de la Landing Page por las de la versión vigente de la aplicación y revisarlas en cada release.
@@ -4738,11 +4774,11 @@ Reemplazar las capturas de la Landing Page por las de la versión vigente de la 
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-El calendario del Diario comunica el estado de ánimo de cada día solo con color (positivo, neutral y negativo), y la leyenda usa un texto de 12 sp. El color de "Neutral" (#FFD166) tiene una relación de contraste de 1.44:1 sobre fondo blanco y el verde de "Positivo" (#6ED3A3) de 1.82:1, por lo que las personas con baja visión o daltonismo pueden no distinguir los estados (Figura 143).
+El calendario del Diario comunica el estado de ánimo de cada día solo con color (positivo, neutral y negativo), y la leyenda usa un texto de 12 sp. El color de "Neutral" (#FFD166) tiene una relación de contraste de 1.44:1 sobre fondo blanco y el verde de "Positivo" (#6ED3A3) de 1.82:1, por lo que las personas con baja visión o daltonismo pueden no distinguir los estados (Figura 158).
 
 ![Problema 14: leyenda del calendario](assets/img/heuristics/app-20-diario-calendario.jpeg)
 
-*Figura 143. Historial emocional: la leyenda del calendario se apoya solo en el color.*
+*Figura 158. Historial emocional: la leyenda del calendario se apoya solo en el color.*
 
 **Recomendación:**
 Complementar el color con un ícono o una forma distinta por estado (por ejemplo, ▲ positivo, ● neutral, ▼ negativo) y oscurecer los colores del texto de la leyenda hasta superar 4.5:1.
@@ -4754,11 +4790,11 @@ Complementar el color con un ícono o una forma distinta por estado (por ejemplo
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-En el idioma español, algunos títulos permanecen en inglés: "AI Mood Journal", "Dynamic Habit Tracker" y "Smart Interventions" en la pantalla de registro y en la tarjeta de suscripción, mientras que el resto de la interfaz está en español. Es una inconsistencia menor que no impide completar las tareas (Figura 144).
+En el idioma español, algunos títulos permanecen en inglés: "AI Mood Journal", "Dynamic Habit Tracker" y "Smart Interventions" en la pantalla de registro y en la tarjeta de suscripción, mientras que el resto de la interfaz está en español. Es una inconsistencia menor que no impide completar las tareas (Figura 159).
 
 ![Problema 15: beneficios en la pantalla de registro](assets/img/heuristics/app-04-registro-beneficios.jpeg)
 
-*Figura 144. Registro: títulos de beneficios en inglés dentro de una interfaz en español.*
+*Figura 159. Registro: títulos de beneficios en inglés dentro de una interfaz en español.*
 
 **Recomendación:**
 Traducir los títulos al español (por ejemplo, "Diario emocional con IA", "Seguimiento dinámico de hábitos" e "Intervenciones inteligentes") y gestionarlos mediante los archivos de idioma de la aplicación.
@@ -4770,20 +4806,20 @@ Traducir los títulos al español (por ejemplo, "Diario emocional con IA", "Segu
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-El entrevistado del Segmento 1 esperaba poder registrar entradas mediante notas de voz y programar hábitos con integración a Google Calendar. El entrevistado del Segmento 2 propuso etiquetar las entradas por proyecto o cliente. La pantalla de Inicio solo permite escribir texto y elegir una de las categorías predefinidas (Estudios, Trabajo, Familia, Reflexión Personal, Salud) (Figura 145).
+El entrevistado del Segmento 1 esperaba poder registrar entradas mediante notas de voz y programar hábitos con integración a Google Calendar. El entrevistado del Segmento 2 propuso etiquetar las entradas por proyecto o cliente. La pantalla de Inicio solo permite escribir texto y elegir una de las categorías predefinidas (Estudios, Trabajo, Familia, Reflexión Personal, Salud) (Figura 160).
 
 ![Problema 16: registro de entrada en el diario](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 145. Inicio: el registro admite solo texto y categorías predefinidas.*
+*Figura 160. Inicio: el registro admite solo texto y categorías predefinidas.*
 
 **Recomendación:**
 Incorporar en el roadmap el registro por dictado de voz, la sincronización de hábitos con el calendario del dispositivo y las etiquetas personalizadas por entrada.
 
 #### Resumen de hallazgos
 
-La distribución de los problemas según su severidad (Tabla 86) y según el eje evaluado (Tabla 87) se muestra a continuación.
+La distribución de los problemas según su severidad (Tabla 87) y según el eje evaluado (Tabla 88) se muestra a continuación.
 
-**Tabla 86. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
+**Tabla 87. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
 
 | Severidad | Cantidad | Problemas |
 |---|---|---|
@@ -4792,7 +4828,7 @@ La distribución de los problemas según su severidad (Tabla 86) y según el eje
 | Severidad 3 | 4 | #1, #2, #3, #4 |
 | Severidad 4 | 0 | — |
 
-**Tabla 87. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
+**Tabla 88. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
 
 | Eje evaluado | Problemas |
 |---|---|
