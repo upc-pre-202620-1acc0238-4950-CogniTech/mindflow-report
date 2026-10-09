@@ -414,9 +414,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV1</u><br>
       Investigó y aplicó técnicas de Strategic-Level Domain-Driven Design mediante la elaboración de Domain Message Flows, Bounded Context Canvases y Context Mapping para MindFlow. Además, participó en el análisis competitivo y en la documentación de entrevistas, fortaleciendo la relación entre las necesidades de los usuarios y las decisiones de diseño de la solución.
       <br><br>
-      <b>Dias de la Cruz, Sebastian Gabriel</b><br>
+      <u>TB1</u><br>
+      Actualizó y aplicó sus conocimientos en desarrollo de software mediante la implementación de los Bounded Contexts Habits & Wellness, Analytics & Reporting y Notifications. Asimismo, fortaleció sus competencias en diseño y desarrollo de aplicaciones móviles mediante la elaboración de Mobile Application Mock-ups y el desarrollo del frontend. Complementó estas actividades con una Validation Interview para el segmento 1, relacionando las necesidades identificadas en los usuarios con las funcionalidades del producto.
+      <br><br>
+      <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
       <u>AV1</u><br>
       Participó en la actualización y aplicación de conocimientos relacionados con análisis de requerimientos y arquitectura de software mediante la elaboración y organización de User Stories, Product Backlog, Impact Mapping y diagramas C4 a nivel de Context y Container. Asimismo, trabajó con técnicas de Needfinding como Empathy Mapping y Ubiquitous Language, integrando estos conocimientos en la documentación y diseño de MindFlow.
+      <br><br>
+      <u>TB1</u><br>
+      Amplió y aplicó sus conocimientos en arquitectura backend, integración de servicios externos y despliegue de aplicaciones mediante el desarrollo de cuatro Bounded Contexts, la implementación de Stripe y la autenticación con cuentas de Google. Además, fortaleció sus competencias en infraestructura cloud al desplegar el backend en Railway, utilizando MySQL 8 y Upstash Redis.
       <br><br>
       <b>Güere Calero, Fernando Julio</b><br>
       <u>AV1</u><br>
@@ -429,9 +435,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV1</u><br>
       Investigó y aplicó nuevos enfoques de arquitectura de software al trasladar los hallazgos metodológicos del EventStorming hacia diagramas arquitectónicos y modelos de base de datos. Esta actualización de conocimientos técnicos le permitió estructurar el modelado del dominio de MindFlow, estableciendo una base sólida para su futura implementación como solución web escalable.
       <br><br>
+      <u>TB1</u><br>
+      Actualizó y aplicó sus conocimientos en diseño UX/UI y desarrollo frontend mediante la elaboración de mockups y la implementación de tres Bounded Contexts del producto. Asimismo, fortaleció sus competencias en diseño de sistemas mediante el desarrollo del Design System en código, complementando estas actividades con una Validation Interview para relacionar los requerimientos de los usuarios con las interfaces implementadas.
+      <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
       Ya contaba con base previa en Domain-Driven Design y en el C4 Model, pero en este proyecto actualizó ese conocimiento al aplicarlo a un caso real con varios bounded contexts interdependientes (IAM, Journal, AI Assistant y Habits & Wellness) y al elaborar por primera vez un Deployment Diagram sobre infraestructura cloud concreta (Railway, con servicios de API, MySQL y Redis), integrando patrones de Application Layer distintos entre sí (Command Service unificado, CQRS, servicios planos) según las necesidades específicas de cada contexto.
+      <br><br>
+      <u>TB1</u><br>
+      Amplió y aplicó sus conocimientos en desarrollo de interfaces, integración de inteligencia artificial y documentación técnica mediante la implementación del frontend del chat con IA y la elaboración de la documentación de servicios. Asimismo, fortaleció sus competencias en diseño centrado en el usuario mediante la construcción de User Flows y la realización de una entrevista, complementando su participación con evidencias de despliegue y Collaboration Insights.
     </td>
     <td>
       <u>AV1</u><br>
@@ -448,9 +460,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV1</u><br>
       Reconoció la necesidad de continuar aprendiendo de forma autónoma al investigar nuevas técnicas de modelado de dominio, relaciones entre bounded contexts y análisis de usuarios, aplicando estos conocimientos directamente en la documentación y diseño de MindFlow.
       <br><br>
-      <b>Dias de la Cruz, Sebastian Gabriel</b><br>
+      <u>TB1</u><br>
+      Reconoció la importancia del aprendizaje continuo al desarrollar funcionalidades correspondientes a tres Bounded Contexts y participar en el diseño e implementación de interfaces móviles. La elaboración de mockups y la realización de una Validation Interview evidenciaron la necesidad de continuar fortaleciendo sus conocimientos en desarrollo frontend, diseño centrado en el usuario y validación de soluciones de software.
+      <br><br>
+      <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
       <u>AV1</u><br>
       Reconoció la importancia del aprendizaje continuo al investigar y aplicar de manera autónoma técnicas de priorización de requerimientos, modelado C4 y análisis centrado en el usuario. Este proceso le permitió adaptar nuevos conocimientos a las necesidades del proyecto y fortalecer su comprensión sobre la relación entre requerimientos, experiencia de usuario y arquitectura de software.
+      <br><br>
+      <u>TB1</u><br>
+      Reconoció la necesidad de actualizar constantemente sus conocimientos técnicos al implementar servicios externos de pagos y autenticación, así como al desplegar el backend en infraestructura cloud. La integración de Stripe, Google Login, Railway, MySQL 8 y Upstash Redis evidenció la importancia del aprendizaje autónomo para comprender nuevas tecnologías, resolver problemas de integración y garantizar el funcionamiento de los servicios del producto.
       <br><br>
       <b>Güere Calero, Fernando Julio</b><br>
       <u>AV1</u><br>
@@ -463,9 +481,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV1</u><br>
       Reconoció la necesidad de expandir sus competencias en el diseño de software investigando de forma autónoma la construcción y aplicación del Lenguaje Ubicuo (Ubiquitous Language) dentro de Domain-Driven Design, aplicando este autoaprendizaje para asegurar que la arquitectura técnica y los esquemas de datos reflejen fielmente las reglas de negocio del proyecto MindFlow.
       <br><br>
+      <u>TB1</u><br>
+      Reconoció la importancia del aprendizaje permanente al desarrollar tres Bounded Contexts del frontend y trasladar los diseños visuales a componentes funcionales. La implementación del Design System en código y la realización de una Validation Interview evidenciaron la necesidad de continuar aprendiendo buenas prácticas de desarrollo frontend, reutilización de componentes y diseño de interfaces consistentes con las necesidades de los usuarios.
+      <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
       Tuvo que investigar por cuenta propia detalles no cubiertos antes, como el despliegue de un backend .NET en contenedores Docker sobre Railway, junto con sus servicios de MySQL y Redis, y las particularidades de integrar un proveedor de IA generativa (Gemini) como dependencia transversal entre varios bounded contexts, reconociendo que ese conocimiento previo necesita actualizarse constantemente frente a cada proyecto y stack tecnológico concreto.
+      <br><br>
+      <u>TB1</u><br>
+      Reconoció la necesidad de mantener un aprendizaje continuo al trabajar en el desarrollo del frontend de un chat con inteligencia artificial y en la documentación de servicios del sistema. Asimismo, la elaboración de User Flows, Collaboration Insights y evidencias de despliegue evidenció la importancia de seguir fortaleciendo sus conocimientos en integración tecnológica, diseño de experiencia de usuario y documentación de soluciones de software.
     </td>
     <td>
       <u>AV1</u><br>
