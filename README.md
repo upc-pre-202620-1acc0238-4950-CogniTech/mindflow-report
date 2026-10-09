@@ -3167,7 +3167,79 @@ Los wireframes representan la versión de baja fidelidad de las pantallas de la 
 
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
 
-_Pendiente_
+Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navegación que sigue el usuario, mostrando en una sola fila las pantallas de baja fidelidad que recorre para cumplir un objetivo. A diferencia del diagrama de flujo abstracto de la sección 3.1.4.4 (que incluye decisiones del sistema y mensajes de error), el wireflow se queda solo en la secuencia de pantallas, en el mismo orden que cada User Flow.
+
+**User Flow 1: Acceder a MindFlow (Figura 146).**
+
+<p>
+<img src="assets/img/movil_wireframes/App — 01 Login.png" alt="Wireframe - Login" width="160"/>
+<img src="assets/img/movil_wireframes/App — 02 Registro.png" alt="Wireframe - Registro" width="160"/>
+<img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
+
+*Figura 146. Wireflow — User Flow 1: Acceder a MindFlow (Login → Registro → Inicio).*
+</p>
+
+**User Flow 2: Registrar cómo me siento y recibir apoyo de la IA (Figura 147).**
+
+<p>
+<img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
+<img src="assets/img/movil_wireframes/App — 12 Chat con MindFlow AI.png" alt="Wireframe - Chat con MindFlow AI" width="160"/>
+
+*Figura 147. Wireflow — User Flow 2: Registrar cómo me siento y recibir apoyo de la IA (Inicio → Chat con MindFlow AI).*
+</p>
+
+**User Flow 3: Revisar mi historial emocional (Figura 148).**
+
+<p>
+<img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
+<img src="assets/img/movil_wireframes/App — 04 Diario (Historial emocional).png" alt="Wireframe - Diario (Historial emocional)" width="160"/>
+
+*Figura 148. Wireflow — User Flow 3: Revisar mi historial emocional (Inicio → Diario).*
+</p>
+
+**User Flow 4: Gestionar mis hábitos según mi nivel de estrés (Figura 149).**
+
+<p>
+<img src="assets/img/movil_wireframes/App — 05 Hábitos · Mis Rutinas.png" alt="Wireframe - Hábitos: Mis Rutinas" width="160"/>
+<img src="assets/img/movil_wireframes/App — 06 Hábitos · Sugerencias de IA.png" alt="Wireframe - Hábitos: Sugerencias de IA" width="160"/>
+
+*Figura 149. Wireflow — User Flow 4: Gestionar mis hábitos según mi nivel de estrés (Mis Rutinas → Sugerencias de IA).*
+</p>
+
+**User Flow 5: Revisar mis analíticas y exportar un reporte (Figura 150).**
+
+<p>
+<img src="assets/img/movil_wireframes/App — 07 Analíticas · Resumen.png" alt="Wireframe - Analíticas: Resumen" width="160"/>
+<img src="assets/img/movil_wireframes/App — 08 Analíticas · Nube, tendencias y exportación.png" alt="Wireframe - Analíticas: Nube, tendencias y exportación" width="160"/>
+<img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="160"/>
+
+*Figura 150. Wireflow — User Flow 5: Revisar mis analíticas y exportar un reporte (Analíticas: Resumen → Analíticas: Nube, tendencias y exportación → Suscripción, al requerir Premium).*
+</p>
+
+**User Flow 6: Mejorar a MindFlow Premium (Figura 151).**
+
+<p>
+<img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="180"/>
+
+*Figura 151. Wireflow — User Flow 6: Mejorar a MindFlow Premium (Suscripción, soporte y cuenta).*
+</p>
+
+**User Flow 7: Proteger mi privacidad y personalizar la aplicación (Figura 152).**
+
+<p>
+<img src="assets/img/movil_wireframes/App — 09 Ajustes · Perfil.png" alt="Wireframe - Ajustes: Perfil" width="160"/>
+<img src="assets/img/movil_wireframes/App — 10 Ajustes · Privacidad y experiencia.png" alt="Wireframe - Ajustes: Privacidad y experiencia" width="160"/>
+
+*Figura 152. Wireflow — User Flow 7: Proteger mi privacidad y personalizar la aplicación (Perfil → Privacidad y experiencia).*
+</p>
+
+**User Flow 8: Pedir ayuda al soporte técnico (Figura 153).**
+
+<p>
+<img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="180"/>
+
+*Figura 153. Wireflow — User Flow 8: Pedir ayuda al soporte técnico (Suscripción, soporte y cuenta).*
+</p>
 
 #### 3.1.4.3. Mobile Applications Mock-ups
 
