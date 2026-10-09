@@ -431,7 +431,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
-      Ya contaba con base previa en Domain-Driven Design y en el C4 Model, pero en este proyecto actualizó ese conocimiento al aplicarlo a un caso real con varios bounded contexts interdependientes (IAM, Journal, AI Assistant y Habits & Wellness) y al elaborar por primera vez un Deployment Diagram sobre infraestructura cloud concreta (Azure App Service, Azure Database for MySQL), integrando patrones de Application Layer distintos entre sí (Command Service unificado, CQRS, servicios planos) según las necesidades específicas de cada contexto.
+      Ya contaba con base previa en Domain-Driven Design y en el C4 Model, pero en este proyecto actualizó ese conocimiento al aplicarlo a un caso real con varios bounded contexts interdependientes (IAM, Journal, AI Assistant y Habits & Wellness) y al elaborar por primera vez un Deployment Diagram sobre infraestructura cloud concreta (Railway, con servicios de API, MySQL y Redis), integrando patrones de Application Layer distintos entre sí (Command Service unificado, CQRS, servicios planos) según las necesidades específicas de cada contexto.
     </td>
     <td>
       <u>AV1</u><br>
@@ -465,7 +465,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
-      Tuvo que investigar por cuenta propia detalles no cubiertos antes, como el despliegue de un backend .NET sobre Azure App Service y Azure Database for MySQL, y las particularidades de integrar un proveedor de IA generativa (Gemini) como dependencia transversal entre varios bounded contexts, reconociendo que ese conocimiento previo necesita actualizarse constantemente frente a cada proyecto y stack tecnológico concreto.
+      Tuvo que investigar por cuenta propia detalles no cubiertos antes, como el despliegue de un backend .NET en contenedores Docker sobre Railway, junto con sus servicios de MySQL y Redis, y las particularidades de integrar un proveedor de IA generativa (Gemini) como dependencia transversal entre varios bounded contexts, reconociendo que ese conocimiento previo necesita actualizarse constantemente frente a cada proyecto y stack tecnológico concreto.
     </td>
     <td>
       <u>AV1</u><br>
@@ -2057,9 +2057,10 @@ El sistema MindFlow está compuesto por cuatro contenedores (Landing Page, Mobil
 
 - **GitHub Pages**: plataforma de hosting de sitios estáticos que aloja el Landing Page (HTML5, CSS3, JavaScript), distribuido a través de su CDN global bajo protocolo HTTPS.
 
-- **Microsoft Azure**: proveedor cloud que aloja toda la infraestructura del backend, compuesto por dos nodos:
-  - **Azure App Service**: plataforma PaaS que ejecuta el contenedor Docker de la **Web Services API** (ASP.NET Core / .NET 10), publicado automáticamente desde el repositorio de GitHub.
-  - **Azure Database for MySQL**: servicio de base de datos relacional administrado (Flexible Server) que aloja la **Database** (MySQL 8.0), donde se persisten usuarios, entradas de diario, hábitos, conversaciones de chat, suscripciones y tickets de soporte.
+- **Railway**: plataforma cloud que aloja toda la infraestructura del backend dentro de un mismo proyecto, compuesto por tres servicios:
+  - **Web Services API**: servicio que construye y ejecuta el contenedor Docker de la API (ASP.NET Core / .NET 10) a partir del `Dockerfile` del repositorio de GitHub.
+  - **MySQL**: servicio de base de datos relacional que aloja la **Database** (MySQL 8.0), donde se persisten usuarios, entradas de diario, hábitos, conversaciones de chat, suscripciones y tickets de soporte.
+  - **Redis**: servicio de caché en memoria que usa la Web Services API para reducir las consultas repetidas a la base de datos.
 
 - **Servicios externos de terceros** (agrupados como Third-Party Cloud Services), consumidos por la Web Services API mediante llamadas HTTPS/JSON (o SMTP en el caso del correo):
   - **Google Cloud / Firebase**: aloja **Google Gemini API** (generación de insights de IA, respuestas del chat, análisis de sentimiento y sugerencias de hábitos), **Firebase Cloud Messaging** (notificaciones push) y **Google OAuth** (autenticación con Google Sign-In).

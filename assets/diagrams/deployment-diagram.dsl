@@ -9,6 +9,7 @@ workspace "MindFlow" "C4 Model - Software Architecture Deployment Diagram" {
             mobileApp = container "Mobile Application" "Lets users journal, track habits, chat with the AI assistant, and view analytics." "Kotlin / Flutter (native or cross-platform)" "MobileApp"
             api = container "Web Services API" "Exposes MindFlow's functionality (IAM, Journal, Habits, AI Assistant, Analytics, Notifications, Subscriptions, Support) via a RESTful API." "ASP.NET Core / .NET 10" "WebApplication"
             database = container "Database" "Stores users, journal entries, habits, chat conversations, subscriptions, and support tickets." "MySQL 8.0" "Database"
+            cache = container "Cache" "Caches frequently requested data to reduce repeated database queries." "Redis" "Database"
         }
 
         geminiApi = softwareSystem "Google Gemini API" "Generates AI-powered insights, chat responses, sentiment analysis, and habit suggestions." "External"
@@ -22,6 +23,7 @@ workspace "MindFlow" "C4 Model - Software Architecture Deployment Diagram" {
         visitor -> landingPage "Visits" "HTTPS"
         mobileApp -> api "Makes API calls to" "HTTPS/JSON, JWT"
         api -> database "Reads from and writes to" "EF Core, TCP/3306"
+        api -> cache "Reads from and writes to" "StackExchange.Redis, TCP/6379"
         api -> geminiApi "Sends prompts to and receives AI-generated content from" "HTTPS/JSON"
         api -> stripe "Creates checkout sessions and receives webhooks from" "HTTPS/JSON"
         api -> fcm "Sends push notifications via" "HTTPS/JSON"
@@ -39,12 +41,15 @@ workspace "MindFlow" "C4 Model - Software Architecture Deployment Diagram" {
                 containerInstance landingPage
             }
 
-            deploymentNode "Microsoft Azure" "Cloud provider hosting the MindFlow backend infrastructure." "Microsoft Azure" {
-                deploymentNode "Azure App Service" "PaaS running the containerized Web Services API." "Linux App Service Plan, Docker container (.NET 10 runtime)" {
+            deploymentNode "Railway" "Cloud platform hosting the MindFlow backend infrastructure in a single project." "Railway" {
+                deploymentNode "API Service" "Builds and runs the Web Services API from the GitHub repository Dockerfile." "Docker container (.NET 10 runtime)" {
                     containerInstance api
                 }
-                deploymentNode "Azure Database for MySQL" "Managed relational database service (Flexible Server)." "Azure Database for MySQL 8.0" {
+                deploymentNode "MySQL Service" "Relational database service provisioned in the Railway project." "MySQL 8.0" {
                     containerInstance database
+                }
+                deploymentNode "Redis Service" "In-memory cache service provisioned in the Railway project." "Redis" {
+                    containerInstance cache
                 }
             }
 
@@ -75,7 +80,7 @@ workspace "MindFlow" "C4 Model - Software Architecture Deployment Diagram" {
             include *
             autoLayout tb 150 150
             title "MindFlow - Deployment Diagram (Production)"
-            description "Physical distribution of the MindFlow system: Landing Page on GitHub Pages, Mobile App on the user's device, Web Services API on Azure App Service, MySQL on Azure Database for MySQL, and third-party integrations (Gemini, Stripe, FCM, Cloudinary, SMTP, Google OAuth)."
+            description "Physical distribution of the MindFlow system: Landing Page on GitHub Pages, Mobile App on the user's device, Web Services API, MySQL and Redis on Railway, and third-party integrations (Gemini, Stripe, FCM, Cloudinary, SMTP, Google OAuth)."
         }
 
         styles {
