@@ -3751,7 +3751,13 @@ flowchart TD
 
 #### 3.1.4.5. Mobile Applications Prototyping
 
-_Pendiente_
+A partir de los mock-ups de alta fidelidad de la sección 3.1.4.3 se armó un prototipo interactivo en Figma, conectando las pantallas en el mismo orden de navegación documentado en los User Flows de la sección 3.1.4.4: acceso a la aplicación (Login → Registro → Inicio) y el registro del historial emocional desde el Dashboard (Inicio → Diario). El prototipo se puede recorrer haciendo clic directamente sobre cada pantalla (Figura 161).
+
+**Prototipo interactivo:** [https://www.figma.com/proto/oL5qBZ6aVIPJBJTRZJ23jH/AppMoviles?node-id=38-527&starting-point-node-id=38%3A527](https://www.figma.com/proto/oL5qBZ6aVIPJBJTRZJ23jH/AppMoviles?node-id=38-527&starting-point-node-id=38%3A527)
+
+<img src="assets/img/mobile_mockups/prototype-preview.jpg" alt="Prototipo interactivo en ejecución" width="300"/>
+
+*Figura 161. Prototipo interactivo ejecutándose en Figma, tras navegar de Login a Registro.*
 
 ---
 
