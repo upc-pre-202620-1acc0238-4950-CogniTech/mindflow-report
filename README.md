@@ -4434,11 +4434,28 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 | Duración | 6:43 |
 | Resumen | Cristian, estudiante universitario de 19 años de la UPC, revisó la Landing Page (presentación, cambio de idioma español/inglés, pasos para explorar la app, vista previa de funciones y planes) y un recorrido en video por la aplicación: inicio con resumen semanal, chat con la IA, ejercicios de respiración y meditación, historial emocional, hábitos con sugerencias, analíticas con exportación de reportes, perfil con cambio de idioma y suscripción. Lo que más le llamó la atención fue la posibilidad de agregar rutinas que se integren a su día a día. Como punto de confusión, señaló que la información de seguimiento aparece repartida en varias vistas —el resumen semanal del inicio, el calendario del historial emocional y las estadísticas de Analíticas— y sugirió concentrarla en la sección de estadísticas. No identificó funcionalidades faltantes, aunque comentó que en el video no se apreciaba cómo responde el chatbot de IA. La confianza al registrar sus emociones vendría de sentirse cómodo y acompañado dentro de la app cuando busca bienestar. Como mejoras, propuso opciones más personalizables, como programar pausas activas durante el día, y preguntó por un modo oscuro o claro. Para su segmento, usaría MindFlow en semana de exámenes cuando siente que las emociones se le acumulan y necesita desestresarse tras varios días de desvelo, y considera fundamental que la app sea gratuita o de bajo costo, ya que existen alternativas gratuitas que se financian con anuncios. Insight principal: para este segmento, el valor está en integrar rutinas de bienestar al día a día a un costo bajo, siempre que el seguimiento del progreso esté organizado en un solo lugar. Conclusión: unificar el resumen semanal, el calendario emocional y las estadísticas dentro de Analíticas (o enlazarlos claramente entre sí), hacer visible la respuesta de la IA durante la demostración y permitir programar pausas activas personalizadas. |
 
+##### Entrevista 3
+
+**Tabla 83. Segmento 1: Estudiantes Universitarios — Entrevista 3.**
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Estudiantes universitarios (18–25 años) |
+| Fecha Entrevista | [por completar] |
+| Entrevistador | Camila Cabrera |
+| Entrevistado | Joaquín Cruzalegui |
+| Edad | 19 años |
+| Distrito | [por completar] |
+| Link del Video | [Ver video](videosegmento1camila) |
+| Minuto de Inicio | 0:00 |
+| Duración | [por completar] |
+| Resumen | Joaquín, estudiante de Ingeniería de Software de 19 años, entiende MindFlow como una aplicación que busca ayudar a los estudiantes universitarios con su bienestar emocional: permite registrar cómo se siente, recibir retroalimentación de la inteligencia artificial y mantener hábitos saludables. Considera que puede ser útil porque, con la carga de estudios, a veces se deja de lado cómo uno se siente. Lo que más le llamó la atención fue el diario emocional y la respuesta de la IA, por la posibilidad de expresar lo que siente y recibir una respuesta. Como punto de confusión, señaló que le gustaría entender mejor cómo funciona esa retroalimentación y si realmente se adapta a lo que escribe cada persona o si las respuestas son más generales. Esperaba encontrar recomendaciones rápidas para momentos de mucho estrés, como ejercicios de respiración o pequeñas pausas para despejarse, y recordatorios de hábitos personalizables, porque cada estudiante tiene horarios distintos y eso facilitaría incorporar la aplicación a su rutina. La confianza se la daría saber que la información que escribe es privada y que otras personas no pueden acceder a ella, dado que se pueden registrar cosas muy personales; la desconfianza vendría de no saber dónde se guardan sus datos ni cómo se utilizan, y considera que explicar las medidas de privacidad ayudaría a que los usuarios se sientan más seguros. Como mejoras, propuso que la aplicación sea rápida y sencilla, porque en épocas de trabajos y exámenes no se quiere dedicar demasiado tiempo a otra actividad, además de mejorar la personalización de los hábitos y las recomendaciones, y que la app no solo permita registrar información sino que ayude a identificar patrones y a entender mejor cómo se está sintiendo. Para su segmento, usaría MindFlow durante una semana de exámenes, especialmente si se siente estresado o tiene muchas entregas acumuladas, para tomarse unos minutos de reflexión; en cuanto al costo, prefiere una versión gratuita con las funciones principales, porque como estudiante no siempre tiene presupuesto para suscripciones, y consideraría seguir usándola si comprueba que realmente le sirve. Insight principal: para este segmento, el valor está en una herramienta rápida y sencilla que ofrezca ayuda inmediata en momentos de estrés, con hábitos y recomendaciones personalizables y las funciones principales gratuitas. Conclusión: dar visibilidad a las intervenciones rápidas (respiración y pausas), permitir recordatorios con horarios personalizables, explicar con claridad cómo la IA se adapta a lo que escribe cada usuario y dónde se almacenan y cómo se usan los datos, y mantener las funciones centrales en el plan gratuito. |
+
 #### Segmento 2: Profesionales Jóvenes
 
 ##### Entrevista 1
 
-**Tabla 83. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
+**Tabla 84. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4455,7 +4472,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 2
 
-**Tabla 84. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
+**Tabla 85. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4472,13 +4489,13 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ### 4.3.3. Evaluaciones según heurísticas
 
-Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 85).
+Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 86).
 
 #### UX Heuristics & Principles Evaluation
 
 **Usability - Inclusive Design - Information Architecture**
 
-**Tabla 85. Evaluación según Heurísticas — Datos generales de la evaluación.**
+**Tabla 86. Evaluación según Heurísticas — Datos generales de la evaluación.**
 
 | Campo | Detalle |
 |---|---|
@@ -4514,9 +4531,9 @@ No están incluidas en esta versión de la evaluación las siguientes tareas:
 
 #### Escala de severidad
 
-Los problemas se puntúan con la siguiente escala (Tabla 86).
+Los problemas se puntúan con la siguiente escala (Tabla 87).
 
-**Tabla 86. Evaluación según Heurísticas — Escala de severidad.**
+**Tabla 87. Evaluación según Heurísticas — Escala de severidad.**
 
 | Nivel | Descripción |
 |---|---|
@@ -4527,9 +4544,9 @@ Los problemas se puntúan con la siguiente escala (Tabla 86).
 
 #### Tabla resumen
 
-La Tabla 87 resume los 16 problemas identificados, ordenados según su numeración y severidad.
+La Tabla 88 resume los 16 problemas identificados, ordenados según su numeración y severidad.
 
-**Tabla 87. Evaluación según Heurísticas — Resumen de problemas identificados.**
+**Tabla 88. Evaluación según Heurísticas — Resumen de problemas identificados.**
 
 | # | Problema | Severidad | Heurística/Principio violada(o) |
 |---|---|---|---|
@@ -4842,9 +4859,9 @@ Incorporar en el roadmap el registro por dictado de voz, la sincronización de h
 
 #### Resumen de hallazgos
 
-La distribución de los problemas según su severidad (Tabla 88) y según el eje evaluado (Tabla 89) se muestra a continuación.
+La distribución de los problemas según su severidad (Tabla 89) y según el eje evaluado (Tabla 90) se muestra a continuación.
 
-**Tabla 88. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
+**Tabla 89. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
 
 | Severidad | Cantidad | Problemas |
 |---|---|---|
@@ -4853,7 +4870,7 @@ La distribución de los problemas según su severidad (Tabla 88) y según el eje
 | Severidad 3 | 4 | #1, #2, #3, #4 |
 | Severidad 4 | 0 | — |
 
-**Tabla 89. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
+**Tabla 90. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
 
 | Eje evaluado | Problemas |
 |---|---|
@@ -4876,14 +4893,14 @@ Los resultados indican que MindFlow no presenta problemas muy graves (severidad 
 1. El modelado estratégico realizado en el Capítulo II (Big Picture EventStorming, EventStorming estratégico, Candidate Context Discovery y Context Mapping) se sostuvo hasta la implementación: los 8 Bounded Contexts candidatos (IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support) se llevaron, sin rediseños mayores, hasta el diseño táctico y el backend construido en el Sprint 1 (Capítulo IV), lo que confirma que los límites de contexto definidos desde la primera entrega eran correctos.
 2. El Style Guide, la Information Architecture y los wireframes/mock-ups del Capítulo III tradujeron de forma consistente los hallazgos del Lean UX Process (Capítulo I) en una experiencia concreta: los 8 User Flows diseñados para la Mobile Application cubren el recorrido completo de los dos User Personas (Jimena y Nordie) y están directamente trazados a las User Stories priorizadas en el Product Backlog.
 3. La evidencia del Sprint 1 (Capítulo IV) —backend de los 8 Bounded Contexts documentado en Swagger, frontend Android con arquitectura DDD, pruebas unitarias automatizadas exitosas y despliegue funcional— demuestra que el flujo de trabajo GitFlow adoptado por el equipo permite construir en paralelo múltiples Bounded Contexts sin bloquear el avance del resto del producto.
-4. Las dos primeras entrevistas de validación (Valeria, Segmento 1, y Juan, Segmento 2) confirman la propuesta de valor de MindFlow en ambos segmentos —desahogo rápido y pausa de hábitos sin culpa en época de exámenes para estudiantes; cierre de jornada laboral y trazabilidad de patrones de estrés para profesionales— y coinciden en una misma preocupación de confianza: la privacidad y el tratamiento de los datos emocionales registrados, tanto en el cifrado local como en su paso por APIs externas de IA.
+4. Las cinco entrevistas de validación realizadas (tres del Segmento 1: Valeria, Cristian y Joaquín; dos del Segmento 2: Juan y Aldo) confirman la propuesta de valor de MindFlow en ambos segmentos —desahogo rápido, intervenciones breves de bienestar y pausa de hábitos sin culpa en época de exámenes para estudiantes; cierre de jornada laboral y trazabilidad de patrones de estrés para profesionales— y coinciden en una misma preocupación de confianza: la privacidad y el tratamiento de los datos emocionales registrados, tanto en el cifrado local como en su paso por APIs externas de IA. Además, los estudiantes coinciden en que la aplicación debe ser rápida y sencilla, y en que las funciones principales deben mantenerse en el plan gratuito.
 
 **Recomendaciones**
 
-1. Completar las 4 entrevistas de validación restantes (3 por segmento, según lo planificado en la sección 4.3.1) antes de cerrar el Sprint 2, profundizando en la disposición de pago por el plan Premium y en la claridad del alcance del asistente de IA, dos puntos de confusión que aparecieron en ambas entrevistas ya realizadas.
-2. Priorizar en el Product Backlog del Sprint 2 los vacíos funcionales que señalaron ambos segmentos durante la validación: integración con calendario y registro por voz para estudiantes, y recordatorios push configurables junto con etiquetado por área de vida (trabajo, finanzas, personal) para profesionales.
+1. Completar la entrevista de validación restante del Segmento 2 (Profesionales Jóvenes), según lo planificado en la sección 4.3.1, antes de cerrar el Sprint 2, profundizando en la disposición de pago por el plan Premium y en la claridad del alcance del asistente de IA, dos puntos de confusión que aparecieron en las entrevistas ya realizadas.
+2. Priorizar en el Product Backlog del Sprint 2 los vacíos funcionales que señalaron ambos segmentos durante la validación: integración con calendario, registro por voz y recordatorios de hábitos con horarios personalizables para estudiantes, y recordatorios push configurables junto con etiquetado por área de vida (trabajo, finanzas, personal) para profesionales.
 3. Conectar en el Sprint 2 las vistas móviles que hoy trabajan con persistencia local (Diario, Hábitos, Analíticas y Configuración) a sus endpoints ya documentados del backend, y completar las funcionalidades pendientes identificadas en la evidencia de Sprint 1: bloqueo por PIN (US04), recordatorios de hábitos y envío de tickets de soporte (US37).
-4. Reforzar el disclaimer de onboarding y la Política de Privacidad para dejar explícito que MindFlow es un asistente de reflexión y no un servicio clínico/terapéutico, y detallar cómo se tratan los datos de texto que procesan las APIs externas de IA (Gemini), atendiendo directamente la desconfianza expresada por los dos entrevistados validados.
+4. Reforzar el disclaimer de onboarding y la Política de Privacidad para dejar explícito que MindFlow es un asistente de reflexión y no un servicio clínico/terapéutico, y detallar cómo se tratan los datos de texto que procesan las APIs externas de IA (Gemini), atendiendo directamente la desconfianza expresada por los entrevistados validados.
 
 <!--
 ## Video App Validation
