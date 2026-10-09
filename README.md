@@ -181,7 +181,7 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
 Para la segunda entrega, el trabajo colaborativo del equipo se amplió del único repositorio del Project Report a los cuatro repositorios que conforman la solución completa de MindFlow:
 
 - Informe: [`mindflow-report`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-report)
-- Backend: [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend)
+- Backend: [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), documentación interactiva en [Swagger](https://powerful-wholeness-production.up.railway.app/swagger)
 - Mobile Application (Android nativo): [`mindflow-frontend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend)
 - Landing Page: [`mindflow-landingPage`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage), desplegado en [GitHub Pages](https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/)
 - Diseño: [Figma — AppMoviles](https://www.figma.com/design/oL5qBZ6aVIPJBJTRZJ23jH/AppMoviles?t=WGZWtJXygKBervV6-1)
