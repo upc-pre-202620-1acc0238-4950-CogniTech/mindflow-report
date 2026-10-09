@@ -4409,11 +4409,28 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 | Duración | 12:22 |
 | Resumen | Valeria, estudiante de Administración y Marketing de 19 años, entiende MindFlow como una app de bienestar emocional para llevar un diario personal, recibir acompañamiento inmediato de una IA empática y organizar hábitos que se adaptan a su nivel de estrés. Lo que más le llamó la atención fue la integración entre el diario y los hábitos —en particular que la IA sugiera pausas o ejercicios de respiración (como el 4-7-8) cuando detecta que está abrumada—, además del calendario de emociones coloreado y la gráfica de tendencias en Analíticas. Como puntos de confusión, señaló que no queda claro si la IA funciona como un terapeuta formal o solo como un asistente de reflexión, ni qué funcionalidades son exclusivas del plan Premium frente al Freemium hasta llegar a la pantalla de Planes. Esperaba encontrar integración con Google Calendar para programar hábitos y la posibilidad de registrar entradas mediante notas de voz. La confianza se la daría saber que las notas están cifradas con AES en el servidor, contar con un PIN de bloqueo y poder eliminar su cuenta y datos en cualquier momento; la desconfianza vendría del temor de que sus reflexiones personales se usen para entrenar modelos de IA de terceros o queden expuestas sin privacidad. Para su segmento, usaría la app en semana de exámenes para desahogarse rápido, hacer micro-meditaciones antes de un examen y pausar hábitos pesados sin sentir culpa por perder la racha; considera esencial que las funciones nucleares (diario emocional, chat básico y seguimiento de hábitos) estén en la versión gratuita, y solo pagaría el plan Premium (4.99 USD/mes) si incluye reportes muy detallados o acompañamiento académico-emocional continuo. Insight principal: para este segmento, el costo y que el sistema actúe de forma proactiva (pausar sin culpa) pesan más que las funciones avanzadas. Conclusión: agregar widgets de registro rápido para la pantalla de inicio, recordatorios más personalizables y mayor claridad en el disclaimer inicial sobre que la app no sustituye atención psicológica clínica. |
 
+##### Entrevista 2
+
+**Tabla 82. Segmento 1: Estudiantes Universitarios — Entrevista 2.**
+
+| Campo | Detalle |
+|------|--------|
+| Segmento Objetivo | Estudiantes universitarios (18–25 años) |
+| Fecha Entrevista | 08/10/2026 |
+| Entrevistador | Imanol Limache |
+| Entrevistado | Cristian Condori |
+| Edad | 19 años |
+| Distrito | Santiago de Surco |
+| Link del Video | [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410382_upc_edu_pe/IQBHBvSaXxnLQJSvx2MNoIsLAQo0Ct1WuDAsUknTpBOvJO4?e=lAlyl0) |
+| Minuto de Inicio | 0:00 |
+| Duración | 6:43 |
+| Resumen | Cristian, estudiante universitario de 19 años de la UPC, revisó la Landing Page (presentación, cambio de idioma español/inglés, pasos para explorar la app, vista previa de funciones y planes) y un recorrido en video por la aplicación: inicio con resumen semanal, chat con la IA, ejercicios de respiración y meditación, historial emocional, hábitos con sugerencias, analíticas con exportación de reportes, perfil con cambio de idioma y suscripción. Lo que más le llamó la atención fue la posibilidad de agregar rutinas que se integren a su día a día. Como punto de confusión, señaló que la información de seguimiento aparece repartida en varias vistas —el resumen semanal del inicio, el calendario del historial emocional y las estadísticas de Analíticas— y sugirió concentrarla en la sección de estadísticas. No identificó funcionalidades faltantes, aunque comentó que en el video no se apreciaba cómo responde el chatbot de IA. La confianza al registrar sus emociones vendría de sentirse cómodo y acompañado dentro de la app cuando busca bienestar. Como mejoras, propuso opciones más personalizables, como programar pausas activas durante el día, y preguntó por un modo oscuro o claro. Para su segmento, usaría MindFlow en semana de exámenes cuando siente que las emociones se le acumulan y necesita desestresarse tras varios días de desvelo, y considera fundamental que la app sea gratuita o de bajo costo, ya que existen alternativas gratuitas que se financian con anuncios. Insight principal: para este segmento, el valor está en integrar rutinas de bienestar al día a día a un costo bajo, siempre que el seguimiento del progreso esté organizado en un solo lugar. Conclusión: unificar el resumen semanal, el calendario emocional y las estadísticas dentro de Analíticas (o enlazarlos claramente entre sí), hacer visible la respuesta de la IA durante la demostración y permitir programar pausas activas personalizadas. |
+
 #### Segmento 2: Profesionales Jóvenes
 
 ##### Entrevista 1
 
-**Tabla 82. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
+**Tabla 83. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4430,7 +4447,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 2
 
-**Tabla 83. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
+**Tabla 84. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4447,13 +4464,13 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ### 4.3.3. Evaluaciones según heurísticas
 
-Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 84).
+Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 85).
 
 #### UX Heuristics & Principles Evaluation
 
 **Usability - Inclusive Design - Information Architecture**
 
-**Tabla 84. Evaluación según Heurísticas — Datos generales de la evaluación.**
+**Tabla 85. Evaluación según Heurísticas — Datos generales de la evaluación.**
 
 | Campo | Detalle |
 |---|---|
@@ -4489,9 +4506,9 @@ No están incluidas en esta versión de la evaluación las siguientes tareas:
 
 #### Escala de severidad
 
-Los problemas se puntúan con la siguiente escala (Tabla 85).
+Los problemas se puntúan con la siguiente escala (Tabla 86).
 
-**Tabla 85. Evaluación según Heurísticas — Escala de severidad.**
+**Tabla 86. Evaluación según Heurísticas — Escala de severidad.**
 
 | Nivel | Descripción |
 |---|---|
@@ -4502,9 +4519,9 @@ Los problemas se puntúan con la siguiente escala (Tabla 85).
 
 #### Tabla resumen
 
-La Tabla 86 resume los 16 problemas identificados, ordenados según su numeración y severidad.
+La Tabla 87 resume los 16 problemas identificados, ordenados según su numeración y severidad.
 
-**Tabla 86. Evaluación según Heurísticas — Resumen de problemas identificados.**
+**Tabla 87. Evaluación según Heurísticas — Resumen de problemas identificados.**
 
 | # | Problema | Severidad | Heurística/Principio violada(o) |
 |---|---|---|---|
@@ -4817,9 +4834,9 @@ Incorporar en el roadmap el registro por dictado de voz, la sincronización de h
 
 #### Resumen de hallazgos
 
-La distribución de los problemas según su severidad (Tabla 87) y según el eje evaluado (Tabla 88) se muestra a continuación.
+La distribución de los problemas según su severidad (Tabla 88) y según el eje evaluado (Tabla 89) se muestra a continuación.
 
-**Tabla 87. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
+**Tabla 88. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
 
 | Severidad | Cantidad | Problemas |
 |---|---|---|
@@ -4828,7 +4845,7 @@ La distribución de los problemas según su severidad (Tabla 87) y según el eje
 | Severidad 3 | 4 | #1, #2, #3, #4 |
 | Severidad 4 | 0 | — |
 
-**Tabla 88. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
+**Tabla 89. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
 
 | Eje evaluado | Problemas |
 |---|---|
