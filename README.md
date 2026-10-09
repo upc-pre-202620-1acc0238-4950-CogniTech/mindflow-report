@@ -3981,14 +3981,49 @@ Ejemplo de respuesta de checkout (Tabla 72):
 
 ##### Capturas de la interacción con la documentación
 
-_Pendiente: agregar capturas de Swagger UI con datos de muestra:_
+A continuación se muestra la interacción con la documentación desplegada en Railway, ejecutando con datos de muestra los endpoints principales del Sprint 1.
 
-1. _Vista general de Swagger UI con los controladores agrupados._
-2. _Botón **Authorize** con el token Bearer obtenido en `sign-in`._
-3. _`POST /api/v1/journal/entries` ejecutado, mostrando el `ai_response` generado._
-4. _`GET /api/v1/analytics/dashboard` con la respuesta de métricas._
-5. _`POST /api/v1/subscriptions/checkout` devolviendo la URL de Stripe._
-6. _`POST /api/v1/support/tickets` devolviendo el ticket creado._
+**1. Vista general.** Al ingresar a la documentación desplegada se muestran los endpoints agrupados por controlador, cada uno con su verbo HTTP, su ruta y un candado en los que requieren autenticación (Figura 90).
+
+<img src="assets/img/swagger/01-swagger-general.png" alt="Vista general de Swagger UI" width="800"/>
+
+*Figura 90. Vista general de la documentación en Swagger UI desplegada en Railway, con los endpoints agrupados por controlador.*
+
+**2. Registro de usuario.** Se registró un usuario de prueba con `POST /api/v1/users/sign-up`. El servicio respondió `201 Created` con el `id`, el `email` y el `name` del nuevo usuario (Figura 91).
+
+<img src="assets/img/swagger/02-sign-up.png" alt="Registro de usuario desde Swagger UI" width="800"/>
+
+*Figura 91. Registro de un usuario de prueba con `POST /api/v1/users/sign-up`.*
+
+**3. Autenticación.** Con `POST /api/v1/users/sign-in` se obtuvo el token JWT del usuario, que se ingresó en la opción **Authorize** para que Swagger UI lo envíe como encabezado `Authorization: Bearer` en los endpoints protegidos (Figura 92).
+
+<img src="assets/img/swagger/03-authorize.png" alt="Autorización con token Bearer" width="800"/>
+
+*Figura 92. Autorización en Swagger UI con el token JWT obtenido en `sign-in`.*
+
+**4. Entrada del diario emocional.** Con `POST /api/v1/journal/entries` se registró una entrada con su fecha, título, contenido, sentimiento y categoría. El servicio respondió `200 OK` con la entrada guardada y asociada al usuario autenticado (`user_id`) (Figura 93).
+
+<img src="assets/img/swagger/04-journal-entry.png" alt="Creación de una entrada del diario" width="800"/>
+
+*Figura 93. Creación de una entrada del diario emocional con `POST /api/v1/journal/entries`.*
+
+**5. Analíticas.** `GET /api/v1/analytics/dashboard`, sin parámetros, devolvió las métricas de los últimos 30 días: cantidad de entradas, distribución por sentimiento, categorías más frecuentes y hábitos completados. Los valores reflejan la entrada registrada en el paso anterior (Figura 94).
+
+<img src="assets/img/swagger/05-analytics-dashboard.png" alt="Dashboard de analíticas" width="800"/>
+
+*Figura 94. Métricas del usuario obtenidas con `GET /api/v1/analytics/dashboard`.*
+
+**6. Suscripción Premium.** `POST /api/v1/subscriptions/checkout` creó una sesión de **Stripe Checkout en modo prueba** y devolvió la `checkout_url` a la que la aplicación redirige al usuario para pagar, junto con el `session_id` de la sesión (Figura 95).
+
+<img src="assets/img/swagger/06-subscriptions-checkout.png" alt="Checkout de Stripe" width="800"/>
+
+*Figura 95. Creación de una sesión de Stripe Checkout en modo prueba con `POST /api/v1/subscriptions/checkout`.*
+
+**7. Ticket de soporte.** Con `POST /api/v1/support/tickets` se creó un ticket con su asunto, categoría, prioridad y mensaje. El servicio respondió `201 Created` con el ticket en estado `open` y el primer mensaje del hilo de conversación (Figura 96).
+
+<img src="assets/img/swagger/07-support-ticket.png" alt="Creación de un ticket de soporte" width="800"/>
+
+*Figura 96. Creación de un ticket de soporte con `POST /api/v1/support/tickets`.*
 
 ##### Commits relacionados con los Web Services y su documentación
 
@@ -4021,25 +4056,25 @@ La Landing Page es un sitio estático (HTML, CSS y JavaScript, sin paso de compi
 
 El backend de MindFlow (ASP.NET Core) se desplegó en **Railway**. Los pasos realizados fueron los siguientes.
 
-**1. Creación del servicio.** Desde el proyecto en Railway se creó un nuevo servicio con la opción *GitHub Repository*, que permite desplegar la aplicación directamente desde su código fuente (Figura 90).
+**1. Creación del servicio.** Desde el proyecto en Railway se creó un nuevo servicio con la opción *GitHub Repository*, que permite desplegar la aplicación directamente desde su código fuente (Figura 97).
 
 <img src="assets/img/deployment/01-railway-nuevo-servicio.jpeg" alt="Creación de un nuevo servicio en Railway" width="500"/>
 
-*Figura 90. Creación de un nuevo servicio en Railway a partir de un repositorio de GitHub.*
+*Figura 97. Creación de un nuevo servicio en Railway a partir de un repositorio de GitHub.*
 
-**2. Conexión del repositorio.** Se seleccionó el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) de la organización del equipo. A partir de ese momento, Railway compila y despliega el backend con cada cambio integrado en la rama configurada (Figura 91).
+**2. Conexión del repositorio.** Se seleccionó el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) de la organización del equipo. A partir de ese momento, Railway compila y despliega el backend con cada cambio integrado en la rama configurada (Figura 98).
 
 <img src="assets/img/deployment/02-railway-repositorio.jpeg" alt="Selección del repositorio mindflow-backend" width="500"/>
 
-*Figura 91. Selección del repositorio `mindflow-backend` en Railway.*
+*Figura 98. Selección del repositorio `mindflow-backend` en Railway.*
 
-**3. Bases de datos.** Desde la opción *Database* se agregaron al proyecto los servicios de datos que necesita el backend: **MySQL**, donde Entity Framework Core persiste la información de los 8 bounded contexts, y **Redis**, que el backend usa como caché (Figura 92).
+**3. Bases de datos.** Desde la opción *Database* se agregaron al proyecto los servicios de datos que necesita el backend: **MySQL**, donde Entity Framework Core persiste la información de los 8 bounded contexts, y **Redis**, que el backend usa como caché (Figura 99).
 
 <img src="assets/img/deployment/03-railway-base-de-datos.jpeg" alt="Bases de datos disponibles en Railway" width="500"/>
 
-*Figura 92. Selección de las bases de datos del backend en Railway.*
+*Figura 99. Selección de las bases de datos del backend en Railway.*
 
-**4. Variables de entorno.** La configuración sensible no se guarda en el repositorio: se registró como variables del servicio en Railway, que las muestra ocultas. Se usa el separador `__` para las claves anidadas de `appsettings.json` (por ejemplo, `ConnectionStrings__DefaultConnection` equivale a `ConnectionStrings:DefaultConnection`). Se registraron las siguientes variables (Tabla 76 y Figura 93):
+**4. Variables de entorno.** La configuración sensible no se guarda en el repositorio: se registró como variables del servicio en Railway, que las muestra ocultas. Se usa el separador `__` para las claves anidadas de `appsettings.json` (por ejemplo, `ConnectionStrings__DefaultConnection` equivale a `ConnectionStrings:DefaultConnection`). Se registraron las siguientes variables (Tabla 76 y Figura 100):
 
 **Tabla 76. Software Deployment Evidence — Variables de entorno de los Web Services.**
 
@@ -4054,7 +4089,7 @@ El backend de MindFlow (ASP.NET Core) se desplegó en **Railway**. Los pasos rea
 
 <img src="assets/img/deployment/04-railway-variables.jpeg" alt="Variables de entorno del servicio en Railway" width="700"/>
 
-*Figura 93. Variables de entorno del servicio del backend en Railway.*
+*Figura 100. Variables de entorno del servicio del backend en Railway.*
 
 **URL de los Web Services (documentación Swagger):** [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger)
 
@@ -4078,27 +4113,27 @@ Durante el Sprint 1 el equipo trabajó con el flujo GitFlow en los tres reposito
 
 ##### Landing Page
 
-En el repositorio [mindflow-landingPage](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage) participaron cuatro integrantes. Güere Calero construyó el sitio (página principal, página Nosotros e internacionalización), mientras que Díaz De la Cruz, Cabrera Sotelo y Limache Coronel documentaron el repositorio: el enlace del sitio desplegado, su formato y la descripción de las secciones de la página (Figura 94).
+En el repositorio [mindflow-landingPage](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage) participaron cuatro integrantes. Güere Calero construyó el sitio (página principal, página Nosotros e internacionalización), mientras que Díaz De la Cruz, Cabrera Sotelo y Limache Coronel documentaron el repositorio: el enlace del sitio desplegado, su formato y la descripción de las secciones de la página (Figura 101).
 
 <img src="assets/img/Insights/Insights_TB1_Landing.png" alt="Insights del repositorio mindflow-landingPage" width="800"/>
 
-*Figura 94. Team Collaboration Insights del repositorio `mindflow-landingPage` durante el Sprint 1.*
+*Figura 101. Team Collaboration Insights del repositorio `mindflow-landingPage` durante el Sprint 1.*
 
 ##### Web Services
 
-En el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), Güere Calero y Díaz De la Cruz co-lideraron la implementación de los 8 bounded contexts. Güere Calero concentró la mayor cantidad de commits, y Díaz De la Cruz implementó los bounded contexts de Notifications, Support, Subscriptions y Analytics, junto con el checkout de Stripe, los reportes en PDF y las notificaciones por correo (Figura 95).
+En el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), Güere Calero y Díaz De la Cruz co-lideraron la implementación de los 8 bounded contexts. Güere Calero concentró la mayor cantidad de commits, y Díaz De la Cruz implementó los bounded contexts de Notifications, Support, Subscriptions y Analytics, junto con el checkout de Stripe, los reportes en PDF y las notificaciones por correo (Figura 102).
 
 <img src="assets/img/Insights/Insights_TB1_Backends.png" alt="Insights del repositorio mindflow-backend" width="800"/>
 
-*Figura 95. Team Collaboration Insights del repositorio `mindflow-backend` durante el Sprint 1.*
+*Figura 102. Team Collaboration Insights del repositorio `mindflow-backend` durante el Sprint 1.*
 
 ##### Mobile Application
 
-En el repositorio [mindflow-frontend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend) participaron cuatro integrantes. Güere Calero y Cabrera Sotelo desarrollaron la mayor parte de las pantallas y su conexión con el backend, mientras que Díaz De la Cruz implementó la base de capas DDD de la app y el checkout de prueba de Stripe, y Limache Coronel agregó el botón flotante del chat de IA y reorganizó el chat en las capas de aplicación y dominio (Figura 96).
+En el repositorio [mindflow-frontend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend) participaron cuatro integrantes. Güere Calero y Cabrera Sotelo desarrollaron la mayor parte de las pantallas y su conexión con el backend, mientras que Díaz De la Cruz implementó la base de capas DDD de la app y el checkout de prueba de Stripe, y Limache Coronel agregó el botón flotante del chat de IA y reorganizó el chat en las capas de aplicación y dominio (Figura 103).
 
 <img src="assets/img/Insights/Insights_TB1_Frontend.png" alt="Insights del repositorio mindflow-frontend" width="800"/>
 
-*Figura 96. Team Collaboration Insights del repositorio `mindflow-frontend` durante el Sprint 1.*
+*Figura 103. Team Collaboration Insights del repositorio `mindflow-frontend` durante el Sprint 1.*
 
 ## 4.3. Validation Interviews
 
@@ -4302,11 +4337,11 @@ La Tabla 85 resume los 16 problemas identificados, ordenados según su numeraci�
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-Ambos entrevistados dudaron sobre el alcance real de la IA. El entrevistado del Segmento 1 no tuvo claro si funciona como un terapeuta formal o solo como un asistente de reflexión, y el entrevistado del Segmento 2 se preguntó si el chat es una bitácora interactiva o una sesión de coaching continuo. La pantalla de Inicio presenta a "MindFlow AI" con un saludo cercano ("estoy aquí para escucharte"). La aclaración de que MindFlow no reemplaza la atención profesional ni constituye un diagnóstico clínico existe únicamente dentro de los Términos y Condiciones, pero no aparece en el flujo de uso de la aplicación (Inicio ni chat), por lo que el usuario no la ve (Figura 97).
+Ambos entrevistados dudaron sobre el alcance real de la IA. El entrevistado del Segmento 1 no tuvo claro si funciona como un terapeuta formal o solo como un asistente de reflexión, y el entrevistado del Segmento 2 se preguntó si el chat es una bitácora interactiva o una sesión de coaching continuo. La pantalla de Inicio presenta a "MindFlow AI" con un saludo cercano ("estoy aquí para escucharte"). La aclaración de que MindFlow no reemplaza la atención profesional ni constituye un diagnóstico clínico existe únicamente dentro de los Términos y Condiciones, pero no aparece en el flujo de uso de la aplicación (Inicio ni chat), por lo que el usuario no la ve (Figura 104).
 
 ![Problema 1: pantalla de Inicio con el chat de IA](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 97. Pantalla de Inicio: la IA se presenta sin indicar su alcance.*
+*Figura 104. Pantalla de Inicio: la IA se presenta sin indicar su alcance.*
 
 **Recomendación:**
 Llevar la aclaración de los Términos y Condiciones a un aviso breve en el onboarding y en el primer uso del chat, que indique que MindFlow es una herramienta de autocuidado y reflexión que no reemplaza la atención psicológica, junto con una etiqueta fija bajo el nombre de la IA ("Asistente de reflexión") y un acceso a recursos de ayuda profesional.
@@ -4318,15 +4353,15 @@ Llevar la aclaración de los Términos y Condiciones a un aviso breve en el onbo
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-Los dos entrevistados señalaron que su desconfianza vendría de no saber si sus reflexiones se usan para entrenar modelos de terceros o quedan expuestas. En la pantalla de registro solo se indica "Datos encriptados con AES-256" junto con los enlaces a Términos de Servicio y Política de Privacidad. La Política de Privacidad indica que los datos se usan para generar observaciones con IA y que el contenido del diario no se vende a terceros, pero ni ella, ni el mensaje del registro, ni la sección de Privacidad de Ajustes mencionan que el texto se envía a un proveedor externo de IA ni si se utiliza para entrenar modelos. El entrevistado del Segmento 2 señaló además que una política ambigua sobre APIs externas le restaría confianza (Figuras 98 y 99).
+Los dos entrevistados señalaron que su desconfianza vendría de no saber si sus reflexiones se usan para entrenar modelos de terceros o quedan expuestas. En la pantalla de registro solo se indica "Datos encriptados con AES-256" junto con los enlaces a Términos de Servicio y Política de Privacidad. La Política de Privacidad indica que los datos se usan para generar observaciones con IA y que el contenido del diario no se vende a terceros, pero ni ella, ni el mensaje del registro, ni la sección de Privacidad de Ajustes mencionan que el texto se envía a un proveedor externo de IA ni si se utiliza para entrenar modelos. El entrevistado del Segmento 2 señaló además que una política ambigua sobre APIs externas le restaría confianza (Figuras 105 y 106).
 
 ![Problema 2: pantalla de registro](assets/img/heuristics/app-03-registro.jpeg)
 
-*Figura 98. Registro: el mensaje de privacidad solo menciona el cifrado.*
+*Figura 105. Registro: el mensaje de privacidad solo menciona el cifrado.*
 
 ![Problema 2: ajustes de privacidad](assets/img/heuristics/app-06-ajustes-privacidad.jpeg)
 
-*Figura 99. Ajustes de privacidad: sin información sobre el procesamiento por terceros.*
+*Figura 106. Ajustes de privacidad: sin información sobre el procesamiento por terceros.*
 
 **Recomendación:**
 Agregar en el registro y en Ajustes de Privacidad un texto claro, con enlace a la política, que explique qué datos se envían al servicio de IA, si se usan o no para entrenar modelos y cómo se eliminan. Completar la Política de Privacidad de la Landing Page con la misma información.
@@ -4338,15 +4373,15 @@ Agregar en el registro y en Ajustes de Privacidad un texto claro, con enlace a l
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-Los botones principales ("Ingresar a MindFlow", "Crear mi cuenta", "Guardar Registro") usan texto blanco sobre un degradado de #4F8DF5 a #6ED3A3. La relación de contraste del blanco es de 3.25:1 en el extremo azul y de 1.82:1 en el extremo verde. Los botones "+ Añadir" y "+ Crear" de Hábitos usan texto blanco sobre #6ED3A3 (1.82:1). WCAG 2.1 exige como mínimo 4.5:1 para texto normal y 3:1 para texto grande, por lo que las personas con baja visión o que usan la aplicación bajo luz intensa pueden no leer las acciones principales (Figuras 100 y 101).
+Los botones principales ("Ingresar a MindFlow", "Crear mi cuenta", "Guardar Registro") usan texto blanco sobre un degradado de #4F8DF5 a #6ED3A3. La relación de contraste del blanco es de 3.25:1 en el extremo azul y de 1.82:1 en el extremo verde. Los botones "+ Añadir" y "+ Crear" de Hábitos usan texto blanco sobre #6ED3A3 (1.82:1). WCAG 2.1 exige como mínimo 4.5:1 para texto normal y 3:1 para texto grande, por lo que las personas con baja visión o que usan la aplicación bajo luz intensa pueden no leer las acciones principales (Figuras 107 y 108).
 
 ![Problema 3: botón de inicio de sesión](assets/img/heuristics/app-01-login.jpeg)
 
-*Figura 100. Inicio de sesión: botón principal con texto blanco sobre degradado.*
+*Figura 107. Inicio de sesión: botón principal con texto blanco sobre degradado.*
 
 ![Problema 3: sugerencias de IA con botones Añadir](assets/img/heuristics/app-17-habitos-sugerencias-ia.jpeg)
 
-*Figura 101. Sugerencias de IA: botones "Añadir" con texto blanco sobre verde claro.*
+*Figura 108. Sugerencias de IA: botones "Añadir" con texto blanco sobre verde claro.*
 
 **Recomendación:**
 Usar texto oscuro (#1F2937) sobre los fondos verdes claros o un tono más oscuro del degradado, de modo que todas las combinaciones superen 4.5:1, y verificar el resultado con una herramienta de contraste.
@@ -4358,15 +4393,15 @@ Usar texto oscuro (#1F2937) sobre los fondos verdes claros o un tono más oscuro
 **Origen:** Revisión del equipo auditor sobre el código de la Landing Page.
 
 **Problema:**
-Las 13 imágenes de la Landing Page tienen el atributo `alt` vacío (`alt=""`), incluidas las capturas de la aplicación en la sección "Así se ve MindFlow en tu teléfono" y las fotos del equipo en la página "Nosotros". Un lector de pantalla las omite, por lo que una persona con discapacidad visual no recibe la información de las capturas ni de los integrantes. Una captura sí tiene un nombre visible debajo, pero no describe su contenido (Figuras 102 y 103).
+Las 13 imágenes de la Landing Page tienen el atributo `alt` vacío (`alt=""`), incluidas las capturas de la aplicación en la sección "Así se ve MindFlow en tu teléfono" y las fotos del equipo en la página "Nosotros". Un lector de pantalla las omite, por lo que una persona con discapacidad visual no recibe la información de las capturas ni de los integrantes. Una captura sí tiene un nombre visible debajo, pero no describe su contenido (Figuras 109 y 110).
 
 ![Problema 4: sección de capturas de la Landing Page](assets/img/heuristics/landing-01-capturas.png)
 
-*Figura 102. Landing Page: capturas de la aplicación sin texto alternativo.*
+*Figura 109. Landing Page: capturas de la aplicación sin texto alternativo.*
 
 ![Problema 4: página Nosotros](assets/img/heuristics/landing-02-equipo.png)
 
-*Figura 103. Página Nosotros: fotos del equipo sin texto alternativo.*
+*Figura 110. Página Nosotros: fotos del equipo sin texto alternativo.*
 
 **Recomendación:**
 Describir cada imagen informativa en su atributo `alt` (por ejemplo, "Pantalla de Inicio de MindFlow con el campo para escribir cómo te sientes") y mantener `alt=""` solo en las imágenes decorativas, como el logotipo repetido.
@@ -4378,11 +4413,11 @@ Describir cada imagen informativa en su atributo `alt` (por ejemplo, "Pantalla d
 **Origen:** Entrevista al Segmento 1.
 
 **Problema:**
-El entrevistado del Segmento 1 indicó que no le quedó claro qué funcionalidades son exclusivas de Premium frente a Freemium hasta llegar a la pantalla de Planes. En el resto de la aplicación la distinción aparece solo de forma puntual: la tarjeta de exportación menciona "(Requiere Premium)" al final de una frase y Ajustes muestra únicamente la lista del plan actual (Figura 104).
+El entrevistado del Segmento 1 indicó que no le quedó claro qué funcionalidades son exclusivas de Premium frente a Freemium hasta llegar a la pantalla de Planes. En el resto de la aplicación la distinción aparece solo de forma puntual: la tarjeta de exportación menciona "(Requiere Premium)" al final de una frase y Ajustes muestra únicamente la lista del plan actual (Figura 111).
 
 ![Problema 5: tarjeta de suscripción en Ajustes](assets/img/heuristics/app-07-ajustes-suscripcion.jpeg)
 
-*Figura 104. Ajustes: la tarjeta de suscripción lista los beneficios sin compararlos con el plan gratuito.*
+*Figura 111. Ajustes: la tarjeta de suscripción lista los beneficios sin compararlos con el plan gratuito.*
 
 **Recomendación:**
 Identificar las funciones Premium con una etiqueta visible (por ejemplo, una insignia "Premium") en el lugar donde aparecen y agregar en Ajustes un enlace "Comparar planes" que lleve a la pantalla de Planes.
@@ -4394,11 +4429,11 @@ Identificar las funciones Premium con una etiqueta visible (por ejemplo, una ins
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-Con la cuenta evaluada, Ajustes muestra "Plan Actual: Premium", pero la tarjeta "Exportar Reportes Clínicos" de Analíticas mantiene el texto "(Requiere Premium)". El mensaje es contradictorio: el usuario puede dudar de si su suscripción está activa o de si podrá usar la función (Figura 105).
+Con la cuenta evaluada, Ajustes muestra "Plan Actual: Premium", pero la tarjeta "Exportar Reportes Clínicos" de Analíticas mantiene el texto "(Requiere Premium)". El mensaje es contradictorio: el usuario puede dudar de si su suscripción está activa o de si podrá usar la función (Figura 112).
 
 ![Problema 6: tarjeta de exportación en Analíticas](assets/img/heuristics/app-13-analiticas-exportar.jpeg)
 
-*Figura 105. Analíticas: la tarjeta de exportación indica "Requiere Premium" aunque el plan actual es Premium.*
+*Figura 112. Analíticas: la tarjeta de exportación indica "Requiere Premium" aunque el plan actual es Premium.*
 
 **Recomendación:**
 Mostrar el texto "(Requiere Premium)" únicamente a los usuarios del plan gratuito; para usuarios Premium, ocultarlo o reemplazarlo por un mensaje como "Incluido en tu plan".
@@ -4410,15 +4445,15 @@ Mostrar el texto "(Requiere Premium)" únicamente a los usuarios del plan gratui
 **Origen:** Entrevista al Segmento 2.
 
 **Problema:**
-El entrevistado del Segmento 2 no tuvo claro si el cálculo de las analíticas se procesa localmente en su teléfono o se sincroniza en la nube. Las pantallas de Analíticas y Tendencias muestran resúmenes y gráficas, pero no informan el estado de la sincronización ni el origen de los datos (Figuras 106 y 107).
+El entrevistado del Segmento 2 no tuvo claro si el cálculo de las analíticas se procesa localmente en su teléfono o se sincroniza en la nube. Las pantallas de Analíticas y Tendencias muestran resúmenes y gráficas, pero no informan el estado de la sincronización ni el origen de los datos (Figuras 113 y 114).
 
 ![Problema 7: resumen semanal de Analíticas](assets/img/heuristics/app-10-analiticas-resumen.jpeg)
 
-*Figura 106. Analíticas: el resumen no indica el origen ni el estado de sincronización de los datos.*
+*Figura 113. Analíticas: el resumen no indica el origen ni el estado de sincronización de los datos.*
 
 ![Problema 7: nube de palabras y tendencias](assets/img/heuristics/app-12-analiticas-nube-tendencias.jpeg)
 
-*Figura 107. Analíticas: nube de palabras y tendencias sin indicador de sincronización.*
+*Figura 114. Analíticas: nube de palabras y tendencias sin indicador de sincronización.*
 
 **Recomendación:**
 Agregar un indicador discreto de estado (por ejemplo, "Sincronizado hace 2 min" o "Solo en este dispositivo") en la cabecera de Analíticas, con una explicación breve al tocarlo.
@@ -4430,11 +4465,11 @@ Agregar un indicador discreto de estado (por ejemplo, "Sincronizado hace 2 min" 
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-El entrevistado del Segmento 1 pidió recordatorios más personalizables y el entrevistado del Segmento 2 esperaba una notificación configurable según su jornada laboral para registrar su ánimo al terminar la tarde. En Ajustes, "Recordatorios de Hábitos" es un único interruptor orientado a "hidratación y pausas", sin elegir horario, días ni tipo de recordatorio, y no existe un recordatorio para registrar el estado de ánimo (Figura 108).
+El entrevistado del Segmento 1 pidió recordatorios más personalizables y el entrevistado del Segmento 2 esperaba una notificación configurable según su jornada laboral para registrar su ánimo al terminar la tarde. En Ajustes, "Recordatorios de Hábitos" es un único interruptor orientado a "hidratación y pausas", sin elegir horario, días ni tipo de recordatorio, y no existe un recordatorio para registrar el estado de ánimo (Figura 115).
 
 ![Problema 8: ajustes de privacidad y experiencia](assets/img/heuristics/app-06-ajustes-privacidad.jpeg)
 
-*Figura 108. Ajustes: el recordatorio es un único interruptor sin opciones de horario.*
+*Figura 115. Ajustes: el recordatorio es un único interruptor sin opciones de horario.*
 
 **Recomendación:**
 Permitir elegir la hora y los días de los recordatorios, y agregar un recordatorio opcional para registrar el estado de ánimo al cierre de la jornada.
@@ -4446,11 +4481,11 @@ Permitir elegir la hora y los días de los recordatorios, y agregar un recordato
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-El campo de fecha del historial emocional muestra el texto "mm/dd/yyyy" y el código aplica el patrón `MM/dd/yyyy`, propio de Estados Unidos, aunque la aplicación está en español latinoamericano. Un usuario peruano puede interpretar mal el valor (por ejemplo, 07/10 como 10 de julio) y filtrar por una fecha equivocada (Figura 109).
+El campo de fecha del historial emocional muestra el texto "mm/dd/yyyy" y el código aplica el patrón `MM/dd/yyyy`, propio de Estados Unidos, aunque la aplicación está en español latinoamericano. Un usuario peruano puede interpretar mal el valor (por ejemplo, 07/10 como 10 de julio) y filtrar por una fecha equivocada (Figura 116).
 
 ![Problema 9: filtro de fecha del historial](assets/img/heuristics/app-20-diario-calendario.jpeg)
 
-*Figura 109. Historial emocional: el filtro de fecha usa el formato mm/dd/yyyy.*
+*Figura 116. Historial emocional: el filtro de fecha usa el formato mm/dd/yyyy.*
 
 **Recomendación:**
 Dar formato a la fecha según el idioma y la región del dispositivo (dd/MM/yyyy para es_419) y mostrar el nombre del mes en el selector.
@@ -4462,15 +4497,15 @@ Dar formato a la fecha según el idioma y la región del dispositivo (dd/MM/yyyy
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-El botón flotante del chat con la IA se mantiene fijo en la esquina inferior derecha y cubre parte del contenido en varias pantallas: oculta el botón "Exportar CSV" en Analíticas, el borde del botón "Micro-meditación (3 min)" en Inicio y la leyenda "Negativo" del calendario. Para usar esas acciones el usuario debe desplazar la pantalla hasta una posición donde el botón no las cubra (Figuras 110 y 111).
+El botón flotante del chat con la IA se mantiene fijo en la esquina inferior derecha y cubre parte del contenido en varias pantallas: oculta el botón "Exportar CSV" en Analíticas, el borde del botón "Micro-meditación (3 min)" en Inicio y la leyenda "Negativo" del calendario. Para usar esas acciones el usuario debe desplazar la pantalla hasta una posición donde el botón no las cubra (Figuras 117 y 118).
 
 ![Problema 10: botón flotante sobre Exportar CSV](assets/img/heuristics/app-13-analiticas-exportar.jpeg)
 
-*Figura 110. Analíticas: el botón flotante cubre el botón "Exportar CSV".*
+*Figura 117. Analíticas: el botón flotante cubre el botón "Exportar CSV".*
 
 ![Problema 10: botón flotante sobre Intervenciones Rápidas](assets/img/heuristics/app-23-inicio-intervenciones.jpeg)
 
-*Figura 111. Inicio: el botón flotante cubre la acción "Micro-meditación (3 min)".*
+*Figura 118. Inicio: el botón flotante cubre la acción "Micro-meditación (3 min)".*
 
 **Recomendación:**
 Agregar un espacio inferior al final de las listas para que el contenido nunca quede debajo del botón, o reducir el botón y moverlo a la barra superior.
@@ -4482,15 +4517,15 @@ Agregar un espacio inferior al final de las listas para que el contenido nunca q
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-En Hábitos, las pestañas "Mis Rutinas", "Sugerencias de IA" e "Historial" no caben en el ancho de la pantalla. Al abrir la pantalla solo se ve una parte de la tercera pestaña (un trazo), y al seleccionar "Historial" la primera queda cortada ("nas"). Sin un indicador de desplazamiento, un usuario puede no descubrir que existe el historial de hábitos (Figuras 112 y 113).
+En Hábitos, las pestañas "Mis Rutinas", "Sugerencias de IA" e "Historial" no caben en el ancho de la pantalla. Al abrir la pantalla solo se ve una parte de la tercera pestaña (un trazo), y al seleccionar "Historial" la primera queda cortada ("nas"). Sin un indicador de desplazamiento, un usuario puede no descubrir que existe el historial de hábitos (Figuras 119 y 120).
 
 ![Problema 11: pestañas de Hábitos](assets/img/heuristics/app-15-habitos-rutinas.jpeg)
 
-*Figura 112. Hábitos: la tercera pestaña no es visible al abrir la pantalla.*
+*Figura 119. Hábitos: la tercera pestaña no es visible al abrir la pantalla.*
 
 ![Problema 11: pestaña Historial](assets/img/heuristics/app-19-habitos-historial.jpeg)
 
-*Figura 113. Hábitos: al seleccionar "Historial" la primera pestaña queda cortada.*
+*Figura 120. Hábitos: al seleccionar "Historial" la primera pestaña queda cortada.*
 
 **Recomendación:**
 Ajustar los textos y el espaciado para que las tres pestañas se vean completas, o usar etiquetas más cortas ("Rutinas", "Sugerencias", "Historial").
@@ -4502,15 +4537,15 @@ Ajustar los textos y el espaciado para que las tres pestañas se vean completas,
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-La casilla de la lista "Hábitos Diarios" mide 20 dp y el ícono para mostrar u ocultar la contraseña mide 24 dp, por debajo de los 48 dp recomendados por Material Design y WCAG para áreas táctiles. Usar la aplicación con una sola mano, en movimiento o con dificultades motoras aumenta la probabilidad de tocar mal (Figuras 114 y 115).
+La casilla de la lista "Hábitos Diarios" mide 20 dp y el ícono para mostrar u ocultar la contraseña mide 24 dp, por debajo de los 48 dp recomendados por Material Design y WCAG para áreas táctiles. Usar la aplicación con una sola mano, en movimiento o con dificultades motoras aumenta la probabilidad de tocar mal (Figuras 121 y 122).
 
 ![Problema 12: casilla de hábito diario](assets/img/heuristics/app-24-inicio-habitos.jpeg)
 
-*Figura 114. Inicio: la casilla del hábito diario tiene un área táctil de 20 dp.*
+*Figura 121. Inicio: la casilla del hábito diario tiene un área táctil de 20 dp.*
 
 ![Problema 12: ícono de contraseña](assets/img/heuristics/app-01-login.jpeg)
 
-*Figura 115. Inicio de sesión: el ícono de mostrar contraseña tiene 24 dp.*
+*Figura 122. Inicio de sesión: el ícono de mostrar contraseña tiene 24 dp.*
 
 **Recomendación:**
 Mantener el tamaño visual de los controles, pero ampliar su área táctil a 48 x 48 dp.
@@ -4522,15 +4557,15 @@ Mantener el tamaño visual de los controles, pero ampliar su área táctil a 48 
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-La sección "Así se ve MindFlow en tu teléfono" se presenta como "Capturas reales de la app Android", pero las imágenes muestran una versión anterior: un menú lateral (Dashboard, Diario, Hábitos, Analíticas, Configuración) y datos de abril de 2026, mientras que la aplicación actual usa barra de navegación inferior. El visitante que descarga la aplicación encuentra una interfaz distinta de la que vio (Figuras 116 y 117).
+La sección "Así se ve MindFlow en tu teléfono" se presenta como "Capturas reales de la app Android", pero las imágenes muestran una versión anterior: un menú lateral (Dashboard, Diario, Hábitos, Analíticas, Configuración) y datos de abril de 2026, mientras que la aplicación actual usa barra de navegación inferior. El visitante que descarga la aplicación encuentra una interfaz distinta de la que vio (Figuras 123 y 124).
 
 ![Problema 13: capturas de la Landing Page](assets/img/heuristics/landing-01-capturas.png)
 
-*Figura 116. Landing Page: capturas con menú lateral.*
+*Figura 123. Landing Page: capturas con menú lateral.*
 
 ![Problema 13: Inicio de la aplicación actual](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 117. Aplicación actual: Inicio con barra de navegación inferior.*
+*Figura 124. Aplicación actual: Inicio con barra de navegación inferior.*
 
 **Recomendación:**
 Reemplazar las capturas de la Landing Page por las de la versión vigente de la aplicación y revisarlas en cada release.
@@ -4542,11 +4577,11 @@ Reemplazar las capturas de la Landing Page por las de la versión vigente de la 
 **Origen:** Revisión del equipo auditor, contrastada con el código de la aplicación.
 
 **Problema:**
-El calendario del Diario comunica el estado de ánimo de cada día solo con color (positivo, neutral y negativo), y la leyenda usa un texto de 12 sp. El color de "Neutral" (#FFD166) tiene una relación de contraste de 1.44:1 sobre fondo blanco y el verde de "Positivo" (#6ED3A3) de 1.82:1, por lo que las personas con baja visión o daltonismo pueden no distinguir los estados (Figura 118).
+El calendario del Diario comunica el estado de ánimo de cada día solo con color (positivo, neutral y negativo), y la leyenda usa un texto de 12 sp. El color de "Neutral" (#FFD166) tiene una relación de contraste de 1.44:1 sobre fondo blanco y el verde de "Positivo" (#6ED3A3) de 1.82:1, por lo que las personas con baja visión o daltonismo pueden no distinguir los estados (Figura 125).
 
 ![Problema 14: leyenda del calendario](assets/img/heuristics/app-20-diario-calendario.jpeg)
 
-*Figura 118. Historial emocional: la leyenda del calendario se apoya solo en el color.*
+*Figura 125. Historial emocional: la leyenda del calendario se apoya solo en el color.*
 
 **Recomendación:**
 Complementar el color con un ícono o una forma distinta por estado (por ejemplo, ▲ positivo, ● neutral, ▼ negativo) y oscurecer los colores del texto de la leyenda hasta superar 4.5:1.
@@ -4558,11 +4593,11 @@ Complementar el color con un ícono o una forma distinta por estado (por ejemplo
 **Origen:** Revisión del equipo auditor.
 
 **Problema:**
-En el idioma español, algunos títulos permanecen en inglés: "AI Mood Journal", "Dynamic Habit Tracker" y "Smart Interventions" en la pantalla de registro y en la tarjeta de suscripción, mientras que el resto de la interfaz está en español. Es una inconsistencia menor que no impide completar las tareas (Figura 119).
+En el idioma español, algunos títulos permanecen en inglés: "AI Mood Journal", "Dynamic Habit Tracker" y "Smart Interventions" en la pantalla de registro y en la tarjeta de suscripción, mientras que el resto de la interfaz está en español. Es una inconsistencia menor que no impide completar las tareas (Figura 126).
 
 ![Problema 15: beneficios en la pantalla de registro](assets/img/heuristics/app-04-registro-beneficios.jpeg)
 
-*Figura 119. Registro: títulos de beneficios en inglés dentro de una interfaz en español.*
+*Figura 126. Registro: títulos de beneficios en inglés dentro de una interfaz en español.*
 
 **Recomendación:**
 Traducir los títulos al español (por ejemplo, "Diario emocional con IA", "Seguimiento dinámico de hábitos" e "Intervenciones inteligentes") y gestionarlos mediante los archivos de idioma de la aplicación.
@@ -4574,11 +4609,11 @@ Traducir los títulos al español (por ejemplo, "Diario emocional con IA", "Segu
 **Origen:** Entrevistas a los Segmentos 1 y 2.
 
 **Problema:**
-El entrevistado del Segmento 1 esperaba poder registrar entradas mediante notas de voz y programar hábitos con integración a Google Calendar. El entrevistado del Segmento 2 propuso etiquetar las entradas por proyecto o cliente. La pantalla de Inicio solo permite escribir texto y elegir una de las categorías predefinidas (Estudios, Trabajo, Familia, Reflexión Personal, Salud) (Figura 120).
+El entrevistado del Segmento 1 esperaba poder registrar entradas mediante notas de voz y programar hábitos con integración a Google Calendar. El entrevistado del Segmento 2 propuso etiquetar las entradas por proyecto o cliente. La pantalla de Inicio solo permite escribir texto y elegir una de las categorías predefinidas (Estudios, Trabajo, Familia, Reflexión Personal, Salud) (Figura 127).
 
 ![Problema 16: registro de entrada en el diario](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
 
-*Figura 120. Inicio: el registro admite solo texto y categorías predefinidas.*
+*Figura 127. Inicio: el registro admite solo texto y categorías predefinidas.*
 
 **Recomendación:**
 Incorporar en el roadmap el registro por dictado de voz, la sincronización de hábitos con el calendario del dispositivo y las etiquetas personalizadas por entrada.
