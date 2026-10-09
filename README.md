@@ -3771,7 +3771,7 @@ A partir de los mock-ups de alta fidelidad de la sección 3.1.4.3 se armó un pr
 
 ### 4.1.1. Software Development Environment Configuration
 
-El equipo configuró el entorno de desarrollo de cada producto de MindFlow por separado, ya que cada uno usa un stack distinto: HTML, CSS y JavaScript estáticos para la Landing Page; ASP.NET Core sobre .NET para los Web Services; y Kotlin con Jetpack Compose para la Aplicación móvil Android. Las Tablas 59 a 61 resumen las herramientas y versiones reales de cada uno, leídas directamente de sus archivos de configuración: `assets/i18n/` e `index.html` en `mindflow-landingPage`; `MindFlow.Platform.csproj`, `Dockerfile` y `docker-compose.yml` en `mindflow-backend`; `app/build.gradle.kts` y `gradle/libs.versions.toml` en `mindflow-fronted`.
+El equipo configuró el entorno de desarrollo de cada producto de MindFlow por separado, ya que cada uno usa un stack distinto: HTML, CSS y JavaScript estáticos para la Landing Page; ASP.NET Core sobre .NET para los Web Services; y Kotlin con Jetpack Compose para la Aplicación móvil Android. Las Tablas 59 a 61 resumen las herramientas y versiones reales de cada uno, leídas directamente de sus archivos de configuración: `assets/i18n/` e `index.html` en `mindflow-landingPage`; `MindFlow.Platform.csproj`, `Dockerfile` y `docker-compose.yml` en `mindflow-backend`; `app/build.gradle.kts` y `gradle/libs.versions.toml` en `mindflow-frontend`.
 
 **Tabla 59. Software Development Environment Configuration — Landing Page.**
 
@@ -3819,7 +3819,7 @@ Como herramientas de gestión y diseño, el equipo usó Figma para el sistema de
 
 ### 4.1.2. Source Code Management
 
-Los cuatro repositorios del proyecto siguen un flujo basado en GitFlow simplificado, aunque no de forma idéntica entre todos: `mindflow-backend` y `mindflow-landingPage` mantienen `main` como rama por defecto en GitHub con `develop` para integración, mientras que `mindflow-report` y `mindflow-fronted` usan `develop` como única rama por defecto — este último repositorio no tiene siquiera una rama `main`. Ninguno de los cuatro usa ramas `release/*` ni `hotfix/*`. El trabajo del Sprint 1 se realizó en ramas `feature/*` creadas a partir de `develop` e integradas mediante Pull Request, como lo muestran los commits de merge del historial (`Merge pull request #N from upc-pre-202620-1acc0238-4950-CogniTech/feature/...`): `feature/shared`, `feature/iam`, `feature/journal`, `feature/ai-assistant`, `feature/habits-wellness` y `feature/local-dev-setup` en el backend (ya eliminadas de GitHub tras su merge); `feature/backend-integration` y `feature/bottom-nav-i18n` en la app móvil; `feature/landing-page-redesign` en la Landing Page. En `mindflow-backend` llama la atención que `main` no se actualizó después del scaffold inicial del proyecto (commit `b144749`): todo el trabajo de los 8 bounded contexts, incluidas las últimas correcciones relacionadas con el despliegue (`2b2e25c`, `ce7707a`, `294a182`), vive solo en `develop`. En la Landing Page, en cambio, sí se integró `develop` en `main` mediante un Pull Request adicional (PR #3), que es la rama que publica GitHub Pages (sección 4.1.4).
+Los cuatro repositorios del proyecto siguen un flujo basado en GitFlow simplificado, aunque no de forma idéntica entre todos: `mindflow-backend` y `mindflow-landingPage` mantienen `main` como rama por defecto en GitHub con `develop` para integración, mientras que `mindflow-report` y `mindflow-frontend` usan `develop` como única rama por defecto — este último repositorio no tiene siquiera una rama `main`. Ninguno de los cuatro usa ramas `release/*` ni `hotfix/*`. El trabajo del Sprint 1 se realizó en ramas `feature/*` creadas a partir de `develop` e integradas mediante Pull Request, como lo muestran los commits de merge del historial (`Merge pull request #N from upc-pre-202620-1acc0238-4950-CogniTech/feature/...`): `feature/shared`, `feature/iam`, `feature/journal`, `feature/ai-assistant`, `feature/habits-wellness` y `feature/local-dev-setup` en el backend (ya eliminadas de GitHub tras su merge); `feature/backend-integration` y `feature/bottom-nav-i18n` en la app móvil; `feature/landing-page-redesign` en la Landing Page. En `mindflow-backend` llama la atención que `main` no se actualizó después del scaffold inicial del proyecto (commit `b144749`): todo el trabajo de los 8 bounded contexts, incluidas las últimas correcciones relacionadas con el despliegue (`2b2e25c`, `ce7707a`, `294a182`), vive solo en `develop`. En la Landing Page, en cambio, sí se integró `develop` en `main` mediante un Pull Request adicional (PR #3), que es la rama que publica GitHub Pages (sección 4.1.4).
 
 La convención de mensajes de commit observada en el historial sigue, en general, Conventional Commits (`feat:`, `fix:`, `refactor:`, `build:`, `chore:`, `style:`, con *scope* opcional entre paréntesis), tal como indica la sección 4.1.3. En la práctica hay excepciones: varios commits tempranos de la app móvil (por ejemplo `feat: implementar pantallas de login y registro`, del 27/09/2026) usan el prefijo correcto pero la descripción en español, mientras que los commits posteriores a la refactorización a capas DDD (`05d549d refactor: add DDD foundation for frontend`) están íntegramente en inglés. El backend tiene además un par de commits sin prefijo de tipo (`de86103 Update database connection and secret keys`) o con un prefijo no estándar (`dda3d04 feature(ReadMe): Add information for MarkDown`, que usa `feature` en vez de `feat`).
 
@@ -3831,7 +3831,7 @@ Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los 
 |---|---|---|---|---|
 | `mindflow-report` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-report | `develop` | `feature/*` | Informe del proyecto (este documento) |
 | `mindflow-backend` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | `main` | `develop`, `feature/*` (`feature/iam`, `feature/journal`, `feature/ai-assistant`, `feature/habits-wellness`, `feature/local-dev-setup`, `feature/backend-hardening`, entre otras) | Web Services (ASP.NET Core) de los 8 bounded contexts |
-| `mindflow-fronted` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | `develop` | `feature/backend-integration`, `feature/bottom-nav-i18n` | Mobile Application para Android |
+| `mindflow-frontend` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | `develop` | `feature/backend-integration`, `feature/bottom-nav-i18n` | Mobile Application para Android |
 | `mindflow-landingPage` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage | `main` | `develop`, `feature/landing-page-redesign` | Landing Page pública del proyecto |
 
 ### 4.1.3. Source Code Style Guide & Conventions
@@ -3859,9 +3859,7 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 
 ### 4.1.4. Software Deployment Configuration
 
-**Web Services.** El backend se despliega en **Railway** a partir del repositorio [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), con Docker, una base de datos MySQL y una caché Redis también alojadas en Railway, y variables de entorno configuradas en el servicio (Figuras 132 a 135, Tabla 82, sección 4.2.1.8). La documentación interactiva de la API, generada con Swashbuckle, está disponible en [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger).
-
-<!-- [Pendiente: confirmar en el panel de Railway cuál es la rama configurada para el despliegue automático. No se pudo verificar directamente; se observa que `main` no se actualiza desde el commit `b144749` (scaffold inicial, sección 4.1.2) mientras que los últimos commits de `develop` corrigen justamente problemas de despliegue (healthcheck, migraciones en bases compartidas, Swagger condicional), lo que sugiere que Railway compila desde `develop`.] -->
+**Web Services.** El backend se despliega en **Railway** a partir de la rama `develop` del repositorio [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), con Docker, una base de datos MySQL y una caché Redis también alojadas en Railway, y variables de entorno configuradas en el servicio (Figuras 132 a 135, Tabla 82, sección 4.2.1.8). La documentación interactiva de la API, generada con Swashbuckle, está disponible en [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger).
 
 **Landing Page.** La Landing Page se publica con **GitHub Pages** desde la rama `main` del repositorio [`mindflow-landingPage`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage), mediante el despliegue automático de GitHub (*pages-build-deployment*), que no requiere un workflow propio en `.github/workflows/` — el repositorio no tiene ninguno, ya que el sitio es estático (HTML, CSS y JavaScript sin paso de compilación). El último despliegue corresponde al merge del Pull Request #3, que integró `develop` en `main` (commit `39d0d90`, sección 4.1.2). La URL pública es [https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/](https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/) (Figura 123).
 
@@ -3876,8 +3874,8 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 | Producto | Plataforma | Origen del despliegue | URL o estado |
 |---|---|---|---|
 | Landing Page | GitHub Pages | `mindflow-landingPage`, rama `main` (merge de Pull Request desde `develop`) | https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/ |
-| Web Services | Railway | `mindflow-backend` (Docker, build desde GitHub) | https://powerful-wholeness-production.up.railway.app/swagger |
-| Aplicación móvil | Android Studio (emulador / dispositivo físico) | `mindflow-fronted`, rama `develop` | Sin publicar; sin firma de release ni APK distribuible en este Sprint |
+| Web Services | Railway | `mindflow-backend`, rama `develop` (Docker, build desde GitHub) | https://powerful-wholeness-production.up.railway.app/swagger |
+| Aplicación móvil | Android Studio (emulador / dispositivo físico) | `mindflow-frontend`, rama `develop` | Sin publicar; sin firma de release ni APK distribuible en este Sprint |
 
 ## 4.2. Landing Page & Mobile Application Implementation
 
@@ -3937,11 +3935,9 @@ Enlace de Trello: [https://trello.com/invite/b/6ac46338f50f7ae8cae3069c/ATTIc570
 
 #### 4.2.1.4. Development Evidence for Sprint Review
 
-<!-- [Pendiente: el README no documenta una fecha explícita de cierre/Sprint Review del Sprint 1; se usó el rango entre el Sprint Planning (22/09/2026, Tabla 65) y el último commit de implementación encontrado en los tres repositorios de producto (08/10/2026).] -->
+Durante el Sprint 1 (22/09/2026 – 09/10/2026) el equipo avanzó en paralelo los tres productos de MindFlow. En `mindflow-backend` se construyeron, uno por uno y mediante Pull Request, los 8 bounded contexts: Shared Kernel, IAM, Journal, AI Assistant y Habits & Wellness primero, y luego Notifications, Support, Subscriptions y Analytics en un único commit conjunto; sobre ellos se agregó el checkout de Stripe, los reportes en PDF con QuestPDF, las notificaciones por correo y, en la recta final, correcciones de estabilidad para el despliegue en Railway (healthcheck, migraciones en bases compartidas, documentación Swagger condicional).
 
-Durante el Sprint 1 (22/09/2026 – 08/10/2026) el equipo avanzó en paralelo los tres productos de MindFlow. En `mindflow-backend` se construyeron, uno por uno y mediante Pull Request, los 8 bounded contexts: Shared Kernel, IAM, Journal, AI Assistant y Habits & Wellness primero, y luego Notifications, Support, Subscriptions y Analytics en un único commit conjunto; sobre ellos se agregó el checkout de Stripe, los reportes en PDF con QuestPDF, las notificaciones por correo y, en la recta final, correcciones de estabilidad para el despliegue en Railway (healthcheck, migraciones en bases compartidas, documentación Swagger condicional).
-
-En `mindflow-fronted` se implementó primero la base de la Mobile Application con persistencia 100% local en SQLite (tema, autenticación, Home, Diario, Hábitos, Analíticas, Configuración y Planes), y luego, en una segunda etapa, se conectó esa misma app al backend real: autenticación con Google, cliente Retrofit, IAM, Chat con Gemini, suscripciones con Stripe, internacionalización español/inglés y una barra de navegación inferior de 5 íconos que reemplazó al menú lateral original.
+En `mindflow-frontend` se implementó primero la base de la Mobile Application con persistencia 100% local en SQLite (tema, autenticación, Home, Diario, Hábitos, Analíticas, Configuración y Planes), y luego, en una segunda etapa, se conectó esa misma app al backend real: autenticación con Google, cliente Retrofit, IAM, Chat con Gemini, suscripciones con Stripe, internacionalización español/inglés y una barra de navegación inferior de 5 íconos que reemplazó al menú lateral original.
 
 En `mindflow-landingPage` se construyó el sitio completo (página principal y "Nosotros") desde cero para el pivote del proyecto hacia la aplicación móvil, con una corrección posterior de la precisión de las biografías del equipo y del grid de integrantes. La Tabla 67 detalla los commits de implementación más representativos de los tres repositorios (hasta 12 por repositorio); el historial completo de cada uno está disponible en GitHub.
 
@@ -3961,18 +3957,18 @@ En `mindflow-landingPage` se construyó el sitio completo (página principal y "
 | upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | feature/backend-hardening | 23dfcbf | fix(ai): switch to gemini-3.8-flash after Google retired gemini-2.0-flash | — | 06/10/2026 |
 | upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | develop | 357627b | build: containerize API for Azure App Service | — | 08/10/2026 |
 | upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | develop | 2b2e25c | feat: allow Swagger documentation in configured environments | — | 08/10/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 75f05d5 | chore: configurar proyecto Android con Kotlin y Jetpack Compose | — | 27/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | a9ffd3c | feat: agregar base de datos SQLite, sesión y repositorios | — | 27/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | a9d9836 | feat: implementar pantallas de login y registro | — | 27/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 6f71fb5 | feat: implementar home con registro emocional y conversaciones recientes | — | 27/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | d71ece0 | feat: implementar diario con calendario emocional y filtros | — | 27/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 07cd917 | feat: implementar hábitos con rutinas, sugerencias de IA e historial | — | 27/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 9162bcc | feat: implementar analíticas y exportación de reportes PDF/CSV | — | 27/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | c0d9b2c | feat: implementar configuración y planes | — | 27/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 05d549d | refactor: add DDD foundation for frontend | Introduce las capas domain, application, infrastructure y shared. | 28/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | feature/backend-integration | ad21d0b | feat(network): add Retrofit API client, auth DTOs and AuthApi | — | 05/10/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | feature/backend-integration | 4c422d8 | feat(auth): wire sign-up/sign-in to backend IAM, keep SQLite as local cache | — | 05/10/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | a83a7e5 | feat(chat): wire the floating chat widget to backend Gemini, not LocalAiResponder | Reemplaza el puerto AiResponder síncrono por un ChatResponder suspend. | 06/10/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | 75f05d5 | chore: configurar proyecto Android con Kotlin y Jetpack Compose | — | 27/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | a9ffd3c | feat: agregar base de datos SQLite, sesión y repositorios | — | 27/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | a9d9836 | feat: implementar pantallas de login y registro | — | 27/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | 6f71fb5 | feat: implementar home con registro emocional y conversaciones recientes | — | 27/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | d71ece0 | feat: implementar diario con calendario emocional y filtros | — | 27/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | 07cd917 | feat: implementar hábitos con rutinas, sugerencias de IA e historial | — | 27/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | 9162bcc | feat: implementar analíticas y exportación de reportes PDF/CSV | — | 27/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | c0d9b2c | feat: implementar configuración y planes | — | 27/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | 05d549d | refactor: add DDD foundation for frontend | Introduce las capas domain, application, infrastructure y shared. | 28/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | feature/backend-integration | ad21d0b | feat(network): add Retrofit API client, auth DTOs and AuthApi | — | 05/10/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | feature/backend-integration | 4c422d8 | feat(auth): wire sign-up/sign-in to backend IAM, keep SQLite as local cache | — | 05/10/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | a83a7e5 | feat(chat): wire the floating chat widget to backend Gemini, not LocalAiResponder | Reemplaza el puerto AiResponder síncrono por un ChatResponder suspend. | 06/10/2026 |
 | upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage | feature/landing-page-redesign | 5e6a3b7 | feat: build landing page from scratch for the mobile app pivot | — | 07/10/2026 |
 | upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage | feature/landing-page-redesign | 3c4e3b6 | fix: team bio accuracy, 5-up team grid, nav/section mismatch | — | 07/10/2026 |
 
@@ -3980,7 +3976,7 @@ En `mindflow-landingPage` se construyó el sitio completo (página principal y "
 
 En este Sprint, la suite de pruebas automatizadas se concentró en la Mobile Application. Se escribieron **unit tests** con **JUnit 4** para las reglas de negocio de la capa de dominio y para los casos de uso de la capa de aplicación. Estas pruebas validan la lógica que define el comportamiento de MindFlow frente al estrés del usuario y la conversación con MindFlow AI, sin depender de la interfaz ni de servicios externos.
 
-**Repositorio:** [https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted) (rama `develop`)
+**Repositorio:** [https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend) (rama `develop`)
 
 **Ruta de las pruebas:** `app/src/test/java/com/cognitech/mindflow/`
 
@@ -4016,9 +4012,9 @@ En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementac
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 05d549d | refactor: add DDD foundation for frontend | Adds domain, application, infrastructure and shared layers. Introduces local persistence adapters, dependency composition, initial domain policies and fixes the Plans header. Incluye `HabitPolicyTest`. | 28/09/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | 7bbe3ca | refactor(chat): route AI chat through application and domain layers | — (agrega `ChatUseCasesTest`) | 02/10/2026 |
-| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-fronted | develop | a83a7e5 | feat(chat): wire the floating chat widget to backend Gemini, not LocalAiResponder | Replaces the sync-only AiResponder port with a suspend ChatResponder port and adds RemoteChatAdapter. Actualiza `ChatUseCasesTest` al nuevo puerto. | 06/10/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | 05d549d | refactor: add DDD foundation for frontend | Adds domain, application, infrastructure and shared layers. Introduces local persistence adapters, dependency composition, initial domain policies and fixes the Plans header. Incluye `HabitPolicyTest`. | 28/09/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | 7bbe3ca | refactor(chat): route AI chat through application and domain layers | — (agrega `ChatUseCasesTest`) | 02/10/2026 |
+| upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | develop | a83a7e5 | feat(chat): wire the floating chat widget to backend Gemini, not LocalAiResponder | Replaces the sync-only AiResponder port with a suspend ChatResponder port and adds RemoteChatAdapter. Actualiza `ChatUseCasesTest` al nuevo puerto. | 06/10/2026 |
 
 #### 4.2.1.6. Execution Evidence for Sprint Review
 
