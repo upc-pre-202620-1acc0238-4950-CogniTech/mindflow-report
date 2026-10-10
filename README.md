@@ -75,7 +75,7 @@ Proyecto
       Cabrera Sotelo, Camila Celeste <br>
       <br>
       <p></p>
-      Dias de la Cruz, Sebastian Gabriel <br>
+      Diaz de la Cruz, Sebastian Gabriel <br>
       <br>
       <p></p>
       Güere Calero, Fernando Julio <br>
@@ -99,7 +99,7 @@ Proyecto
       Cabrera Sotelo, Camila Celeste <br>
       <br>
       <p></p>
-      Dias de la Cruz, Sebastian Gabriel <br>
+      Diaz de la Cruz, Sebastian Gabriel <br>
       <br>
       <p></p>
       Güere Calero, Fernando Julio <br>
