@@ -56,6 +56,8 @@ Proyecto
 
 ---
 
+<div style="page-break-before: always;"></div>
+
 # Registro de Versiones del Informe
 
 
@@ -146,6 +148,8 @@ Proyecto
 
 ---
 
+<div style="page-break-before: always;"></div>
+
 # Project Report Collaboration Insights
 
 El informe del proyecto fue desarrollado de manera colaborativa por el equipo mediante el repositorio de GitHub creado para la gestión del Project Report de MindFlow. Este repositorio contiene los archivos del informe, los diagramas, las evidencias y el historial de versiones correspondiente a cada entrega.
@@ -211,6 +215,8 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
 </div>
 
 ---
+
+<div style="page-break-before: always;"></div>
 
 # Contenido
 
@@ -390,6 +396,8 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
 
 ---
 
+<div style="page-break-before: always;"></div>
+
 # Student Outcome
 
 El curso contribuye al cumplimiento del Student Outcome ABET:
@@ -502,6 +510,8 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 </table>
 
 ---
+
+<div style="page-break-before: always;"></div>
 
 # Objetivos SMART
 
@@ -797,6 +807,8 @@ Estas soluciones representan enfoques parciales del problema, lo que evidencia u
 
 ### 2.1.1. Análisis competitivo
 
+La Tabla 3 compara a MindFlow frente a las soluciones existentes en el mercado.
+
 **Tabla 3. Análisis competitivo (Competitive Analysis Landscape).**
 
 <table border="1" cellspacing="0" cellpadding="5">
@@ -1024,6 +1036,8 @@ Asimismo, se incluyen preguntas complementarias orientadas a la construcción de
 - ¿Qué te generaría confianza o desconfianza al usar una app de salud mental?
 
 ### 2.2.2. Registro de entrevistas
+
+A continuación se registran las seis entrevistas de descubrimiento realizadas: tres al Segmento 1 (Tablas 4 a 6) y tres al Segmento 2 (Tablas 7 a 9).
 
 #### Segmento 1: Estudiantes Universitarios
 
@@ -1256,6 +1270,8 @@ Los profesionales requieren soluciones que optimicen su bienestar sin demandar t
 
 ### Comparación entre segmentos
 
+La comparación entre ambos segmentos se resume en la Tabla 10.
+
 **Tabla 10. Entrevistas — Comparación entre segmentos.**
 
 | Factor | Estudiantes | Profesionales |
@@ -1307,7 +1323,7 @@ El proceso de needfinding evidencia que los usuarios no solo buscan registrar su
 
 En esta sección se presenta la matriz de tareas de usuario (User Task Matrix), construida a partir de los User Personas definidos: **Jimena** (estudiante universitaria) y **Nordie** (profesional joven).  
 
-La matriz identifica las tareas que ambos segmentos realizan para gestionar su bienestar emocional y productividad en su día a día, independientemente de la existencia de una solución tecnológica.  
+La matriz identifica las tareas que ambos segmentos realizan para gestionar su bienestar emocional y productividad en su día a día, independientemente de la existencia de una solución tecnológica (Tabla 11).  
 
 Cada tarea se evalúa en función de:  
 - **Frecuencia:** Número aproximado de veces que realiza la tarea (diaria/semanal)  
@@ -1490,6 +1506,8 @@ Adicionalmente, se incluye una **Spike Story (SP01)** para reducir la incertidum
 | E3 | Bienestar Inteligente e Ingeniería de Hábitos | Gestión de hábitos, rutinas de bienestar, intervenciones frente al estrés y recomendaciones adaptativas. |
 | E4 | Analítica, Monetización y Escalabilidad | Visualización de datos, reportes, monetización, soporte y capacidades técnicas orientadas a la escalabilidad. |
 | E5 | Landing Page y Adquisición de Usuarios | Sitio informativo orientado a comunicar la propuesta de valor de MindFlow y atraer potenciales usuarios. |
+
+El detalle de cada User Story, con su criterio de aceptación, prioridad y Epic asociado, se presenta en la Tabla 14.
 
 **Tabla 14. Requirements Specification — User Stories (2).**
 
@@ -2299,6 +2317,8 @@ A diferencia de IAM, Journal **no define un repository interface propio**: los C
 
 #### 2.6.2.1. Domain Layer
 
+El Domain Layer concentra el agregado raíz `JournalEntry`, las entidades `Tag`, `EntryTag`, `Media` y `JournalSearchToken`, y el servicio de dominio `JournalSearchTokenizer` que normaliza el texto para la búsqueda cifrada (Tabla 22).
+
 **Tabla 22. Bounded Context: Journal — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
@@ -2329,6 +2349,8 @@ El Aggregate Design Canvas de `JournalEntry` documenta su ciclo de vida, que inc
 
 #### 2.6.2.2. Interface Layer
 
+El Interface Layer expone las doce operaciones REST de Journal a través de `JournalController`, que resuelve el usuario autenticado desde el JWT y valida la propiedad de cada recurso antes de delegar en el Application Layer (Tabla 24).
+
 **Tabla 24. Bounded Context: Journal — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
@@ -2336,6 +2358,8 @@ El Aggregate Design Canvas de `JournalEntry` documenta su ciclo de vida, que inc
 | `JournalController` | REST Controller (`/journal`) | Expone las 12 operaciones REST de Journal: entradas, tags, entry-tags y media (incluyendo upload de archivos). Resuelve el `user_id` del JWT y valida ownership antes de delegar en el Application Layer. | `GET/POST /entries`, `GET/PUT/DELETE /entries/{id}`, `POST /entries/sync`, `GET /tags`, `GET/POST /entry-tags`, `DELETE /entry-tags/{id}`, `GET/POST /media`, `POST /media/upload` | Depende de `IMediator` (Cortex.Mediator) para despachar Commands/Queries, de `IFileStorageService` para subir archivos, y de `AppDbContext` (acceso puntual en `DeleteEntryTag` para resolver el `EntryId` antes de validar ownership) |
 
 #### 2.6.2.3. Application Layer
+
+El Application Layer implementa un patrón CQRS explícito con Commands y Queries despachados vía `IMediator`: los Command Handlers escriben a través de `IBaseRepository` y disparan el reindexado de búsqueda y la invalidación de caché de Analytics, mientras que los Query Handlers leen directamente de `AppDbContext` (Tabla 25).
 
 **Tabla 25. Bounded Context: Journal — Application Layer.**
 
@@ -2353,6 +2377,8 @@ El Aggregate Design Canvas de `JournalEntry` documenta su ciclo de vida, que inc
 | `ISearchTokenHasher` | Service Port | Abstrae el hashing determinístico de un token de búsqueda. | `Hash(token: string): string` | Implementada por `SearchTokenHasher` (Infrastructure); consumida por `GetJournalEntriesHandler` y `JournalSearchIndexer` |
 
 #### 2.6.2.4. Infrastructure Layer
+
+El Infrastructure Layer implementa el almacenamiento de archivos multimedia (`CloudinaryFileStorageService` y su alternativa local), el hashing determinístico de los tokens de búsqueda y el job en segundo plano `JournalSearchBackfillService`, que reindexa las entradas creadas antes de existir la búsqueda (Tabla 26).
 
 **Tabla 26. Bounded Context: Journal — Infrastructure Layer.**
 
@@ -2413,6 +2439,8 @@ Se identificaron además dos dependencias cruzadas reales hacia otros bounded co
 
 #### 2.6.3.1. Domain Layer
 
+El Domain Layer concentra el agregado raíz `Conversation` con sus `ChatMessage`, la entidad `AiFeedbackRating` para calificar contenido generado por IA, y `AiMetricLog`, que registra la telemetría de cada llamada al proveedor de IA (Tabla 27).
+
 **Tabla 27. Bounded Context: AI Assistant — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
@@ -2440,6 +2468,8 @@ El Aggregate Design Canvas de `Conversation` muestra cómo el agregado mantiene 
 
 #### 2.6.3.2. Interface Layer
 
+El Interface Layer expone el chat y la valoración de respuestas mediante `ChatController` y `AiFeedbackController`, que validan la longitud del mensaje y el contenido de la calificación antes de delegar en el Application Layer (Tabla 29).
+
 **Tabla 29. Bounded Context: AI Assistant — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
@@ -2450,6 +2480,8 @@ El Aggregate Design Canvas de `Conversation` muestra cómo el agregado mantiene 
 | `SubmitRatingRequest` | Request DTO (record) | Cuerpo de la petición para registrar una calificación. Definido directamente en el archivo del Controller. | `SubmitRatingRequest(ContentId, ContentType, Rating, Comment?)` | Consumido directamente por `AiFeedbackController` |
 
 #### 2.6.3.3. Application Layer
+
+El Application Layer usa Application Services planos en lugar de Commands/Queries: `ChatService` orquesta la conversación con el asistente, `AiFeedbackService` gestiona las calificaciones, e `IAiService` abstrae al proveedor de IA generativa, consumido también por Analytics & Reporting y Habits & Wellness (Tabla 30).
 
 **Tabla 30. Bounded Context: AI Assistant — Application Layer.**
 
@@ -2462,6 +2494,8 @@ El Aggregate Design Canvas de `Conversation` muestra cómo el agregado mantiene 
 | `AiFeedbackSummaryDto` | Response DTO (record) | Representa el resumen agregado de calificaciones de un usuario. | `AiFeedbackSummaryDto(TotalRatings, AverageRating, Distribution)` | Construido por `AiFeedbackService` |
 
 #### 2.6.3.4. Infrastructure Layer
+
+El Infrastructure Layer implementa `ChatService` y `AiFeedbackService` directamente sobre `AppDbContext`, y `GeminiService`, que construye los prompts por caso de uso y llama a la API de Google Gemini, registrando cada llamada en `AiMetricLog` (Tabla 31).
 
 **Tabla 31. Bounded Context: AI Assistant — Infrastructure Layer.**
 
@@ -2555,6 +2589,8 @@ El Aggregate Design Canvas de `Habit` explica cómo se mantiene la racha y quié
 
 #### 2.6.4.2. Interface Layer
 
+El Interface Layer expone hábitos, registros de cumplimiento, el chequeo de estrés y el catálogo de ejercicios de bienestar mediante `HabitsController`, `HabitLogsController`, `WellnessController` y `WellnessExercisesController` —este último con administración restringida a roles de IAM— (Tabla 34).
+
 **Tabla 34. Bounded Context: Habits & Wellness — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
@@ -2568,6 +2604,8 @@ El Aggregate Design Canvas de `Habit` explica cómo se mantiene la racha y quié
 | `HabitsActionResultAssembler` | Assembler (static, genérico) | Traduce un `Result<T>`/`Result` en un `IActionResult`, mapeando el nombre del error de dominio a status HTTP (`"NotFound"` → 404, `"Mismatch"` → 403, resto → 400) vía `ProblemDetailsFactory`. | `ToActionResultFromCreateResult`, `ToActionResultFromDeleteResult`, `ToActionResultFromGetResult`, `ToActionResultFromGetAllResult` | Usado por `HabitsController` y `HabitLogsController` |
 
 #### 2.6.4.3. Application Layer
+
+El Application Layer combina Application Services para hábitos, logs y el chequeo de estrés —`WellnessService` lee entradas del diario para calcular el nivel de estrés y pausar o reanudar hábitos— con Commands/Queries vía Mediator para el catálogo de ejercicios de bienestar (Tabla 35).
 
 **Tabla 35. Bounded Context: Habits & Wellness — Application Layer.**
 
@@ -3109,6 +3147,8 @@ Sistema de espaciado basado en múltiplos de 8px, consistente entre Landing Page
 - Separación entre secciones: `32px`
 
 **Communication Tone**
+
+El tono de comunicación de MindFlow se posiciona en cuatro dimensiones (Tabla 60).
 
 **Tabla 60. Style Guidelines — General Style Guidelines — Communication Tone.**
 
@@ -4023,7 +4063,7 @@ Los cuatro repositorios del proyecto siguen un flujo basado en GitFlow simplific
 
 La convención de mensajes de commit observada en el historial sigue, en general, Conventional Commits (`feat:`, `fix:`, `refactor:`, `build:`, `chore:`, `style:`, con *scope* opcional entre paréntesis), tal como indica la sección 4.1.3. En la práctica hay excepciones: varios commits tempranos de la app móvil (por ejemplo `feat: implementar pantallas de login y registro`, del 27/09/2026) usan el prefijo correcto pero la descripción en español, mientras que los commits posteriores a la refactorización a capas DDD (`05d549d refactor: add DDD foundation for frontend`) están íntegramente en inglés. El backend tiene además un par de commits sin prefijo de tipo (`de86103 Update database connection and secret keys`) o con un prefijo no estándar (`dda3d04 feature(ReadMe): Add information for MarkDown`, que usa `feature` en vez de `feat`).
 
-Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los tres repositorios de producto, con los commits por integrante en la rama `develop`, ya se presentan en la sección 4.2.1.9 "Team Collaboration Insights during Sprint" (Tabla 89, Figuras 136 a 138); no se repiten aquí.
+Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los tres repositorios de producto, con los commits por integrante en la rama `develop`, ya se presentan en la sección 4.2.1.9 "Team Collaboration Insights during Sprint" (Tabla 89, Figuras 136 a 138); no se repiten aquí. La Tabla 68 enumera los repositorios del proyecto con su URL, rama principal y propósito.
 
 **Tabla 68. Source Code Management — Repositorios del proyecto.**
 
@@ -4067,7 +4107,7 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 
 *Figura 123. Despliegue de la Landing Page en GitHub Pages.*
 
-**Aplicación móvil Android.** En este Sprint la aplicación no tiene un proceso de publicación: el `buildType release` de `app/build.gradle.kts` no define un `signingConfig` propio (usa la firma de depuración por defecto), no se generó ningún APK distribuible y el repositorio no tiene configuración de Google Play Store. La app se ejecuta desde Android Studio, sobre emuladores y dispositivos Android físicos conectados al backend de Railway a través de `API_BASE_URL` (`app/build.gradle.kts`), tal como ya se describe en la sección 4.2.1.8. La publicación en una tienda de aplicaciones queda para un Sprint posterior.
+**Aplicación móvil Android.** En este Sprint la aplicación no tiene un proceso de publicación: el `buildType release` de `app/build.gradle.kts` no define un `signingConfig` propio (usa la firma de depuración por defecto), no se generó ningún APK distribuible y el repositorio no tiene configuración de Google Play Store. La app se ejecuta desde Android Studio, sobre emuladores y dispositivos Android físicos conectados al backend de Railway a través de `API_BASE_URL` (`app/build.gradle.kts`), tal como ya se describe en la sección 4.2.1.8. La publicación en una tienda de aplicaciones queda para un Sprint posterior. La Tabla 70 resume el despliegue de los tres productos.
 
 **Tabla 70. Software Deployment Configuration — Resumen de despliegue por producto.**
 
@@ -4198,6 +4238,8 @@ En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementac
 
 ##### Resultado de la ejecución
 
+La Tabla 75 resume el resultado de la ejecución de los unit tests.
+
 **Tabla 75. Testing Suite Evidence for Sprint Review — Resultado de la ejecución.**
 
 | Clase de prueba | Tests | Exitosos | Fallidos |
@@ -4207,6 +4249,8 @@ En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementac
 | **Total** | **5** | **5** | **0** |
 
 ##### Commits relacionados con Testing
+
+La Tabla 76 detalla los commits relacionados con las pruebas automatizadas.
 
 **Tabla 76. Testing Suite Evidence for Sprint Review — Commits relacionados con Testing.**
 
@@ -4389,6 +4433,8 @@ Ejemplo de mensaje en una conversación existente (Tabla 80):
 
 ##### Habits & Wellness: hábitos, registros y bienestar
 
+La Tabla 81 agrupa los endpoints de hábitos, registros de cumplimiento, chequeo de estrés y catálogo de ejercicios de bienestar.
+
 **Tabla 81. Services Documentation Evidence for Sprint Review — Habits & Wellness: hábitos, registros y bienestar.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
@@ -4442,6 +4488,8 @@ Ejemplo de respuesta del dashboard (Tabla 82):
 
 ##### Notifications
 
+La Tabla 83 agrupa los endpoints de notificaciones del usuario.
+
 **Tabla 83. Services Documentation Evidence for Sprint Review — Notifications.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
@@ -4474,6 +4522,8 @@ Ejemplo de respuesta de checkout (Tabla 84):
 
 ##### Support
 
+La Tabla 85 agrupa los endpoints de tickets de soporte.
+
 **Tabla 85. Services Documentation Evidence for Sprint Review — Support.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
@@ -4485,6 +4535,8 @@ Ejemplo de respuesta de checkout (Tabla 84):
 | PATCH 🔒👤 | `/api/v1/support/tickets/{id}` | Path: `id`. Body: `assignee_id`, `status` | `204` al asignar el ticket o cambiar su estado. |
 
 ##### Health check
+
+La Tabla 86 documenta el endpoint de verificación de estado del servicio.
 
 **Tabla 86. Services Documentation Evidence for Sprint Review — Health check.**
 
@@ -4539,6 +4591,8 @@ A continuación se muestra la interacción con la documentación desplegada en R
 *Figura 131. Creación de un ticket de soporte con `POST /api/v1/support/tickets`.*
 
 ##### Commits relacionados con los Web Services y su documentación
+
+La Tabla 87 detalla los commits de implementación y documentación de los Web Services.
 
 **Tabla 87. Services Documentation Evidence for Sprint Review — Commits relacionados con los Web Services y su documentación.**
 
@@ -4683,6 +4737,8 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
  
 #### Estructura de la sesión
  
+La estructura de cada sesión de entrevista sigue cuatro etapas (Tabla 92).
+
 **Tabla 92. Diseño de Entrevistas — Estructura de la sesión.**
 
 | Etapa | Duración aprox. | Descripción |
@@ -4705,6 +4761,8 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 **Segmento B:** ¿Encajaría MindFlow en tu rutina laboral? ¿Qué valor tendría para ti ver reportes de tu estado emocional?
 
 ### 4.3.2. Registro de Entrevistas
+
+A continuación se registran las cinco entrevistas de validación realizadas: tres al Segmento 1 (Tablas 93 a 95) y dos al Segmento 2 (Tablas 96 y 97).
 
 #### Segmento 1: Estudiantes Universitarios
 
