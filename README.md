@@ -40,7 +40,7 @@ Proyecto
 | Código      | Apellidos y Nombres |
 | ----------- | -------------------- |
 | u202412462  | Cabrera Sotelo, Camila Celeste |
-| u202410421  | Dias de la Cruz, Sebastian Gabriel |
+| u202410421  | Diaz de la Cruz, Sebastian Gabriel |
 | u202413169  | Güere Calero, Fernando Julio |
 | U202410024  | Jáuregui Cerna, Jean Franco |
 | U202410382  | Limache Coronel, Imanol Fabrizio |
