@@ -42,15 +42,15 @@ Proyecto
 | u202412462  | Cabrera Sotelo, Camila Celeste |
 | u202410421  | Diaz de la Cruz, Sebastian Gabriel |
 | u202413169  | Güere Calero, Fernando Julio |
-| U202410024  | Jáuregui Cerna, Jean Franco |
-| U202410382  | Limache Coronel, Imanol Fabrizio |
+| u202410024  | Jáuregui Cerna, Jean Franco |
+| u202410382  | Limache Coronel, Imanol Fabrizio |
 
 <br>
 
 
 **Periodo 202620**
 
-**Setiembre 2026**
+**Octubre 2026**
 
 </div>
 
@@ -5198,17 +5198,19 @@ Los resultados indican que MindFlow no presenta problemas muy graves (severidad 
 
 **Conclusiones**
 
-1. El modelado estratégico realizado en el Capítulo II (Big Picture EventStorming, EventStorming estratégico, Candidate Context Discovery y Context Mapping) se sostuvo hasta la implementación: los 8 Bounded Contexts candidatos (IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support) se llevaron, sin rediseños mayores, hasta el diseño táctico y el backend construido en el Sprint 1 (Capítulo IV), lo que confirma que los límites de contexto definidos desde la primera entrega eran correctos.
+1. El modelado estratégico de los 8 Bounded Contexts (IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support) se validó y refinó entre la primera entrega (AV1) y esta (TB1): los límites definidos mediante EventStorming y Candidate Context Discovery (sección 2.5.1) se sostuvieron, y el equipo profundizó su documentación con los Domain Message Flows (sección 2.5.1.2), los Bounded Context Canvases bajo el estándar DDD Crew (v5) (sección 2.5.1.3), el Context Mapping (sección 2.5.2) y el Aggregate Design Canvas de los agregados principales de cada contexto (sección 2.6). Este refinamiento alineó el diseño estratégico con lo efectivamente construido en el backend del Sprint 1 (sección 4.2.1).
 2. El Style Guide, la Information Architecture y los wireframes/mock-ups del Capítulo III tradujeron de forma consistente los hallazgos del Lean UX Process (Capítulo I) en una experiencia concreta: los 8 User Flows diseñados para la Mobile Application cubren el recorrido completo de los dos User Personas (Jimena y Nordie) y están directamente trazados a las User Stories priorizadas en el Product Backlog.
-3. La evidencia del Sprint 1 (Capítulo IV) —backend de los 8 Bounded Contexts documentado en Swagger, frontend Android con arquitectura DDD, pruebas unitarias automatizadas exitosas y despliegue funcional— demuestra que el flujo de trabajo GitFlow adoptado por el equipo permite construir en paralelo múltiples Bounded Contexts sin bloquear el avance del resto del producto.
+3. La evidencia del Sprint 1 (sección 4.2.1) muestra que el equipo construyó, en paralelo, el backend de los 8 Bounded Contexts —documentado con Swagger y desplegado en Railway (secciones 4.2.1.7 y 4.2.1.8)—, publicó el Landing Page en GitHub Pages (sección 4.1.4) y construyó las ocho vistas de la aplicación móvil que cubren el recorrido completo del usuario, desde el acceso hasta la gestión de la suscripción (sección 4.2.1.6).
 4. Las cinco entrevistas de validación realizadas (tres del Segmento 1: Valeria, Cristian y Joaquín; dos del Segmento 2: Juan y Aldo) confirman la propuesta de valor de MindFlow en ambos segmentos —desahogo rápido, intervenciones breves de bienestar y pausa de hábitos sin culpa en época de exámenes para estudiantes; cierre de jornada laboral y trazabilidad de patrones de estrés para profesionales— y coinciden en una misma preocupación de confianza: la privacidad y el tratamiento de los datos emocionales registrados, tanto en el cifrado local como en su paso por APIs externas de IA. Además, los estudiantes coinciden en que la aplicación debe ser rápida y sencilla, y en que las funciones principales deben mantenerse en el plan gratuito.
+5. La evaluación heurística (sección 4.3.3) identificó 16 problemas de Usabilidad, Inclusive Design e Information Architecture, de los cuales 4 son de severidad 3 ("problema mayor", Tabla 100): la falta de aclaración de que la IA es un asistente de reflexión y no un servicio clínico (problema #1), la falta de información sobre cómo se tratan los textos del diario al ser procesados por servicios externos de IA (problema #2), el contraste insuficiente de los botones principales (problema #3) y la ausencia de texto alternativo en las imágenes de la Landing Page (problema #4). Los problemas #1 y #2 coinciden directamente con la preocupación por privacidad expresada en las entrevistas de validación (conclusión 4), confirmando desde dos fuentes independientes que la confianza del usuario en el manejo de sus datos emocionales es un punto crítico en la experiencia de MindFlow.
 
 **Recomendaciones**
 
-1. Completar la entrevista de validación restante del Segmento 2 (Profesionales Jóvenes), según lo planificado en la sección 4.3.1, antes de cerrar el Sprint 2, profundizando en la disposición de pago por el plan Premium y en la claridad del alcance del asistente de IA, dos puntos de confusión que aparecieron en las entrevistas ya realizadas.
-2. Priorizar en el Product Backlog del Sprint 2 los vacíos funcionales que señalaron ambos segmentos durante la validación: integración con calendario, registro por voz y recordatorios de hábitos con horarios personalizables para estudiantes, y recordatorios push configurables junto con etiquetado por área de vida (trabajo, finanzas, personal) para profesionales.
-3. Conectar en el Sprint 2 las vistas móviles que hoy trabajan con persistencia local (Diario, Hábitos, Analíticas y Configuración) a sus endpoints ya documentados del backend, y completar las funcionalidades pendientes identificadas en la evidencia de Sprint 1: bloqueo por PIN (US04), recordatorios de hábitos y envío de tickets de soporte (US37).
-4. Reforzar el disclaimer de onboarding y la Política de Privacidad para dejar explícito que MindFlow es un asistente de reflexión y no un servicio clínico/terapéutico, y detallar cómo se tratan los datos de texto que procesan las APIs externas de IA (Gemini), atendiendo directamente la desconfianza expresada por los entrevistados validados.
+1. Cerrar los pendientes del Sprint 1: el bloqueo por PIN (US04), los recordatorios de hábitos y el envío de tickets de soporte al backend (US37).
+2. Conectar al backend las vistas que hoy operan con datos locales: Diario, Hábitos, Analíticas y Configuración (sección 4.2.1.6).
+3. Corregir los problemas de mayor severidad identificados en la sección 4.3.3: los problemas #1 y #2, sobre la falta de claridad respecto al alcance de la IA y al tratamiento de los datos del diario, y el problema #3, sobre el contraste insuficiente de los botones principales.
+4. Priorizar en el Product Backlog del Sprint 2 los vacíos funcionales que señalaron ambos segmentos durante la validación: integración con calendario, registro por voz y recordatorios de hábitos con horarios personalizables para estudiantes, y recordatorios push configurables junto con etiquetado por área de vida (trabajo, finanzas, personal) para profesionales.
+5. Reforzar el disclaimer de onboarding y la Política de Privacidad para dejar explícito que MindFlow es un asistente de reflexión y no un servicio clínico/terapéutico, y detallar cómo se tratan los datos de texto que procesan las APIs externas de IA.
 
 <!--
 ## Video App Validation
