@@ -5211,7 +5211,6 @@ Los resultados indican que MindFlow no presenta problemas muy graves (severidad 
 3. Corregir los problemas de mayor severidad identificados en la sección 4.3.3: los problemas #1 y #2, sobre la falta de claridad respecto al alcance de la IA y al tratamiento de los datos del diario, y el problema #3, sobre el contraste insuficiente de los botones principales.
 4. Priorizar en el Product Backlog del Sprint 2 los vacíos funcionales que señalaron ambos segmentos durante la validación: integración con calendario, registro por voz y recordatorios de hábitos con horarios personalizables para estudiantes, y recordatorios push configurables junto con etiquetado por área de vida (trabajo, finanzas, personal) para profesionales.
 5. Reforzar el disclaimer de onboarding y la Política de Privacidad para dejar explícito que MindFlow es un asistente de reflexión y no un servicio clínico/terapéutico, y detallar cómo se tratan los datos de texto que procesan las APIs externas de IA.
-6. Realizar una nueva validación en el Sprint 2 con más participantes del Segmento 2, dado que queda una entrevista sin realizar de las planificadas en la sección 4.3.1, enfocada en la disposición de pago por el plan Premium y en la claridad del alcance del asistente de IA.
 
 <!--
 ## Video App Validation
