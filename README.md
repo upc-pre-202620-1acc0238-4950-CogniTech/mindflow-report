@@ -2096,6 +2096,8 @@ El sistema MindFlow está compuesto por cuatro contenedores (Landing Page, Mobil
 
 <!-- Se agrega una sub-sección "2.6.x. Bounded Context: <Nombre>" por cada bounded context identificado en 2.5, una vez completado el Strategic-Level DDD. -->
 
+Además de las tablas por capa, el Domain Layer de cada bounded context que tiene un agregado con reglas de negocio propias incluye su **Aggregate Design Canvas**. El canvas recorre nueve secciones: nombre, descripción, transiciones de estado, invariantes que el agregado garantiza, políticas correctivas para lo que queda fuera de su límite de consistencia, comandos que maneja, eventos que genera, throughput (probabilidad de conflictos de concurrencia) y tamaño (cuántos cambios acumula en su vida). Los eventos listados son los eventos de dominio identificados en el EventStorming (sección 2.5.1): en el Sprint 1 el backend no los publica como `IEvent`, sino que sus efectos se ejecutan de forma síncrona en el Application Layer. Analytics & Reporting y Notifications no tienen canvas: el primero no tiene un agregado propio (solo lee datos de otros contextos) y el segundo solo registra notificaciones, sin reglas que proteger.
+
 ### 2.6.1. Bounded Context: IAM
 
 El bounded context **IAM (Identity & Access Management)** es responsable de la identidad, autenticación y perfil de los usuarios de MindFlow. Ancla el evento *User registered / User authenticated*, y es consumido por el resto de bounded contexts, ya que toda operación sobre Journal, Habits & Wellness, AI Assistant, Analytics, Subscriptions, Notifications y Support requiere un usuario autenticado.
@@ -2112,11 +2114,27 @@ El Domain Layer concentra el agregado raíz `User`, la entidad `PasswordResetTok
 | `PasswordResetToken` | Entity | Representa un token de un solo uso, con expiración, para el flujo de recuperación de contraseña. Solo se persiste el hash del token; el valor crudo viaja únicamente en el correo enviado al usuario. | `Id: int`, `UserId: int`, `Token: string` (hash SHA-256), `ExpiresAt: DateTime`, `Used: bool` | *(entidad anémica, sin comportamiento propio — el ciclo de vida lo gestiona `UserCommandService`)* | Referencia lógica a `User` por `UserId` (0..* a 1, sin constraint físico en BD) |
 | `IUserRepository` | Repository Interface (extiende `IBaseRepository<User>`) | Abstrae el acceso a datos de `User` para que el Domain/Application Layer no dependa de la tecnología de persistencia. | — | `FindByEmailAsync(email): Task<User?>`, `FindByGoogleIdAsync(googleId): Task<User?>`, `ExistsByEmailAsync(email): Task<bool>` + heredados de `IBaseRepository<User>` (`AddAsync`, `FindByIdAsync`, `Update`, `Remove`, `ListAsync`) | Implementada por `UserRepository` (Infrastructure Layer); consumida por `UserCommandService` (Application Layer) |
 
+El Aggregate Design Canvas de `User` resume sus reglas de identidad y cómo se coordina con el resto de contextos al eliminar una cuenta (Tabla 18).
+
+**Tabla 18. Bounded Context: IAM — Aggregate Design Canvas de `User`.**
+
+| Sección | Contenido |
+|---|---|
+| **1. Name** | `User` |
+| **2. Description** | Representa la identidad de una persona en MindFlow: sus credenciales (hash de contraseña y de PIN), su rol, su vínculo con Google y su perfil. Se decidió dejar `PasswordResetToken` fuera del agregado, como entidad propia gestionada por `UserCommandService`, para que la expiración y el uso único del token no obliguen a cargar y bloquear al usuario. La eliminación de cuenta tampoco vive en el agregado: la orquesta el Application Layer porque afecta datos de otros bounded contexts. |
+| **3. State Transitions** | *Registrado* (email y contraseña, o Google) → *Vinculado a Google* (`LinkGoogle`, cuando un usuario existente inicia sesión con Google)<br>*Sin PIN* ⇄ *Con PIN* (`SetPin` / `RemovePin`)<br>Rol *User* → *Support* / *Admin* (`PromoteToSupport` / `PromoteToAdmin`)<br>Cualquier estado → *Eliminado* (`DeleteAccountCommand`, borrado físico) |
+| **4. Enforced Invariants** | El email es único (índice único y verificación con `ExistsByEmailAsync`) y tiene formato válido.<br>La contraseña tiene al menos 8 caracteres.<br>La contraseña y el PIN nunca se guardan en texto plano, solo como hash BCrypt.<br>El PIN es numérico y tiene entre 4 y 6 dígitos.<br>`GoogleId` es único.<br>`Role` solo puede ser `User`, `Support` o `Admin`. |
+| **5. Corrective Policies** | Al eliminar una cuenta se borran, dentro de una misma transacción, las entradas de diario (con sus etiquetas y adjuntos), hábitos y logs, conversaciones, calificaciones de IA, sugerencias cacheadas, tokens y etiquetas del usuario.<br>Al pedir un nuevo token de recuperación se eliminan los tokens anteriores no usados; cada token expira a los 15 minutos y se marca como usado al restablecer la contraseña.<br>Si alguien inicia sesión con Google usando un email ya registrado, se vincula esa cuenta en lugar de crear un usuario duplicado. |
+| **6. Handled Commands** | `SignUpCommand`, `SignInCommand`, `GoogleAuthCommand`, `UpdateProfileCommand`, `ForgotPasswordCommand`, `ResetPasswordCommand`, `SetPinCommand`, `VerifyPinCommand`, `RemovePinCommand`, `DeleteAccountCommand` |
+| **7. Created Events** | *User registered*, *User authenticated*, *Google account linked*, *Profile updated*, *Password reset requested*, *Password reset*, *PIN set*, *PIN removed*, *Account deleted* |
+| **8. Throughput** | Bajo. Cada instancia solo la modifica su propio dueño, a lo sumo desde un par de dispositivos, y las escrituras son esporádicas (registro, cambios de perfil o PIN); iniciar sesión no modifica el agregado. La probabilidad de conflictos de concurrencia es prácticamente nula. |
+| **9. Size** | Pequeño. No contiene colecciones, y en toda su vida acumula unas decenas de cambios como máximo (registro, vínculo con Google, actualizaciones de perfil, cambios de PIN y de contraseña). |
+
 #### 2.6.1.2. Interface Layer
 
-El Interface Layer expone las capacidades de IAM como una API REST, y traduce entre el contrato HTTP (Resources) y los Commands del Application Layer (Tabla 18).
+El Interface Layer expone las capacidades de IAM como una API REST, y traduce entre el contrato HTTP (Resources) y los Commands del Application Layer (Tabla 19).
 
-**Tabla 18. Bounded Context: IAM — Interface Layer.**
+**Tabla 19. Bounded Context: IAM — Interface Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2128,9 +2146,9 @@ El Interface Layer expone las capacidades de IAM como una API REST, y traduce en
 
 #### 2.6.1.3. Application Layer
 
-El Application Layer orquesta los flujos de negocio de IAM a través de Commands y del servicio `UserCommandService`, que actúa como Command Handler unificado para todos los casos de uso de identidad (Tabla 19).
+El Application Layer orquesta los flujos de negocio de IAM a través de Commands y del servicio `UserCommandService`, que actúa como Command Handler unificado para todos los casos de uso de identidad (Tabla 20).
 
-**Tabla 19. Bounded Context: IAM — Application Layer.**
+**Tabla 20. Bounded Context: IAM — Application Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2144,9 +2162,9 @@ El Application Layer orquesta los flujos de negocio de IAM a través de Commands
 
 #### 2.6.1.4. Infrastructure Layer
 
-El Infrastructure Layer contiene las implementaciones concretas de los puertos definidos en Domain/Application Layer: persistencia con EF Core, emisión de JWT, envío de correo por SMTP, y validación de credenciales de Google (Tabla 20).
+El Infrastructure Layer contiene las implementaciones concretas de los puertos definidos en Domain/Application Layer: persistencia con EF Core, emisión de JWT, envío de correo por SMTP, y validación de credenciales de Google (Tabla 21).
 
-**Tabla 20. Bounded Context: IAM — Infrastructure Layer.**
+**Tabla 21. Bounded Context: IAM — Infrastructure Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2203,7 +2221,7 @@ A diferencia de IAM, Journal **no define un repository interface propio**: los C
 
 #### 2.6.2.1. Domain Layer
 
-**Tabla 21. Bounded Context: Journal — Domain Layer.**
+**Tabla 22. Bounded Context: Journal — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
 |---|---|---|---|---|---|
@@ -2215,9 +2233,25 @@ A diferencia de IAM, Journal **no define un repository interface propio**: los C
 | `JournalError` | Domain Error Enum | Códigos de error de dominio para resultados fallidos. | — | `JournalEntryNotFound`, `EntryTagNotFound` | Usado por los Handlers al construir `Result.Failure(...)` |
 | `JournalSearchTokenizer` | Domain Service (estático) | Normaliza texto libre en un conjunto de palabras indexables: minúsculas, sin tildes, separadas por límites no alfanuméricos, deduplicadas. Se usa idénticamente al indexar una entrada y al parsear una query de búsqueda, para que ambos lados hasheen igual. | — | `{static} Tokenize(text: string?): IReadOnlySet<string>` | Consumida por `JournalSearchIndexer` (Infrastructure) y por `GetJournalEntriesHandler` (Application) |
 
+El Aggregate Design Canvas de `JournalEntry` documenta su ciclo de vida, que incluye la sincronización offline-first de la aplicación móvil (Tabla 23).
+
+**Tabla 23. Bounded Context: Journal — Aggregate Design Canvas de `JournalEntry`.**
+
+| Sección | Contenido |
+|---|---|
+| **1. Name** | `JournalEntry` |
+| **2. Description** | Representa una entrada del diario emocional con su contenido cifrado, su sentimiento, la respuesta empática generada por IA, sus etiquetas (`EntryTag`) y sus adjuntos (`Media`). Se decidió dejar `Tag` fuera del agregado porque una etiqueta se comparte entre muchas entradas y puede ser global; `JournalSearchToken` también queda fuera porque es un índice derivado del contenido que se puede regenerar. Como tradeoff, la entidad es anémica: sus reglas viven en los Command Handlers. |
+| **3. State Transitions** | *Creada offline* (solo en el cliente) → *Sincronizada* (`SyncJournalEntriesCommand`)<br>*Creada* → *Editada* (`UpdateJournalEntryCommand` o sincronización)<br>*Creada / Editada* → *Eliminada* (soft delete con `DeletedAt`)<br>*Eliminada* → *Restaurada* (una edición offline más reciente que el borrado la recupera durante la sincronización) |
+| **4. Enforced Invariants** | Cada entrada pertenece a un único usuario.<br>`(UserId, ClientId)` es único, lo que hace idempotente la sincronización.<br>`Sentiment` es `positive`, `negative` o `neutral`; si llega vacío o como `auto`, se detecta a partir del texto.<br>`HasPreview` es verdadero solo si el contenido supera los 200 caracteres.<br>`Content` siempre se guarda cifrado con AES.<br>Una etiqueta no se repite en la misma entrada (`(EntryId, TagId)` único).<br>Una entrada eliminada no aparece en las consultas (query filter global). |
+| **5. Corrective Policies** | Los conflictos de la sincronización se resuelven con *last-write-wins*: si `UpdatedAt` en el servidor es igual o más reciente que la edición del cliente, se conserva la versión del servidor (`conflict_kept_server`).<br>Después de cada cambio se invalida la caché de Analytics del día afectado y se reindexan los tokens de búsqueda.<br>`JournalSearchBackfillService` reindexa en segundo plano las entradas que no tengan tokens.<br>Si Gemini no responde, la entrada se guarda igual con `AiResponse` vacío. |
+| **6. Handled Commands** | `CreateJournalEntryCommand`, `UpdateJournalEntryCommand`, `DeleteJournalEntryCommand`, `SyncJournalEntriesCommand`, `CreateEntryTagCommand`, `DeleteEntryTagCommand`, `CreateMediaCommand` |
+| **7. Created Events** | *Journal entry created* (evento pivote), *Empathic response generated*, *Journal entry updated*, *Journal entry deleted*, *Journal entry restored*, *Journal entries synced*, *Tag added to entry*, *Tag removed from entry*, *Media attached* |
+| **8. Throughput** | Bajo. Solo el dueño escribe en sus entradas, normalmente entre una y tres veces al día. El único conflicto realista es la misma entrada editada offline en el móvil y en línea desde otro cliente, que la política de *last-write-wins* resuelve. |
+| **9. Size** | Pequeño. Cada entrada recibe pocas ediciones, la mayoría en los días posteriores a su creación, y unas cuantas etiquetas y adjuntos. Lo que crece con el tiempo es la cantidad de entradas por usuario (alrededor de 365 al año con uso diario), no el tamaño de cada agregado. |
+
 #### 2.6.2.2. Interface Layer
 
-**Tabla 22. Bounded Context: Journal — Interface Layer.**
+**Tabla 24. Bounded Context: Journal — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2225,7 +2259,7 @@ A diferencia de IAM, Journal **no define un repository interface propio**: los C
 
 #### 2.6.2.3. Application Layer
 
-**Tabla 23. Bounded Context: Journal — Application Layer.**
+**Tabla 25. Bounded Context: Journal — Application Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2242,7 +2276,7 @@ A diferencia de IAM, Journal **no define un repository interface propio**: los C
 
 #### 2.6.2.4. Infrastructure Layer
 
-**Tabla 24. Bounded Context: Journal — Infrastructure Layer.**
+**Tabla 26. Bounded Context: Journal — Infrastructure Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2301,7 +2335,7 @@ Se identificaron además dos dependencias cruzadas reales hacia otros bounded co
 
 #### 2.6.3.1. Domain Layer
 
-**Tabla 25. Bounded Context: AI Assistant — Domain Layer.**
+**Tabla 27. Bounded Context: AI Assistant — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
 |---|---|---|---|---|---|
@@ -2310,9 +2344,25 @@ Se identificaron además dos dependencias cruzadas reales hacia otros bounded co
 | `AiFeedbackRating` | Entity (implementa `IAuditableEntity`) | Representa la calificación (1-5) que un usuario da a una pieza de contenido generado por IA (insight de journal o sugerencia de hábito). | `Id: int`, `UserId: int`, `ContentId: int`, `ContentType: string` (`"journal"` / `"habit"`), `Rating: int`, `Comment: string?`, `CreatedAt/UpdatedAt: DateTimeOffset?` | *(anémica)* | Única por `(UserId, ContentId, ContentType)`; `ContentId` referencia lógicamente (sin FK) a `JournalEntry` o `Habit` según `ContentType` |
 | `AiMetricLog` | Entity | Registra telemetría operacional de cada llamada al proveedor de IA (latencia, éxito, longitudes de prompt/respuesta, error). **No está asociada a un usuario** — es un log de sistema, no de dominio de negocio. | `Id: int`, `Operation: string`, `LatencyMs: int`, `Success: bool`, `PromptLength: int`, `ResponseLength: int`, `ErrorMessage: string?`, `CreatedAt: DateTimeOffset` (default `UtcNow`, no nullable) | *(anémica)* | Escrita exclusivamente por `GeminiService` tras cada llamada a Gemini |
 
+El Aggregate Design Canvas de `Conversation` muestra cómo el agregado mantiene un intercambio coherente entre el usuario y el asistente aun cuando el proveedor de IA falla (Tabla 28).
+
+**Tabla 28. Bounded Context: AI Assistant — Aggregate Design Canvas de `Conversation`.**
+
+| Sección | Contenido |
+|---|---|
+| **1. Name** | `Conversation` |
+| **2. Description** | Representa una conversación entre el usuario y el asistente de IA, junto con sus mensajes (`ChatMessage`). El título se genera a partir de los primeros 50 caracteres del primer mensaje. Se decidió mantener todos los mensajes dentro del agregado, pero enviar a Gemini solo los últimos 10 como contexto, para controlar el costo y la latencia de cada llamada. `AiFeedbackRating` y `AiMetricLog` quedan fuera porque califican o miden contenido de IA de varios orígenes, no solo del chat. |
+| **3. State Transitions** | *Creada* (con el primer mensaje del usuario y la respuesta del asistente) → *Activa* (mensajes alternados entre usuario y asistente) → *Eliminada* (borrado físico, junto con sus mensajes) |
+| **4. Enforced Invariants** | Cada conversación pertenece a un único usuario, y solo él puede leerla, escribir en ella o eliminarla (toda consulta filtra por `UserId`).<br>`Role` de cada mensaje es `user` o `assistant`.<br>Cada mensaje del usuario recibe exactamente una respuesta del asistente.<br>El título tiene como máximo 50 caracteres (más `...` si se recorta), y `Category` es `Personal` si no se indica otra. |
+| **5. Corrective Policies** | El mensaje del usuario se guarda antes de llamar a Gemini, para que no se pierda si la llamada falla.<br>Si Gemini no responde o devuelve un texto vacío, se guarda un mensaje de respaldo, de modo que la conversación siempre conserva el par usuario–asistente.<br>`GeminiService` registra cada llamada fallida en `AiMetricLog` para poder monitorearla. |
+| **6. Handled Commands** | *Create conversation* (`CreateConversationAsync`), *Send message* (`SendMessageAsync`), *Delete conversation* (`DeleteConversationAsync`). En este contexto no son clases Command, sino métodos de `ChatService`. |
+| **7. Created Events** | *Conversation started*, *Assistant query submitted* (evento pivote), *Assistant response generated*, *Fallback response returned*, *Conversation deleted* |
+| **8. Throughput** | Bajo. Solo escribe el dueño, en ráfagas de pocos segundos durante una sesión de chat. Como cada mensaje se agrega al final sin modificar los anteriores, los conflictos de concurrencia son muy poco probables. |
+| **9. Size** | Medio. Cada intercambio agrega dos mensajes y no hay un límite de mensajes por conversación: una conversación típica tiene unas decenas de mensajes, pero una sesión larga puede llegar a cientos. Por eso solo se cargan los mensajes completos al abrir una conversación, y el listado muestra solo un resumen. |
+
 #### 2.6.3.2. Interface Layer
 
-**Tabla 26. Bounded Context: AI Assistant — Interface Layer.**
+**Tabla 29. Bounded Context: AI Assistant — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2323,7 +2373,7 @@ Se identificaron además dos dependencias cruzadas reales hacia otros bounded co
 
 #### 2.6.3.3. Application Layer
 
-**Tabla 27. Bounded Context: AI Assistant — Application Layer.**
+**Tabla 30. Bounded Context: AI Assistant — Application Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2335,7 +2385,7 @@ Se identificaron además dos dependencias cruzadas reales hacia otros bounded co
 
 #### 2.6.3.4. Infrastructure Layer
 
-**Tabla 28. Bounded Context: AI Assistant — Infrastructure Layer.**
+**Tabla 31. Bounded Context: AI Assistant — Infrastructure Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2392,7 +2442,7 @@ También destaca un patrón de **consistencia perezosa** (*lazy consistency*): `
 
 #### 2.6.4.1. Domain Layer
 
-**Tabla 29. Bounded Context: Habits & Wellness — Domain Layer.**
+**Tabla 32. Bounded Context: Habits & Wellness — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
 |---|---|---|---|---|---|
@@ -2407,11 +2457,27 @@ También destaca un patrón de **consistencia perezosa** (*lazy consistency*): `
 | `WellnessExercise` | Entity (implementa `IAuditableEntity`) | Representa un ejercicio de bienestar (respiración o meditación) editable sin necesidad de release del cliente. Campos de respiración (`InhaleSeconds`, `HoldSeconds`, etc.) y de meditación (`AudioUrl`) son mutuamente excluyentes según `Type`. | `Id: int`, `Type: string` (`"breathing"`/`"meditation"`), `Name/Description: string`, `DurationSeconds: int`, `InhaleSeconds/HoldSeconds/ExhaleSeconds/HoldAfterExhaleSeconds/Cycles: int?`, `AudioUrl: string?`, `IsActive: bool`, `SortOrder: int`, `CreatedAt/UpdatedAt` | *(anémica)* | Sin relaciones hacia otras entidades |
 | `WellnessContentError` | Domain Error Enum | Códigos de error para el catálogo de ejercicios. | — | `ExerciseNotFound`, `InvalidType` | Usado por los Handlers de `WellnessContent` |
 
-**Nota:** `WellnessEngine` no define entidades ni Value Objects propios — opera exclusivamente sobre `Habit` (mismo bounded context) y `JournalEntry` (Journal, dependencia cruzada) (Tabla 29).
+**Nota:** `WellnessEngine` no define entidades ni Value Objects propios — opera exclusivamente sobre `Habit` (mismo bounded context) y `JournalEntry` (Journal, dependencia cruzada) (Tabla 32).
+
+El Aggregate Design Canvas de `Habit` explica cómo se mantiene la racha y quién puede pausar un hábito, incluido el ajuste automático por nivel de estrés (Tabla 33).
+
+**Tabla 33. Bounded Context: Habits & Wellness — Aggregate Design Canvas de `Habit`.**
+
+| Sección | Contenido |
+|---|---|
+| **1. Name** | `Habit` |
+| **2. Description** | Representa un hábito que el usuario quiere construir, con su frecuencia, su racha (`Streak`), su estado y si fue pausado por IA, además de sus registros de cumplimiento (`HabitCompletionLog`). Como tradeoff, los registros se crean y editan con su propio repositorio y servicio (`HabitLogCommandService`) en lugar de pasar por la raíz; la racha se recalcula justo después, en una segunda escritura. Esto mantiene simples las escrituras de logs, a cambio de que la racha sea consistente un instante después y no en la misma transacción. |
+| **3. State Transitions** | *Pending* → *Completed* (`MarkCompleted`)<br>*Completed* → *Pending* (`MarkPending`, cuando empieza un nuevo día, semana o mes sin registro)<br>*Pending / Completed* → *PausedByAi* (`PauseByAi`, cuando el chequeo de estrés da un nivel alto)<br>*PausedByAi* → *Pending* (`Resume`, cuando el estrés vuelve a un nivel bajo)<br>Cualquier estado → *Eliminado* (`DeleteHabitCommand`) |
+| **4. Enforced Invariants** | `Frequency` es `Daily`, `Weekly` o `Monthly`.<br>Solo el dueño del hábito puede editarlo o eliminarlo (`UserIdMismatch`).<br>No se pueden registrar cumplimientos con fecha futura.<br>`Streak` es igual a la cantidad de periodos consecutivos con un registro completado, contando desde el periodo actual o el anterior.<br>`PausedByAi` es verdadero si y solo si `Status` es `PausedByAi`. |
+| **5. Corrective Policies** | Después de crear, editar o eliminar un registro, `RecalculateStreakAsync` recalcula la racha del hábito.<br>`HabitQueryService` aplica consistencia perezosa: al consultar, recalcula la racha y devuelve el hábito a *Pending* si el periodo actual no tiene registro.<br>`WellnessService` pausa los hábitos activos cuando el chequeo de estrés da un nivel alto y reanuda los pausados cuando da un nivel bajo. |
+| **6. Handled Commands** | `CreateHabitCommand`, `UpdateHabitCommand`, `DeleteHabitCommand`, `CreateHabitLogCommand`, `UpdateHabitLogCommand`, `DeleteHabitLogCommand`, más *Run stress check* (`RunStressCheckAsync`), que pausa o reanuda hábitos |
+| **7. Created Events** | *Habit created* (evento pivote), *Habit updated*, *Habit deleted*, *Habit completed*, *Habit log updated*, *Habit log deleted*, *Streak recalculated*, *Stress check completed* (evento pivote), *Habit paused by AI*, *Habit resumed* |
+| **8. Throughput** | Bajo. Solo el dueño registra cumplimientos, normalmente una vez por periodo y por hábito. El conflicto posible son dos registros casi simultáneos que recalculan la racha a la vez; como la racha se calcula siempre desde todos los registros, el último cálculo deja el valor correcto. |
+| **9. Size** | Medio. El hábito acumula un registro por periodo cumplido: hasta unos 365 al año si es diario, 52 si es semanal y 12 si es mensual. Por eso los registros se consultan por su propio repositorio y no se cargan junto con el hábito. |
 
 #### 2.6.4.2. Interface Layer
 
-**Tabla 30. Bounded Context: Habits & Wellness — Interface Layer.**
+**Tabla 34. Bounded Context: Habits & Wellness — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2425,7 +2491,7 @@ También destaca un patrón de **consistencia perezosa** (*lazy consistency*): `
 
 #### 2.6.4.3. Application Layer
 
-**Tabla 31. Bounded Context: Habits & Wellness — Application Layer.**
+**Tabla 35. Bounded Context: Habits & Wellness — Application Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2444,14 +2510,14 @@ También destaca un patrón de **consistencia perezosa** (*lazy consistency*): `
 
 #### 2.6.4.4. Infrastructure Layer
 
-**Tabla 32. Bounded Context: Habits & Wellness — Infrastructure Layer.**
+**Tabla 36. Bounded Context: Habits & Wellness — Infrastructure Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
 | `HabitRepository` | Repository (EF Core) | Implementa `IHabitRepository` sobre `AppDbContext`, extendiendo `BaseRepository<Habit>`. | `FindByUserIdAsync(userId)`, `FindByIdAndUserIdAsync(id, userId)` | Implementa `IHabitRepository`; hereda de `BaseRepository<Habit>` |
 | `HabitCompletionLogRepository` | Repository (EF Core) | Implementa `IHabitCompletionLogRepository` sobre `AppDbContext`, extendiendo `BaseRepository<HabitCompletionLog>`. `FindByUserIdAsync` resuelve primero los `HabitId` del usuario y luego filtra los logs por esos IDs (no hay FK directa `UserId` en la tabla de logs). | `FindByHabitIdAsync(habitId)`, `FindByUserIdAsync(userId)` | Implementa `IHabitCompletionLogRepository`; hereda de `BaseRepository<HabitCompletionLog>` |
 
-**Nota:** `WellnessEngine` y `WellnessContent` no tienen clases de Infrastructure propias — `WellnessService` y los Handlers de `WellnessContent` acceden a `AppDbContext` directamente desde el Application Layer, sin una capa de Repository intermedia (Tabla 32).
+**Nota:** `WellnessEngine` y `WellnessContent` no tienen clases de Infrastructure propias — `WellnessService` y los Handlers de `WellnessContent` acceden a `AppDbContext` directamente desde el Application Layer, sin una capa de Repository intermedia (Tabla 36).
 
 ---
 
@@ -2500,9 +2566,9 @@ A diferencia de IAM, Analytics **no define un repository interface propio**: tan
 
 #### 2.6.5.1. Domain Layer
 
-El Domain Layer concentra los agregados `AnalyticsCache` y `WordCloud`, la enumeración `AnalyticsError`, y los dos puertos de dominio del bounded context: `IAnalyticsCacheInvalidator` (consumido por Journal) e `IReportingService` (consumido por el propio Interface Layer de Reporting) (Tabla 33).
+El Domain Layer concentra los agregados `AnalyticsCache` y `WordCloud`, la enumeración `AnalyticsError`, y los dos puertos de dominio del bounded context: `IAnalyticsCacheInvalidator` (consumido por Journal) e `IReportingService` (consumido por el propio Interface Layer de Reporting) (Tabla 37).
 
-**Tabla 33. Bounded Context: Analytics & Reporting — Domain Layer.**
+**Tabla 37. Bounded Context: Analytics & Reporting — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
 |---|---|---|---|---|---|
@@ -2514,9 +2580,9 @@ El Domain Layer concentra los agregados `AnalyticsCache` y `WordCloud`, la enume
 
 #### 2.6.5.2. Interface Layer
 
-El Interface Layer expone Analytics y Reporting como dos controladores REST independientes; ninguno de los dos usa una capa de Resources/Assemblers, siguiendo el mismo criterio adoptado en Journal: los DTOs del Application Layer se consumen directamente como contrato de entrada/salida (Tabla 34).
+El Interface Layer expone Analytics y Reporting como dos controladores REST independientes; ninguno de los dos usa una capa de Resources/Assemblers, siguiendo el mismo criterio adoptado en Journal: los DTOs del Application Layer se consumen directamente como contrato de entrada/salida (Tabla 38).
 
-**Tabla 34. Bounded Context: Analytics & Reporting — Interface Layer.**
+**Tabla 38. Bounded Context: Analytics & Reporting — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2525,9 +2591,9 @@ El Interface Layer expone Analytics y Reporting como dos controladores REST inde
 
 #### 2.6.5.3. Application Layer
 
-El Application Layer combina dos estilos: manejadores CQRS livianos (vía Cortex.Mediator) para las operaciones simples de lectura/escritura sobre `AnalyticsCache` y `WordCloud`, y un servicio de aplicación dedicado (`AnalyticsComputationService`) para el cómputo pesado, deliberadamente separado de los Handlers para no mezclar una operación costosa con el flujo estándar de consulta (Tabla 35).
+El Application Layer combina dos estilos: manejadores CQRS livianos (vía Cortex.Mediator) para las operaciones simples de lectura/escritura sobre `AnalyticsCache` y `WordCloud`, y un servicio de aplicación dedicado (`AnalyticsComputationService`) para el cómputo pesado, deliberadamente separado de los Handlers para no mezclar una operación costosa con el flujo estándar de consulta (Tabla 39).
 
-**Tabla 35. Bounded Context: Analytics & Reporting — Application Layer.**
+**Tabla 39. Bounded Context: Analytics & Reporting — Application Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2540,9 +2606,9 @@ El Application Layer combina dos estilos: manejadores CQRS livianos (vía Cortex
 
 #### 2.6.5.4. Infrastructure Layer
 
-El Infrastructure Layer contiene las implementaciones concretas de los dos puertos definidos en el Domain Layer, además de la tarea programada que mantiene el análisis de todos los usuarios actualizado sin que tengan que esperar el cómputo bajo demanda (Tabla 36).
+El Infrastructure Layer contiene las implementaciones concretas de los dos puertos definidos en el Domain Layer, además de la tarea programada que mantiene el análisis de todos los usuarios actualizado sin que tengan que esperar el cómputo bajo demanda (Tabla 40).
 
-**Tabla 36. Bounded Context: Analytics & Reporting — Infrastructure Layer.**
+**Tabla 40. Bounded Context: Analytics & Reporting — Infrastructure Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2596,9 +2662,9 @@ El bounded context **Notifications** es responsable de la bandeja de notificacio
 
 #### 2.6.6.1. Domain Layer
 
-El Domain Layer concentra las dos entidades del bounded context. Ninguna define un repository interface propio: al ser operaciones simples de consulta/escritura, el equipo decidió que tanto el Interface Layer como la implementación del puerto de notificación accedan directamente a `AppDbContext`, sin una capa de repositorio intermedia (Tabla 37).
+El Domain Layer concentra las dos entidades del bounded context. Ninguna define un repository interface propio: al ser operaciones simples de consulta/escritura, el equipo decidió que tanto el Interface Layer como la implementación del puerto de notificación accedan directamente a `AppDbContext`, sin una capa de repositorio intermedia (Tabla 41).
 
-**Tabla 37. Bounded Context: Notifications — Domain Layer.**
+**Tabla 41. Bounded Context: Notifications — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
 |---|---|---|---|---|---|
@@ -2607,9 +2673,9 @@ El Domain Layer concentra las dos entidades del bounded context. Ninguna define 
 
 #### 2.6.6.2. Interface Layer
 
-El Interface Layer expone la bandeja de notificaciones y el registro de dispositivos como un único controlador REST, que para las operaciones de consulta/escritura simple actúa también como su propio orquestador (sin pasar por un Application Service intermedio) (Tabla 38).
+El Interface Layer expone la bandeja de notificaciones y el registro de dispositivos como un único controlador REST, que para las operaciones de consulta/escritura simple actúa también como su propio orquestador (sin pasar por un Application Service intermedio) (Tabla 42).
 
-**Tabla 38. Bounded Context: Notifications — Interface Layer.**
+**Tabla 42. Bounded Context: Notifications — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2618,9 +2684,9 @@ El Interface Layer expone la bandeja de notificaciones y el registro de disposit
 
 #### 2.6.6.3. Application Layer
 
-El Application Layer de este bounded context se reduce, por diseño, a un único puerto: la lógica de negocio real de Notifications —el envío efectivo de una notificación, individual o masiva— vive detrás de `INotificationService`, mientras que las operaciones de simple consulta/escritura del inbox quedan resueltas en el Interface Layer, tal como se explica en la introducción de esta sección (Tabla 39).
+El Application Layer de este bounded context se reduce, por diseño, a un único puerto: la lógica de negocio real de Notifications —el envío efectivo de una notificación, individual o masiva— vive detrás de `INotificationService`, mientras que las operaciones de simple consulta/escritura del inbox quedan resueltas en el Interface Layer, tal como se explica en la introducción de esta sección (Tabla 43).
 
-**Tabla 39. Bounded Context: Notifications — Application Layer.**
+**Tabla 43. Bounded Context: Notifications — Application Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2628,9 +2694,9 @@ El Application Layer de este bounded context se reduce, por diseño, a un único
 
 #### 2.6.6.4. Infrastructure Layer
 
-El Infrastructure Layer implementa el puerto de notificación sobre el proveedor de push externo, y contiene el job en segundo plano que dispara el único recordatorio automático de MindFlow (Tabla 40).
+El Infrastructure Layer implementa el puerto de notificación sobre el proveedor de push externo, y contiene el job en segundo plano que dispara el único recordatorio automático de MindFlow (Tabla 44).
 
-**Tabla 40. Bounded Context: Notifications — Infrastructure Layer.**
+**Tabla 44. Bounded Context: Notifications — Infrastructure Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2682,19 +2748,35 @@ El bounded context **Subscriptions** es responsable del plan de suscripción del
 
 #### 2.6.7.1. Domain Layer
 
-El Domain Layer se reduce a un único agregado, sin repository interface propio: al tener una única suscripción por usuario y operaciones acotadas, el equipo decidió que el servicio de aplicación acceda directamente a `AppDbContext`, sin una capa de repositorio intermedia (Tabla 41).
+El Domain Layer se reduce a un único agregado, sin repository interface propio: al tener una única suscripción por usuario y operaciones acotadas, el equipo decidió que el servicio de aplicación acceda directamente a `AppDbContext`, sin una capa de repositorio intermedia (Tabla 45).
 
-**Tabla 41. Bounded Context: Subscriptions — Domain Layer.**
+**Tabla 45. Bounded Context: Subscriptions — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
 |---|---|---|---|---|---|
 | `Subscription` | Aggregate Root (implementa `IAuditableEntity`) | Representa el plan de facturación de un usuario. Se decidió modelar un único agregado plano —sin una entidad separada de "transacción de pago"— porque el estado completo de facturación que MindFlow necesita conocer (plan, estado, identificadores del proveedor de pagos) cabe en un solo registro; el historial detallado de cobros queda delegado por completo al proveedor externo. | `Id: int`, `UserId: int`, `Plan: string` ("free"/"premium"), `Status: string` ("active"/"past_due"/"canceled"), `StripeCustomerId: string?`, `StripeSubscriptionId: string?`, `ExpiresAt: DateTimeOffset?`, `CreatedAt/UpdatedAt: DateTimeOffset?` | `Activate(stripeCustomerId, stripeSubscriptionId)`, `Cancel()`, `MarkPastDue()`, propiedad calculada `IsPremium` | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física); único registro por usuario |
 
+El Aggregate Design Canvas de `Subscription` describe cómo cambia el plan del usuario y qué garantiza que solo un pago confirmado lo active (Tabla 46).
+
+**Tabla 46. Bounded Context: Subscriptions — Aggregate Design Canvas de `Subscription`.**
+
+| Sección | Contenido |
+|---|---|
+| **1. Name** | `Subscription` |
+| **2. Description** | Representa el plan de un usuario (`freemium` o `premium`), su estado y los identificadores de cliente y suscripción en Stripe. Se decidió no guardar el historial de pagos: Stripe es la fuente de verdad de los cobros, y MindFlow solo conserva lo necesario para saber qué plan tiene el usuario. Un usuario sin registro se trata como *freemium*, así que el registro se crea recién cuando cambia de plan. |
+| **3. State Transitions** | *Sin registro* (freemium implícito) → *freemium / active* o *premium / active* (`demo/plan/{plan}`)<br>*Sin registro* o *freemium* → *premium / active* (webhook `checkout.session.completed` de Stripe)<br>*premium* → *freemium* (`demo/plan/freemium`, solo en el flujo de demostración) |
+| **4. Enforced Invariants** | Cada usuario tiene como máximo una suscripción (índice único sobre `UserId`).<br>`Plan` solo puede ser `freemium` o `premium`.<br>Solo un webhook con firma HMAC válida de Stripe, recibido dentro de un margen de 5 minutos, puede activar *premium* a partir de un pago.<br>La suscripción se asocia al usuario indicado en `client_reference_id` de la sesión de checkout. |
+| **5. Corrective Policies** | El webhook es idempotente: si Stripe lo reenvía, vuelve a fijar *premium / active* sobre el mismo registro sin duplicarlo.<br>Si el usuario aún no tenía registro cuando llega el webhook, se crea en ese momento.<br>Si un usuario sin registro consulta su plan, se le devuelve *freemium* por defecto en lugar de un error. |
+| **6. Handled Commands** | *Start checkout* (`POST /checkout`), *Confirm payment* (`POST /webhook`), *Change demo plan* (`POST /demo/plan/{plan}`). En este contexto no son clases Command, sino acciones de `SubscriptionsController`. |
+| **7. Created Events** | *Checkout session started*, *Payment confirmed* (evento externo de Stripe), *Subscription upgraded to premium*, *Plan changed* |
+| **8. Throughput** | Muy bajo. Un usuario cambia de plan pocas veces en toda su vida. El único conflicto posible es que el webhook de Stripe y un cambio de plan de demostración lleguen al mismo tiempo, lo cual es muy poco probable fuera de pruebas. |
+| **9. Size** | Muy pequeño. Es un único registro por usuario, sin colecciones, que cambia solo cuando el usuario cambia de plan. |
+
 #### 2.6.7.2. Interface Layer
 
-El Interface Layer expone la suscripción del usuario y el endpoint de webhook del proveedor de pagos como un único controlador REST (Tabla 42).
+El Interface Layer expone la suscripción del usuario y el endpoint de webhook del proveedor de pagos como un único controlador REST (Tabla 47).
 
-**Tabla 42. Bounded Context: Subscriptions — Interface Layer.**
+**Tabla 47. Bounded Context: Subscriptions — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2702,9 +2784,9 @@ El Interface Layer expone la suscripción del usuario y el endpoint de webhook d
 
 #### 2.6.7.3. Application Layer
 
-El Application Layer se reduce, igual que en Notifications, a un único puerto de dominio: toda la lógica de facturación de MindFlow queda concentrada detrás de `ISubscriptionService` (Tabla 43).
+El Application Layer se reduce, igual que en Notifications, a un único puerto de dominio: toda la lógica de facturación de MindFlow queda concentrada detrás de `ISubscriptionService` (Tabla 48).
 
-**Tabla 43. Bounded Context: Subscriptions — Application Layer.**
+**Tabla 48. Bounded Context: Subscriptions — Application Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2713,9 +2795,9 @@ El Application Layer se reduce, igual que en Notifications, a un único puerto d
 
 #### 2.6.7.4. Infrastructure Layer
 
-El Infrastructure Layer implementa el puerto de facturación sobre el proveedor de pagos externo, siendo el punto de integración más denso del bounded context: reconcilia tanto las llamadas directas del usuario como los eventos asíncronos del webhook (Tabla 44).
+El Infrastructure Layer implementa el puerto de facturación sobre el proveedor de pagos externo, siendo el punto de integración más denso del bounded context: reconcilia tanto las llamadas directas del usuario como los eventos asíncronos del webhook (Tabla 49).
 
-**Tabla 44. Bounded Context: Subscriptions — Infrastructure Layer.**
+**Tabla 49. Bounded Context: Subscriptions — Infrastructure Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2766,19 +2848,35 @@ El bounded context **Support** es responsable de los tickets de soporte que un u
 
 #### 2.6.8.1. Domain Layer
 
-El Domain Layer se reduce a un único agregado, sin repository interface propio: al ser un catálogo acotado de operaciones, el equipo decidió que el servicio de aplicación acceda directamente a `AppDbContext`, sin una capa de repositorio intermedia (Tabla 45).
+El Domain Layer se reduce a un único agregado, sin repository interface propio: al ser un catálogo acotado de operaciones, el equipo decidió que el servicio de aplicación acceda directamente a `AppDbContext`, sin una capa de repositorio intermedia (Tabla 50).
 
-**Tabla 45. Bounded Context: Support — Domain Layer.**
+**Tabla 50. Bounded Context: Support — Domain Layer.**
 
 | Clase | Tipo | Propósito | Atributos | Métodos | Relaciones |
 |---|---|---|---|---|---|
 | `SupportTicket` | Aggregate Root (implementa `IAuditableEntity`) | Representa un ticket de soporte levantado por un usuario. Se decidió desnormalizar el correo del usuario (`UserEmail`) directamente en el ticket, en lugar de resolverlo en tiempo de consulta contra IAM, para poder enviar la confirmación y cualquier respuesta futura sin una dependencia síncrona entre bounded contexts. | `Id: int`, `UserId: int`, `UserEmail: string`, `Subject: string`, `Message: string`, `Status: string` ("open"/"in_progress"/"closed"), `CreatedAt/UpdatedAt: DateTimeOffset?` | `MarkInProgress()`, `Close()` | `UserId` es una referencia lógica al agregado `User` del bounded context IAM (sin FK física) |
 
+El Aggregate Design Canvas de `SupportTicket` describe la conversación entre el usuario y el equipo de soporte, y quién puede actuar sobre cada ticket (Tabla 51).
+
+**Tabla 51. Bounded Context: Support — Aggregate Design Canvas de `SupportTicket`.**
+
+| Sección | Contenido |
+|---|---|
+| **1. Name** | `SupportTicket` |
+| **2. Description** | Representa una solicitud de soporte de un usuario, con su asunto, categoría, prioridad, estado, el miembro del staff asignado y los mensajes intercambiados (`SupportMessage`). Los mensajes forman parte del agregado porque solo tienen sentido dentro de su ticket. Las notificaciones al usuario quedan fuera: el agregado solo pide a Notifications que las cree. |
+| **3. State Transitions** | *open* (al crearse) → *in_progress* → *closed*, cambios que solo puede hacer el staff<br>*Sin asignar* → *Asignado* (el staff fija `AssigneeId`) |
+| **4. Enforced Invariants** | El asunto es obligatorio y ningún mensaje puede estar vacío.<br>Solo el dueño del ticket o el staff (roles `Support` y `Admin`) puede verlo y responderlo.<br>Solo el staff puede cambiar el estado o la asignación.<br>Cada mensaje queda marcado como de staff (`IsStaff`) según el rol de su autor, no según lo que envíe el cliente. |
+| **5. Corrective Policies** | Al crear un ticket se notifica al usuario que su solicitud fue recibida.<br>Cada respuesta del staff genera una notificación para el dueño del ticket.<br>`NotificationService` además envía cada notificación por correo, para que el usuario se entere aunque no abra la aplicación. |
+| **6. Handled Commands** | *Create ticket* (`POST /support/tickets`), *Add message* (`POST /support/tickets/{id}/messages`), *Update ticket* (`PATCH /support/tickets/{id}`, asignación y estado). En este contexto no son clases Command, sino acciones de `SupportTicketsController`. |
+| **7. Created Events** | *Support ticket created*, *Support message added*, *Staff reply posted*, *Ticket assigned*, *Ticket status changed* |
+| **8. Throughput** | Bajo. Sobre un ticket actúan como máximo el usuario y uno o dos miembros del staff. Los mensajes se agregan al final sin modificar los anteriores, así que no compiten entre sí; dos miembros del staff que cambian el estado a la vez se resuelven con la última escritura. |
+| **9. Size** | Pequeño. Un ticket suele tener unas pocas decenas de mensajes y una vida corta, de días, hasta que se cierra. |
+
 #### 2.6.8.2. Interface Layer
 
-El Interface Layer expone la creación y consulta de tickets del usuario autenticado como un único controlador REST (Tabla 46).
+El Interface Layer expone la creación y consulta de tickets del usuario autenticado como un único controlador REST (Tabla 52).
 
-**Tabla 46. Bounded Context: Support — Interface Layer.**
+**Tabla 52. Bounded Context: Support — Interface Layer.**
 
 | Clase | Tipo | Propósito | Endpoints / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2787,9 +2885,9 @@ El Interface Layer expone la creación y consulta de tickets del usuario autenti
 
 #### 2.6.8.3. Application Layer
 
-El Application Layer se reduce, igual que en Notifications y Subscriptions, a un único puerto de dominio (Tabla 47).
+El Application Layer se reduce, igual que en Notifications y Subscriptions, a un único puerto de dominio (Tabla 53).
 
-**Tabla 47. Bounded Context: Support — Application Layer.**
+**Tabla 53. Bounded Context: Support — Application Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2797,9 +2895,9 @@ El Application Layer se reduce, igual que en Notifications y Subscriptions, a un
 
 #### 2.6.8.4. Infrastructure Layer
 
-El Infrastructure Layer implementa el puerto de soporte, concentrando dos decisiones de diseño puntuales: la protección contra tickets duplicados y el envío no bloqueante de la confirmación (Tabla 48).
+El Infrastructure Layer implementa el puerto de soporte, concentrando dos decisiones de diseño puntuales: la protección contra tickets duplicados y el envío no bloqueante de la confirmación (Tabla 54).
 
-**Tabla 48. Bounded Context: Support — Infrastructure Layer.**
+**Tabla 54. Bounded Context: Support — Infrastructure Layer.**
 
 | Clase | Tipo | Propósito | Atributos / Métodos | Relaciones |
 |---|---|---|---|---|
@@ -2868,9 +2966,9 @@ La identidad visual de MindFlow busca transmitir calma emocional, confianza tecn
 - **Tipo:** Sans-serif humanista
 - **Uso:** Títulos, subtítulos, botones e interfaz general
 
-Se seleccionó por su alta legibilidad en pantallas pequeñas (crítico para el contexto móvil del proyecto), su trazo redondeado que transmite cercanía sin perder seriedad, y su amplia disponibilidad de pesos (Regular, Medium, SemiBold, Bold) que permite construir jerarquía tipográfica sin depender de una segunda familia tipográfica (Tabla 49).
+Se seleccionó por su alta legibilidad en pantallas pequeñas (crítico para el contexto móvil del proyecto), su trazo redondeado que transmite cercanía sin perder seriedad, y su amplia disponibilidad de pesos (Regular, Medium, SemiBold, Bold) que permite construir jerarquía tipográfica sin depender de una segunda familia tipográfica (Tabla 55).
 
-**Tabla 49. Style Guidelines — General Style Guidelines.**
+**Tabla 55. Style Guidelines — General Style Guidelines.**
 
 | Estilo | Peso | Uso |
 |---|---|---|
@@ -2882,18 +2980,18 @@ Se seleccionó por su alta legibilidad en pantallas pequeñas (crítico para el 
 
 **Colors**
 
-*Colores primarios* — representan calma emocional y confianza; se usan en botones principales, elementos interactivos y estados positivos (Tabla 50).
+*Colores primarios* — representan calma emocional y confianza; se usan en botones principales, elementos interactivos y estados positivos (Tabla 56).
 
-**Tabla 50. Style Guidelines — General Style Guidelines — Colores primarios.**
+**Tabla 56. Style Guidelines — General Style Guidelines — Colores primarios.**
 
 | Nombre | Hex | Uso |
 |---|---|---|
 | Calm Indigo | `#4C5FD5` | Acción principal, elementos activos, branding |
 | Serene Teal | `#45C7A3` | Estados positivos, progreso, hábitos completados |
 
-*Colores secundarios* — dan soporte y jerarquía visual sin competir con los primarios (Tabla 51).
+*Colores secundarios* — dan soporte y jerarquía visual sin competir con los primarios (Tabla 57).
 
-**Tabla 51. Style Guidelines — General Style Guidelines — Colores secundarios.**
+**Tabla 57. Style Guidelines — General Style Guidelines — Colores secundarios.**
 
 | Nombre | Hex | Uso |
 |---|---|---|
@@ -2901,9 +2999,9 @@ Se seleccionó por su alta legibilidad en pantallas pequeñas (crítico para el 
 | Neutral Fog | `#F4F6FA` | Fondos de sección, tarjetas |
 | Ink Gray | `#2B2D33` | Texto principal |
 
-*Colores de estado* — reservados exclusivamente para retroalimentación funcional, no decorativa (Tabla 52).
+*Colores de estado* — reservados exclusivamente para retroalimentación funcional, no decorativa (Tabla 58).
 
-**Tabla 52. Style Guidelines — General Style Guidelines — Colores de estado.**
+**Tabla 58. Style Guidelines — General Style Guidelines — Colores de estado.**
 
 | Nombre | Hex | Uso |
 |---|---|---|
@@ -2911,9 +3009,9 @@ Se seleccionó por su alta legibilidad en pantallas pequeñas (crítico para el 
 | Alert Amber | `#E0A73B` | Advertencias no críticas (p. ej. suscripción por vencer) |
 | Error Red | `#E5484D` | Errores de validación, fallos de red |
 
-*Colores de wireframe* — usados exclusivamente durante la etapa de baja fidelidad, para mantener el foco en estructura y no en estética final (Tabla 53).
+*Colores de wireframe* — usados exclusivamente durante la etapa de baja fidelidad, para mantener el foco en estructura y no en estética final (Tabla 59).
 
-**Tabla 53. Style Guidelines — General Style Guidelines — Colores de wireframe.**
+**Tabla 59. Style Guidelines — General Style Guidelines — Colores de wireframe.**
 
 | Nombre | Hex |
 |---|---|
@@ -2934,7 +3032,7 @@ Sistema de espaciado basado en múltiplos de 8px, consistente entre Landing Page
 
 **Communication Tone**
 
-**Tabla 54. Style Guidelines — General Style Guidelines — Communication Tone.**
+**Tabla 60. Style Guidelines — General Style Guidelines — Communication Tone.**
 
 | Dimensión | Posición de MindFlow |
 |---|---|
@@ -2966,9 +3064,9 @@ MindFlow combina tres tipos de organización visual, aplicados según el context
 - **Organización secuencial:** aplicada en flujos donde el usuario debe completar una serie de pasos, como el registro (Onboarding → Registro → Configuración de perfil) o la creación de una nueva entrada de diario (Selección de estado de ánimo → Redacción → Confirmación).
 - **Organización matricial:** utilizada en la sección de Analíticas, donde se cruzan distintas variables (estado de ánimo, fecha, hábitos completados) dentro de una misma vista para facilitar la comparación y el análisis de patrones.
 
-A nivel de categorización de contenido, se aplican los siguientes esquemas (Tabla 55):
+A nivel de categorización de contenido, se aplican los siguientes esquemas (Tabla 61):
 
-**Tabla 55. Information Architecture — Organization Systems.**
+**Tabla 61. Information Architecture — Organization Systems.**
 
 | Esquema | Dónde se aplica |
 |---|---|
@@ -2979,9 +3077,9 @@ A nivel de categorización de contenido, se aplican los siguientes esquemas (Tab
 
 #### 3.1.2.2. Labelling Systems
 
-Las etiquetas de MindFlow se definieron priorizando claridad y el menor número de palabras posible, manteniendo consistencia entre el Landing Page, la Mobile Application y el propio lenguaje ubicuo definido en el Capítulo II (Tabla 56).
+Las etiquetas de MindFlow se definieron priorizando claridad y el menor número de palabras posible, manteniendo consistencia entre el Landing Page, la Mobile Application y el propio lenguaje ubicuo definido en el Capítulo II (Tabla 62).
 
-**Tabla 56. Information Architecture — Labelling Systems.**
+**Tabla 62. Information Architecture — Labelling Systems.**
 
 | Etiqueta | Módulo asociado |
 |---|---|
@@ -2999,9 +3097,9 @@ Estas etiquetas se mantienen idénticas en todos los puntos de contacto (menú d
 
 #### 3.1.2.3. SEO Tags and Meta Tags
 
-Para el **Landing Page**, se definen las siguientes meta tags principales (Tabla 57):
+Para el **Landing Page**, se definen las siguientes meta tags principales (Tabla 63):
 
-**Tabla 57. Information Architecture — SEO Tags and Meta Tags.**
+**Tabla 63. Information Architecture — SEO Tags and Meta Tags.**
 
 | Tag | Valor |
 |---|---|
@@ -3011,9 +3109,9 @@ Para el **Landing Page**, se definen las siguientes meta tags principales (Tabla
 | Author | CogniTech |
 | Charset | UTF-8 |
 
-Para las **Mobile Applications**, al distribuirse a través de una app store, se definen adicionalmente los elementos de ASO (App Store Optimization) (Tabla 58):
+Para las **Mobile Applications**, al distribuirse a través de una app store, se definen adicionalmente los elementos de ASO (App Store Optimization) (Tabla 64):
 
-**Tabla 58. Information Architecture — SEO Tags and Meta Tags (2).**
+**Tabla 64. Information Architecture — SEO Tags and Meta Tags (2).**
 
 | Elemento ASO | Valor |
 |---|---|
@@ -3795,9 +3893,9 @@ A partir de los mock-ups de alta fidelidad de la sección 3.1.4.3 se armó un pr
 
 ### 4.1.1. Software Development Environment Configuration
 
-El equipo configuró el entorno de desarrollo de cada producto de MindFlow por separado, ya que cada uno usa un stack distinto: HTML, CSS y JavaScript estáticos para la Landing Page; ASP.NET Core sobre .NET para los Web Services; y Kotlin con Jetpack Compose para la Aplicación móvil Android. Las Tablas 59 a 61 resumen las herramientas y versiones reales de cada uno, leídas directamente de sus archivos de configuración: `assets/i18n/` e `index.html` en `mindflow-landingPage`; `MindFlow.Platform.csproj`, `Dockerfile` y `docker-compose.yml` en `mindflow-backend`; `app/build.gradle.kts` y `gradle/libs.versions.toml` en `mindflow-frontend`.
+El equipo configuró el entorno de desarrollo de cada producto de MindFlow por separado, ya que cada uno usa un stack distinto: HTML, CSS y JavaScript estáticos para la Landing Page; ASP.NET Core sobre .NET para los Web Services; y Kotlin con Jetpack Compose para la Aplicación móvil Android. Las Tablas 65 a 67 resumen las herramientas y versiones reales de cada uno, leídas directamente de sus archivos de configuración: `assets/i18n/` e `index.html` en `mindflow-landingPage`; `MindFlow.Platform.csproj`, `Dockerfile` y `docker-compose.yml` en `mindflow-backend`; `app/build.gradle.kts` y `gradle/libs.versions.toml` en `mindflow-frontend`.
 
-**Tabla 59. Software Development Environment Configuration — Landing Page.**
+**Tabla 65. Software Development Environment Configuration — Landing Page.**
 
 | Componente | Herramienta | Versión o detalle | Uso en el proyecto |
 |---|---|---|---|
@@ -3806,7 +3904,7 @@ El equipo configuró el entorno de desarrollo de cada producto de MindFlow por s
 | Interactividad | JavaScript | `assets/script.js` | Comportamiento del sitio (menú, cambio de idioma, etc.) |
 | Internacionalización | JSON propio | `assets/i18n/es.json`, `assets/i18n/en.json` | Textos del sitio en español e inglés |
 
-**Tabla 60. Software Development Environment Configuration — Web Services.**
+**Tabla 66. Software Development Environment Configuration — Web Services.**
 
 | Componente | Herramienta / Biblioteca | Versión o detalle | Uso en el proyecto |
 |---|---|---|---|
@@ -3824,7 +3922,7 @@ El equipo configuró el entorno de desarrollo de cada producto de MindFlow por s
 | Contenedores | Docker (`Dockerfile`, `docker-compose.yml`) | Imágenes base `mcr.microsoft.com/dotnet/*:10.0` | Build multi-stage y base de datos/caché local para desarrollo |
 | Base de datos (local) | MySQL | `mysql:8.0` vía `docker-compose.yml` | Persistencia de los 8 bounded contexts en desarrollo |
 
-**Tabla 61. Software Development Environment Configuration — Aplicación móvil.**
+**Tabla 67. Software Development Environment Configuration — Aplicación móvil.**
 
 | Componente | Herramienta / Biblioteca | Versión o detalle | Uso en el proyecto |
 |---|---|---|---|
@@ -3847,9 +3945,9 @@ Los cuatro repositorios del proyecto siguen un flujo basado en GitFlow simplific
 
 La convención de mensajes de commit observada en el historial sigue, en general, Conventional Commits (`feat:`, `fix:`, `refactor:`, `build:`, `chore:`, `style:`, con *scope* opcional entre paréntesis), tal como indica la sección 4.1.3. En la práctica hay excepciones: varios commits tempranos de la app móvil (por ejemplo `feat: implementar pantallas de login y registro`, del 27/09/2026) usan el prefijo correcto pero la descripción en español, mientras que los commits posteriores a la refactorización a capas DDD (`05d549d refactor: add DDD foundation for frontend`) están íntegramente en inglés. El backend tiene además un par de commits sin prefijo de tipo (`de86103 Update database connection and secret keys`) o con un prefijo no estándar (`dda3d04 feature(ReadMe): Add information for MarkDown`, que usa `feature` en vez de `feat`).
 
-Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los tres repositorios de producto, con los commits por integrante en la rama `develop`, ya se presentan en la sección 4.2.1.9 "Team Collaboration Insights during Sprint" (Tabla 83, Figuras 136 a 138); no se repiten aquí.
+Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los tres repositorios de producto, con los commits por integrante en la rama `develop`, ya se presentan en la sección 4.2.1.9 "Team Collaboration Insights during Sprint" (Tabla 89, Figuras 136 a 138); no se repiten aquí.
 
-**Tabla 62. Source Code Management — Repositorios del proyecto.**
+**Tabla 68. Source Code Management — Repositorios del proyecto.**
 
 | Repositorio | URL | Rama principal | Ramas de trabajo | Propósito |
 |---|---|---|---|---|
@@ -3860,9 +3958,9 @@ Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los 
 
 ### 4.1.3. Source Code Style Guide & Conventions
 
-El equipo adopta guías de estilo oficiales y ampliamente utilizadas en la industria para cada lenguaje empleado en la solución, garantizando consistencia en todo el código fuente. En todos los casos, la nomenclatura de clases, métodos, variables, archivos y comentarios de código se redacta en inglés (Tabla 63).
+El equipo adopta guías de estilo oficiales y ampliamente utilizadas en la industria para cada lenguaje empleado en la solución, garantizando consistencia en todo el código fuente. En todos los casos, la nomenclatura de clases, métodos, variables, archivos y comentarios de código se redacta en inglés (Tabla 69).
 
-**Tabla 63. Software Configuration Management — Source Code Style Guide & Conventions.**
+**Tabla 69. Software Configuration Management — Source Code Style Guide & Conventions.**
 
 | Lenguaje / Artefacto | Uso en el proyecto | Guía de estilo adoptada | Convenciones clave |
 |---|---|---|---|
@@ -3883,7 +3981,7 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 
 ### 4.1.4. Software Deployment Configuration
 
-**Web Services.** El backend se despliega en **Railway** a partir de la rama `develop` del repositorio [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), con Docker, una base de datos MySQL y una caché Redis también alojadas en Railway, y variables de entorno configuradas en el servicio (Figuras 132 a 135, Tabla 82, sección 4.2.1.8). La documentación interactiva de la API, generada con Swashbuckle, está disponible en [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger).
+**Web Services.** El backend se despliega en **Railway** a partir de la rama `develop` del repositorio [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), con Docker, una base de datos MySQL y una caché Redis también alojadas en Railway, y variables de entorno configuradas en el servicio (Figuras 132 a 135, Tabla 88, sección 4.2.1.8). La documentación interactiva de la API, generada con Swashbuckle, está disponible en [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger).
 
 **Landing Page.** La Landing Page se publica con **GitHub Pages** desde la rama `main` del repositorio [`mindflow-landingPage`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage), mediante el despliegue automático de GitHub (*pages-build-deployment*), que no requiere un workflow propio en `.github/workflows/` — el repositorio no tiene ninguno, ya que el sitio es estático (HTML, CSS y JavaScript sin paso de compilación). El último despliegue corresponde al merge del Pull Request #3, que integró `develop` en `main` (commit `39d0d90`, sección 4.1.2). La URL pública es [https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/](https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/) (Figura 123).
 
@@ -3893,7 +3991,7 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 
 **Aplicación móvil Android.** En este Sprint la aplicación no tiene un proceso de publicación: el `buildType release` de `app/build.gradle.kts` no define un `signingConfig` propio (usa la firma de depuración por defecto), no se generó ningún APK distribuible y el repositorio no tiene configuración de Google Play Store. La app se ejecuta desde Android Studio, sobre emuladores y dispositivos Android físicos conectados al backend de Railway a través de `API_BASE_URL` (`app/build.gradle.kts`), tal como ya se describe en la sección 4.2.1.8. La publicación en una tienda de aplicaciones queda para un Sprint posterior.
 
-**Tabla 64. Software Deployment Configuration — Resumen de despliegue por producto.**
+**Tabla 70. Software Deployment Configuration — Resumen de despliegue por producto.**
 
 | Producto | Plataforma | Origen del despliegue | URL o estado |
 |---|---|---|---|
@@ -3915,9 +4013,9 @@ En este primer Sprint el equipo trabajó en paralelo el backend de los 8 bounded
 
 #### 4.2.1.1. Sprint Planning 1
 
-A continuación se presenta el resumen del Sprint Planning Meeting realizado para el Sprint 1 (Tabla 65).
+A continuación se presenta el resumen del Sprint Planning Meeting realizado para el Sprint 1 (Tabla 71).
 
-**Tabla 65. Sprint 1 — Sprint Planning 1.**
+**Tabla 71. Sprint 1 — Sprint Planning 1.**
 
 | Sprint # | Sprint 1 |
 |---|---|
@@ -3936,9 +4034,9 @@ A continuación se presenta el resumen del Sprint Planning Meeting realizado par
 
 #### 4.2.1.2. Aspect Leaders and Collaborators
 
-En esta sección se detalla la matriz de liderazgo y colaboración (LACX) para el Sprint 1. Cada aspecto representa una fase crítica de la entrega, donde se designa un líder (**L**) responsable de la dirección del entregable y colaboradores (**C**) que apoyaron en su ejecución (Tabla 66).
+En esta sección se detalla la matriz de liderazgo y colaboración (LACX) para el Sprint 1. Cada aspecto representa una fase crítica de la entrega, donde se designa un líder (**L**) responsable de la dirección del entregable y colaboradores (**C**) que apoyaron en su ejecución (Tabla 72).
 
-**Tabla 66. Sprint 1 — Aspect Leaders and Collaborators.**
+**Tabla 72. Sprint 1 — Aspect Leaders and Collaborators.**
 
 | Team Member (Last Name, First Name) | GitHub Username | Style Guidelines & Information Architecture | Backend — 8 Bounded Contexts | Landing Page (Wireframe y Mock-up) | Mobile Application (Android) — 8 Bounded Contexts | Configuración del Proyecto y Despliegue | Prototyping & Testing/Sprint Review Evidence |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -3963,9 +4061,9 @@ Durante el Sprint 1 (22/09/2026 – 09/10/2026) el equipo avanzó en paralelo lo
 
 En `mindflow-frontend` se implementó primero la base de la Mobile Application con persistencia 100% local en SQLite (tema, autenticación, Home, Diario, Hábitos, Analíticas, Configuración y Planes), y luego, en una segunda etapa, se conectó esa misma app al backend real: autenticación con Google, cliente Retrofit, IAM, Chat con Gemini, suscripciones con Stripe, internacionalización español/inglés y una barra de navegación inferior de 5 íconos que reemplazó al menú lateral original.
 
-En `mindflow-landingPage` se construyó el sitio completo (página principal y "Nosotros") desde cero para el pivote del proyecto hacia la aplicación móvil, con una corrección posterior de la precisión de las biografías del equipo y del grid de integrantes. La Tabla 67 detalla los commits de implementación más representativos de los tres repositorios (hasta 12 por repositorio); el historial completo de cada uno está disponible en GitHub.
+En `mindflow-landingPage` se construyó el sitio completo (página principal y "Nosotros") desde cero para el pivote del proyecto hacia la aplicación móvil, con una corrección posterior de la precisión de las biografías del equipo y del grid de integrantes. La Tabla 73 detalla los commits de implementación más representativos de los tres repositorios (hasta 12 por repositorio); el historial completo de cada uno está disponible en GitHub.
 
-**Tabla 67. Development Evidence for Sprint Review — Commits de implementación por repositorio.**
+**Tabla 73. Development Evidence for Sprint Review — Commits de implementación por repositorio.**
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
@@ -4008,7 +4106,7 @@ En este Sprint, la suite de pruebas automatizadas se concentró en la Mobile App
 
 ##### Relación de Unit Tests
 
-**Tabla 68. Testing Suite Evidence for Sprint Review — Relación de Unit Tests.**
+**Tabla 74. Testing Suite Evidence for Sprint Review — Relación de Unit Tests.**
 
 | Archivo de prueba | Clase probada | Test | Comportamiento validado | User Story |
 |---|---|---|---|---|
@@ -4018,11 +4116,11 @@ En este Sprint, la suite de pruebas automatizadas se concentró en la Mobile App
 | `application/ChatUseCasesTest.kt` | `ChatUseCases` (application service) | `replies as the assistant` | La respuesta al mensaje del usuario la entrega MindFlow AI y se identifica como mensaje del asistente, no del usuario. | US13 |
 | `application/ChatUseCasesTest.kt` | `ChatUseCases` (application service) | `welcome message comes from the assistant` | El mensaje de bienvenida del chat se muestra como mensaje del asistente. | US13 |
 
-En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementación de prueba. Así se valida el caso de uso de forma aislada, sin llamar al servicio de IA del backend (Tabla 68).
+En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementación de prueba. Así se valida el caso de uso de forma aislada, sin llamar al servicio de IA del backend (Tabla 74).
 
 ##### Resultado de la ejecución
 
-**Tabla 69. Testing Suite Evidence for Sprint Review — Resultado de la ejecución.**
+**Tabla 75. Testing Suite Evidence for Sprint Review — Resultado de la ejecución.**
 
 | Clase de prueba | Tests | Exitosos | Fallidos |
 |---|---|---|---|
@@ -4032,7 +4130,7 @@ En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementac
 
 ##### Commits relacionados con Testing
 
-**Tabla 70. Testing Suite Evidence for Sprint Review — Commits relacionados con Testing.**
+**Tabla 76. Testing Suite Evidence for Sprint Review — Commits relacionados con Testing.**
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
@@ -4062,7 +4160,7 @@ Logros principales del Sprint:
 
 ##### Vistas implementadas
 
-**Tabla 71. Execution Evidence for Sprint Review — Vistas implementadas.**
+**Tabla 77. Execution Evidence for Sprint Review — Vistas implementadas.**
 
 | Vista | Funcionalidad implementada | User Stories | Conexión con el backend |
 |---|---|---|---|
@@ -4076,7 +4174,7 @@ Logros principales del Sprint:
 | Planes | Comparación de Freemium y Premium, y actualización a Premium con Stripe Checkout en modo prueba. El plan se vuelve a consultar al regresar a la aplicación. | US33, US34 | `POST /api/v1/subscriptions/checkout`, `GET /api/v1/subscriptions/me` |
 | Chat MindFlow AI | Botón flotante que abre una conversación con la IA desde cualquier pantalla. | US13 | `POST /api/v1/chat/conversations`, `POST /api/v1/chat/conversations/{id}/messages` |
 
-Las vistas que hoy trabajan con persistencia local (Diario, Hábitos, Analíticas y Configuración) se conectarán a sus endpoints del backend en el siguiente Sprint. Esos endpoints ya están implementados y documentados en la sección 4.2.1.7. En ese mismo Sprint se completarán la pantalla de bloqueo por PIN (US04), los recordatorios de hábitos y el envío de tickets de soporte al backend (US37) (Tabla 71).
+Las vistas que hoy trabajan con persistencia local (Diario, Hábitos, Analíticas y Configuración) se conectarán a sus endpoints del backend en el siguiente Sprint. Esos endpoints ya están implementados y documentados en la sección 4.2.1.7. En ese mismo Sprint se completarán la pantalla de bloqueo por PIN (US04), los recordatorios de hábitos y el envío de tickets de soporte al backend (US37) (Tabla 77).
 
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 
@@ -4103,7 +4201,7 @@ Logros del Sprint en documentación de Web Services:
 
 ##### IAM: usuarios y autenticación
 
-**Tabla 72. Services Documentation Evidence for Sprint Review — IAM: usuarios y autenticación.**
+**Tabla 78. Services Documentation Evidence for Sprint Review — IAM: usuarios y autenticación.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4120,7 +4218,7 @@ Logros del Sprint en documentación de Web Services:
 | DELETE 🔒 | `/api/v1/users/pin` | — | `200` "PIN eliminado correctamente.". |
 | GET 🔒 | `/api/v1/users/pin/status` | — | `200` con `{ "has_pin": true }` o `{ "has_pin": false }`. |
 
-Ejemplo de inicio de sesión. El `token` devuelto es el que se usa en el botón **Authorize** de Swagger (Tabla 72):
+Ejemplo de inicio de sesión. El `token` devuelto es el que se usa en el botón **Authorize** de Swagger (Tabla 78):
 
 ```http
 POST /api/v1/users/sign-in
@@ -4135,7 +4233,7 @@ Content-Type: application/json
 
 ##### Journal: diario emocional
 
-**Tabla 73. Services Documentation Evidence for Sprint Review — Journal: diario emocional.**
+**Tabla 79. Services Documentation Evidence for Sprint Review — Journal: diario emocional.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4153,7 +4251,7 @@ Content-Type: application/json
 | POST 🔒 | `/api/v1/journal/media` | Body: datos del adjunto asociado a una entrada | `200` con el adjunto registrado. |
 | POST 🔒 | `/api/v1/journal/media/upload` | `multipart/form-data`: `entryId`, `file` | `200` con el adjunto subido. `400` si no se envía archivo. |
 
-Ejemplo de creación de una entrada. El backend analiza el texto y devuelve la respuesta empática de MindFlow AI (US11, US12, US13) (Tabla 73):
+Ejemplo de creación de una entrada. El backend analiza el texto y devuelve la respuesta empática de MindFlow AI (US11, US12, US13) (Tabla 79):
 
 ```http
 POST /api/v1/journal/entries
@@ -4189,7 +4287,7 @@ Content-Type: application/json
 
 ##### AI Assistant: chat y valoración de respuestas
 
-**Tabla 74. Services Documentation Evidence for Sprint Review — AI Assistant: chat y valoración de respuestas.**
+**Tabla 80. Services Documentation Evidence for Sprint Review — AI Assistant: chat y valoración de respuestas.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4202,7 +4300,7 @@ Content-Type: application/json
 | GET 🔒 | `/api/v1/ai-feedback` | — | `200` con las valoraciones del usuario. |
 | GET 🔒 | `/api/v1/ai-feedback/summary` | — | `200` con `total_ratings`, `average_rating` y `distribution`. |
 
-Ejemplo de mensaje en una conversación existente (Tabla 74):
+Ejemplo de mensaje en una conversación existente (Tabla 80):
 
 ```json
 {
@@ -4213,7 +4311,7 @@ Ejemplo de mensaje en una conversación existente (Tabla 74):
 
 ##### Habits & Wellness: hábitos, registros y bienestar
 
-**Tabla 75. Services Documentation Evidence for Sprint Review — Habits & Wellness: hábitos, registros y bienestar.**
+**Tabla 81. Services Documentation Evidence for Sprint Review — Habits & Wellness: hábitos, registros y bienestar.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4239,7 +4337,7 @@ Ejemplo de mensaje en una conversación existente (Tabla 74):
 
 ##### Analytics & Reporting
 
-**Tabla 76. Services Documentation Evidence for Sprint Review — Analytics & Reporting.**
+**Tabla 82. Services Documentation Evidence for Sprint Review — Analytics & Reporting.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4247,7 +4345,7 @@ Ejemplo de mensaje en una conversación existente (Tabla 74):
 | GET 🔒 | `/api/v1/analytics/report.csv` | — | Archivo `mindflow-report.csv` con fecha, categoría, sentimiento y título de cada entrada (US36). |
 | GET 🔒 | `/api/v1/analytics/report.pdf` | — | Archivo `mindflow-report.pdf` con el resumen emocional y el listado de entradas (US35). |
 
-Ejemplo de respuesta del dashboard (Tabla 76):
+Ejemplo de respuesta del dashboard (Tabla 82):
 
 ```json
 {
@@ -4266,7 +4364,7 @@ Ejemplo de respuesta del dashboard (Tabla 76):
 
 ##### Notifications
 
-**Tabla 77. Services Documentation Evidence for Sprint Review — Notifications.**
+**Tabla 83. Services Documentation Evidence for Sprint Review — Notifications.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4277,7 +4375,7 @@ Ejemplo de respuesta del dashboard (Tabla 76):
 
 ##### Subscriptions
 
-**Tabla 78. Services Documentation Evidence for Sprint Review — Subscriptions.**
+**Tabla 84. Services Documentation Evidence for Sprint Review — Subscriptions.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4287,7 +4385,7 @@ Ejemplo de respuesta del dashboard (Tabla 76):
 | POST | `/api/v1/subscriptions/webhook` | Header `Stripe-Signature`. Body: evento de Stripe | `200` al procesar `checkout.session.completed` y activar el plan Premium. `401` si la firma no es válida. Lo invoca Stripe, no la aplicación. |
 | POST 🔒 | `/api/v1/subscriptions/demo/plan/{plan}` | Path: `plan` (`freemium` o `premium`) | `200` con la suscripción actualizada. Endpoint de demostración para cambiar de plan sin pasar por Stripe. |
 
-Ejemplo de respuesta de checkout (Tabla 78):
+Ejemplo de respuesta de checkout (Tabla 84):
 
 ```json
 {
@@ -4298,7 +4396,7 @@ Ejemplo de respuesta de checkout (Tabla 78):
 
 ##### Support
 
-**Tabla 79. Services Documentation Evidence for Sprint Review — Support.**
+**Tabla 85. Services Documentation Evidence for Sprint Review — Support.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4310,7 +4408,7 @@ Ejemplo de respuesta de checkout (Tabla 78):
 
 ##### Health check
 
-**Tabla 80. Services Documentation Evidence for Sprint Review — Health check.**
+**Tabla 86. Services Documentation Evidence for Sprint Review — Health check.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4364,7 +4462,7 @@ A continuación se muestra la interacción con la documentación desplegada en R
 
 ##### Commits relacionados con los Web Services y su documentación
 
-**Tabla 81. Services Documentation Evidence for Sprint Review — Commits relacionados con los Web Services y su documentación.**
+**Tabla 87. Services Documentation Evidence for Sprint Review — Commits relacionados con los Web Services y su documentación.**
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
@@ -4411,9 +4509,9 @@ El backend de MindFlow (ASP.NET Core) se desplegó en **Railway**. Los pasos rea
 
 *Figura 134. Selección de las bases de datos del backend en Railway.*
 
-**4. Variables de entorno.** La configuración sensible no se guarda en el repositorio: se registró como variables del servicio en Railway, que las muestra ocultas. Se usa el separador `__` para las claves anidadas de `appsettings.json` (por ejemplo, `ConnectionStrings__DefaultConnection` equivale a `ConnectionStrings:DefaultConnection`). Se registraron las siguientes variables (Tabla 82 y Figura 135):
+**4. Variables de entorno.** La configuración sensible no se guarda en el repositorio: se registró como variables del servicio en Railway, que las muestra ocultas. Se usa el separador `__` para las claves anidadas de `appsettings.json` (por ejemplo, `ConnectionStrings__DefaultConnection` equivale a `ConnectionStrings:DefaultConnection`). Se registraron las siguientes variables (Tabla 88 y Figura 135):
 
-**Tabla 82. Software Deployment Evidence — Variables de entorno de los Web Services.**
+**Tabla 88. Software Deployment Evidence — Variables de entorno de los Web Services.**
 
 | Variable | Uso |
 |---|---|
@@ -4438,7 +4536,7 @@ Durante el Sprint, la aplicación se compiló desde Android Studio y se instaló
 
 Durante el Sprint 1 el equipo trabajó con el flujo GitFlow en los tres repositorios de los productos: cada integrante desarrolló sus cambios en ramas `feature/*` creadas a partir de `develop` y los integró mediante Pull Requests, con mensajes de commit bajo la convención Conventional Commits. A continuación se presentan los analíticos de colaboración de GitHub (*Insights → Contributors*) de cada producto, que muestran los commits de cada integrante en la rama `develop`, sin contar los commits de merge.
 
-**Tabla 83. Team Collaboration Insights — Commits por integrante en el Sprint 1.**
+**Tabla 89. Team Collaboration Insights — Commits por integrante en el Sprint 1.**
 
 | Team Member | GitHub Username | Landing Page | Web Services | Mobile Application |
 |:---|:---|:---:|:---:|:---:|
@@ -4480,14 +4578,14 @@ Las entrevistas de validación buscan conocer cómo usuarios reales de cada segm
  
 #### Segmentos a validar
  
-**Tabla 84. Diseño de Entrevistas — Segmentos a validar.**
+**Tabla 90. Diseño de Entrevistas — Segmentos a validar.**
 
 | Segmento | Perfil | Nº de entrevistas |
 |---|---|---|
 | Segmento A: Estudiantes Universitarios (*Tech-Native Scholars*) | Jóvenes de 18 a 25 años que cursan pregrado en entornos de alta exigencia académica | 3 |
 | Segmento B: Profesionales Jóvenes (*High-Performance Achievers*) | Adultos de 26 a 35 años en consolidación de carrera o mando medio | 3 |
  
-Se invitará a personas que no hayan participado en las entrevistas de descubrimiento de la sección 2.2 (Tabla 84).
+Se invitará a personas que no hayan participado en las entrevistas de descubrimiento de la sección 2.2 (Tabla 90).
  
 #### Elementos de la sesión
  
@@ -4495,7 +4593,7 @@ Se invitará a personas que no hayan participado en las entrevistas de descubrim
 2. **Aplicación móvil Android** (pantallas del Sprint 1).
 #### Flujos de la aplicación validados
  
-**Tabla 85. Diseño de Entrevistas — Flujos de la aplicación validados.**
+**Tabla 91. Diseño de Entrevistas — Flujos de la aplicación validados.**
 
 | Flujo | User Stories |
 |---|---|
@@ -4503,11 +4601,11 @@ Se invitará a personas que no hayan participado en las entrevistas de descubrim
 | Entrada de diario y retroalimentación empática de la IA | US11, US13 |
 | Creación y cumplimiento de hábitos | US21, US22 |
  
-Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprint 1 (Tabla 85).
+Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprint 1 (Tabla 91).
  
 #### Estructura de la sesión
  
-**Tabla 86. Diseño de Entrevistas — Estructura de la sesión.**
+**Tabla 92. Diseño de Entrevistas — Estructura de la sesión.**
 
 | Etapa | Duración aprox. | Descripción |
 |---|---|---|
@@ -4534,7 +4632,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 1
 
-**Tabla 87. Segmento 1: Estudiantes Universitarios — Entrevista 1.**
+**Tabla 93. Segmento 1: Estudiantes Universitarios — Entrevista 1.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4551,7 +4649,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 2
 
-**Tabla 88. Segmento 1: Estudiantes Universitarios — Entrevista 2.**
+**Tabla 94. Segmento 1: Estudiantes Universitarios — Entrevista 2.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4568,7 +4666,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 3
 
-**Tabla 89. Segmento 1: Estudiantes Universitarios — Entrevista 3.**
+**Tabla 95. Segmento 1: Estudiantes Universitarios — Entrevista 3.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4587,7 +4685,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 1
 
-**Tabla 90. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
+**Tabla 96. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4604,7 +4702,7 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ##### Entrevista 2
 
-**Tabla 91. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
+**Tabla 97. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
 
 | Campo | Detalle |
 |------|--------|
@@ -4621,13 +4719,13 @@ Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprin
 
 ### 4.3.3. Evaluaciones según heurísticas
 
-Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 92).
+Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 98).
 
 #### UX Heuristics & Principles Evaluation
 
 **Usability - Inclusive Design - Information Architecture**
 
-**Tabla 92. Evaluación según Heurísticas — Datos generales de la evaluación.**
+**Tabla 98. Evaluación según Heurísticas — Datos generales de la evaluación.**
 
 | Campo | Detalle |
 |---|---|
@@ -4663,9 +4761,9 @@ No están incluidas en esta versión de la evaluación las siguientes tareas:
 
 #### Escala de severidad
 
-Los problemas se puntúan con la siguiente escala (Tabla 93).
+Los problemas se puntúan con la siguiente escala (Tabla 99).
 
-**Tabla 93. Evaluación según Heurísticas — Escala de severidad.**
+**Tabla 99. Evaluación según Heurísticas — Escala de severidad.**
 
 | Nivel | Descripción |
 |---|---|
@@ -4676,9 +4774,9 @@ Los problemas se puntúan con la siguiente escala (Tabla 93).
 
 #### Tabla resumen
 
-La Tabla 94 resume los 16 problemas identificados, ordenados según su numeración y severidad.
+La Tabla 100 resume los 16 problemas identificados, ordenados según su numeración y severidad.
 
-**Tabla 94. Evaluación según Heurísticas — Resumen de problemas identificados.**
+**Tabla 100. Evaluación según Heurísticas — Resumen de problemas identificados.**
 
 | # | Problema | Severidad | Heurística/Principio violada(o) |
 |---|---|---|---|
@@ -4991,9 +5089,9 @@ Incorporar en el roadmap el registro por dictado de voz, la sincronización de h
 
 #### Resumen de hallazgos
 
-La distribución de los problemas según su severidad (Tabla 95) y según el eje evaluado (Tabla 96) se muestra a continuación.
+La distribución de los problemas según su severidad (Tabla 101) y según el eje evaluado (Tabla 102) se muestra a continuación.
 
-**Tabla 95. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
+**Tabla 101. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
 
 | Severidad | Cantidad | Problemas |
 |---|---|---|
@@ -5002,7 +5100,7 @@ La distribución de los problemas según su severidad (Tabla 95) y según el eje
 | Severidad 3 | 4 | #1, #2, #3, #4 |
 | Severidad 4 | 0 | — |
 
-**Tabla 96. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
+**Tabla 102. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
 
 | Eje evaluado | Problemas |
 |---|---|
