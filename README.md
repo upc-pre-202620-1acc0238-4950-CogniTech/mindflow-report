@@ -1719,94 +1719,184 @@ Complementando esto con un pase rápido de **start-with-value** se confirmó que
 
 #### 2.5.1.2. Domain Message Flows Modeling
 
-El **Domain Message Flows Modeling** permite representar cómo circulan los mensajes de dominio entre los diferentes **Bounded Contexts** de MindFlow, considerando **Commands, Domain Events, Policies, Actors/Agents** y sistemas externos.
+El **Domain Message Flows Modeling** representa cómo circulan los mensajes de dominio entre los **Bounded Contexts** de MindFlow en cada escenario de uso: qué actor inicia la interacción, qué contexto asume la responsabilidad, qué mensaje se produce y qué reacciones provoca en otros contextos o en sistemas externos.
 
-A partir de los eventos y límites identificados previamente durante el **EventStorming** y el **Candidate Context Discovery**, se modelaron los principales escenarios de interacción del sistema. Estos flujos permiten visualizar qué actor inicia una acción, qué Bounded Context asume la responsabilidad, qué mensaje se genera y cómo dicho mensaje puede provocar nuevas acciones en otros contextos.
+A partir de los eventos y límites identificados en el **EventStorming** y en el **Candidate Context Discovery**, se modelaron diez escenarios, uno por diagrama y en el orden en que el usuario los recorre:
 
-Los escenarios considerados son:
+| N.º | Escenario | Bounded Contexts que participan | Sistemas externos |
+|---|---|---|---|
+| 01 | Registro y autenticación de usuario | IAM | Google Identity |
+| 02 | Registro emocional y diario | Journal | Cloudinary Media Storage |
+| 03 | Generación de Insight con IA | Journal, AI Assistant | Google Gemini API |
+| 04 | Gestión de hábitos y recordatorios | Habits & Wellness, Notifications | — |
+| 05 | Detección de estrés y bienestar | Habits & Wellness, Journal, AI Assistant, Notifications | — |
+| 06 | Generación y exportación de reportes | Analytics & Reporting, Journal | — |
+| 07 | Suscripción Premium | Subscriptions | Stripe |
+| 08 | Gestión de soporte | Support, Notifications | — |
+| 09 | Seguridad de la cuenta (IAM extendido) | IAM, Journal, Habits & Wellness, AI Assistant | SMTP Email Service |
+| 10 | Dashboard emocional (consulta) | Analytics & Reporting, Journal, Habits & Wellness | — |
 
-1. Registro y autenticación de usuario.
-2. Registro emocional y diario.
-3. Generación de Insight con IA.
-4. Gestión de hábitos y recordatorios.
-5. Detección de estrés y bienestar.
-6. Generación y exportación de reportes.
-7. Suscripción Premium.
-8. Gestión de soporte.
+*Tabla 16.1. Escenarios modelados en los Domain Message Flows.*
 
-Para la representación gráfica se empleó la siguiente convención:
+Todos los diagramas usan la misma notación, incluida como leyenda al pie de cada uno, y un único idioma (inglés) para los nombres de mensajes, de modo que coincidan con el lenguaje ubicuo del EventStorming y de los Bounded Context Canvases:
 
-- **Azul:** Command.
-- **Amarillo:** Domain Event.
-- **Rosado:** Policy.
-- **Gris:** Actor, Agent, Bounded Context o External System.
-- **Flechas:** dirección en la que se produce el flujo de mensajes (Figura 24).
+- **Actor / Client (gris, bordes redondeados):** persona o aplicación que inicia la interacción.
+- **Bounded Context (gris, barras laterales):** contexto que atiende el mensaje.
+- **External System (azul oscuro):** sistema ajeno a MindFlow; se dibuja siempre como un elemento separado del contexto que lo consume.
+- **Command (azul):** intención de cambiar el estado.
+- **Query (verde):** pedido de información que no cambia el estado.
+- **Event (amarillo):** hecho de dominio ya ocurrido.
+- **Policy (rosado):** reacción automática ante un evento ("cada vez que… entonces…").
+- **Read Model (verde, borde doble):** información preparada para mostrarse al usuario.
+- **Borde punteado:** mensaje definido en el modelo de dominio que aún no está implementado en la versión actual del producto.
 
-<div align="center">
+Cada fila numerada dentro de un diagrama es un paso del escenario y se lee de izquierda a derecha.
 
-![Domain Message Flows - Parte 1](assets/img/event_storming/Flow1.jpg)
+**Escenario 01 — Registro y autenticación de usuario**
 
-*Figura 24. Domain Message Flows Modeling de MindFlow - Parte 1.*
-
-</div>
-
-La primera parte representa los flujos relacionados con la identidad del usuario, el registro de estados emocionales y las operaciones principales del diario. El usuario interactúa mediante la **MindFlow Mobile Application**, que dirige las operaciones hacia los Bounded Contexts correspondientes.
-
-El contexto **IAM** administra los Commands `Register user`, `Update profile` y `Log in`, generando respectivamente los Domain Events `User registered`, `Profile updated` y `User authenticated`.
-
-Por su parte, **Journal** administra el registro emocional mediante `Log mood`, `Write journal entry` y `Tag journal entry`, generando los eventos `Mood logged`, `Journal entry created` y `Journal entry tagged` (Figura 25).
-
-<div align="center">
-
-![Domain Message Flows - Parte 2](assets/img/event_storming/Flow2.jpg)
-
-*Figura 25. Domain Message Flows Modeling de MindFlow - Parte 2.*
-
-</div>
-
-La segunda parte representa los escenarios donde se producen interacciones entre distintos Bounded Contexts.
-
-Cuando una entrada de diario es creada, el Domain Event `Journal entry created` activa la Policy `after Journal entry created`, permitiendo que **AI Assistant** procese la información con apoyo de **Google Gemini API** y genere el evento `Insight generated`. El usuario también puede valorar la respuesta generada, produciendo `Assistant response rated`.
-
-En **Habits & Wellness**, los Commands `Create habit` y `Complete habit` permiten registrar y actualizar los hábitos del usuario. Cuando se alcanza el umbral correspondiente se activa la Policy `streak threshold met`, produciendo `Streak achieved`.
-
-De manera independiente, el **System** puede activar la Policy `check-in time reached`, que invoca al Bounded Context **Notifications** para producir el evento `Reminder sent`.
-
-El flujo de bienestar comienza con `Run stress check`, generando `Stress check completed`. Ante un nivel elevado de estrés se activa la Policy `after high-stress check`, produciendo `Wellness exercise suggested`.
-
-Asimismo, los registros emocionales recurrentes pueden activar `after recurring low mood`. **AI Assistant** identifica entonces el evento `Risk pattern detected`, el cual activa `after risk detected` y permite que **Notifications** produzca `Wellness alert sent` (Figura 26).
+El usuario se registra o inicia sesión desde la **MindFlow Mobile App** y **IAM** responde con los eventos `User registered` y `User authenticated`. Cuando el usuario elige entrar con Google, IAM consulta a **Google Identity** únicamente para validar la cuenta (`Validate Google ID token`); la identidad que circula por MindFlow sigue siendo la que emite IAM. La actualización del perfil produce `Profile updated` (Figura 24.1).
 
 <div align="center">
 
-![Domain Message Flows - Parte 3](assets/img/event_storming/Flow3.jpg)
+![Domain Message Flow - Escenario 01](assets/img/strategic_ddd/flow-01-registration-authentication.png)
 
-*Figura 26. Domain Message Flows Modeling de MindFlow - Parte 3.*
+*Figura 24.1. Domain Message Flow del Escenario 01: registro y autenticación de usuario.*
 
 </div>
 
-La tercera parte representa los flujos relacionados con analítica, monetización y soporte.
+**Escenario 02 — Registro emocional y diario**
 
-El Bounded Context **Analytics & Reporting** permite generar un reporte mediante `Generate progress report`, produciendo `Progress report generated`. Posteriormente, el usuario puede ejecutar `Export report`, generando el evento `Report exported`.
+**Journal** atiende los Commands `Log mood`, `Write journal entry` y `Tag journal entry`, que producen `Mood logged`, `Journal entry created` y `Journal entry tagged`. Se incorporan dos Commands que no figuraban en la versión anterior: `Attach media`, que delega el almacenamiento del archivo en **Cloudinary Media Storage**, y `Sync offline entries`, con el que la aplicación envía las entradas escritas sin conexión (Figura 24.2).
 
-En **Subscriptions**, el usuario selecciona un plan mediante `Select premium plan`, produciendo `Premium plan selected`. El pago es procesado mediante un **Payment Gateway / Stripe**, generando `Payment processed`. Este evento activa la Policy `after payment processed`, dando como resultado `Subscription activated`. El usuario también puede ejecutar `Cancel subscription`, produciendo `Subscription canceled`.
+<div align="center">
 
-Finalmente, el Bounded Context **Support** administra las solicitudes de asistencia. El usuario ejecuta `Create support ticket`, produciendo `Support ticket created`, mientras que el **Support Agent** puede ejecutar `Resolve support ticket`, generando `Support ticket resolved`.
+![Domain Message Flow - Escenario 02](assets/img/strategic_ddd/flow-02-mood-journal.png)
 
-En conjunto, estos flujos evidencian cómo los diferentes Bounded Contexts colaboran sin perder sus responsabilidades individuales, utilizando mensajes de dominio para coordinar las capacidades principales de MindFlow.
+*Figura 24.2. Domain Message Flow del Escenario 02: registro emocional y diario.*
+
+</div>
+
+**Escenario 03 — Generación de Insight con IA**
+
+El evento `Journal entry created` activa la Policy `after Journal entry created`, que envía el Command `Generate insight` a **AI Assistant**. Este contexto es el único que se comunica con **Google Gemini API** y devuelve el evento `Insight generated`. El usuario también puede escribirle directamente al asistente (`Submit assistant query` → `Assistant query submitted`) y valorar la respuesta recibida (`Rate assistant response` → `Assistant response rated`) (Figura 24.3).
+
+<div align="center">
+
+![Domain Message Flow - Escenario 03](assets/img/strategic_ddd/flow-03-ai-insight.png)
+
+*Figura 24.3. Domain Message Flow del Escenario 03: generación de Insight con IA.*
+
+</div>
+
+**Escenario 04 — Gestión de hábitos y recordatorios**
+
+**Habits & Wellness** atiende `Create habit` y `Complete habit`. Cada cumplimiento produce `Habit completed` y, cuando se cumple la Policy `streak threshold met`, el evento `Streak achieved`. El recordatorio programado (`check-in time reached` → `Send reminder` → `Reminder sent`) pertenece al modelo de dominio y lo entrega **Notifications**; se muestra con borde punteado porque aún no está implementado (Figura 24.4).
+
+<div align="center">
+
+![Domain Message Flow - Escenario 04](assets/img/strategic_ddd/flow-04-habits-reminders.png)
+
+*Figura 24.4. Domain Message Flow del Escenario 04: gestión de hábitos y recordatorios.*
+
+</div>
+
+**Escenario 05 — Detección de estrés y bienestar**
+
+Al ejecutar `Run stress check`, **Habits & Wellness** consulta a **Journal** el ánimo reciente del usuario (`Get recent moods`) y produce `Stress check completed`. Si el nivel es alto, la Policy `after high-stress check` pide a **AI Assistant** una recomendación (`Suggest wellness exercise` → `Wellness exercise suggested`). El tercer paso modela la detección de un patrón de riesgo ante ánimo bajo recurrente y la alerta que **Notifications** envía al usuario; es parte del modelo de dominio y está pendiente de implementación (Figura 24.5).
+
+<div align="center">
+
+![Domain Message Flow - Escenario 05](assets/img/strategic_ddd/flow-05-stress-wellbeing.png)
+
+*Figura 24.5. Domain Message Flow del Escenario 05: detección de estrés y bienestar.*
+
+</div>
+
+**Escenario 06 — Generación y exportación de reportes**
+
+**Analytics & Reporting** atiende `Generate progress report`, para lo cual consulta las entradas del usuario a **Journal**, y produce `Progress report generated`. Luego el usuario puede ejecutar `Export report`, que produce `Report exported` (Figura 24.6).
+
+<div align="center">
+
+![Domain Message Flow - Escenario 06](assets/img/strategic_ddd/flow-06-reports.png)
+
+*Figura 24.6. Domain Message Flow del Escenario 06: generación y exportación de reportes.*
+
+</div>
+
+**Escenario 07 — Suscripción Premium**
+
+El usuario ejecuta `Select premium plan` y **Subscriptions** produce `Premium plan selected`. El cobro se delega en **Stripe** (`Process payment`), que devuelve `Payment processed`; solo entonces la Policy `after payment processed` ejecuta `Activate subscription` y se produce `Subscription activated`. La cancelación (`Cancel subscription` → `Subscription canceled`) forma parte del modelo y está pendiente de implementación (Figura 24.7).
+
+<div align="center">
+
+![Domain Message Flow - Escenario 07](assets/img/strategic_ddd/flow-07-premium-subscription.png)
+
+*Figura 24.7. Domain Message Flow del Escenario 07: suscripción Premium.*
+
+</div>
+
+**Escenario 08 — Gestión de soporte**
+
+El usuario ejecuta `Create support ticket` y **Support** produce `Support ticket created`. Tanto la creación como cada respuesta del **Support Agent** (`Reply to ticket` → `Support ticket replied`) activan una Policy que pide a **Notifications** avisar al dueño del ticket (`Send notification` → `Notification sent`). El agente cierra el caso con `Resolve support ticket`, que produce `Support ticket resolved` (Figura 24.8).
+
+<div align="center">
+
+![Domain Message Flow - Escenario 08](assets/img/strategic_ddd/flow-08-support.png)
+
+*Figura 24.8. Domain Message Flow del Escenario 08: gestión de soporte.*
+
+</div>
+
+**Escenario 09 — Seguridad de la cuenta (IAM extendido)**
+
+Este escenario amplía IAM con las capacidades de protección de la cuenta. La recuperación de contraseña (`Request password reset` → `Password reset requested`) envía el enlace mediante el **SMTP Email Service** y se completa con `Reset password`. El bloqueo de la aplicación se modela con `Set PIN` y `Verify PIN`. Finalmente, `Delete account` produce `Account deleted`, evento que activa la Policy `after account deleted` para que **Journal**, **Habits & Wellness** y **AI Assistant** eliminen los datos del usuario (Figura 24.9).
+
+<div align="center">
+
+![Domain Message Flow - Escenario 09](assets/img/strategic_ddd/flow-09-account-security.png)
+
+*Figura 24.9. Domain Message Flow del Escenario 09: seguridad de la cuenta (IAM extendido).*
+
+</div>
+
+**Escenario 10 — Dashboard emocional (consulta)**
+
+A diferencia de los anteriores, este escenario no cambia el estado del sistema. La Query `Get emotional dashboard` es atendida por **Analytics & Reporting**, que consulta a **Journal** (`Get journal entries`) y a **Habits & Wellness** (`Get habits and completions`) y compone el Read Model `Emotional dashboard` que la aplicación muestra al usuario (Figura 24.10).
+
+<div align="center">
+
+![Domain Message Flow - Escenario 10](assets/img/strategic_ddd/flow-10-dashboard-query.png)
+
+*Figura 24.10. Domain Message Flow del Escenario 10: dashboard emocional (consulta).*
+
+</div>
+
+En conjunto, los flujos muestran que cada Bounded Context conserva su responsabilidad y que la colaboración entre ellos ocurre siempre mediante mensajes de dominio explícitos; los sistemas externos solo son alcanzados por el contexto dueño de esa integración.
 
 #### 2.5.1.3. Bounded Context Canvases
 
-Los **Bounded Context Canvases** permiten documentar de manera estructurada las responsabilidades, lenguaje, reglas de negocio y formas de comunicación de cada uno de los Bounded Contexts identificados durante el proceso de Strategic-Level Domain-Driven Design.
+Los **Bounded Context Canvases** documentan de manera estructurada el propósito, las responsabilidades, el lenguaje, las reglas de negocio y la comunicación de cada uno de los ocho Bounded Contexts de MindFlow: **IAM**, **Journal**, **AI Assistant**, **Habits & Wellness**, **Analytics & Reporting**, **Notifications**, **Subscriptions** y **Support**.
 
-Para MindFlow se definieron ocho Bounded Contexts: **IAM**, **Journal**, **AI Assistant**, **Habits & Wellness**, **Analytics & Reporting**, **Notifications**, **Subscriptions** y **Support**. Cada canvas describe su propósito, clasificación estratégica, lenguaje ubicuo, decisiones de negocio y mecanismos de comunicación de entrada y salida.
+Cada canvas sigue la plantilla del **Bounded Context Canvas de DDD Crew (v5)** y contiene las mismas secciones:
+
+- **Name y Purpose:** nombre del contexto y la razón de negocio por la que existe.
+- **Strategic Classification:** tipo de subdominio (Core, Supporting o Generic), rol en el modelo de negocio y nivel de evolución.
+- **Domain Roles:** el papel que el contexto cumple dentro del sistema.
+- **Inbound Communication y Outbound Communication:** colaboradores con los que intercambia mensajes, el tipo de relación con cada uno y los mensajes clasificados como Command (C), Query (Q) o Event (E).
+- **Ubiquitous Language:** términos propios del contexto con su definición.
+- **Business Decisions:** reglas de negocio que el contexto hace cumplir.
+- **Assumptions, Verification Metrics y Open Questions:** supuestos sobre los que se diseñó, métricas para verificar que el contexto cumple su propósito y preguntas aún no resueltas por el equipo.
+
+Los mensajes con borde punteado están definidos en el modelo de dominio pero todavía no forman parte de la versión implementada.
 
 ### IAM
 
-El bounded context **IAM (Identity and Access Management)** concentra las responsabilidades relacionadas con la identidad de los usuarios, autenticación, perfiles y mecanismos de acceso a MindFlow. Funciona como un contexto de soporte para el resto de las capacidades del sistema (Figura 27).
+**IAM (Identity and Access Management)** da a cada persona una identidad verificable y protege el acceso a su información. Es un contexto de soporte del que dependen todos los demás, y el único que se comunica con Google Identity y con el servicio de correo (Figura 27).
 
 <div align="center">
 
-![Bounded Context Canvas - IAM](assets/img/event_storming/iam.png)
+![Bounded Context Canvas - IAM](assets/img/strategic_ddd/canvas-iam.png)
 
 *Figura 27. Bounded Context Canvas correspondiente a IAM.*
 
@@ -1814,11 +1904,11 @@ El bounded context **IAM (Identity and Access Management)** concentra las respon
 
 ### Journal
 
-El bounded context **Journal** administra el diario emocional del usuario, incluyendo el registro de estados de ánimo, creación de entradas y organización de información mediante etiquetas. Se considera uno de los contextos centrales de MindFlow debido a su relación directa con la autoconciencia emocional (Figura 28).
+**Journal** administra el diario emocional: entradas, estado de ánimo, etiquetas y adjuntos. Es un contexto core porque origina el dato emocional que alimenta al resto del producto (Figura 28).
 
 <div align="center">
 
-![Bounded Context Canvas - Journal](assets/img/event_storming/journal.png)
+![Bounded Context Canvas - Journal](assets/img/strategic_ddd/canvas-journal.png)
 
 *Figura 28. Bounded Context Canvas correspondiente a Journal.*
 
@@ -1826,11 +1916,11 @@ El bounded context **Journal** administra el diario emocional del usuario, inclu
 
 ### AI Assistant
 
-El bounded context **AI Assistant** concentra las capacidades relacionadas con la interacción conversacional basada en Inteligencia Artificial, la generación de insights, el análisis del contexto emocional y la detección de patrones relevantes a partir de la información del usuario (Figura 29).
+**AI Assistant** convierte lo que el usuario escribe en acompañamiento empático e insights, y aísla al resto de MindFlow del proveedor de IA. Es el principal diferenciador del producto (Figura 29).
 
 <div align="center">
 
-![Bounded Context Canvas - AI Assistant](assets/img/event_storming/AIAssistant.png)
+![Bounded Context Canvas - AI Assistant](assets/img/strategic_ddd/canvas-ai-assistant.png)
 
 *Figura 29. Bounded Context Canvas correspondiente a AI Assistant.*
 
@@ -1838,11 +1928,11 @@ El bounded context **AI Assistant** concentra las capacidades relacionadas con l
 
 ### Habits & Wellness
 
-El bounded context **Habits & Wellness** administra la creación y seguimiento de hábitos, el cumplimiento de actividades, las rachas de progreso, los chequeos de estrés y las sugerencias orientadas al bienestar del usuario (Figura 30).
+**Habits & Wellness** administra los hábitos, sus cumplimientos y rachas, los chequeos de estrés y los ejercicios de bienestar, y aplica la regla que ajusta la carga de hábitos según el nivel de estrés (Figura 30).
 
 <div align="center">
 
-![Bounded Context Canvas - Habits and Wellness](assets/img/event_storming/Habits.png)
+![Bounded Context Canvas - Habits and Wellness](assets/img/strategic_ddd/canvas-habits-wellness.png)
 
 *Figura 30. Bounded Context Canvas correspondiente a Habits & Wellness.*
 
@@ -1850,11 +1940,11 @@ El bounded context **Habits & Wellness** administra la creación y seguimiento d
 
 ### Analytics & Reporting
 
-El bounded context **Analytics & Reporting** transforma la información generada en otros contextos en métricas, tendencias y reportes que permiten al usuario visualizar y comprender su evolución emocional y el progreso de sus hábitos (Figura 31).
+**Analytics & Reporting** transforma los registros de Journal y de Habits & Wellness en indicadores y reportes. Solo lee información: nunca modifica los datos de los contextos de origen (Figura 31).
 
 <div align="center">
 
-![Bounded Context Canvas - Analytics and Reporting](assets/img/event_storming/Analytics.png)
+![Bounded Context Canvas - Analytics and Reporting](assets/img/strategic_ddd/canvas-analytics-reporting.png)
 
 *Figura 31. Bounded Context Canvas correspondiente a Analytics & Reporting.*
 
@@ -1862,11 +1952,11 @@ El bounded context **Analytics & Reporting** transforma la información generada
 
 ### Notifications
 
-El bounded context **Notifications** se encarga de gestionar recordatorios, alertas de bienestar y notificaciones dirigidas al usuario. Funciona como un contexto transversal que recibe información originada en otros Bounded Contexts y la comunica mediante los canales disponibles (Figura 32).
+**Notifications** entrega al usuario los avisos que otros contextos solicitan. Es un contexto transversal: no decide cuándo notificar, solo se encarga de que el aviso llegue (Figura 32).
 
 <div align="center">
 
-![Bounded Context Canvas - Notifications](assets/img/event_storming/notifications.png)
+![Bounded Context Canvas - Notifications](assets/img/strategic_ddd/canvas-notifications.png)
 
 *Figura 32. Bounded Context Canvas correspondiente a Notifications.*
 
@@ -1874,11 +1964,11 @@ El bounded context **Notifications** se encarga de gestionar recordatorios, aler
 
 ### Subscriptions
 
-El bounded context **Subscriptions** administra las capacidades comerciales de MindFlow relacionadas con los planes Premium, procesamiento de pagos, activación de suscripciones y cancelaciones, manteniendo estas responsabilidades separadas de las funcionalidades centrales de bienestar (Figura 33).
+**Subscriptions** administra el plan de cada usuario y el paso a Premium. Es el único contexto que se comunica con la pasarela de pago y mantiene las reglas comerciales separadas del dominio de bienestar (Figura 33).
 
 <div align="center">
 
-![Bounded Context Canvas - Subscriptions](assets/img/event_storming/Subs.png)
+![Bounded Context Canvas - Subscriptions](assets/img/strategic_ddd/canvas-subscriptions.png)
 
 *Figura 33. Bounded Context Canvas correspondiente a Subscriptions.*
 
@@ -1886,111 +1976,99 @@ El bounded context **Subscriptions** administra las capacidades comerciales de M
 
 ### Support
 
-El bounded context **Support** gestiona las solicitudes de asistencia de los usuarios mediante tickets de soporte, controlando su ciclo de vida desde la creación hasta su resolución por parte del equipo correspondiente (Figura 34).
+**Support** gestiona las solicitudes de ayuda mediante tickets, desde su creación hasta su resolución por el equipo de soporte, y mantiene informado al usuario a través de Notifications (Figura 34).
 
 <div align="center">
 
-![Bounded Context Canvas - Support](assets/img/event_storming/Support.png)
+![Bounded Context Canvas - Support](assets/img/strategic_ddd/canvas-support.png)
 
 *Figura 34. Bounded Context Canvas correspondiente a Support.*
 
 </div>
 
-En conjunto, estos canvases permiten establecer límites claros entre las responsabilidades del dominio de MindFlow y documentar cómo cada Bounded Context mantiene su propio lenguaje y reglas de negocio, mientras colabora con otros contextos mediante mensajes y eventos de dominio.
+En conjunto, los canvases establecen límites claros entre las responsabilidades del dominio de MindFlow y dejan explícito, para cada contexto, qué mensajes recibe, cuáles emite y con qué tipo de relación colabora con los demás.
 
 ### 2.5.2. Context Mapping
 
-El **Context Mapping** permite representar las relaciones existentes entre los diferentes **Bounded Contexts** de MindFlow, identificando cuáles actúan como **Upstream (U)** y cuáles como **Downstream (D)**, así como el patrón de integración utilizado entre ellos.
+El **Context Mapping** representa las relaciones entre los **Bounded Contexts** de MindFlow y con los sistemas externos: cuál actúa como **Upstream (U)**, cuál como **Downstream (D)** y qué patrón de integración se aplica en cada caso.
 
-A partir de los Bounded Contexts identificados durante el EventStorming y el Candidate Context Discovery, se definieron relaciones de tipo **Conformist** y **Customer-Supplier**. Estas relaciones permiten mantener separados los modelos de dominio, al mismo tiempo que hacen explícitas las dependencias necesarias para el funcionamiento de la solución (Figura 35).
+Para mantener la legibilidad, el mapa se dividió en tres vistas pequeñas, cada una centrada en un grupo de relaciones. Las tres comparten la misma leyenda y utilizan los patrones del catálogo de **DDD Crew**:
+
+| Patrón | Sigla | Uso en MindFlow |
+|---|---|---|
+| Open Host Service | OHS | El contexto upstream ofrece una interfaz estable que varios contextos consumen. |
+| Published Language | PL | El upstream publica un formato común y documentado que los demás adoptan. |
+| Customer / Supplier | C/S | El downstream es cliente del upstream y sus necesidades influyen en lo que este ofrece. |
+| Conformist | CF | El downstream adopta el modelo del upstream tal cual, sin traducirlo. |
+| Anti-Corruption Layer | ACL | El downstream traduce el modelo de un sistema externo para que no contamine el suyo. |
+
+*Tabla 16.2. Patrones de Context Mapping utilizados.*
+
+**Decisiones de diseño.** Tres decisiones explican la forma del mapa. (1) La identidad no se modela como un **Shared Kernel** entre contextos, porque obligaría a coordinar cada cambio del modelo de usuario con los ocho contextos; en su lugar, IAM la publica y los demás la adoptan. (2) Ningún contexto consume directamente al proveedor de IA: AI Assistant concentra esa relación, de modo que un cambio de proveedor afecta a un solo contexto. (3) Analytics & Reporting lee los datos de los contextos de origen en lugar de mantener una copia propia alimentada por eventos, porque el volumen actual no lo justifica; la alternativa queda registrada como pregunta abierta en su canvas.
+
+**Context Map 1 — Identidad y acceso**
+
+**IAM** es **Upstream** de todos los demás contextos. Publica la identidad autenticada (identificador del usuario y rol) como **Open Host Service** con **Published Language**, y los siete contextos restantes la adoptan sin traducirla, por lo que su relación es **Conformist**. **Notifications** es además cliente de IAM (**Customer / Supplier**), porque le solicita el contacto del usuario y el envío de correos. Hacia afuera, IAM protege su modelo con un **Anti-Corruption Layer** frente a **Google Identity** y frente al **SMTP Email Service** (Figura 35.1).
 
 <div align="center">
 
-![Context Mapping - MindFlow](assets/img/event_storming/ContextMapping.png)
+![Context Map 1 - Identidad y acceso](assets/img/strategic_ddd/context-map-01-identity-access.png)
 
-*Figura 35. Context Mapping de los Bounded Contexts de MindFlow.*
+*Figura 35.1. Context Map 1: identidad y acceso.*
+
+</div>
+
+**Context Map 2 — Dominio core de bienestar**
+
+**AI Assistant** actúa como **Upstream** y expone sus capacidades como **Open Host Service**; **Journal** y **Habits & Wellness** son sus clientes (**Customer / Supplier**): el primero le pide un insight por cada entrada y el segundo, sugerencias de hábitos y ejercicios de bienestar. A su vez, **Journal** es **Upstream** de **Habits & Wellness**, que lee el ánimo reciente para calcular el nivel de estrés, y tanto **Journal** como **Habits & Wellness** son **Upstream** de **Analytics & Reporting**; en los tres casos el downstream lee el modelo del upstream tal cual (**Conformist**). Adicionalmente, AI Assistant consulta a Journal y a Habits & Wellness para comprobar que existe el contenido que el usuario valora. Los sistemas externos quedan aislados mediante **Anti-Corruption Layer**: **Google Gemini API** detrás de AI Assistant y **Cloudinary Media Storage** detrás de Journal (Figura 35.2).
+
+<div align="center">
+
+![Context Map 2 - Dominio core de bienestar](assets/img/strategic_ddd/context-map-02-core-wellbeing.png)
+
+*Figura 35.2. Context Map 2: dominio core de bienestar.*
+
+</div>
+
+**Context Map 3 — Engagement, servicio y monetización**
+
+**Notifications** ofrece el envío de avisos como **Open Host Service**. **Support** es su cliente (**Customer / Supplier**) y lo utiliza al crear un ticket y en cada respuesta del equipo. Las relaciones con **Habits & Wellness** (recordatorios) y con **AI Assistant** (alertas de bienestar) siguen el mismo patrón y se dibujan con línea punteada porque están definidas en el modelo pero aún no implementadas. **Subscriptions** no depende de ningún otro contexto del dominio, salvo de la identidad de IAM, y adopta el modelo de **Stripe** como **Conformist** (Figura 35.3).
+
+<div align="center">
+
+![Context Map 3 - Engagement, servicio y monetización](assets/img/strategic_ddd/context-map-03-engagement-service-monetization.png)
+
+*Figura 35.3. Context Map 3: engagement, servicio y monetización.*
 
 </div>
 
 ### Relaciones entre Bounded Contexts
 
-**IAM – Journal (Conformist)**
+La siguiente tabla resume todas las relaciones representadas en los tres mapas.
 
-En esta relación, **IAM** actúa como **Upstream**, ya que proporciona la identidad autenticada del usuario. **Journal** actúa como **Downstream**, utilizando dicha identidad para asociar las entradas del diario y los registros emocionales al usuario correspondiente.
+| Upstream (U) | Downstream (D) | Patrón | Qué se intercambia |
+|---|---|---|---|
+| IAM | Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Subscriptions, Support | OHS + PL → Conformist | Identidad autenticada: identificador del usuario y rol |
+| IAM | Notifications | OHS + PL → Conformist; Customer / Supplier | Identidad, contacto del usuario y envío de correo |
+| IAM | Journal, Habits & Wellness, AI Assistant | Customer / Supplier | Evento `Account deleted` para eliminar los datos del usuario |
+| AI Assistant | Journal | OHS → Customer / Supplier | `Generate insight` → `Insight generated` |
+| AI Assistant | Habits & Wellness | OHS → Customer / Supplier | `Suggest habits`, `Suggest wellness exercise` |
+| Journal | Habits & Wellness | Conformist | Ánimo reciente del usuario (`Get recent moods`) |
+| Journal | Analytics & Reporting | Conformist | Entradas del diario (`Get journal entries`) |
+| Habits & Wellness | Analytics & Reporting | Conformist | Hábitos y cumplimientos (`Get habits and completions`) |
+| Journal, Habits & Wellness | AI Assistant | Conformist | Existencia del contenido valorado por el usuario |
+| Notifications | Support | OHS → Customer / Supplier | `Send notification` → `Notification sent` |
+| Notifications | Habits & Wellness | OHS → Customer / Supplier (planificado) | `Send reminder` → `Reminder sent` |
+| Notifications | AI Assistant | OHS → Customer / Supplier (planificado) | `Risk pattern detected` → `Wellness alert sent` |
+| Google Identity | IAM | Anti-Corruption Layer | Validación de la cuenta de Google |
+| SMTP Email Service | IAM | Anti-Corruption Layer | Entrega de correos |
+| Google Gemini API | AI Assistant | Anti-Corruption Layer | Generación de contenido |
+| Cloudinary Media Storage | Journal | Anti-Corruption Layer | Almacenamiento de adjuntos |
+| Stripe | Subscriptions | Conformist | Sesión de pago y confirmación del cobro |
 
-La relación se define como **Conformist**, debido a que Journal adopta la información de identidad proporcionada por IAM sin requerir un modelo de traducción adicional.
+*Tabla 16.3. Relaciones entre los Bounded Contexts de MindFlow y con sistemas externos.*
 
-**IAM – AI Assistant (Conformist)**
-
-**IAM** es el contexto **Upstream**, ya que proporciona la identidad del usuario autenticado. **AI Assistant** actúa como **Downstream**, utilizando esta información para asociar conversaciones, respuestas e insights con el usuario correspondiente.
-
-La relación se establece como **Conformist**, ya que AI Assistant utiliza directamente la identidad definida por IAM.
-
-**IAM – Habits & Wellness (Conformist)**
-
-**IAM** funciona como **Upstream**, mientras que **Habits & Wellness** funciona como **Downstream**. La identidad proporcionada por IAM permite asociar hábitos, chequeos de estrés y actividades de bienestar con un usuario específico.
-
-Habits & Wellness adopta el modelo de identidad de IAM, por lo que la relación se clasifica como **Conformist**.
-
-**IAM – Analytics & Reporting (Conformist)**
-
-En esta relación, **IAM** actúa como **Upstream** y **Analytics & Reporting** como **Downstream**. Los reportes, métricas y tendencias generados por MindFlow deben corresponder a un usuario previamente identificado.
-
-Analytics & Reporting utiliza la identidad proporcionada por IAM, estableciendo una relación de tipo **Conformist**.
-
-**IAM – Subscriptions (Conformist)**
-
-**IAM** es **Upstream**, proporcionando la identidad del usuario, mientras que **Subscriptions** es **Downstream**, ya que necesita asociar los planes Premium, pagos y estados de suscripción a un usuario determinado.
-
-Subscriptions adopta directamente la identificación del usuario gestionada por IAM, por lo que se utiliza el patrón **Conformist**.
-
-**IAM – Support (Conformist)**
-
-**IAM** funciona como **Upstream**, proporcionando la información de identidad necesaria para registrar solicitudes de soporte. **Support** actúa como **Downstream**, asociando cada ticket con el usuario que lo generó.
-
-La relación se define como **Conformist**, ya que Support utiliza directamente el modelo de identidad proporcionado por IAM.
-
-**Journal – AI Assistant (Customer-Supplier)**
-
-En esta relación, **Journal** actúa como **Upstream (Supplier)**, ya que produce información emocional como entradas de diario y estados de ánimo.
-
-**AI Assistant** funciona como **Downstream (Customer)**, consumiendo dicha información para generar insights, respuestas contextualizadas y detectar patrones emocionales.
-
-La relación se clasifica como **Customer-Supplier**, debido a que AI Assistant depende de información generada por Journal para ejecutar parte de sus capacidades.
-
-**Journal – Analytics & Reporting (Customer-Supplier)**
-
-**Journal** actúa como **Upstream (Supplier)** al proporcionar información relacionada con entradas emocionales y estados de ánimo.
-
-**Analytics & Reporting** funciona como **Downstream (Customer)**, utilizando estos datos para construir métricas, tendencias y reportes sobre la evolución emocional del usuario.
-
-Por ello, la relación se establece como **Customer-Supplier**.
-
-**Habits & Wellness – Analytics & Reporting (Customer-Supplier)**
-
-**Habits & Wellness** funciona como **Upstream (Supplier)**, ya que genera información relacionada con hábitos, cumplimiento, rachas y chequeos de estrés.
-
-**Analytics & Reporting** actúa como **Downstream (Customer)**, consumiendo estos datos para generar indicadores y reportes relacionados con el progreso del usuario.
-
-La relación se clasifica como **Customer-Supplier**.
-
-**AI Assistant – Notifications (Customer-Supplier)**
-
-**AI Assistant** actúa como **Upstream (Supplier)** al detectar patrones de riesgo y generar información que puede requerir una comunicación hacia el usuario.
-
-**Notifications** funciona como **Downstream (Customer)**, reaccionando ante estos eventos para generar y enviar alertas de bienestar.
-
-Esta relación se modela como **Customer-Supplier**.
-
-**Habits & Wellness – Notifications (Customer-Supplier)**
-
-**Habits & Wellness** actúa como **Upstream (Supplier)** al generar información relacionada con hábitos, chequeos y condiciones de bienestar.
-
-**Notifications** funciona como **Downstream (Customer)** al utilizar estas condiciones para generar recordatorios y comunicaciones dirigidas al usuario.
-
-Por ello, la relación se establece como **Customer-Supplier**.
-
-En conjunto, el Context Mapping permite visualizar las dependencias entre los Bounded Contexts de MindFlow y establecer de manera explícita la dirección de la comunicación entre ellos. IAM funciona como proveedor transversal de identidad, mientras que Journal, Habits & Wellness y AI Assistant generan información de dominio que posteriormente es utilizada por contextos como Analytics & Reporting y Notifications.
+En conjunto, el Context Mapping muestra que **IAM** es el proveedor transversal de identidad; que **Journal** y **Habits & Wellness** generan la información de dominio que consumen **AI Assistant** y **Analytics & Reporting**; que **AI Assistant** y **Notifications** funcionan como servicios compartidos por varios contextos; y que toda integración con un sistema externo tiene un único contexto dueño.
 
 ### 2.5.3. Software Architecture
 
