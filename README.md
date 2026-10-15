@@ -1,9 +1,3 @@
-<style>
-table { width: 100%; }
-table td, table th { word-wrap: break-word; overflow-wrap: anywhere; word-break: break-word; }
-table code { white-space: normal !important; word-break: break-word; overflow-wrap: anywhere; }
-</style>
-
 <div align="center">
 
 <img src="assets/img/upc/upc-logo.png" alt="Logo UPC" width="120"/>
