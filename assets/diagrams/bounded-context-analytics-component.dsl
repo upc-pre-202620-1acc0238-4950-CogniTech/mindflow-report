@@ -1,64 +1,69 @@
-workspace "MindFlow - Analytics & Reporting" "C4 Model - Component Diagram for the Analytics & Reporting Bounded Context" {
+workspace "MindFlow - Analytics & Reporting" "C4 Model - Component Diagram of the Analytics & Reporting bounded context (as built)" {
 
     model {
-        user = person "MindFlow User" "A user viewing their weekly emotional analytics, mood calendar, word cloud, or exporting a personal report." "Person"
-
-        geminiApi = softwareSystem "AI Advisory Service" "Generates the narrative weekly insight text." "External"
-        database = softwareSystem "Database" "Stores analytics_caches and word_clouds, and is read directly from Journal entries and Subscriptions." "External"
-        redisCache = softwareSystem "Redis Cache" "Short-TTL cache for the computed mood calendar." "External"
-
-        mindflow = softwareSystem "MindFlow" "Allows users to track their emotional well-being through journaling, habit tracking, and AI-powered insights." {
-            api = container "Web Services API" "Exposes MindFlow's functionality via a RESTful API." "ASP.NET Core / .NET 10" {
-
-                analyticsController = component "AnalyticsController" "Exposes REST endpoints for the weekly analytics cache, the mood calendar and the word cloud." "ASP.NET Core Controller"
-                analyticsHandlers = component "Analytics/WordCloud Command & Query Handlers" "Handle the CQRS commands and queries for AnalyticsCache and WordCloud, reading and writing directly against the database." "Cortex.Mediator Handlers"
-                analyticsComputationService = component "AnalyticsComputationService" "Computes the weekly score and trend, the mood calendar, the word cloud and the AI-generated weekly insight, from the user's journal entries." "Application Service"
-                analyticsCacheInvalidator = component "AnalyticsCacheInvalidator" "Implements the cache-invalidation port: clears a user's weekly analytics cache, word cloud and mood-calendar cache entry when their journal changes." "Application/Infrastructure Service"
-                reportingController = component "ReportingController" "Exposes REST endpoints to export the user's personal report as PDF or CSV, gated to Premium subscribers." "ASP.NET Core Controller"
-                reportingService = component "ReportingService" "Builds a branded PDF report and a tabular CSV export from the user's journal entries." "Application/Infrastructure Service"
+        user = person "MindFlow User" "Authenticated user of the mobile app." "Person"
+        mindflow = softwareSystem "MindFlow" "Emotional well-being platform." {
+            database = container "Database" "MySQL 8 - persists the data of all bounded contexts." "MySQL 8" "Database"
+            cache = container "Cache" "Redis - habit list cache." "Redis" "Database"
+            api = container "Web Services API" "REST API of the 8 bounded contexts." "ASP.NET Core, .NET 10" {
+                analyticsController = component "AnalyticsController" "Only component of the context (no domain, application or infrastructure layers). api/v1/analytics: GET dashboard (from/to, default 30 days), GET report.csv, GET report.pdf. Computes everything on each request; no cache." "ASP.NET Core Controller" "Component"
+                questPdf = component "QuestPDF" "In-process PDF generation (A4) used by the controller." "Library (QuestPDF)" "Component"
+                journalBc = component "Journal" "Owner of journal_entries." "Bounded context (not detailed)" "OtherBC"
+                habitsBc = component "Habits & Wellness" "Owner of habits and habit_completion_logs." "Bounded context (not detailed)" "OtherBC"
             }
         }
-
-        user -> analyticsController "Views weekly analytics, mood calendar and word cloud via" "HTTPS/JSON, JWT"
-        user -> reportingController "Exports a personal report via" "HTTPS/JSON, JWT"
-
-        analyticsController -> analyticsHandlers "Dispatches simple commands/queries to (via mediator)"
-        analyticsHandlers -> database "Reads from and writes to" "EF Core / TCP"
-        analyticsController -> analyticsComputationService "Delegates the weekly/mood-calendar/word-cloud computation to"
-        analyticsComputationService -> database "Reads journal entries from, and writes the computed cache/word cloud to" "EF Core / TCP"
-        analyticsComputationService -> geminiApi "Requests the narrative weekly insight from"
-        analyticsController -> redisCache "Reads/writes the mood-calendar cache entry via" "TCP"
-
-        analyticsCacheInvalidator -> database "Deletes the stale weekly cache and word cloud rows in" "EF Core / TCP"
-        analyticsCacheInvalidator -> redisCache "Removes the stale mood-calendar cache entry from" "TCP"
-
-        reportingController -> reportingService "Delegates export generation to"
-        reportingController -> database "Verifies the caller's active Premium subscription directly in" "EF Core / TCP"
-        reportingService -> database "Reads journal entries directly from" "EF Core / TCP"
+        user -> analyticsController "Reads the dashboard and downloads reports through" "HTTPS/JSON, CSV, PDF" "Relationship"
+        analyticsController -> questPdf "Renders the PDF with" "" "Relationship"
+        analyticsController -> database "Reads journal_entries, habits, habit_completion_logs directly" "EF Core (shared context)" "Relationship"
+        analyticsController -> journalBc "Aggregates entries owned by" "" "Relationship"
+        analyticsController -> habitsBc "Aggregates habits owned by" "" "Relationship"
     }
 
     views {
-        component api "AnalyticsReportingComponentDiagram" {
+        component api "AnalyticsComponents" {
             include *
-            autoLayout tb 150 150
+            autoLayout tb 120 160
             title "MindFlow - Analytics & Reporting Bounded Context - Component Diagram"
-            description "The weekly analytics/word-cloud sub-model (CQRS handlers + a heavier computation service), the cross-context cache-invalidation port, and the Premium-gated PDF/CSV export service."
         }
-
         styles {
             element "Person" {
                 shape Person
                 background #08427b
                 color #ffffff
             }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Database" {
+                shape Cylinder
+            }
             element "Component" {
                 background #85bbf0
                 color #000000
+            }
+            element "OtherBC" {
+                background #c9d6e4
+                color #333333
             }
             element "External" {
                 background #999999
                 color #ffffff
             }
+            element "Planned" {
+                background #e8e8e8
+                color #555555
+                border dashed
+            }
+            relationship "Relationship" {
+                dashed false
+                color #444444
+            }
+            relationship "Planned" {
+                dashed true
+                color #888888
+            }
         }
+
     }
 }

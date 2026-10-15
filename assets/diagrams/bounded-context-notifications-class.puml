@@ -1,76 +1,55 @@
 @startuml Notifications_DomainLayer_ClassDiagram
-skinparam classAttributeIconSize 0
-hide circle
+!include style.iuml
+title MindFlow - Notifications - Domain Layer Class Diagram
 
 interface IAuditableEntity {
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class Notification {
-  -Id : int
-  -UserId : int
-  -Title : string
-  -Body : string
-  -IsRead : bool
+class Notification <<Aggregate Root>> {
+  +Id : int
+  +UserId : int
+  +Type : string = "general"
+  +Title : string
+  +Body : string
+  +ReadAt : DateTimeOffset?
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class DeviceToken {
-  -Id : int
-  -UserId : int
-  -Token : string
-  -Platform : string = "web"
-  +CreatedAt : DateTimeOffset
+interface INotificationService <<Application port>> {
+  +CreateAsync(userId: int, type: string, title: string, body: string, ct: CancellationToken) : Task
 }
-
-interface INotificationService {
-  +SendToAllAsync(title: string, body: string, ct: CancellationToken) : Task
-  +SendToUserAsync(userId: int, title: string, body: string, ct: CancellationToken) : Task
+class NotificationService <<Application Service>> {
+  -db : AppDbContext
+  -email : IEmailService
+  +CreateAsync(userId: int, type: string, title: string, body: string, ct: CancellationToken) : Task
 }
-
-class RegisterDeviceRequest {
+interface IEmailService <<IAM>> {
+  +SendNotificationAsync(...) : Task
+}
+class DeviceToken <<planned>> {
+  +Id : int
+  +UserId : int
   +Token : string
-  +Platform : string = "web"
+  +Platform : string
+}
+class FcmNotificationService <<planned>> {
+  +SendPushAsync(...) : Task
 }
 
-class UnregisterDeviceRequest {
-  +Token : string
-}
-
-Notification .up.|> IAuditableEntity
-INotificationService ..> Notification : registra un\nregistro por envío >
-INotificationService ..> DeviceToken : lee los tokens\nde destino >
+Notification ..|> IAuditableEntity : implements
+NotificationService ..|> INotificationService : implements
+NotificationService ..> Notification : "creates 0..* >"
+NotificationService ..> IEmailService : "sends email through >"
+FcmNotificationService ..> DeviceToken : "would read >"
 
 note right of Notification
-  UserId es una referencia lógica al
-  agregado User del bounded context IAM.
-  No existe repositorio dedicado: el
-  controlador y el servicio de envío
-  acceden a Notification y DeviceToken
-  directamente vía AppDbContext, dado
-  que sus operaciones son consultas y
-  escrituras simples sin reglas de
-  negocio adicionales.
+  Type is a free string (the only value in use is "support").
+  A notification is unread while ReadAt is null.
+  Only the Support context creates notifications today.
 end note
-
-note right of INotificationService
-  Único puerto de dominio del bounded
-  context. Concentra la única regla de
-  negocio real: toda notificación enviada
-  (individual o masiva) queda además
-  registrada como Notification antes de
-  intentar el envío push, para que el
-  usuario la vea en su bandeja aunque el
-  push falle o su dispositivo esté offline.
+note bottom of DeviceToken
+  Grey classes are planned and not implemented:
+  there is no push delivery and no reminder job.
 end note
-
-note right of DeviceToken
-  Un token de dispositivo pertenece a un
-  único usuario a la vez: al registrar un
-  token ya existente, se reasigna su
-  UserId en lugar de duplicarlo.
-end note
-
 @enduml

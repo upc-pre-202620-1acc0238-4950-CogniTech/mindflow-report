@@ -1,21 +1,19 @@
 @startuml IAM_DomainLayer_ClassDiagram
-skinparam classAttributeIconSize 0
-hide circle
+!include style.iuml
+title MindFlow - IAM - Domain Layer Class Diagram
 
 interface IAuditableEntity {
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
 interface "IBaseRepository<TEntity>" as IBaseRepository {
-  +AddAsync(entity: TEntity, cancellationToken: CancellationToken) : Task
-  +FindByIdAsync(id: int, cancellationToken: CancellationToken) : Task<TEntity?>
+  +AddAsync(entity: TEntity, ct: CancellationToken) : Task
+  +FindByIdAsync(id: int, ct: CancellationToken) : Task<TEntity?>
   +Update(entity: TEntity) : void
   +Remove(entity: TEntity) : void
-  +ListAsync(cancellationToken: CancellationToken) : Task<IEnumerable<TEntity>>
+  +ListAsync(ct: CancellationToken) : Task<IEnumerable<TEntity>>
 }
-
-class User {
+class User <<Aggregate Root>> {
   -Id : int
   -Email : string
   -Name : string?
@@ -26,13 +24,15 @@ class User {
   -Role : string
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
-  +{static} AdminRole : string
-  +{static} DefaultRole : string
+  +{static} AdminRole : string = "Admin"
+  +{static} SupportRole : string = "Support"
+  +{static} DefaultRole : string = "User"
   +IsAdmin : bool
   +HasPin : bool
   +User(email: string, password: string)
   +User(email: string, googleId: string, name: string?)
   +PromoteToAdmin() : User
+  +PromoteToSupport() : User
   +LinkGoogle(googleId: string) : void
   +UpdatePasswordHash(password: string) : User
   +UpdateProfile(name: string?, occupation: string?) : User
@@ -40,24 +40,73 @@ class User {
   +VerifyPin(pin: string) : bool
   +RemovePin() : User
 }
-
-class PasswordResetToken {
+class PasswordResetToken <<Entity>> {
   +Id : int
   +UserId : int
   +Token : string
   +ExpiresAt : DateTime
   +Used : bool
 }
-
 interface IUserRepository {
   +FindByEmailAsync(email: string) : Task<User?>
   +FindByGoogleIdAsync(googleId: string) : Task<User?>
   +ExistsByEmailAsync(email: string) : Task<bool>
 }
+package "Commands (domain/model/commands)" <<Rectangle>> {
+class SignUpCommand <<record>> {
+  +Email : string
+  +Password : string
+  +Name : string?
+}
+class SignInCommand <<record>> {
+  +Email : string
+  +Password : string
+}
+class GoogleAuthCommand <<record>> {
+  +Credential : string
+}
+class UpdateProfileCommand <<record>> {
+  +UserId : int
+  +Name : string?
+  +Occupation : string?
+}
+class ForgotPasswordCommand <<record>> {
+  +Email : string
+}
+class ResetPasswordCommand <<record>> {
+  +Token : string
+  +NewPassword : string
+}
+class SetPinCommand <<record>> {
+  +UserId : int
+  +Pin : string
+}
+class VerifyPinCommand <<record>> {
+  +UserId : int
+  +Pin : string
+}
+class RemovePinCommand <<record>> {
+  +UserId : int
+}
+class DeleteAccountCommand <<record>> {
+  +UserId : int
+}
 
-User .up.|> IAuditableEntity
-IUserRepository -up-|> IBaseRepository
-IUserRepository ..> User
-PasswordResetToken "0..*" --> "1" User
+}
 
+User ..|> IAuditableEntity : implements
+IUserRepository --|> IBaseRepository : extends
+IUserRepository ..> User : "manages >"
+PasswordResetToken "0..*" --> "1" User : "belongs to >"
+
+note right of User
+  Roles are string constants (no enum).
+  Passwords and PINs are stored as BCrypt hashes.
+  PIN: 4-6 numeric digits. No lockout after failed attempts.
+end note
+note bottom of DeleteAccountCommand
+  Handled by UserCommandService in one transaction:
+  deletes Journal, Habits and Chat data of the user.
+  Notifications, Subscriptions and Support data are NOT deleted.
+end note
 @enduml

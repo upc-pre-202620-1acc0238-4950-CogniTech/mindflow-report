@@ -1,0 +1,54 @@
+@startuml Mobile_LocalDatabaseDiagram
+!include style.iuml
+skinparam linetype ortho
+title MindFlow - Android app - Local Database Diagram (SQLite, schema version 2)
+
+entity "users" as users {
+  * id : INTEGER <<PK, AUTOINCREMENT>>
+  --
+  * email : TEXT <<UNIQUE>>
+  * name : TEXT
+  * password_hash : TEXT
+  * occupation : TEXT = ''
+  * timezone : TEXT = 'GMT-5 (Lima, Perú)'
+  * plan : TEXT = 'Freemium'
+  * created_at : INTEGER
+}
+entity "journal_entries" as journal_entries {
+  * id : INTEGER <<PK>>
+  --
+  * user_id : INTEGER <<FK to users.id ON DELETE CASCADE>>
+  * title : TEXT
+  * content : TEXT
+  * category : TEXT
+  * sentiment : TEXT = 'neutral'
+  ai_response : TEXT, nullable
+  * created_at : INTEGER
+  --
+  INDEX idx_journal_user (user_id, created_at DESC)
+}
+entity "habits" as habits {
+  * id : INTEGER <<PK>>
+  --
+  * user_id : INTEGER <<FK to users.id ON DELETE CASCADE>>
+  * name : TEXT
+  * category : TEXT
+  * frequency : TEXT = 'Diario'
+  * created_at : INTEGER
+}
+entity "habit_logs" as habit_logs {
+  * id : INTEGER <<PK>>
+  --
+  * habit_id : INTEGER <<FK to habits.id ON DELETE CASCADE>>
+  * date : TEXT
+  --
+  UNIQUE (habit_id, date)
+}
+users ||--o{ journal_entries : "writes"
+users ||--o{ habits : "tracks"
+habits ||--o{ habit_logs : "is completed on"
+note bottom of habit_logs
+  Plain SQLite, no encryption. onUpgrade drops the four tables and recreates them.
+  There is no sync mechanism or pending-changes column with the backend.
+end note
+@enduml

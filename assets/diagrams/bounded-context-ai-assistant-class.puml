@@ -1,22 +1,20 @@
 @startuml AiAssistant_DomainLayer_ClassDiagram
-skinparam classAttributeIconSize 0
-hide circle
+!include style.iuml
+title MindFlow - AI Assistant - Domain Layer Class Diagram
 
 interface IAuditableEntity {
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class Conversation {
+class Conversation <<Aggregate Root>> {
   +Id : int
   +UserId : int
   +Title : string
-  +Category : string
+  +Category : string = "Personal"
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class ChatMessage {
+class ChatMessage <<Entity>> {
   +Id : int
   +ConversationId : int
   +Role : string
@@ -24,8 +22,7 @@ class ChatMessage {
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class AiFeedbackRating {
+class AiFeedbackRating <<Aggregate Root>> {
   +Id : int
   +UserId : int
   +ContentId : int
@@ -35,8 +32,7 @@ class AiFeedbackRating {
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class AiMetricLog {
+class AiMetricLog <<Entity>> {
   +Id : int
   +Operation : string
   +LatencyMs : int
@@ -46,12 +42,37 @@ class AiMetricLog {
   +ErrorMessage : string?
   +CreatedAt : DateTimeOffset
 }
+interface IAiService <<Application port>> {
+  +GenerateEmpathicResponseAsync(...) : Task<string>
+  +GenerateChatResponseAsync(...) : Task<string>
+  +GenerateStressAdviceAsync(...) : Task<string>
+  +GenerateHabitSuggestionsAsync(...) : Task<string>
+  +GenerateWeeklySummaryAsync(...) : Task<string>
+}
+class GeminiService <<Infrastructure>> {
+  -CallGeminiAsync(prompt: string) : Task<string>
+}
 
-Conversation .up.|> IAuditableEntity
-ChatMessage .up.|> IAuditableEntity
-AiFeedbackRating .up.|> IAuditableEntity
+Conversation ..|> IAuditableEntity : implements
+ChatMessage ..|> IAuditableEntity : implements
+AiFeedbackRating ..|> IAuditableEntity : implements
+Conversation "1" *-- "0..*" ChatMessage : "contains >"
+GeminiService ..|> IAiService : implements
+GeminiService ..> AiMetricLog : "records every call >"
 
-Conversation "1" --> "0..*" ChatMessage
-ChatMessage "0..*" --> "1" Conversation
-
+note right of ChatMessage
+  Content is encrypted at rest (AES-256).
+  Role is "user" or "assistant" (free string).
+  The assistant receives the last 10 messages.
+end note
+note bottom of AiFeedbackRating
+  ContentType is "journal" or "habit"; Rating from 1 to 5.
+  ContentId points logically to a journal entry or a habit
+  (validated by reading those tables directly).
+end note
+note bottom of IAiService
+  GenerateWeeklySummaryAsync has no caller yet.
+  On any failure the service returns an empty string and
+  each consumer applies its own fallback text.
+end note
 @enduml

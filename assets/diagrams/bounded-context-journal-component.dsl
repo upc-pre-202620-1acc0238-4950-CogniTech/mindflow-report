@@ -1,67 +1,83 @@
-workspace "MindFlow - Journal" "C4 Model - Component Diagram for the Journal Bounded Context" {
+workspace "MindFlow - Journal" "C4 Model - Component Diagram of the Journal bounded context (as built)" {
 
     model {
-        user = person "MindFlow User" "A user writing, editing, searching, or attaching media to journal entries." "Person"
-
-        cloudinary = softwareSystem "Cloudinary" "Stores and serves journal media files." "External"
-        database = softwareSystem "Database" "Stores journal_entries, tags, entry_tags, media, and journal_search_tokens." "External"
-        analyticsBc = softwareSystem "Analytics & Reporting (Bounded Context)" "Consumes journal changes to invalidate its computed analytics cache." "External"
-
-        mindflow = softwareSystem "MindFlow" "Allows users to track their emotional well-being through journaling, habit tracking, and AI-powered insights." {
-            api = container "Web Services API" "Exposes MindFlow's functionality via a RESTful API." "ASP.NET Core / .NET 10" {
-
-                journalController = component "JournalController" "Exposes REST endpoints for entries, tags, entry-tags, and media (including file upload)." "ASP.NET Core Controller"
-                journalCommandHandlers = component "Journal Command Handlers" "Create/Update/Delete JournalEntry, Create/Delete EntryTag, Create Media, Sync offline entries. Write via IBaseRepository<T> + Unit of Work." "Cortex.Mediator Command Handlers"
-                journalQueryHandlers = component "Journal Query Handlers" "Read-optimized queries directly against AppDbContext (joins, filters, full-text search)." "Cortex.Mediator Query Handlers"
-                fileStorageService = component "FileStorageService" "Abstracts media storage (IFileStorageService), implemented by Cloudinary (production) or local disk (fallback)." "Infrastructure Service"
-                searchIndexer = component "JournalSearchIndexer" "(Re)indexes an entry's title/content into hashed search tokens after create/update." "Infrastructure Service"
-                searchTokenHasher = component "SearchTokenHasher" "Keyed HMAC-SHA256 hashing of search tokens." "Infrastructure Service"
-                searchBackfillService = component "JournalSearchBackfillService" "One-time startup backfill of search tokens for pre-existing entries." "Background Service"
+        user = person "MindFlow User" "Authenticated user of the mobile app." "Person"
+        cloudinary = softwareSystem "Cloudinary" "Media storage." "External"
+        mindflow = softwareSystem "MindFlow" "Emotional well-being platform." {
+            database = container "Database" "MySQL 8 - persists the data of all bounded contexts." "MySQL 8" "Database"
+            cache = container "Cache" "Redis - habit list cache." "Redis" "Database"
+            api = container "Web Services API" "REST API of the 8 bounded contexts." "ASP.NET Core, .NET 10" {
+                journalController = component "JournalController" "api/v1/journal: entries (GET/POST/PUT/DELETE), entries/sync, tags, entry-tags, media, media/upload (10 MB)." "ASP.NET Core Controller" "Component"
+                commandHandlers = component "Journal Command Handlers" "Create/Update/Delete (soft-delete) entry, Sync offline entries (last-write-wins), tags, media." "Cortex.Mediator command handlers" "Component"
+                queryHandlers = component "Journal Query Handlers" "List (sort, order, limit, hashed keyword search) and get by id." "Cortex.Mediator query handlers" "Component"
+                searchIndexer = component "JournalSearchIndexer" "Tokenizes title and content and stores keyed hashes, so search works without decrypting." "Infrastructure Service" "Component"
+                tokenHasher = component "SearchTokenHasher" "HMAC-SHA256 keyed hashing of search tokens." "Infrastructure Service" "Component"
+                backfill = component "JournalSearchBackfillService" "Runs once at startup and indexes entries without tokens." "BackgroundService (one-time)" "Component"
+                fileStorage = component "CloudinaryFileStorageService" "Implements IFileStorageService; uploads attachments (image, audio, video, PDF)." "Infrastructure Service" "Component"
+                invalidatorStub = component "AnalyticsCacheInvalidatorStub" "IAnalyticsCacheInvalidator implementation registered in DI; its body does nothing." "Infrastructure Service (stub)" "Component,Planned"
+                aiBc = component "AI Assistant (IAiService)" "Generates the empathic response for a new entry." "Bounded context (not detailed)" "OtherBC"
             }
         }
-
-        user -> journalController "Makes authenticated requests to" "HTTPS/JSON"
-        journalController -> journalCommandHandlers "Sends commands to" "Cortex.Mediator"
-        journalController -> journalQueryHandlers "Sends queries to" "Cortex.Mediator"
-        journalController -> fileStorageService "Uploads media files via"
-
-        journalCommandHandlers -> database "Reads and writes JournalEntry, EntryTag, Media via IBaseRepository<T>"
-        journalCommandHandlers -> analyticsBc "Invalidates the analytics cache via IAnalyticsCacheInvalidator"
-        journalCommandHandlers -> searchIndexer "Triggers re-indexing after create/update"
-
-        journalQueryHandlers -> database "Reads via AppDbContext (Include, filters, ordering)"
-
-        searchIndexer -> searchTokenHasher "Hashes tokens via"
-        searchIndexer -> database "Writes JournalSearchToken rows via AppDbContext"
-
-        searchBackfillService -> searchIndexer "Invokes for unindexed entries at startup"
-        searchBackfillService -> database "Reads unindexed JournalEntry rows via AppDbContext"
-
-        fileStorageService -> cloudinary "Uploads files to (production)" "HTTPS/JSON"
+        user -> journalController "Calls" "HTTPS/JSON" "Relationship"
+        journalController -> commandHandlers "Sends commands to" "Cortex.Mediator" "Relationship"
+        journalController -> queryHandlers "Sends queries to" "Cortex.Mediator" "Relationship"
+        journalController -> fileStorage "Uploads media through" "" "Relationship"
+        commandHandlers -> database "Writes journal_entries, tags, entry_tags, media" "EF Core" "Relationship"
+        queryHandlers -> database "Reads (soft-delete filter, hashed search)" "EF Core" "Relationship"
+        commandHandlers -> searchIndexer "Indexes after create/update" "" "Relationship"
+        commandHandlers -> invalidatorStub "Invalidates analytics cache (no effect)" "" "Planned"
+        commandHandlers -> aiBc "Requests the empathic response from" "IAiService" "Relationship"
+        searchIndexer -> tokenHasher "Hashes tokens with" "" "Relationship"
+        searchIndexer -> database "Writes journal_search_tokens" "EF Core" "Relationship"
+        backfill -> searchIndexer "Indexes pending entries via" "" "Relationship"
+        fileStorage -> cloudinary "Uploads files to" "HTTPS" "Relationship"
     }
 
     views {
-        component api "JournalComponentDiagram" {
+        component api "JournalComponents" {
             include *
-            autoLayout tb 150 150
+            autoLayout tb 120 160
             title "MindFlow - Journal Bounded Context - Component Diagram"
-            description "Decomposition of the Web Services API container into the components that implement the Journal bounded context, showing the CQRS split between Command and Query handlers."
         }
-
         styles {
             element "Person" {
                 shape Person
                 background #08427b
                 color #ffffff
             }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Database" {
+                shape Cylinder
+            }
             element "Component" {
                 background #85bbf0
                 color #000000
+            }
+            element "OtherBC" {
+                background #c9d6e4
+                color #333333
             }
             element "External" {
                 background #999999
                 color #ffffff
             }
+            element "Planned" {
+                background #e8e8e8
+                color #555555
+                border dashed
+            }
+            relationship "Relationship" {
+                dashed false
+                color #444444
+            }
+            relationship "Planned" {
+                dashed true
+                color #888888
+            }
         }
+
     }
 }

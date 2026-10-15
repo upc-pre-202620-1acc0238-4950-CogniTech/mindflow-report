@@ -1,52 +1,29 @@
 @startuml Notifications_DatabaseDiagram
-hide circle
-hide empty members
+!include style.iuml
 skinparam linetype ortho
+title MindFlow - Notifications - Database Diagram (MySQL 8)
 
 entity "notifications" as notifications {
-  *id : int <<PK>>
+  * id : int <<PK>>
   --
-  user_id : int <<FK, logical only>>
-  title : varchar(200)
-  body : text
-  is_read : boolean = false
+  * user_id : int <<logical FK users.id>>
+  * type : varchar(50)
+  * title : varchar(200)
+  * body : varchar(2000)
+  read_at : datetime, nullable <<null = unread>>
   created_at : datetime, nullable
   updated_at : datetime, nullable
-}
-
-entity "device_tokens" as device_tokens {
-  *id : int <<PK>>
   --
-  user_id : int <<FK, logical only>>
-  token : varchar(500)
-  platform : varchar(20) = "web"
-  created_at : datetime(6)
+  INDEX (user_id, read_at)
 }
-
-entity "users" as users {
-  *id : int <<PK>>
+entity "device_tokens (planned)" as device_tokens #EEEEEE {
+  * id : int <<PK>>
   --
-  ...
+  * user_id : int
+  * token : varchar
+  * platform : varchar
 }
-
-users ||..o{ notifications : "user_id (referencia lógica al BC IAM)"
-users ||..o{ device_tokens : "user_id (referencia lógica al BC IAM)"
-
-note right of device_tokens
-  Índice único recomendado sobre token:
-  un mismo token de dispositivo push
-  pertenece a un único usuario, y se
-  reasigna en lugar de duplicarse si el
-  usuario vuelve a iniciar sesión en el
-  mismo dispositivo.
+note bottom of device_tokens
+  Not created: there is no push delivery yet.
 end note
-
-note right of notifications
-  No tiene relación física con
-  device_tokens: se genera un registro
-  por usuario notificado en el momento
-  del envío, independientemente de
-  cuántos dispositivos tenga registrados.
-end note
-
 @enduml

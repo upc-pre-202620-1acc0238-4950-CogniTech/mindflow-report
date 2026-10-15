@@ -1,67 +1,81 @@
-workspace "MindFlow - AI Assistant" "C4 Model - Component Diagram for the AI Assistant Bounded Context" {
+workspace "MindFlow - AI Assistant" "C4 Model - Component Diagram of the AI Assistant bounded context (as built)" {
 
     model {
-        user = person "MindFlow User" "A user chatting with the AI assistant or rating AI-generated content." "Person"
-
-        geminiApi = softwareSystem "Google Gemini API" "Generates AI content for every use case in the system." "External"
-        database = softwareSystem "Database" "Stores conversations, chat_messages, ai_feedback_ratings, and ai_metric_logs." "External"
-        journalBc = softwareSystem "Journal (Bounded Context)" "Owns JournalEntry, queried to validate rated content." "External"
-        habitsBc = softwareSystem "Habits & Wellness (Bounded Context)" "Owns Habit, queried to validate rated content; also consumes AI-generated suggestions and stress advice." "External"
-        analyticsBc = softwareSystem "Analytics & Reporting (Bounded Context)" "Consumes AI-generated weekly summaries." "External"
-
-        mindflow = softwareSystem "MindFlow" "Allows users to track their emotional well-being through journaling, habit tracking, and AI-powered insights." {
-            api = container "Web Services API" "Exposes MindFlow's functionality via a RESTful API." "ASP.NET Core / .NET 10" {
-
-                chatController = component "ChatController" "Exposes REST endpoints for conversations and messages." "ASP.NET Core Controller"
-                aiFeedbackController = component "AiFeedbackController" "Exposes REST endpoints for submitting and reading AI content ratings." "ASP.NET Core Controller"
-                chatService = component "ChatService" "Orchestrates conversation creation and message exchange, requesting AI replies and keeping a bounded history window." "Application Service"
-                aiFeedbackService = component "AiFeedbackService" "Validates and upserts a user's rating for a piece of AI-generated content." "Application Service"
-                geminiService = component "GeminiService" "Builds prompts per use case and calls the Google Gemini API, logging metrics for every call." "Infrastructure Service"
+        user = person "MindFlow User" "Authenticated user of the mobile app." "Person"
+        gemini = softwareSystem "Google Gemini API" "Generative AI provider." "External"
+        mindflow = softwareSystem "MindFlow" "Emotional well-being platform." {
+            database = container "Database" "MySQL 8 - persists the data of all bounded contexts." "MySQL 8" "Database"
+            cache = container "Cache" "Redis - habit list cache." "Redis" "Database"
+            api = container "Web Services API" "REST API of the 8 bounded contexts." "ASP.NET Core, .NET 10" {
+                chatController = component "ChatController" "api/v1/chat: conversations (POST max 5000 chars, GET, DELETE) and messages (POST, GET)." "ASP.NET Core Controller" "Component"
+                feedbackController = component "AiFeedbackController" "api/v1/ai-feedback: submit rating (1-5), list own ratings, summary." "ASP.NET Core Controller" "Component"
+                chatService = component "ChatService" "Creates conversations and exchanges messages; sends the last 10 messages as history; fixed fallback text if the AI fails." "Application Service" "Component"
+                feedbackService = component "AiFeedbackService" "Validates content type (journal or habit) and rating, and upserts the rating." "Application Service" "Component"
+                geminiService = component "GeminiService" "Implements IAiService: empathic response, chat reply, stress advice, habit suggestions and weekly summary (no caller). Retries once on 503/429, returns empty text on failure, logs AiMetricLog." "Infrastructure Service (HttpClient)" "Component"
+                journalBc = component "Journal" "Owner of journal_entries." "Bounded context (not detailed)" "OtherBC"
+                habitsBc = component "Habits & Wellness" "Owner of habits." "Bounded context (not detailed)" "OtherBC"
             }
         }
-
-        user -> chatController "Sends chat messages via" "HTTPS/JSON"
-        user -> aiFeedbackController "Rates AI-generated content via" "HTTPS/JSON"
-
-        chatController -> chatService "Delegates to"
-        aiFeedbackController -> aiFeedbackService "Delegates to"
-
-        chatService -> geminiService "Requests AI-generated replies from"
-        chatService -> database "Reads and writes Conversation, ChatMessage via AppDbContext"
-
-        aiFeedbackService -> database "Reads and writes AiFeedbackRating via AppDbContext"
-        aiFeedbackService -> journalBc "Validates rated journal content exists in"
-        aiFeedbackService -> habitsBc "Validates rated habit content exists in"
-
-        geminiService -> geminiApi "Sends prompts to and receives responses from" "HTTPS/JSON"
-        geminiService -> database "Writes AiMetricLog rows via AppDbContext"
-
-        habitsBc -> geminiService "Requests habit suggestions and stress advice from"
-        analyticsBc -> geminiService "Requests weekly summaries from"
+        user -> chatController "Chats through" "HTTPS/JSON" "Relationship"
+        user -> feedbackController "Rates AI content through" "HTTPS/JSON" "Relationship"
+        chatController -> chatService "Delegates to" "" "Relationship"
+        feedbackController -> feedbackService "Delegates to" "" "Relationship"
+        chatService -> geminiService "Requests chat replies from" "IAiService" "Relationship"
+        chatService -> database "Writes conversations and chat_messages (content AES-256)" "EF Core" "Relationship"
+        feedbackService -> database "Writes ai_feedback_ratings" "EF Core" "Relationship"
+        feedbackService -> journalBc "Reads journal entries directly to validate the rated content" "EF Core (shared context)" "Relationship"
+        feedbackService -> habitsBc "Reads habits directly to validate the rated content" "EF Core (shared context)" "Relationship"
+        geminiService -> gemini "Sends prompts to" "HTTPS/JSON" "Relationship"
+        geminiService -> database "Writes ai_metric_logs" "EF Core" "Relationship"
+        journalBc -> geminiService "Requests empathic responses from" "IAiService" "Relationship"
+        habitsBc -> geminiService "Requests stress advice and habit suggestions from" "IAiService" "Relationship"
     }
 
     views {
-        component api "AiAssistantComponentDiagram" {
+        component api "AiAssistantComponents" {
             include *
-            autoLayout tb 150 150
+            autoLayout tb 120 160
             title "MindFlow - AI Assistant Bounded Context - Component Diagram"
-            description "Decomposition of the Web Services API container into the components that implement the AI Assistant bounded context, showing GeminiService's role as a cross-context shared AI service."
         }
-
         styles {
             element "Person" {
                 shape Person
                 background #08427b
                 color #ffffff
             }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Database" {
+                shape Cylinder
+            }
             element "Component" {
                 background #85bbf0
                 color #000000
+            }
+            element "OtherBC" {
+                background #c9d6e4
+                color #333333
             }
             element "External" {
                 background #999999
                 color #ffffff
             }
+            element "Planned" {
+                background #e8e8e8
+                color #555555
+                border dashed
+            }
+            relationship "Relationship" {
+                dashed false
+                color #444444
+            }
+            relationship "Planned" {
+                dashed true
+                color #888888
+            }
         }
+
     }
 }

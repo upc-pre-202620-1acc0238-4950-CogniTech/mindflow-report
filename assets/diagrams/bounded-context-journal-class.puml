@@ -1,41 +1,37 @@
 @startuml Journal_DomainLayer_ClassDiagram
-skinparam classAttributeIconSize 0
-hide circle
+!include style.iuml
+title MindFlow - Journal - Domain Layer Class Diagram
 
 interface IAuditableEntity {
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class JournalEntry {
+class JournalEntry <<Aggregate Root>> {
   +Id : int
   +UserId : int
   +ClientId : string?
   +Date : DateOnly
   +Title : string
   +Content : string
-  +Sentiment : string
-  +Category : string
+  +Sentiment : string = "neutral"
+  +Category : string = "Sin categoría"
   +HasPreview : bool
   +AiResponse : string?
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
   +DeletedAt : DateTimeOffset?
 }
-
-class Tag {
+class Tag <<Entity>> {
   +Id : int
   +UserId : int?
   +Name : string
 }
-
-class EntryTag {
+class EntryTag <<Entity>> {
   +Id : int
   +EntryId : int
   +TagId : int
 }
-
-class Media {
+class Media <<Entity>> {
   +Id : int
   +EntryId : int
   +Type : string
@@ -43,32 +39,50 @@ class Media {
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class JournalSearchToken {
+class JournalSearchToken <<Entity>> {
   +Id : int
   +EntryId : int
   +UserId : int
   +TokenHash : string
 }
-
 enum JournalError {
   JournalEntryNotFound
   EntryTagNotFound
 }
-
 class JournalSearchTokenizer <<Domain Service>> {
   +{static} Tokenize(text: string?) : IReadOnlySet<string>
 }
+package "Commands" <<Rectangle>> {
+class CreateJournalEntryCommand <<record>>
+class UpdateJournalEntryCommand <<record>>
+class DeleteJournalEntryCommand <<record>>
+class SyncJournalEntriesCommand <<record>>
+class CreateEntryTagCommand <<record>>
+class DeleteEntryTagCommand <<record>>
+class CreateMediaCommand <<record>>
 
-JournalEntry .up.|> IAuditableEntity
-Media .up.|> IAuditableEntity
+}
 
-JournalEntry "1" --> "0..*" EntryTag
-Tag "1" --> "0..*" EntryTag
-EntryTag "0..*" --> "1" JournalEntry
-EntryTag "0..*" --> "1" Tag
-JournalEntry "1" --> "0..*" Media
-Media "0..*" --> "1" JournalEntry
-JournalSearchToken "0..*" --> "1" JournalEntry
+JournalEntry ..|> IAuditableEntity : implements
+Media ..|> IAuditableEntity : implements
+JournalEntry "1" o-- "0..*" EntryTag : "is labelled by >"
+Tag "1" o-- "0..*" EntryTag : "labels >"
+JournalEntry "1" o-- "0..*" Media : "has attachments >"
+JournalEntry "1" o-- "0..*" JournalSearchToken : "is indexed by >"
+JournalSearchTokenizer ..> JournalSearchToken : "produces tokens for >"
 
+note right of JournalEntry
+  Content is encrypted at rest (AES-256).
+  Delete is a soft delete (DeletedAt).
+  (UserId, ClientId) is unique: offline-first sync,
+  last-write-wins.
+end note
+note bottom of CreateJournalEntryCommand
+  Commands are handled by Cortex.Mediator handlers
+  (CQRS). Queries are defined in the Application layer.
+end note
+note as DateNote
+  JournalEntry.Date is a DateOnly in the domain;
+  EF Core stores it as datetime(6).
+end note
 @enduml

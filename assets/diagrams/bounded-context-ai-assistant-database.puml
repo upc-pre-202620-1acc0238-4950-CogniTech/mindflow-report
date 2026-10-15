@@ -1,52 +1,53 @@
 @startuml AiAssistant_DatabaseDiagram
-hide circle
-hide empty members
+!include style.iuml
 skinparam linetype ortho
+title MindFlow - AI Assistant - Database Diagram (MySQL 8)
 
 entity "conversations" as conversations {
-  *id : int <<PK>>
+  * id : int <<PK>>
   --
-  user_id : int <<FK, logical only>>
-  title : varchar(255)
-  category : varchar(50)
+  * user_id : int <<logical FK users.id>>
+  * title : varchar(255)
+  * category : varchar(50)
   created_at : datetime, nullable
   updated_at : datetime, nullable
+  --
+  INDEX (user_id)
 }
-
 entity "chat_messages" as chat_messages {
-  *id : int <<PK>>
+  * id : int <<PK>>
   --
-  conversation_id : int <<FK, enforced, cascade>>
-  role : varchar(20)
-  content : longtext
+  * conversation_id : int <<FK ON DELETE CASCADE>>
+  * role : varchar(20)
+  * content : longtext <<AES-256 encrypted>>
   created_at : datetime, nullable
   updated_at : datetime, nullable
 }
-
 entity "ai_feedback_ratings" as ai_feedback_ratings {
-  *id : int <<PK>>
+  * id : int <<PK>>
   --
-  user_id : int <<FK, logical only>>
-  content_id : int <<logical reference to journal_entries or habits>>
-  content_type : varchar(20)
-  rating : int
+  * user_id : int <<logical FK users.id>>
+  * content_id : int <<logical: journal_entries.id or habits.id>>
+  * content_type : varchar(20) <<journal | habit>>
+  * rating : int <<1..5>>
   comment : varchar(500), nullable
   created_at : datetime, nullable
   updated_at : datetime, nullable
-}
-
-entity "ai_metric_logs" as ai_metric_logs {
-  *id : int <<PK>>
   --
-  operation : varchar(50)
-  latency_ms : int
-  success : boolean
-  prompt_length : int
-  response_length : int
-  error_message : varchar(500), nullable
-  created_at : datetime
+  UNIQUE (user_id, content_id, content_type)
 }
-
-conversations ||--o{ chat_messages
-
+entity "ai_metric_logs" as ai_metric_logs {
+  * id : int <<PK>>
+  --
+  * operation : varchar(50)
+  * latency_ms : int
+  * success : boolean
+  * prompt_length : int
+  * response_length : int
+  error_message : varchar(500), nullable
+  * created_at : datetime
+  --
+  INDEX (created_at)
+}
+conversations ||--o{ chat_messages : "contains"
 @enduml

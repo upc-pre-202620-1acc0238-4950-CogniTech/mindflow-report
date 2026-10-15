@@ -1,36 +1,23 @@
 @startuml Subscriptions_DatabaseDiagram
-hide circle
-hide empty members
+!include style.iuml
 skinparam linetype ortho
+title MindFlow - Subscriptions - Database Diagram (MySQL 8)
 
 entity "subscriptions" as subscriptions {
-  *id : int <<PK>>
+  * id : int <<PK>>
   --
-  user_id : int <<FK, logical only>>
-  plan : varchar(20) = "free"
-  status : varchar(20) = "active"
-  stripe_customer_id : varchar(100), nullable
-  stripe_subscription_id : varchar(100), nullable
-  expires_at : datetime, nullable
+  * user_id : int <<logical FK users.id, UNIQUE>>
+  * plan : varchar(30)
+  * status : varchar(30)
+  stripe_customer_id : varchar(255), nullable
+  stripe_subscription_id : varchar(255), nullable
+  current_period_end : datetime, nullable
   created_at : datetime, nullable
   updated_at : datetime, nullable
 }
-
-entity "users" as users {
-  *id : int <<PK>>
-  --
-  ...
-}
-
-users ||..o{ subscriptions : "user_id (referencia lógica al BC IAM,\núnico registro por usuario)"
-
 note right of subscriptions
-  Índices únicos recomendados sobre
-  user_id y sobre stripe_customer_id:
-  cada usuario tiene una única
-  suscripción, y los eventos entrantes
-  del webhook de Stripe se resuelven
-  buscando por stripe_customer_id.
+  One row per user (unique index on user_id; no real
+  foreign key to users). plan: freemium | premium
+  (default values are set in the application code).
 end note
-
 @enduml

@@ -1,52 +1,77 @@
-workspace "MindFlow - Notifications" "C4 Model - Component Diagram for the Notifications Bounded Context" {
+workspace "MindFlow - Notifications" "C4 Model - Component Diagram of the Notifications bounded context (as built)" {
 
     model {
-        user = person "MindFlow User" "A user viewing their notification inbox, or registering/unregistering a device for push notifications." "Person"
-
-        fcmApi = softwareSystem "Push Notification Service" "External push delivery provider (FCM) used to deliver notifications to registered devices." "External"
-        database = softwareSystem "Database" "Stores notifications and device_tokens." "External"
-
-        mindflow = softwareSystem "MindFlow" "Allows users to track their emotional well-being through journaling, habit tracking, and AI-powered insights." {
-            api = container "Web Services API" "Exposes MindFlow's functionality via a RESTful API." "ASP.NET Core / .NET 10" {
-
-                notificationsController = component "NotificationsController" "Exposes REST endpoints to list notifications, mark them as read, and register/unregister a device token, accessing persistence directly." "ASP.NET Core Controller"
-                notificationService = component "NotificationService (FCM adapter)" "Implements the notification port: records every notification sent and delivers it as a push message to the user's registered devices." "Application/Infrastructure Service"
+        user = person "MindFlow User" "Authenticated user of the mobile app." "Person"
+        smtp = softwareSystem "SMTP Email Service" "Delivers emails." "External"
+        fcm = softwareSystem "Firebase Cloud Messaging" "Push provider (not integrated)." "External,Planned"
+        mindflow = softwareSystem "MindFlow" "Emotional well-being platform." {
+            database = container "Database" "MySQL 8 - persists the data of all bounded contexts." "MySQL 8" "Database"
+            cache = container "Cache" "Redis - habit list cache." "Redis" "Database"
+            api = container "Web Services API" "REST API of the 8 bounded contexts." "ASP.NET Core, .NET 10" {
+                notificationsController = component "NotificationsController" "api/v1/notifications: GET list, GET unread-count, POST {id}/read, POST read-all." "ASP.NET Core Controller" "Component"
+                notificationService = component "NotificationService" "INotificationService.CreateAsync: stores the in-app notification and tries to send an email (skipped if SMTP is not configured)." "Application Service" "Component"
+                emailService = component "EmailService (IAM)" "SMTP sender owned by the IAM context." "Bounded context (not detailed)" "OtherBC"
+                supportBc = component "Support" "Only caller of INotificationService." "Bounded context (not detailed)" "OtherBC"
+                pushAdapter = component "Push delivery (FCM)" "Device tokens and push sending. Not implemented." "Planned" "Component,Planned"
+                reminderJob = component "Reminder job" "Scheduled habit and wellness reminders. Not implemented." "Planned" "Component,Planned"
             }
-
-            hydrationScheduler = container "Hydration Reminder Job" "Periodically triggers a wellness reminder for every registered user." "ASP.NET Core BackgroundService"
         }
-
-        user -> notificationsController "Manages notifications and devices via" "HTTPS/JSON, JWT"
-
-        notificationsController -> database "Reads and writes Notification/DeviceToken directly via" "EF Core / TCP"
-
-        hydrationScheduler -> notificationService "Triggers a broadcast reminder every 2 hours via"
-        notificationService -> database "Records each Notification in, and reads DeviceToken from" "EF Core / TCP"
-        notificationService -> fcmApi "Sends the push payload to each registered device via" "HTTPS/JSON, OAuth2"
+        user -> notificationsController "Reads and marks notifications through" "HTTPS/JSON" "Relationship"
+        notificationsController -> database "Reads and updates notifications" "EF Core" "Relationship"
+        supportBc -> notificationService "Creates notifications through" "INotificationService" "Relationship"
+        notificationService -> database "Writes notifications" "EF Core" "Relationship"
+        notificationService -> emailService "Sends email through" "" "Relationship"
+        emailService -> smtp "Sends email through" "SMTP" "Relationship"
+        reminderJob -> notificationService "Would trigger reminders through" "" "Planned"
+        notificationService -> pushAdapter "Would deliver push through" "" "Planned"
+        pushAdapter -> fcm "Would send push to" "HTTPS" "Planned"
     }
 
     views {
-        component api "NotificationsComponentDiagram" {
-            include notificationsController notificationService user fcmApi database
-            autoLayout tb 150 150
+        component api "NotificationsComponents" {
+            include *
+            autoLayout tb 120 160
             title "MindFlow - Notifications Bounded Context - Component Diagram"
-            description "The notification inbox/device registry (direct persistence access) and the push-delivery service, triggered on demand or by the hydration reminder job."
         }
-
         styles {
             element "Person" {
                 shape Person
                 background #08427b
                 color #ffffff
             }
+            element "Container" {
+                background #438dd5
+                color #ffffff
+            }
+            element "Database" {
+                shape Cylinder
+            }
             element "Component" {
                 background #85bbf0
                 color #000000
+            }
+            element "OtherBC" {
+                background #c9d6e4
+                color #333333
             }
             element "External" {
                 background #999999
                 color #ffffff
             }
+            element "Planned" {
+                background #e8e8e8
+                color #555555
+                border dashed
+            }
+            relationship "Relationship" {
+                dashed false
+                color #444444
+            }
+            relationship "Planned" {
+                dashed true
+                color #888888
+            }
         }
+
     }
 }

@@ -1,0 +1,26 @@
+skinparam shadowing false
+skinparam dpi 200
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam roundCorner 6
+skinparam ArrowColor #444444
+skinparam ArrowFontSize 11
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F4F8FC
+  BorderColor #3B6EA5
+  HeaderBackgroundColor #DCE8F5
+  BackgroundColor<<planned>> #EEEEEE
+  BorderColor<<planned>> #999999
+  BackgroundColor<<external>> #E9E9E9
+  BorderColor<<external>> #888888
+}
+skinparam entity {
+  BackgroundColor #F4F8FC
+  BorderColor #3B6EA5
+}
+skinparam note {
+  BackgroundColor #FFF8DC
+  BorderColor #B8A25A
+}
+hide circle

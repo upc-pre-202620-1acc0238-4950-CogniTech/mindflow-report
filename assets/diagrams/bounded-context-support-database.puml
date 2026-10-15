@@ -1,37 +1,31 @@
 @startuml Support_DatabaseDiagram
-hide circle
-hide empty members
+!include style.iuml
 skinparam linetype ortho
+title MindFlow - Support - Database Diagram (MySQL 8)
 
 entity "support_tickets" as support_tickets {
-  *id : int <<PK>>
+  * id : int <<PK>>
   --
-  user_id : int <<FK, logical only>>
-  user_email : varchar(255)
-  subject : varchar(255)
-  message : text
-  status : varchar(20) = "open"
+  * owner_id : int <<logical FK users.id>>
+  assignee_id : int, nullable <<logical FK users.id>>
+  * subject : varchar(200)
+  * category : varchar(50)
+  * priority : varchar(20)
+  * status : varchar(20)
+  created_at : datetime, nullable
+  updated_at : datetime, nullable
+  --
+  INDEX (owner_id, status)
+}
+entity "support_messages" as support_messages {
+  * id : int <<PK>>
+  --
+  * ticket_id : int <<FK ON DELETE CASCADE>>
+  * author_id : int <<logical FK users.id>>
+  * is_staff : boolean
+  * body : text
   created_at : datetime, nullable
   updated_at : datetime, nullable
 }
-
-entity "users" as users {
-  *id : int <<PK>>
-  --
-  ...
-}
-
-users ||..o{ support_tickets : "user_id (referencia lógica al BC IAM)"
-
-note right of support_tickets
-  user_email queda desnormalizado en la
-  propia tabla, para poder enviar la
-  confirmación por correo sin depender
-  de una consulta al bounded context IAM.
-  Índice recomendado sobre (user_id,
-  subject, created_at) para la
-  verificación de tickets duplicados
-  recientes.
-end note
-
+support_tickets ||--|{ support_messages : "has thread"
 @enduml

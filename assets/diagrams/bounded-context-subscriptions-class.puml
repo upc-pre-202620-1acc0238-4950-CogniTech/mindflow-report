@@ -1,74 +1,42 @@
 @startuml Subscriptions_DomainLayer_ClassDiagram
-skinparam classAttributeIconSize 0
-hide circle
+!include style.iuml
+title MindFlow - Subscriptions - Domain Layer Class Diagram
 
 interface IAuditableEntity {
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
 }
-
-class Subscription {
-  -Id : int
-  -UserId : int
-  -Plan : string = "free"
-  -Status : string = "active"
-  -StripeCustomerId : string?
-  -StripeSubscriptionId : string?
-  -ExpiresAt : DateTimeOffset?
+class Subscription <<Aggregate Root>> {
+  +Id : int
+  +UserId : int
+  +Plan : string = "freemium"
+  +Status : string = "active"
+  +StripeCustomerId : string?
+  +StripeSubscriptionId : string?
+  +CurrentPeriodEnd : DateTimeOffset?
   +CreatedAt : DateTimeOffset?
   +UpdatedAt : DateTimeOffset?
-  +IsPremium : bool <<computed>>
-  +Activate(stripeCustomerId: string, stripeSubscriptionId: string) : void
-  +Cancel() : void
-  +MarkPastDue() : void
+}
+class SubscriptionsController <<REST Controller>> {
+  +GetPlans() : IActionResult
+  +GetMine() : IActionResult
+  +SetDemoPlan(plan: string) : IActionResult
+  +CreateCheckout() : IActionResult
+  +HandleWebhook() : IActionResult
 }
 
-interface ISubscriptionService {
-  +CreateCheckoutSessionAsync(userId: int, userEmail: string, ct: CancellationToken) : Task<CheckoutSessionDto>
-  +HandleWebhookAsync(payload: string, stripeSignature: string, ct: CancellationToken) : Task
-  +GetByUserIdAsync(userId: int, ct: CancellationToken) : Task<SubscriptionDto>
-  +VerifySessionAsync(userId: int, sessionId: string, ct: CancellationToken) : Task<SubscriptionDto>
-  +CancelAsync(userId: int, ct: CancellationToken) : Task
-}
-
-class SubscriptionDto {
-  +UserId : int
-  +Plan : string = "free"
-  +Status : string = "active"
-  +IsPremium : bool
-  +ExpiresAt : DateTimeOffset?
-}
-
-class CheckoutSessionDto {
-  +CheckoutUrl : string
-}
-
-Subscription .up.|> IAuditableEntity
-ISubscriptionService ..> Subscription : activa/cancela >
-ISubscriptionService ..> SubscriptionDto : produce >
-ISubscriptionService ..> CheckoutSessionDto : produce >
+Subscription ..|> IAuditableEntity : implements
+SubscriptionsController ..> Subscription : "creates and updates 0..1 per user >"
 
 note right of Subscription
-  UserId es una referencia lógica al
-  agregado User del bounded context IAM.
-  Se decidió modelar un único agregado
-  plano (sin una entidad separada de
-  "transacción de pago"): el estado de
-  facturación completo del usuario cabe
-  en Plan + Status + los identificadores
-  de Stripe, y el historial de pagos en
-  sí queda delegado por completo al
-  proveedor externo.
+  Plan is "freemium" or "premium"; Status is only used as
+  "active". One subscription per user (unique UserId, logical
+  reference to IAM). CurrentPeriodEnd is stored but never used
+  to expire the plan.
 end note
-
-note right of ISubscriptionService
-  Único puerto de dominio del bounded
-  context: aísla toda la lógica de
-  facturación (checkout, webhook,
-  cancelación) detrás de una interfaz
-  que no conoce Stripe explícitamente,
-  de modo que un cambio de proveedor de
-  pagos no afectaría al resto del sistema.
+note bottom of SubscriptionsController
+  All billing logic lives in the controller (no domain service).
+  Stripe is called over HTTP. There is no cancel endpoint.
+  demo/plan/{plan} changes the plan without paying.
 end note
-
 @enduml

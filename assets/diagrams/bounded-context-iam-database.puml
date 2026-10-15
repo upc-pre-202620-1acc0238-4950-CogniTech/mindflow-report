@@ -1,31 +1,33 @@
 @startuml IAM_DatabaseDiagram
-hide circle
-hide empty members
+!include style.iuml
 skinparam linetype ortho
+title MindFlow - IAM - Database Diagram (MySQL 8)
 
 entity "users" as users {
-  *id : int <<PK>>
+  * id : int <<PK>>
   --
-  email : varchar(255) <<unique>>
-  google_id : varchar(255) <<unique, nullable>>
+  * email : varchar(255) <<UNIQUE>>
+  google_id : varchar(255) <<UNIQUE>>, nullable
   name : varchar(100), nullable
   occupation : varchar(100), nullable
-  password_hash : longtext
+  * password_hash : longtext
   pin_hash : varchar(255), nullable
-  role : varchar(20) = 'User'
+  * role : varchar(20) = 'User'
   created_at : datetime, nullable
   updated_at : datetime, nullable
 }
-
 entity "password_reset_tokens" as password_reset_tokens {
-  *id : int <<PK>>
+  * id : int <<PK>>
   --
-  user_id : int <<FK, logical only>>
-  token : varchar(64) <<unique>>
-  expires_at : datetime(6)
-  used : boolean
+  * user_id : int <<logical FK users.id>>
+  * token : varchar(64) <<UNIQUE, SHA-256 hash>>
+  * expires_at : datetime(6)
+  * used : boolean
 }
-
-users ||..o{ password_reset_tokens
-
+users ||..o{ password_reset_tokens : "user_id (logical, no constraint)"
+note bottom of users
+  Roles: User, Support, Admin (stored as text).
+  No table has a real foreign key to users.id:
+  the relation is by column name, in every context.
+end note
 @enduml
