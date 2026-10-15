@@ -3367,7 +3367,7 @@ Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navega
 
 **User Flow 1: Acceder a MindFlow (Figura 87).**
 
-<p>
+<p align="center">
 <img src="assets/img/movil_wireframes/App — 01 Login.png" alt="Wireframe - Login" width="160"/>
 <img src="assets/img/movil_wireframes/App — 02 Registro.png" alt="Wireframe - Registro" width="160"/>
 <img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
@@ -3377,7 +3377,7 @@ Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navega
 
 **User Flow 2: Registrar cómo me siento y recibir apoyo de la IA (Figura 88).**
 
-<p>
+<p align="center">
 <img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
 <img src="assets/img/movil_wireframes/App — 12 Chat con MindFlow AI.png" alt="Wireframe - Chat con MindFlow AI" width="160"/>
 
@@ -3386,7 +3386,7 @@ Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navega
 
 **User Flow 3: Revisar mi historial emocional (Figura 89).**
 
-<p>
+<p align="center">
 <img src="assets/img/movil_wireframes/App — 03 Inicio (Dashboard).png" alt="Wireframe - Inicio (Dashboard)" width="160"/>
 <img src="assets/img/movil_wireframes/App — 04 Diario (Historial emocional).png" alt="Wireframe - Diario (Historial emocional)" width="160"/>
 
@@ -3395,7 +3395,7 @@ Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navega
 
 **User Flow 4: Gestionar mis hábitos según mi nivel de estrés (Figura 90).**
 
-<p>
+<p align="center">
 <img src="assets/img/movil_wireframes/App — 05 Hábitos · Mis Rutinas.png" alt="Wireframe - Hábitos: Mis Rutinas" width="160"/>
 <img src="assets/img/movil_wireframes/App — 06 Hábitos · Sugerencias de IA.png" alt="Wireframe - Hábitos: Sugerencias de IA" width="160"/>
 
@@ -3404,7 +3404,7 @@ Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navega
 
 **User Flow 5: Revisar mis analíticas y exportar un reporte (Figura 91).**
 
-<p>
+<p align="center">
 <img src="assets/img/movil_wireframes/App — 07 Analíticas · Resumen.png" alt="Wireframe - Analíticas: Resumen" width="160"/>
 <img src="assets/img/movil_wireframes/App — 08 Analíticas · Nube, tendencias y exportación.png" alt="Wireframe - Analíticas: Nube, tendencias y exportación" width="160"/>
 <img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="160"/>
@@ -3414,7 +3414,7 @@ Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navega
 
 **User Flow 6: Mejorar a MindFlow Premium (Figura 92).**
 
-<p>
+<p align="center">
 <img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="180"/>
 
 *Figura 92. Wireflow — User Flow 6: Mejorar a MindFlow Premium (Suscripción, soporte y cuenta).*
@@ -3422,7 +3422,7 @@ Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navega
 
 **User Flow 7: Proteger mi privacidad y personalizar la aplicación (Figura 93).**
 
-<p>
+<p align="center">
 <img src="assets/img/movil_wireframes/App — 09 Ajustes · Perfil.png" alt="Wireframe - Ajustes: Perfil" width="160"/>
 <img src="assets/img/movil_wireframes/App — 10 Ajustes · Privacidad y experiencia.png" alt="Wireframe - Ajustes: Privacidad y experiencia" width="160"/>
 
@@ -3431,7 +3431,7 @@ Un wireflow combina los wireframes de la sección 3.1.4.1 con el orden de navega
 
 **User Flow 8: Pedir ayuda al soporte técnico (Figura 94).**
 
-<p>
+<p align="center">
 <img src="assets/img/movil_wireframes/App — 11 Ajustes · Suscripción, soporte y cuenta.png" alt="Wireframe - Ajustes: Suscripción, soporte y cuenta" width="180"/>
 
 *Figura 94. Wireflow — User Flow 8: Pedir ayuda al soporte técnico (Suscripción, soporte y cuenta).*
@@ -3445,80 +3445,102 @@ Los mock-ups representan la versión de alta fidelidad de las pantallas de la Mo
 
 **El usuario inicia sesión con su cuenta de Google o con su correo electrónico y contraseña; desde esta pantalla también puede recuperar su contraseña o ir al registro (US01, US02, US03) (Figura 95)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/login-mockup.png" alt="Mockup - Login" width="300"/>
 
 *Figura 95. Mockup - Login.*
+</p>
 
 **El usuario nuevo crea su cuenta con Google o completando su nombre, correo electrónico y contraseña, y acepta los Términos de Servicio y la Política de Privacidad (US01) (Figura 96)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/register-mockup.png" alt="Mockup - Registro" width="300"/>
 
 *Figura 96. Mockup - Registro.*
+</p>
 
 **Registro emocional y navegación**
 
 **El usuario entra al Dashboard, escribe cómo se siente, elige una etiqueta de contexto y guarda el registro; MindFlow AI le responde con retroalimentación empática y debajo aparecen sus conversaciones recientes (US11, US12, US13, US14) (Figura 97)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/home-mockup.png" alt="Mockup - Home" width="300"/>
 
 *Figura 97. Mockup - Home.*
+</p>
 
 **El usuario conversa con MindFlow AI desde la pantalla de Chat para profundizar en cómo se siente; la IA responde con preguntas de seguimiento y sugerencias de autocuidado dentro de un mismo hilo de conversación (US12, US13) (Figura 98)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/chat-mockup.png" alt="Mockup - Chat con MindFlow AI" width="300"/>
 
 *Figura 98. Mockup - Chat con MindFlow AI.*
+</p>
 
 **El usuario abre el menú lateral desde el ícono superior izquierdo para moverse entre Dashboard, Diario, Hábitos, Analíticas, Configuración y Planes (Figura 99)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/menu-mockup.png" alt="Mockup - Menú móvil" width="300"/>
 
 *Figura 99. Mockup - Menú móvil.*
+</p>
 
 **Diario y hábitos**
 
 **El usuario revisa su historial emocional: busca entradas por palabra clave, filtra por etiqueta, estado y fecha, y ve en el calendario el estado de ánimo de cada día según su color (US14, US16, US17) (Figura 100)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/journal-mockup.png" alt="Mockup - Diario" width="300"/>
 
 *Figura 100. Mockup - Diario.*
+</p>
 
 **El usuario consulta sus rutinas, ve el progreso del día y añade un nuevo hábito con su frecuencia; cuando MindFlow AI detecta un nivel alto de estrés, muestra un aviso y ajusta las tareas (US21, US22, US23) (Figura 101)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/habits-mockup.png" alt="Mockup - Hábitos" width="300"/>
 
 *Figura 101. Mockup - Hábitos.*
+</p>
 
 **Cuando MindFlow AI detecta un nivel de estrés elevado en los registros recientes, sugiere ajustes a la rutina de hábitos del usuario —pausar, reducir la frecuencia o reemplazar un hábito por uno más ligero— y el usuario decide si aplicarlos (US22, US23) (Figura 102)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/habits-ai-mockup.png" alt="Mockup - Sugerencias de IA" width="300"/>
 
 *Figura 102. Mockup - Sugerencias de IA.*
+</p>
 
 **Analíticas**
 
 **El usuario revisa su resumen semanal generado por IA, sus indicadores del mes, la fluctuación emocional de la última semana, la nube de palabras frecuentes y la tendencia de ánimo; al final puede exportar sus reportes en PDF o CSV (US18, US28, US31, US32, US35, US36) (Figura 103)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/analytics-mockup.png" alt="Mockup - Analíticas" width="300"/>
 
 *Figura 103. Mockup - Analíticas.*
+</p>
 
 **Perfil y privacidad**
 
 **El usuario edita sus datos personales, activa el bloqueo por PIN y cambia al modo oscuro desde Ajustes y Privacidad (US04, US05, US06) (Figura 104)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/settings-mockup.png" alt="Mockup - Configuración" width="300"/>
 
 *Figura 104. Mockup - Configuración.*
+</p>
 
 
 **Planes y suscripción**
 
 **El usuario compara el plan Freemium con MindFlow Premium, revisa qué funcionalidades incluye cada uno y puede actualizar a Premium con pago seguro (US33, US34) (Figura 105)**
 
+<p align="center">
 <img src="assets/img/mobile_mockups/plans-mockup.png" alt="Mockup - Planes" width="600"/>
 
 *Figura 105. Mockup - Planes.*
+</p>
 
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
 
@@ -4899,9 +4921,11 @@ La Tabla 40 resume los 16 problemas identificados, ordenados según su numeraci�
 **Problema:**
 Ambos entrevistados dudaron sobre el alcance real de la IA. El entrevistado del Segmento 1 no tuvo claro si funciona como un terapeuta formal o solo como un asistente de reflexión, y el entrevistado del Segmento 2 se preguntó si el chat es una bitácora interactiva o una sesión de coaching continuo. La pantalla de Inicio presenta a "MindFlow AI" con un saludo cercano ("estoy aquí para escucharte"). La aclaración de que MindFlow no reemplaza la atención profesional ni constituye un diagnóstico clínico existe únicamente dentro de los Términos y Condiciones, pero no aparece en el flujo de uso de la aplicación (Inicio ni chat), por lo que el usuario no la ve (Figura 139).
 
-![Problema 1: pantalla de Inicio con el chat de IA](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-22-inicio-chat-ia.jpeg" alt="Problema 1: pantalla de Inicio con el chat de IA" width="180"/>
 
 *Figura 139. Pantalla de Inicio: la IA se presenta sin indicar su alcance.*
+</p>
 
 **Recomendación:**
 Llevar la aclaración de los Términos y Condiciones a un aviso breve en el onboarding y en el primer uso del chat, que indique que MindFlow es una herramienta de autocuidado y reflexión que no reemplaza la atención psicológica, junto con una etiqueta fija bajo el nombre de la IA ("Asistente de reflexión") y un acceso a recursos de ayuda profesional.
@@ -4915,13 +4939,17 @@ Llevar la aclaración de los Términos y Condiciones a un aviso breve en el onbo
 **Problema:**
 Los dos entrevistados señalaron que su desconfianza vendría de no saber si sus reflexiones se usan para entrenar modelos de terceros o quedan expuestas. En la pantalla de registro solo se indica "Datos encriptados con AES-256" junto con los enlaces a Términos de Servicio y Política de Privacidad. La Política de Privacidad indica que los datos se usan para generar observaciones con IA y que el contenido del diario no se vende a terceros, pero ni ella, ni el mensaje del registro, ni la sección de Privacidad de Ajustes mencionan que el texto se envía a un proveedor externo de IA ni si se utiliza para entrenar modelos. El entrevistado del Segmento 2 señaló además que una política ambigua sobre APIs externas le restaría confianza (Figuras 140 y 141).
 
-![Problema 2: pantalla de registro](assets/img/heuristics/app-03-registro.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-03-registro.jpeg" alt="Problema 2: pantalla de registro" width="180"/>
 
 *Figura 140. Registro: el mensaje de privacidad solo menciona el cifrado.*
+</p>
 
-![Problema 2: ajustes de privacidad](assets/img/heuristics/app-06-ajustes-privacidad.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-06-ajustes-privacidad.jpeg" alt="Problema 2: ajustes de privacidad" width="180"/>
 
 *Figura 141. Ajustes de privacidad: sin información sobre el procesamiento por terceros.*
+</p>
 
 **Recomendación:**
 Agregar en el registro y en Ajustes de Privacidad un texto claro, con enlace a la política, que explique qué datos se envían al servicio de IA, si se usan o no para entrenar modelos y cómo se eliminan. Completar la Política de Privacidad de la Landing Page con la misma información.
@@ -4935,13 +4963,17 @@ Agregar en el registro y en Ajustes de Privacidad un texto claro, con enlace a l
 **Problema:**
 Los botones principales ("Ingresar a MindFlow", "Crear mi cuenta", "Guardar Registro") usan texto blanco sobre un degradado de #4F8DF5 a #6ED3A3. La relación de contraste del blanco es de 3.25:1 en el extremo azul y de 1.82:1 en el extremo verde. Los botones "+ Añadir" y "+ Crear" de Hábitos usan texto blanco sobre #6ED3A3 (1.82:1). WCAG 2.1 exige como mínimo 4.5:1 para texto normal y 3:1 para texto grande, por lo que las personas con baja visión o que usan la aplicación bajo luz intensa pueden no leer las acciones principales (Figuras 142 y 143).
 
-![Problema 3: botón de inicio de sesión](assets/img/heuristics/app-01-login.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-01-login.jpeg" alt="Problema 3: botón de inicio de sesión" width="180"/>
 
 *Figura 142. Inicio de sesión: botón principal con texto blanco sobre degradado.*
+</p>
 
-![Problema 3: sugerencias de IA con botones Añadir](assets/img/heuristics/app-17-habitos-sugerencias-ia.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-17-habitos-sugerencias-ia.jpeg" alt="Problema 3: sugerencias de IA con botones Añadir" width="180"/>
 
 *Figura 143. Sugerencias de IA: botones "Añadir" con texto blanco sobre verde claro.*
+</p>
 
 **Recomendación:**
 Usar texto oscuro (#1F2937) sobre los fondos verdes claros o un tono más oscuro del degradado, de modo que todas las combinaciones superen 4.5:1, y verificar el resultado con una herramienta de contraste.
@@ -4955,13 +4987,17 @@ Usar texto oscuro (#1F2937) sobre los fondos verdes claros o un tono más oscuro
 **Problema:**
 Las 13 imágenes de la Landing Page tienen el atributo `alt` vacío (`alt=""`), incluidas las capturas de la aplicación en la sección "Así se ve MindFlow en tu teléfono" y las fotos del equipo en la página "Nosotros". Un lector de pantalla las omite, por lo que una persona con discapacidad visual no recibe la información de las capturas ni de los integrantes. Una captura sí tiene un nombre visible debajo, pero no describe su contenido (Figuras 144 y 145).
 
-![Problema 4: sección de capturas de la Landing Page](assets/img/heuristics/landing-01-capturas.png)
+<p align="center">
+<img src="assets/img/heuristics/landing-01-capturas.png" alt="Problema 4: sección de capturas de la Landing Page" width="180"/>
 
 *Figura 144. Landing Page: capturas de la aplicación sin texto alternativo.*
+</p>
 
-![Problema 4: página Nosotros](assets/img/heuristics/landing-02-equipo.png)
+<p align="center">
+<img src="assets/img/heuristics/landing-02-equipo.png" alt="Problema 4: página Nosotros" width="180"/>
 
 *Figura 145. Página Nosotros: fotos del equipo sin texto alternativo.*
+</p>
 
 **Recomendación:**
 Describir cada imagen informativa en su atributo `alt` (por ejemplo, "Pantalla de Inicio de MindFlow con el campo para escribir cómo te sientes") y mantener `alt=""` solo en las imágenes decorativas, como el logotipo repetido.
@@ -4975,9 +5011,11 @@ Describir cada imagen informativa en su atributo `alt` (por ejemplo, "Pantalla d
 **Problema:**
 El entrevistado del Segmento 1 indicó que no le quedó claro qué funcionalidades son exclusivas de Premium frente a Freemium hasta llegar a la pantalla de Planes. En el resto de la aplicación la distinción aparece solo de forma puntual: la tarjeta de exportación menciona "(Requiere Premium)" al final de una frase y Ajustes muestra únicamente la lista del plan actual (Figura 146).
 
-![Problema 5: tarjeta de suscripción en Ajustes](assets/img/heuristics/app-07-ajustes-suscripcion.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-07-ajustes-suscripcion.jpeg" alt="Problema 5: tarjeta de suscripción en Ajustes" width="180"/>
 
 *Figura 146. Ajustes: la tarjeta de suscripción lista los beneficios sin compararlos con el plan gratuito.*
+</p>
 
 **Recomendación:**
 Identificar las funciones Premium con una etiqueta visible (por ejemplo, una insignia "Premium") en el lugar donde aparecen y agregar en Ajustes un enlace "Comparar planes" que lleve a la pantalla de Planes.
@@ -4991,9 +5029,11 @@ Identificar las funciones Premium con una etiqueta visible (por ejemplo, una ins
 **Problema:**
 Con la cuenta evaluada, Ajustes muestra "Plan Actual: Premium", pero la tarjeta "Exportar Reportes Clínicos" de Analíticas mantiene el texto "(Requiere Premium)". El mensaje es contradictorio: el usuario puede dudar de si su suscripción está activa o de si podrá usar la función (Figura 147).
 
-![Problema 6: tarjeta de exportación en Analíticas](assets/img/heuristics/app-13-analiticas-exportar.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-13-analiticas-exportar.jpeg" alt="Problema 6: tarjeta de exportación en Analíticas" width="180"/>
 
 *Figura 147. Analíticas: la tarjeta de exportación indica "Requiere Premium" aunque el plan actual es Premium.*
+</p>
 
 **Recomendación:**
 Mostrar el texto "(Requiere Premium)" únicamente a los usuarios del plan gratuito; para usuarios Premium, ocultarlo o reemplazarlo por un mensaje como "Incluido en tu plan".
@@ -5007,13 +5047,17 @@ Mostrar el texto "(Requiere Premium)" únicamente a los usuarios del plan gratui
 **Problema:**
 El entrevistado del Segmento 2 no tuvo claro si el cálculo de las analíticas se procesa localmente en su teléfono o se sincroniza en la nube. Las pantallas de Analíticas y Tendencias muestran resúmenes y gráficas, pero no informan el estado de la sincronización ni el origen de los datos (Figuras 148 y 149).
 
-![Problema 7: resumen semanal de Analíticas](assets/img/heuristics/app-10-analiticas-resumen.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-10-analiticas-resumen.jpeg" alt="Problema 7: resumen semanal de Analíticas" width="180"/>
 
 *Figura 148. Analíticas: el resumen no indica el origen ni el estado de sincronización de los datos.*
+</p>
 
-![Problema 7: nube de palabras y tendencias](assets/img/heuristics/app-12-analiticas-nube-tendencias.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-12-analiticas-nube-tendencias.jpeg" alt="Problema 7: nube de palabras y tendencias" width="180"/>
 
 *Figura 149. Analíticas: nube de palabras y tendencias sin indicador de sincronización.*
+</p>
 
 **Recomendación:**
 Agregar un indicador discreto de estado (por ejemplo, "Sincronizado hace 2 min" o "Solo en este dispositivo") en la cabecera de Analíticas, con una explicación breve al tocarlo.
@@ -5027,9 +5071,11 @@ Agregar un indicador discreto de estado (por ejemplo, "Sincronizado hace 2 min" 
 **Problema:**
 El entrevistado del Segmento 1 pidió recordatorios más personalizables y el entrevistado del Segmento 2 esperaba una notificación configurable según su jornada laboral para registrar su ánimo al terminar la tarde. En Ajustes, "Recordatorios de Hábitos" es un único interruptor orientado a "hidratación y pausas", sin elegir horario, días ni tipo de recordatorio, y no existe un recordatorio para registrar el estado de ánimo (Figura 150).
 
-![Problema 8: ajustes de privacidad y experiencia](assets/img/heuristics/app-06-ajustes-privacidad.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-06-ajustes-privacidad.jpeg" alt="Problema 8: ajustes de privacidad y experiencia" width="180"/>
 
 *Figura 150. Ajustes: el recordatorio es un único interruptor sin opciones de horario.*
+</p>
 
 **Recomendación:**
 Permitir elegir la hora y los días de los recordatorios, y agregar un recordatorio opcional para registrar el estado de ánimo al cierre de la jornada.
@@ -5043,9 +5089,11 @@ Permitir elegir la hora y los días de los recordatorios, y agregar un recordato
 **Problema:**
 El campo de fecha del historial emocional muestra el texto "mm/dd/yyyy" y el código aplica el patrón `MM/dd/yyyy`, propio de Estados Unidos, aunque la aplicación está en español latinoamericano. Un usuario peruano puede interpretar mal el valor (por ejemplo, 07/10 como 10 de julio) y filtrar por una fecha equivocada (Figura 151).
 
-![Problema 9: filtro de fecha del historial](assets/img/heuristics/app-20-diario-calendario.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-20-diario-calendario.jpeg" alt="Problema 9: filtro de fecha del historial" width="180"/>
 
 *Figura 151. Historial emocional: el filtro de fecha usa el formato mm/dd/yyyy.*
+</p>
 
 **Recomendación:**
 Dar formato a la fecha según el idioma y la región del dispositivo (dd/MM/yyyy para es_419) y mostrar el nombre del mes en el selector.
@@ -5059,13 +5107,17 @@ Dar formato a la fecha según el idioma y la región del dispositivo (dd/MM/yyyy
 **Problema:**
 El botón flotante del chat con la IA se mantiene fijo en la esquina inferior derecha y cubre parte del contenido en varias pantallas: oculta el botón "Exportar CSV" en Analíticas, el borde del botón "Micro-meditación (3 min)" en Inicio y la leyenda "Negativo" del calendario. Para usar esas acciones el usuario debe desplazar la pantalla hasta una posición donde el botón no las cubra (Figuras 152 y 153).
 
-![Problema 10: botón flotante sobre Exportar CSV](assets/img/heuristics/app-13-analiticas-exportar.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-13-analiticas-exportar.jpeg" alt="Problema 10: botón flotante sobre Exportar CSV" width="180"/>
 
 *Figura 152. Analíticas: el botón flotante cubre el botón "Exportar CSV".*
+</p>
 
-![Problema 10: botón flotante sobre Intervenciones Rápidas](assets/img/heuristics/app-23-inicio-intervenciones.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-23-inicio-intervenciones.jpeg" alt="Problema 10: botón flotante sobre Intervenciones Rápidas" width="180"/>
 
 *Figura 153. Inicio: el botón flotante cubre la acción "Micro-meditación (3 min)".*
+</p>
 
 **Recomendación:**
 Agregar un espacio inferior al final de las listas para que el contenido nunca quede debajo del botón, o reducir el botón y moverlo a la barra superior.
@@ -5079,13 +5131,17 @@ Agregar un espacio inferior al final de las listas para que el contenido nunca q
 **Problema:**
 En Hábitos, las pestañas "Mis Rutinas", "Sugerencias de IA" e "Historial" no caben en el ancho de la pantalla. Al abrir la pantalla solo se ve una parte de la tercera pestaña (un trazo), y al seleccionar "Historial" la primera queda cortada ("nas"). Sin un indicador de desplazamiento, un usuario puede no descubrir que existe el historial de hábitos (Figuras 154 y 155).
 
-![Problema 11: pestañas de Hábitos](assets/img/heuristics/app-15-habitos-rutinas.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-15-habitos-rutinas.jpeg" alt="Problema 11: pestañas de Hábitos" width="180"/>
 
 *Figura 154. Hábitos: la tercera pestaña no es visible al abrir la pantalla.*
+</p>
 
-![Problema 11: pestaña Historial](assets/img/heuristics/app-19-habitos-historial.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-19-habitos-historial.jpeg" alt="Problema 11: pestaña Historial" width="180"/>
 
 *Figura 155. Hábitos: al seleccionar "Historial" la primera pestaña queda cortada.*
+</p>
 
 **Recomendación:**
 Ajustar los textos y el espaciado para que las tres pestañas se vean completas, o usar etiquetas más cortas ("Rutinas", "Sugerencias", "Historial").
@@ -5099,13 +5155,17 @@ Ajustar los textos y el espaciado para que las tres pestañas se vean completas,
 **Problema:**
 La casilla de la lista "Hábitos Diarios" mide 20 dp y el ícono para mostrar u ocultar la contraseña mide 24 dp, por debajo de los 48 dp recomendados por Material Design y WCAG para áreas táctiles. Usar la aplicación con una sola mano, en movimiento o con dificultades motoras aumenta la probabilidad de tocar mal (Figuras 156 y 157).
 
-![Problema 12: casilla de hábito diario](assets/img/heuristics/app-24-inicio-habitos.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-24-inicio-habitos.jpeg" alt="Problema 12: casilla de hábito diario" width="180"/>
 
 *Figura 156. Inicio: la casilla del hábito diario tiene un área táctil de 20 dp.*
+</p>
 
-![Problema 12: ícono de contraseña](assets/img/heuristics/app-01-login.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-01-login.jpeg" alt="Problema 12: ícono de contraseña" width="180"/>
 
 *Figura 157. Inicio de sesión: el ícono de mostrar contraseña tiene 24 dp.*
+</p>
 
 **Recomendación:**
 Mantener el tamaño visual de los controles, pero ampliar su área táctil a 48 x 48 dp.
@@ -5119,13 +5179,17 @@ Mantener el tamaño visual de los controles, pero ampliar su área táctil a 48 
 **Problema:**
 La sección "Así se ve MindFlow en tu teléfono" se presenta como "Capturas reales de la app Android", pero las imágenes muestran una versión anterior: un menú lateral (Dashboard, Diario, Hábitos, Analíticas, Configuración) y datos de abril de 2026, mientras que la aplicación actual usa barra de navegación inferior. El visitante que descarga la aplicación encuentra una interfaz distinta de la que vio (Figuras 158 y 159).
 
-![Problema 13: capturas de la Landing Page](assets/img/heuristics/landing-01-capturas.png)
+<p align="center">
+<img src="assets/img/heuristics/landing-01-capturas.png" alt="Problema 13: capturas de la Landing Page" width="180"/>
 
 *Figura 158. Landing Page: capturas con menú lateral.*
+</p>
 
-![Problema 13: Inicio de la aplicación actual](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-22-inicio-chat-ia.jpeg" alt="Problema 13: Inicio de la aplicación actual" width="180"/>
 
 *Figura 159. Aplicación actual: Inicio con barra de navegación inferior.*
+</p>
 
 **Recomendación:**
 Reemplazar las capturas de la Landing Page por las de la versión vigente de la aplicación y revisarlas en cada release.
@@ -5139,9 +5203,11 @@ Reemplazar las capturas de la Landing Page por las de la versión vigente de la 
 **Problema:**
 El calendario del Diario comunica el estado de ánimo de cada día solo con color (positivo, neutral y negativo), y la leyenda usa un texto de 12 sp. El color de "Neutral" (#FFD166) tiene una relación de contraste de 1.44:1 sobre fondo blanco y el verde de "Positivo" (#6ED3A3) de 1.82:1, por lo que las personas con baja visión o daltonismo pueden no distinguir los estados (Figura 160).
 
-![Problema 14: leyenda del calendario](assets/img/heuristics/app-20-diario-calendario.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-20-diario-calendario.jpeg" alt="Problema 14: leyenda del calendario" width="180"/>
 
 *Figura 160. Historial emocional: la leyenda del calendario se apoya solo en el color.*
+</p>
 
 **Recomendación:**
 Complementar el color con un ícono o una forma distinta por estado (por ejemplo, ▲ positivo, ● neutral, ▼ negativo) y oscurecer los colores del texto de la leyenda hasta superar 4.5:1.
@@ -5155,9 +5221,11 @@ Complementar el color con un ícono o una forma distinta por estado (por ejemplo
 **Problema:**
 En el idioma español, algunos títulos permanecen en inglés: "AI Mood Journal", "Dynamic Habit Tracker" y "Smart Interventions" en la pantalla de registro y en la tarjeta de suscripción, mientras que el resto de la interfaz está en español. Es una inconsistencia menor que no impide completar las tareas (Figura 161).
 
-![Problema 15: beneficios en la pantalla de registro](assets/img/heuristics/app-04-registro-beneficios.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-04-registro-beneficios.jpeg" alt="Problema 15: beneficios en la pantalla de registro" width="180"/>
 
 *Figura 161. Registro: títulos de beneficios en inglés dentro de una interfaz en español.*
+</p>
 
 **Recomendación:**
 Traducir los títulos al español (por ejemplo, "Diario emocional con IA", "Seguimiento dinámico de hábitos" e "Intervenciones inteligentes") y gestionarlos mediante los archivos de idioma de la aplicación.
@@ -5171,9 +5239,11 @@ Traducir los títulos al español (por ejemplo, "Diario emocional con IA", "Segu
 **Problema:**
 El entrevistado del Segmento 1 esperaba poder registrar entradas mediante notas de voz y programar hábitos con integración a Google Calendar. El entrevistado del Segmento 2 propuso etiquetar las entradas por proyecto o cliente. La pantalla de Inicio solo permite escribir texto y elegir una de las categorías predefinidas (Estudios, Trabajo, Familia, Reflexión Personal, Salud) (Figura 162).
 
-![Problema 16: registro de entrada en el diario](assets/img/heuristics/app-22-inicio-chat-ia.jpeg)
+<p align="center">
+<img src="assets/img/heuristics/app-22-inicio-chat-ia.jpeg" alt="Problema 16: registro de entrada en el diario" width="180"/>
 
 *Figura 162. Inicio: el registro admite solo texto y categorías predefinidas.*
+</p>
 
 **Recomendación:**
 Incorporar en el roadmap el registro por dictado de voz, la sincronización de hábitos con el calendario del dispositivo y las etiquetas personalizadas por entrada.
