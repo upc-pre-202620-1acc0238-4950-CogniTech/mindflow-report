@@ -712,7 +712,7 @@ Para delimitar y comprender a profundidad el alcance de esta problemática, se e
 * **Where (Dónde):** En entornos académicos (universidades, institutos) y espacios laborales (oficinas, esquemas de teletrabajo) a nivel nacional en Perú y la región latinoamericana, donde el ritmo de vida acelerado dificulta la desconexión mental.
 * **When (Cuándo):** De manera constante, pero con picos de intensidad durante periodos de evaluaciones universitarias, cierres de proyectos laborales, o momentos de crisis personal donde no se dispone de asistencia psicológica inmediata.
 * **Why (Por qué):** Debido a los altos costos económicos de la terapia tradicional, la falta de tiempo para agendar sesiones físicas, el estigma social que aún rodea a la vulnerabilidad emocional, y la carencia de herramientas digitales que ofrezcan empatía y retroalimentación clínica validada en tiempo real.
-* **How (Cómo):** El problema se manifiesta a través del agotamiento cognitivo, alteraciones del sueño y baja productividad. Actualmente, los usuarios intentan mitigarlo mediante diarios en papel o aplicaciones genéricas que fallan al no analizar el estado del usuario. Para resolver esto de forma efectiva, la integración de intervenciones digitales impulsadas por Inteligencia Artificial resulta fundamental; según la Organización Mundial de la Salud (OMS), las herramientas de salud digital basadas en algoritmos tienen el potencial de superar barreras históricas de acceso y ofrecer un monitoreo continuo que empodera al paciente en su autocuidado (OMS, 2021, *Global strategy on digital health 2020-2025*).
+* **How (Cómo):** El problema se manifiesta a través del agotamiento cognitivo, alteraciones del sueño y baja productividad. Actualmente, los usuarios intentan mitigarlo mediante diarios en papel o aplicaciones genéricas que fallan al no analizar el estado del usuario. Para resolver esto de forma efectiva, la integración de intervenciones digitales impulsadas por Inteligencia Artificial resulta fundamental: revisiones sistemáticas recientes confirman que los chatbots de IA reducen el malestar psicológico y promueven conductas saludables en estudiantes universitarios y en adolescentes y jóvenes (Nyakhar & Wang, 2025; Feng et al., 2025), en línea con lo señalado por la Organización Mundial de la Salud (OMS), para quien las herramientas de salud digital basadas en algoritmos tienen el potencial de superar barreras históricas de acceso y ofrecer un monitoreo continuo que empodera al paciente en su autocuidado (OMS, 2021, *Global strategy on digital health 2020-2025*).
 * **How much (Cuánto):** El costo y el impacto de esta problemática son cuantificables y alarmantes. A nivel global, la depresión y la ansiedad generan la pérdida de 12,000 millones de días de trabajo cada año, costando a la economía mundial cerca de 1 billón de dólares anuales en pérdida de productividad (OMS, 2022, *World mental health report*). En el contexto peruano, el Ministerio de Salud (MINSA) reportó que solo en el año 2023 se atendieron más de 1.3 millones de casos relacionados a trastornos de salud mental, destacando que la ansiedad y la depresión son las principales causas de pérdida de años de vida saludables en la población joven (MINSA, 2023, *Boletín Epidemiológico del Perú*).
 
 ### 1.2.2. Lean UX Process
@@ -4250,7 +4250,7 @@ La Tabla 40 detalla los commits relacionados con las pruebas automatizadas.
 
 #### 4.2.1.6. Execution Evidence for Sprint Review
 
-En el Sprint 1 el equipo construyó la Mobile Application de MindFlow para Android con **Kotlin y Jetpack Compose (Material 3)**, siguiendo los mock-ups de la sección 3.1.4.3 y el sistema de diseño definido en Figma (tipografía Inter, paleta de marca y componentes reutilizables). En paralelo se levantó el backend **MindFlow.Platform** (ASP.NET Core) con los 8 bounded contexts, documentado en la sección 4.2.1.7.
+En el Sprint 1 el equipo construyó la Mobile Application de MindFlow para Android con **Kotlin y Jetpack Compose (Material 3)**, un lenguaje cuyo uso real en proyectos de software ha sido objeto de estudios empíricos recientes sobre inferencia de tipos y calidad del código (Flint et al., 2025), siguiendo los mock-ups de la sección 3.1.4.3 y el sistema de diseño definido en Figma (tipografía Inter, paleta de marca y componentes reutilizables). En paralelo se levantó el backend **MindFlow.Platform** (ASP.NET Core) con los 8 bounded contexts, documentado en la sección 4.2.1.7.
 
 Logros principales del Sprint:
 
@@ -4260,7 +4260,7 @@ Logros principales del Sprint:
   - creación de entradas del diario con la respuesta empática generada por Google Gemini;
   - chat con MindFlow AI;
   - pago de la suscripción Premium mediante Stripe Checkout en modo prueba.
-- **Persistencia local con SQLite**, que funciona como caché de los datos del usuario. Si la IA del backend no responde, la aplicación usa una respuesta local de respaldo para que el usuario no pierda su registro.
+- **Persistencia local con SQLite**, que funciona como caché de los datos del usuario. Si la IA del backend no responde, la aplicación usa una respuesta local de respaldo para que el usuario no pierda su registro, una estrategia de resiliencia alineada con los patrones de integración de IA documentados en estudios empíricos recientes sobre aplicaciones móviles (Li et al., 2024).
 - **Arquitectura MVVM** (Composable + ViewModel por pantalla), con una capa de casos de uso (domain/application/infrastructure) aplicada de forma parcial: solo autenticación y chat están conectados a ella hoy; el resto de pantallas sigue usando los repositorios directamente.
 - **Mejoras de usabilidad** posteriores a los mock-ups:
   - barra de navegación inferior de 5 íconos en lugar del menú lateral, para acceder con una mano a las secciones principales;
@@ -5331,6 +5331,14 @@ _Pendiente_ -->
 <div style="page-break-before: always;"></div>
 
 # Bibliografía
+
+Feng, X., Tian, L., Ho, G. W. K., Yorke, J., & Hui, V. (2025). The effectiveness of AI chatbots in alleviating mental distress and promoting health behaviors among adolescents and young adults: Systematic review and meta-analysis. *Journal of Medical Internet Research, 27*, Article e79850. https://doi.org/10.2196/79850
+
+Flint, S. W., Keshk, A. M., Dyer, R., & Bagheri, H. (2025). How do developers use type inference: An exploratory study in Kotlin. *Empirical Software Engineering, 30*(2). https://doi.org/10.1007/s10664-024-10585-y
+
+Li, Y., Dang, X., Tian, H., Sun, T., Wang, Z., Ma, L., Klein, J., & Bissyandé, T. F. (2024). An empirical study of AI techniques in mobile applications. *Journal of Systems and Software, 219*, Article 112233. https://doi.org/10.1016/j.jss.2024.112233
+
+Nyakhar, S., & Wang, H. (2025). Effectiveness of artificial intelligence chatbots on mental health & well-being in college students: A rapid systematic review. *Frontiers in Psychiatry, 16*, Article 1621768. https://doi.org/10.3389/fpsyt.2025.1621768
 
 Organización Mundial de la Salud. (2021). *Global strategy on digital health 2020-2025*. https://www.who.int/publications/i/item/9789240020924
 
