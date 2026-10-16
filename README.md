@@ -117,6 +117,33 @@ Proyecto
       Capítulo IV: Product Implementation & Validation (configuración del proyecto, implementación del Sprint 1 del Landing Page y las Mobile Applications, y entrevistas de validación)
     </td>
   </tr>
+
+  <tr>
+    <td><b>Tercera Entrega (AV2)</b></td>
+    <td>09/11/2026</td>
+    <td>
+      Cabrera Sotelo, Camila Celeste <br>
+      <br>
+      <p></p>
+      Diaz de la Cruz, Sebastian Gabriel <br>
+      <br>
+      <p></p>
+      Güere Calero, Fernando Julio <br>
+      <br>
+      <p></p>
+      Jáuregui Cerna, Jean Franco <br>
+      <br>
+      <p></p>
+      Limache Coronel, Imanol Fabrizio <br>
+    </td>
+    <td>
+      Correcciones y mejoras de entregas anteriores: Capítulo II (diagramas C4, de clases, de componentes y de base de datos alineados con el backend implementado, tras una revisión cruzada con el código fuente) y Capítulo IV (centrado y tamaño de las imágenes en Heurísticas, Wireflows y Mock-ups) <br>
+      Capítulo IV: Product Implementation & Validation (Sprint 2 del Landing Page, los Web Services y las Mobile Applications: Sprint Planning, Aspect Leaders and Collaborators, Sprint Backlog, evidencias de desarrollo, pruebas, ejecución, documentación de servicios y despliegue, y Team Collaboration Insights) <br>
+      Validation Interviews: tercera entrevista del Segmento 2 y actualización de las evaluaciones según heurísticas <br>
+      Conclusiones y recomendaciones, Bibliografía, Glosario, Anexos y Términos y Condiciones <br>
+      Actualización de Student Outcome y de Project Report Collaboration Insights
+    </td>
+  </tr>
   <!-- 
   <tr>
     <td><b>Primera Entrega (TB1)</b></td>
