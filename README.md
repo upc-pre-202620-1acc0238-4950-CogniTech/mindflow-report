@@ -439,6 +439,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>TB1</u><br>
       Investigó y aplicó por primera vez principios de diseño de sistemas (Design Systems) y arquitectura de información para dispositivos móviles, definiendo la tipografía, paleta de colores y guías dimensionales de MindFlow, además de estructurar los esquemas de organización, etiquetado y navegación de la Mobile Application y el Landing Page.
       <br><br>
+      <u>AV2</u><br>
+      Actualizó y aplicó sus conocimientos al contrastar los diagramas C4, de clases, de componentes y de base de datos con el backend ya implementado y desplegado, corrigiendo las relaciones entre tablas, los tipos de datos y los patrones realmente usados en cada Bounded Context tras una revisión cruzada con el código fuente. Además, investigó los códigos de ética de ingeniería de software de la ACM/IEEE y del CIP, así como los principios de protección de datos personales aplicables en el Perú (Ley N.º 29733), para redactar y publicar los Términos y Condiciones y la Política de Privacidad del producto, tanto en el Landing Page (español e inglés) como en el informe, y buscó y seleccionó artículos académicos de alto impacto para sustentar la bibliografía del informe.
+      <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
       Investigó y aplicó nuevos enfoques de arquitectura de software al trasladar los hallazgos metodológicos del EventStorming hacia diagramas arquitectónicos y modelos de base de datos. Esta actualización de conocimientos técnicos le permitió estructurar el modelado del dominio de MindFlow, estableciendo una base sólida para su futura implementación como solución web escalable.
@@ -459,6 +462,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       El equipo actualizó sus conocimientos en diseño de producto y planificación ágil, aplicando Style Guidelines, Information Architecture y Sprint Planning para estructurar la construcción del Landing Page y las Mobile Applications sobre los 8 bounded contexts definidos en el Capítulo II.
+      <br><br>
+      <u>AV2</u><br>
+      El equipo actualizó sus conocimientos al cerrar el Sprint 2: documentó la evidencia de desarrollo, pruebas, ejecución y despliegue del backend, el Landing Page y la aplicación móvil Android, documentó los Web Services ya desplegados, y corrigió los diagramas de arquitectura, de clases, de componentes y de base de datos contrastándolos con el backend realmente implementado. Aplicó también conocimientos de ética profesional (códigos ACM/IEEE y CIP) y de protección de datos personales al redactar y publicar los Términos y Condiciones y la Política de Privacidad, y validó la propuesta con una tercera entrevista al segmento de profesionales jóvenes, actualizando la evaluación según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
     </td>
   </tr>
   <tr>
@@ -485,6 +491,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>TB1</u><br>
       Reconoció la necesidad de aprender de forma autónoma criterios de accesibilidad táctil y guías de estilo específicas para aplicaciones móviles (Android e iOS), un ámbito no cubierto en clase, aplicándolos directamente en la planificación del Sprint 1 y en la definición de la matriz de liderazgo del equipo.
       <br><br>
+      <u>AV2</u><br>
+      Reconoció la necesidad de seguir aprendiendo al comprobar, mediante una revisión cruzada del informe contra el código del backend, que varias afirmaciones del Capítulo II no coincidían con la implementación real, lo que lo llevó a verificar cada artefacto contra evidencia concreta (archivo y línea) antes de darlo por correcto. De forma autónoma aprendió a evaluar la calidad de las fuentes académicas (cuartil de la revista y antigüedad), a trasladar principios éticos y legales a un texto de términos de servicio entendible para el usuario, y a coordinar cambios consistentes entre el repositorio del informe y el de la Landing Page.
+      <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
       Reconoció la necesidad de expandir sus competencias en el diseño de software investigando de forma autónoma la construcción y aplicación del Lenguaje Ubicuo (Ubiquitous Language) dentro de Domain-Driven Design, aplicando este autoaprendizaje para asegurar que la arquitectura técnica y los esquemas de datos reflejen fielmente las reglas de negocio del proyecto MindFlow.
@@ -505,6 +514,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       El equipo reconoció la necesidad de aprendizaje continuo al enfrentar por primera vez decisiones de diseño de producto y coordinación de un Sprint real, investigando de forma autónoma buenas prácticas de UX/UI y gestión ágil para aplicarlas en la construcción de MindFlow.
+      <br><br>
+      <u>AV2</u><br>
+      El equipo reconoció que el aprendizaje continúa después del diseño: al contrastar el modelo propuesto con la implementación real del backend y con la reacción de los usuarios entrevistados, tuvo que revisar y corregir artefactos ya entregados, documentar evidencia de un Sprint completo (planning, backlog, desarrollo, pruebas, despliegue) y aprender nuevas prácticas de documentación técnica, validación con usuarios y redacción ética de términos de servicio y políticas de privacidad. Esta experiencia mostró que verificar cada afirmación del informe contra el código y la evidencia real, y aceptar la retroalimentación de revisiones cruzadas, son parte del trabajo profesional en soluciones de software.
     </td>
   </tr>
 </table>
