@@ -4754,6 +4754,22 @@ El Sprint Planning Meeting del Sprint 2 partió de la revisión de lo entregado 
 
 Las User Stories seleccionadas para el Sprint 2 y sus Story Points se detallan en la Tabla 86.3: US04 (2), US05 (2), US07 (3), US16 (3), US17 (5), US21 (3), US22 (2), US31 (5) y US37 (3).
 
+#### 4.2.2.2. Aspect Leaders and Collaborators
+
+Para el Sprint 2 el equipo organizó el trabajo en seis aspectos: la integración de Diario, Hábitos y Analíticas con el backend; la seguridad y la gestión de la cuenta; el soporte y las notificaciones dentro de la aplicación; el despliegue y la documentación de los Web Services; el Landing Page y su contenido legal; y la validación, los videos y la evidencia del Sprint Review. Cada aspecto tiene un líder (**L**) responsable de su entrega y colaboradores (**C**) que apoyan su ejecución. La asignación de tareas del Sprint Backlog 2 sigue esta matriz (Tabla 86.2).
+
+**Tabla 86.2. Sprint 2 — Aspect Leaders and Collaborators.**
+
+| Team Member (Last Name, First Name) | GitHub Username | Integración de Diario, Hábitos y Analíticas | Seguridad y Cuenta (PIN, Perfil, Eliminación) | Soporte y Notificaciones | Web Services — Despliegue y Documentación | Landing Page y Contenido Legal | Validación, Videos y Evidencia del Sprint Review |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Cabrera Sotelo, Camila Celeste | whcamm | **L** | C | C | C | C | C |
+| Jáuregui Cerna, Jean Franco | JFranco556 | C | **L** | C | C | C | C |
+| Limache Coronel, Imanol Fabrizio | ImaLi06 | C | C | **L** | C | C | **L** |
+| Güere Calero, Fernando Julio | FerG17 | C | C | C | **L** | C | C |
+| Díaz De la Cruz, Sebastián Gabriel | tipaso07 | C | C | C | C | **L** | C |
+
+Cabrera Sotelo lidera la integración de Diario, Hábitos y Analíticas porque implementó esas vistas en el Sprint 1. Jáuregui Cerna, co-líder de la Mobile Application, toma las funcionalidades de cuenta que dependen de IAM. Limache Coronel, quien desarrolló el chat y la documentación de servicios, lidera el soporte y las notificaciones, además de la evidencia del Sprint Review, como en el Sprint 1. Güere Calero mantiene el despliegue y la documentación de los Web Services, y Díaz De la Cruz continúa a cargo del Landing Page.
+
 ## 4.3. Validation Interviews
 
 ### 4.3.1. Diseño de Entrevistas
