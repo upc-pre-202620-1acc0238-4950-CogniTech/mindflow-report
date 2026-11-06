@@ -456,6 +456,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>TB1</u><br>
       Actualizó y aplicó sus conocimientos en desarrollo de software mediante la implementación de los Bounded Contexts Habits & Wellness, Analytics & Reporting y Notifications. Asimismo, fortaleció sus competencias en diseño y desarrollo de aplicaciones móviles mediante la elaboración de Mobile Application Mock-ups y el desarrollo del frontend. Complementó estas actividades con una Validation Interview para el segmento 1, relacionando las necesidades identificadas en los usuarios con las funcionalidades del producto.
       <br><br>
+      <u>AV2</u><br>
+      Actualizó y aplicó sus conocimientos de Strategic-Level Domain-Driven Design al rehacer los Domain Message Flows, los Bounded Context Canvases y el Context Mapping de MindFlow con las plantillas de DDD Crew: un flujo por escenario con Commands, Queries, Events y Policies, canvases completos con Purpose, Assumptions, Verification Metrics y Open Questions, y tres mapas de contexto con los patrones Open Host Service, Published Language, Customer/Supplier, Conformist y Anti-Corruption Layer, contrastando cada relación con el código del backend. Además, aplicó la guía de Scrum.org para redactar el Sprint Goal del Sprint 2 y descompuso sus User Stories en tareas ligadas a los endpoints documentados de los Web Services.
+      <br><br>
       <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
       <u>AV1</u><br>
       Participó en la actualización y aplicación de conocimientos relacionados con análisis de requerimientos y arquitectura de software mediante la elaboración y organización de User Stories, Product Backlog, Impact Mapping y diagramas C4 a nivel de Context y Container. Asimismo, trabajó con técnicas de Needfinding como Empathy Mapping y Ubiquitous Language, integrando estos conocimientos en la documentación y diseño de MindFlow.
@@ -507,6 +510,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       Reconoció la importancia del aprendizaje continuo al desarrollar funcionalidades correspondientes a tres Bounded Contexts y participar en el diseño e implementación de interfaces móviles. La elaboración de mockups y la realización de una Validation Interview evidenciaron la necesidad de continuar fortaleciendo sus conocimientos en desarrollo frontend, diseño centrado en el usuario y validación de soluciones de software.
+      <br><br>
+      <u>AV2</u><br>
+      Reconoció la necesidad de seguir aprendiendo al comprobar que los diagramas estratégicos entregados en AV1 no reflejaban todas las relaciones reales entre los bounded contexts, lo que la llevó a estudiar por cuenta propia los patrones de integración de DDD Crew y a revisar el código fuente antes de corregirlos. Asimismo, la planificación del Sprint 2 le mostró la importancia de aprender a estimar tareas, definir objetivos medibles y coordinar responsabilidades en un equipo ágil.
       <br><br>
       <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
       <u>AV1</u><br>
