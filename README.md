@@ -405,6 +405,10 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
       - [4.2.1.7. Services Documentation Evidence for Sprint Review](#4217-services-documentation-evidence-for-sprint-review)
       - [4.2.1.8. Software Deployment Evidence for Sprint Review](#4218-software-deployment-evidence-for-sprint-review)
       - [4.2.1.9. Team Collaboration Insights during Sprint](#4219-team-collaboration-insights-during-sprint)
+    - [4.2.2. Sprint 2](#422-sprint-2)
+      - [4.2.2.1. Sprint Planning 2](#4221-sprint-planning-2)
+      - [4.2.2.2. Aspect Leaders and Collaborators](#4222-aspect-leaders-and-collaborators)
+      - [4.2.2.3. Sprint Backlog 2](#4223-sprint-backlog-2)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
@@ -4716,6 +4720,39 @@ En el repositorio [mindflow-frontend](https://github.com/upc-pre-202620-1acc0238
 <img src="assets/img/Insights/Insights_TB1_Frontend.png" alt="Insights del repositorio mindflow-frontend" width="800"/>
 
 *Figura 138. Team Collaboration Insights del repositorio `mindflow-frontend` durante el Sprint 1.*
+
+### 4.2.2. Sprint 2
+
+En el segundo Sprint el equipo completa la conexión de la Mobile Application con los Web Services ya desplegados y cierra los pendientes identificados en la revisión del Sprint 1 y en las entrevistas de validación. Esto incluye:
+
+- Conexión al backend de las vistas que en el Sprint 1 operaban con persistencia local: Diario, Hábitos, Analíticas y Configuración.
+- Bloqueo de la aplicación mediante PIN, edición del perfil y eliminación de la cuenta sobre los endpoints de IAM.
+- Envío y seguimiento de tickets de soporte, y bandeja de notificaciones dentro de la aplicación.
+- Correcciones de los problemas de mayor severidad de la evaluación heurística (sección 4.3.3).
+- Backend desplegado al 100% con su documentación pública, y Landing Page actualizada con los Términos y Condiciones.
+
+#### 4.2.2.1. Sprint Planning 2
+
+El Sprint Planning Meeting del Sprint 2 partió de la revisión de lo entregado en el Sprint 1 y de los hallazgos de las entrevistas de validación y de la evaluación heurística. A partir de ellos el equipo definió el objetivo del Sprint y seleccionó las User Stories del Product Backlog (Tabla 15) que aportan directamente a ese objetivo (Tabla 86.1).
+
+**Tabla 86.1. Sprint 2 — Sprint Planning 2.**
+
+| Sprint # | Sprint 2 |
+|---|---|
+| **Sprint Planning Background** | |
+| Date | 2026-10-12 |
+| Time | 07:00 PM |
+| Location | Reunión virtual vía Google Meet |
+| Prepared By | Cabrera Sotelo, Camila Celeste |
+| Attendees | Cabrera Sotelo, Camila Celeste / Díaz De la Cruz, Sebastián Gabriel / Güere Calero, Fernando Julio / Jáuregui Cerna, Jean Franco / Limache Coronel, Imanol Fabrizio |
+| Sprint 1 Review Summary | Se entregaron los tres productos de la solución. El backend de los 8 bounded contexts quedó desplegado en Railway con su documentación Swagger, y el Landing Page se publicó en GitHub Pages. La Mobile Application implementó ocho vistas que cubren el recorrido completo del usuario; el registro e inicio de sesión, la entrada de diario con la respuesta de Google Gemini, el chat con MindFlow AI y el pago con Stripe en modo prueba ya consumen el backend real. Quedaron pendientes la conexión de Diario, Hábitos, Analíticas y Configuración, que aún trabajan con SQLite, además del bloqueo por PIN, los recordatorios y el envío de tickets de soporte. Las cinco entrevistas de validación confirmaron la propuesta de valor en ambos segmentos, y la evaluación heurística identificó 16 problemas, 4 de ellos de severidad 3. |
+| Sprint 1 Retrospective Summary | Como aciertos, el equipo destacó el reparto de los bounded contexts entre co-líderes, que permitió avanzar backend y aplicación en paralelo, y el uso de Pull Requests con Conventional Commits en el backend. Como oportunidades de mejora, identificó que la aplicación se conectó al backend recién al final del Sprint, que la participación en los repositorios fue desigual entre integrantes (Tabla 86) y que parte de los commits del frontend se integraron directamente en `develop`. Para el Sprint 2 acordó conectar cada vista al backend desde el inicio, trabajar todas las funcionalidades en ramas `feature/*` con Pull Request y repartir las tareas según la matriz de liderazgo (Tabla 86.2). |
+| **Sprint Goal & User Stories** | |
+| Sprint 2 Goal | Nuestro enfoque está en que la Mobile Application funcione por completo sobre el backend: diario, hábitos, analíticas y cuenta del usuario sincronizados con los Web Services, junto con el bloqueo por PIN y el canal de soporte. Creemos que esto entrega a los estudiantes universitarios y a los profesionales jóvenes la confianza de que su historial emocional y sus hábitos se conservan entre dispositivos y quedan protegidos. Esto se confirmará cuando un usuario registre una entrada y complete un hábito, los vea reflejados en el calendario y en las analíticas al iniciar sesión en otro dispositivo, abra la aplicación solo después de ingresar su PIN y reciba dentro de la aplicación la respuesta a un ticket de soporte. |
+| Sprint 2 Velocity | 30 |
+| Sum of Story Points | 28 |
+
+Las User Stories seleccionadas para el Sprint 2 y sus Story Points se detallan en la Tabla 86.3: US04 (2), US05 (2), US07 (3), US16 (3), US17 (5), US21 (3), US22 (2), US31 (5) y US37 (3).
 
 ## 4.3. Validation Interviews
 
