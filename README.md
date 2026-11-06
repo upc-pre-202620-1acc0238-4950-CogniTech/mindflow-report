@@ -405,6 +405,10 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
       - [4.2.1.7. Services Documentation Evidence for Sprint Review](#4217-services-documentation-evidence-for-sprint-review)
       - [4.2.1.8. Software Deployment Evidence for Sprint Review](#4218-software-deployment-evidence-for-sprint-review)
       - [4.2.1.9. Team Collaboration Insights during Sprint](#4219-team-collaboration-insights-during-sprint)
+    - [4.2.2. Sprint 2](#422-sprint-2)
+      - [4.2.2.1. Sprint Planning 2](#4221-sprint-planning-2)
+      - [4.2.2.2. Aspect Leaders and Collaborators](#4222-aspect-leaders-and-collaborators)
+      - [4.2.2.3. Sprint Backlog 2](#4223-sprint-backlog-2)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
@@ -451,6 +455,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       Actualizó y aplicó sus conocimientos en desarrollo de software mediante la implementación de los Bounded Contexts Habits & Wellness, Analytics & Reporting y Notifications. Asimismo, fortaleció sus competencias en diseño y desarrollo de aplicaciones móviles mediante la elaboración de Mobile Application Mock-ups y el desarrollo del frontend. Complementó estas actividades con una Validation Interview para el segmento 1, relacionando las necesidades identificadas en los usuarios con las funcionalidades del producto.
+      <br><br>
+      <u>AV2</u><br>
+      Actualizó y aplicó sus conocimientos de Strategic-Level Domain-Driven Design al rehacer los Domain Message Flows, los Bounded Context Canvases y el Context Mapping de MindFlow con las plantillas de DDD Crew: un flujo por escenario con Commands, Queries, Events y Policies, canvases completos con Purpose, Assumptions, Verification Metrics y Open Questions, y tres mapas de contexto con los patrones Open Host Service, Published Language, Customer/Supplier, Conformist y Anti-Corruption Layer, contrastando cada relación con el código del backend. Además, aplicó la guía de Scrum.org para redactar el Sprint Goal del Sprint 2 y descompuso sus User Stories en tareas ligadas a los endpoints documentados de los Web Services.
       <br><br>
       <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
       <u>AV1</u><br>
@@ -503,6 +510,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       Reconoció la importancia del aprendizaje continuo al desarrollar funcionalidades correspondientes a tres Bounded Contexts y participar en el diseño e implementación de interfaces móviles. La elaboración de mockups y la realización de una Validation Interview evidenciaron la necesidad de continuar fortaleciendo sus conocimientos en desarrollo frontend, diseño centrado en el usuario y validación de soluciones de software.
+      <br><br>
+      <u>AV2</u><br>
+      Reconoció la necesidad de seguir aprendiendo al comprobar que los diagramas estratégicos entregados en AV1 no reflejaban todas las relaciones reales entre los bounded contexts, lo que la llevó a estudiar por cuenta propia los patrones de integración de DDD Crew y a revisar el código fuente antes de corregirlos. Asimismo, la planificación del Sprint 2 le mostró la importancia de aprender a estimar tareas, definir objetivos medibles y coordinar responsabilidades en un equipo ágil.
       <br><br>
       <b>Diaz de la Cruz, Sebastian Gabriel</b><br>
       <u>AV1</u><br>
@@ -4716,6 +4726,87 @@ En el repositorio [mindflow-frontend](https://github.com/upc-pre-202620-1acc0238
 <img src="assets/img/Insights/Insights_TB1_Frontend.png" alt="Insights del repositorio mindflow-frontend" width="800"/>
 
 *Figura 138. Team Collaboration Insights del repositorio `mindflow-frontend` durante el Sprint 1.*
+
+### 4.2.2. Sprint 2
+
+En el segundo Sprint el equipo completa la conexión de la Mobile Application con los Web Services ya desplegados y cierra los pendientes identificados en la revisión del Sprint 1 y en las entrevistas de validación. Esto incluye:
+
+- Conexión al backend de las vistas que en el Sprint 1 operaban con persistencia local: Diario, Hábitos, Analíticas y Configuración.
+- Bloqueo de la aplicación mediante PIN, edición del perfil y eliminación de la cuenta sobre los endpoints de IAM.
+- Envío y seguimiento de tickets de soporte, y bandeja de notificaciones dentro de la aplicación.
+- Correcciones de los problemas de mayor severidad de la evaluación heurística (sección 4.3.3).
+- Backend desplegado al 100% con su documentación pública, y Landing Page actualizada con los Términos y Condiciones.
+
+#### 4.2.2.1. Sprint Planning 2
+
+El Sprint Planning Meeting del Sprint 2 partió de la revisión de lo entregado en el Sprint 1 y de los hallazgos de las entrevistas de validación y de la evaluación heurística. A partir de ellos el equipo definió el objetivo del Sprint y seleccionó las User Stories del Product Backlog (Tabla 15) que aportan directamente a ese objetivo (Tabla 86.1).
+
+**Tabla 86.1. Sprint 2 — Sprint Planning 2.**
+
+| Sprint # | Sprint 2 |
+|---|---|
+| **Sprint Planning Background** | |
+| Date | 2026-10-12 |
+| Time | 07:00 PM |
+| Location | Reunión virtual vía Google Meet |
+| Prepared By | Cabrera Sotelo, Camila Celeste |
+| Attendees | Cabrera Sotelo, Camila Celeste / Díaz De la Cruz, Sebastián Gabriel / Güere Calero, Fernando Julio / Jáuregui Cerna, Jean Franco / Limache Coronel, Imanol Fabrizio |
+| Sprint 1 Review Summary | Se entregaron los tres productos de la solución. El backend de los 8 bounded contexts quedó desplegado en Railway con su documentación Swagger, y el Landing Page se publicó en GitHub Pages. La Mobile Application implementó ocho vistas que cubren el recorrido completo del usuario; el registro e inicio de sesión, la entrada de diario con la respuesta de Google Gemini, el chat con MindFlow AI y el pago con Stripe en modo prueba ya consumen el backend real. Quedaron pendientes la conexión de Diario, Hábitos, Analíticas y Configuración, que aún trabajan con SQLite, además del bloqueo por PIN, los recordatorios y el envío de tickets de soporte. Las cinco entrevistas de validación confirmaron la propuesta de valor en ambos segmentos, y la evaluación heurística identificó 16 problemas, 4 de ellos de severidad 3. |
+| Sprint 1 Retrospective Summary | Como aciertos, el equipo destacó el reparto de los bounded contexts entre co-líderes, que permitió avanzar backend y aplicación en paralelo, y el uso de Pull Requests con Conventional Commits en el backend. Como oportunidades de mejora, identificó que la aplicación se conectó al backend recién al final del Sprint, que la participación en los repositorios fue desigual entre integrantes (Tabla 86) y que parte de los commits del frontend se integraron directamente en `develop`. Para el Sprint 2 acordó conectar cada vista al backend desde el inicio, trabajar todas las funcionalidades en ramas `feature/*` con Pull Request y repartir las tareas según la matriz de liderazgo (Tabla 86.2). |
+| **Sprint Goal & User Stories** | |
+| Sprint 2 Goal | Nuestro enfoque está en que la Mobile Application funcione por completo sobre el backend: diario, hábitos, analíticas y cuenta del usuario sincronizados con los Web Services, junto con el bloqueo por PIN y el canal de soporte. Creemos que esto entrega a los estudiantes universitarios y a los profesionales jóvenes la confianza de que su historial emocional y sus hábitos se conservan entre dispositivos y quedan protegidos. Esto se confirmará cuando un usuario registre una entrada y complete un hábito, los vea reflejados en el calendario y en las analíticas al iniciar sesión en otro dispositivo, abra la aplicación solo después de ingresar su PIN y reciba dentro de la aplicación la respuesta a un ticket de soporte. |
+| Sprint 2 Velocity | 30 |
+| Sum of Story Points | 28 |
+
+Las User Stories seleccionadas para el Sprint 2 y sus Story Points se detallan en la Tabla 86.3: US04 (2), US05 (2), US07 (3), US16 (3), US17 (5), US21 (3), US22 (2), US31 (5) y US37 (3).
+
+#### 4.2.2.2. Aspect Leaders and Collaborators
+
+Para el Sprint 2 el equipo organizó el trabajo en seis aspectos: la integración de Diario, Hábitos y Analíticas con el backend; la seguridad y la gestión de la cuenta; el soporte y las notificaciones dentro de la aplicación; el despliegue y la documentación de los Web Services; el Landing Page y su contenido legal; y la validación, los videos y la evidencia del Sprint Review. Cada aspecto tiene un líder (**L**) responsable de su entrega y colaboradores (**C**) que apoyan su ejecución. La asignación de tareas del Sprint Backlog 2 sigue esta matriz (Tabla 86.2).
+
+**Tabla 86.2. Sprint 2 — Aspect Leaders and Collaborators.**
+
+| Team Member (Last Name, First Name) | GitHub Username | Integración de Diario, Hábitos y Analíticas | Seguridad y Cuenta (PIN, Perfil, Eliminación) | Soporte y Notificaciones | Web Services — Despliegue y Documentación | Landing Page y Contenido Legal | Validación, Videos y Evidencia del Sprint Review |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Cabrera Sotelo, Camila Celeste | whcamm | **L** | C | C | C | C | C |
+| Jáuregui Cerna, Jean Franco | JFranco556 | C | **L** | C | C | C | C |
+| Limache Coronel, Imanol Fabrizio | ImaLi06 | C | C | **L** | C | C | **L** |
+| Güere Calero, Fernando Julio | FerG17 | C | C | C | **L** | C | C |
+| Díaz De la Cruz, Sebastián Gabriel | tipaso07 | C | C | C | C | **L** | C |
+
+Cabrera Sotelo lidera la integración de Diario, Hábitos y Analíticas porque implementó esas vistas en el Sprint 1. Jáuregui Cerna, co-líder de la Mobile Application, toma las funcionalidades de cuenta que dependen de IAM. Limache Coronel, quien desarrolló el chat y la documentación de servicios, lidera el soporte y las notificaciones, además de la evidencia del Sprint Review, como en el Sprint 1. Güere Calero mantiene el despliegue y la documentación de los Web Services, y Díaz De la Cruz continúa a cargo del Landing Page.
+
+#### 4.2.2.3. Sprint Backlog 2
+
+El objetivo del Sprint 2 es que la Mobile Application funcione por completo sobre el backend desplegado y que el usuario pueda proteger su cuenta y pedir ayuda desde la aplicación. Las User Stories del Sprint se descompusieron en tareas de la aplicación que consumen los endpoints documentados en la sección 4.2.1.7, y se agregaron tareas que no dependen de una User Story en particular: el despliegue y la documentación del backend, las correcciones de la evaluación heurística, el contenido legal del Landing Page y la evidencia del Sprint Review (Tabla 86.3).
+
+**Tabla 86.3. Sprint 2 — Sprint Backlog 2.**
+
+| Sprint # | Sprint 2 | | | | | | |
+|---|---|---|---|---|---|---|---|
+| **User Story Id** | **User Story Title** | **Work-Item Id** | **Work-Item Title** | **Description** | **Estimation (Hours)** | **Assigned To** | **Status** |
+| US17 | Calendario de estado de ánimo | T01 | Cargar el historial del Diario desde el backend | Reemplazar la lectura de SQLite por `GET /api/v1/journal/entries` con ordenamiento por fecha, manteniendo SQLite como caché. | 4 | whcamm | To-do |
+| US17 | Calendario de estado de ánimo | T02 | Colorear el calendario con el sentimiento del backend | Pintar cada día del calendario según el campo `sentiment` de las entradas recibidas. | 3 | whcamm | To-do |
+| US16 | Búsqueda por palabras clave | T03 | Buscar entradas en el backend | Enviar el término de búsqueda en el parámetro `q` de `GET /api/v1/journal/entries` y mostrar los resultados. | 3 | whcamm | To-do |
+| US21 | Creación de hábitos | T04 | Gestionar hábitos con el backend | Crear, editar y eliminar hábitos con `POST`, `PUT` y `DELETE /api/v1/habits`, y listar con `GET /api/v1/habits`. | 4 | whcamm | To-do |
+| US22 | Registro de cumplimiento de hábitos | T05 | Registrar cumplimientos en el backend | Marcar un hábito como cumplido con `POST /api/v1/habit-logs` y refrescar su racha. | 3 | whcamm | To-do |
+| US31 | Dashboard de analítica | T06 | Mostrar el dashboard con datos del backend | Calcular las métricas del periodo con `GET /api/v1/analytics/dashboard` en lugar de hacerlo en el dispositivo. | 4 | whcamm | To-do |
+| US31 | Dashboard de analítica | T07 | Indicar el origen y la sincronización de los datos | Mostrar en Analíticas la fecha de la última sincronización con el backend (problema mostrado en las Figuras 148 y 149). | 2 | whcamm | To-do |
+| US04 | Bloqueo mediante PIN | T08 | Pantalla de bloqueo por PIN | Solicitar el PIN al abrir la aplicación y validarlo con `POST /api/v1/users/pin/verify`. | 4 | JFranco556 | To-do |
+| US04 | Bloqueo mediante PIN | T09 | Activar y desactivar el PIN | Configurar el PIN desde Configuración con `POST /api/v1/users/pin` y `DELETE /api/v1/users/pin`, y consultar su estado con `GET /api/v1/users/pin/status`. | 2 | JFranco556 | To-do |
+| US05 | Perfil de usuario | T10 | Editar el perfil en el backend | Cargar y guardar nombre y ocupación con `GET` y `PUT /api/v1/users/profile`. | 2 | JFranco556 | To-do |
+| US07 | Eliminación de cuenta | T11 | Eliminar la cuenta en el backend | Confirmar la eliminación, llamar a `DELETE /api/v1/users`, borrar la caché local y cerrar la sesión. | 2 | JFranco556 | To-do |
+| US37 | Soporte técnico | T12 | Enviar tickets de soporte | Enviar el formulario de Configuración a `POST /api/v1/support/tickets`. | 3 | ImaLi06 | To-do |
+| US37 | Soporte técnico | T13 | Ver tickets y respuestas | Listar los tickets del usuario y su conversación con `GET /api/v1/support/tickets` y `GET /api/v1/support/tickets/{id}`. | 3 | ImaLi06 | To-do |
+| US37 | Soporte técnico | T14 | Bandeja de notificaciones | Mostrar las notificaciones y el contador de no leídas con `GET /api/v1/notifications` y `GET /api/v1/notifications/unread-count`, y marcarlas como leídas. | 4 | ImaLi06 | To-do |
+| — | — | T15 | Desplegar el backend al 100% con documentación | Verificar en Railway todos los endpoints de los 8 bounded contexts y publicar su documentación Swagger. | 4 | FerG17 | To-do |
+| — | — | T16 | Aclarar el alcance de la IA y el tratamiento de datos | Agregar en el onboarding y en Configuración que MindFlow es un asistente de reflexión y no un servicio clínico, y cómo se procesan los textos (problemas #1 y #2 de la sección 4.3.3). | 3 | JFranco556 | To-do |
+| — | — | T17 | Mejorar el contraste de los botones principales | Ajustar los colores de los botones principales para cumplir el contraste mínimo (problema #3 de la sección 4.3.3). | 2 | JFranco556 | To-do |
+| — | — | T18 | Publicar Términos y Condiciones en el Landing Page | Actualizar los Términos y Condiciones y la Política de Privacidad con los datos del backend. | 3 | FerG17 | Done |
+| — | — | T19 | Grabar los videos del AV2 | Grabar la primera versión de los videos App Validation, About the Product y About the Team. | 6 | ImaLi06 | To-do |
+| — | — | T20 | Documentar la evidencia del Sprint Review 2 | Completar en el informe la evidencia de desarrollo, pruebas, ejecución, servicios, despliegue y colaboración del Sprint 2. | 5 | ImaLi06 | To-do |
+| — | — | T21 | Documentar el Sprint Planning y el Sprint Backlog 2 | Redactar el Sprint Planning 2, la matriz de liderazgo y el Sprint Backlog 2 en el informe. | 3 | whcamm | Done |
+
 
 ## 4.3. Validation Interviews
 
