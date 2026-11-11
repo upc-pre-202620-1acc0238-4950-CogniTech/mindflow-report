@@ -409,6 +409,8 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
       - [4.2.2.1. Sprint Planning 2](#4221-sprint-planning-2)
       - [4.2.2.2. Aspect Leaders and Collaborators](#4222-aspect-leaders-and-collaborators)
       - [4.2.2.3. Sprint Backlog 2](#4223-sprint-backlog-2)
+      - [4.2.2.4. Development Evidence for Sprint Review](#4224-development-evidence-for-sprint-review)
+      - [4.2.2.5. Testing Suite Evidence for Sprint Review](#4225-testing-suite-evidence-for-sprint-review)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
@@ -419,7 +421,8 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
   - [Video App Validation](#video-app-validation)
   - [Video About the product](#video-about-the-product)
   - [Video About the team](#video-about-the-team) 
-- [Glosario](#glosario)-->
+-->
+- [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 <!--
 - [Anexos](#anexos)
@@ -465,6 +468,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       Amplió y aplicó sus conocimientos en arquitectura backend, integración de servicios externos y despliegue de aplicaciones mediante el desarrollo de cuatro Bounded Contexts, la implementación de Stripe y la autenticación con cuentas de Google. Además, fortaleció sus competencias en infraestructura cloud al desplegar el backend en Railway, utilizando MySQL 8 y Upstash Redis.
+      <br><br>
+      <u>AV2</u><br>
+      Actualizó sus conocimientos sobre trazabilidad de entregables, control de versiones y aseguramiento de calidad al contrastar el Sprint Backlog 2 con los historiales de los repositorios backend, Android Kotlin/Jetpack Compose, Flutter y Landing Page. Diferenció la aplicación Android original de la nueva implementación móvil en Flutter, relacionó los commits verificables con las User Stories priorizadas y revisó la evidencia de pruebas unitarias y de widget. Aplicó estos hallazgos para documentar de forma precisa la evidencia del Sprint Review, separando implementaciones confirmadas de pruebas y resultados aún pendientes.
       <br><br>
       <b>Güere Calero, Fernando Julio</b><br>
       <u>AV1</u><br>
@@ -520,6 +526,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       Reconoció la necesidad de actualizar constantemente sus conocimientos técnicos al implementar servicios externos de pagos y autenticación, así como al desplegar el backend en infraestructura cloud. La integración de Stripe, Google Login, Railway, MySQL 8 y Upstash Redis evidenció la importancia del aprendizaje autónomo para comprender nuevas tecnologías, resolver problemas de integración y garantizar el funcionamiento de los servicios del producto.
+      <br><br>
+      <u>AV2</u><br>
+      Reconoció la necesidad de aprender continuamente al identificar la coexistencia de una aplicación Android Kotlin/Jetpack Compose y una nueva aplicación Flutter/Dart dentro del mismo Sprint. Reforzó de manera autónoma la revisión de commits, diferencias, pruebas Unit, Widget, Integration y Acceptance, así como la especificación BDD en Gherkin. Al comprobar que el repositorio Flutter contiene un Widget Test versionado pero que no había resultados de ejecución disponibles en el entorno revisado ni suites automatizadas de integración o aceptación, identificó acciones pendientes para mejorar la automatización, la integración continua y la evidencia reproducible del producto.
       <br><br>
       <b>Güere Calero, Fernando Julio</b><br>
       <u>AV1</u><br>
@@ -4807,6 +4816,61 @@ El objetivo del Sprint 2 es que la Mobile Application funcione por completo sobr
 | — | — | T20 | Documentar la evidencia del Sprint Review 2 | Completar en el informe la evidencia de desarrollo, pruebas, ejecución, servicios, despliegue y colaboración del Sprint 2. | 5 | ImaLi06 | To-do |
 | — | — | T21 | Documentar el Sprint Planning y el Sprint Backlog 2 | Redactar el Sprint Planning 2, la matriz de liderazgo y el Sprint Backlog 2 en el informe. | 3 | whcamm | Done |
 
+#### 4.2.2.4. Development Evidence for Sprint Review
+
+Se revisó la rama `develop` de los cuatro repositorios del producto después del Sprint Planning 2 (12/10/2026) y hasta el 10/11/2026. Las fechas se expresan en UTC. La aplicación Android original (`mindflow-frontend`, Kotlin/Jetpack Compose) y la nueva aplicación (`mindflow-mobile-flutter`, Flutter/Dart) se registran por separado. Los commits de merge no se contabilizan como una segunda implementación.
+
+**Tabla 86.4. Sprint 2 — Development Evidence by Repository.**
+
+| Repository | Branch | Commit Id | Message | Body | Date |
+|---|---|---|---|---|---|
+| [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend/tree/develop) | `develop` | — | Sin commits nuevos después del 12/10/2026 | — | — |
+| [`mindflow-frontend` (Android Kotlin)](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/tree/develop) | `develop` | [`ac85aede7a5b`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/commit/ac85aede7a5b6fdf7477d2b85cd75c109b608e88) | `chore(api): point base URL to the new Railway backend` | Sin cuerpo. | 2026-11-10 23:52:45 UTC |
+| [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/tree/develop) | `develop` | [`fab69a3854bf`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/fab69a3854bf146f474a1f965d581485aa85ed4d) | `Full Settings feature: profile, real PIN lock, theme, language, log out` | `Profile (W22): edit name/occupation against the real backend, read-only email, delete account (with native MindFlow.Platform DELETE /users) then sign out`.<br><br>`Settings (W7): profile summary row, real PIN lock (POST/DELETE/verify/status against IAM's actual PIN endpoints, not a local-only stub), dark mode and EN/ES language wired to the whole app via new ThemeController/LocaleController, habit reminders and hide-in-switcher as explicit local-only preferences (no backend concept for either), real current plan from GET /subscriptions/me, crisis line, log out`.<br><br>`Hide-in-switcher actually sets FLAG_SECURE natively on Android (MainActivity.kt MethodChannel), not just a cosmetic toggle`.<br><br>`Terms and privacy row reuses the existing TermsPage; Plans and Support and FAQ are left as explicit stubs for a follow-up branch` | 2026-11-04 01:30:55 UTC |
+| [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/tree/develop) | `develop` | [`766784eacf80`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/766784eacf80f6ede1eaa2deb3c30930aaabd959) | `Add password visibility toggle on sign-up and enforce the PIN lock` | `Register's password field had obscureText hardcoded with no show/hide button, unlike Login which already had one.`<br><br>`"Bloqueo con PIN" in Settings saved a preference and called the pinApi to set/verify a PIN server-side, but nothing in the app ever re-asked for it — AuthGate only checked for a stored session token, so the toggle had no real effect. AuthGate now also checks PinApi.status() when a session exists and routes to a new PinLockPage (verifies against the backend, with a sign-out fallback) before AppShell.` | 2026-11-06 00:06:21 UTC |
+| [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/tree/develop) | `develop` | [`56e598eebbbf`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/56e598eebbbf63001fc6025cc51fdaea17382f15) | `Full Journal feature: list/calendar, entry detail with edit and delete` | `Full CRUD against the real backend: list (with real server-side search via q, client-side category/sentiment filters), get by id, update, delete`.<br><br>`Journal tab (W4): List/Calendar toggle, search, category and sentiment filter chips, entry rows`.<br><br>`Calendar view (W15): month grid colored by sentiment, day detail list, month navigation`.<br><br>`Entry detail (W14): view + inline edit (title/content/category), delete with confirmation, AI response, links to breathing pause`.<br><br>`Today's recent entries and the Journal list both open the same entry detail and refresh on return`.<br><br>`Categories reconciled against NewEntryPage's real stored values (the design's own Journal-filter and New-entry screens list different category sets; used the one that actually determines what gets stored)` | 2026-11-04 00:26:07 UTC |
+| [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/tree/develop) | `develop` | [`5c6246b15356`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/5c6246b15356f02c32791ce095c79961121c6330) | `Full Habits feature: routines, AI suggestions, history` | `Full CRUD against the real backend: list, create, delete habits; list habit-logs; toggle today's completion (create/delete a log)`.<br><br>`Routines tab (W5): daily progress bar, filter by name and status, add-habit sheet (name + category + frequency — category added because CreateHabitResource requires it, the mock's dialog doesn't show one), long-press to delete, stress-pause banner driven by real paused_by_ai habits`.<br><br>`AI suggestions tab (W16): real POST /habits/suggestions, add as a real habit per suggestion`.<br><br>`History tab (W17): completed habit logs sorted by completion time, reusing the same logs the Routines tab already loaded`.<br><br>`Habits tab wired into the shell` | 2026-11-04 00:33:04 UTC |
+| [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/tree/develop) | `develop` | [`f2ca6e777dc3`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/f2ca6e777dc3fd9ff28569b7fe94f4d7369d9e5a) | `Full Insights feature against the real Analytics backend` | `GET /analytics/dashboard with real from/to range (Week/Month toggle), sentiment counts, top categories, habit completions and active habits`.<br><br>`Best streak reused from the real Habits data (max habit streak), since there is no global-streak endpoint`.<br><br>`Deliberately does not build the design's mood-score, day-by-day fluctuation chart, or word cloud: the backend has no mood score, no time-series, and no word-frequency data, so faking those would mean inventing data`.<br><br>`Export PDF/CSV now call the real /analytics/report.csv and .pdf endpoints and share the file; the mock's Premium gate on export was dropped because the backend does not actually restrict these endpoints by plan`.<br><br>`Added path_provider (direct dependency) and share_plus for saving/sharing exported reports` | 2026-11-04 01:20:34 UTC |
+| [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/tree/develop) | `develop` | [`206f4aec632b`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/206f4aec632b497da14c89c9cea469437807b164) | `Add Support ticket system (W23)` | `Real ticket list/detail/reply against /support/tickets endpoints, with an FAQ section and crisis-support banner. Settings now links to the real page instead of the ComingSoon stub, which is now unused and removed.` | 2026-11-04 16:36:11 UTC |
+| [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/tree/develop) | `develop` | [`f0fb9e3ce4c0`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/f0fb9e3ce4c093cdbeca26de6d59af7539ddbd25) | `Point API client to the new Railway backend` | Sin cuerpo. | 2026-11-10 23:52:42 UTC |
+| [`mindflow-landingPage`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage/tree/develop) | `develop` | [`c4348a751408`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage/commit/c4348a7514088244f8df9fa814eced9461eb471f) | `Actualizar Terminos y Condiciones y Politica de Privacidad con datos verificados del backend` | Sin cuerpo. | 2026-10-16 01:34:15 UTC |
+
+**Trazabilidad.** En Flutter, `fab69a3854bf` y `766784eacf80` aportan evidencia de US04 (bloqueo con PIN); el primero también evidencia US05 (perfil) y US07 (eliminación de cuenta). `56e598eebbbf` cubre búsqueda y calendario del diario (US16 y US17); `5c6246b15356`, hábitos y registros de cumplimiento (US21 y US22); `f2ca6e777dc3`, analíticas (US31); y `206f4aec632b`, soporte (US37). Esta relación se deriva del contenido verificable de los commits y no demuestra por sí sola pruebas exitosas ni cierre de User Stories. El merge `b71242c946c9` de Landing Page fue omitido para no duplicar `c4348a751408`.
+
+#### 4.2.2.5. Testing Suite Evidence for Sprint Review
+
+La revisión de `develop` separa pruebas implementadas de especificaciones propuestas. La existencia de un archivo de prueba o de un commit no equivale a una ejecución aprobada.
+
+**Tabla 86.5. Testing Suite — Inventario y relación con las User Stories.**
+
+| Tipo | Archivo o evidencia | Casos identificados | User Stories | Estado |
+|---|---|---|---|---|
+| Unit | [`HabitPolicyTest.kt`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/blob/develop/app/src/test/java/com/cognitech/mindflow/domain/service/HabitPolicyTest.kt) (Android Kotlin) | Tres métodos `@Test`: clasificación, racha y estrés. | US21, US22 (lógica de dominio relacionada). | Implementado antes del Sprint 2; sin resultado de ejecución adjunto. |
+| Unit | [`ChatUseCasesTest.kt`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/blob/develop/app/src/test/java/com/cognitech/mindflow/application/ChatUseCasesTest.kt) (Android Kotlin) | Dos métodos `@Test`: respuesta y bienvenida del asistente. | Regresión de chat anterior; no US priorizada del Sprint 2. | Implementado antes del Sprint 2; sin resultado de ejecución adjunto. |
+| Widget | [`test/widget_test.dart`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/blob/develop/test/widget_test.dart) (Flutter) | Un `testWidgets`: inicia `MindFlowApp` y espera un `CircularProgressIndicator` mientras se resuelve la sesión. | Infraestructura transversal; no valida por sí solo una US priorizada. | Implementado en el scaffold de Flutter. No ejecutado en esta revisión porque el SDK de Flutter no está disponible en el entorno. |
+| Integration | Backend + cliente Android Kotlin / cliente Flutter + MySQL | Autenticación, PIN, perfil, diario, hábitos, analíticas y soporte contra servicios reales. | US04, US05, US07, US16, US17, US21, US22, US31, US37. | No se identificó una suite automatizada ni resultados versionados. |
+| Acceptance | Archivos `.feature` en [`gherkin/`](gherkin/) | Escenarios BDD en inglés. | Nueve US del Sprint 2. | Especificaciones propuestas; no hay *step definitions* ni ejecución acreditada. |
+
+**Tabla 86.6. Gherkin — Trazabilidad de especificaciones de aceptación.**
+
+| User Story | Archivo `.feature` propuesto | Estado |
+|---|---|---|
+| US04, US05, US07 | [`gherkin/account_management.feature`](gherkin/account_management.feature) | Proposed; not executed. |
+| US16, US17 | [`gherkin/journal.feature`](gherkin/journal.feature) | Proposed; not executed. |
+| US21, US22 | [`gherkin/habits.feature`](gherkin/habits.feature) | Proposed; not executed. |
+| US31 | [`gherkin/analytics.feature`](gherkin/analytics.feature) | Proposed; not executed. |
+| US37 | [`gherkin/support.feature`](gherkin/support.feature) | Proposed; not executed. |
+
+**Tabla 86.7. Testing Commits.**
+
+| Repository | Branch | Commit Id | Message | Body | Date |
+|---|---|---|---|---|---|
+| `mindflow-frontend` | `develop` | [`05d549d2406e`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/commit/05d549d2406e517d5d38d01da236e9efc9b99e80) | `refactor: add DDD foundation for frontend` | `Adds domain, application, infrastructure and shared layers.`<br>`Introduces local persistence adapters, dependency composition,`<br>`initial domain policies and fixes the Plans header.` The diff adds `HabitPolicyTest.kt`. | 2026-09-28 17:09:26 UTC |
+| `mindflow-frontend` | `develop` | [`7bbe3caf8b7b`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/commit/7bbe3caf8b7b53c2267d700776c882b922ff64a0) | `refactor(chat): route AI chat through application and domain layers` | Sin cuerpo. El diff añade `ChatUseCasesTest.kt`. | 2026-10-02 23:23:22 UTC |
+| `mindflow-mobile-flutter` | `develop` | [`6e285faab169`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/6e285faab169bea11a2104356fd98f9cf9271be9) | `Scaffold Flutter project: core infra, auth flow, and Today screen wired to the real backend` | El cuerpo original declara `Project scaffold (flutter create)`; el diff introduce `test/widget_test.dart`. | 2026-11-04 00:08:17 UTC |
+
+No se informa ningún resultado como PASS. Para completar la evidencia faltan ejecución reproducible de `flutter test`, pruebas de integración, *step definitions*, resultados de aceptación y artefactos de CI o logs vinculados a las User Stories.
+
 
 ## 4.3. Validation Interviews
 
@@ -5440,9 +5504,31 @@ _Pendiente_
 
 ---
 
-<!--# Glosario
+# Glosario
 
-_Pendiente_ -->
+Los siguientes términos se emplean en la documentación, arquitectura y validación de MindFlow.
+
+| Término | Definición aplicada al proyecto |
+|---|---|
+| Acceptance Test | Verificación de un comportamiento esperado desde la perspectiva de una User Story. |
+| ASP.NET Core | Plataforma .NET utilizada por el backend para exponer servicios y reglas de negocio. |
+| BDD | Enfoque que expresa comportamientos verificables mediante ejemplos legibles para negocio y desarrollo. |
+| Bounded Context | Límite DDD en el que un modelo de dominio mantiene reglas y significado coherentes. |
+| Dart | Lenguaje de programación usado por la aplicación móvil Flutter. |
+| DDD | Enfoque de diseño que alinea software y modelo de dominio. |
+| Flutter | SDK multiplataforma utilizado por `mindflow-mobile-flutter`, distinto de la aplicación Android Kotlin. |
+| Gherkin | Sintaxis BDD basada en `Feature`, `Scenario`, `Given`, `When` y `Then`. |
+| Integration Test | Prueba de interacción entre componentes, por ejemplo cliente móvil, API y base de datos. |
+| Jetpack Compose | Toolkit declarativo de interfaz utilizado por la aplicación Android Kotlin original. |
+| Kotlin | Lenguaje usado por `mindflow-frontend`, la aplicación Android original. |
+| MySQL | Base de datos relacional usada para persistir información del backend. |
+| Railway | Plataforma cloud utilizada para el despliegue del backend y servicios asociados. |
+| REST API | Interfaz HTTP con recursos y operaciones consumida por los clientes móviles. |
+| Scrum | Marco ágil que organiza trabajo iterativo mediante roles, eventos y artefactos. |
+| Sprint | Iteración de tiempo fijo en la que se desarrolla un incremento del producto. |
+| Unit Test | Prueba automatizada y aislada de una unidad pequeña de lógica. |
+| User Story | Descripción breve de una necesidad de usuario verificable mediante criterios de aceptación. |
+| Widget Test | Prueba Flutter que valida widgets y sus interacciones en un entorno de prueba. |
 
 ---
 
