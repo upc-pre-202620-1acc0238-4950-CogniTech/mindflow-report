@@ -460,9 +460,7 @@ El trabajo de esta entrega incluyó la planificación del Sprint 2 (Sprint Plann
 -->
 - [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
-<!--
 - [Anexos](#anexos)
--->
 
 ---
 
