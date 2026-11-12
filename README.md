@@ -445,6 +445,8 @@ El trabajo de esta entrega incluyó la planificación del Sprint 2 (Sprint Plann
       - [4.2.2.3. Sprint Backlog 2](#4223-sprint-backlog-2)
       - [4.2.2.4. Development Evidence for Sprint Review](#4224-development-evidence-for-sprint-review)
       - [4.2.2.5. Testing Suite Evidence for Sprint Review](#4225-testing-suite-evidence-for-sprint-review)
+      - [4.2.2.6. Execution Evidence for Sprint Review](#4226-execution-evidence-for-sprint-review)
+      - [4.2.2.7. Services Documentation Evidence for Sprint Review](#4227-services-documentation-evidence-for-sprint-review)
       - [4.2.2.8. Software Deployment Evidence for Sprint Review](#4228-software-deployment-evidence-for-sprint-review)
       - [4.2.2.9. Team Collaboration Insights during Sprint](#4229-team-collaboration-insights-during-sprint)
   - [4.3. Validation Interviews](#43-validation-interviews)
@@ -4904,6 +4906,208 @@ La revisión de `develop` separa pruebas implementadas de especificaciones propu
 | `mindflow-mobile-flutter` | `develop` | [`6e285faab169`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/6e285faab169bea11a2104356fd98f9cf9271be9) | `Scaffold Flutter project: core infra, auth flow, and Today screen wired to the real backend` | El cuerpo original declara `Project scaffold (flutter create)`; el diff introduce `test/widget_test.dart`. | 2026-11-04 00:08:17 UTC |
 
 No se informa ningún resultado como PASS. Para completar la evidencia faltan ejecución reproducible de `flutter test`, pruebas de integración, *step definitions*, resultados de aceptación y artefactos de CI o logs vinculados a las User Stories.
+
+#### 4.2.2.6. Execution Evidence for Sprint Review
+
+En el Sprint 2 el equipo construyó la Mobile Application en **Flutter (Dart)** en el repositorio [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter), conectada desde el inicio a los Web Services desplegados en Railway (sección 4.2.2.8). La aplicación Android en Kotlin del Sprint 1 se mantiene en su repositorio y en este Sprint solo cambió su URL base hacia el nuevo servicio (`ac85aede7a5b`, Tabla 86.4).
+
+Logros principales del Sprint:
+
+- **Vistas conectadas al backend real.** Diario, Hábitos, Analíticas, Soporte, Notificaciones y Ajustes leen y escriben en los Web Services. La aplicación consume **46 de los 70 endpoints** documentados en la sección 4.2.2.7.
+- **Arquitectura por funcionalidad.** Cada módulo (`auth`, `journal`, `habits`, `insights`, `support`, `notifications`, `ai_feedback`, `settings`, entre otros) separa sus capas `domain`, `application` (casos de uso), `infrastructure` (cliente de API) y `presentation` (páginas y ViewModels).
+- **Sesión protegida.** El token JWT emitido por `POST /api/v1/users/sign-in` se guarda en el almacenamiento seguro del dispositivo. Si el usuario tiene un PIN configurado, la aplicación lo solicita antes de mostrar el contenido y ofrece cerrar la sesión si lo olvidó (US04).
+- **Soporte dentro de la aplicación.** Desde Soporte el usuario envía un ticket, consulta sus tickets y responde en su conversación (US37). La misma pantalla muestra la Línea 113 y un botón que abre el marcador del teléfono.
+- **Ajustes de usabilidad.** Modo oscuro, cambio de idioma español/inglés, opción de mostrar u ocultar la contraseña en el registro y mayor contraste de las burbujas del chat en modo oscuro (`c65ef98`).
+- **Analíticas con datos reales.** La pantalla muestra solo las métricas que entrega el endpoint de analíticas (entradas, hábitos activos, mejor racha, distribución por sentimiento y hábitos completados); la fluctuación diaria y la nube de palabras de los mock-ups no se muestran porque el backend no entrega esos datos.
+- **Distribución.** Las versiones de la aplicación se publican a los dispositivos de prueba mediante un flujo de integración continua con Firebase App Distribution.
+
+##### Vistas implementadas
+
+**Tabla 86.9. Execution Evidence for Sprint Review — Vistas implementadas en la Mobile Application (Flutter).**
+
+| Vista | Funcionalidad implementada | User Stories | Conexión con el backend |
+|---|---|---|---|
+| Acceso | Inicio de sesión, registro con visibilidad de la contraseña y recuperación de contraseña. | US01, US02 | `POST /api/v1/users/sign-in`, `POST /api/v1/users/sign-up`, `POST /api/v1/users/forgot-password` |
+| Hoy | Pantalla de inicio con acceso a una nueva entrada y a las entradas recientes. | US11, US12, US13 | `POST /api/v1/journal/entries`, `GET /api/v1/journal/entries` |
+| Diario | Alternancia entre Lista y Calendario, búsqueda por palabra clave, filtros por categoría y sentimiento, calendario mensual coloreado según el sentimiento con el detalle del día, y detalle de entrada con edición, eliminación con confirmación y respuesta de la IA (Figura 138.7). | US16, US17 | `GET /api/v1/journal/entries` (parámetro `q`), `GET`, `PUT` y `DELETE /api/v1/journal/entries/{id}` |
+| Hábitos | Tres pestañas: Rutinas, Sugerencias IA e Historial. Rutinas muestra el progreso diario, filtra por nombre y estado, agrega hábitos (nombre, categoría y frecuencia), marca su cumplimiento del día y elimina con pulsación larga (Figura 138.8). | US21, US22, US23, US28 | `GET`, `POST` y `DELETE /api/v1/habits`; `GET`, `POST` y `DELETE /api/v1/habit-logs`; `POST /api/v1/habits/suggestions` |
+| Análisis | Entradas, hábitos activos y mejor racha del periodo; alternancia Semana/Mes; positividad general con la distribución Positivo/Neutral/Negativo; hábitos completados; exportación en PDF y CSV (Figura 138.9). | US31, US35, US36 | `GET /api/v1/analytics/dashboard` (`from`, `to`), `GET /api/v1/analytics/report.pdf`, `GET /api/v1/analytics/report.csv` |
+| Bloqueo por PIN | Pantalla que solicita el PIN de 4 dígitos al abrir la aplicación, con la opción «Olvidé mi PIN, cerrar sesión» (Figura 138.10). | US04 | `GET /api/v1/users/pin/status`, `POST /api/v1/users/pin/verify` |
+| Soporte | Aviso de la Línea 113 con botón de llamada, formulario para enviar un ticket, lista «Mis tickets», detalle del ticket con su conversación y preguntas frecuentes (Figura 138.11). | US37 | `POST` y `GET /api/v1/support/tickets`, `GET /api/v1/support/tickets/{id}`, `POST /api/v1/support/tickets/{id}/messages` |
+| Ajustes | Perfil (nombre y ocupación), activación y desactivación del PIN, modo oscuro, idioma, plan actual, cierre de sesión y eliminación de la cuenta. | US04, US05, US07 | `GET` y `PUT /api/v1/users/profile`, `POST` y `DELETE /api/v1/users/pin`, `DELETE /api/v1/users`, `GET /api/v1/subscriptions/me` |
+| Notificaciones | Bandeja de notificaciones con contador de no leídas y opciones para marcar una o todas como leídas. | US37 | `GET /api/v1/notifications`, `GET /api/v1/notifications/unread-count`, `POST /api/v1/notifications/{id}/read`, `POST /api/v1/notifications/read-all` |
+| Valoración de la IA | Calificación de las respuestas de MindFlow AI e historial de valoraciones. | US26 | `POST /api/v1/ai-feedback`, `GET /api/v1/ai-feedback`, `GET /api/v1/ai-feedback/summary` |
+| Chat MindFlow AI | Conversaciones con la IA desde cualquier pantalla principal. | US13 | `POST` y `GET /api/v1/chat/conversations`, `GET` y `POST /api/v1/chat/conversations/{id}/messages`, `DELETE /api/v1/chat/conversations/{id}` |
+| Planes | Comparación de Freemium y Premium y pago con Stripe Checkout en modo prueba. | US33, US34 | `GET /api/v1/subscriptions/plans`, `POST /api/v1/subscriptions/checkout` |
+
+##### Trazabilidad con las User Stories del Sprint
+
+**Tabla 86.10. Execution Evidence for Sprint Review — Trazabilidad de las User Stories del Sprint 2.**
+
+| User Story | Vista | Tareas del Sprint Backlog (Tabla 86.3) | Commit de implementación (Tabla 86.4) | Captura |
+|---|---|---|---|---|
+| US04 Bloqueo mediante PIN | Bloqueo por PIN y Ajustes | T08, T09 | `766784eacf80`, `fab69a3854bf` | Figura 138.10 |
+| US05 Perfil de usuario | Ajustes | T10 | `fab69a3854bf` | — |
+| US07 Eliminación de cuenta | Ajustes | T11 | `fab69a3854bf` | — |
+| US16 Búsqueda por palabras clave | Diario | T03 | `56e598eebbbf` | Figura 138.7 |
+| US17 Calendario de estado de ánimo | Diario (Calendario) | T01, T02 | `56e598eebbbf` | Figura 138.7 |
+| US21 Creación de hábitos | Hábitos | T04 | `5c6246b15356` | Figura 138.8 |
+| US22 Registro de cumplimiento de hábitos | Hábitos | T05 | `5c6246b15356` | Figura 138.8 |
+| US31 Dashboard de analítica | Análisis | T06 | `f2ca6e777dc3` | Figura 138.9 |
+| US37 Soporte técnico | Soporte y Notificaciones | T12, T13, T14 | `206f4aec632b` | Figura 138.11 |
+
+##### Capturas de la aplicación
+
+Las capturas corresponden a la versión de la aplicación instalada en un dispositivo Android el 12/11/2026, en modo oscuro e idioma español, con una cuenta recién registrada. Por eso el Diario y las métricas de Análisis se muestran sin entradas registradas.
+
+**1. Diario, vista Calendario.** El calendario de noviembre de 2026 marca el día actual, incluye la leyenda de colores Positivo, Neutral y Negativo, y muestra debajo la lista de entradas del día seleccionado (Figura 138.7).
+
+<img src="assets/img/flutter-execution/Flutter_Diario_Calendario_AV2.jpeg" alt="Vista Calendario del Diario en la aplicación Flutter" width="300"/>
+
+*Figura 138.7. Diario en vista Calendario de la Mobile Application (Flutter), con la leyenda de estados de ánimo.*
+
+**2. Hábitos, pestaña Rutinas.** Se muestran las pestañas Rutinas, Sugerencias IA e Historial, el botón para agregar un hábito, el progreso diario («0 de 3 activos»), el filtro por nombre y estado (Todos, Hechos, Pendientes) y tres hábitos con su categoría, frecuencia y racha (Figura 138.8).
+
+<img src="assets/img/flutter-execution/Flutter_Habitos_Rutinas_AV2.jpeg" alt="Pestaña Rutinas de Hábitos en la aplicación Flutter" width="300"/>
+
+*Figura 138.8. Hábitos, pestaña Rutinas, de la Mobile Application (Flutter).*
+
+**3. Análisis.** La pantalla presenta las tarjetas de entradas, hábitos activos y mejor racha, el selector Semana/Mes, la positividad general con la distribución por sentimiento, los hábitos completados y los botones para exportar el reporte en PDF y CSV (Figura 138.9).
+
+<img src="assets/img/flutter-execution/Flutter_Analisis_AV2.jpeg" alt="Pantalla de Análisis en la aplicación Flutter" width="300"/>
+
+*Figura 138.9. Análisis de la Mobile Application (Flutter), con la selección Mes y la exportación de datos.*
+
+**4. Bloqueo por PIN.** Al abrir la aplicación con un PIN configurado se solicita el código de 4 dígitos. El botón «Continuar» se habilita al completarlo y el enlace inferior permite cerrar la sesión si el usuario lo olvidó (Figura 138.10).
+
+<img src="assets/img/flutter-execution/Flutter_Bloqueo_PIN_AV2.jpeg" alt="Pantalla de bloqueo por PIN en la aplicación Flutter" width="300"/>
+
+*Figura 138.10. Pantalla de bloqueo por PIN de la Mobile Application (Flutter).*
+
+**5. Soporte.** La pantalla ofrece la Línea 113 con el botón «Llamar al 113», el formulario «Enviar un ticket» y las preguntas frecuentes (privacidad de las entradas, funcionamiento de MindFlow AI, pausa de hábitos y alcance de Premium) (Figura 138.11).
+
+<img src="assets/img/flutter-execution/Flutter_Soporte_AV2.jpeg" alt="Pantalla de Soporte en la aplicación Flutter" width="300"/>
+
+*Figura 138.11. Soporte de la Mobile Application (Flutter), con el formulario de tickets y las preguntas frecuentes.*
+
+#### 4.2.2.7. Services Documentation Evidence for Sprint Review
+
+Los Web Services no registraron commits en `develop` durante el Sprint 2 (Tabla 86.4). Lo que cambió fue su despliegue: el backend se publicó en un nuevo servicio de Railway (sección 4.2.2.8), por lo que la documentación **OpenAPI (Swagger)** se verificó nuevamente en esa URL. El 12/11/2026 la especificación desplegada respondió `200`, declara **70 operaciones sobre 49 rutas** (69 endpoints de 12 controladores, más `/health`), el mismo inventario que documenta la sección 4.2.1.7, y `GET /health` respondió `{ "status": "ok", "database": "connected" }`.
+
+Esta sección documenta los endpoints que la Mobile Application en Flutter consume para las User Stories del Sprint 2. El detalle de los demás endpoints se mantiene en las Tablas 75 a 83.
+
+**Repositorio de Web Services:** [https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) (rama `develop`)
+
+**Documentación desplegada (Railway):** [https://mindflow-backend-production-898f07da.up.railway.app/swagger/index.html](https://mindflow-backend-production-898f07da.up.railway.app/swagger/index.html)
+
+**Convenciones de las tablas:**
+
+- 🔒 indica que el endpoint requiere el header `Authorization: Bearer <token>`.
+- 👤 indica que el endpoint requiere además el rol `Admin` o `Support`.
+- Las rutas son relativas al prefijo `https://mindflow-backend-production-898f07da.up.railway.app`.
+
+##### Inventario de endpoints y uso desde la aplicación
+
+**Tabla 86.11. Services Documentation Evidence for Sprint Review — Endpoints documentados y consumidos por la Mobile Application (Flutter).**
+
+| Grupo (Tablas del Sprint 1) | Controladores | Endpoints documentados | Consumidos por Flutter |
+|---|---|---|---|
+| IAM: usuarios y autenticación (Tabla 75) | `Users` | 12 | 11 |
+| Journal: diario emocional (Tabla 76) | `Journal` | 13 | 5 |
+| AI Assistant: chat y valoración (Tabla 77) | `Chat`, `AiFeedback` | 8 | 8 |
+| Habits & Wellness (Tabla 78) | `Habits`, `HabitLogs`, `Wellness`, `WellnessExercises` | 19 | 8 |
+| Analytics & Reporting (Tabla 79) | `Analytics` | 3 | 3 |
+| Notifications (Tabla 80) | `Notifications` | 4 | 4 |
+| Subscriptions (Tabla 81) | `Subscriptions` | 5 | 3 |
+| Support (Tabla 82) | `SupportTickets` | 5 | 4 |
+| Health check (Tabla 83) | `MindFlow.Platform` | 1 | 0 |
+| **Total** | **12 controladores y `/health`** | **70** | **46** |
+
+Los 46 endpoints que consume la aplicación figuran en la especificación desplegada; se verificó cada ruta y verbo contra el código de `mindflow-mobile-flutter` en `develop`.
+
+##### Endpoints de las User Stories del Sprint 2
+
+**Tabla 86.12. Services Documentation Evidence for Sprint Review — Cuenta y seguridad (US04, US05, US07).**
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET 🔒 | `/api/v1/users/pin/status` | — | `200` con `{ "has_pin": true }` o `{ "has_pin": false }`. La aplicación lo consulta al abrirse para decidir si muestra el bloqueo (US04). |
+| POST 🔒 | `/api/v1/users/pin/verify` | Body: `pin` | `200` con `{ "valid": true }` o `{ "valid": false }` (US04). |
+| POST 🔒 | `/api/v1/users/pin` | Body: `pin` | `200` "PIN configurado correctamente." (US04). |
+| DELETE 🔒 | `/api/v1/users/pin` | — | `200` "PIN eliminado correctamente." (US04). |
+| GET 🔒 | `/api/v1/users/profile` | — | `200` con el perfil del usuario autenticado (US05). |
+| PUT 🔒 | `/api/v1/users/profile` | Body: `name`, `occupation` | `200` con el perfil actualizado (US05). |
+| DELETE 🔒 | `/api/v1/users` | — | `204` al eliminar la cuenta del usuario autenticado (US07). |
+
+**Tabla 86.13. Services Documentation Evidence for Sprint Review — Diario (US16, US17).**
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET 🔒 | `/api/v1/journal/entries` | Query: `_sort`, `_order`, `_limit`, `q` (búsqueda por palabra clave) | `200` con la lista de entradas del usuario. Alimenta la lista, la búsqueda (US16) y el calendario coloreado por `sentiment` (US17). |
+| GET 🔒 | `/api/v1/journal/entries/{id}` | Path: `id` | `200` con la entrada. `404` si no existe o pertenece a otro usuario. |
+| POST 🔒 | `/api/v1/journal/entries` | Body: `date`, `title`, `content`, `sentiment`, `category` | `200` con la entrada creada, incluida la respuesta de la IA (`ai_response`). |
+| PUT 🔒 | `/api/v1/journal/entries/{id}` | Path: `id`. Body: `title`, `content`, `sentiment`, `category` | `200` con la entrada actualizada. `404` si no existe. |
+| DELETE 🔒 | `/api/v1/journal/entries/{id}` | Path: `id` | `200` al eliminarla. `404` si no existe. |
+
+**Tabla 86.14. Services Documentation Evidence for Sprint Review — Hábitos (US21, US22).**
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET 🔒 | `/api/v1/habits` | Query: `user_id` (opcional) | `200` con los hábitos (`id`, `name`, `category`, `frequency`, `streak`, `status`, `paused_by_ai`). |
+| POST 🔒 | `/api/v1/habits` | Body: `name`, `category`, `frequency`, `user_id` | Hábito creado (US21). |
+| DELETE 🔒 | `/api/v1/habits/{id}` | Path: `id` | Elimina el hábito. |
+| GET 🔒 | `/api/v1/habit-logs` | Query: `user_id`, `habit_id` (opcionales) | `200` con los registros de cumplimiento. |
+| POST 🔒 | `/api/v1/habit-logs` | Body: `habit_id`, `habit_name`, `category`, `date`, `completed`, `completed_at` | Registro de cumplimiento creado (US22). |
+| DELETE 🔒 | `/api/v1/habit-logs/{id}` | Path: `id` | Elimina el registro; la aplicación lo usa para desmarcar el hábito del día. |
+| POST 🔒 | `/api/v1/habits/suggestions` | — | `200` con hasta 3 hábitos sugeridos por la IA según el nivel de estrés. |
+
+**Tabla 86.15. Services Documentation Evidence for Sprint Review — Analíticas y Soporte (US31, US37).**
+
+| Verbo | Endpoint | Parámetros / Body | Response |
+|---|---|---|---|
+| GET 🔒 | `/api/v1/analytics/dashboard` | Query: `from`, `to` (`YYYY-MM-DD`; por defecto los últimos 30 días) | `200` con las entradas del periodo, la distribución por sentimiento, las categorías principales, los hábitos completados y los hábitos activos (US31). `400` si `from` es posterior a `to`. |
+| GET 🔒 | `/api/v1/analytics/report.pdf` | — | Archivo `mindflow-report.pdf` con el resumen emocional. |
+| GET 🔒 | `/api/v1/analytics/report.csv` | — | Archivo `mindflow-report.csv` con las entradas del usuario. |
+| POST 🔒 | `/api/v1/support/tickets` | Body: `subject`, `category`, `message` (opcional), `priority` (por defecto `normal`) | `201` con el ticket creado; genera además una notificación «Ticket creado» (US37). `400` si falta `subject`. |
+| GET 🔒 | `/api/v1/support/tickets` | — | `200` con los tickets del usuario. |
+| GET 🔒 | `/api/v1/support/tickets/{id}` | Path: `id` | `200` con el ticket y su hilo de mensajes. `404` si no existe o no le pertenece. |
+| POST 🔒 | `/api/v1/support/tickets/{id}/messages` | Path: `id`. Body: `message` | `204` al agregar el mensaje. Si responde el personal de soporte, el usuario recibe una notificación. |
+
+Ejemplo del formulario de soporte de la Figura 138.11, tal como lo envía la aplicación (Tabla 86.15):
+
+```http
+POST /api/v1/support/tickets
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{ "subject": "No puedo cambiar mi PIN", "category": "general", "message": "Al desactivar el PIN la aplicación vuelve a pedirlo." }
+```
+
+Ejemplo de verificación del PIN de la Figura 138.10 (Tabla 86.12):
+
+```http
+POST /api/v1/users/pin/verify
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{ "pin": "1234" }
+```
+
+```json
+{ "valid": true }
+```
+
+##### Verificación de la documentación desplegada
+
+**Tabla 86.16. Services Documentation Evidence for Sprint Review — Verificación de la documentación en Railway (12/11/2026).**
+
+| Verificación | Resultado |
+|---|---|
+| `GET /swagger/v1/swagger.json` | `200`; 49 rutas y 70 operaciones. |
+| `GET /health` | `200` con `{ "status": "ok", "database": "connected" }`. |
+| Operaciones de la especificación frente al Sprint 1 | 69 endpoints de 12 controladores más `/health`, igual que la sección 4.2.1.7. |
+| Endpoints que consume `mindflow-mobile-flutter` | 46 de 46 presentes en la especificación. |
+| Commits del backend en `develop` durante el Sprint 2 | Ninguno (Tabla 86.4); el último es del 08/10/2026. |
 
 #### 4.2.2.8. Software Deployment Evidence for Sprint Review
 
