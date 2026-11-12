@@ -4941,15 +4941,15 @@ Durante el Sprint 2 el equipo mantuvo el flujo GitFlow sobre la rama `develop` d
 
 **Tabla 86.8. Team Collaboration Insights — Commits por integrante en el Sprint 2.**
 
-| Team Member | GitHub Username | Landing Page | Web Services | Mobile Application (Android Kotlin) | Mobile Application (Flutter) |
-|:---|:---|:---:|:---:|:---:|:---:|
-| Güere Calero, Fernando Julio | FerG17 | 1 | — | 1 | 23 |
-| Díaz De la Cruz, Sebastián Gabriel | tipaso07 | — | — | — | 1 |
-| Cabrera Sotelo, Camila Celeste | whcamm | — | — | — | — |
-| Limache Coronel, Imanol Fabrizio | ImaLi06 | — | — | — | — |
-| Jáuregui Cerna, Jean Franco | JFranco556 | — | — | — | 2 |
+| Team Member | GitHub Username | Landing Page | Web Services | Mobile Application (Android Kotlin) | Mobile Application (Flutter) | Informe (`mindflow-report`) |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|
+| Güere Calero, Fernando Julio | FerG17 | 1 | — | 1 | 23 | 11 |
+| Díaz De la Cruz, Sebastián Gabriel | tipaso07 | — | — | — | 1 | 1 |
+| Cabrera Sotelo, Camila Celeste | whcamm | — | — | — | — | 4 |
+| Limache Coronel, Imanol Fabrizio | ImaLi06 | — | — | — | — | 2 |
+| Jáuregui Cerna, Jean Franco | JFranco556 | — | — | — | 2 | — |
 
-La tabla cuenta los commits en los repositorios de los productos; la participación en el repositorio del informe se describe al final de esta sección.
+La tabla incluye los commits de los repositorios de los productos y del repositorio del informe (`mindflow-report`, Figura 7), cuyo detalle se describe al final de esta sección. Los commits no recogen todo el aporte del equipo: el diseño, las entrevistas, la grabación de videos y la revisión del informe no siempre generan commits.
 
 ##### Landing Page
 
