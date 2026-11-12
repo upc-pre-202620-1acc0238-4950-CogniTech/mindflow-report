@@ -4883,7 +4883,7 @@ La revisión de `develop` separa pruebas implementadas de especificaciones propu
 |---|---|---|---|---|
 | Unit | [`HabitPolicyTest.kt`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/blob/develop/app/src/test/java/com/cognitech/mindflow/domain/service/HabitPolicyTest.kt) (Android Kotlin) | Tres métodos `@Test`: clasificación, racha y estrés. | US21, US22 (lógica de dominio relacionada). | Implementado antes del Sprint 2; sin resultado de ejecución adjunto. |
 | Unit | [`ChatUseCasesTest.kt`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/blob/develop/app/src/test/java/com/cognitech/mindflow/application/ChatUseCasesTest.kt) (Android Kotlin) | Dos métodos `@Test`: respuesta y bienvenida del asistente. | Regresión de chat anterior; no US priorizada del Sprint 2. | Implementado antes del Sprint 2; sin resultado de ejecución adjunto. |
-| Widget | [`test/widget_test.dart`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/blob/develop/test/widget_test.dart) (Flutter) | Un `testWidgets`: inicia `MindFlowApp` y espera un `CircularProgressIndicator` mientras se resuelve la sesión. | Infraestructura transversal; no valida por sí solo una US priorizada. | Implementado en el scaffold de Flutter. No ejecutado en esta revisión porque el SDK de Flutter no está disponible en el entorno. |
+| Widget | [`test/widget_test.dart`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/blob/develop/test/widget_test.dart) (Flutter) | Un `testWidgets`: inicia `MindFlowApp` y espera un `CircularProgressIndicator` mientras se resuelve la sesión. | Infraestructura transversal; no valida por sí solo una US priorizada. | Implementado en el scaffold de Flutter. Ejecutado el 12/11/2026: 1 de 1 prueba aprobada (Tabla 86.7.1). |
 | Integration | Backend + cliente Android Kotlin / cliente Flutter + MySQL | Autenticación, PIN, perfil, diario, hábitos, analíticas y soporte contra servicios reales. | US04, US05, US07, US16, US17, US21, US22, US31, US37. | No se identificó una suite automatizada ni resultados versionados. |
 | Acceptance | Archivos `.feature` en [`gherkin/`](gherkin/) | Escenarios BDD en inglés. | Nueve US del Sprint 2. | Especificaciones propuestas; no hay *step definitions* ni ejecución acreditada. |
 
@@ -4905,7 +4905,18 @@ La revisión de `develop` separa pruebas implementadas de especificaciones propu
 | `mindflow-frontend` | `develop` | [`7bbe3caf8b7b`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/commit/7bbe3caf8b7b53c2267d700776c882b922ff64a0) | `refactor(chat): route AI chat through application and domain layers` | Sin cuerpo. El diff añade `ChatUseCasesTest.kt`. | 2026-10-02 23:23:22 UTC |
 | `mindflow-mobile-flutter` | `develop` | [`6e285faab169`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/6e285faab169bea11a2104356fd98f9cf9271be9) | `Scaffold Flutter project: core infra, auth flow, and Today screen wired to the real backend` | El cuerpo original declara `Project scaffold (flutter create)`; el diff introduce `test/widget_test.dart`. | 2026-11-04 00:08:17 UTC |
 
-No se informa ningún resultado como PASS. Para completar la evidencia faltan ejecución reproducible de `flutter test`, pruebas de integración, *step definitions*, resultados de aceptación y artefactos de CI o logs vinculados a las User Stories.
+**Tabla 86.7.1. Testing Suite — Ejecución del Widget Test de Flutter.**
+
+| Campo | Valor |
+|---|---|
+| Fecha de ejecución | 12/11/2026 |
+| Repositorio y commit | `mindflow-mobile-flutter`, rama `develop`, commit `d643cf3` |
+| Entorno | Windows 11, Flutter 3.47.9 (canal stable), Dart 3.13.7 |
+| Comando | `flutter test --no-pub` |
+| Prueba ejecutada | `test/widget_test.dart`: *App boots and shows a loading state while resolving the session* |
+| Resultado | PASS: 1 prueba ejecutada, 1 aprobada, 0 fallidas (`All tests passed!`) |
+
+El único resultado informado como PASS es el del Widget Test de Flutter de la Tabla 86.7.1, que valida el arranque de la aplicación y no cubre por sí solo ninguna User Story priorizada. Las pruebas unitarias de Android Kotlin, las pruebas de integración y las especificaciones Gherkin (que no tienen *step definitions*) no tienen una ejecución acreditada en esta revisión.
 
 #### 4.2.2.6. Execution Evidence for Sprint Review
 
@@ -5800,7 +5811,7 @@ Los resultados indican que MindFlow no presenta problemas muy graves (severidad 
 
 **Recomendaciones**
 
-1. Ejecutar y documentar las pruebas de las User Stories del Sprint 2 antes de darlas por cerradas: correr `flutter test` y ampliar los Widget Tests a las funcionalidades implementadas, agregar pruebas de integración contra el backend desplegado, implementar las *step definitions* de los escenarios Gherkin de la carpeta `gherkin/` y automatizar su ejecución en un pipeline de integración continua que deje resultados versionados.
+1. Ejecutar y documentar las pruebas de las User Stories del Sprint 2 antes de darlas por cerradas: ampliar los Widget Tests, hoy limitados al arranque de la aplicación (Tabla 86.7.1), a las funcionalidades implementadas, agregar pruebas de integración contra el backend desplegado, implementar las *step definitions* de los escenarios Gherkin de la carpeta `gherkin/` y automatizar su ejecución en un pipeline de integración continua que deje resultados versionados.
 2. Definir cuál es la aplicación móvil oficial del producto, la implementación Android en Kotlin/Jetpack Compose o la nueva en Flutter, y alinear con esa decisión los diagramas de contenedores y de despliegue (secciones 2.5.3.2 y 2.5.3.3) y la configuración del proyecto (secciones 4.1.1 a 4.1.4), que hoy solo describen la aplicación Android.
 3. Completar la corrección de los problemas de severidad 3 de la sección 4.3.3 que siguen planificados en el Sprint Backlog 2 (T16 y T17): dejar explícito en el onboarding y en Configuración que MindFlow es un asistente de reflexión y no un servicio clínico, detallar cómo se tratan los textos que procesan las APIs externas de IA y ajustar el contraste de los botones principales.
 4. Validar el objetivo del Sprint 2 con usuarios de ambos segmentos: comprobar que un usuario encuentra su entrada y sus hábitos en el calendario y en las analíticas al iniciar sesión en otro dispositivo, que la aplicación solo se abre tras ingresar el PIN y que recibe dentro de la aplicación la respuesta a un ticket de soporte.
