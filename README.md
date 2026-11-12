@@ -243,6 +243,40 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
 
 ---
 
+**Tercera Entrega (AV2)**
+
+Para la tercera entrega, el trabajo colaborativo se registró en los cinco repositorios que conforman la solución de MindFlow, que ahora incluyen la nueva implementación de la Mobile Application en Flutter:
+
+- Informe: [`mindflow-report`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-report)
+- Backend: [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), documentación interactiva en [Swagger](https://mindflow-backend-production-898f07da.up.railway.app/swagger/index.html)
+- Mobile Application (Android nativo): [`mindflow-frontend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend)
+- Mobile Application (Flutter): [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter)
+- Landing Page: [`mindflow-landingPage`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage), desplegado en [GitHub Pages](https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/)
+
+El trabajo de esta entrega incluyó la planificación del Sprint 2 (Sprint Planning, matriz de líderes y colaboradores y Sprint Backlog), la implementación de la Mobile Application en Flutter sobre los Web Services desplegados, la actualización de los Términos y Condiciones del Landing Page, el despliegue del backend en un nuevo servicio de Railway y del seguimiento de la aplicación en Firebase, la documentación de la evidencia del Sprint 2 en el informe y el video App Validation con las cinco entrevistas de validación (Figuras 7 a 10). El backend no tuvo commits nuevos en esta entrega, por lo que no se incluye su captura.
+
+<div align="center">
+
+<img src="assets/img/Insights/Insights_Report_AV2.png" width="500"/>
+
+*Figura 7. Historial de colaboración del repositorio `mindflow-report` durante la tercera entrega (AV2).*
+
+<img src="assets/img/Insights/Insights_Android_AV2.png" width="500"/>
+
+*Figura 8. Historial de colaboración del repositorio `mindflow-frontend` durante la tercera entrega (AV2).*
+
+<img src="assets/img/Insights/Insights_Flutter_AV2.png" width="500"/>
+
+*Figura 9. Historial de colaboración del repositorio `mindflow-mobile-flutter` durante la tercera entrega (AV2).*
+
+<img src="assets/img/Insights/Insights_Landing_AV2.png" width="500"/>
+
+*Figura 10. Historial de colaboración del repositorio `mindflow-landingPage` durante la tercera entrega (AV2).*
+
+</div>
+
+---
+
 <div style="page-break-before: always;"></div>
 
 # Contenido
@@ -412,14 +446,15 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
       - [4.2.2.4. Development Evidence for Sprint Review](#4224-development-evidence-for-sprint-review)
       - [4.2.2.5. Testing Suite Evidence for Sprint Review](#4225-testing-suite-evidence-for-sprint-review)
       - [4.2.2.8. Software Deployment Evidence for Sprint Review](#4228-software-deployment-evidence-for-sprint-review)
+      - [4.2.2.9. Team Collaboration Insights during Sprint](#4229-team-collaboration-insights-during-sprint)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 - [Conclusiones](#conclusiones)
   - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
-<!--
   - [Video App Validation](#video-app-validation)
+<!--
   - [Video About the product](#video-about-the-product)
   - [Video About the team](#video-about-the-team) 
 -->
@@ -4900,6 +4935,56 @@ El backend se desplegó en un nuevo servicio `mindflow-backend` de Railway, cone
 
 *Figura 138.3. Resumen de la última versión (1.0.0) de MindFlow Android en Firebase Analytics.*
 
+#### 4.2.2.9. Team Collaboration Insights during Sprint
+
+Durante el Sprint 2 el equipo mantuvo el flujo GitFlow sobre la rama `develop` de los repositorios de los productos. En la implementación de la Mobile Application en Flutter, las funcionalidades principales se integraron mediante Pull Requests desde ramas `feature/*` (PR n.º 1 a 11); los ajustes posteriores a ese conjunto y los cambios de los demás repositorios se integraron en `develop` sin Pull Request. Los mensajes de commit siguen la convención Conventional Commits en `mindflow-frontend` y son descriptivos, en inglés, en `mindflow-mobile-flutter`. Los datos provienen de los analíticos de colaboración de GitHub (*Insights → Contributors*) y se verificaron con el historial de la rama `develop` de cada repositorio (`git log --no-merges`) entre el Sprint Planning 2 (12/10/2026) y el 12/11/2026 (UTC), por lo que este análisis incluye commits posteriores al corte del 10/11/2026 de la Tabla 86.4. No se contabilizan los commits de merge.
+
+**Tabla 86.8. Team Collaboration Insights — Commits por integrante en el Sprint 2.**
+
+| Team Member | GitHub Username | Landing Page | Web Services | Mobile Application (Android Kotlin) | Mobile Application (Flutter) |
+|:---|:---|:---:|:---:|:---:|:---:|
+| Güere Calero, Fernando Julio | FerG17 | 1 | — | 1 | 23 |
+| Díaz De la Cruz, Sebastián Gabriel | tipaso07 | — | — | — | 1 |
+| Cabrera Sotelo, Camila Celeste | whcamm | — | — | — | — |
+| Limache Coronel, Imanol Fabrizio | ImaLi06 | — | — | — | — |
+| Jáuregui Cerna, Jean Franco | JFranco556 | — | — | — | 2 |
+
+La tabla cuenta los commits en los repositorios de los productos; la participación en el repositorio del informe se describe al final de esta sección.
+
+##### Landing Page
+
+En el repositorio [mindflow-landingPage](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage), Güere Calero actualizó los Términos y Condiciones y la Política de Privacidad con datos verificados del backend (commit `c4348a751408`, 16/10/2026), que corresponde a la tarea T18 del Sprint Backlog 2 (Figura 138.4).
+
+<img src="assets/img/Insights/Insights_Landing_AV2.png" alt="Insights del repositorio mindflow-landingPage" width="800"/>
+
+*Figura 138.4. Team Collaboration Insights del repositorio `mindflow-landingPage`. La captura corresponde al período «Last 3 months» y también incluye los commits del Sprint 1.*
+
+##### Web Services
+
+En el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) no se registraron commits en `develop` durante el Sprint 2: el último commit de la rama es del 08/10/2026 (`feat: allow Swagger documentation in configured environments`). Por ello no se incluye una captura de este repositorio. El despliegue del backend en Railway, que se realizó desde esa misma rama, se documenta en la sección 4.2.2.8.
+
+##### Mobile Application
+
+**Android Kotlin.** En el repositorio [mindflow-frontend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend), Güere Calero apuntó la dirección base de la API al nuevo servicio de Railway (commit `ac85aede7a5b`, 10/11/2026) (Figura 138.5).
+
+<img src="assets/img/Insights/Insights_Android_AV2.png" alt="Insights del repositorio mindflow-frontend" width="800"/>
+
+*Figura 138.5. Team Collaboration Insights del repositorio `mindflow-frontend`. La captura corresponde al período «Last 3 months» y también incluye los commits del Sprint 1.*
+
+**Flutter.** En el repositorio [mindflow-mobile-flutter](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter) participaron tres integrantes (Figura 138.6):
+
+- Güere Calero creó el proyecto y desarrolló las funcionalidades sobre los Web Services: Diario, Hábitos, Chat con la IA, Analíticas, Configuración (perfil, bloqueo por PIN, tema e idioma), ejercicios de bienestar, notificaciones, suscripciones, soporte y calificaciones de las respuestas de la IA. También realizó correcciones de diseño y de contraste, integró Firebase con el flujo de distribución de la aplicación y apuntó el cliente al nuevo backend.
+- Jáuregui Cerna realizó dos commits sobre la configuración de firma de las versiones *release* de Android (`android/app/build.gradle.kts`, 09/11/2026).
+- Díaz De la Cruz refactorizó `AuthRepositoryImpl` para agregar el método `googleAuth` (12/11/2026, UTC).
+
+<img src="assets/img/Insights/Insights_Flutter_AV2.png" alt="Insights del repositorio mindflow-mobile-flutter" width="800"/>
+
+*Figura 138.6. Team Collaboration Insights del repositorio `mindflow-mobile-flutter`. La captura corresponde al período «Last 3 months»; el gráfico muestra la actividad semanal desde la semana del 26 de octubre hasta la del 9 de noviembre de 2026, que abarca todo el historial del repositorio (iniciado el 31/10/2026).*
+
+##### Informe
+
+En el repositorio [mindflow-report](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-report) (Figura 7), el trabajo del Sprint 2 se distribuyó así: Cabrera Sotelo redactó el Sprint Planning 2, la matriz de líderes y colaboradores, el Sprint Backlog 2 y las acciones de Student Outcome del Sprint (06/11/2026); Díaz De la Cruz completó la evidencia del Sprint 2 con la aplicación Flutter y las especificaciones Gherkin en inglés (10/11/2026); Limache Coronel agregó la evidencia de despliegue del Sprint 2 (11/11/2026) y actualizó las conclusiones y recomendaciones (12/11/2026); y Güere Calero incorporó los Términos y Condiciones como anexo, los bloques de Student Outcome de la tercera entrega, la actualización del Registro de Versiones, la bibliografía y las correcciones de diagramas y del backend (15/10/2026).
+
 
 ## 4.3. Validation Interviews
 
@@ -5507,8 +5592,9 @@ Los resultados indican que MindFlow no presenta problemas muy graves (severidad 
 2. El Style Guide, la Information Architecture y los wireframes/mock-ups del Capítulo III tradujeron de forma consistente los hallazgos del Lean UX Process (Capítulo I) en una experiencia concreta: los 8 User Flows diseñados para la Mobile Application cubren el recorrido completo de los dos User Personas (Jimena y Nordie) y están directamente trazados a las User Stories priorizadas en el Product Backlog.
 3. La evidencia del Sprint 1 (sección 4.2.1) muestra que el equipo construyó, en paralelo, el backend de los 8 Bounded Contexts —documentado con Swagger y desplegado en Railway (secciones 4.2.1.7 y 4.2.1.8)—, publicó el Landing Page en GitHub Pages (sección 4.1.4) y construyó las ocho vistas de la aplicación móvil que cubren el recorrido completo del usuario, desde el acceso hasta la gestión de la suscripción (sección 4.2.1.6).
 4. En el Sprint 2 (sección 4.2.2) el desarrollo de la Mobile Application se concentró en una nueva implementación en Flutter (`mindflow-mobile-flutter`), cuyos commits en `develop` aportan evidencia de las nueve User Stories priorizadas sobre los Web Services reales: bloqueo por PIN, perfil y eliminación de cuenta (US04, US05 y US07), búsqueda y calendario del diario (US16 y US17), creación y cumplimiento de hábitos (US21 y US22), analíticas (US31) y soporte (US37) (sección 4.2.2.4). El backend se desplegó en un nuevo servicio de Railway desde la rama `develop`, y la aplicación se registró en Firebase, donde su versión 1.0.0 figura con el 100 % de usuarios sin fallos durante las pruebas (sección 4.2.2.8). Sin embargo, la evidencia de pruebas todavía es insuficiente: solo existe un Widget Test del scaffold de Flutter y las especificaciones Gherkin no tienen *step definitions* ni ejecución, por lo que estas User Stories aún no pueden darse por cerradas con evidencia verificable (sección 4.2.2.5).
-5. Las cinco entrevistas de validación realizadas (tres del Segmento 1: Valeria, Cristian y Joaquín; dos del Segmento 2: Juan y Aldo) confirman la propuesta de valor de MindFlow en ambos segmentos —desahogo rápido, intervenciones breves de bienestar y pausa de hábitos sin culpa en época de exámenes para estudiantes; cierre de jornada laboral y trazabilidad de patrones de estrés para profesionales— y coinciden en una misma preocupación de confianza: la privacidad y el tratamiento de los datos emocionales registrados, tanto en el cifrado local como en su paso por APIs externas de IA. Además, los estudiantes coinciden en que la aplicación debe ser rápida y sencilla, y en que las funciones principales deben mantenerse en el plan gratuito.
+5. Las cinco entrevistas de validación realizadas (tres del Segmento 1: Valeria, Cristian y Joaquín; dos del Segmento 2: Juan y Aldo) confirman la propuesta de valor de MindFlow en ambos segmentos —desahogo rápido, intervenciones breves de bienestar y pausa de hábitos sin culpa en época de exámenes para estudiantes; cierre de jornada laboral y trazabilidad de patrones de estrés para profesionales— y coinciden en una misma preocupación de confianza: la privacidad y el tratamiento de los datos emocionales registrados, tanto en el cifrado local como en su paso por APIs externas de IA. Además, los estudiantes coinciden en que la aplicación debe ser rápida y sencilla, y en que las funciones principales deben mantenerse en el plan gratuito. Las cinco entrevistas quedaron registradas en el video App Validation, de 52 minutos y 39 segundos, cuya secuencia se detalla en la sección Video App Validation.
 6. La evaluación heurística (sección 4.3.3) identificó 16 problemas de Usabilidad, Inclusive Design e Information Architecture, de los cuales 4 son de severidad 3 ("problema mayor", Tabla 40): la falta de aclaración de que la IA es un asistente de reflexión y no un servicio clínico (problema #1), la falta de información sobre cómo se tratan los textos del diario al ser procesados por servicios externos de IA (problema #2), el contraste insuficiente de los botones principales (problema #3) y la ausencia de texto alternativo en las imágenes de la Landing Page (problema #4). Los problemas #1 y #2 coinciden directamente con la preocupación por privacidad expresada en las entrevistas de validación (conclusión 5), confirmando desde dos fuentes independientes que la confianza del usuario en el manejo de sus datos emocionales es un punto crítico en la experiencia de MindFlow.
+7. Los analíticos de colaboración del Sprint 2 (sección 4.2.2.9, Tabla 86.8) muestran que los commits de los repositorios de producto se registraron en tres de los cinco integrantes —con la Mobile Application en Flutter como el repositorio de mayor actividad y sin commits nuevos en el backend—, mientras que las contribuciones de los otros dos integrantes se dieron principalmente en el informe, con la planificación del Sprint, la evidencia de despliegue y las conclusiones. Esto confirma la oportunidad de mejora que la retrospectiva del Sprint 1 ya había identificado sobre la participación desigual en los repositorios. Los commits no recogen todo el aporte del equipo (diseño, entrevistas, grabación de videos y revisión del informe), pero sí indican que la ejecución de tareas de código aún no refleja de forma completa la matriz de líderes y colaboradores de la Tabla 86.2.
 
 **Recomendaciones**
 
@@ -5517,13 +5603,40 @@ Los resultados indican que MindFlow no presenta problemas muy graves (severidad 
 3. Completar la corrección de los problemas de severidad 3 de la sección 4.3.3 que siguen planificados en el Sprint Backlog 2 (T16 y T17): dejar explícito en el onboarding y en Configuración que MindFlow es un asistente de reflexión y no un servicio clínico, detallar cómo se tratan los textos que procesan las APIs externas de IA y ajustar el contraste de los botones principales.
 4. Validar el objetivo del Sprint 2 con usuarios de ambos segmentos: comprobar que un usuario encuentra su entrada y sus hábitos en el calendario y en las analíticas al iniciar sesión en otro dispositivo, que la aplicación solo se abre tras ingresar el PIN y que recibe dentro de la aplicación la respuesta a un ticket de soporte.
 5. Priorizar en el Product Backlog del siguiente Sprint los vacíos funcionales que señalaron ambos segmentos durante la validación y que aún no están implementados: recordatorios de hábitos con horarios personalizables y notificaciones push (hoy los recordatorios son una preferencia local y Firebase Cloud Messaging está planificado pero no integrado), integración con calendario y registro por voz para estudiantes, y etiquetado por área de vida (trabajo, finanzas, personal) para profesionales.
-6. Mantener en todos los repositorios, incluido `mindflow-mobile-flutter`, el flujo con ramas `feature/*`, Pull Requests y la convención Conventional Commits que el equipo acordó en la retrospectiva del Sprint 1, para que el historial siga siendo trazable a las User Stories.
+6. Aplicar en todos los repositorios, incluido `mindflow-mobile-flutter`, el flujo con ramas `feature/*`, Pull Requests y la convención Conventional Commits que el equipo acordó en la retrospectiva del Sprint 1, también a los ajustes posteriores a la integración de las funcionalidades principales, que en el Sprint 2 se incorporaron a `develop` sin Pull Request, para que el historial siga siendo trazable a las User Stories.
+7. Repartir mejor la ejecución de tareas en el siguiente Sprint: revisar al inicio la matriz de líderes y colaboradores, asignar a cada integrante al menos una tarea con commits o Pull Requests propios en los repositorios de producto, contrastar a mitad del Sprint el avance con los analíticos de colaboración de GitHub y registrar en el Sprint Backlog el trabajo que no genera commits (diseño, entrevistas, pruebas y videos), de modo que todo el aporte quede visible.
 
-<!--
 ## Video App Validation
 
-_Pendiente_
+Este video reúne las cinco entrevistas de validación descritas en la sección 4.3.2: tres del Segmento 1 (Estudiantes Universitarios) y dos del Segmento 2 (Profesionales Jóvenes). Entre una entrevista y la siguiente se muestra una pantalla negra con el segmento, el número de entrevista, el nombre del entrevistado y la fecha.
 
+- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-mindflow-validation-av2.mp4`
+- **URL:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202413169_upc_edu_pe/IQA6zETX4SHNR5ECbi_BprgFAbpP0Rknt3ehvFF6EekT1WY?e=DAWxd2&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+- **Duración total:** 00:52:39
+
+<p align="center">
+<img src="assets/img/video-validation/Video_App_Validation_AV2.png" alt="Fotograma del video App Validation durante la entrevista 5" width="700"/>
+
+*Figura 162.1. Fotograma del video App Validation, durante la entrevista 5 (Segmento 2).*
+</p>
+
+**Tabla 99.1. Video App Validation — Secuencia del video.**
+
+| Tiempo (hh:mm:ss) | Escena |
+|---|---|
+| 00:00:00 | Pantalla de título: Segmento 1, Entrevista 1 (Valeria Montalvo) |
+| 00:00:05 | Entrevista 1, Valeria Montalvo (duración 12:22) |
+| 00:12:27 | Pantalla de título: Segmento 1, Entrevista 2 (Cristian Condori) |
+| 00:12:32 | Entrevista 2, Cristian Condori (duración 6:43) |
+| 00:19:16 | Pantalla de título: Segmento 1, Entrevista 3 (Joaquín Cruzalegui) |
+| 00:19:21 | Entrevista 3, Joaquín Cruzalegui (duración 7:26) |
+| 00:26:50 | Pantalla de título: Segmento 2, Entrevista 1 (Juan Ayllón) |
+| 00:26:55 | Entrevista 4, Juan Ayllón (duración 14:07) |
+| 00:41:02 | Pantalla de título: Segmento 2, Entrevista 2 (Aldo Huamán) |
+| 00:41:07 | Entrevista 5, Aldo Huamán (duración 11:31) |
+| 00:52:39 | Fin |
+
+<!--
 ## Video About the product
 
 _Pendiente_
