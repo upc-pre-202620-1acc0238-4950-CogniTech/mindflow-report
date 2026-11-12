@@ -411,6 +411,7 @@ En los cuatro repositorios se mantuvo el mismo flujo de trabajo GitFlow adoptado
       - [4.2.2.3. Sprint Backlog 2](#4223-sprint-backlog-2)
       - [4.2.2.4. Development Evidence for Sprint Review](#4224-development-evidence-for-sprint-review)
       - [4.2.2.5. Testing Suite Evidence for Sprint Review](#4225-testing-suite-evidence-for-sprint-review)
+      - [4.2.2.8. Software Deployment Evidence for Sprint Review](#4228-software-deployment-evidence-for-sprint-review)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
@@ -4870,6 +4871,34 @@ La revisión de `develop` separa pruebas implementadas de especificaciones propu
 | `mindflow-mobile-flutter` | `develop` | [`6e285faab169`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/6e285faab169bea11a2104356fd98f9cf9271be9) | `Scaffold Flutter project: core infra, auth flow, and Today screen wired to the real backend` | El cuerpo original declara `Project scaffold (flutter create)`; el diff introduce `test/widget_test.dart`. | 2026-11-04 00:08:17 UTC |
 
 No se informa ningún resultado como PASS. Para completar la evidencia faltan ejecución reproducible de `flutter test`, pruebas de integración, *step definitions*, resultados de aceptación y artefactos de CI o logs vinculados a las User Stories.
+
+#### 4.2.2.8. Software Deployment Evidence for Sprint Review
+
+En el Sprint 2 el equipo desplegó los Web Services en un nuevo servicio de **Railway**, al que se apuntaron las aplicaciones móviles, e incorporó **Firebase** al despliegue de la Mobile Application para registrar sus versiones y monitorear su uso y su estabilidad en los dispositivos de prueba.
+
+##### Web Services: Railway
+
+El backend se desplegó en un nuevo servicio `mindflow-backend` de Railway, conectado al repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) y configurado para desplegar desde la rama `develop`, de modo que cada cambio integrado en esa rama genera un nuevo despliegue. El servicio se ejecuta en la región *US East* con una réplica y persiste su información en un servicio **MySQL** con volumen propio dentro del mismo proyecto. Ambos servicios figuran en estado *Online*, y el despliegue activo, originado desde GitHub con el commit `feat: allow Swagger documentation in configured environments`, terminó con estado *Deployment successful* (Figura 138.1).
+
+<img src="assets/img/deployment/08-railway-despliegue-sprint-2.png" alt="Servicios mindflow-backend y MySQL en Railway con el despliegue activo" width="700"/>
+
+*Figura 138.1. Servicios `mindflow-backend` y MySQL en Railway, con el despliegue activo del backend.*
+
+**URL de los Web Services (documentación Swagger):** [https://mindflow-backend-production-898f07da.up.railway.app/swagger/index.html](https://mindflow-backend-production-898f07da.up.railway.app/swagger/index.html)
+
+##### Mobile Application: Firebase
+
+**1. Proyecto en Firebase.** Se creó el proyecto **Mindflow** en Firebase, en el plan gratuito *Spark*, y se registró en él la aplicación Android **MindFlow Android**. Con la aplicación vinculada, Google Analytics for Firebase recoge automáticamente la actividad de los usuarios: el panel de estadísticas del proyecto muestra los usuarios activos por día entre el 4 y el 10 de noviembre de 2026, periodo en el que la aplicación se instaló y probó contra el backend (Figura 138.2).
+
+<img src="assets/img/deployment/06-firebase-proyecto.jpeg" alt="Descripción general del proyecto Mindflow en Firebase" width="700"/>
+
+*Figura 138.2. Proyecto Mindflow en Firebase con la aplicación MindFlow Android y sus usuarios activos por día.*
+
+**2. Seguimiento de la versión publicada.** Desde *Latest Release* el equipo verifica el estado de la última versión instalada en los dispositivos de prueba. La versión **1.0.0** de MindFlow Android figura con estado *Correcta*, con el 100 % de los usuarios activos en esa versión y el 100 % de usuarios sin fallos (Figura 138.3).
+
+<img src="assets/img/deployment/07-firebase-latest-release.jpeg" alt="Resumen de la última versión de MindFlow Android en Firebase" width="700"/>
+
+*Figura 138.3. Resumen de la última versión (1.0.0) de MindFlow Android en Firebase Analytics.*
 
 
 ## 4.3. Validation Interviews
