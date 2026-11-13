@@ -120,7 +120,7 @@ Proyecto
 
   <tr>
     <td><b>Tercera Entrega (AV2)</b></td>
-    <td>09/11/2026</td>
+    <td>13/11/2026</td>
     <td>
       Cabrera Sotelo, Camila Celeste <br>
       <br>
@@ -138,8 +138,8 @@ Proyecto
     </td>
     <td>
       Correcciones y mejoras de entregas anteriores: Capítulo II (diagramas C4, de clases, de componentes y de base de datos alineados con el backend implementado, tras una revisión cruzada con el código fuente) y Capítulo IV (centrado y tamaño de las imágenes en Heurísticas, Wireflows y Mock-ups) <br>
-      Capítulo IV: Product Implementation & Validation (Sprint 2 del Landing Page, los Web Services y las Mobile Applications: Sprint Planning, Aspect Leaders and Collaborators, Sprint Backlog, evidencias de desarrollo, pruebas, ejecución, documentación de servicios y despliegue, y Team Collaboration Insights) <br>
-      Validation Interviews: tercera entrevista del Segmento 2 y actualización de las evaluaciones según heurísticas <br>
+      Capítulo IV: Product Implementation & Validation (Sprint 2 del Landing Page, los Web Services y las Mobile Applications: Sprint Planning, Aspect Leaders and Collaborators, Sprint Backlog, evidencias de desarrollo, pruebas, ejecución (con el video de navegación de la aplicación móvil), documentación de servicios (con capturas de la documentación y de la interacción con los servicios) y despliegue, y Team Collaboration Insights) <br>
+      Validation Interviews: actualización de las evaluaciones según heurísticas <br>
       Conclusiones y recomendaciones, Bibliografía, Glosario, Anexos y Términos y Condiciones <br>
       Actualización de Student Outcome y de Project Report Collaboration Insights
     </td>
@@ -540,7 +540,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       El equipo actualizó sus conocimientos en diseño de producto y planificación ágil, aplicando Style Guidelines, Information Architecture y Sprint Planning para estructurar la construcción del Landing Page y las Mobile Applications sobre los 8 bounded contexts definidos en el Capítulo II.
       <br><br>
       <u>AV2</u><br>
-      El equipo actualizó sus conocimientos al cerrar el Sprint 2: documentó la evidencia de desarrollo, pruebas, ejecución y despliegue del backend, el Landing Page y la aplicación móvil Android, documentó los Web Services ya desplegados, y corrigió los diagramas de arquitectura, de clases, de componentes y de base de datos contrastándolos con el backend realmente implementado. Aplicó también conocimientos de ética profesional (códigos ACM/IEEE y CIP) y de protección de datos personales al redactar y publicar los Términos y Condiciones y la Política de Privacidad, y validó la propuesta con una tercera entrevista al segmento de profesionales jóvenes, actualizando la evaluación según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
+      El equipo actualizó sus conocimientos al cerrar el Sprint 2: documentó la evidencia de desarrollo, pruebas, ejecución y despliegue del backend, el Landing Page y las aplicaciones móviles (Android y Flutter), documentó los Web Services ya desplegados, y corrigió los diagramas de arquitectura, de clases, de componentes y de base de datos contrastándolos con el backend realmente implementado. Aplicó también conocimientos de ética profesional (códigos ACM/IEEE y CIP) y de protección de datos personales al redactar y publicar los Términos y Condiciones y la Política de Privacidad, y documentó cinco entrevistas de validación (tres del Segmento 1 y dos del Segmento 2), actualizando la evaluación según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
     </td>
   </tr>
   <tr>
@@ -4830,26 +4830,26 @@ El objetivo del Sprint 2 es que la Mobile Application funcione por completo sobr
 | Sprint # | Sprint 2 | | | | | | |
 |---|---|---|---|---|---|---|---|
 | **User Story Id** | **User Story Title** | **Work-Item Id** | **Work-Item Title** | **Description** | **Estimation (Hours)** | **Assigned To** | **Status** |
-| US17 | Calendario de estado de ánimo | T01 | Cargar el historial del Diario desde el backend | Reemplazar la lectura de SQLite por `GET /api/v1/journal/entries` con ordenamiento por fecha, manteniendo SQLite como caché. | 4 | whcamm | To-do |
-| US17 | Calendario de estado de ánimo | T02 | Colorear el calendario con el sentimiento del backend | Pintar cada día del calendario según el campo `sentiment` de las entradas recibidas. | 3 | whcamm | To-do |
-| US16 | Búsqueda por palabras clave | T03 | Buscar entradas en el backend | Enviar el término de búsqueda en el parámetro `q` de `GET /api/v1/journal/entries` y mostrar los resultados. | 3 | whcamm | To-do |
+| US17 | Calendario de estado de ánimo | T01 | Cargar el historial del Diario desde el backend | Reemplazar la lectura de SQLite por `GET /api/v1/journal/entries` con ordenamiento por fecha, manteniendo SQLite como caché. | 4 | whcamm | Done |
+| US17 | Calendario de estado de ánimo | T02 | Colorear el calendario con el sentimiento del backend | Pintar cada día del calendario según el campo `sentiment` de las entradas recibidas. | 3 | whcamm | Done |
+| US16 | Búsqueda por palabras clave | T03 | Buscar entradas en el backend | Enviar el término de búsqueda en el parámetro `q` de `GET /api/v1/journal/entries` y mostrar los resultados. | 3 | whcamm | Done |
 | US21 | Creación de hábitos | T04 | Gestionar hábitos con el backend | Crear, editar y eliminar hábitos con `POST`, `PUT` y `DELETE /api/v1/habits`, y listar con `GET /api/v1/habits`. | 4 | whcamm | To-do |
-| US22 | Registro de cumplimiento de hábitos | T05 | Registrar cumplimientos en el backend | Marcar un hábito como cumplido con `POST /api/v1/habit-logs` y refrescar su racha. | 3 | whcamm | To-do |
-| US31 | Dashboard de analítica | T06 | Mostrar el dashboard con datos del backend | Calcular las métricas del periodo con `GET /api/v1/analytics/dashboard` en lugar de hacerlo en el dispositivo. | 4 | whcamm | To-do |
+| US22 | Registro de cumplimiento de hábitos | T05 | Registrar cumplimientos en el backend | Marcar un hábito como cumplido con `POST /api/v1/habit-logs` y refrescar su racha. | 3 | whcamm | Done |
+| US31 | Dashboard de analítica | T06 | Mostrar el dashboard con datos del backend | Calcular las métricas del periodo con `GET /api/v1/analytics/dashboard` en lugar de hacerlo en el dispositivo. | 4 | whcamm | Done |
 | US31 | Dashboard de analítica | T07 | Indicar el origen y la sincronización de los datos | Mostrar en Analíticas la fecha de la última sincronización con el backend (problema mostrado en las Figuras 148 y 149). | 2 | whcamm | To-do |
-| US04 | Bloqueo mediante PIN | T08 | Pantalla de bloqueo por PIN | Solicitar el PIN al abrir la aplicación y validarlo con `POST /api/v1/users/pin/verify`. | 4 | JFranco556 | To-do |
-| US04 | Bloqueo mediante PIN | T09 | Activar y desactivar el PIN | Configurar el PIN desde Configuración con `POST /api/v1/users/pin` y `DELETE /api/v1/users/pin`, y consultar su estado con `GET /api/v1/users/pin/status`. | 2 | JFranco556 | To-do |
-| US05 | Perfil de usuario | T10 | Editar el perfil en el backend | Cargar y guardar nombre y ocupación con `GET` y `PUT /api/v1/users/profile`. | 2 | JFranco556 | To-do |
-| US07 | Eliminación de cuenta | T11 | Eliminar la cuenta en el backend | Confirmar la eliminación, llamar a `DELETE /api/v1/users`, borrar la caché local y cerrar la sesión. | 2 | JFranco556 | To-do |
-| US37 | Soporte técnico | T12 | Enviar tickets de soporte | Enviar el formulario de Configuración a `POST /api/v1/support/tickets`. | 3 | ImaLi06 | To-do |
-| US37 | Soporte técnico | T13 | Ver tickets y respuestas | Listar los tickets del usuario y su conversación con `GET /api/v1/support/tickets` y `GET /api/v1/support/tickets/{id}`. | 3 | ImaLi06 | To-do |
-| US37 | Soporte técnico | T14 | Bandeja de notificaciones | Mostrar las notificaciones y el contador de no leídas con `GET /api/v1/notifications` y `GET /api/v1/notifications/unread-count`, y marcarlas como leídas. | 4 | ImaLi06 | To-do |
-| — | — | T15 | Desplegar el backend al 100% con documentación | Verificar en Railway todos los endpoints de los 8 bounded contexts y publicar su documentación Swagger. | 4 | FerG17 | To-do |
+| US04 | Bloqueo mediante PIN | T08 | Pantalla de bloqueo por PIN | Solicitar el PIN al abrir la aplicación y validarlo con `POST /api/v1/users/pin/verify`. | 4 | JFranco556 | Done |
+| US04 | Bloqueo mediante PIN | T09 | Activar y desactivar el PIN | Configurar el PIN desde Configuración con `POST /api/v1/users/pin` y `DELETE /api/v1/users/pin`, y consultar su estado con `GET /api/v1/users/pin/status`. | 2 | JFranco556 | Done |
+| US05 | Perfil de usuario | T10 | Editar el perfil en el backend | Cargar y guardar nombre y ocupación con `GET` y `PUT /api/v1/users/profile`. | 2 | JFranco556 | Done |
+| US07 | Eliminación de cuenta | T11 | Eliminar la cuenta en el backend | Confirmar la eliminación, llamar a `DELETE /api/v1/users`, borrar la caché local y cerrar la sesión. | 2 | JFranco556 | Done |
+| US37 | Soporte técnico | T12 | Enviar tickets de soporte | Enviar el formulario de Configuración a `POST /api/v1/support/tickets`. | 3 | ImaLi06 | Done |
+| US37 | Soporte técnico | T13 | Ver tickets y respuestas | Listar los tickets del usuario y su conversación con `GET /api/v1/support/tickets` y `GET /api/v1/support/tickets/{id}`. | 3 | ImaLi06 | Done |
+| US37 | Soporte técnico | T14 | Bandeja de notificaciones | Mostrar las notificaciones y el contador de no leídas con `GET /api/v1/notifications` y `GET /api/v1/notifications/unread-count`, y marcarlas como leídas. | 4 | ImaLi06 | Done |
+| — | — | T15 | Desplegar el backend al 100% con documentación | Verificar en Railway todos los endpoints de los 8 bounded contexts y publicar su documentación Swagger. | 4 | FerG17 | Done |
 | — | — | T16 | Aclarar el alcance de la IA y el tratamiento de datos | Agregar en el onboarding y en Configuración que MindFlow es un asistente de reflexión y no un servicio clínico, y cómo se procesan los textos (problemas #1 y #2 de la sección 4.3.3). | 3 | JFranco556 | To-do |
 | — | — | T17 | Mejorar el contraste de los botones principales | Ajustar los colores de los botones principales para cumplir el contraste mínimo (problema #3 de la sección 4.3.3). | 2 | JFranco556 | To-do |
 | — | — | T18 | Publicar Términos y Condiciones en el Landing Page | Actualizar los Términos y Condiciones y la Política de Privacidad con los datos del backend. | 3 | FerG17 | Done |
 | — | — | T19 | Grabar los videos del AV2 | Grabar la primera versión de los videos App Validation, About the Product y About the Team. | 6 | ImaLi06 | To-do |
-| — | — | T20 | Documentar la evidencia del Sprint Review 2 | Completar en el informe la evidencia de desarrollo, pruebas, ejecución, servicios, despliegue y colaboración del Sprint 2. | 5 | ImaLi06 | To-do |
+| — | — | T20 | Documentar la evidencia del Sprint Review 2 | Completar en el informe la evidencia de desarrollo, pruebas, ejecución, servicios, despliegue y colaboración del Sprint 2. | 5 | ImaLi06 | Done |
 | — | — | T21 | Documentar el Sprint Planning y el Sprint Backlog 2 | Redactar el Sprint Planning 2, la matriz de liderazgo y el Sprint Backlog 2 en el informe. | 3 | whcamm | Done |
 
 #### 4.2.2.4. Development Evidence for Sprint Review
@@ -4930,7 +4930,7 @@ Logros principales del Sprint:
 - **Soporte dentro de la aplicación.** Desde Soporte el usuario envía un ticket, consulta sus tickets y responde en su conversación (US37). La misma pantalla muestra la Línea 113 y un botón que abre el marcador del teléfono.
 - **Ajustes de usabilidad.** Modo oscuro, cambio de idioma español/inglés, opción de mostrar u ocultar la contraseña en el registro y mayor contraste de las burbujas del chat en modo oscuro (`c65ef98`).
 - **Analíticas con datos reales.** La pantalla muestra solo las métricas que entrega el endpoint de analíticas (entradas, hábitos activos, mejor racha, distribución por sentimiento y hábitos completados); la fluctuación diaria y la nube de palabras de los mock-ups no se muestran porque el backend no entrega esos datos.
-- **Distribución.** Las versiones de la aplicación se publican a los dispositivos de prueba mediante un flujo de integración continua con Firebase App Distribution.
+- **Distribución.** Las versiones de la aplicación se publican a los dispositivos de prueba mediante un flujo de integración continua con Firebase App Distribution (`.github/workflows/firebase-distribute.yml` en `mindflow-mobile-flutter`); el proyecto de Firebase donde se registran las versiones se documenta en la sección 4.2.2.8.
 
 ##### Vistas implementadas
 
@@ -5000,6 +5000,21 @@ Las capturas corresponden a la versión de la aplicación instalada en un dispos
 <img src="assets/img/flutter-execution/Flutter_Soporte_AV2.jpeg" alt="Pantalla de Soporte en la aplicación Flutter" width="300"/>
 
 *Figura 138.11. Soporte de la Mobile Application (Flutter), con el formulario de tickets y las preguntas frecuentes.*
+
+##### Video de navegación
+
+Este video de navegación de la Mobile Application en Flutter recorre los flujos principales implementados en el Sprint 2: sesión y bloqueo por PIN, Diario, Hábitos, Análisis, Soporte, Ajustes y Notificaciones (Tabla 86.9). El video solo muestra la aplicación móvil; no incluye el Landing Page.
+
+- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-mindflow-productnavigation-av2.mp4`
+- **URL:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202413169_upc_edu_pe/IQBs-3JhQVXqTpONY1WGX7iEAcGlF81x-48zT5IIqfPRPPg?e=kMNiS3&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+- **Duración total:** 00:01:55
+- **Plataforma:** OneDrive institucional UPC (Stream/SharePoint)
+
+<p align="center">
+<img src="assets/img/product-navigation/Video_Navegacion_Flutter_AV2.png" alt="Fotograma del video de navegación de la aplicación Flutter" width="700"/>
+
+*Figura 138.12. Fotograma del video de navegación de la Mobile Application (Flutter), en el segundo 00:28, con la vista Diario.*
+</p>
 
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
@@ -5107,6 +5122,42 @@ Content-Type: application/json
 ```json
 { "valid": true }
 ```
+
+##### Capturas de la documentación y de la interacción con los servicios
+
+Las capturas se tomaron el 12/11/2026 en la documentación Swagger desplegada en Railway, con una cuenta de prueba (`user_id` 1) y datos de muestra. Los endpoints protegidos se autorizaron con un token JWT de esa cuenta, que no se muestra en las imágenes.
+
+**1. Vista general.** La documentación OpenAPI desplegada se titula MindFlow.Platform (versión 1.0, OAS 3.0), enlaza la especificación `swagger.json` del servicio y agrupa los endpoints por controlador, con un candado en los que requieren autenticación (Figura 138.13).
+
+<img src="assets/img/swagger/Swagger_01_Vista_General_AV2.jpg" alt="Vista general de la documentación Swagger desplegada en Railway" width="700"/>
+
+*Figura 138.13. Vista general de la documentación OpenAPI desplegada en Railway, con los endpoints agrupados por controlador.*
+
+**2. Autorización.** El diálogo «Available authorizations» muestra el esquema Bearer (JWT) en estado *Authorized*. El valor del token aparece oculto (Figura 138.14).
+
+<img src="assets/img/swagger/Swagger_02_Authorize_Bearer_AV2.jpg" alt="Diálogo de autorización Bearer en Swagger con el token oculto" width="700"/>
+
+*Figura 138.14. Esquema Bearer (JWT) autorizado en Swagger UI, con el valor del token oculto.*
+
+**3. Creación de una entrada del diario.** `POST /api/v1/journal/entries` recibió una entrada de muestra (`date` 2026-11-12, `title` «Un dia tranquilo», `sentiment` `positive`, `category` `daily`) y respondió `200` con la entrada guardada (`id` 1, `user_id` 1), el campo `ai_response` con el mensaje de MindFlow AI, `tags` y `media` vacíos y `deleted_at` nulo. Este endpoint se documenta en la Tabla 86.13 (diario, US16 y US17) y su ejemplo en la Tabla 76 (Figura 138.15).
+
+<img src="assets/img/swagger/Swagger_03_POST_Journal_Entries_AV2.jpg" alt="POST journal entries con respuesta 200 en Swagger" width="700"/>
+
+*Figura 138.15. `POST /api/v1/journal/entries` con datos de muestra y respuesta `200`, que incluye la respuesta de MindFlow AI.*
+
+**4. Consulta de las entradas.** `GET /api/v1/journal/entries` respondió `200` con la lista del usuario, que contiene la entrada creada en el paso anterior. Es el endpoint que alimenta la lista, la búsqueda y el calendario del Diario (Tabla 86.13, US16 y US17) (Figura 138.16).
+
+<img src="assets/img/swagger/Swagger_04_GET_Journal_Entries_AV2.jpg" alt="GET journal entries con respuesta 200 en Swagger" width="700"/>
+
+*Figura 138.16. `GET /api/v1/journal/entries` con respuesta `200` y la entrada creada.*
+
+**5. Resumen de rachas de hábitos.** `GET /api/v1/habits/streak-summary` respondió `200` con tres hábitos de muestra, identificados del 1 al 3: «Caminata de 15 minutos» con racha 1, y «Escritura libre de 5 minutos» y «Planificación semanal de objetivos», ambos con racha 0. Los tres figuran con `status` `pending`. Este endpoint se documenta en la Tabla 78 (US28) y complementa los endpoints de hábitos de la Tabla 86.14 (US21 y US22) (Figura 138.17).
+
+<img src="assets/img/swagger/Swagger_05_GET_Habits_Streak_Summary_AV2.jpg" alt="GET habits streak-summary con respuesta 200 en Swagger" width="700"/>
+
+*Figura 138.17. `GET /api/v1/habits/streak-summary` con respuesta `200` y tres hábitos de muestra.*
+
+**Commit de documentación.** El último commit de `mindflow-backend` en `develop` relacionado con la documentación Swagger es [`2b2e25c3ce50`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend/commit/2b2e25c3ce50) (`feat: allow Swagger documentation in configured environments`, 08/10/2026), el que desplegó el servicio de Railway descrito en la sección 4.2.2.8.
 
 ##### Verificación de la documentación desplegada
 
