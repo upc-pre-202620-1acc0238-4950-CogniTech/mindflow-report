@@ -5123,6 +5123,42 @@ Content-Type: application/json
 { "valid": true }
 ```
 
+##### Capturas de la documentación y de la interacción con los servicios
+
+Las capturas se tomaron el 12/11/2026 en la documentación Swagger desplegada en Railway, con una cuenta de prueba (`user_id` 1) y datos de muestra. Los endpoints protegidos se autorizaron con un token JWT de esa cuenta, que no se muestra en las imágenes.
+
+**1. Vista general.** La documentación OpenAPI desplegada se titula MindFlow.Platform (versión 1.0, OAS 3.0), enlaza la especificación `swagger.json` del servicio y agrupa los endpoints por controlador, con un candado en los que requieren autenticación (Figura 138.13).
+
+<img src="assets/img/swagger/Swagger_01_Vista_General_AV2.jpg" alt="Vista general de la documentación Swagger desplegada en Railway" width="700"/>
+
+*Figura 138.13. Vista general de la documentación OpenAPI desplegada en Railway, con los endpoints agrupados por controlador.*
+
+**2. Autorización.** El diálogo «Available authorizations» muestra el esquema Bearer (JWT) en estado *Authorized*. El valor del token aparece oculto (Figura 138.14).
+
+<img src="assets/img/swagger/Swagger_02_Authorize_Bearer_AV2.jpg" alt="Diálogo de autorización Bearer en Swagger con el token oculto" width="700"/>
+
+*Figura 138.14. Esquema Bearer (JWT) autorizado en Swagger UI, con el valor del token oculto.*
+
+**3. Creación de una entrada del diario.** `POST /api/v1/journal/entries` recibió una entrada de muestra (`date` 2026-11-12, `title` «Un dia tranquilo», `sentiment` `positive`, `category` `daily`) y respondió `200` con la entrada guardada (`id` 1, `user_id` 1), el campo `ai_response` con el mensaje de MindFlow AI, `tags` y `media` vacíos y `deleted_at` nulo. Este endpoint se documenta en la Tabla 86.13 (diario, US16 y US17) y su ejemplo en la Tabla 76 (Figura 138.15).
+
+<img src="assets/img/swagger/Swagger_03_POST_Journal_Entries_AV2.jpg" alt="POST journal entries con respuesta 200 en Swagger" width="700"/>
+
+*Figura 138.15. `POST /api/v1/journal/entries` con datos de muestra y respuesta `200`, que incluye la respuesta de MindFlow AI.*
+
+**4. Consulta de las entradas.** `GET /api/v1/journal/entries` respondió `200` con la lista del usuario, que contiene la entrada creada en el paso anterior. Es el endpoint que alimenta la lista, la búsqueda y el calendario del Diario (Tabla 86.13, US16 y US17) (Figura 138.16).
+
+<img src="assets/img/swagger/Swagger_04_GET_Journal_Entries_AV2.jpg" alt="GET journal entries con respuesta 200 en Swagger" width="700"/>
+
+*Figura 138.16. `GET /api/v1/journal/entries` con respuesta `200` y la entrada creada.*
+
+**5. Resumen de rachas de hábitos.** `GET /api/v1/habits/streak-summary` respondió `200` con tres hábitos de muestra, identificados del 1 al 3: «Caminata de 15 minutos» con racha 1, y «Escritura libre de 5 minutos» y «Planificación semanal de objetivos», ambos con racha 0. Los tres figuran con `status` `pending`. Este endpoint se documenta en la Tabla 78 (US28) y complementa los endpoints de hábitos de la Tabla 86.14 (US21 y US22) (Figura 138.17).
+
+<img src="assets/img/swagger/Swagger_05_GET_Habits_Streak_Summary_AV2.jpg" alt="GET habits streak-summary con respuesta 200 en Swagger" width="700"/>
+
+*Figura 138.17. `GET /api/v1/habits/streak-summary` con respuesta `200` y tres hábitos de muestra.*
+
+**Commit de documentación.** El último commit de `mindflow-backend` en `develop` relacionado con la documentación Swagger es [`2b2e25c3ce50`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend/commit/2b2e25c3ce50) (`feat: allow Swagger documentation in configured environments`, 08/10/2026), el que desplegó el servicio de Railway descrito en la sección 4.2.2.8.
+
 ##### Verificación de la documentación desplegada
 
 **Tabla 86.16. Services Documentation Evidence for Sprint Review — Verificación de la documentación en Railway (12/11/2026).**
