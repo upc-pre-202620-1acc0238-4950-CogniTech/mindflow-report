@@ -4845,10 +4845,10 @@ El objetivo del Sprint 2 es que la Mobile Application funcione por completo sobr
 | US17 | Calendario de estado de ánimo | T01 | Cargar el historial del Diario desde el backend | Reemplazar la lectura de SQLite por `GET /api/v1/journal/entries` con ordenamiento por fecha, manteniendo SQLite como caché. | 4 | whcamm | Done |
 | US17 | Calendario de estado de ánimo | T02 | Colorear el calendario con el sentimiento del backend | Pintar cada día del calendario según el campo `sentiment` de las entradas recibidas. | 3 | whcamm | Done |
 | US16 | Búsqueda por palabras clave | T03 | Buscar entradas en el backend | Enviar el término de búsqueda en el parámetro `q` de `GET /api/v1/journal/entries` y mostrar los resultados. | 3 | whcamm | Done |
-| US21 | Creación de hábitos | T04 | Gestionar hábitos con el backend | Crear, editar y eliminar hábitos con `POST`, `PUT` y `DELETE /api/v1/habits`, y listar con `GET /api/v1/habits`. | 4 | whcamm | To-do |
+| US21 | Creación de hábitos | T04 | Gestionar hábitos con el backend | Crear, editar y eliminar hábitos con `POST`, `PUT` y `DELETE /api/v1/habits`, y listar con `GET /api/v1/habits`. | 4 | whcamm | Done |
 | US22 | Registro de cumplimiento de hábitos | T05 | Registrar cumplimientos en el backend | Marcar un hábito como cumplido con `POST /api/v1/habit-logs` y refrescar su racha. | 3 | whcamm | Done |
 | US31 | Dashboard de analítica | T06 | Mostrar el dashboard con datos del backend | Calcular las métricas del periodo con `GET /api/v1/analytics/dashboard` en lugar de hacerlo en el dispositivo. | 4 | whcamm | Done |
-| US31 | Dashboard de analítica | T07 | Indicar el origen y la sincronización de los datos | Mostrar en Analíticas la fecha de la última sincronización con el backend (problema mostrado en las Figuras 180 y 181). | 2 | whcamm | To-do |
+| US31 | Dashboard de analítica | T07 | Indicar el origen y la sincronización de los datos | Mostrar en Analíticas la fecha de la última sincronización con el backend (problema mostrado en las Figuras 180 y 181). | 2 | whcamm | Done |
 | US04 | Bloqueo mediante PIN | T08 | Pantalla de bloqueo por PIN | Solicitar el PIN al abrir la aplicación y validarlo con `POST /api/v1/users/pin/verify`. | 4 | JFranco556 | Done |
 | US04 | Bloqueo mediante PIN | T09 | Activar y desactivar el PIN | Configurar el PIN desde Configuración con `POST /api/v1/users/pin` y `DELETE /api/v1/users/pin`, y consultar su estado con `GET /api/v1/users/pin/status`. | 2 | JFranco556 | Done |
 | US05 | Perfil de usuario | T10 | Editar el perfil en el backend | Cargar y guardar nombre y ocupación con `GET` y `PUT /api/v1/users/profile`. | 2 | JFranco556 | Done |
@@ -4857,10 +4857,10 @@ El objetivo del Sprint 2 es que la Mobile Application funcione por completo sobr
 | US37 | Soporte técnico | T13 | Ver tickets y respuestas | Listar los tickets del usuario y su conversación con `GET /api/v1/support/tickets` y `GET /api/v1/support/tickets/{id}`. | 3 | ImaLi06 | Done |
 | US37 | Soporte técnico | T14 | Bandeja de notificaciones | Mostrar las notificaciones y el contador de no leídas con `GET /api/v1/notifications` y `GET /api/v1/notifications/unread-count`, y marcarlas como leídas. | 4 | ImaLi06 | Done |
 | — | — | T15 | Desplegar el backend al 100% con documentación | Verificar en Railway todos los endpoints de los 8 bounded contexts y publicar su documentación Swagger. | 4 | FerG17 | Done |
-| — | — | T16 | Aclarar el alcance de la IA y el tratamiento de datos | Agregar en el onboarding y en Configuración que MindFlow es un asistente de reflexión y no un servicio clínico, y cómo se procesan los textos (problemas #1 y #2 de la sección 4.3.3). | 3 | JFranco556 | To-do |
-| — | — | T17 | Mejorar el contraste de los botones principales | Ajustar los colores de los botones principales para cumplir el contraste mínimo (problema #3 de la sección 4.3.3). | 2 | JFranco556 | To-do |
+| — | — | T16 | Aclarar el alcance de la IA y el tratamiento de datos | Agregar en el onboarding y en Configuración que MindFlow es un asistente de reflexión y no un servicio clínico, y cómo se procesan los textos (problemas #1 y #2 de la sección 4.3.3). | 3 | JFranco556 | Done |
+| — | — | T17 | Mejorar el contraste de los botones principales | Ajustar los colores de los botones principales para cumplir el contraste mínimo (problema #3 de la sección 4.3.3). | 2 | JFranco556 | Done |
 | — | — | T18 | Publicar Términos y Condiciones en el Landing Page | Actualizar los Términos y Condiciones y la Política de Privacidad con los datos del backend. | 3 | FerG17 | Done |
-| — | — | T19 | Grabar los videos del AV2 | Grabar la primera versión de los videos App Validation, About the Product y About the Team. | 6 | ImaLi06 | To-do |
+| — | — | T19 | Grabar los videos del AV2 | Grabar la primera versión de los videos App Validation, About the Product y About the Team. | 6 | ImaLi06 | Done |
 | — | — | T20 | Documentar la evidencia del Sprint Review 2 | Completar en el informe la evidencia de desarrollo, pruebas, ejecución, servicios, despliegue y colaboración del Sprint 2. | 5 | ImaLi06 | Done |
 | — | — | T21 | Documentar el Sprint Planning y el Sprint Backlog 2 | Redactar el Sprint Planning 2, la matriz de liderazgo y el Sprint Backlog 2 en el informe. | 3 | whcamm | Done |
 
