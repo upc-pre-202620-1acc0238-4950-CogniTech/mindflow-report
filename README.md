@@ -531,6 +531,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       Amplió y aplicó sus conocimientos en desarrollo de interfaces, integración de inteligencia artificial y documentación técnica mediante la implementación del frontend del chat con IA y la elaboración de la documentación de servicios. Asimismo, fortaleció sus competencias en diseño centrado en el usuario mediante la construcción de User Flows y la realización de una entrevista, complementando su participación con evidencias de despliegue y Collaboration Insights.
+      <br><br>
+      <u>AV2</u><br>
+      Actualizó y aplicó sus conocimientos en despliegue continuo e infraestructura cloud al desplegar los Web Services de MindFlow en un nuevo servicio de Railway: conectó el servicio al repositorio `mindflow-backend` para que cada cambio integrado en la rama `develop` genere un nuevo despliegue, configuró la base de datos MySQL con su volumen persistente y publicó la documentación Swagger en la nueva URL pública, a la que se apuntaron las aplicaciones móviles. Además, como líder del aspecto de validación y evidencia del Sprint Review, documentó la evidencia de despliegue del Sprint 2 y contrastó lo implementado con las recomendaciones de la entrega anterior para actualizar las conclusiones y recomendaciones del informe.
     </td>
     <td>
       <u>AV1</u><br>
@@ -589,6 +592,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       Reconoció la necesidad de mantener un aprendizaje continuo al trabajar en el desarrollo del frontend de un chat con inteligencia artificial y en la documentación de servicios del sistema. Asimismo, la elaboración de User Flows, Collaboration Insights y evidencias de despliegue evidenció la importancia de seguir fortaleciendo sus conocimientos en integración tecnológica, diseño de experiencia de usuario y documentación de soluciones de software.
+      <br><br>
+      <u>AV2</u><br>
+      Reconoció la necesidad de seguir aprendiendo al desplegar nuevamente el backend en Railway: configurar el despliegue continuo desde `develop`, la base de datos y la exposición de la documentación Swagger en un entorno de producción le exigió revisar por cuenta propia la configuración de la plataforma y verificar el estado de cada servicio antes de dar el despliegue por correcto. Comprobó también que la evidencia del Sprint 1 ya no describía la infraestructura vigente, lo que le mostró que la documentación de un producto debe actualizarse junto con él, e identificó como siguiente paso aprender a automatizar pruebas e integración continua para que cada despliegue quede respaldado por resultados verificables.
     </td>
     <td>
       <u>AV1</u><br>
