@@ -5944,17 +5944,39 @@ Los siguientes términos se emplean en la documentación, arquitectura y validac
 
 # Bibliografía
 
+Conventional Commits. (s. f.). *Conventional Commits 1.0.0*. https://www.conventionalcommits.org/en/v1.0.0/
+
+Coppola, R., Fulcini, T., Ardito, L., & Torchiano, M. (2025). Kotlin assimilating the Android ecosystem: An appraisal of diffusion and impact on maintainability. *Journal of Systems and Software, 222*, Article 112346. https://doi.org/10.1016/j.jss.2025.112346
+
+Evans, E. (2003). *Domain-driven design: Tackling complexity in the heart of software*. Addison-Wesley.
+
 Feng, X., Tian, L., Ho, G. W. K., Yorke, J., & Hui, V. (2025). The effectiveness of AI chatbots in alleviating mental distress and promoting health behaviors among adolescents and young adults: Systematic review and meta-analysis. *Journal of Medical Internet Research, 27*, Article e79850. https://doi.org/10.2196/79850
 
 Flint, S. W., Keshk, A. M., Dyer, R., & Bagheri, H. (2025). How do developers use type inference: An exploratory study in Kotlin. *Empirical Software Engineering, 30*(2). https://doi.org/10.1007/s10664-024-10585-y
 
+Google. (s. f.-a). *Flutter documentation*. https://docs.flutter.dev
+
+Google. (s. f.-b). *Jetpack Compose*. Android Developers. https://developer.android.com/compose
+
+Gothelf, J., & Seiden, J. (2021). *Lean UX: Creating great products with agile teams* (3.ª ed.). O'Reilly Media.
+
+JetBrains. (s. f.). *Kotlin documentation*. https://kotlinlang.org/docs/home.html
+
 Li, Y., Dang, X., Tian, H., Sun, T., Wang, Z., Ma, L., Klein, J., & Bissyandé, T. F. (2024). An empirical study of AI techniques in mobile applications. *Journal of Systems and Software, 219*, Article 112233. https://doi.org/10.1016/j.jss.2024.112233
 
+Microsoft. (s. f.). *ASP.NET Core documentation*. https://learn.microsoft.com/aspnet/core
+
 Nyakhar, S., & Wang, H. (2025). Effectiveness of artificial intelligence chatbots on mental health & well-being in college students: A rapid systematic review. *Frontiers in Psychiatry, 16*, Article 1621768. https://doi.org/10.3389/fpsyt.2025.1621768
+
+OpenAPI Initiative. (2021). *OpenAPI Specification v3.0.3*. https://spec.openapis.org/oas/v3.0.3
 
 Organización Mundial de la Salud. (2021). *Global strategy on digital health 2020-2025*. https://www.who.int/publications/i/item/9789240020924
 
 Organización Mundial de la Salud. (2022). *World mental health report: Transforming mental health for all*. https://www.who.int/publications/i/item/9789240049338
+
+Özkan, O., Babur, Ö., & van den Brand, M. (2025). Domain-driven design in software development: A systematic literature review on implementation, challenges, and effectiveness. *Journal of Systems and Software, 230*, Article 112537. https://doi.org/10.1016/j.jss.2025.112537
+
+Schwaber, K., & Sutherland, J. (2020). *The Scrum guide*. https://scrumguides.org/scrum-guide.html
 
 ---
 
