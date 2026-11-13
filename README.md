@@ -5001,6 +5001,21 @@ Las capturas corresponden a la versión de la aplicación instalada en un dispos
 
 *Figura 138.11. Soporte de la Mobile Application (Flutter), con el formulario de tickets y las preguntas frecuentes.*
 
+##### Video de navegación
+
+Este video de navegación de la Mobile Application en Flutter recorre los flujos principales implementados en el Sprint 2: sesión y bloqueo por PIN, Diario, Hábitos, Análisis, Soporte, Ajustes y Notificaciones (Tabla 86.9). El video solo muestra la aplicación móvil; no incluye el Landing Page.
+
+- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-mindflow-productnavigation-av2.mp4`
+- **URL:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202413169_upc_edu_pe/IQBs-3JhQVXqTpONY1WGX7iEAcGlF81x-48zT5IIqfPRPPg?e=kMNiS3&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+- **Duración total:** 00:01:55
+- **Plataforma:** OneDrive institucional UPC (Stream/SharePoint)
+
+<p align="center">
+<img src="assets/img/product-navigation/Video_Navegacion_Flutter_AV2.png" alt="Fotograma del video de navegación de la aplicación Flutter" width="700"/>
+
+*Figura 138.12. Fotograma del video de navegación de la Mobile Application (Flutter), en el segundo 00:28, con la vista Diario.*
+</p>
+
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
 Los Web Services no registraron commits en `develop` durante el Sprint 2 (Tabla 86.4). Lo que cambió fue su despliegue: el backend se publicó en un nuevo servicio de Railway (sección 4.2.2.8), por lo que la documentación **OpenAPI (Swagger)** se verificó nuevamente en esa URL. El 12/11/2026 la especificación desplegada respondió `200`, declara **70 operaciones sobre 49 rutas** (69 endpoints de 12 controladores, más `/health`), el mismo inventario que documenta la sección 4.2.1.7, y `GET /health` respondió `{ "status": "ok", "database": "connected" }`.
