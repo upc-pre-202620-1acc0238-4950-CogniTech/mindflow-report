@@ -799,6 +799,8 @@ Para delimitar y comprender a profundidad el alcance de esta problemática, se e
 
 ### 1.2.2. Lean UX Process
 
+Esta sección aplica el enfoque Lean UX (Gothelf & Seiden, 2021), que parte de declaraciones de problema, supuestos e hipótesis que se validan con usuarios.
+
 #### 1.2.2.1. Lean UX Problem Statements
 
 El estado actual del mercado de aplicaciones de salud mental y *habit tracking* revela una deficiencia crítica en la interactividad. Las soluciones existentes obligan a los usuarios a realizar el esfuerzo cognitivo de registrar sus emociones en aislamiento, ofreciendo únicamente métricas pasivas sin proporcionar contención ni guía en tiempo real.
@@ -1738,6 +1740,8 @@ La columna **Priority** representa la importancia relativa de cada elemento dent
 | 51 | US36 | Exportación en CSV | Como usuario Premium, quiero exportar mi información en formato CSV, para analizar los datos mediante herramientas externas. | Low | 3 |
 
 ## 2.5. Strategic-Level Domain-Driven Design
+
+El diseño del dominio de MindFlow sigue el enfoque Domain-Driven Design (Evans, 2003), cuya aplicación en el desarrollo de software ha sido analizada en revisiones sistemáticas recientes (Özkan et al., 2025).
 
 ### 2.5.1. EventStorming
 
@@ -4081,7 +4085,7 @@ A partir de los mock-ups de alta fidelidad de la sección 3.1.4.3 se armó un pr
 
 ### 4.1.1. Software Development Environment Configuration
 
-El equipo configuró el entorno de desarrollo de cada producto de MindFlow por separado, ya que cada uno usa un stack distinto: HTML, CSS y JavaScript estáticos para la Landing Page; ASP.NET Core sobre .NET para los Web Services; y Kotlin con Jetpack Compose para la Aplicación móvil Android. Las Tablas 65 a 67 resumen las herramientas y versiones reales de cada uno, leídas directamente de sus archivos de configuración: `assets/i18n/` e `index.html` en `mindflow-landingPage`; `MindFlow.Platform.csproj`, `Dockerfile` y `docker-compose.yml` en `mindflow-backend`; `app/build.gradle.kts` y `gradle/libs.versions.toml` en `mindflow-frontend`.
+El equipo configuró el entorno de desarrollo de cada producto de MindFlow por separado, ya que cada uno usa un stack distinto: HTML, CSS y JavaScript estáticos para la Landing Page; ASP.NET Core sobre .NET para los Web Services (Microsoft, s. f.); y Kotlin con Jetpack Compose para la Aplicación móvil Android (JetBrains, s. f.; Google, s. f.-b). Las Tablas 65 a 67 resumen las herramientas y versiones reales de cada uno, leídas directamente de sus archivos de configuración: `assets/i18n/` e `index.html` en `mindflow-landingPage`; `MindFlow.Platform.csproj`, `Dockerfile` y `docker-compose.yml` en `mindflow-backend`; `app/build.gradle.kts` y `gradle/libs.versions.toml` en `mindflow-frontend`.
 
 **Tabla 62. Software Development Environment Configuration — Landing Page.**
 
@@ -4131,7 +4135,7 @@ Como herramientas de gestión y diseño, el equipo usó Figma para el sistema de
 
 Los cuatro repositorios del proyecto siguen un flujo basado en GitFlow simplificado, aunque no de forma idéntica entre todos: `mindflow-backend` y `mindflow-landingPage` mantienen `main` como rama por defecto en GitHub con `develop` para integración, mientras que `mindflow-report` y `mindflow-frontend` usan `develop` como única rama por defecto — este último repositorio no tiene siquiera una rama `main`. Ninguno de los cuatro usa ramas `release/*` ni `hotfix/*`. El trabajo del Sprint 1 se realizó en ramas `feature/*` creadas a partir de `develop` e integradas mediante Pull Request, como lo muestran los commits de merge del historial (`Merge pull request #N from upc-pre-202620-1acc0238-4950-CogniTech/feature/...`): `feature/shared`, `feature/iam`, `feature/journal`, `feature/ai-assistant`, `feature/habits-wellness` y `feature/local-dev-setup` en el backend (ya eliminadas de GitHub tras su merge); `feature/backend-integration` y `feature/bottom-nav-i18n` en la app móvil; `feature/landing-page-redesign` en la Landing Page. En `mindflow-backend` llama la atención que `main` no se actualizó después del scaffold inicial del proyecto (commit `b144749`): todo el trabajo de los 8 bounded contexts, incluidas las últimas correcciones relacionadas con el despliegue (`2b2e25c`, `ce7707a`, `294a182`), vive solo en `develop`. En la Landing Page, en cambio, sí se integró `develop` en `main` mediante un Pull Request adicional (PR #3), que es la rama que publica GitHub Pages (sección 4.1.4).
 
-La convención de mensajes de commit observada en el historial sigue, en general, Conventional Commits (`feat:`, `fix:`, `refactor:`, `build:`, `chore:`, `style:`, con *scope* opcional entre paréntesis), tal como indica la sección 4.1.3. En la práctica hay excepciones: varios commits tempranos de la app móvil (por ejemplo `feat: implementar pantallas de login y registro`, del 27/09/2026) usan el prefijo correcto pero la descripción en español, mientras que los commits posteriores a la refactorización a capas DDD (`05d549d refactor: add DDD foundation for frontend`) están íntegramente en inglés. El backend tiene además un par de commits sin prefijo de tipo (`de86103 Update database connection and secret keys`) o con un prefijo no estándar (`dda3d04 feature(ReadMe): Add information for MarkDown`, que usa `feature` en vez de `feat`).
+La convención de mensajes de commit observada en el historial sigue, en general, Conventional Commits (Conventional Commits, s. f.) (`feat:`, `fix:`, `refactor:`, `build:`, `chore:`, `style:`, con *scope* opcional entre paréntesis), tal como indica la sección 4.1.3. En la práctica hay excepciones: varios commits tempranos de la app móvil (por ejemplo `feat: implementar pantallas de login y registro`, del 27/09/2026) usan el prefijo correcto pero la descripción en español, mientras que los commits posteriores a la refactorización a capas DDD (`05d549d refactor: add DDD foundation for frontend`) están íntegramente en inglés. El backend tiene además un par de commits sin prefijo de tipo (`de86103 Update database connection and secret keys`) o con un prefijo no estándar (`dda3d04 feature(ReadMe): Add information for MarkDown`, que usa `feature` en vez de `feat`).
 
 Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los tres repositorios de producto, con los commits por integrante en la rama `develop`, ya se presentan en la sección 4.2.1.9 "Team Collaboration Insights during Sprint" (Tabla 86, Figuras 136 a 138); no se repiten aquí. La Tabla 65 enumera los repositorios del proyecto con su URL, rama principal y propósito.
 
@@ -4188,6 +4192,8 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 | Aplicación móvil | Android Studio (emulador / dispositivo físico) | `mindflow-frontend`, rama `develop` | Sin publicar; sin firma de release ni APK distribuible en este Sprint |
 
 ## 4.2. Landing Page & Mobile Application Implementation
+
+La implementación se organiza en Sprints con su Sprint Planning, Sprint Backlog y Sprint Review, según el marco Scrum (Schwaber & Sutherland, 2020).
 
 ### 4.2.1. Sprint 1
 
@@ -4332,7 +4338,7 @@ La Tabla 40 detalla los commits relacionados con las pruebas automatizadas.
 
 #### 4.2.1.6. Execution Evidence for Sprint Review
 
-En el Sprint 1 el equipo construyó la Mobile Application de MindFlow para Android con **Kotlin y Jetpack Compose (Material 3)**, un lenguaje cuyo uso real en proyectos de software ha sido objeto de estudios empíricos recientes sobre inferencia de tipos y calidad del código (Flint et al., 2025), siguiendo los mock-ups de la sección 3.1.4.3 y el sistema de diseño definido en Figma (tipografía Inter, paleta de marca y componentes reutilizables). En paralelo se levantó el backend **MindFlow.Platform** (ASP.NET Core) con los 8 bounded contexts, documentado en la sección 4.2.1.7.
+En el Sprint 1 el equipo construyó la Mobile Application de MindFlow para Android con **Kotlin y Jetpack Compose (Material 3)**, un lenguaje cuyo uso real en proyectos de software ha sido objeto de estudios empíricos recientes sobre inferencia de tipos y calidad del código (Flint et al., 2025) y cuya adopción en el ecosistema Android ha ido en aumento (Coppola et al., 2025), siguiendo los mock-ups de la sección 3.1.4.3 y el sistema de diseño definido en Figma (tipografía Inter, paleta de marca y componentes reutilizables). En paralelo se levantó el backend **MindFlow.Platform** (ASP.NET Core) con los 8 bounded contexts, documentado en la sección 4.2.1.7.
 
 Logros principales del Sprint:
 
@@ -4342,7 +4348,7 @@ Logros principales del Sprint:
   - creación de entradas del diario con la respuesta empática generada por Google Gemini;
   - chat con MindFlow AI;
   - pago de la suscripción Premium mediante Stripe Checkout en modo prueba.
-- **Persistencia local con SQLite**, que funciona como caché de los datos del usuario. Si la IA del backend no responde, la aplicación usa una respuesta local de respaldo para que el usuario no pierda su registro, una estrategia de resiliencia alineada con los patrones de integración de IA documentados en estudios empíricos recientes sobre aplicaciones móviles (Li et al., 2024).
+- **Persistencia local con SQLite**, que funciona como caché de los datos del usuario. Si la IA del backend no responde, la aplicación usa una respuesta local de respaldo para que el usuario no pierda su registro. La IA se ofrece como un servicio del backend, una de las modalidades de integración de IA en aplicaciones móviles que analiza el estudio empírico de Li et al. (2024).
 - **Arquitectura MVVM** (Composable + ViewModel por pantalla), con una capa de casos de uso (domain/application/infrastructure) aplicada de forma parcial: solo autenticación y chat están conectados a ella hoy; el resto de pantallas sigue usando los repositorios directamente.
 - **Mejoras de usabilidad** posteriores a los mock-ups:
   - barra de navegación inferior de 5 íconos en lugar del menú lateral, para acceder con una mano a las secciones principales;
@@ -4370,7 +4376,7 @@ Las vistas que hoy trabajan con persistencia local (Diario, Hábitos, Analítica
 
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 
-Durante el Sprint 1 se documentaron con **OpenAPI (Swagger)** los Web Services de los 8 bounded contexts de MindFlow. La documentación se genera automáticamente desde los controladores del backend (ASP.NET Core con Swashbuckle) e incluye el esquema de seguridad **Bearer (JWT)**. Así, desde la misma interfaz de Swagger UI se puede iniciar sesión, pegar el token y probar los endpoints protegidos.
+Durante el Sprint 1 se documentaron con **OpenAPI (Swagger)** (OpenAPI Initiative, 2021) los Web Services de los 8 bounded contexts de MindFlow. La documentación se genera automáticamente desde los controladores del backend (ASP.NET Core con Swashbuckle) e incluye el esquema de seguridad **Bearer (JWT)**. Así, desde la misma interfaz de Swagger UI se puede iniciar sesión, pegar el token y probar los endpoints protegidos.
 
 Logros del Sprint en documentación de Web Services:
 
@@ -4920,7 +4926,7 @@ El único resultado informado como PASS es el del Widget Test de Flutter de la T
 
 #### 4.2.2.6. Execution Evidence for Sprint Review
 
-En el Sprint 2 el equipo construyó la Mobile Application en **Flutter (Dart)** en el repositorio [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter), conectada desde el inicio a los Web Services desplegados en Railway (sección 4.2.2.8). La aplicación Android en Kotlin del Sprint 1 se mantiene en su repositorio y en este Sprint solo cambió su URL base hacia el nuevo servicio (`ac85aede7a5b`, Tabla 86.4).
+En el Sprint 2 el equipo construyó la Mobile Application en **Flutter (Dart)** (Google, s. f.-a) en el repositorio [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter), conectada desde el inicio a los Web Services desplegados en Railway (sección 4.2.2.8). La aplicación Android en Kotlin del Sprint 1 se mantiene en su repositorio y en este Sprint solo cambió su URL base hacia el nuevo servicio (`ac85aede7a5b`, Tabla 86.4).
 
 Logros principales del Sprint:
 
