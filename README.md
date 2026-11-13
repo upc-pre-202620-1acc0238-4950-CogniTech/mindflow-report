@@ -120,7 +120,7 @@ Proyecto
 
   <tr>
     <td><b>Tercera Entrega (AV2)</b></td>
-    <td>09/11/2026</td>
+    <td>13/11/2026</td>
     <td>
       Cabrera Sotelo, Camila Celeste <br>
       <br>
@@ -138,8 +138,8 @@ Proyecto
     </td>
     <td>
       Correcciones y mejoras de entregas anteriores: Capítulo II (diagramas C4, de clases, de componentes y de base de datos alineados con el backend implementado, tras una revisión cruzada con el código fuente) y Capítulo IV (centrado y tamaño de las imágenes en Heurísticas, Wireflows y Mock-ups) <br>
-      Capítulo IV: Product Implementation & Validation (Sprint 2 del Landing Page, los Web Services y las Mobile Applications: Sprint Planning, Aspect Leaders and Collaborators, Sprint Backlog, evidencias de desarrollo, pruebas, ejecución, documentación de servicios y despliegue, y Team Collaboration Insights) <br>
-      Validation Interviews: tercera entrevista del Segmento 2 y actualización de las evaluaciones según heurísticas <br>
+      Capítulo IV: Product Implementation & Validation (Sprint 2 del Landing Page, los Web Services y las Mobile Applications: Sprint Planning, Aspect Leaders and Collaborators, Sprint Backlog, evidencias de desarrollo, pruebas, ejecución (con el video de navegación de la aplicación móvil), documentación de servicios (con capturas de la documentación y de la interacción con los servicios) y despliegue, y Team Collaboration Insights) <br>
+      Validation Interviews: actualización de las evaluaciones según heurísticas <br>
       Conclusiones y recomendaciones, Bibliografía, Glosario, Anexos y Términos y Condiciones <br>
       Actualización de Student Outcome y de Project Report Collaboration Insights
     </td>
@@ -540,7 +540,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       El equipo actualizó sus conocimientos en diseño de producto y planificación ágil, aplicando Style Guidelines, Information Architecture y Sprint Planning para estructurar la construcción del Landing Page y las Mobile Applications sobre los 8 bounded contexts definidos en el Capítulo II.
       <br><br>
       <u>AV2</u><br>
-      El equipo actualizó sus conocimientos al cerrar el Sprint 2: documentó la evidencia de desarrollo, pruebas, ejecución y despliegue del backend, el Landing Page y la aplicación móvil Android, documentó los Web Services ya desplegados, y corrigió los diagramas de arquitectura, de clases, de componentes y de base de datos contrastándolos con el backend realmente implementado. Aplicó también conocimientos de ética profesional (códigos ACM/IEEE y CIP) y de protección de datos personales al redactar y publicar los Términos y Condiciones y la Política de Privacidad, y validó la propuesta con una tercera entrevista al segmento de profesionales jóvenes, actualizando la evaluación según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
+      El equipo actualizó sus conocimientos al cerrar el Sprint 2: documentó la evidencia de desarrollo, pruebas, ejecución y despliegue del backend, el Landing Page y las aplicaciones móviles (Android y Flutter), documentó los Web Services ya desplegados, y corrigió los diagramas de arquitectura, de clases, de componentes y de base de datos contrastándolos con el backend realmente implementado. Aplicó también conocimientos de ética profesional (códigos ACM/IEEE y CIP) y de protección de datos personales al redactar y publicar los Términos y Condiciones y la Política de Privacidad, y documentó cinco entrevistas de validación (tres del Segmento 1 y dos del Segmento 2), actualizando la evaluación según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
     </td>
   </tr>
   <tr>
