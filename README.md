@@ -4930,7 +4930,7 @@ Logros principales del Sprint:
 - **Soporte dentro de la aplicación.** Desde Soporte el usuario envía un ticket, consulta sus tickets y responde en su conversación (US37). La misma pantalla muestra la Línea 113 y un botón que abre el marcador del teléfono.
 - **Ajustes de usabilidad.** Modo oscuro, cambio de idioma español/inglés, opción de mostrar u ocultar la contraseña en el registro y mayor contraste de las burbujas del chat en modo oscuro (`c65ef98`).
 - **Analíticas con datos reales.** La pantalla muestra solo las métricas que entrega el endpoint de analíticas (entradas, hábitos activos, mejor racha, distribución por sentimiento y hábitos completados); la fluctuación diaria y la nube de palabras de los mock-ups no se muestran porque el backend no entrega esos datos.
-- **Distribución.** Las versiones de la aplicación se publican a los dispositivos de prueba mediante un flujo de integración continua con Firebase App Distribution.
+- **Distribución.** Las versiones de la aplicación se publican a los dispositivos de prueba mediante un flujo de integración continua con Firebase App Distribution (`.github/workflows/firebase-distribute.yml` en `mindflow-mobile-flutter`); el proyecto de Firebase donde se registran las versiones se documenta en la sección 4.2.2.8.
 
 ##### Vistas implementadas
 
