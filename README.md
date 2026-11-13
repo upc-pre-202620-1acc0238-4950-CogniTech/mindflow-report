@@ -4219,9 +4219,9 @@ A continuación se presenta el resumen del Sprint Planning Meeting realizado par
 
 | Sprint # | Sprint 1 |
 |---|---|
-| **Sprint Planning Background** | |
+| **Sprint Planning Background** | <img src="assets/img/participants/PlanningMeet.jpeg" width="300"/> |
 | Date | 2026-09-22 |
-| Time | 07:00 PM |
+| Time | 10:27 AM |
 | Location | Reunión virtual vía Google Meet |
 | Prepared By | Güere Calero, Fernando Julio |
 | Attendees | Cabrera Sotelo, Camila Celeste / Díaz De la Cruz, Sebastián Gabriel / Güere Calero, Fernando Julio / Jáuregui Cerna, Jean Franco / Limache Coronel, Imanol Fabrizio |
@@ -4802,7 +4802,7 @@ El Sprint Planning Meeting del Sprint 2 partió de la revisión de lo entregado 
 
 | Sprint # | Sprint 2 |
 |---|---|
-| **Sprint Planning Background** | |
+| **Sprint Planning Background** | <img src="assets/img/participants/PlanningMeet2.jpeg" width="300"/> |
 | Date | 2026-10-12 |
 | Time | 07:00 PM |
 | Location | Reunión virtual vía Google Meet |
