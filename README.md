@@ -212,7 +212,7 @@ Para la organización y seguimiento del trabajo, el equipo utilizó GitHub como 
 Para la segunda entrega, el trabajo colaborativo del equipo se amplió del único repositorio del Project Report a los cuatro repositorios que conforman la solución completa de MindFlow:
 
 - Informe: [`mindflow-report`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-report)
-- Backend: [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), documentación interactiva en [Swagger](https://powerful-wholeness-production.up.railway.app/swagger)
+- Backend: [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), documentación interactiva en [Swagger](https://powerful-wholeness-production.up.railway.app/swagger) (dirección del Sprint 1; la dirección vigente se indica en la sección 4.2.2.8)
 - Mobile Application (Android nativo): [`mindflow-frontend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend)
 - Landing Page: [`mindflow-landingPage`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage), desplegado en [GitHub Pages](https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/)
 - Diseño: [Figma — AppMoviles](https://www.figma.com/design/oL5qBZ6aVIPJBJTRZJ23jH/AppMoviles?t=WGZWtJXygKBervV6-1)
@@ -368,10 +368,6 @@ El trabajo de esta entrega incluyó la planificación del Sprint 2 (Sprint Plann
         - [2.6.4.6.1. Bounded Context Domain Layer Class Diagrams](#26461-bounded-context-domain-layer-class-diagrams)
         - [2.6.4.6.2. Bounded Context Database Design Diagram](#26462-bounded-context-database-design-diagram)
     - [2.6.5. Bounded Context: Analytics & Reporting](#265-bounded-context-analytics--reporting)
-      - [2.6.5.1. Domain Layer](#2651-domain-layer)
-      - [2.6.5.2. Interface Layer](#2652-interface-layer)
-      - [2.6.5.3. Application Layer](#2653-application-layer)
-      - [2.6.5.4. Infrastructure Layer](#2654-infrastructure-layer)
       - [2.6.5.5. Bounded Context Software Architecture Component Level Diagrams](#2655-bounded-context-software-architecture-component-level-diagrams)
       - [2.6.5.6. Bounded Context Software Architecture Code Level Diagrams](#2656-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.5.6.1. Bounded Context Domain Layer Class Diagrams](#26561-bounded-context-domain-layer-class-diagrams)
@@ -799,7 +795,7 @@ Para delimitar y comprender a profundidad el alcance de esta problemática, se e
 * **When (Cuándo):** De manera constante, pero con picos de intensidad durante periodos de evaluaciones universitarias, cierres de proyectos laborales, o momentos de crisis personal donde no se dispone de asistencia psicológica inmediata.
 * **Why (Por qué):** Debido a los altos costos económicos de la terapia tradicional, la falta de tiempo para agendar sesiones físicas, el estigma social que aún rodea a la vulnerabilidad emocional, y la carencia de herramientas digitales que ofrezcan empatía y retroalimentación clínica validada en tiempo real.
 * **How (Cómo):** El problema se manifiesta a través del agotamiento cognitivo, alteraciones del sueño y baja productividad. Actualmente, los usuarios intentan mitigarlo mediante diarios en papel o aplicaciones genéricas que fallan al no analizar el estado del usuario. Para resolver esto de forma efectiva, la integración de intervenciones digitales impulsadas por Inteligencia Artificial resulta fundamental: revisiones sistemáticas recientes confirman que los chatbots de IA reducen el malestar psicológico y promueven conductas saludables en estudiantes universitarios y en adolescentes y jóvenes (Nyakhar & Wang, 2025; Feng et al., 2025), en línea con lo señalado por la Organización Mundial de la Salud (OMS), para quien las herramientas de salud digital basadas en algoritmos tienen el potencial de superar barreras históricas de acceso y ofrecer un monitoreo continuo que empodera al paciente en su autocuidado (OMS, 2021, *Global strategy on digital health 2020-2025*).
-* **How much (Cuánto):** El costo y el impacto de esta problemática son cuantificables y alarmantes. A nivel global, la depresión y la ansiedad generan la pérdida de 12,000 millones de días de trabajo cada año, costando a la economía mundial cerca de 1 billón de dólares anuales en pérdida de productividad (OMS, 2022, *World mental health report*). En el contexto peruano, el Ministerio de Salud (MINSA) reportó que solo en el año 2023 se atendieron más de 1.3 millones de casos relacionados a trastornos de salud mental, destacando que la ansiedad y la depresión son las principales causas de pérdida de años de vida saludables en la población joven (MINSA, 2023, *Boletín Epidemiológico del Perú*).
+* **How much (Cuánto):** El costo y el impacto de esta problemática son cuantificables y alarmantes. A nivel global, la depresión y la ansiedad generan la pérdida de 12,000 millones de días de trabajo cada año, costando a la economía mundial cerca de 1 billón de dólares anuales en pérdida de productividad (OMS, 2022, *World mental health report*). En el contexto peruano, el Ministerio de Salud (MINSA) informó que entre enero y setiembre de 2023 sus establecimientos atendieron 1 333 930 casos por trastornos de salud mental y problemas psicosociales, entre los cuales la ansiedad (343 897 casos) y la depresión (207 068 casos) figuran entre las patologías más frecuentes (MINSA, 2023).
 
 ### 1.2.2. Lean UX Process
 
@@ -2303,8 +2299,6 @@ Los servicios de terceros (agrupados como Third-Party Cloud Services) son consum
 Se muestra en gris y punteado el nodo de **Firebase** (push), aún no implementado.
 
 ## 2.6. Tactical-Level Domain-Driven Design
-
-<!-- Se agrega una sub-sección "2.6.x. Bounded Context: <Nombre>" por cada bounded context identificado en 2.5, una vez completado el Strategic-Level DDD. -->
 
 Además de las tablas por capa, el Domain Layer de cada bounded context que tiene un agregado con reglas de negocio propias incluye su **Aggregate Design Canvas**. El canvas recorre nueve secciones: nombre, descripción, transiciones de estado, invariantes que el agregado garantiza, políticas correctivas para lo que queda fuera de su límite de consistencia, comandos que maneja, eventos que genera, throughput (probabilidad de conflictos de concurrencia) y tamaño (cuántos cambios acumula en su vida). Los eventos listados son los eventos de dominio identificados en el EventStorming (sección 2.5.1): en el Sprint 1 el backend no los publica como `IEvent`, sino que sus efectos se ejecutan de forma síncrona en el Application Layer. Analytics & Reporting y Notifications no tienen canvas: el primero no tiene un agregado propio (solo lee datos de otros contextos) y el segundo solo registra notificaciones, sin reglas que proteger.
 
@@ -4195,6 +4189,8 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 | Web Services | Railway | `mindflow-backend`, rama `develop` (Docker, build desde GitHub) | https://powerful-wholeness-production.up.railway.app/swagger |
 | Aplicación móvil | Android Studio (emulador / dispositivo físico) | `mindflow-frontend`, rama `develop` | Sin publicar; sin firma de release ni APK distribuible en este Sprint |
 
+**Nota:** la dirección de Railway indicada corresponde al despliegue realizado en el Sprint 1. En el Sprint 2 el backend se desplegó en un nuevo servicio de Railway, con una nueva URL pública, que se documenta en la sección 4.2.2.8.
+
 ## 4.2. Landing Page & Mobile Application Implementation
 
 La implementación se organiza en Sprints con su Sprint Planning, Sprint Backlog y Sprint Review, según el marco Scrum (Schwaber & Sutherland, 2020).
@@ -4392,6 +4388,8 @@ Logros del Sprint en documentación de Web Services:
 **Repositorio de Web Services:** [https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) (rama `develop`)
 
 **Documentación desplegada (Railway):** [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger)
+
+**Nota:** la dirección de Railway indicada corresponde al despliegue realizado en el Sprint 1. En el Sprint 2 el backend se desplegó en un nuevo servicio de Railway, con una nueva URL pública, que se documenta en la sección 4.2.2.8.
 
 **Documentación en entorno local:** `http://localhost:5166/swagger/index.html`, disponible al ejecutar el backend en el entorno `Development`.
 
@@ -4739,6 +4737,8 @@ El backend de MindFlow (ASP.NET Core) se desplegó en **Railway**. Los pasos rea
 *Figura 150. Variables de entorno del servicio del backend en Railway.*
 
 **URL de los Web Services (documentación Swagger):** [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger)
+
+**Nota:** la dirección de Railway indicada corresponde al despliegue realizado en el Sprint 1. En el Sprint 2 el backend se desplegó en un nuevo servicio de Railway, con una nueva URL pública, que se documenta en la sección 4.2.2.8.
 
 ##### Mobile Application
 
@@ -5999,6 +5999,8 @@ JetBrains. (s. f.). *Kotlin documentation*. https://kotlinlang.org/docs/home.htm
 Li, Y., Dang, X., Tian, H., Sun, T., Wang, Z., Ma, L., Klein, J., & Bissyandé, T. F. (2024). An empirical study of AI techniques in mobile applications. *Journal of Systems and Software, 219*, Article 112233. https://doi.org/10.1016/j.jss.2024.112233
 
 Microsoft. (s. f.). *ASP.NET Core documentation*. https://learn.microsoft.com/aspnet/core
+
+Ministerio de Salud. (2023, 10 de octubre). *Día Mundial de la Salud Mental: más de 1 333 000 casos atendidos por trastornos y problemas psicosociales* [Nota de prensa]. Gob.pe. https://www.gob.pe/institucion/minsa/noticias/847052-dia-mundial-de-la-salud-mental-mas-de-1-333-000-casos-atendidos-por-trastornos-y-problemas-psicosociales
 
 Nyakhar, S., & Wang, H. (2025). Effectiveness of artificial intelligence chatbots on mental health & well-being in college students: A rapid systematic review. *Frontiers in Psychiatry, 16*, Article 1621768. https://doi.org/10.3389/fpsyt.2025.1621768
 
