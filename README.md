@@ -5917,10 +5917,10 @@ El video About the Product de MindFlow presenta la propuesta de valor de la solu
 
 Su propósito es comunicar de manera breve y atractiva las principales características y beneficios del producto, facilitando que los potenciales usuarios comprendan su utilidad.
 
-- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-cognitech-about-the-product-tb2.mp4`
-- **Video en YouTube:** [Ver video](https://youtu.be/kcir1Opjq90)
-- **Video en OneDrive:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQBqfCrCuIW8TbWNGUPaMUF1AXXpUU4J35Hgp2Uana61vXU?e=5k2cal)
-- **Duración total:** Pendiente de confirmar.
+- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-cognitech-about-the-product-av2.mp4`
+- **YouTube:** [Ver video](https://youtu.be/kcir1Opjq90)
+- **OneDrive:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQBqfCrCuIW8TbWNGUPaMUF1AXXpUU4J35Hgp2Uana61vXU?e=5k2cal)
+- **Duración total:** 00:05:19
 
 <p align="center">
 <img src="https://img.youtube.com/vi/kcir1Opjq90/hqdefault.jpg" alt="Vista previa del video About the Product de MindFlow" width="700"/>
@@ -5936,10 +5936,10 @@ Su propósito es mostrar el proceso de trabajo colaborativo, las actividades des
 
 Asimismo, complementa las evidencias del Student Outcome 7, destacando la adquisición y aplicación de nuevos conocimientos, las competencias desarrolladas y los resultados alcanzados durante la implementación del proyecto.
 
-- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-cognitech-about-the-team-tb2.mp4`
-- **Video en YouTube:** [Ver video](https://youtu.be/Aq2nWZGpI1U)
-- **Video en OneDrive:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAFMB8Cs8yTQpDvrr58ixkPAR_pr-GTfn72tAkYbrYwxPE?e=MU7bBd)
-- **Duración total:** 00:09:51
+- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-cognitech-about-the-team-av2.mp4`
+- **YouTube:** [Ver video](https://youtu.be/Aq2nWZGpI1U)
+- **OneDrive:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAFMB8Cs8yTQpDvrr58ixkPAR_pr-GTfn72tAkYbrYwxPE?e=MU7bBd)
+- **Duración total:** 00:09:50
 
 <p align="center">
 <img src="https://img.youtube.com/vi/Aq2nWZGpI1U/hqdefault.jpg" alt="Vista previa del video About the Team de CogniTech" width="700"/>
