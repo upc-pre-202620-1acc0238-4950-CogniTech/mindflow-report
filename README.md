@@ -456,10 +456,8 @@ El trabajo de esta entrega incluyó la planificación del Sprint 2 (Sprint Plann
 - [Conclusiones](#conclusiones)
   - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
   - [Video App Validation](#video-app-validation)
-<!--
   - [Video About the product](#video-about-the-product)
-  - [Video About the team](#video-about-the-team) 
--->
+  - [Video About the team](#video-about-the-team)
 - [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -5912,17 +5910,42 @@ Este video reúne las cinco entrevistas de validación descritas en la sección 
 | 00:41:07 | Entrevista 5, Aldo Huamán (duración 11:31) |
 | 00:52:39 | Fin |
 
-<!--
+
 ## Video About the product
 
-_Pendiente_
+El video About the Product de MindFlow presenta la propuesta de valor de la solución desarrollada por CogniTech, orientada a promover el bienestar emocional y la gestión de hábitos de estudiantes universitarios y profesionales jóvenes.
+
+Su propósito es comunicar de manera breve y atractiva las principales características y beneficios del producto, facilitando que los potenciales usuarios comprendan su utilidad.
+
+- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-cognitech-about-the-product-tb2.mp4`
+- **Video en YouTube:** [Ver video](https://youtu.be/kcir1Opjq90)
+- **Video en OneDrive:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQBqfCrCuIW8TbWNGUPaMUF1AXXpUU4J35Hgp2Uana61vXU?e=5k2cal)
+- **Duración total:** Pendiente de confirmar.
+
+<p align="center">
+<img src="https://img.youtube.com/vi/kcir1Opjq90/hqdefault.jpg" alt="Vista previa del video About the Product de MindFlow" width="700"/>
+
+*Figura 196. Vista previa del video About the Product de MindFlow.*
+</p>
 
 ## Video About the team
 
-_Pendiente_
--->
+El video About the Team presenta al equipo CogniTech, conformado por cinco estudiantes de Ingeniería de Software responsables del desarrollo del proyecto MindFlow.
 
----
+Su propósito es mostrar el proceso de trabajo colaborativo, las actividades desarrolladas durante el ciclo académico y las experiencias de aprendizaje adquiridas por los integrantes del equipo.
+
+Asimismo, complementa las evidencias del Student Outcome 7, destacando la adquisición y aplicación de nuevos conocimientos, las competencias desarrolladas y los resultados alcanzados durante la implementación del proyecto.
+
+- **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-cognitech-about-the-team-tb2.mp4`
+- **Video en YouTube:** [Ver video](https://youtu.be/Aq2nWZGpI1U)
+- **Video en OneDrive:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410421_upc_edu_pe/IQAFMB8Cs8yTQpDvrr58ixkPAR_pr-GTfn72tAkYbrYwxPE?e=MU7bBd)
+- **Duración total:** 00:09:51
+
+<p align="center">
+<img src="https://img.youtube.com/vi/Aq2nWZGpI1U/hqdefault.jpg" alt="Vista previa del video About the Team de CogniTech" width="700"/>
+
+*Figura 197. Vista previa del video About the Team de CogniTech.*
+</p>
 
 # Glosario
 
