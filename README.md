@@ -516,6 +516,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>TB1</u><br>
       Actualizó y aplicó sus conocimientos en diseño UX/UI y desarrollo frontend mediante la elaboración de mockups y la implementación de tres Bounded Contexts del producto. Asimismo, fortaleció sus competencias en diseño de sistemas mediante el desarrollo del Design System en código, complementando estas actividades con una Validation Interview para relacionar los requerimientos de los usuarios con las interfaces implementadas.
       <br><br>
+      <u>AV2</u><br>
+      Actualizó y aplicó sus conocimientos en desarrollo móvil con Flutter y en el consumo de servicios REST al liderar el aspecto de Seguridad y Cuenta del Sprint 2. Implementó la pantalla de bloqueo por PIN, que solicita y valida el código al abrir la aplicación con `POST /api/v1/users/pin/verify`, y su activación y desactivación desde Configuración con `POST` y `DELETE /api/v1/users/pin` y `GET /api/v1/users/pin/status`. Integró también la edición del perfil con `GET` y `PUT /api/v1/users/profile` y la eliminación de la cuenta con `DELETE /api/v1/users`, borrando la caché local y cerrando la sesión del usuario. Además, a partir de los hallazgos de la evaluación de usabilidad, aclaró en el onboarding y en Configuración que MindFlow es un asistente de reflexión y no un servicio clínico, explicando cómo se procesan los textos, y ajustó los colores de los botones principales para cumplir el contraste mínimo de accesibilidad.
+      <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
       Ya contaba con base previa en Domain-Driven Design y en el C4 Model, pero en este proyecto actualizó ese conocimiento al aplicarlo a un caso real con varios bounded contexts interdependientes (IAM, Journal, AI Assistant y Habits & Wellness) y al elaborar por primera vez un Deployment Diagram sobre infraestructura cloud concreta (Railway, con servicios de API, MySQL y Redis), integrando patrones de Application Layer distintos entre sí (Command Service unificado, CQRS, servicios planos) según las necesidades específicas de cada contexto.
@@ -576,6 +579,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>TB1</u><br>
       Reconoció la importancia del aprendizaje permanente al desarrollar tres Bounded Contexts del frontend y trasladar los diseños visuales a componentes funcionales. La implementación del Design System en código y la realización de una Validation Interview evidenciaron la necesidad de continuar aprendiendo buenas prácticas de desarrollo frontend, reutilización de componentes y diseño de interfaces consistentes con las necesidades de los usuarios.
+      <br><br>
+      <u>AV2</u><br>
+      Reconoció la necesidad de seguir aprendiendo al pasar del desarrollo web al desarrollo móvil en Flutter, lo que le exigió estudiar por cuenta propia el manejo del estado de sesión, el almacenamiento local y el tratamiento de las respuestas y errores del backend en funcionalidades sensibles como el PIN y la eliminación de la cuenta. La evaluación de usabilidad le mostró que una funcionalidad correcta en lo técnico no basta si el usuario no entiende el alcance del producto o no puede leer bien la interfaz, lo que lo llevó a aprender criterios de contraste accesible y a comunicar con claridad el tratamiento de datos personales en una aplicación de bienestar emocional. Identificó como siguiente paso fortalecer sus conocimientos en pruebas automatizadas para respaldar cada funcionalidad con evidencia verificable.
       <br><br>
       <b>Limache Coronel, Imanol Fabrizio</b><br>
       <u>AV1</u><br>
