@@ -4397,8 +4397,8 @@ Logros del Sprint en documentación de Web Services:
 
 **Convenciones de la tabla:**
 
-- 🔒 indica que el endpoint requiere el header `Authorization: Bearer <token>`.
-- 👤 indica que el endpoint requiere además el rol `Admin` o `Support`.
+- Todos los endpoints requieren el header `Authorization: Bearer <token>`, salvo los públicos: `POST /api/v1/users/sign-up`, `sign-in`, `google-auth`, `forgot-password` y `reset-password`, `GET /api/v1/subscriptions/plans`, `POST /api/v1/subscriptions/webhook` y `GET /health`.
+- Los endpoints que requieren además el rol `Admin` o `Support` se indican con «(Admin/Support)» junto al método.
 - Las respuestas de error siguen el formato `{ "error": "mensaje" }` o `{ "message": "mensaje" }` según el controlador.
 
 ##### IAM: usuarios y autenticación
@@ -4412,13 +4412,13 @@ Logros del Sprint en documentación de Web Services:
 | POST | `/api/v1/users/google-auth` | Body: `credential` (token de Google) | `200` con `id`, `email` y `token`. `401` si el token de Google no es válido. |
 | POST | `/api/v1/users/forgot-password` | Body: `email` | `200` con un mensaje genérico. No revela si el correo existe. |
 | POST | `/api/v1/users/reset-password` | Body: `token`, `new_password` | `200` "Contraseña actualizada correctamente.". `400` si el token es inválido o expiró. |
-| GET 🔒 | `/api/v1/users/profile` | — | `200` con el perfil del usuario autenticado. |
-| PUT 🔒 | `/api/v1/users/profile` | Body: `name`, `occupation` (ambos opcionales) | `200` con el perfil actualizado. |
-| DELETE 🔒 | `/api/v1/users` | — | `204` al eliminar la cuenta del usuario autenticado. |
-| POST 🔒 | `/api/v1/users/pin` | Body: `pin` | `200` "PIN configurado correctamente.". |
-| POST 🔒 | `/api/v1/users/pin/verify` | Body: `pin` | `200` con `{ "valid": true }` o `{ "valid": false }`. |
-| DELETE 🔒 | `/api/v1/users/pin` | — | `200` "PIN eliminado correctamente.". |
-| GET 🔒 | `/api/v1/users/pin/status` | — | `200` con `{ "has_pin": true }` o `{ "has_pin": false }`. |
+| GET | `/api/v1/users/profile` | — | `200` con el perfil del usuario autenticado. |
+| PUT | `/api/v1/users/profile` | Body: `name`, `occupation` (ambos opcionales) | `200` con el perfil actualizado. |
+| DELETE | `/api/v1/users` | — | `204` al eliminar la cuenta del usuario autenticado. |
+| POST | `/api/v1/users/pin` | Body: `pin` | `200` "PIN configurado correctamente.". |
+| POST | `/api/v1/users/pin/verify` | Body: `pin` | `200` con `{ "valid": true }` o `{ "valid": false }`. |
+| DELETE | `/api/v1/users/pin` | — | `200` "PIN eliminado correctamente.". |
+| GET | `/api/v1/users/pin/status` | — | `200` con `{ "has_pin": true }` o `{ "has_pin": false }`. |
 
 Ejemplo de inicio de sesión. El `token` devuelto es el que se usa en el botón **Authorize** de Swagger (Tabla 78):
 
@@ -4439,19 +4439,19 @@ Content-Type: application/json
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| GET 🔒 | `/api/v1/journal/entries` | Query: `_sort`, `_order` (`asc`/`desc`), `_limit`, `q` (búsqueda por palabra clave) | `200` con la lista de entradas del usuario. |
-| GET 🔒 | `/api/v1/journal/entries/{id}` | Path: `id` | `200` con la entrada. `404` si no existe o pertenece a otro usuario. |
-| POST 🔒 | `/api/v1/journal/entries` | Body: `date`, `title`, `content`, `sentiment`, `category` | `200` con la entrada creada, incluida la respuesta empática generada por IA (`ai_response`). |
-| PUT 🔒 | `/api/v1/journal/entries/{id}` | Path: `id`. Body: `title`, `content`, `sentiment`, `category` | `200` con la entrada actualizada. `404` si no existe. |
-| DELETE 🔒 | `/api/v1/journal/entries/{id}` | Path: `id` | `200` al eliminarla. `404` si no existe. |
-| POST 🔒 | `/api/v1/journal/entries/sync` | Body: lista de entradas creadas sin conexión (`client_id`, `date`, `title`, `content`, `sentiment`, `category`, `client_updated_at`) | `200` con el resultado de la sincronización (US30). |
-| GET 🔒 | `/api/v1/journal/tags` | — | `200` con las etiquetas disponibles. |
-| GET 🔒 | `/api/v1/journal/entry-tags` | Query: `entryId` (opcional) | `200` con las etiquetas asignadas a las entradas. |
-| POST 🔒 | `/api/v1/journal/entry-tags` | Body: `entry_id`, `tag_id` | `200` con la asignación creada. `404` si la entrada no existe. |
-| DELETE 🔒 | `/api/v1/journal/entry-tags/{id}` | Path: `id` | `200` al quitar la etiqueta. |
-| GET 🔒 | `/api/v1/journal/media` | Query: `entryId` (opcional) | `200` con los adjuntos multimedia. |
-| POST 🔒 | `/api/v1/journal/media` | Body: datos del adjunto asociado a una entrada | `200` con el adjunto registrado. |
-| POST 🔒 | `/api/v1/journal/media/upload` | `multipart/form-data`: `entryId`, `file` | `200` con el adjunto subido. `400` si no se envía archivo. |
+| GET | `/api/v1/journal/entries` | Query: `_sort`, `_order` (`asc`/`desc`), `_limit`, `q` (búsqueda por palabra clave) | `200` con la lista de entradas del usuario. |
+| GET | `/api/v1/journal/entries/{id}` | Path: `id` | `200` con la entrada. `404` si no existe o pertenece a otro usuario. |
+| POST | `/api/v1/journal/entries` | Body: `date`, `title`, `content`, `sentiment`, `category` | `200` con la entrada creada, incluida la respuesta empática generada por IA (`ai_response`). |
+| PUT | `/api/v1/journal/entries/{id}` | Path: `id`. Body: `title`, `content`, `sentiment`, `category` | `200` con la entrada actualizada. `404` si no existe. |
+| DELETE | `/api/v1/journal/entries/{id}` | Path: `id` | `200` al eliminarla. `404` si no existe. |
+| POST | `/api/v1/journal/entries/sync` | Body: lista de entradas creadas sin conexión (`client_id`, `date`, `title`, `content`, `sentiment`, `category`, `client_updated_at`) | `200` con el resultado de la sincronización (US30). |
+| GET | `/api/v1/journal/tags` | — | `200` con las etiquetas disponibles. |
+| GET | `/api/v1/journal/entry-tags` | Query: `entryId` (opcional) | `200` con las etiquetas asignadas a las entradas. |
+| POST | `/api/v1/journal/entry-tags` | Body: `entry_id`, `tag_id` | `200` con la asignación creada. `404` si la entrada no existe. |
+| DELETE | `/api/v1/journal/entry-tags/{id}` | Path: `id` | `200` al quitar la etiqueta. |
+| GET | `/api/v1/journal/media` | Query: `entryId` (opcional) | `200` con los adjuntos multimedia. |
+| POST | `/api/v1/journal/media` | Body: datos del adjunto asociado a una entrada | `200` con el adjunto registrado. |
+| POST | `/api/v1/journal/media/upload` | `multipart/form-data`: `entryId`, `file` | `200` con el adjunto subido. `400` si no se envía archivo. |
 
 Ejemplo de creación de una entrada. El backend analiza el texto y devuelve la respuesta empática de MindFlow AI (US11, US12, US13) (Tabla 79):
 
@@ -4493,14 +4493,14 @@ Content-Type: application/json
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| POST 🔒 | `/api/v1/chat/conversations` | Body: `content`, `category` (opcional) | `201` con la conversación creada y sus mensajes (el del usuario y la respuesta de la IA). `400` si el mensaje está vacío o supera el máximo de caracteres. |
-| GET 🔒 | `/api/v1/chat/conversations` | — | `200` con las conversaciones del usuario (`id`, `title`, `category`, `message_count`, `last_message`). |
-| GET 🔒 | `/api/v1/chat/conversations/{id}/messages` | Path: `id` | `200` con la conversación y su historial de mensajes. `404` si no existe. |
-| POST 🔒 | `/api/v1/chat/conversations/{id}/messages` | Path: `id`. Body: `content` | `201` con `user_message` y `ai_message`. `404` si la conversación no existe. |
-| DELETE 🔒 | `/api/v1/chat/conversations/{id}` | Path: `id` | `200` "Conversación eliminada exitosamente.". `404` si no existe. |
-| POST 🔒 | `/api/v1/ai-feedback` | Body: `content_id`, `content_type`, `rating`, `comment` (opcional) | `200` con la valoración registrada (US26). |
-| GET 🔒 | `/api/v1/ai-feedback` | — | `200` con las valoraciones del usuario. |
-| GET 🔒 | `/api/v1/ai-feedback/summary` | — | `200` con `total_ratings`, `average_rating` y `distribution`. |
+| POST | `/api/v1/chat/conversations` | Body: `content`, `category` (opcional) | `201` con la conversación creada y sus mensajes (el del usuario y la respuesta de la IA). `400` si el mensaje está vacío o supera el máximo de caracteres. |
+| GET | `/api/v1/chat/conversations` | — | `200` con las conversaciones del usuario (`id`, `title`, `category`, `message_count`, `last_message`). |
+| GET | `/api/v1/chat/conversations/{id}/messages` | Path: `id` | `200` con la conversación y su historial de mensajes. `404` si no existe. |
+| POST | `/api/v1/chat/conversations/{id}/messages` | Path: `id`. Body: `content` | `201` con `user_message` y `ai_message`. `404` si la conversación no existe. |
+| DELETE | `/api/v1/chat/conversations/{id}` | Path: `id` | `200` "Conversación eliminada exitosamente.". `404` si no existe. |
+| POST | `/api/v1/ai-feedback` | Body: `content_id`, `content_type`, `rating`, `comment` (opcional) | `200` con la valoración registrada (US26). |
+| GET | `/api/v1/ai-feedback` | — | `200` con las valoraciones del usuario. |
+| GET | `/api/v1/ai-feedback/summary` | — | `200` con `total_ratings`, `average_rating` y `distribution`. |
 
 Ejemplo de mensaje en una conversación existente (Tabla 80):
 
@@ -4519,25 +4519,25 @@ La Tabla 81 agrupa los endpoints de hábitos, registros de cumplimiento, chequeo
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| GET 🔒 | `/api/v1/habits` | Query: `user_id` (opcional) | `200` con los hábitos (`id`, `name`, `category`, `frequency`, `streak`, `status`, `paused_by_ai`). |
-| GET 🔒 | `/api/v1/habits/{id}` | Path: `id` | `200` con el hábito. `404` si no existe. |
-| POST 🔒 | `/api/v1/habits` | Body: `name`, `category`, `frequency`, `user_id` | Hábito creado (US21). |
-| PUT 🔒 | `/api/v1/habits/{id}` | Path: `id`. Body: `name`, `category`, `frequency` | Hábito actualizado. |
-| DELETE 🔒 | `/api/v1/habits/{id}` | Path: `id` | Elimina el hábito. |
-| GET 🔒 | `/api/v1/habits/streak-summary` | — | `200` con la racha de cada hábito, ordenada de mayor a menor (`habit_id`, `name`, `streak`, `status`) (US28). |
-| POST 🔒 | `/api/v1/habits/suggestions` | — | `200` con `{ "suggestions": [...] }`: hasta 3 hábitos sugeridos por IA según el nivel de estrés. Si la IA no responde, devuelve sugerencias predefinidas. |
-| GET 🔒 | `/api/v1/habit-logs` | Query: `user_id`, `habit_id` (opcionales) | `200` con los registros de cumplimiento. |
-| GET 🔒 | `/api/v1/habit-logs/{id}` | Path: `id` | `200` con el registro. |
-| POST 🔒 | `/api/v1/habit-logs` | Body: `habit_id`, `habit_name`, `category`, `date`, `completed`, `completed_at` | Registro de cumplimiento creado (US22). |
-| PUT 🔒 | `/api/v1/habit-logs/{id}` | Path: `id`. Body: `habit_name`, `category`, `completed`, `completed_at` | Registro actualizado. |
-| DELETE 🔒 | `/api/v1/habit-logs/{id}` | Path: `id` | Elimina el registro. |
-| POST 🔒 | `/api/v1/wellness/stress-check` | — | `200` con `stress_level`, `score`, `analyzed_entries`, `paused_habits`, `resumed_habits` y `advice`. Pausa o reactiva hábitos según el estrés detectado (US23). |
-| GET 🔒 | `/api/v1/wellness/exercises` | Query: `type` (opcional, por ejemplo `breathing`) | `200` con los ejercicios activos: respiración 4-7-8 y micro-meditaciones (US24, US25). |
-| GET 🔒👤 | `/api/v1/wellness/exercises/all` | Query: `type` (opcional) | `200` con todos los ejercicios, incluidos los inactivos. |
-| GET 🔒👤 | `/api/v1/wellness/exercises/{id}` | Path: `id` | `200` con el ejercicio. |
-| POST 🔒👤 | `/api/v1/wellness/exercises` | Body: `type`, `name`, `description`, `duration_seconds`, `inhale_seconds`, `hold_seconds`, `exhale_seconds`, `hold_after_exhale_seconds`, `cycles`, `audio_url`, `is_active`, `sort_order` | Ejercicio creado. |
-| PUT 🔒👤 | `/api/v1/wellness/exercises/{id}` | Path: `id`. Body: mismos campos que POST | Ejercicio actualizado. |
-| DELETE 🔒👤 | `/api/v1/wellness/exercises/{id}` | Path: `id` | Elimina el ejercicio. |
+| GET | `/api/v1/habits` | Query: `user_id` (opcional) | `200` con los hábitos (`id`, `name`, `category`, `frequency`, `streak`, `status`, `paused_by_ai`). |
+| GET | `/api/v1/habits/{id}` | Path: `id` | `200` con el hábito. `404` si no existe. |
+| POST | `/api/v1/habits` | Body: `name`, `category`, `frequency`, `user_id` | Hábito creado (US21). |
+| PUT | `/api/v1/habits/{id}` | Path: `id`. Body: `name`, `category`, `frequency` | Hábito actualizado. |
+| DELETE | `/api/v1/habits/{id}` | Path: `id` | Elimina el hábito. |
+| GET | `/api/v1/habits/streak-summary` | — | `200` con la racha de cada hábito, ordenada de mayor a menor (`habit_id`, `name`, `streak`, `status`) (US28). |
+| POST | `/api/v1/habits/suggestions` | — | `200` con `{ "suggestions": [...] }`: hasta 3 hábitos sugeridos por IA según el nivel de estrés. Si la IA no responde, devuelve sugerencias predefinidas. |
+| GET | `/api/v1/habit-logs` | Query: `user_id`, `habit_id` (opcionales) | `200` con los registros de cumplimiento. |
+| GET | `/api/v1/habit-logs/{id}` | Path: `id` | `200` con el registro. |
+| POST | `/api/v1/habit-logs` | Body: `habit_id`, `habit_name`, `category`, `date`, `completed`, `completed_at` | Registro de cumplimiento creado (US22). |
+| PUT | `/api/v1/habit-logs/{id}` | Path: `id`. Body: `habit_name`, `category`, `completed`, `completed_at` | Registro actualizado. |
+| DELETE | `/api/v1/habit-logs/{id}` | Path: `id` | Elimina el registro. |
+| POST | `/api/v1/wellness/stress-check` | — | `200` con `stress_level`, `score`, `analyzed_entries`, `paused_habits`, `resumed_habits` y `advice`. Pausa o reactiva hábitos según el estrés detectado (US23). |
+| GET | `/api/v1/wellness/exercises` | Query: `type` (opcional, por ejemplo `breathing`) | `200` con los ejercicios activos: respiración 4-7-8 y micro-meditaciones (US24, US25). |
+| GET (Admin/Support) | `/api/v1/wellness/exercises/all` | Query: `type` (opcional) | `200` con todos los ejercicios, incluidos los inactivos. |
+| GET (Admin/Support) | `/api/v1/wellness/exercises/{id}` | Path: `id` | `200` con el ejercicio. |
+| POST (Admin/Support) | `/api/v1/wellness/exercises` | Body: `type`, `name`, `description`, `duration_seconds`, `inhale_seconds`, `hold_seconds`, `exhale_seconds`, `hold_after_exhale_seconds`, `cycles`, `audio_url`, `is_active`, `sort_order` | Ejercicio creado. |
+| PUT (Admin/Support) | `/api/v1/wellness/exercises/{id}` | Path: `id`. Body: mismos campos que POST | Ejercicio actualizado. |
+| DELETE (Admin/Support) | `/api/v1/wellness/exercises/{id}` | Path: `id` | Elimina el ejercicio. |
 
 ##### Analytics & Reporting
 
@@ -4545,9 +4545,9 @@ La Tabla 81 agrupa los endpoints de hábitos, registros de cumplimiento, chequeo
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| GET 🔒 | `/api/v1/analytics/dashboard` | Query: `from`, `to` (fechas `YYYY-MM-DD`, opcionales; por defecto los últimos 30 días) | `200` con las métricas del periodo (US31). `400` si `from` es posterior a `to`. |
-| GET 🔒 | `/api/v1/analytics/report.csv` | — | Archivo `mindflow-report.csv` con fecha, categoría, sentimiento y título de cada entrada (US36). |
-| GET 🔒 | `/api/v1/analytics/report.pdf` | — | Archivo `mindflow-report.pdf` con el resumen emocional y el listado de entradas (US35). |
+| GET | `/api/v1/analytics/dashboard` | Query: `from`, `to` (fechas `YYYY-MM-DD`, opcionales; por defecto los últimos 30 días) | `200` con las métricas del periodo (US31). `400` si `from` es posterior a `to`. |
+| GET | `/api/v1/analytics/report.csv` | — | Archivo `mindflow-report.csv` con fecha, categoría, sentimiento y título de cada entrada (US36). |
+| GET | `/api/v1/analytics/report.pdf` | — | Archivo `mindflow-report.pdf` con el resumen emocional y el listado de entradas (US35). |
 
 Ejemplo de respuesta del dashboard (Tabla 82):
 
@@ -4574,10 +4574,10 @@ La Tabla 83 agrupa los endpoints de notificaciones del usuario.
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| GET 🔒 | `/api/v1/notifications` | — | `200` con las notificaciones del usuario, de la más reciente a la más antigua. |
-| GET 🔒 | `/api/v1/notifications/unread-count` | — | `200` con `{ "count": 3 }`. |
-| POST 🔒 | `/api/v1/notifications/{id}/read` | Path: `id` | `204` al marcarla como leída. `404` si no existe. |
-| POST 🔒 | `/api/v1/notifications/read-all` | — | `204` al marcar todas como leídas. |
+| GET | `/api/v1/notifications` | — | `200` con las notificaciones del usuario, de la más reciente a la más antigua. |
+| GET | `/api/v1/notifications/unread-count` | — | `200` con `{ "count": 3 }`. |
+| POST | `/api/v1/notifications/{id}/read` | Path: `id` | `204` al marcarla como leída. `404` si no existe. |
+| POST | `/api/v1/notifications/read-all` | — | `204` al marcar todas como leídas. |
 
 ##### Subscriptions
 
@@ -4586,10 +4586,10 @@ La Tabla 83 agrupa los endpoints de notificaciones del usuario.
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
 | GET | `/api/v1/subscriptions/plans` | — (público) | `200` con el catálogo de planes: `freemium` (0 USD) y `premium` (4.99 USD/mes) (US33). |
-| GET 🔒 | `/api/v1/subscriptions/me` | — | `200` con la suscripción del usuario (`plan`, `status`, `current_period_end`). Si no tiene una, devuelve `freemium`. |
-| POST 🔒 | `/api/v1/subscriptions/checkout` | — | `200` con `checkout_url` y `session_id` de Stripe Checkout en modo prueba (US34). `503` si Stripe no está configurado, `502` si Stripe rechaza la solicitud. |
+| GET | `/api/v1/subscriptions/me` | — | `200` con la suscripción del usuario (`plan`, `status`, `current_period_end`). Si no tiene una, devuelve `freemium`. |
+| POST | `/api/v1/subscriptions/checkout` | — | `200` con `checkout_url` y `session_id` de Stripe Checkout en modo prueba (US34). `503` si Stripe no está configurado, `502` si Stripe rechaza la solicitud. |
 | POST | `/api/v1/subscriptions/webhook` | Header `Stripe-Signature`. Body: evento de Stripe | `200` al procesar `checkout.session.completed` y activar el plan Premium. `401` si la firma no es válida. Lo invoca Stripe, no la aplicación. |
-| POST 🔒 | `/api/v1/subscriptions/demo/plan/{plan}` | Path: `plan` (`freemium` o `premium`) | `200` con la suscripción actualizada. Endpoint de demostración para cambiar de plan sin pasar por Stripe. |
+| POST | `/api/v1/subscriptions/demo/plan/{plan}` | Path: `plan` (`freemium` o `premium`) | `200` con la suscripción actualizada. Endpoint de demostración para cambiar de plan sin pasar por Stripe. |
 
 Ejemplo de respuesta de checkout (Tabla 84):
 
@@ -4608,11 +4608,11 @@ La Tabla 85 agrupa los endpoints de tickets de soporte.
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| POST 🔒 | `/api/v1/support/tickets` | Body: `subject`, `category`, `message` (opcional), `priority` (por defecto `normal`) | `201` con el ticket creado. Además genera una notificación "Ticket creado" (US37). `400` si falta `subject`. |
-| GET 🔒 | `/api/v1/support/tickets` | — | `200` con los tickets del usuario. El personal de soporte ve todos. |
-| GET 🔒 | `/api/v1/support/tickets/{id}` | Path: `id` | `200` con el ticket y su hilo de mensajes. `404` si no existe o no le pertenece. |
-| POST 🔒 | `/api/v1/support/tickets/{id}/messages` | Path: `id`. Body: `message` | `204` al agregar el mensaje. Si responde el personal de soporte, el usuario recibe una notificación. |
-| PATCH 🔒👤 | `/api/v1/support/tickets/{id}` | Path: `id`. Body: `assignee_id`, `status` | `204` al asignar el ticket o cambiar su estado. |
+| POST | `/api/v1/support/tickets` | Body: `subject`, `category`, `message` (opcional), `priority` (por defecto `normal`) | `201` con el ticket creado. Además genera una notificación "Ticket creado" (US37). `400` si falta `subject`. |
+| GET | `/api/v1/support/tickets` | — | `200` con los tickets del usuario. El personal de soporte ve todos. |
+| GET | `/api/v1/support/tickets/{id}` | Path: `id` | `200` con el ticket y su hilo de mensajes. `404` si no existe o no le pertenece. |
+| POST | `/api/v1/support/tickets/{id}/messages` | Path: `id`. Body: `message` | `204` al agregar el mensaje. Si responde el personal de soporte, el usuario recibe una notificación. |
+| PATCH (Admin/Support) | `/api/v1/support/tickets/{id}` | Path: `id`. Body: `assignee_id`, `status` | `204` al asignar el ticket o cambiar su estado. |
 
 ##### Health check
 
@@ -5038,8 +5038,7 @@ Esta sección documenta los endpoints que la Mobile Application en Flutter consu
 
 **Convenciones de las tablas:**
 
-- 🔒 indica que el endpoint requiere el header `Authorization: Bearer <token>`.
-- 👤 indica que el endpoint requiere además el rol `Admin` o `Support`.
+- Todos los endpoints de esta sección requieren el header `Authorization: Bearer <token>`.
 - Las rutas son relativas al prefijo `https://mindflow-backend-production-898f07da.up.railway.app`.
 
 ##### Inventario de endpoints y uso desde la aplicación
@@ -5067,47 +5066,47 @@ Los 46 endpoints que consume la aplicación figuran en la especificación desple
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| GET 🔒 | `/api/v1/users/pin/status` | — | `200` con `{ "has_pin": true }` o `{ "has_pin": false }`. La aplicación lo consulta al abrirse para decidir si muestra el bloqueo (US04). |
-| POST 🔒 | `/api/v1/users/pin/verify` | Body: `pin` | `200` con `{ "valid": true }` o `{ "valid": false }` (US04). |
-| POST 🔒 | `/api/v1/users/pin` | Body: `pin` | `200` "PIN configurado correctamente." (US04). |
-| DELETE 🔒 | `/api/v1/users/pin` | — | `200` "PIN eliminado correctamente." (US04). |
-| GET 🔒 | `/api/v1/users/profile` | — | `200` con el perfil del usuario autenticado (US05). |
-| PUT 🔒 | `/api/v1/users/profile` | Body: `name`, `occupation` | `200` con el perfil actualizado (US05). |
-| DELETE 🔒 | `/api/v1/users` | — | `204` al eliminar la cuenta del usuario autenticado (US07). |
+| GET | `/api/v1/users/pin/status` | — | `200` con `{ "has_pin": true }` o `{ "has_pin": false }`. La aplicación lo consulta al abrirse para decidir si muestra el bloqueo (US04). |
+| POST | `/api/v1/users/pin/verify` | Body: `pin` | `200` con `{ "valid": true }` o `{ "valid": false }` (US04). |
+| POST | `/api/v1/users/pin` | Body: `pin` | `200` "PIN configurado correctamente." (US04). |
+| DELETE | `/api/v1/users/pin` | — | `200` "PIN eliminado correctamente." (US04). |
+| GET | `/api/v1/users/profile` | — | `200` con el perfil del usuario autenticado (US05). |
+| PUT | `/api/v1/users/profile` | Body: `name`, `occupation` | `200` con el perfil actualizado (US05). |
+| DELETE | `/api/v1/users` | — | `204` al eliminar la cuenta del usuario autenticado (US07). |
 
 **Tabla 102. Services Documentation Evidence for Sprint Review — Diario (US16, US17).**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| GET 🔒 | `/api/v1/journal/entries` | Query: `_sort`, `_order`, `_limit`, `q` (búsqueda por palabra clave) | `200` con la lista de entradas del usuario. Alimenta la lista, la búsqueda (US16) y el calendario coloreado por `sentiment` (US17). |
-| GET 🔒 | `/api/v1/journal/entries/{id}` | Path: `id` | `200` con la entrada. `404` si no existe o pertenece a otro usuario. |
-| POST 🔒 | `/api/v1/journal/entries` | Body: `date`, `title`, `content`, `sentiment`, `category` | `200` con la entrada creada, incluida la respuesta de la IA (`ai_response`). |
-| PUT 🔒 | `/api/v1/journal/entries/{id}` | Path: `id`. Body: `title`, `content`, `sentiment`, `category` | `200` con la entrada actualizada. `404` si no existe. |
-| DELETE 🔒 | `/api/v1/journal/entries/{id}` | Path: `id` | `200` al eliminarla. `404` si no existe. |
+| GET | `/api/v1/journal/entries` | Query: `_sort`, `_order`, `_limit`, `q` (búsqueda por palabra clave) | `200` con la lista de entradas del usuario. Alimenta la lista, la búsqueda (US16) y el calendario coloreado por `sentiment` (US17). |
+| GET | `/api/v1/journal/entries/{id}` | Path: `id` | `200` con la entrada. `404` si no existe o pertenece a otro usuario. |
+| POST | `/api/v1/journal/entries` | Body: `date`, `title`, `content`, `sentiment`, `category` | `200` con la entrada creada, incluida la respuesta de la IA (`ai_response`). |
+| PUT | `/api/v1/journal/entries/{id}` | Path: `id`. Body: `title`, `content`, `sentiment`, `category` | `200` con la entrada actualizada. `404` si no existe. |
+| DELETE | `/api/v1/journal/entries/{id}` | Path: `id` | `200` al eliminarla. `404` si no existe. |
 
 **Tabla 103. Services Documentation Evidence for Sprint Review — Hábitos (US21, US22).**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| GET 🔒 | `/api/v1/habits` | Query: `user_id` (opcional) | `200` con los hábitos (`id`, `name`, `category`, `frequency`, `streak`, `status`, `paused_by_ai`). |
-| POST 🔒 | `/api/v1/habits` | Body: `name`, `category`, `frequency`, `user_id` | Hábito creado (US21). |
-| DELETE 🔒 | `/api/v1/habits/{id}` | Path: `id` | Elimina el hábito. |
-| GET 🔒 | `/api/v1/habit-logs` | Query: `user_id`, `habit_id` (opcionales) | `200` con los registros de cumplimiento. |
-| POST 🔒 | `/api/v1/habit-logs` | Body: `habit_id`, `habit_name`, `category`, `date`, `completed`, `completed_at` | Registro de cumplimiento creado (US22). |
-| DELETE 🔒 | `/api/v1/habit-logs/{id}` | Path: `id` | Elimina el registro; la aplicación lo usa para desmarcar el hábito del día. |
-| POST 🔒 | `/api/v1/habits/suggestions` | — | `200` con hasta 3 hábitos sugeridos por la IA según el nivel de estrés. |
+| GET | `/api/v1/habits` | Query: `user_id` (opcional) | `200` con los hábitos (`id`, `name`, `category`, `frequency`, `streak`, `status`, `paused_by_ai`). |
+| POST | `/api/v1/habits` | Body: `name`, `category`, `frequency`, `user_id` | Hábito creado (US21). |
+| DELETE | `/api/v1/habits/{id}` | Path: `id` | Elimina el hábito. |
+| GET | `/api/v1/habit-logs` | Query: `user_id`, `habit_id` (opcionales) | `200` con los registros de cumplimiento. |
+| POST | `/api/v1/habit-logs` | Body: `habit_id`, `habit_name`, `category`, `date`, `completed`, `completed_at` | Registro de cumplimiento creado (US22). |
+| DELETE | `/api/v1/habit-logs/{id}` | Path: `id` | Elimina el registro; la aplicación lo usa para desmarcar el hábito del día. |
+| POST | `/api/v1/habits/suggestions` | — | `200` con hasta 3 hábitos sugeridos por la IA según el nivel de estrés. |
 
 **Tabla 104. Services Documentation Evidence for Sprint Review — Analíticas y Soporte (US31, US37).**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
-| GET 🔒 | `/api/v1/analytics/dashboard` | Query: `from`, `to` (`YYYY-MM-DD`; por defecto los últimos 30 días) | `200` con las entradas del periodo, la distribución por sentimiento, las categorías principales, los hábitos completados y los hábitos activos (US31). `400` si `from` es posterior a `to`. |
-| GET 🔒 | `/api/v1/analytics/report.pdf` | — | Archivo `mindflow-report.pdf` con el resumen emocional. |
-| GET 🔒 | `/api/v1/analytics/report.csv` | — | Archivo `mindflow-report.csv` con las entradas del usuario. |
-| POST 🔒 | `/api/v1/support/tickets` | Body: `subject`, `category`, `message` (opcional), `priority` (por defecto `normal`) | `201` con el ticket creado; genera además una notificación «Ticket creado» (US37). `400` si falta `subject`. |
-| GET 🔒 | `/api/v1/support/tickets` | — | `200` con los tickets del usuario. |
-| GET 🔒 | `/api/v1/support/tickets/{id}` | Path: `id` | `200` con el ticket y su hilo de mensajes. `404` si no existe o no le pertenece. |
-| POST 🔒 | `/api/v1/support/tickets/{id}/messages` | Path: `id`. Body: `message` | `204` al agregar el mensaje. Si responde el personal de soporte, el usuario recibe una notificación. |
+| GET | `/api/v1/analytics/dashboard` | Query: `from`, `to` (`YYYY-MM-DD`; por defecto los últimos 30 días) | `200` con las entradas del periodo, la distribución por sentimiento, las categorías principales, los hábitos completados y los hábitos activos (US31). `400` si `from` es posterior a `to`. |
+| GET | `/api/v1/analytics/report.pdf` | — | Archivo `mindflow-report.pdf` con el resumen emocional. |
+| GET | `/api/v1/analytics/report.csv` | — | Archivo `mindflow-report.csv` con las entradas del usuario. |
+| POST | `/api/v1/support/tickets` | Body: `subject`, `category`, `message` (opcional), `priority` (por defecto `normal`) | `201` con el ticket creado; genera además una notificación «Ticket creado» (US37). `400` si falta `subject`. |
+| GET | `/api/v1/support/tickets` | — | `200` con los tickets del usuario. |
+| GET | `/api/v1/support/tickets/{id}` | Path: `id` | `200` con el ticket y su hilo de mensajes. `404` si no existe o no le pertenece. |
+| POST | `/api/v1/support/tickets/{id}/messages` | Path: `id`. Body: `message` | `204` al agregar el mensaje. Si responde el personal de soporte, el usuario recibe una notificación. |
 
 Ejemplo del formulario de soporte de la Figura 158, tal como lo envía la aplicación (Tabla 104):
 
