@@ -141,6 +141,33 @@ Proyecto
       Actualización de Student Outcome y de Project Report Collaboration Insights
     </td>
   </tr>
+
+  <tr>
+    <td><b>Cuarta Entrega (TB2)</b></td>
+    <td>29/11/2026</td>
+    <td>
+      Cabrera Sotelo, Camila Celeste <br>
+      <br>
+      <p></p>
+      Diaz de la Cruz, Sebastian Gabriel <br>
+      <br>
+      <p></p>
+      Güere Calero, Fernando Julio <br>
+      <br>
+      <p></p>
+      Jáuregui Cerna, Jean Franco <br>
+      <br>
+      <p></p>
+      Limache Coronel, Imanol Fabrizio <br>
+    </td>
+    <td>
+      Correcciones de la entrega AV2 en el Capítulo IV <br>
+      Capítulo IV: Product Implementation & Validation (desarrollo del Sprint 3) <br>
+      Conclusiones y recomendaciones, y Student Outcome <br>
+      Videos en versión final
+    </td>
+  </tr>
+
   <!-- 
   <tr>
     <td><b>Primera Entrega (TB1)</b></td>
@@ -442,6 +469,8 @@ El trabajo de esta entrega incluyó la planificación del Sprint 2 (Sprint Plann
       - [4.2.2.7. Services Documentation Evidence for Sprint Review](#4227-services-documentation-evidence-for-sprint-review)
       - [4.2.2.8. Software Deployment Evidence for Sprint Review](#4228-software-deployment-evidence-for-sprint-review)
       - [4.2.2.9. Team Collaboration Insights during Sprint](#4229-team-collaboration-insights-during-sprint)
+    - [4.2.3. Sprint 3](#423-sprint-3)
+      - [4.2.3.1. Sprint Planning 3](#4231-sprint-planning-3)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
@@ -509,6 +538,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV2</u><br>
       Actualizó y aplicó sus conocimientos al contrastar los diagramas C4, de clases, de componentes y de base de datos con el backend ya implementado y desplegado, corrigiendo las relaciones entre tablas, los tipos de datos y los patrones realmente usados en cada Bounded Context tras una revisión cruzada con el código fuente. Además, investigó los códigos de ética de ingeniería de software de la ACM/IEEE y del CIP, así como los principios de protección de datos personales aplicables en el Perú (Ley N.º 29733), para redactar y publicar los Términos y Condiciones y la Política de Privacidad del producto, tanto en el Landing Page (español e inglés) como en el informe, y buscó y seleccionó artículos académicos de alto impacto para sustentar la bibliografía del informe.
       <br><br>
+      <u>TB2</u><br>
+      Actualizó y aplicó sus conocimientos en calidad y consistencia de software al auditar los repositorios del backend, de la aplicación Android y de la aplicación Flutter contra el Product Backlog y entre sí, y al corregir lo hallado: en el backend (`484ede6`) unificó el formato de los errores, validó los datos de entrada, hizo que la eliminación de la cuenta borre también las suscripciones, los tickets y las notificaciones, y agregó el proyecto de pruebas con 29 pruebas xUnit; en la aplicación Flutter (`a997530`) trató la sesión expirada y los errores de red, agregó tiempos de espera al cliente HTTP y pruebas del cliente y del arranque. A partir de esa auditoría identificó las ocho User Stories que faltaban en la aplicación oficial, las estimó con los Story Points del Product Backlog y planificó el Sprint 3 (sección 4.2.3.1). Además, investigó por su cuenta Firebase App Distribution y GitHub Actions, tecnología que no se vio en clase, y las aplicó en el flujo que compila y distribuye cada cambio de `develop` como un APK firmado (sección 4.2.3). En el informe redactó las Conclusiones y recomendaciones finales, contrastando las hipótesis del Lean UX Process con la evidencia disponible.
+      <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
       Investigó y aplicó nuevos enfoques de arquitectura de software al trasladar los hallazgos metodológicos del EventStorming hacia diagramas arquitectónicos y modelos de base de datos. Esta actualización de conocimientos técnicos le permitió estructurar el modelado del dominio de MindFlow, estableciendo una base sólida para su futura implementación como solución web escalable.
@@ -538,6 +570,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>AV2</u><br>
       El equipo actualizó sus conocimientos al cerrar el Sprint 2: documentó la evidencia de desarrollo, pruebas, ejecución y despliegue del backend, el Landing Page y las aplicaciones móviles (Android y Flutter), documentó los Web Services ya desplegados, y corrigió los diagramas de arquitectura, de clases, de componentes y de base de datos contrastándolos con el backend realmente implementado. Aplicó también conocimientos de ética profesional (códigos ACM/IEEE y CIP) y de protección de datos personales al redactar y publicar los Términos y Condiciones y la Política de Privacidad, y documentó cinco entrevistas de validación (tres del Segmento 1 y dos del Segmento 2), actualizando la evaluación según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
+      <br><br>
+      <u>TB2</u><br>
+      El equipo actualizó sus conocimientos al cerrar el proyecto: contrastó el Product Backlog con el código de los tres repositorios, corrigió el backend y la aplicación Flutter a partir de esa revisión, definió la aplicación Flutter como la aplicación móvil oficial y planificó el Sprint 3 con las User Stories pendientes. Incorporó Firebase App Distribution y GitHub Actions como tecnología de aprendizaje autónomo para distribuir cada versión a los testers, actualizó el capítulo de configuración del proyecto con la aplicación Flutter y redactó las conclusiones y recomendaciones finales, en las que contrastó los resultados de las validaciones con los Problem Statements, los supuestos y las hipótesis del Lean UX Process.
     </td>
   </tr>
   <tr>
@@ -573,6 +608,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <u>AV2</u><br>
       Reconoció la necesidad de seguir aprendiendo al comprobar, mediante una revisión cruzada del informe contra el código del backend, que varias afirmaciones del Capítulo II no coincidían con la implementación real, lo que lo llevó a verificar cada artefacto contra evidencia concreta (archivo y línea) antes de darlo por correcto. De forma autónoma aprendió a evaluar la calidad de las fuentes académicas (cuartil de la revista y antigüedad), a trasladar principios éticos y legales a un texto de términos de servicio entendible para el usuario, y a coordinar cambios consistentes entre el repositorio del informe y el de la Landing Page.
       <br><br>
+      <u>TB2</u><br>
+      Reconoció la necesidad de seguir aprendiendo al comprobar, con la auditoría, que errores que no se habían detectado durante el desarrollo sí afectaban al usuario: la aplicación Flutter podía quedarse cargando indefinidamente con un token vencido, el backend devolvía un error 500 ante una frecuencia de hábito inválida y la eliminación de la cuenta dejaba suscripciones y tickets, lo que lo llevó a estudiar el manejo de errores, la validación de entradas y el diseño del contrato entre cliente y servidor. De forma autónoma aprendió a configurar un flujo de integración continua con secretos, firma de versiones *release* y distribución a testers. Al redactar las conclusiones reconoció también que una hipótesis de producto solo se confirma con datos de uso real, por lo que distinguió en el informe lo implementado, lo validado con usuarios y lo que todavía no puede medirse.
+      <br><br>
       <b>Jáuregui Cerna, Jean Franco</b><br>
       <u>AV1</u><br>
       Reconoció la necesidad de expandir sus competencias en el diseño de software investigando de forma autónoma la construcción y aplicación del Lenguaje Ubicuo (Ubiquitous Language) dentro de Domain-Driven Design, aplicando este autoaprendizaje para asegurar que la arquitectura técnica y los esquemas de datos reflejen fielmente las reglas de negocio del proyecto MindFlow.
@@ -602,6 +640,9 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <br><br>
       <u>AV2</u><br>
       El equipo reconoció que el aprendizaje continúa después del diseño: al contrastar el modelo propuesto con la implementación real del backend y con la reacción de los usuarios entrevistados, tuvo que revisar y corregir artefactos ya entregados, documentar evidencia de un Sprint completo (planning, backlog, desarrollo, pruebas, despliegue) y aprender nuevas prácticas de documentación técnica, validación con usuarios y redacción ética de términos de servicio y políticas de privacidad. Esta experiencia mostró que verificar cada afirmación del informe contra el código y la evidencia real, y aceptar la retroalimentación de revisiones cruzadas, son parte del trabajo profesional en soluciones de software.
+      <br><br>
+      <u>TB2</u><br>
+      El equipo reconoció que el aprendizaje no termina con la entrega: la revisión de los repositorios mostró defectos que no se habían detectado durante el desarrollo, y las hipótesis del Lean UX Process resultaron imposibles de confirmar sin usuarios reales durante semanas. Esa experiencia llevó al equipo a distinguir en el informe entre lo implementado, lo validado y lo pendiente, y a dejar como recomendaciones ampliar las pruebas automatizadas, medir las métricas de éxito después del lanzamiento y revalidar la usabilidad sobre la aplicación Flutter.
     </td>
   </tr>
 </table>
@@ -2237,9 +2278,11 @@ A diferencia del Context Level Diagram, en este nivel del modelo C4 se detalla c
 
 **Explicación del diagrama**
 
-MindFlow se compone de seis contenedores. El usuario interactúa con la **aplicación móvil Android** (Kotlin y Jetpack Compose), que guarda una copia local de su perfil, diario y hábitos en una **base de datos SQLite** del dispositivo y se comunica con la **Web Services API** mediante HTTPS/JSON con autenticación JWT. La API (ASP.NET Core sobre .NET 10 y Entity Framework Core) expone los ocho bounded contexts, persiste en **MySQL 8** y usa **Redis** únicamente para guardar durante dos minutos la lista de hábitos de cada usuario. La **Landing Page** (HTML, CSS y JavaScript) es un sitio estático independiente.
+MindFlow se compone de seis contenedores. El usuario interactúa con la **aplicación móvil** (en este diagrama, la implementación Android original en Kotlin y Jetpack Compose), que guarda una copia local de su perfil, diario y hábitos en una **base de datos SQLite** del dispositivo y se comunica con la **Web Services API** mediante HTTPS/JSON con autenticación JWT. La API (ASP.NET Core sobre .NET 10 y Entity Framework Core) expone los ocho bounded contexts, persiste en **MySQL 8** y usa **Redis** únicamente para guardar durante dos minutos la lista de hábitos de cada usuario. La **Landing Page** (HTML, CSS y JavaScript) es un sitio estático independiente.
 
 La aplicación móvil obtiene el token de Google con Credential Manager y abre la página de pago de Stripe en una Chrome Custom Tab; la API valida el token de Google, crea las sesiones de pago y recibe los webhooks firmados de Stripe.
+
+**Nota de actualización (TB2).** Desde el Sprint 2 la aplicación móvil oficial del producto es la implementada en Flutter y Dart (`mindflow-mobile-flutter`), que ocupa en este diagrama el lugar del contenedor «aplicación móvil Android»: se comunica con la misma Web Services API mediante HTTPS/JSON con autenticación JWT y usa las mismas integraciones externas. Se diferencia de la aplicación Android original en el almacenamiento local: la aplicación Flutter conserva en el dispositivo el token de sesión y las preferencias (con `flutter_secure_storage`) y obtiene el diario, los hábitos y las demás entidades del backend, mientras que la copia local de las entradas del Diario y su sincronización forman parte del Sprint 3 (US30, sección 4.2.3.1). El acceso con Google en Flutter también forma parte del Sprint 3 (US01). Los diagramas de componentes y de base de datos local de esta sección (Figuras 51 y 52) corresponden a la aplicación Android original.
 
 La Web Services API también mantiene integraciones con diferentes servicios externos:
 
@@ -2257,7 +2300,7 @@ Este nivel del modelo C4 permite comprender cómo se distribuyen las responsabil
 
 ![Component Diagram de la aplicación móvil Android](assets/img/software_architecture/mobile_component_diagram.png)
 
-*Figura 51. Component Diagram de la aplicación móvil Android.*
+*Figura 51. Component Diagram de la aplicación móvil Android (implementación original).*
 
 </div>
 
@@ -2267,7 +2310,7 @@ La aplicación sigue un patrón MVVM: las pantallas de Compose observan a los Vi
 
 ![Database Diagram de la base local SQLite de la aplicación Android](assets/img/software_architecture/mobile_database_diagram.png)
 
-*Figura 52. Database Diagram de la base local SQLite de la aplicación Android.*
+*Figura 52. Database Diagram de la base local SQLite de la aplicación Android (implementación original).*
 
 </div>
 
@@ -2286,7 +2329,7 @@ Se elaboró el Deployment Diagram siguiendo el C4 Model, con el objetivo de repr
 
 **Explicación del diagrama**
 
-La aplicación Android se ejecuta en el dispositivo del usuario (Android 8.0 o superior) junto con su base SQLite local. La Landing Page se publica en **GitHub Pages**. El backend se despliega en **Railway** como un único proyecto con tres servicios:
+La aplicación móvil se ejecuta en el dispositivo del usuario (en este diagrama, la aplicación Android original sobre Android 8.0 o superior, junto con su base SQLite local); la aplicación Flutter oficial se distribuye a los testers con Firebase App Distribution desde un flujo de GitHub Actions (sección 4.1.4). La Landing Page se publica en **GitHub Pages**. El backend se despliega en **Railway** como un único proyecto con tres servicios:
 
 - **Web Services API**: servicio que construye y ejecuta el contenedor Docker de la API (ASP.NET Core / .NET 10) a partir del `Dockerfile` del repositorio de GitHub.
 - **MySQL**: servicio de base de datos relacional (MySQL 8) donde se persisten usuarios, entradas de diario, hábitos, conversaciones de chat, suscripciones y tickets de soporte.
@@ -4086,7 +4129,7 @@ A partir de los mock-ups de alta fidelidad de la sección 3.1.4.3 se armó un pr
 
 ### 4.1.1. Software Development Environment Configuration
 
-El equipo configuró el entorno de desarrollo de cada producto de MindFlow por separado, ya que cada uno usa un stack distinto: HTML, CSS y JavaScript estáticos para la Landing Page; ASP.NET Core sobre .NET para los Web Services (Microsoft, s. f.); y Kotlin con Jetpack Compose para la Aplicación móvil Android (JetBrains, s. f.; Google, s. f.-b). Las Tablas 67 a 69 resumen las herramientas y versiones reales de cada uno, leídas directamente de sus archivos de configuración: `assets/i18n/` e `index.html` en `mindflow-landingPage`; `MindFlow.Platform.csproj`, `Dockerfile` y `docker-compose.yml` en `mindflow-backend`; `app/build.gradle.kts` y `gradle/libs.versions.toml` en `mindflow-frontend`.
+El equipo configuró el entorno de desarrollo de cada producto de MindFlow por separado, ya que cada uno usa un stack distinto: HTML, CSS y JavaScript estáticos para la Landing Page; ASP.NET Core sobre .NET para los Web Services (Microsoft, s. f.); Dart con Flutter para la Aplicación móvil oficial (Google, s. f.-a); y Kotlin con Jetpack Compose para la Aplicación móvil Android desarrollada en el Sprint 1 (JetBrains, s. f.; Google, s. f.-b). Las Tablas 64 a 66 y la Tabla 67 resumen las herramientas y versiones reales de cada uno, leídas directamente de sus archivos de configuración: `assets/i18n/` e `index.html` en `mindflow-landingPage`; `MindFlow.Platform.csproj`, `Dockerfile` y `docker-compose.yml` en `mindflow-backend`; `pubspec.yaml`, `android/app/build.gradle.kts` y `.github/workflows/firebase-distribute.yml` en `mindflow-mobile-flutter`; y `app/build.gradle.kts` y `gradle/libs.versions.toml` en `mindflow-frontend`.
 
 **Tabla 64. Software Development Environment Configuration — Landing Page.**
 
@@ -4115,7 +4158,23 @@ El equipo configuró el entorno de desarrollo de cada producto de MindFlow por s
 | Contenedores | Docker (`Dockerfile`, `docker-compose.yml`) | Imágenes base `mcr.microsoft.com/dotnet/*:10.0` | Build multi-stage y base de datos/caché local para desarrollo |
 | Base de datos (local) | MySQL | `mysql:8.0` vía `docker-compose.yml` | Persistencia de los 8 bounded contexts en desarrollo |
 
-**Tabla 66. Software Development Environment Configuration — Aplicación móvil.**
+**Tabla 66. Software Development Environment Configuration — Aplicación móvil (Flutter).**
+
+| Componente | Herramienta / Biblioteca | Versión o detalle | Uso en el proyecto |
+|---|---|---|---|
+| Lenguaje | Dart | `^3.13.7` (`pubspec.yaml`) | Lenguaje de la aplicación móvil oficial |
+| Framework | Flutter | `3.47.9`, canal *stable* (`firebase-distribute.yml`) | Interfaz multiplataforma; el proyecto Android usa el identificador `pe.edu.upc.mindflow_workday` |
+| Interfaz y tipografía | Material de Flutter + `google_fonts` | `^6.3.3` | Pantallas y tipografía del sistema de diseño |
+| Idiomas | `flutter_localizations` + `intl` | `^0.20.2` | Interfaz en español e inglés |
+| Cliente HTTP | `http` | `^1.6.0` | `ApiClient` con token JWT, tiempos de espera y cierre de sesión ante un 401 |
+| Inyección de dependencias | `get_it` | `^9.3.0` | Registro de casos de uso, clientes de API y ViewModels |
+| Almacenamiento seguro | `flutter_secure_storage` | `^10.0.0-beta.4` | Token de sesión y preferencias locales |
+| Archivos y compartir | `path_provider` + `share_plus` | `^2.1.5` / `^11.1.0` | Exportación de reportes PDF y CSV |
+| Enlaces externos | `url_launcher` | `^6.3.2` | Llamada a la Línea 113 y apertura de la página de pago |
+| Pruebas y análisis | `flutter_test` + `flutter_lints` | `^6.0.0` (lints) | Widget y unit tests (sección 4.2.2.5) |
+| Distribución | GitHub Actions + Firebase App Distribution | `.github/workflows/firebase-distribute.yml` | APK de *release* firmado, enviado al grupo de testers con cada `push` a `develop` |
+
+**Tabla 67. Software Development Environment Configuration — Aplicación móvil Android (versión inicial del Sprint 1).**
 
 | Componente | Herramienta / Biblioteca | Versión o detalle | Uso en el proyecto |
 |---|---|---|---|
@@ -4130,35 +4189,37 @@ El equipo configuró el entorno de desarrollo de cada producto de MindFlow por s
 | Persistencia local | SQLite (API nativa de Android) | — | Caché offline del perfil y datos de Diario/Hábitos |
 | Pruebas | JUnit 4 | `4.13.2` | Unit tests de dominio y aplicación (sección 4.2.1.5) |
 
-Como herramientas de gestión y diseño, el equipo usó Figma para el sistema de diseño y los artefactos de UI/UX del capítulo 3, Trello para el Sprint Backlog (Figura 139) y GitHub para alojar los cuatro repositorios del proyecto y gestionar los Pull Requests (sección 4.1.2).
+Como herramientas de gestión y diseño, el equipo usó Figma para el sistema de diseño y los artefactos de UI/UX del capítulo 3, Trello para el Sprint Backlog (Figura 139) y GitHub para alojar los cinco repositorios del proyecto y gestionar los Pull Requests (sección 4.1.2).
 
 ### 4.1.2. Source Code Management
 
-Los cuatro repositorios del proyecto siguen un flujo basado en GitFlow simplificado, aunque no de forma idéntica entre todos: `mindflow-backend` y `mindflow-landingPage` mantienen `main` como rama por defecto en GitHub con `develop` para integración, mientras que `mindflow-report` y `mindflow-frontend` usan `develop` como única rama por defecto — este último repositorio no tiene siquiera una rama `main`. Ninguno de los cuatro usa ramas `release/*` ni `hotfix/*`. El trabajo del Sprint 1 se realizó en ramas `feature/*` creadas a partir de `develop` e integradas mediante Pull Request, como lo muestran los commits de merge del historial (`Merge pull request #N from upc-pre-202620-1acc0238-4950-CogniTech/feature/...`): `feature/shared`, `feature/iam`, `feature/journal`, `feature/ai-assistant`, `feature/habits-wellness` y `feature/local-dev-setup` en el backend (ya eliminadas de GitHub tras su merge); `feature/backend-integration` y `feature/bottom-nav-i18n` en la app móvil; `feature/landing-page-redesign` en la Landing Page. En `mindflow-backend` llama la atención que `main` no se actualizó después del scaffold inicial del proyecto (commit `b144749`): todo el trabajo de los 8 bounded contexts, incluidas las últimas correcciones relacionadas con el despliegue (`2b2e25c`, `ce7707a`, `294a182`), vive solo en `develop`. En la Landing Page, en cambio, sí se integró `develop` en `main` mediante un Pull Request adicional (PR #3), que es la rama que publica GitHub Pages (sección 4.1.4).
+Los cinco repositorios del proyecto siguen un flujo basado en GitFlow simplificado, aunque no de forma idéntica entre todos: `mindflow-backend` y `mindflow-landingPage` mantienen `main` como rama por defecto en GitHub con `develop` para integración, mientras que `mindflow-report`, `mindflow-frontend` y `mindflow-mobile-flutter` usan `develop` como rama por defecto: `mindflow-frontend` no tiene siquiera una rama `main`, y la de `mindflow-mobile-flutter` solo contiene el commit inicial y no se usa para integrar. Ninguno de los cinco usa ramas `release/*` ni `hotfix/*`. El trabajo del Sprint 1 se realizó en ramas `feature/*` creadas a partir de `develop` e integradas mediante Pull Request, como lo muestran los commits de merge del historial (`Merge pull request #N from upc-pre-202620-1acc0238-4950-CogniTech/feature/...`): `feature/shared`, `feature/iam`, `feature/journal`, `feature/ai-assistant`, `feature/habits-wellness` y `feature/local-dev-setup` en el backend (ya eliminadas de GitHub tras su merge); `feature/backend-integration` y `feature/bottom-nav-i18n` en la app móvil Android; `feature/landing-page-redesign` en la Landing Page. En `mindflow-mobile-flutter`, la aplicación móvil oficial desde el Sprint 2, las funcionalidades se integraron mediante los Pull Requests n.º 1 a 11 desde ramas `feature/*` (`feature/project-scaffold`, `feature/journal`, `feature/habits`, `feature/chat`, `feature/insights`, `feature/settings`, `feature/wellness-exercises`, `feature/notifications`, `feature/subscriptions`, `feature/support` y `feature/ai-feedback`). En `mindflow-backend` llama la atención que `main` no se actualizó después del scaffold inicial del proyecto (commit `b144749`): todo el trabajo de los 8 bounded contexts, incluidas las últimas correcciones relacionadas con el despliegue (`2b2e25c`, `ce7707a`, `294a182`), vive solo en `develop`. En la Landing Page, en cambio, sí se integró `develop` en `main` mediante un Pull Request adicional (PR #3), que es la rama que publica GitHub Pages (sección 4.1.4).
 
-La convención de mensajes de commit observada en el historial sigue, en general, Conventional Commits (Conventional Commits, s. f.) (`feat:`, `fix:`, `refactor:`, `build:`, `chore:`, `style:`, con *scope* opcional entre paréntesis), tal como indica la sección 4.1.3. En la práctica hay excepciones: varios commits tempranos de la app móvil (por ejemplo `feat: implementar pantallas de login y registro`, del 27/09/2026) usan el prefijo correcto pero la descripción en español, mientras que los commits posteriores a la refactorización a capas DDD (`05d549d refactor: add DDD foundation for frontend`) están íntegramente en inglés. El backend tiene además un par de commits sin prefijo de tipo (`de86103 Update database connection and secret keys`) o con un prefijo no estándar (`dda3d04 feature(ReadMe): Add information for MarkDown`, que usa `feature` en vez de `feat`).
+La convención de mensajes de commit observada en el historial sigue, en general, Conventional Commits (Conventional Commits, s. f.) (`feat:`, `fix:`, `refactor:`, `build:`, `chore:`, `style:`, con *scope* opcional entre paréntesis), tal como indica la sección 4.1.3. En la práctica hay excepciones: varios commits tempranos de la app móvil Android (por ejemplo `feat: implementar pantallas de login y registro`, del 27/09/2026) usan el prefijo correcto pero la descripción en español, mientras que los commits posteriores a la refactorización a capas DDD (`05d549d refactor: add DDD foundation for frontend`) están íntegramente en inglés. El backend tiene además un par de commits sin prefijo de tipo (`de86103 Update database connection and secret keys`) o con un prefijo no estándar (`dda3d04 feature(ReadMe): Add information for MarkDown`, que usa `feature` en vez de `feat`).
 
-Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los tres repositorios de producto, con los commits por integrante en la rama `develop`, ya se presentan en la sección 4.2.1.9 "Team Collaboration Insights during Sprint" (Tabla 88, Figuras 151 a 153); no se repiten aquí. La Tabla 67 enumera los repositorios del proyecto con su URL, rama principal y propósito.
+Los analíticos de colaboración de GitHub (*Insights → Contributors*) de los tres repositorios de producto, con los commits por integrante en la rama `develop`, ya se presentan en la sección 4.2.1.9 "Team Collaboration Insights during Sprint" (Tabla 89, Figuras 151 a 153); no se repiten aquí. La Tabla 68 enumera los repositorios del proyecto con su URL, rama principal y propósito.
 
-**Tabla 67. Source Code Management — Repositorios del proyecto.**
+**Tabla 68. Source Code Management — Repositorios del proyecto.**
 
 | Repositorio | URL | Rama principal | Ramas de trabajo | Propósito |
 |---|---|---|---|---|
 | `mindflow-report` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-report | `develop` | `feature/*` | Informe del proyecto (este documento) |
 | `mindflow-backend` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend | `main` | `develop`, `feature/*` (`feature/iam`, `feature/journal`, `feature/ai-assistant`, `feature/habits-wellness`, `feature/local-dev-setup`, `feature/backend-hardening`, entre otras) | Web Services (ASP.NET Core) de los 8 bounded contexts |
-| `mindflow-frontend` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | `develop` | `feature/backend-integration`, `feature/bottom-nav-i18n` | Mobile Application para Android |
+| `mindflow-frontend` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend | `develop` | `feature/backend-integration`, `feature/bottom-nav-i18n` | Mobile Application Android nativa (versión inicial del Sprint 1) |
+| `mindflow-mobile-flutter` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter | `develop` | `feature/*` (`feature/journal`, `feature/habits`, `feature/chat`, `feature/insights`, `feature/settings`, `feature/support`, entre otras) | Mobile Application oficial (Flutter), desarrollada desde el Sprint 2 |
 | `mindflow-landingPage` | https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage | `main` | `develop`, `feature/landing-page-redesign` | Landing Page pública del proyecto |
 
 ### 4.1.3. Source Code Style Guide & Conventions
 
-El equipo adopta guías de estilo oficiales y ampliamente utilizadas en la industria para cada lenguaje empleado en la solución, garantizando consistencia en todo el código fuente. En todos los casos, la nomenclatura de clases, métodos, variables, archivos y comentarios de código se redacta en inglés (Tabla 68).
+El equipo adopta guías de estilo oficiales y ampliamente utilizadas en la industria para cada lenguaje empleado en la solución, garantizando consistencia en todo el código fuente. En todos los casos, la nomenclatura de clases, métodos, variables, archivos y comentarios de código se redacta en inglés (Tabla 69).
 
-**Tabla 68. Software Configuration Management — Source Code Style Guide & Conventions.**
+**Tabla 69. Software Configuration Management — Source Code Style Guide & Conventions.**
 
 | Lenguaje / Artefacto | Uso en el proyecto | Guía de estilo adoptada | Convenciones clave |
 |---|---|---|---|
 | **C# (.NET 10)** | Backend — Web Services API (ASP.NET Core) | [Microsoft C# Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions) | `PascalCase` para clases, records, métodos y propiedades (`JournalEntry`, `UserCommandService`); `camelCase` para parámetros y variables locales; interfaces prefijadas con `I` (`IUserRepository`, `IAiService`); métodos asíncronos sufijados con `Async` (`FindByEmailAsync`); un tipo público por archivo; `namespace` a nivel de archivo (*file-scoped*) |
-| **Kotlin** | Mobile Application (Android nativo) | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) + [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | `PascalCase` para clases e interfaces; `camelCase` para funciones y propiedades; `UPPER_SNAKE_CASE` para constantes (`companion object`); indentación de 4 espacios; uso explícito de modificadores de visibilidad; *trailing comma* en declaraciones multilínea |
+| **Dart (Flutter)** | Mobile Application oficial | [Effective Dart](https://dart.dev/effective-dart) + reglas de `flutter_lints` | `UpperCamelCase` para clases y tipos; `lowerCamelCase` para variables, funciones y miembros; `lowercase_with_underscores` para archivos y paquetes; organización por funcionalidad en `lib/features/<funcionalidad>/{domain,application,infrastructure,presentation}` |
+| **Kotlin** | Mobile Application Android (versión inicial del Sprint 1) | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) + [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | `PascalCase` para clases e interfaces; `camelCase` para funciones y propiedades; `UPPER_SNAKE_CASE` para constantes (`companion object`); indentación de 4 espacios; uso explícito de modificadores de visibilidad; *trailing comma* en declaraciones multilínea |
 | **HTML5** | Landing Page | [HTML Style Guide and Coding Conventions](https://www.w3schools.com/html/html5_syntax.asp) + [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) | Etiquetas y atributos en minúscula, comillas dobles, etiquetas semánticas (`<header>`, `<section>`, `<footer>`), indentación de 2 espacios |
 | **CSS3** | Landing Page | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) | Clases e IDs en `kebab-case` (`.hero-section`, `#cta-button`), metodología BEM para componentes reutilizables, *mobile-first* en media queries |
 | **JavaScript** | Landing Page (interactividad) | [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | `camelCase` para variables y funciones, `PascalCase` para clases, `const`/`let` (nunca `var`), funciones puras cuando sea posible |
@@ -4174,7 +4235,7 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 
 ### 4.1.4. Software Deployment Configuration
 
-**Web Services.** El backend se despliega en **Railway** a partir de la rama `develop` del repositorio [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), con Docker, una base de datos MySQL y una caché Redis también alojadas en Railway, y variables de entorno configuradas en el servicio (Figuras 147 a 150, Tabla 87, sección 4.2.1.8). La documentación interactiva de la API, generada con Swashbuckle, está disponible en [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger).
+**Web Services.** El backend se despliega en **Railway** a partir de la rama `develop` del repositorio [`mindflow-backend`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend), con Docker, una base de datos MySQL y una caché Redis también alojadas en Railway, y variables de entorno configuradas en el servicio (Figuras 147 a 150, Tabla 88, sección 4.2.1.8). La documentación interactiva de la API, generada con Swashbuckle, está disponible en [https://powerful-wholeness-production.up.railway.app/swagger](https://powerful-wholeness-production.up.railway.app/swagger).
 
 **Landing Page.** La Landing Page se publica con **GitHub Pages** desde la rama `main` del repositorio [`mindflow-landingPage`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-landingPage), mediante el despliegue automático de GitHub (*pages-build-deployment*), que no requiere un workflow propio en `.github/workflows/` — el repositorio no tiene ninguno, ya que el sitio es estático (HTML, CSS y JavaScript sin paso de compilación). El último despliegue corresponde al merge del Pull Request #3, que integró `develop` en `main` (commit `39d0d90`, sección 4.1.2). La URL pública es [https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/](https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/) (Figura 138).
 
@@ -4182,15 +4243,16 @@ Estas convenciones se aplican de manera uniforme en los 8 Bounded Contexts, aseg
 
 *Figura 138. Despliegue de la Landing Page en GitHub Pages.*
 
-**Aplicación móvil Android.** En este Sprint la aplicación no tiene un proceso de publicación: el `buildType release` de `app/build.gradle.kts` no define un `signingConfig` propio (usa la firma de depuración por defecto), no se generó ningún APK distribuible y el repositorio no tiene configuración de Google Play Store. La app se ejecuta desde Android Studio, sobre emuladores y dispositivos Android físicos conectados al backend de Railway a través de `API_BASE_URL` (`app/build.gradle.kts`), tal como ya se describe en la sección 4.2.1.8. La publicación en una tienda de aplicaciones queda para un Sprint posterior. La Tabla 69 resume el despliegue de los tres productos.
+**Aplicación móvil.** La aplicación oficial (Flutter, `mindflow-mobile-flutter`) se distribuye con **Firebase App Distribution**: el flujo `.github/workflows/firebase-distribute.yml` de GitHub Actions compila un APK de *release* firmado con cada `push` a la rama `develop` y lo envía al grupo de testers `equipo-curso`, sin pasos manuales (secciones 4.2.2.6 y 4.2.3). La firma usa un *keystore* de *release* cuyas credenciales se guardan como secretos del repositorio; si el entorno no las define, `android/app/build.gradle.kts` firma con la clave de depuración. El equipo no publicó la aplicación en una tienda de aplicaciones: la distribución a los testers se hace con Firebase App Distribution. La aplicación Android inicial (`mindflow-frontend`) no tiene proceso de publicación: el `buildType release` de `app/build.gradle.kts` no define un `signingConfig` propio, no se generó ningún APK distribuible y se ejecuta desde Android Studio sobre emuladores y dispositivos físicos conectados al backend de Railway a través de `API_BASE_URL`, como se describe en la sección 4.2.1.8. La Tabla 70 resume el despliegue de los productos.
 
-**Tabla 69. Software Deployment Configuration — Resumen de despliegue por producto.**
+**Tabla 70. Software Deployment Configuration — Resumen de despliegue por producto.**
 
 | Producto | Plataforma | Origen del despliegue | URL o estado |
 |---|---|---|---|
 | Landing Page | GitHub Pages | `mindflow-landingPage`, rama `main` (merge de Pull Request desde `develop`) | https://upc-pre-202620-1acc0238-4950-cognitech.github.io/mindflow-landingPage/ |
 | Web Services | Railway | `mindflow-backend`, rama `develop` (Docker, build desde GitHub) | https://powerful-wholeness-production.up.railway.app/swagger |
-| Aplicación móvil | Android Studio (emulador / dispositivo físico) | `mindflow-frontend`, rama `develop` | Sin publicar; sin firma de release ni APK distribuible en este Sprint |
+| Aplicación móvil (Flutter, oficial) | GitHub Actions + Firebase App Distribution | `mindflow-mobile-flutter`, rama `develop` (cada `push`) | APK de *release* firmado, distribuido al grupo de testers `equipo-curso` |
+| Aplicación móvil Android (versión inicial) | Android Studio (emulador / dispositivo físico) | `mindflow-frontend`, rama `develop` | Sin publicar; sin firma de release ni APK distribuible |
 
 **Nota:** la dirección de Railway indicada corresponde al despliegue realizado en el Sprint 1. En el Sprint 2 el backend se desplegó en un nuevo servicio de Railway, con una nueva URL pública, que se documenta en la sección 4.2.2.8.
 
@@ -4210,9 +4272,9 @@ En este primer Sprint el equipo trabajó en paralelo el backend de los 8 bounded
 
 #### 4.2.1.1. Sprint Planning 1
 
-A continuación se presenta el resumen del Sprint Planning Meeting realizado para el Sprint 1 (Tabla 70).
+A continuación se presenta el resumen del Sprint Planning Meeting realizado para el Sprint 1 (Tabla 71).
 
-**Tabla 70. Sprint 1 — Sprint Planning 1.**
+**Tabla 71. Sprint 1 — Sprint Planning 1.**
 
 | Sprint # | Sprint 1 |
 |---|---|
@@ -4231,9 +4293,9 @@ A continuación se presenta el resumen del Sprint Planning Meeting realizado par
 
 #### 4.2.1.2. Aspect Leaders and Collaborators
 
-En esta sección se detalla la matriz de liderazgo y colaboración (LACX) para el Sprint 1. Cada aspecto representa una fase crítica de la entrega, donde se designa un líder (**L**) responsable de la dirección del entregable y colaboradores (**C**) que apoyaron en su ejecución (Tabla 71).
+En esta sección se detalla la matriz de liderazgo y colaboración (LACX) para el Sprint 1. Cada aspecto representa una fase crítica de la entrega, donde se designa un líder (**L**) responsable de la dirección del entregable y colaboradores (**C**) que apoyaron en su ejecución (Tabla 72).
 
-**Tabla 71. Sprint 1 — Aspect Leaders and Collaborators.**
+**Tabla 72. Sprint 1 — Aspect Leaders and Collaborators.**
 
 | Team Member (Last Name, First Name) | GitHub Username | Style Guidelines & Information Architecture | Backend — 8 Bounded Contexts | Landing Page (Wireframe y Mock-up) | Mobile Application (Android) — 8 Bounded Contexts | Configuración del Proyecto y Despliegue | Prototyping & Testing/Sprint Review Evidence |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -4258,9 +4320,9 @@ Durante el Sprint 1 (22/09/2026 – 09/10/2026) el equipo avanzó en paralelo lo
 
 En `mindflow-frontend` se implementó primero la base de la Mobile Application con persistencia 100% local en SQLite (tema, autenticación, Home, Diario, Hábitos, Analíticas, Configuración y Planes), y luego, en una segunda etapa, se conectó esa misma app al backend real: autenticación con Google, cliente Retrofit, IAM, Chat con Gemini, suscripciones con Stripe, internacionalización español/inglés y una barra de navegación inferior de 5 íconos que reemplazó al menú lateral original.
 
-En `mindflow-landingPage` se construyó el sitio completo (página principal y "Nosotros") desde cero para el pivote del proyecto hacia la aplicación móvil, con una corrección posterior de la precisión de las biografías del equipo y del grid de integrantes. La Tabla 72 detalla los commits de implementación más representativos de los tres repositorios (hasta 12 por repositorio); el historial completo de cada uno está disponible en GitHub.
+En `mindflow-landingPage` se construyó el sitio completo (página principal y "Nosotros") desde cero para el pivote del proyecto hacia la aplicación móvil, con una corrección posterior de la precisión de las biografías del equipo y del grid de integrantes. La Tabla 73 detalla los commits de implementación más representativos de los tres repositorios (hasta 12 por repositorio); el historial completo de cada uno está disponible en GitHub.
 
-**Tabla 72. Development Evidence for Sprint Review — Commits de implementación por repositorio.**
+**Tabla 73. Development Evidence for Sprint Review — Commits de implementación por repositorio.**
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
@@ -4303,7 +4365,7 @@ En este Sprint, la suite de pruebas automatizadas se concentró en la Mobile App
 
 ##### Relación de Unit Tests
 
-**Tabla 73. Testing Suite Evidence for Sprint Review — Relación de Unit Tests.**
+**Tabla 74. Testing Suite Evidence for Sprint Review — Relación de Unit Tests.**
 
 | Archivo de prueba | Clase probada | Test | Comportamiento validado | User Story |
 |---|---|---|---|---|
@@ -4313,13 +4375,13 @@ En este Sprint, la suite de pruebas automatizadas se concentró en la Mobile App
 | `application/ChatUseCasesTest.kt` | `ChatUseCases` (application service) | `replies as the assistant` | La respuesta al mensaje del usuario la entrega MindFlow AI y se identifica como mensaje del asistente, no del usuario. | US13 |
 | `application/ChatUseCasesTest.kt` | `ChatUseCases` (application service) | `welcome message comes from the assistant` | El mensaje de bienvenida del chat se muestra como mensaje del asistente. | US13 |
 
-En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementación de prueba. Así se valida el caso de uso de forma aislada, sin llamar al servicio de IA del backend (Tabla 73).
+En `ChatUseCasesTest` se reemplaza el puerto `ChatResponder` por una implementación de prueba. Así se valida el caso de uso de forma aislada, sin llamar al servicio de IA del backend (Tabla 74).
 
 ##### Resultado de la ejecución
 
-La Tabla 74 resume el resultado de la ejecución de los unit tests.
+La Tabla 75 resume el resultado de la ejecución de los unit tests.
 
-**Tabla 74. Testing Suite Evidence for Sprint Review — Resultado de la ejecución.**
+**Tabla 75. Testing Suite Evidence for Sprint Review — Resultado de la ejecución.**
 
 | Clase de prueba | Tests | Exitosos | Fallidos |
 |---|---|---|---|
@@ -4329,9 +4391,9 @@ La Tabla 74 resume el resultado de la ejecución de los unit tests.
 
 ##### Commits relacionados con Testing
 
-La Tabla 75 detalla los commits relacionados con las pruebas automatizadas.
+La Tabla 76 detalla los commits relacionados con las pruebas automatizadas.
 
-**Tabla 75. Testing Suite Evidence for Sprint Review — Commits relacionados con Testing.**
+**Tabla 76. Testing Suite Evidence for Sprint Review — Commits relacionados con Testing.**
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
@@ -4361,7 +4423,7 @@ Logros principales del Sprint:
 
 ##### Vistas implementadas
 
-**Tabla 76. Execution Evidence for Sprint Review — Vistas implementadas.**
+**Tabla 77. Execution Evidence for Sprint Review — Vistas implementadas.**
 
 | Vista | Funcionalidad implementada | User Stories | Conexión con el backend |
 |---|---|---|---|
@@ -4375,7 +4437,7 @@ Logros principales del Sprint:
 | Planes | Comparación de Freemium y Premium, y actualización a Premium con Stripe Checkout en modo prueba. El plan se vuelve a consultar al regresar a la aplicación. Volver a Freemium muestra un aviso; la cancelación en el backend aún no existe. | US33, US34 | `POST /api/v1/subscriptions/checkout`, `GET /api/v1/subscriptions/me` |
 | Chat MindFlow AI | Botón flotante que abre una conversación con la IA desde cualquier pantalla. | US13 | `POST /api/v1/chat/conversations`, `POST /api/v1/chat/conversations/{id}/messages` |
 
-Las vistas que hoy trabajan con persistencia local (Diario, Hábitos, Analíticas y Configuración) se conectarán a sus endpoints del backend en el siguiente Sprint. Esos endpoints ya están implementados y documentados en la sección 4.2.1.7. En ese mismo Sprint se completarán la pantalla de bloqueo por PIN (US04), los recordatorios de hábitos y el envío de tickets de soporte al backend (US37) (Tabla 76).
+Las vistas que hoy trabajan con persistencia local (Diario, Hábitos, Analíticas y Configuración) se conectarán a sus endpoints del backend en el siguiente Sprint. Esos endpoints ya están implementados y documentados en la sección 4.2.1.7. En ese mismo Sprint se completarán la pantalla de bloqueo por PIN (US04), los recordatorios de hábitos y el envío de tickets de soporte al backend (US37) (Tabla 77).
 
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 
@@ -4404,7 +4466,7 @@ Logros del Sprint en documentación de Web Services:
 
 ##### IAM: usuarios y autenticación
 
-**Tabla 77. Services Documentation Evidence for Sprint Review — IAM: usuarios y autenticación.**
+**Tabla 78. Services Documentation Evidence for Sprint Review — IAM: usuarios y autenticación.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4421,7 +4483,7 @@ Logros del Sprint en documentación de Web Services:
 | DELETE | `/api/v1/users/pin` | — | `200` "PIN eliminado correctamente.". |
 | GET | `/api/v1/users/pin/status` | — | `200` con `{ "has_pin": true }` o `{ "has_pin": false }`. |
 
-Ejemplo de inicio de sesión. El `token` devuelto es el que se usa en el botón **Authorize** de Swagger (Tabla 77):
+Ejemplo de inicio de sesión. El `token` devuelto es el que se usa en el botón **Authorize** de Swagger (Tabla 78):
 
 ```http
 POST /api/v1/users/sign-in
@@ -4436,7 +4498,7 @@ Content-Type: application/json
 
 ##### Journal: diario emocional
 
-**Tabla 78. Services Documentation Evidence for Sprint Review — Journal: diario emocional.**
+**Tabla 79. Services Documentation Evidence for Sprint Review — Journal: diario emocional.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4454,7 +4516,7 @@ Content-Type: application/json
 | POST | `/api/v1/journal/media` | Body: datos del adjunto asociado a una entrada | `200` con el adjunto registrado. |
 | POST | `/api/v1/journal/media/upload` | `multipart/form-data`: `entryId`, `file` | `200` con el adjunto subido. `400` si no se envía archivo. |
 
-Ejemplo de creación de una entrada. El backend analiza el texto y devuelve la respuesta empática de MindFlow AI (US11, US12, US13) (Tabla 78):
+Ejemplo de creación de una entrada. El backend analiza el texto y devuelve la respuesta empática de MindFlow AI (US11, US12, US13) (Tabla 79):
 
 ```http
 POST /api/v1/journal/entries
@@ -4490,7 +4552,7 @@ Content-Type: application/json
 
 ##### AI Assistant: chat y valoración de respuestas
 
-**Tabla 79. Services Documentation Evidence for Sprint Review — AI Assistant: chat y valoración de respuestas.**
+**Tabla 80. Services Documentation Evidence for Sprint Review — AI Assistant: chat y valoración de respuestas.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4503,7 +4565,7 @@ Content-Type: application/json
 | GET | `/api/v1/ai-feedback` | — | `200` con las valoraciones del usuario. |
 | GET | `/api/v1/ai-feedback/summary` | — | `200` con `total_ratings`, `average_rating` y `distribution`. |
 
-Ejemplo de mensaje en una conversación existente (Tabla 79):
+Ejemplo de mensaje en una conversación existente (Tabla 80):
 
 ```json
 {
@@ -4514,9 +4576,9 @@ Ejemplo de mensaje en una conversación existente (Tabla 79):
 
 ##### Habits & Wellness: hábitos, registros y bienestar
 
-La Tabla 80 agrupa los endpoints de hábitos, registros de cumplimiento, chequeo de estrés y catálogo de ejercicios de bienestar.
+La Tabla 81 agrupa los endpoints de hábitos, registros de cumplimiento, chequeo de estrés y catálogo de ejercicios de bienestar.
 
-**Tabla 80. Services Documentation Evidence for Sprint Review — Habits & Wellness: hábitos, registros y bienestar.**
+**Tabla 81. Services Documentation Evidence for Sprint Review — Habits & Wellness: hábitos, registros y bienestar.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4542,7 +4604,7 @@ La Tabla 80 agrupa los endpoints de hábitos, registros de cumplimiento, chequeo
 
 ##### Analytics & Reporting
 
-**Tabla 81. Services Documentation Evidence for Sprint Review — Analytics & Reporting.**
+**Tabla 82. Services Documentation Evidence for Sprint Review — Analytics & Reporting.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4550,7 +4612,7 @@ La Tabla 80 agrupa los endpoints de hábitos, registros de cumplimiento, chequeo
 | GET | `/api/v1/analytics/report.csv` | — | Archivo `mindflow-report.csv` con fecha, categoría, sentimiento y título de cada entrada (US36). |
 | GET | `/api/v1/analytics/report.pdf` | — | Archivo `mindflow-report.pdf` con el resumen emocional y el listado de entradas (US35). |
 
-Ejemplo de respuesta del dashboard (Tabla 81):
+Ejemplo de respuesta del dashboard (Tabla 82):
 
 ```json
 {
@@ -4569,9 +4631,9 @@ Ejemplo de respuesta del dashboard (Tabla 81):
 
 ##### Notifications
 
-La Tabla 82 agrupa los endpoints de notificaciones del usuario.
+La Tabla 83 agrupa los endpoints de notificaciones del usuario.
 
-**Tabla 82. Services Documentation Evidence for Sprint Review — Notifications.**
+**Tabla 83. Services Documentation Evidence for Sprint Review — Notifications.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4582,7 +4644,7 @@ La Tabla 82 agrupa los endpoints de notificaciones del usuario.
 
 ##### Subscriptions
 
-**Tabla 83. Services Documentation Evidence for Sprint Review — Subscriptions.**
+**Tabla 84. Services Documentation Evidence for Sprint Review — Subscriptions.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4592,7 +4654,7 @@ La Tabla 82 agrupa los endpoints de notificaciones del usuario.
 | POST | `/api/v1/subscriptions/webhook` | Header `Stripe-Signature`. Body: evento de Stripe | `200` al procesar `checkout.session.completed` y activar el plan Premium. `401` si la firma no es válida. Lo invoca Stripe, no la aplicación. |
 | POST | `/api/v1/subscriptions/demo/plan/{plan}` | Path: `plan` (`freemium` o `premium`) | `200` con la suscripción actualizada. Endpoint de demostración para cambiar de plan sin pasar por Stripe. |
 
-Ejemplo de respuesta de checkout (Tabla 83):
+Ejemplo de respuesta de checkout (Tabla 84):
 
 ```json
 {
@@ -4603,9 +4665,9 @@ Ejemplo de respuesta de checkout (Tabla 83):
 
 ##### Support
 
-La Tabla 84 agrupa los endpoints de tickets de soporte.
+La Tabla 85 agrupa los endpoints de tickets de soporte.
 
-**Tabla 84. Services Documentation Evidence for Sprint Review — Support.**
+**Tabla 85. Services Documentation Evidence for Sprint Review — Support.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4617,9 +4679,9 @@ La Tabla 84 agrupa los endpoints de tickets de soporte.
 
 ##### Health check
 
-La Tabla 85 documenta el endpoint de verificación de estado del servicio.
+La Tabla 86 documenta el endpoint de verificación de estado del servicio.
 
-**Tabla 85. Services Documentation Evidence for Sprint Review — Health check.**
+**Tabla 86. Services Documentation Evidence for Sprint Review — Health check.**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -4673,9 +4735,9 @@ A continuación se muestra la interacción con la documentación desplegada en R
 
 ##### Commits relacionados con los Web Services y su documentación
 
-La Tabla 86 detalla los commits de implementación y documentación de los Web Services.
+La Tabla 87 detalla los commits de implementación y documentación de los Web Services.
 
-**Tabla 86. Services Documentation Evidence for Sprint Review — Commits relacionados con los Web Services y su documentación.**
+**Tabla 87. Services Documentation Evidence for Sprint Review — Commits relacionados con los Web Services y su documentación.**
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
 |---|---|---|---|---|---|
@@ -4722,9 +4784,9 @@ El backend de MindFlow (ASP.NET Core) se desplegó en **Railway**. Los pasos rea
 
 *Figura 149. Selección de las bases de datos del backend en Railway.*
 
-**4. Variables de entorno.** La configuración sensible no se guarda en el repositorio: se registró como variables del servicio en Railway, que las muestra ocultas. Se usa el separador `__` para las claves anidadas de `appsettings.json` (por ejemplo, `ConnectionStrings__DefaultConnection` equivale a `ConnectionStrings:DefaultConnection`). Se registraron las siguientes variables (Tabla 87 y Figura 150):
+**4. Variables de entorno.** La configuración sensible no se guarda en el repositorio: se registró como variables del servicio en Railway, que las muestra ocultas. Se usa el separador `__` para las claves anidadas de `appsettings.json` (por ejemplo, `ConnectionStrings__DefaultConnection` equivale a `ConnectionStrings:DefaultConnection`). Se registraron las siguientes variables (Tabla 88 y Figura 150):
 
-**Tabla 87. Software Deployment Evidence — Variables de entorno de los Web Services.**
+**Tabla 88. Software Deployment Evidence — Variables de entorno de los Web Services.**
 
 | Variable | Uso |
 |---|---|
@@ -4751,7 +4813,7 @@ Durante el Sprint, la aplicación se compiló desde Android Studio y se instaló
 
 Durante el Sprint 1 el equipo trabajó con el flujo GitFlow en los tres repositorios de los productos: cada integrante desarrolló sus cambios en ramas `feature/*` creadas a partir de `develop` y los integró mediante Pull Requests, con mensajes de commit bajo la convención Conventional Commits. A continuación se presentan los analíticos de colaboración de GitHub (*Insights → Contributors*) de cada producto, que muestran los commits de cada integrante en la rama `develop`, sin contar los commits de merge.
 
-**Tabla 88. Team Collaboration Insights — Commits por integrante en el Sprint 1.**
+**Tabla 89. Team Collaboration Insights — Commits por integrante en el Sprint 1.**
 
 | Team Member | GitHub Username | Landing Page | Web Services | Mobile Application |
 |:---|:---|:---:|:---:|:---:|
@@ -4797,9 +4859,9 @@ En el segundo Sprint el equipo completa la conexión de la Mobile Application co
 
 #### 4.2.2.1. Sprint Planning 2
 
-El Sprint Planning Meeting del Sprint 2 partió de la revisión de lo entregado en el Sprint 1 y de los hallazgos de las entrevistas de validación y de la evaluación heurística. A partir de ellos el equipo definió el objetivo del Sprint y seleccionó las User Stories del Product Backlog (Tabla 14) que aportan directamente a ese objetivo (Tabla 89).
+El Sprint Planning Meeting del Sprint 2 partió de la revisión de lo entregado en el Sprint 1 y de los hallazgos de las entrevistas de validación y de la evaluación heurística. A partir de ellos el equipo definió el objetivo del Sprint y seleccionó las User Stories del Product Backlog (Tabla 14) que aportan directamente a ese objetivo (Tabla 90).
 
-**Tabla 89. Sprint 2 — Sprint Planning 2.**
+**Tabla 90. Sprint 2 — Sprint Planning 2.**
 
 | Sprint # | Sprint 2 |
 |---|---|
@@ -4810,19 +4872,19 @@ El Sprint Planning Meeting del Sprint 2 partió de la revisión de lo entregado 
 | Prepared By | Cabrera Sotelo, Camila Celeste |
 | Attendees | Cabrera Sotelo, Camila Celeste / Díaz De la Cruz, Sebastián Gabriel / Güere Calero, Fernando Julio / Jáuregui Cerna, Jean Franco / Limache Coronel, Imanol Fabrizio |
 | Sprint 1 Review Summary | Se entregaron los tres productos de la solución. El backend de los 8 bounded contexts quedó desplegado en Railway con su documentación Swagger, y el Landing Page se publicó en GitHub Pages. La Mobile Application implementó ocho vistas que cubren el recorrido completo del usuario; el registro e inicio de sesión, la entrada de diario con la respuesta de Google Gemini, el chat con MindFlow AI y el pago con Stripe en modo prueba ya consumen el backend real. Quedaron pendientes la conexión de Diario, Hábitos, Analíticas y Configuración, que aún trabajan con SQLite, además del bloqueo por PIN, los recordatorios y el envío de tickets de soporte. Las cinco entrevistas de validación confirmaron la propuesta de valor en ambos segmentos, y la evaluación heurística identificó 16 problemas, 4 de ellos de severidad 3. |
-| Sprint 1 Retrospective Summary | Como aciertos, el equipo destacó el reparto de los bounded contexts entre co-líderes, que permitió avanzar backend y aplicación en paralelo, y el uso de Pull Requests con Conventional Commits en el backend. Como oportunidades de mejora, identificó que la aplicación se conectó al backend recién al final del Sprint, que la participación en los repositorios fue desigual entre integrantes (Tabla 88) y que parte de los commits del frontend se integraron directamente en `develop`. Para el Sprint 2 acordó conectar cada vista al backend desde el inicio, trabajar todas las funcionalidades en ramas `feature/*` con Pull Request y repartir las tareas según la matriz de liderazgo (Tabla 90). |
+| Sprint 1 Retrospective Summary | Como aciertos, el equipo destacó el reparto de los bounded contexts entre co-líderes, que permitió avanzar backend y aplicación en paralelo, y el uso de Pull Requests con Conventional Commits en el backend. Como oportunidades de mejora, identificó que la aplicación se conectó al backend recién al final del Sprint, que la participación en los repositorios fue desigual entre integrantes (Tabla 89) y que parte de los commits del frontend se integraron directamente en `develop`. Para el Sprint 2 acordó conectar cada vista al backend desde el inicio, trabajar todas las funcionalidades en ramas `feature/*` con Pull Request y repartir las tareas según la matriz de liderazgo (Tabla 91). |
 | **Sprint Goal & User Stories** | |
 | Sprint 2 Goal | Nuestro enfoque está en que la Mobile Application funcione por completo sobre el backend: diario, hábitos, analíticas y cuenta del usuario sincronizados con los Web Services, junto con el bloqueo por PIN y el canal de soporte. Creemos que esto entrega a los estudiantes universitarios y a los profesionales jóvenes la confianza de que su historial emocional y sus hábitos se conservan entre dispositivos y quedan protegidos. Esto se confirmará cuando un usuario registre una entrada y complete un hábito, los vea reflejados en el calendario y en las analíticas al iniciar sesión en otro dispositivo, abra la aplicación solo después de ingresar su PIN y reciba dentro de la aplicación la respuesta a un ticket de soporte. |
 | Sprint 2 Velocity | 30 |
 | Sum of Story Points | 28 |
 
-Las User Stories seleccionadas para el Sprint 2 y sus Story Points se detallan en la Tabla 91: US04 (2), US05 (2), US07 (3), US16 (3), US17 (5), US21 (3), US22 (2), US31 (5) y US37 (3).
+Las User Stories seleccionadas para el Sprint 2 y sus Story Points se detallan en la Tabla 92: US04 (2), US05 (2), US07 (3), US16 (3), US17 (5), US21 (3), US22 (2), US31 (5) y US37 (3).
 
 #### 4.2.2.2. Aspect Leaders and Collaborators
 
-Para el Sprint 2 el equipo organizó el trabajo en seis aspectos: la integración de Diario, Hábitos y Analíticas con el backend; la seguridad y la gestión de la cuenta; el soporte y las notificaciones dentro de la aplicación; el despliegue y la documentación de los Web Services; el Landing Page y su contenido legal; y la validación, los videos y la evidencia del Sprint Review. Cada aspecto tiene un líder (**L**) responsable de su entrega y colaboradores (**C**) que apoyan su ejecución. La asignación de tareas del Sprint Backlog 2 sigue esta matriz (Tabla 90).
+Para el Sprint 2 el equipo organizó el trabajo en seis aspectos: la integración de Diario, Hábitos y Analíticas con el backend; la seguridad y la gestión de la cuenta; el soporte y las notificaciones dentro de la aplicación; el despliegue y la documentación de los Web Services; el Landing Page y su contenido legal; y la validación, los videos y la evidencia del Sprint Review. Cada aspecto tiene un líder (**L**) responsable de su entrega y colaboradores (**C**) que apoyan su ejecución. La asignación de tareas del Sprint Backlog 2 sigue esta matriz (Tabla 91).
 
-**Tabla 90. Sprint 2 — Aspect Leaders and Collaborators.**
+**Tabla 91. Sprint 2 — Aspect Leaders and Collaborators.**
 
 | Team Member (Last Name, First Name) | GitHub Username | Integración de Diario, Hábitos y Analíticas | Seguridad y Cuenta (PIN, Perfil, Eliminación) | Soporte y Notificaciones | Web Services — Despliegue y Documentación | Landing Page y Contenido Legal | Validación, Videos y Evidencia del Sprint Review |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -4836,9 +4898,9 @@ Cabrera Sotelo lidera la integración de Diario, Hábitos y Analíticas porque i
 
 #### 4.2.2.3. Sprint Backlog 2
 
-El objetivo del Sprint 2 es que la Mobile Application funcione por completo sobre el backend desplegado y que el usuario pueda proteger su cuenta y pedir ayuda desde la aplicación. Las User Stories del Sprint se descompusieron en tareas de la aplicación que consumen los endpoints documentados en la sección 4.2.1.7, y se agregaron tareas que no dependen de una User Story en particular: el despliegue y la documentación del backend, las correcciones de la evaluación heurística, el contenido legal del Landing Page y la evidencia del Sprint Review (Tabla 91).
+El objetivo del Sprint 2 es que la Mobile Application funcione por completo sobre el backend desplegado y que el usuario pueda proteger su cuenta y pedir ayuda desde la aplicación. Las User Stories del Sprint se descompusieron en tareas de la aplicación que consumen los endpoints documentados en la sección 4.2.1.7, y se agregaron tareas que no dependen de una User Story en particular: el despliegue y la documentación del backend, las correcciones de la evaluación heurística, el contenido legal del Landing Page y la evidencia del Sprint Review (Tabla 92).
 
-**Tabla 91. Sprint 2 — Sprint Backlog 2.**
+**Tabla 92. Sprint 2 — Sprint Backlog 2.**
 
 | Sprint # | Sprint 2 | | | | | | |
 |---|---|---|---|---|---|---|---|
@@ -4869,7 +4931,7 @@ El objetivo del Sprint 2 es que la Mobile Application funcione por completo sobr
 
 Se revisó la rama `develop` de los cuatro repositorios del producto después del Sprint Planning 2 (12/10/2026) y hasta el 10/11/2026. Las fechas se expresan en UTC. La aplicación Android original (`mindflow-frontend`, Kotlin/Jetpack Compose) y la nueva aplicación (`mindflow-mobile-flutter`, Flutter/Dart) se registran por separado. Los commits de merge no se contabilizan como una segunda implementación.
 
-**Tabla 92. Sprint 2 — Development Evidence by Repository.**
+**Tabla 93. Sprint 2 — Development Evidence by Repository.**
 
 | Repository | Branch | Commit Id | Message | Body | Date |
 |---|---|---|---|---|---|
@@ -4890,17 +4952,17 @@ Se revisó la rama `develop` de los cuatro repositorios del producto después de
 
 La revisión de `develop` separa pruebas implementadas de especificaciones propuestas. La existencia de un archivo de prueba o de un commit no equivale a una ejecución aprobada.
 
-**Tabla 93. Testing Suite — Inventario y relación con las User Stories.**
+**Tabla 94. Testing Suite — Inventario y relación con las User Stories.**
 
 | Tipo | Archivo o evidencia | Casos identificados | User Stories | Estado |
 |---|---|---|---|---|
 | Unit | [`HabitPolicyTest.kt`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/blob/develop/app/src/test/java/com/cognitech/mindflow/domain/service/HabitPolicyTest.kt) (Android Kotlin) | Tres métodos `@Test`: clasificación, racha y estrés. | US21, US22 (lógica de dominio relacionada). | Implementado antes del Sprint 2; sin resultado de ejecución adjunto. |
 | Unit | [`ChatUseCasesTest.kt`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/blob/develop/app/src/test/java/com/cognitech/mindflow/application/ChatUseCasesTest.kt) (Android Kotlin) | Dos métodos `@Test`: respuesta y bienvenida del asistente. | Regresión de chat anterior; no US priorizada del Sprint 2. | Implementado antes del Sprint 2; sin resultado de ejecución adjunto. |
-| Widget | [`test/widget_test.dart`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/blob/develop/test/widget_test.dart) (Flutter) | Un `testWidgets`: inicia `MindFlowApp` y espera un `CircularProgressIndicator` mientras se resuelve la sesión. | Infraestructura transversal; no valida por sí solo una US priorizada. | Implementado en el scaffold de Flutter. Ejecutado el 12/11/2026: 1 de 1 prueba aprobada (Tabla 96). |
+| Widget | [`test/widget_test.dart`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/blob/develop/test/widget_test.dart) (Flutter) | Un `testWidgets`: inicia `MindFlowApp` y espera un `CircularProgressIndicator` mientras se resuelve la sesión. | Infraestructura transversal; no valida por sí solo una US priorizada. | Implementado en el scaffold de Flutter. Ejecutado el 12/11/2026: 1 de 1 prueba aprobada (Tabla 97). |
 | Integration | Backend + cliente Android Kotlin / cliente Flutter + MySQL | Autenticación, PIN, perfil, diario, hábitos, analíticas y soporte contra servicios reales. | US04, US05, US07, US16, US17, US21, US22, US31, US37. | No se identificó una suite automatizada ni resultados versionados. |
 | Acceptance | Archivos `.feature` en [`gherkin/`](gherkin/) | Escenarios BDD en inglés. | Nueve US del Sprint 2. | Especificaciones propuestas; no hay *step definitions* ni ejecución acreditada. |
 
-**Tabla 94. Gherkin — Trazabilidad de especificaciones de aceptación.**
+**Tabla 95. Gherkin — Trazabilidad de especificaciones de aceptación.**
 
 | User Story | Archivo `.feature` propuesto | Estado |
 |---|---|---|
@@ -4910,7 +4972,7 @@ La revisión de `develop` separa pruebas implementadas de especificaciones propu
 | US31 | [`gherkin/analytics.feature`](gherkin/analytics.feature) | Proposed; not executed. |
 | US37 | [`gherkin/support.feature`](gherkin/support.feature) | Proposed; not executed. |
 
-**Tabla 95. Testing Commits.**
+**Tabla 96. Testing Commits.**
 
 | Repository | Branch | Commit Id | Message | Body | Date |
 |---|---|---|---|---|---|
@@ -4918,7 +4980,7 @@ La revisión de `develop` separa pruebas implementadas de especificaciones propu
 | `mindflow-frontend` | `develop` | [`7bbe3caf8b7b`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-frontend/commit/7bbe3caf8b7b53c2267d700776c882b922ff64a0) | `refactor(chat): route AI chat through application and domain layers` | Sin cuerpo. El diff añade `ChatUseCasesTest.kt`. | 2026-10-02 23:23:22 UTC |
 | `mindflow-mobile-flutter` | `develop` | [`6e285faab169`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter/commit/6e285faab169bea11a2104356fd98f9cf9271be9) | `Scaffold Flutter project: core infra, auth flow, and Today screen wired to the real backend` | El cuerpo original declara `Project scaffold (flutter create)`; el diff introduce `test/widget_test.dart`. | 2026-11-04 00:08:17 UTC |
 
-**Tabla 96. Testing Suite — Ejecución del Widget Test de Flutter.**
+**Tabla 97. Testing Suite — Ejecución del Widget Test de Flutter.**
 
 | Campo | Valor |
 |---|---|
@@ -4929,11 +4991,11 @@ La revisión de `develop` separa pruebas implementadas de especificaciones propu
 | Prueba ejecutada | `test/widget_test.dart`: *App boots and shows a loading state while resolving the session* |
 | Resultado | PASS: 1 prueba ejecutada, 1 aprobada, 0 fallidas (`All tests passed!`) |
 
-El único resultado informado como PASS es el del Widget Test de Flutter de la Tabla 96, que valida el arranque de la aplicación y no cubre por sí solo ninguna User Story priorizada. Las pruebas unitarias de Android Kotlin, las pruebas de integración y las especificaciones Gherkin (que no tienen *step definitions*) no tienen una ejecución acreditada en esta revisión.
+El único resultado informado como PASS es el del Widget Test de Flutter de la Tabla 97, que valida el arranque de la aplicación y no cubre por sí solo ninguna User Story priorizada. Las pruebas unitarias de Android Kotlin, las pruebas de integración y las especificaciones Gherkin (que no tienen *step definitions*) no tienen una ejecución acreditada en esta revisión.
 
 #### 4.2.2.6. Execution Evidence for Sprint Review
 
-En el Sprint 2 el equipo construyó la Mobile Application en **Flutter (Dart)** (Google, s. f.-a) en el repositorio [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter), conectada desde el inicio a los Web Services desplegados en Railway (sección 4.2.2.8). La aplicación Android en Kotlin del Sprint 1 se mantiene en su repositorio y en este Sprint solo cambió su URL base hacia el nuevo servicio (`ac85aede7a5b`, Tabla 92).
+En el Sprint 2 el equipo construyó la Mobile Application en **Flutter (Dart)** (Google, s. f.-a) en el repositorio [`mindflow-mobile-flutter`](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-mobile-flutter), conectada desde el inicio a los Web Services desplegados en Railway (sección 4.2.2.8). La aplicación Android en Kotlin del Sprint 1 se mantiene en su repositorio y en este Sprint solo cambió su URL base hacia el nuevo servicio (`ac85aede7a5b`, Tabla 93).
 
 Logros principales del Sprint:
 
@@ -4947,7 +5009,7 @@ Logros principales del Sprint:
 
 ##### Vistas implementadas
 
-**Tabla 97. Execution Evidence for Sprint Review — Vistas implementadas en la Mobile Application (Flutter).**
+**Tabla 98. Execution Evidence for Sprint Review — Vistas implementadas en la Mobile Application (Flutter).**
 
 | Vista | Funcionalidad implementada | User Stories | Conexión con el backend |
 |---|---|---|---|
@@ -4966,9 +5028,9 @@ Logros principales del Sprint:
 
 ##### Trazabilidad con las User Stories del Sprint
 
-**Tabla 98. Execution Evidence for Sprint Review — Trazabilidad de las User Stories del Sprint 2.**
+**Tabla 99. Execution Evidence for Sprint Review — Trazabilidad de las User Stories del Sprint 2.**
 
-| User Story | Vista | Tareas del Sprint Backlog (Tabla 91) | Commit de implementación (Tabla 92) | Captura |
+| User Story | Vista | Tareas del Sprint Backlog (Tabla 92) | Commit de implementación (Tabla 93) | Captura |
 |---|---|---|---|---|
 | US04 Bloqueo mediante PIN | Bloqueo por PIN y Ajustes | T08, T09 | `766784eacf80`, `fab69a3854bf` | Figura 157 |
 | US05 Perfil de usuario | Ajustes | T10 | `fab69a3854bf` | — |
@@ -5016,7 +5078,7 @@ Las capturas corresponden a la versión de la aplicación instalada en un dispos
 
 ##### Video de navegación
 
-Este video de navegación de la Mobile Application en Flutter recorre los flujos principales implementados en el Sprint 2: sesión y bloqueo por PIN, Diario, Hábitos, Análisis, Soporte, Ajustes y Notificaciones (Tabla 97). El video solo muestra la aplicación móvil; no incluye el Landing Page.
+Este video de navegación de la Mobile Application en Flutter recorre los flujos principales implementados en el Sprint 2: sesión y bloqueo por PIN, Diario, Hábitos, Análisis, Soporte, Ajustes y Notificaciones (Tabla 98). El video solo muestra la aplicación móvil; no incluye el Landing Page.
 
 - **Nombre del archivo:** `upc-pre-202620-1acc0238-4950-mindflow-productnavigation-av2.mp4`
 - **URL:** [Ver video](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202413169_upc_edu_pe/IQBs-3JhQVXqTpONY1WGX7iEAcGlF81x-48zT5IIqfPRPPg?e=kMNiS3&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
@@ -5031,9 +5093,9 @@ Este video de navegación de la Mobile Application en Flutter recorre los flujos
 
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
-Los Web Services no registraron commits en `develop` durante el Sprint 2 (Tabla 92). Lo que cambió fue su despliegue: el backend se publicó en un nuevo servicio de Railway (sección 4.2.2.8), por lo que la documentación **OpenAPI (Swagger)** se verificó nuevamente en esa URL. El 12/11/2026 la especificación desplegada respondió `200`, declara **70 operaciones sobre 49 rutas** (69 endpoints de 12 controladores, más `/health`), el mismo inventario que documenta la sección 4.2.1.7, y `GET /health` respondió `{ "status": "ok", "database": "connected" }`.
+Los Web Services no registraron commits en `develop` durante el Sprint 2 (Tabla 93). Lo que cambió fue su despliegue: el backend se publicó en un nuevo servicio de Railway (sección 4.2.2.8), por lo que la documentación **OpenAPI (Swagger)** se verificó nuevamente en esa URL. El 12/11/2026 la especificación desplegada respondió `200`, declara **70 operaciones sobre 49 rutas** (69 endpoints de 12 controladores, más `/health`), el mismo inventario que documenta la sección 4.2.1.7, y `GET /health` respondió `{ "status": "ok", "database": "connected" }`.
 
-Esta sección documenta los endpoints que la Mobile Application en Flutter consume para las User Stories del Sprint 2. El detalle de los demás endpoints se mantiene en las Tablas 77 a 85.
+Esta sección documenta los endpoints que la Mobile Application en Flutter consume para las User Stories del Sprint 2. El detalle de los demás endpoints se mantiene en las Tablas 78 a 86.
 
 **Repositorio de Web Services:** [https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-backend) (rama `develop`)
 
@@ -5046,26 +5108,26 @@ Esta sección documenta los endpoints que la Mobile Application en Flutter consu
 
 ##### Inventario de endpoints y uso desde la aplicación
 
-**Tabla 99. Services Documentation Evidence for Sprint Review — Endpoints documentados y consumidos por la Mobile Application (Flutter).**
+**Tabla 100. Services Documentation Evidence for Sprint Review — Endpoints documentados y consumidos por la Mobile Application (Flutter).**
 
 | Grupo (Tablas del Sprint 1) | Controladores | Endpoints documentados | Consumidos por Flutter |
 |---|---|---|---|
-| IAM: usuarios y autenticación (Tabla 77) | `Users` | 12 | 11 |
-| Journal: diario emocional (Tabla 78) | `Journal` | 13 | 5 |
-| AI Assistant: chat y valoración (Tabla 79) | `Chat`, `AiFeedback` | 8 | 8 |
-| Habits & Wellness (Tabla 80) | `Habits`, `HabitLogs`, `Wellness`, `WellnessExercises` | 19 | 8 |
-| Analytics & Reporting (Tabla 81) | `Analytics` | 3 | 3 |
-| Notifications (Tabla 82) | `Notifications` | 4 | 4 |
-| Subscriptions (Tabla 83) | `Subscriptions` | 5 | 3 |
-| Support (Tabla 84) | `SupportTickets` | 5 | 4 |
-| Health check (Tabla 85) | `MindFlow.Platform` | 1 | 0 |
+| IAM: usuarios y autenticación (Tabla 78) | `Users` | 12 | 11 |
+| Journal: diario emocional (Tabla 79) | `Journal` | 13 | 5 |
+| AI Assistant: chat y valoración (Tabla 80) | `Chat`, `AiFeedback` | 8 | 8 |
+| Habits & Wellness (Tabla 81) | `Habits`, `HabitLogs`, `Wellness`, `WellnessExercises` | 19 | 8 |
+| Analytics & Reporting (Tabla 82) | `Analytics` | 3 | 3 |
+| Notifications (Tabla 83) | `Notifications` | 4 | 4 |
+| Subscriptions (Tabla 84) | `Subscriptions` | 5 | 3 |
+| Support (Tabla 85) | `SupportTickets` | 5 | 4 |
+| Health check (Tabla 86) | `MindFlow.Platform` | 1 | 0 |
 | **Total** | **12 controladores y `/health`** | **70** | **46** |
 
 Los 46 endpoints que consume la aplicación figuran en la especificación desplegada; se verificó cada ruta y verbo contra el código de `mindflow-mobile-flutter` en `develop`.
 
 ##### Endpoints de las User Stories del Sprint 2
 
-**Tabla 100. Services Documentation Evidence for Sprint Review — Cuenta y seguridad (US04, US05, US07).**
+**Tabla 101. Services Documentation Evidence for Sprint Review — Cuenta y seguridad (US04, US05, US07).**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -5077,7 +5139,7 @@ Los 46 endpoints que consume la aplicación figuran en la especificación desple
 | PUT | `/api/v1/users/profile` | Body: `name`, `occupation` | `200` con el perfil actualizado (US05). |
 | DELETE | `/api/v1/users` | — | `204` al eliminar la cuenta del usuario autenticado (US07). |
 
-**Tabla 101. Services Documentation Evidence for Sprint Review — Diario (US16, US17).**
+**Tabla 102. Services Documentation Evidence for Sprint Review — Diario (US16, US17).**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -5087,7 +5149,7 @@ Los 46 endpoints que consume la aplicación figuran en la especificación desple
 | PUT | `/api/v1/journal/entries/{id}` | Path: `id`. Body: `title`, `content`, `sentiment`, `category` | `200` con la entrada actualizada. `404` si no existe. |
 | DELETE | `/api/v1/journal/entries/{id}` | Path: `id` | `200` al eliminarla. `404` si no existe. |
 
-**Tabla 102. Services Documentation Evidence for Sprint Review — Hábitos (US21, US22).**
+**Tabla 103. Services Documentation Evidence for Sprint Review — Hábitos (US21, US22).**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -5099,7 +5161,7 @@ Los 46 endpoints que consume la aplicación figuran en la especificación desple
 | DELETE | `/api/v1/habit-logs/{id}` | Path: `id` | Elimina el registro; la aplicación lo usa para desmarcar el hábito del día. |
 | POST | `/api/v1/habits/suggestions` | — | `200` con hasta 3 hábitos sugeridos por la IA según el nivel de estrés. |
 
-**Tabla 103. Services Documentation Evidence for Sprint Review — Analíticas y Soporte (US31, US37).**
+**Tabla 104. Services Documentation Evidence for Sprint Review — Analíticas y Soporte (US31, US37).**
 
 | Verbo | Endpoint | Parámetros / Body | Response |
 |---|---|---|---|
@@ -5111,7 +5173,7 @@ Los 46 endpoints que consume la aplicación figuran en la especificación desple
 | GET | `/api/v1/support/tickets/{id}` | Path: `id` | `200` con el ticket y su hilo de mensajes. `404` si no existe o no le pertenece. |
 | POST | `/api/v1/support/tickets/{id}/messages` | Path: `id`. Body: `message` | `204` al agregar el mensaje. Si responde el personal de soporte, el usuario recibe una notificación. |
 
-Ejemplo del formulario de soporte de la Figura 158, tal como lo envía la aplicación (Tabla 103):
+Ejemplo del formulario de soporte de la Figura 158, tal como lo envía la aplicación (Tabla 104):
 
 ```http
 POST /api/v1/support/tickets
@@ -5121,7 +5183,7 @@ Content-Type: application/json
 { "subject": "No puedo cambiar mi PIN", "category": "general", "message": "Al desactivar el PIN la aplicación vuelve a pedirlo." }
 ```
 
-Ejemplo de verificación del PIN de la Figura 157 (Tabla 100):
+Ejemplo de verificación del PIN de la Figura 157 (Tabla 101):
 
 ```http
 POST /api/v1/users/pin/verify
@@ -5151,19 +5213,19 @@ Las capturas se tomaron el 12/11/2026 en la documentación Swagger desplegada en
 
 *Figura 161. Esquema Bearer (JWT) autorizado en Swagger UI, con el valor del token oculto.*
 
-**3. Creación de una entrada del diario.** `POST /api/v1/journal/entries` recibió una entrada de muestra (`date` 2026-11-12, `title` «Un dia tranquilo», `sentiment` `positive`, `category` `daily`) y respondió `200` con la entrada guardada (`id` 1, `user_id` 1), el campo `ai_response` con el mensaje de MindFlow AI, `tags` y `media` vacíos y `deleted_at` nulo. Este endpoint se documenta en la Tabla 101 (diario, US16 y US17) y su ejemplo en la Tabla 78 (Figura 162).
+**3. Creación de una entrada del diario.** `POST /api/v1/journal/entries` recibió una entrada de muestra (`date` 2026-11-12, `title` «Un dia tranquilo», `sentiment` `positive`, `category` `daily`) y respondió `200` con la entrada guardada (`id` 1, `user_id` 1), el campo `ai_response` con el mensaje de MindFlow AI, `tags` y `media` vacíos y `deleted_at` nulo. Este endpoint se documenta en la Tabla 102 (diario, US16 y US17) y su ejemplo en la Tabla 79 (Figura 162).
 
 <img src="assets/img/swagger/Swagger_03_POST_Journal_Entries_AV2.jpg" alt="POST journal entries con respuesta 200 en Swagger" width="700"/>
 
 *Figura 162. `POST /api/v1/journal/entries` con datos de muestra y respuesta `200`, que incluye la respuesta de MindFlow AI.*
 
-**4. Consulta de las entradas.** `GET /api/v1/journal/entries` respondió `200` con la lista del usuario, que contiene la entrada creada en el paso anterior. Es el endpoint que alimenta la lista, la búsqueda y el calendario del Diario (Tabla 101, US16 y US17) (Figura 163).
+**4. Consulta de las entradas.** `GET /api/v1/journal/entries` respondió `200` con la lista del usuario, que contiene la entrada creada en el paso anterior. Es el endpoint que alimenta la lista, la búsqueda y el calendario del Diario (Tabla 102, US16 y US17) (Figura 163).
 
 <img src="assets/img/swagger/Swagger_04_GET_Journal_Entries_AV2.jpg" alt="GET journal entries con respuesta 200 en Swagger" width="700"/>
 
 *Figura 163. `GET /api/v1/journal/entries` con respuesta `200` y la entrada creada.*
 
-**5. Resumen de rachas de hábitos.** `GET /api/v1/habits/streak-summary` respondió `200` con tres hábitos de muestra, identificados del 1 al 3: «Caminata de 15 minutos» con racha 1, y «Escritura libre de 5 minutos» y «Planificación semanal de objetivos», ambos con racha 0. Los tres figuran con `status` `pending`. Este endpoint se documenta en la Tabla 80 (US28) y complementa los endpoints de hábitos de la Tabla 102 (US21 y US22) (Figura 164).
+**5. Resumen de rachas de hábitos.** `GET /api/v1/habits/streak-summary` respondió `200` con tres hábitos de muestra, identificados del 1 al 3: «Caminata de 15 minutos» con racha 1, y «Escritura libre de 5 minutos» y «Planificación semanal de objetivos», ambos con racha 0. Los tres figuran con `status` `pending`. Este endpoint se documenta en la Tabla 81 (US28) y complementa los endpoints de hábitos de la Tabla 103 (US21 y US22) (Figura 164).
 
 <img src="assets/img/swagger/Swagger_05_GET_Habits_Streak_Summary_AV2.jpg" alt="GET habits streak-summary con respuesta 200 en Swagger" width="700"/>
 
@@ -5173,7 +5235,7 @@ Las capturas se tomaron el 12/11/2026 en la documentación Swagger desplegada en
 
 ##### Verificación de la documentación desplegada
 
-**Tabla 104. Services Documentation Evidence for Sprint Review — Verificación de la documentación en Railway (12/11/2026).**
+**Tabla 105. Services Documentation Evidence for Sprint Review — Verificación de la documentación en Railway (12/11/2026).**
 
 | Verificación | Resultado |
 |---|---|
@@ -5181,7 +5243,7 @@ Las capturas se tomaron el 12/11/2026 en la documentación Swagger desplegada en
 | `GET /health` | `200` con `{ "status": "ok", "database": "connected" }`. |
 | Operaciones de la especificación frente al Sprint 1 | 69 endpoints de 12 controladores más `/health`, igual que la sección 4.2.1.7. |
 | Endpoints que consume `mindflow-mobile-flutter` | 46 de 46 presentes en la especificación. |
-| Commits del backend en `develop` durante el Sprint 2 | Ninguno (Tabla 92); el último es del 08/10/2026. |
+| Commits del backend en `develop` durante el Sprint 2 | Ninguno (Tabla 93); el último es del 08/10/2026. |
 
 #### 4.2.2.8. Software Deployment Evidence for Sprint Review
 
@@ -5213,9 +5275,9 @@ El backend se desplegó en un nuevo servicio `mindflow-backend` de Railway, cone
 
 #### 4.2.2.9. Team Collaboration Insights during Sprint
 
-Durante el Sprint 2 el equipo mantuvo el flujo GitFlow sobre la rama `develop` de los repositorios de los productos. En la implementación de la Mobile Application en Flutter, las funcionalidades principales se integraron mediante Pull Requests desde ramas `feature/*` (PR n.º 1 a 11); los ajustes posteriores a ese conjunto y los cambios de los demás repositorios se integraron en `develop` sin Pull Request. Los mensajes de commit siguen la convención Conventional Commits en `mindflow-frontend` y son descriptivos, en inglés, en `mindflow-mobile-flutter`. Los datos provienen de los analíticos de colaboración de GitHub (*Insights → Contributors*) y se verificaron con el historial de la rama `develop` de cada repositorio (`git log --no-merges`) entre el Sprint Planning 2 (12/10/2026) y el 12/11/2026 (UTC), por lo que este análisis incluye commits posteriores al corte del 10/11/2026 de la Tabla 92. No se contabilizan los commits de merge.
+Durante el Sprint 2 el equipo mantuvo el flujo GitFlow sobre la rama `develop` de los repositorios de los productos. En la implementación de la Mobile Application en Flutter, las funcionalidades principales se integraron mediante Pull Requests desde ramas `feature/*` (PR n.º 1 a 11); los ajustes posteriores a ese conjunto y los cambios de los demás repositorios se integraron en `develop` sin Pull Request. Los mensajes de commit siguen la convención Conventional Commits en `mindflow-frontend` y son descriptivos, en inglés, en `mindflow-mobile-flutter`. Los datos provienen de los analíticos de colaboración de GitHub (*Insights → Contributors*) y se verificaron con el historial de la rama `develop` de cada repositorio (`git log --no-merges`) entre el Sprint Planning 2 (12/10/2026) y el 12/11/2026 (UTC), por lo que este análisis incluye commits posteriores al corte del 10/11/2026 de la Tabla 93. No se contabilizan los commits de merge.
 
-**Tabla 105. Team Collaboration Insights — Commits por integrante en el Sprint 2.**
+**Tabla 106. Team Collaboration Insights — Commits por integrante en el Sprint 2.**
 
 | Team Member | GitHub Username | Landing Page | Web Services | Mobile Application (Android Kotlin) | Mobile Application (Flutter) | Informe (`mindflow-report`) |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|
@@ -5262,6 +5324,59 @@ En el repositorio [mindflow-backend](https://github.com/upc-pre-202620-1acc0238-
 En el repositorio [mindflow-report](https://github.com/upc-pre-202620-1acc0238-4950-CogniTech/mindflow-report) (Figura 7), el trabajo del Sprint 2 se distribuyó así: Cabrera Sotelo redactó el Sprint Planning 2, la matriz de líderes y colaboradores, el Sprint Backlog 2 y las acciones de Student Outcome del Sprint (06/11/2026); Díaz De la Cruz completó la evidencia del Sprint 2 con la aplicación Flutter y las especificaciones Gherkin en inglés (10/11/2026); Limache Coronel agregó la evidencia de despliegue del Sprint 2 (11/11/2026) y actualizó las conclusiones y recomendaciones (12/11/2026); y Güere Calero incorporó los Términos y Condiciones como anexo, los bloques de Student Outcome de la tercera entrega, la actualización del Registro de Versiones, la bibliografía y las correcciones de diagramas y del backend (15/10/2026).
 
 
+### 4.2.3. Sprint 3
+
+En el tercer Sprint el equipo completa el Product Backlog sobre la aplicación móvil oficial del producto, la implementada en Flutter (`mindflow-mobile-flutter`), y deja lista la versión final de la entrega TB2. Las User Stories del Sprint son las que, al contrastar el código de los repositorios con el Product Backlog (Tabla 14), todavía no estaban implementadas en la aplicación Flutter. Esto incluye:
+
+- Diario: etiquetas contextuales (US14), adjuntos multimedia (US15) y sincronización de las entradas sin conexión, con almacenamiento local en el dispositivo (US30).
+- Analíticas con IA: nube de palabras (US32) y resumen semanal generado por IA (US18), que requiere un nuevo endpoint en los Web Services.
+- Bienestar y cuenta: recordatorios de hidratación y de hábitos con horario definido por el usuario (US27) y acceso con cuenta de Google en la aplicación Flutter (US01).
+- Calidad: pruebas automatizadas de la aplicación y de los Web Services, ejecutadas y documentadas con sus resultados (US38).
+- Distribución: versión final de la aplicación distribuida con Firebase App Distribution mediante un flujo de integración continua.
+
+**Aprendizaje autónomo: Firebase App Distribution con integración continua.** La tecnología que el equipo investigó, evaluó e integró por su cuenta, fuera de lo visto en clase, es Firebase (Google, s. f.-c), en particular su servicio App Distribution, combinada con GitHub Actions (GitHub, s. f.). Se eligió para que cada cambio integrado en la rama `develop` de `mindflow-mobile-flutter` genere, sin pasos manuales, un APK firmado que llega a los colaboradores, y porque la entrega final exige que la aplicación esté desplegada en Firebase App Distribution u otro servicio similar. Compartir el APK a mano habría obligado a compilarlo en la máquina de quien lo entrega y sin dejar registro de qué commit contiene cada versión.
+
+El flujo `.github/workflows/firebase-distribute.yml` se ejecuta con cada `push` a `develop` y realiza estos pasos: descarga el código, instala JDK 17 y Flutter 3.47.9, resuelve las dependencias, reconstruye el *keystore* de firma a partir de un secreto del repositorio, compila el APK de *release* usando el número de ejecución del flujo como número de compilación, elimina el *keystore* y envía el APK al grupo de testers `equipo-curso` de Firebase, con el identificador del commit en las notas de la versión. El *keystore*, sus contraseñas y la cuenta de servicio de Firebase se guardan como *secrets* de GitHub y no aparecen en el código. La configuración de despliegue se resume en la sección 4.1.4, y el proyecto de Firebase y el seguimiento de las versiones, en la sección 4.2.2.8.
+
+#### 4.2.3.1. Sprint Planning 3
+
+El Sprint Planning Meeting del Sprint 3 partió de la revisión de lo entregado en el Sprint 2, de las correcciones que siguieron a la revisión de los repositorios del 17/11/2026 y de la comparación del código con el Product Backlog (Tabla 14). A partir de ello el equipo definió el objetivo del Sprint y seleccionó las User Stories que faltaban en la aplicación Flutter (Tabla 108).
+
+**Tabla 107. Sprint 3 — Sprint Planning 3.**
+
+| Sprint # | Sprint 3 |
+|---|---|
+| **Sprint Planning Background** | <img src="assets/img/participants/PlanningMeet2.jpeg" width="300"/> |
+| Date | 2026-11-25 |
+| Time | 03:00 PM |
+| Location | Reunión virtual vía Google Meet |
+| Prepared By | Güere Calero, Fernando Julio |
+| Attendees | Cabrera Sotelo, Camila Celeste / Díaz De la Cruz, Sebastián Gabriel / Güere Calero, Fernando Julio / Jáuregui Cerna, Jean Franco / Limache Coronel, Imanol Fabrizio |
+| Sprint 2 Review Summary | Se entregó la aplicación móvil en Flutter conectada a los Web Services desplegados en un nuevo servicio de Railway, con Diario, Hábitos, Análisis, Soporte, Notificaciones, Chat con la IA, Planes y Ajustes (PIN, perfil y eliminación de cuenta). Las nueve User Stories priorizadas del Sprint quedaron respaldadas por commits en `develop`, las 21 tareas del Sprint Backlog 2 figuran como Done, la aplicación se distribuye a los dispositivos de prueba con Firebase App Distribution y la Landing Page actualizó sus Términos y Condiciones y su Política de Privacidad. Después de la entrega, la revisión de los repositorios (17/11/2026) corrigió en el backend y en Flutter el contrato de hábitos, las validaciones, el manejo de la sesión expirada y la eliminación de la cuenta, e incorporó pruebas automatizadas en ambos. Quedaron sin implementar en Flutter las etiquetas, los adjuntos, la nube de palabras, el resumen semanal con IA, los recordatorios, el acceso con Google y la sincronización sin conexión, y la evidencia de pruebas seguía siendo limitada. |
+| Sprint 2 Retrospective Summary | Con base en la evidencia del Sprint 2, el equipo identificó como aciertos el uso de Pull Requests desde ramas `feature/*` para las funcionalidades principales de la aplicación Flutter (PR n.º 1 a 11) y la distribución automática de cada versión con Firebase App Distribution, que permitió probar los cambios en dispositivos reales. Como oportunidades de mejora identificó que los ajustes posteriores a esos Pull Requests se integraron en `develop` sin revisión, que la ejecución de tareas siguió concentrada en pocos integrantes (Tabla 106) y que las pruebas automatizadas cubrían solo el arranque de la aplicación. Para el Sprint 3 acordó trabajar cada User Story en una rama `feature/*` con Pull Request, repartir entre los cinco integrantes las secciones del informe y las tareas del producto, y ejecutar y documentar las pruebas antes de dar una User Story por cerrada. |
+| **Sprint Goal & User Stories** | |
+| Sprint 3 Goal | Nuestro enfoque está en completar el Product Backlog en la aplicación Flutter oficial: etiquetas y adjuntos en el Diario, sincronización sin conexión, nube de palabras, resumen semanal con IA, recordatorios y acceso con Google, junto con pruebas automatizadas ejecutadas. Creemos que esto entrega a los estudiantes universitarios y a los profesionales jóvenes una aplicación completa que pueden seguir usando aunque no tengan conexión en ese momento. Esto se confirmará cuando las ocho User Stories estén verificadas contra el backend desplegado en un dispositivo físico y la versión final de la aplicación se distribuya al equipo mediante Firebase App Distribution. |
+| Sprint 3 Velocity | 35 |
+| Sum of Story Points | 35 |
+
+La Tabla 108 detalla las User Stories del Sprint. Todas provienen del Product Backlog (Tabla 14) y se presentan en el mismo orden.
+
+**Tabla 108. Sprint 3 — User Stories seleccionadas.**
+
+| Orden en el Product Backlog | User Story Id | Título | Priority | Story Points |
+|---|---|---|---|---|
+| 20 | US01 | Registro con OAuth (Google) | High | 3 |
+| 25 | US30 (T) | Sincronización de datos offline | High | 8 |
+| 26 | US38 (T) | Pruebas automatizadas | High | 5 |
+| 30 | US14 | Etiquetas contextuales | Medium | 2 |
+| 31 | US15 | Adjuntos multimedia | Medium | 5 |
+| 34 | US18 | Resumen semanal mediante IA | Medium | 5 |
+| 40 | US32 | Nube de palabras | Medium | 5 |
+| 50 | US27 | Alerta de hidratación | Low | 2 |
+| — | — | **Total** | — | **35** |
+
+La suma de 35 Story Points coincide con la velocity del Sprint, que continúa la tendencia de los Sprints anteriores (25 en el Sprint 1 y 30 en el Sprint 2). US30 se limita a las entradas del Diario. US20 (Registro de interacciones de IA, 2 Story Points) no entra en este Sprint: es una historia técnica sin efecto visible para el usuario y su inclusión elevaría la suma a 37, por encima de la velocity, por lo que permanece en el Product Backlog.
+
 ## 4.3. Validation Interviews
 
 ### 4.3.1. Diseño de Entrevistas
@@ -5270,14 +5385,14 @@ Las entrevistas de validación buscan conocer cómo usuarios reales de cada segm
  
 #### Segmentos a validar
  
-**Tabla 106. Diseño de Entrevistas — Segmentos a validar.**
+**Tabla 109. Diseño de Entrevistas — Segmentos a validar.**
 
 | Segmento | Perfil | Nº de entrevistas |
 |---|---|---|
 | Segmento A: Estudiantes Universitarios (*Tech-Native Scholars*) | Jóvenes de 18 a 25 años que cursan pregrado en entornos de alta exigencia académica | 3 |
 | Segmento B: Profesionales Jóvenes (*High-Performance Achievers*) | Adultos de 26 a 35 años en consolidación de carrera o mando medio | 3 |
  
-Se invitará a personas que no hayan participado en las entrevistas de descubrimiento de la sección 2.2 (Tabla 106).
+Se invitará a personas que no hayan participado en las entrevistas de descubrimiento de la sección 2.2 (Tabla 109).
  
 #### Elementos de la sesión
  
@@ -5285,7 +5400,7 @@ Se invitará a personas que no hayan participado en las entrevistas de descubrim
 2. **Aplicación móvil Android** (pantallas del Sprint 1).
 #### Flujos de la aplicación validados
  
-**Tabla 107. Diseño de Entrevistas — Flujos de la aplicación validados.**
+**Tabla 110. Diseño de Entrevistas — Flujos de la aplicación validados.**
 
 | Flujo | User Stories |
 |---|---|
@@ -5293,13 +5408,13 @@ Se invitará a personas que no hayan participado en las entrevistas de descubrim
 | Entrada de diario y retroalimentación empática de la IA | US11, US13 |
 | Creación y cumplimiento de hábitos | US21, US22 |
  
-Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprint 1 (Tabla 107).
+Los flujos se ajustarán a las pantallas efectivamente implementadas en el Sprint 1 (Tabla 110).
  
 #### Estructura de la sesión
  
-La estructura de cada sesión de entrevista sigue cuatro etapas (Tabla 108).
+La estructura de cada sesión de entrevista sigue cuatro etapas (Tabla 111).
 
-**Tabla 108. Diseño de Entrevistas — Estructura de la sesión.**
+**Tabla 111. Diseño de Entrevistas — Estructura de la sesión.**
 
 | Etapa | Duración aprox. | Descripción |
 |---|---|---|
@@ -5322,13 +5437,13 @@ La estructura de cada sesión de entrevista sigue cuatro etapas (Tabla 108).
 
 ### 4.3.2. Registro de Entrevistas
 
-A continuación se registran las cinco entrevistas de validación realizadas: tres al Segmento 1 (Tablas 109 a 111) y dos al Segmento 2 (Tablas 112 y 113).
+A continuación se registran las cinco entrevistas de validación realizadas: tres al Segmento 1 (Tablas 112 a 114) y dos al Segmento 2 (Tablas 115 y 116).
 
 #### Segmento 1: Estudiantes Universitarios
 
 ##### Entrevista 1
 
-**Tabla 109. Segmento 1: Estudiantes Universitarios — Entrevista 1.**
+**Tabla 112. Segmento 1: Estudiantes Universitarios — Entrevista 1.**
 
 | Campo | Detalle |
 |------|--------|
@@ -5345,7 +5460,7 @@ A continuación se registran las cinco entrevistas de validación realizadas: tr
 
 ##### Entrevista 2
 
-**Tabla 110. Segmento 1: Estudiantes Universitarios — Entrevista 2.**
+**Tabla 113. Segmento 1: Estudiantes Universitarios — Entrevista 2.**
 
 | Campo | Detalle |
 |------|--------|
@@ -5362,7 +5477,7 @@ A continuación se registran las cinco entrevistas de validación realizadas: tr
 
 ##### Entrevista 3
 
-**Tabla 111. Segmento 1: Estudiantes Universitarios — Entrevista 3.**
+**Tabla 114. Segmento 1: Estudiantes Universitarios — Entrevista 3.**
 
 | Campo | Detalle |
 |------|--------|
@@ -5381,7 +5496,7 @@ A continuación se registran las cinco entrevistas de validación realizadas: tr
 
 ##### Entrevista 1
 
-**Tabla 112. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
+**Tabla 115. Segmento 2: Profesionales Jóvenes — Entrevista 1.**
 
 | Campo | Detalle |
 |------|--------|
@@ -5398,7 +5513,7 @@ A continuación se registran las cinco entrevistas de validación realizadas: tr
 
 ##### Entrevista 2
 
-**Tabla 113. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
+**Tabla 116. Segmento 2: Profesionales Jóvenes — Entrevista 2.**
 
 | Campo | Detalle |
 |------|--------|
@@ -5415,13 +5530,13 @@ A continuación se registran las cinco entrevistas de validación realizadas: tr
 
 ### 4.3.3. Evaluaciones según heurísticas
 
-Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 114).
+Esta sección presenta la evaluación de User Experience de MindFlow a partir de las sesiones de validación descritas en la sección 4.3.2, siguiendo el formato del Anexo E del enunciado del trabajo final. La evaluación considera tres ejes: **Usabilidad** (las 10 heurísticas de Nielsen), **Inclusive Design** (principios de Inclusive Design Principles) y **Information Architecture** (findable, usable, credible). Los hallazgos provienen de dos fuentes, que se indican en cada problema: lo expresado por los entrevistados durante la sesión y la revisión que realizó el equipo auditor sobre la Landing Page y la aplicación móvil Android, contrastada con el código fuente y con las capturas de pantalla de la aplicación (Tabla 117).
 
 #### UX Heuristics & Principles Evaluation
 
 **Usability - Inclusive Design - Information Architecture**
 
-**Tabla 114. Evaluación según Heurísticas — Datos generales de la evaluación.**
+**Tabla 117. Evaluación según Heurísticas — Datos generales de la evaluación.**
 
 | Campo | Detalle |
 |---|---|
@@ -5457,9 +5572,9 @@ No están incluidas en esta versión de la evaluación las siguientes tareas:
 
 #### Escala de severidad
 
-Los problemas se puntúan con la siguiente escala (Tabla 115).
+Los problemas se puntúan con la siguiente escala (Tabla 118).
 
-**Tabla 115. Evaluación según Heurísticas — Escala de severidad.**
+**Tabla 118. Evaluación según Heurísticas — Escala de severidad.**
 
 | Nivel | Descripción |
 |---|---|
@@ -5470,9 +5585,9 @@ Los problemas se puntúan con la siguiente escala (Tabla 115).
 
 #### Tabla resumen
 
-La Tabla 116 resume los 16 problemas identificados, ordenados según su numeración y severidad.
+La Tabla 119 resume los 16 problemas identificados, ordenados según su numeración y severidad.
 
-**Tabla 116. Evaluación según Heurísticas — Resumen de problemas identificados.**
+**Tabla 119. Evaluación según Heurísticas — Resumen de problemas identificados.**
 
 | # | Problema | Severidad | Heurística/Principio violada(o) |
 |---|---|---|---|
@@ -5833,9 +5948,9 @@ Incorporar en el roadmap el registro por dictado de voz, la sincronización de h
 
 #### Resumen de hallazgos
 
-La distribución de los problemas según su severidad (Tabla 117) y según el eje evaluado (Tabla 118) se muestra a continuación.
+La distribución de los problemas según su severidad (Tabla 120) y según el eje evaluado (Tabla 121) se muestra a continuación.
 
-**Tabla 117. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
+**Tabla 120. Evaluación según Heurísticas — Resumen de hallazgos por severidad.**
 
 | Severidad | Cantidad | Problemas |
 |---|---|---|
@@ -5844,7 +5959,7 @@ La distribución de los problemas según su severidad (Tabla 117) y según el ej
 | Severidad 3 | 4 | #1, #2, #3, #4 |
 | Severidad 4 | 0 | — |
 
-**Tabla 118. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
+**Tabla 121. Evaluación según Heurísticas — Resumen de hallazgos por eje evaluado.**
 
 | Eje evaluado | Problemas |
 |---|---|
@@ -5867,20 +5982,23 @@ Los resultados indican que MindFlow no presenta problemas muy graves (severidad 
 1. El modelado estratégico de los 8 Bounded Contexts (IAM, Journal, AI Assistant, Habits & Wellness, Analytics & Reporting, Notifications, Subscriptions y Support) se validó y refinó entre la primera entrega (AV1) y la segunda (TB1): los límites definidos mediante EventStorming y Candidate Context Discovery (sección 2.5.1) se sostuvieron, y el equipo profundizó su documentación con los Domain Message Flows (sección 2.5.1.2), los Bounded Context Canvases bajo el estándar DDD Crew (v5) (sección 2.5.1.3), el Context Mapping (sección 2.5.2) y el Aggregate Design Canvas de los agregados principales de cada contexto (sección 2.6). Este refinamiento alineó el diseño estratégico con lo efectivamente construido en el backend del Sprint 1 (sección 4.2.1).
 2. El Style Guide, la Information Architecture y los wireframes/mock-ups del Capítulo III tradujeron de forma consistente los hallazgos del Lean UX Process (Capítulo I) en una experiencia concreta: los 8 User Flows diseñados para la Mobile Application cubren el recorrido completo de los dos User Personas (Jimena y Nordie) y están directamente trazados a las User Stories priorizadas en el Product Backlog.
 3. La evidencia del Sprint 1 (sección 4.2.1) muestra que el equipo construyó, en paralelo, el backend de los 8 Bounded Contexts —documentado con Swagger y desplegado en Railway (secciones 4.2.1.7 y 4.2.1.8)—, publicó el Landing Page en GitHub Pages (sección 4.1.4) y construyó las ocho vistas de la aplicación móvil que cubren el recorrido completo del usuario, desde el acceso hasta la gestión de la suscripción (sección 4.2.1.6).
-4. En el Sprint 2 (sección 4.2.2) el desarrollo de la Mobile Application se concentró en una nueva implementación en Flutter (`mindflow-mobile-flutter`), cuyos commits en `develop` aportan evidencia de las nueve User Stories priorizadas sobre los Web Services reales: bloqueo por PIN, perfil y eliminación de cuenta (US04, US05 y US07), búsqueda y calendario del diario (US16 y US17), creación y cumplimiento de hábitos (US21 y US22), analíticas (US31) y soporte (US37) (sección 4.2.2.4). El backend se desplegó en un nuevo servicio de Railway desde la rama `develop`, y la aplicación se registró en Firebase, donde su versión 1.0.0 figura con el 100 % de usuarios sin fallos durante las pruebas (sección 4.2.2.8). Sin embargo, la evidencia de pruebas todavía es insuficiente: solo existe un Widget Test del scaffold de Flutter y las especificaciones Gherkin no tienen *step definitions* ni ejecución, por lo que estas User Stories aún no pueden darse por cerradas con evidencia verificable (sección 4.2.2.5).
-5. Las cinco entrevistas de validación realizadas (tres del Segmento 1: Valeria, Cristian y Joaquín; dos del Segmento 2: Juan y Aldo) confirman la propuesta de valor de MindFlow en ambos segmentos —desahogo rápido, intervenciones breves de bienestar y pausa de hábitos sin culpa en época de exámenes para estudiantes; cierre de jornada laboral y trazabilidad de patrones de estrés para profesionales— y coinciden en una misma preocupación de confianza: la privacidad y el tratamiento de los datos emocionales registrados, tanto en el cifrado local como en su paso por APIs externas de IA. Además, los estudiantes coinciden en que la aplicación debe ser rápida y sencilla, y en que las funciones principales deben mantenerse en el plan gratuito. Las cinco entrevistas quedaron registradas en el video App Validation, de 52 minutos y 39 segundos, cuya secuencia se detalla en la sección Video App Validation.
-6. La evaluación heurística (sección 4.3.3) identificó 16 problemas de Usabilidad, Inclusive Design e Information Architecture, de los cuales 4 son de severidad 3 ("problema mayor", Tabla 116): la falta de aclaración de que la IA es un asistente de reflexión y no un servicio clínico (problema #1), la falta de información sobre cómo se tratan los textos del diario al ser procesados por servicios externos de IA (problema #2), el contraste insuficiente de los botones principales (problema #3) y la ausencia de texto alternativo en las imágenes de la Landing Page (problema #4). Los problemas #1 y #2 coinciden directamente con la preocupación por privacidad expresada en las entrevistas de validación (conclusión 5), confirmando desde dos fuentes independientes que la confianza del usuario en el manejo de sus datos emocionales es un punto crítico en la experiencia de MindFlow.
-7. Durante el Sprint 2 el equipo avanzó de forma articulada en la entrega: los analíticos de colaboración de GitHub (sección 4.2.2.9, Tabla 105) registran el desarrollo de la Mobile Application en Flutter y los ajustes de los demás repositorios de producto, y la planificación, la evidencia y las conclusiones del Sprint se documentaron en el informe con aportes de varios integrantes. Como ya señaló la retrospectiva del Sprint 1, existe espacio para distribuir de forma más equilibrada la ejecución de tareas en los repositorios de producto, de acuerdo con la matriz de líderes y colaboradores (Tabla 90), considerando además que los commits no recogen todo el aporte del equipo (diseño, entrevistas, grabación de videos y revisión del informe).
+4. En el Sprint 2 (sección 4.2.2) el desarrollo de la Mobile Application se concentró en una nueva implementación en Flutter (`mindflow-mobile-flutter`), que desde entonces es la aplicación móvil oficial del producto. Sus commits en `develop` aportan evidencia de las nueve User Stories priorizadas sobre los Web Services reales: bloqueo por PIN, perfil y eliminación de cuenta (US04, US05 y US07), búsqueda y calendario del diario (US16 y US17), creación y cumplimiento de hábitos (US21 y US22), analíticas (US31) y soporte (US37) (sección 4.2.2.4). El backend se desplegó en un nuevo servicio de Railway desde la rama `develop`, y la aplicación se registró en Firebase, donde su versión 1.0.0 figura con el 100 % de usuarios sin fallos durante las pruebas (sección 4.2.2.8). La evidencia de pruebas del Sprint 2 fue limitada —un Widget Test de arranque y especificaciones Gherkin sin *step definitions* ni ejecución (sección 4.2.2.5)—, por lo que las pruebas automatizadas (US38) se incluyeron en el Sprint 3.
+5. La revisión de los tres repositorios posterior al Sprint 2 (17/11/2026) corrigió en el backend y en la aplicación Flutter el contrato de hábitos, las validaciones, el tratamiento de la sesión expirada y la eliminación de la cuenta, e incorporó pruebas automatizadas en ambos. Al contrastar el código con el Product Backlog (Tabla 14), el equipo planificó el Sprint 3 con las ocho User Stories que aún no estaban implementadas en la aplicación Flutter, 35 Story Points en total (sección 4.2.3.1). Como tecnología de aprendizaje autónomo, el equipo integró Firebase App Distribution con GitHub Actions, de modo que cada cambio en `develop` genera un APK firmado que se distribuye a los testers (secciones 4.1.4 y 4.2.3).
+6. Las cinco entrevistas de validación realizadas (tres del Segmento 1: Valeria, Cristian y Joaquín; dos del Segmento 2: Juan y Aldo) confirman la propuesta de valor de MindFlow en ambos segmentos —desahogo rápido, intervenciones breves de bienestar y pausa de hábitos sin culpa en época de exámenes para estudiantes; cierre de jornada laboral y trazabilidad de patrones de estrés para profesionales— y coinciden en una misma preocupación de confianza: la privacidad y el tratamiento de los datos emocionales registrados, tanto en el cifrado local como en su paso por APIs externas de IA. Además, los estudiantes coinciden en que la aplicación debe ser rápida y sencilla, y en que las funciones principales deben mantenerse en el plan gratuito. Las cinco entrevistas quedaron registradas en el video App Validation, de 52 minutos y 39 segundos, cuya secuencia se detalla en la sección Video App Validation.
+7. Frente a los Problem Statements, los supuestos y las hipótesis del Lean UX Process (sección 1.2.2), la evidencia disponible permite concluir lo siguiente. Problem Statement 1 (contención emocional): la entrada de diario con respuesta empática de la IA y el chat con MindFlow AI están implementados sobre el backend, y los entrevistados valoraron el desahogo rápido; sin embargo, el Supuesto de Confianza se cumple solo de forma condicionada, porque aceptan compartir información vulnerable siempre que el producto aclare que no reemplaza a un profesional clínico y explique cómo se tratan sus textos (problemas #1 y #2 de la evaluación heurística). Problem Statement 2 (adherencia a hábitos): los hábitos, las sugerencias de IA y la pausa de hábitos según el nivel de estrés están implementados, y los estudiantes valoraron poder pausar hábitos sin culpa en época de exámenes. Las tres hipótesis, en cambio, se formularon con métricas de uso real que el equipo no pudo medir: la retención semanal superior al 40 % con más de tres sesiones por semana (Hipótesis 1), el 50 % de los usuarios con una alerta de alto estrés que califica la recomendación con 4 o 5 estrellas (Hipótesis 2) y la conversión del 5 % al plan Premium (Hipótesis 3) requieren usuarios activos durante semanas o meses, y la aplicación solo se usó en dispositivos de prueba y con el pago de Stripe en modo de prueba. Por eso las hipótesis no pueden darse por confirmadas ni refutadas todavía: la validación con usuarios respalda la propuesta de valor, pero no sus métricas de éxito.
+8. La evaluación heurística (sección 4.3.3) identificó 16 problemas de Usabilidad, Inclusive Design e Information Architecture, de los cuales 4 son de severidad 3 ("problema mayor", Tabla 119): la falta de aclaración de que la IA es un asistente de reflexión y no un servicio clínico (problema #1), la falta de información sobre cómo se tratan los textos del diario al ser procesados por servicios externos de IA (problema #2), el contraste insuficiente de los botones principales (problema #3) y la ausencia de texto alternativo en las imágenes de la Landing Page (problema #4). Los problemas #1 y #2 coinciden directamente con la preocupación por privacidad expresada en las entrevistas de validación (conclusión 6), confirmando desde dos fuentes independientes que la confianza del usuario en el manejo de sus datos emocionales es un punto crítico en la experiencia de MindFlow. Los problemas #1 y #2 (alcance de la IA y tratamiento de los textos) y #3 (contraste de los botones) se asignaron a las tareas T16 y T17 del Sprint Backlog 2 (Tabla 92). La evaluación se realizó sobre la aplicación Android del Sprint 1, por lo que los problemas restantes (#4 a #16) quedan como oportunidades de mejora que deben revalidarse sobre la aplicación Flutter.
+9. Durante el Sprint 2 el equipo avanzó de forma articulada en la entrega: los analíticos de colaboración de GitHub (sección 4.2.2.9, Tabla 106) registran el desarrollo de la Mobile Application en Flutter y los ajustes de los demás repositorios de producto, y la planificación, la evidencia y las conclusiones del Sprint se documentaron en el informe con aportes de varios integrantes. Como ya señaló la retrospectiva del Sprint 1, existe espacio para distribuir de forma más equilibrada la ejecución de tareas en los repositorios de producto, de acuerdo con la matriz de líderes y colaboradores (Tabla 91), considerando además que los commits no recogen todo el aporte del equipo (diseño, entrevistas, grabación de videos y revisión del informe). Para la entrega TB2 las secciones del informe se repartieron entre los cinco integrantes, cada una en su propia rama de trabajo y con su Pull Request.
 
 **Recomendaciones**
 
-1. Ejecutar y documentar las pruebas de las User Stories del Sprint 2 antes de darlas por cerradas: ampliar los Widget Tests, hoy limitados al arranque de la aplicación (Tabla 96), a las funcionalidades implementadas, agregar pruebas de integración contra el backend desplegado, implementar las *step definitions* de los escenarios Gherkin de la carpeta `gherkin/` y automatizar su ejecución en un pipeline de integración continua que deje resultados versionados.
-2. Definir cuál es la aplicación móvil oficial del producto, la implementación Android en Kotlin/Jetpack Compose o la nueva en Flutter, y alinear con esa decisión los diagramas de contenedores y de despliegue (secciones 2.5.3.2 y 2.5.3.3) y la configuración del proyecto (secciones 4.1.1 a 4.1.4), que hoy solo describen la aplicación Android.
-3. Completar la corrección de los problemas de severidad 3 de la sección 4.3.3 que siguen planificados en el Sprint Backlog 2 (T16 y T17): dejar explícito en el onboarding y en Configuración que MindFlow es un asistente de reflexión y no un servicio clínico, detallar cómo se tratan los textos que procesan las APIs externas de IA y ajustar el contraste de los botones principales.
-4. Validar el objetivo del Sprint 2 con usuarios de ambos segmentos: comprobar que un usuario encuentra su entrada y sus hábitos en el calendario y en las analíticas al iniciar sesión en otro dispositivo, que la aplicación solo se abre tras ingresar el PIN y que recibe dentro de la aplicación la respuesta a un ticket de soporte.
-5. Priorizar en el Product Backlog del siguiente Sprint los vacíos funcionales que señalaron ambos segmentos durante la validación y que aún no están implementados: recordatorios de hábitos con horarios personalizables y notificaciones push (hoy los recordatorios son una preferencia local y Firebase Cloud Messaging está planificado pero no integrado), integración con calendario y registro por voz para estudiantes, y etiquetado por área de vida (trabajo, finanzas, personal) para profesionales.
-6. Aplicar en todos los repositorios, incluido `mindflow-mobile-flutter`, el flujo con ramas `feature/*`, Pull Requests y la convención Conventional Commits que el equipo acordó en la retrospectiva del Sprint 1, también a los ajustes posteriores a la integración de las funcionalidades principales, que en el Sprint 2 se incorporaron a `develop` sin Pull Request, para que el historial siga siendo trazable a las User Stories.
-7. Repartir mejor la ejecución de tareas en el siguiente Sprint: revisar al inicio la matriz de líderes y colaboradores, asignar a cada integrante al menos una tarea con commits o Pull Requests propios en los repositorios de producto, contrastar a mitad del Sprint el avance con los analíticos de colaboración de GitHub y registrar en el Sprint Backlog el trabajo que no genera commits (diseño, entrevistas, pruebas y videos), de modo que todo el aporte quede visible.
+1. Medir las hipótesis después del lanzamiento. Cuando la aplicación esté disponible para usuarios reales, instrumentar y revisar las métricas de las tres hipótesis del Lean UX Process: la retención semanal y las sesiones por semana con Firebase Analytics, que ya está vinculado a la aplicación (sección 4.2.2.8); las calificaciones de las recomendaciones de la IA con el resumen del endpoint de valoraciones (US26); y la conversión a Premium con los datos de suscripciones. Si los valores observados se alejan de las metas, replantear las hipótesis en lugar de ajustar la métrica.
+2. Ejecutar las pruebas en cada Pull Request. Hoy el flujo de GitHub Actions solo compila y distribuye la aplicación Flutter; conviene que ejecute antes `flutter test`, que el backend ejecute `dotnet test`, que se implementen las *step definitions* de las especificaciones Gherkin de la carpeta `gherkin/` y que se conserven los resultados de cada ejecución.
+3. Priorizar en el Product Backlog posterior los vacíos que señalaron los segmentos y que no están implementados: notificaciones push con Firebase Cloud Messaging (los recordatorios del Sprint 3 se programan en el dispositivo), registro de entradas por voz e integración de los hábitos con un calendario externo. Incluir también la historia técnica US20 (registro de interacciones de IA), que quedó fuera del Sprint 3.
+4. Aprovechar que Flutter es multiplataforma para compilar, probar y distribuir la aplicación en iOS, que hoy solo se distribuye para Android, y mantener `mindflow-frontend` como referencia histórica del Sprint 1.
+5. Revisar, antes de abrir la aplicación a usuarios reales, los Términos y Condiciones y la Política de Privacidad (Anexo A) con asesoría legal, mantener visible el aviso de que MindFlow no reemplaza a un profesional de la salud y verificar periódicamente el borrado de datos al eliminar la cuenta y el tratamiento de los textos por el proveedor de IA, que fue la mayor preocupación de los entrevistados.
+6. Validar con usuarios de ambos segmentos qué funciones justifican el plan Premium: los estudiantes entrevistados pidieron mantener las funciones principales en el plan gratuito, lo que pone en riesgo la meta de conversión del 5 % (Hipótesis 3). Antes de cobrar, la integración con Stripe debe pasar del modo de prueba al de producción.
+7. Repetir las entrevistas y la evaluación heurística sobre la aplicación Flutter oficial y corregir los problemas #4 a #16 que sigan presentes, con prioridad en la accesibilidad (áreas táctiles, leyenda del calendario y textos en inglés).
+8. Mantener en todos los repositorios el flujo GitFlow con ramas `feature/*`, Pull Requests y Conventional Commits, incluidos los ajustes posteriores a la integración de las funcionalidades principales, y contrastar a mitad de cada Sprint el reparto de tareas con los analíticos de colaboración de GitHub, registrando también el trabajo que no genera commits (diseño, entrevistas, pruebas y videos).
 
 ## Video App Validation
 
@@ -5896,7 +6014,7 @@ Este video reúne las cinco entrevistas de validación descritas en la sección 
 *Figura 195. Fotograma del video App Validation, durante la entrevista 5 (Segmento 2).*
 </p>
 
-**Tabla 119. Video App Validation — Secuencia del video.**
+**Tabla 122. Video App Validation — Secuencia del video.**
 
 | Tiempo (hh:mm:ss) | Escena |
 |---|---|
@@ -5961,8 +6079,10 @@ Los siguientes términos se emplean en la documentación, arquitectura y validac
 | Bounded Context | Límite DDD en el que un modelo de dominio mantiene reglas y significado coherentes. |
 | Dart | Lenguaje de programación usado por la aplicación móvil Flutter. |
 | DDD | Enfoque de diseño que alinea software y modelo de dominio. |
-| Flutter | SDK multiplataforma utilizado por `mindflow-mobile-flutter`, distinto de la aplicación Android Kotlin. |
+| Firebase App Distribution | Servicio de Google que distribuye versiones de la aplicación a testers; en MindFlow recibe el APK que genera el flujo de GitHub Actions. |
+| Flutter | SDK multiplataforma utilizado por `mindflow-mobile-flutter`, la aplicación móvil oficial del producto. |
 | Gherkin | Sintaxis BDD basada en `Feature`, `Scenario`, `Given`, `When` y `Then`. |
+| GitHub Actions | Servicio de automatización de GitHub; en MindFlow ejecuta el flujo que compila y distribuye la aplicación Flutter con cada cambio en `develop`. |
 | Integration Test | Prueba de interacción entre componentes, por ejemplo cliente móvil, API y base de datos. |
 | Jetpack Compose | Toolkit declarativo de interfaz utilizado por la aplicación Android Kotlin original. |
 | Kotlin | Lenguaje usado por `mindflow-frontend`, la aplicación Android original. |
@@ -5991,9 +6111,13 @@ Feng, X., Tian, L., Ho, G. W. K., Yorke, J., & Hui, V. (2025). The effectiveness
 
 Flint, S. W., Keshk, A. M., Dyer, R., & Bagheri, H. (2025). How do developers use type inference: An exploratory study in Kotlin. *Empirical Software Engineering, 30*(2). https://doi.org/10.1007/s10664-024-10585-y
 
+GitHub. (s. f.). *GitHub Actions documentation*. https://docs.github.com/actions
+
 Google. (s. f.-a). *Flutter documentation*. https://docs.flutter.dev
 
 Google. (s. f.-b). *Jetpack Compose*. Android Developers. https://developer.android.com/compose
+
+Google. (s. f.-c). *Firebase App Distribution*. Firebase. https://firebase.google.com/docs/app-distribution
 
 Gothelf, J., & Seiden, J. (2021). *Lean UX: Creating great products with agile teams* (3.ª ed.). O'Reilly Media.
 
